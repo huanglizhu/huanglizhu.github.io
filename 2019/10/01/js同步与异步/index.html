@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS中的同步与异步 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JavaScript">
+  
+  
+  
+  
+  <meta name="description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的同步与异步">
+<meta property="og:url" content="http://yoursite.com/2019/10/01/js同步与异步/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-02T05:47:51.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中的同步与异步">
+<meta name="twitter:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-js同步与异步" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS中的同步与异步
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/01/js同步与异步/" class="article-date">
+	  <time datetime="2019-10-01T10:00:05.000Z" itemprop="datePublished">十月 1, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><ul>
+<li>作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。<a id="more"></a>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>总结</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>私有作用域</td>
+<td>函数执行都会形成一个私有作用域</td>
+</tr>
+<tr>
+<td>全局作用域</td>
+<td>页面一打开就会形成一个全局的作用域</td>
+</tr>
+<tr>
+<td>私有变量</td>
+<td>在私有作用域里边形成的变量 (通过 var 声明； <strong>形参</strong>)</td>
+</tr>
+<tr>
+<td>全局变量</td>
+<td>在全局作用域形成的变量（var a = 12 或者函数内没有声明，直接赋值的变量）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>某个执行环境中所有的代码<strong>执行完毕</strong>后，该<strong>环境被销毁</strong>，保存在其中的所有<strong>变量和函数定义也随之销毁</strong>（全局执行环境直到应用程序退出时，如关闭浏览器或网页，才会被销毁）</li>
+<li>每个函数都有自己的执行环境。当执行流进入一个函数时，函数的环境就会被推入一个环境栈中。而在函数执行之后，栈将被环境弹出，把控制权返回给之前的执行环境。ECMAScript 程序中的执行流正是由这个方便的机制控制着。</li>
+</ul>
+<hr>
+<h1 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h1><ul>
+<li>当代码在一个环境中执行时，会创建变量对象的一个作用域链（作用域形成的链条）</li>
+<li>作用域链的<strong>前端</strong>，始终都是<strong>当前执行的代码所在环境的变量对象</strong></li>
+<li>作用域链中的下一个对象来自于外部环境，而在下一个变量对象则来自下一个外部环境，一直到全局执行环境</li>
+<li><strong>全局执行环境的变量对象</strong>始终都是作用域链上的<strong>最后一个对象</strong></li>
+<li><strong>内部环境可以通过作用域链访问所有外部环境，但外部环境不能访问内部环境的任何变量和函数。</strong></li>
+<li>所以执行函数时，作用域链是从内到外来排序的。</li>
+</ul>
+<hr>
+<h1 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">count</span> = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">function foo(<span class="built_in">count</span>) &#123;</span><br><span class="line">  <span class="built_in">count</span> += <span class="number">1</span><span class="comment">;</span></span><br><span class="line">  console.log(<span class="built_in">count</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>函数的形参</strong>属于函数执行上下文，所以当指定这个形参后，它就<strong>随着函数被调用而新建，随着函数销毁而销毁</strong>。</li>
+<li>指定了这个形参，<strong>调用函数时会沿着作用域链找到私有变量 count，而不是全局变量count。</strong>  </li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>我们用执行栈来理解一下</p>
+<ol>
+<li>函数每次被调用都会产生新的执行上下文（私有变量 count），并被压入执行栈，执行完毕后当前上下文就会被弹出执行栈，私有变量 count被销毁。</li>
+<li>再次调用时又随着函数被调用而新建私有变量 count，重复第一步。</li>
+<li>所以第一次调用应该返回 1，第二次调用也应该返回 1，第 n 次调用都应该返回 1。</li>
+</ol>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">count</span> = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">function foo() &#123;</span><br><span class="line">  <span class="built_in">count</span> += <span class="number">1</span><span class="comment">;</span></span><br><span class="line">  console.log(<span class="built_in">count</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数的形参属于函数执行上下文，所以当指定这个形参后，它就随着函数被调用而新建，随着函数销毁而销毁。如果不指定这个形参，就会<strong>沿着作用域链找到全局变量 count</strong>，它属于全局执行上下文，这个时候再去调用 foo() 函数就会读写这个全局变量。</li>
+<li><strong>全局变量不会随着函数的调用而新建，也不会随着函数的销毁而销毁。</strong></li>
+<li>每个 foo() 函数调用后，给 count（全局变量） 加一，然后被弹出执行栈，而全局执行上下文的生命周期将伴随着整个程序，所以第一次调用打印 1，第二次调用打印 2，第 n 次调用打印 n。</li>
+</ul>
+<hr>
+<h1 id="js的异步机制"><a href="#js的异步机制" class="headerlink" title="js的异步机制"></a>js的异步机制</h1><ul>
+<li>同步任务进入总线程，异步任务不会进入主线程，而是会先进入任务队列，任务队列其实是一个先进先出的数据结构，也是一个事件队列。</li>
+<li>比如说文件读取操作，因为这是一个异步任务，因此该任务会被添加到任务队列中，等到IO（输入输出）完成后，就会在<strong>任务队列中添加一个事件</strong>，表示<strong>异步任务完成</strong>啦，<strong>可以进入执行栈</strong>啦~但是这时候呀，主线程不一定有空，当主线程处理完其它任务有空时，就会读取任务队列，读取里面有哪些事件，排在前面的事件会被优先进行处理，如果该任务指定了回调函数，那么主线程在处理该事件时，就会执行回调函数中的代码，也就是执行异步任务啦</li>
+<li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等到，直到有新的任务，这就叫做任务循环，因为每个任务都是由一个事件触发的，因此也叫作事件循环。</li>
+</ul>
+<h2 id="步骤总结"><a href="#步骤总结" class="headerlink" title="步骤总结"></a>步骤总结</h2><ol>
+<li>所有<strong>同步任务</strong>都在<strong>主线程</strong>上执行，行成一个<strong>执行栈</strong></li>
+<li>主线程之外，还存在一个<strong>任务队列</strong>，只要<strong>异步任务</strong>有了<strong>结果</strong>，就会在任务队列中<strong>放置一个事件</strong></li>
+<li>一旦<strong>执行栈</strong>中的所有同步任务<strong>执行完毕</strong>，系统就会<strong>读取任务队列</strong>，看看里面还有哪些事件，那些对应的异步任务，于是结束等待状态，<strong>（异步任务）进入执行栈</strong>，开始<strong>执行</strong></li>
+<li>主线程<strong>不断的重复</strong>上面的<strong>第三步</strong></li>
+</ol>
+<h1 id="js的异步编程"><a href="#js的异步编程" class="headerlink" title="js的异步编程"></a>js的异步编程</h1><h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><ul>
+<li><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023022332902400" target="_blank" rel="noopener">AJAX</a></li>
+</ul>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><hr>
+<ul>
+<li><a href="https://www.cnblogs.com/Yellow-ice/p/10433423.html" target="_blank" rel="noopener">js中的同步与异步</a></li>
+<li><a href="http://www.fly63.com/article/detial/1597" target="_blank" rel="noopener">理解 JavaScript 执行栈</a></li>
+<li><a href="https://www.jianshu.com/p/cc79f22b99fe" target="_blank" rel="noopener">作用域</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/26/百度前端技术学院 第四天学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第四天学笔记（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">3.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">3.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">4.</span> <span class="nav-text">js的异步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤总结"><span class="nav-number">4.1.</span> <span class="nav-text">步骤总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">5.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">5.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">5.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <!-- <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div> -->
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
