@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-02T05:47:51.599Z">
+<meta property="og:updated_time" content="2019-10-02T12:18:14.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中的同步与异步">
 <meta name="twitter:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
@@ -197,25 +197,48 @@
 <li>作用域链中的下一个对象来自于外部环境，而在下一个变量对象则来自下一个外部环境，一直到全局执行环境</li>
 <li><strong>全局执行环境的变量对象</strong>始终都是作用域链上的<strong>最后一个对象</strong></li>
 <li><strong>内部环境可以通过作用域链访问所有外部环境，但外部环境不能访问内部环境的任何变量和函数。</strong></li>
-<li>所以执行函数时，作用域链是从内到外来排序的。</li>
+<li>所以执行函数时，作用域链是从内到外来排序的。（有形参找形参，没有才找外部的全局变量）</li>
 </ul>
 <hr>
-<h1 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">count</span> = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">function foo(<span class="built_in">count</span>) &#123;</span><br><span class="line">  <span class="built_in">count</span> += <span class="number">1</span><span class="comment">;</span></span><br><span class="line">  console.log(<span class="built_in">count</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br></pre></td></tr></table></figure>
+<h1 id="形参与实参"><a href="#形参与实参" class="headerlink" title="形参与实参"></a>形参与实参</h1><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>概念</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>形参（形式参数）</td>
+<td>是在定义函数名和函数体的时候使用的参数，目的是用来<strong>接收调用该函数时传递的参数</strong>。</td>
+</tr>
+<tr>
+<td>实参（实际参数）</td>
+<td>是在调用时传递给函数的参数，即<strong>传递给被调用函数的值</strong>。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>形参变量</strong>只有在被调用时才分配内存单元，在调用结束时，即刻释放所分配的内存单元。因此，形参只在函数内部有效。函数调用结束返回主调用函数后则不能再使用该形参变量。<strong>（随着函数被调用而新建，随着函数销毁而销毁）</strong></li>
+<li>函数调用中发生的<strong>数据传送是单向的</strong>，即<strong>只能把实参的值传给形参，而不能把形参的值传给实参</strong>。因此，在函数调用的过程中，形参的值可以改变，而实参的值则不会变化。</li>
+<li><a href="https://blog.csdn.net/alidada_blog/article/details/80639500" target="_blank" rel="noopener">参考</a></li>
+</ul>
+<hr>
+<h1 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><strong>注意</strong>：执行函数时，作用域链是从内到外来排序的。（<strong>有形参找形参，没有才找外部的全局变量</strong>）</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">count</span> = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span></span> foo(<span class="built_in">count</span>) &#123;//<span class="built_in">count</span>形参</span><br><span class="line">  <span class="built_in">count</span> += <span class="number">1</span>;//私有变量<span class="built_in">count</span></span><br><span class="line">  console.<span class="built_in">log</span>(<span class="built_in">count</span>);//私有变量<span class="built_in">count</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="built_in">count</span>); // <span class="number">1</span>     <span class="built_in">count</span>实参</span><br><span class="line">foo(<span class="built_in">count</span>); // <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>函数的形参</strong>属于函数执行上下文，所以当指定这个形参后，它就<strong>随着函数被调用而新建，随着函数销毁而销毁</strong>。</li>
-<li>指定了这个形参，<strong>调用函数时会沿着作用域链找到私有变量 count，而不是全局变量count。</strong>  </li>
+<li>指定了这个形参，<strong>调用函数时传递进来的实参count（0）会沿着作用域链找到私有变量 count（接下来的操作都在私有变量上进行），而不是全局变量count。</strong>  </li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>我们用执行栈来理解一下</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>我们用执行栈来理解一下</p>
 <ol>
-<li>函数每次被调用都会产生新的执行上下文（私有变量 count），并被压入执行栈，执行完毕后当前上下文就会被弹出执行栈，私有变量 count被销毁。</li>
+<li>函数每次被调用都会产生新的执行上下文（<strong>私有变量 count</strong>），实参count（全局变量count）的数据（0）被传入函数，私有变量 count变为0，并被压入执行栈，执行完毕后输出1，当前上下文接着被弹出执行栈，私有变量 count被销毁。</li>
 <li>再次调用时又随着函数被调用而新建私有变量 count，重复第一步。</li>
-<li>所以第一次调用应该返回 1，第二次调用也应该返回 1，第 n 次调用都应该返回 1。</li>
+<li>（<strong>函数内的操作都在私有变量身上进行，随着私有变量的销毁上一次的操作就没了</strong>）所以第一次调用应该返回 1，第二次调用也应该返回 1，第 n 次调用都应该返回 1。</li>
 </ol>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">count</span> = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">function foo() &#123;</span><br><span class="line">  <span class="built_in">count</span> += <span class="number">1</span><span class="comment">;</span></span><br><span class="line">  console.log(<span class="built_in">count</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 1</span></span><br><span class="line">foo(<span class="built_in">count</span>)<span class="comment">; // 2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">count</span> = 0;</span><br><span class="line">function foo() &#123;</span><br><span class="line">  <span class="keyword">count</span> += 1;<span class="comment">//全局变量count</span></span><br><span class="line">  console.<span class="built_in">log</span>(<span class="keyword">count</span>);<span class="comment">//全局变量count</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="keyword">count</span>); <span class="comment">// 1</span></span><br><span class="line">foo(<span class="keyword">count</span>); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>函数的形参属于函数执行上下文，所以当指定这个形参后，它就随着函数被调用而新建，随着函数销毁而销毁。如果不指定这个形参，就会<strong>沿着作用域链找到全局变量 count</strong>，它属于全局执行上下文，这个时候再去调用 foo() 函数就会读写这个全局变量。</li>
+<li>函数的形参属于函数执行上下文，所以当指定这个形参后，它就随着函数被调用而新建，随着函数销毁而销毁。如果<strong>不指定这个形参</strong>，实参count（0）传进函数以后找不到形参就会<strong>沿着作用域链找到全局变量 count</strong>，它属于全局执行上下文，这个时候再去调用 foo() 函数就会读写这个全局变量（<strong>也就是函数里的所有操作都是在全局变量上进行的</strong>）。</li>
 <li><strong>全局变量不会随着函数的调用而新建，也不会随着函数的销毁而销毁。</strong></li>
 <li>每个 foo() 函数调用后，给 count（全局变量） 加一，然后被弹出执行栈，而全局执行上下文的生命周期将伴随着整个程序，所以第一次调用打印 1，第二次调用打印 2，第 n 次调用打印 n。</li>
 </ul>
@@ -223,9 +246,10 @@
 <h1 id="js的异步机制"><a href="#js的异步机制" class="headerlink" title="js的异步机制"></a>js的异步机制</h1><ul>
 <li>同步任务进入总线程，异步任务不会进入主线程，而是会先进入任务队列，任务队列其实是一个先进先出的数据结构，也是一个事件队列。</li>
 <li>比如说文件读取操作，因为这是一个异步任务，因此该任务会被添加到任务队列中，等到IO（输入输出）完成后，就会在<strong>任务队列中添加一个事件</strong>，表示<strong>异步任务完成</strong>啦，<strong>可以进入执行栈</strong>啦~但是这时候呀，主线程不一定有空，当主线程处理完其它任务有空时，就会读取任务队列，读取里面有哪些事件，排在前面的事件会被优先进行处理，如果该任务指定了回调函数，那么主线程在处理该事件时，就会执行回调函数中的代码，也就是执行异步任务啦</li>
-<li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等到，直到有新的任务，这就叫做任务循环，因为每个任务都是由一个事件触发的，因此也叫作事件循环。</li>
+<li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等到，直到有新的任务，这就叫做<strong>任务循环</strong>，因为每个任务都是由一个事件触发的，因此也叫作<strong>事件循环</strong>。</li>
 </ul>
-<h2 id="步骤总结"><a href="#步骤总结" class="headerlink" title="步骤总结"></a>步骤总结</h2><ol>
+<p><strong>步骤总结</strong>：</p>
+<ol>
 <li>所有<strong>同步任务</strong>都在<strong>主线程</strong>上执行，行成一个<strong>执行栈</strong></li>
 <li>主线程之外，还存在一个<strong>任务队列</strong>，只要<strong>异步任务</strong>有了<strong>结果</strong>，就会在任务队列中<strong>放置一个事件</strong></li>
 <li>一旦<strong>执行栈</strong>中的所有同步任务<strong>执行完毕</strong>，系统就会<strong>读取任务队列</strong>，看看里面还有哪些事件，那些对应的异步任务，于是结束等待状态，<strong>（异步任务）进入执行栈</strong>，开始<strong>执行</strong></li>
@@ -285,6 +309,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2019/10/02/AJAX异步更新/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          AJAX异步更新
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/09/26/百度前端技术学院 第四天学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -302,7 +335,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">3.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">3.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">4.</span> <span class="nav-text">js的异步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤总结"><span class="nav-number">4.1.</span> <span class="nav-text">步骤总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">5.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">5.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">5.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形参与实参"><span class="nav-number">3.</span> <span class="nav-text">形参与实参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">4.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">5.</span> <span class="nav-text">js的异步机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">6.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">6.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">6.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
     
     </div>
   </aside>
