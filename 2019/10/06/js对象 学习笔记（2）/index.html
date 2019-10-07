@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="JavaScript 对象访问器（Getter 和 Setter）Getter 和 Setter与函数相比的优点： 它提供了更简洁的语法（Getter 和 Setter使用属性形式访问对象方法，不用加括号）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-06T13:55:39.850Z">
+<meta property="og:updated_time" content="2019-10-07T07:03:50.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js对象 学习笔记（2）">
 <meta name="twitter:description" content="JavaScript 对象访问器（Getter 和 Setter）Getter 和 Setter与函数相比的优点： 它提供了更简洁的语法（Getter 和 Setter使用属性形式访问对象方法，不用加括号）">
@@ -181,14 +181,29 @@
 <li>例子 2 以<strong>属性形式</strong>访问 <code>fullName：person.fullName</code>。</li>
 <li>第二个例子提供了更简洁的语法。</li>
 </ul>
-<h1 id="JavaScript-对象构造器"><a href="#JavaScript-对象构造器" class="headerlink" title="JavaScript 对象构造器"></a>JavaScript 对象构造器</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<h1 id="JavaScript-对象构造器"><a href="#JavaScript-对象构造器" class="headerlink" title="JavaScript 对象构造器"></a>JavaScript 对象构造器</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li><p>用<strong>大写首字母</strong>对<strong>构造器函数命名</strong>是个好习惯。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Person(first, last, age, eye) &#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName = first;</span><br><span class="line">    <span class="keyword">this</span>.lastName = last;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eye;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>给<strong>已有对象</strong>添加属性可以直接用<code>对象名.新属性名=&quot;新属性值&quot;</code>，添加新方法用<code>对象名.新方法名=function(){函数内容}</code></p>
+<li><p>给<strong>已有对象</strong>添加属性：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.新属性名=<span class="string">"新属性值"</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>但是给<strong>构造器</strong>添加属性和方法时必须回到构造器函数中进行增加，不能使用<code>构造器名.新属性名....</code>这样的语法。</p>
+<li><p>给<strong>已有对象</strong>添加新方法:</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.新方法名=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;函数内容&#125;</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>给<strong>构造器</strong>添加新属性:</p>
+</li>
+</ol>
+<ul>
+<li>方法1：回到构造器函数中进行增加。</li>
+<li>方法2：<code>构造器名.prototype.新属性名=&quot;新属性值&quot;</code></li>
+</ul>
+<ol start="5">
+<li>给<strong>构造器</strong>添加新方法：</li>
+</ol>
+<ul>
+<li>方法1：回到构造器函数中进行增加。</li>
+<li>方法2：<code>构造器名.prototype.新方法名=function(){函数内容}</code></li>
 </ul>
 <h2 id="对象类型（蓝图）（类）"><a href="#对象类型（蓝图）（类）" class="headerlink" title="对象类型（蓝图）（类）"></a>对象类型（蓝图）（类）</h2><ul>
 <li>在上面的例子中，<strong>函数 Person()</strong> 就是<strong>对象构造器函数</strong>。</li>
@@ -224,6 +239,30 @@
 </li>
 </ul>
 <p><a href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_constructor_8" target="_blank" rel="noopener">完整例子</a></p>
+<h2 id="内建-JavaScript-构造器"><a href="#内建-JavaScript-构造器" class="headerlink" title="内建 JavaScript 构造器"></a>内建 JavaScript 构造器</h2><p>Math() 对象不算，Math 是全局对象。new 关键词不可用于 Math。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x1 = &#123;&#125;;            <span class="comment">// 新对象</span></span><br><span class="line"><span class="keyword">var</span> x2 = <span class="string">""</span>;            <span class="comment">// 新的原始字符串</span></span><br><span class="line"><span class="keyword">var</span> x3 = <span class="number">0</span>;             <span class="comment">// 新的原始数值</span></span><br><span class="line"><span class="keyword">var</span> x4 = <span class="literal">false</span>;         <span class="comment">// 新的原始逻辑值</span></span><br><span class="line"><span class="keyword">var</span> x5 = [];            <span class="comment">// 新的数组对象</span></span><br><span class="line"><span class="keyword">var</span> x6 = <span class="regexp">/()/</span>           <span class="comment">// 新的正则表达式对象</span></span><br><span class="line"><span class="keyword">var</span> x7 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;  <span class="comment">// 新的函数对象</span></span><br><span class="line"><span class="keyword">var</span> x8 = <span class="keyword">new</span> <span class="built_in">Date</span>();      <span class="comment">// 一个新的 Date 对象</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_constructor_builtin_2" target="_blank" rel="noopener">完整例子</a></p>
+<h1 id="JavaScript-对象原型"><a href="#JavaScript-对象原型" class="headerlink" title="JavaScript 对象原型"></a>JavaScript 对象原型</h1><p>所有 JavaScript 对象都<strong>从原型继承属性和方法</strong>。</p>
+<h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><ul>
+<li>日期对象继承自 Date.prototype。</li>
+<li>数组对象继承自 Array.prototype。</li>
+<li>Person 对象继承自 Person.prototype。</li>
+<li><strong>Object.prototype</strong> 位于<strong>原型继承链的顶端</strong>：日期对象、数组对象和 Person 对象都继承自 Object.prototype。</li>
+</ul>
+<h2 id="使用-prototype-属性为对象构造器添加新属性-方法"><a href="#使用-prototype-属性为对象构造器添加新属性-方法" class="headerlink" title="使用 prototype 属性为对象构造器添加新属性/方法"></a>使用 prototype 属性为对象构造器添加新属性/方法</h2><p><strong>注意：请只修改自己的原型。绝不要修改标准 JavaScript 对象的原型。</strong></p>
+<ul>
+<li>为对象构造器添加新属性：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function Person(first, last, age, eyecolor) &#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName = first;</span><br><span class="line">    <span class="keyword">this</span>.lastName = last;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyecolor;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.nationality = <span class="string">"English"</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_prototype_4" target="_blank" rel="noopener">完整例子</a></p>
+<ul>
+<li>为对象构造器添加新方法：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function Person(first, last, age, eyecolor) &#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName = first;</span><br><span class="line">    <span class="keyword">this</span>.lastName = last;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyecolor;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.name = function() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">" "</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_prototype_5" target="_blank" rel="noopener">完整例子</a></p>
 
       
     </div>
@@ -269,6 +308,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2019/10/07/函数相关知识点补充/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          函数相关知识点补充
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/10/05/解决小火箭被目录覆盖问题/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -286,7 +334,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-对象访问器（Getter-和-Setter）"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 对象访问器（Getter 和 Setter）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getter-和-Setter与函数相比的优点："><span class="nav-number">1.1.</span> <span class="nav-text">Getter 和 Setter与函数相比的优点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getter（get-关键词）"><span class="nav-number">1.2.</span> <span class="nav-text">Getter（get 关键词）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter（set-关键词）"><span class="nav-number">1.3.</span> <span class="nav-text">Setter（set 关键词）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-函数与-Getter的访问方法不同"><span class="nav-number">1.4.</span> <span class="nav-text">JavaScript 函数与 Getter的访问方法不同</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-对象构造器"><span class="nav-number">2.</span> <span class="nav-text">JavaScript 对象构造器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象类型（蓝图）（类）"><span class="nav-number">2.2.</span> <span class="nav-text">对象类型（蓝图）（类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this-关键词"><span class="nav-number">2.3.</span> <span class="nav-text">this 关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为-已有-对象添加属性"><span class="nav-number">2.4.</span> <span class="nav-text">为(已有)对象添加属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为-已有-对象添加方法"><span class="nav-number">2.5.</span> <span class="nav-text">为(已有)对象添加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为构造器添加属性"><span class="nav-number">2.6.</span> <span class="nav-text">为构造器添加属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为构造器添加方法"><span class="nav-number">2.7.</span> <span class="nav-text">为构造器添加方法</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-对象访问器（Getter-和-Setter）"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 对象访问器（Getter 和 Setter）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getter-和-Setter与函数相比的优点："><span class="nav-number">1.1.</span> <span class="nav-text">Getter 和 Setter与函数相比的优点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getter（get-关键词）"><span class="nav-number">1.2.</span> <span class="nav-text">Getter（get 关键词）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter（set-关键词）"><span class="nav-number">1.3.</span> <span class="nav-text">Setter（set 关键词）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-函数与-Getter的访问方法不同"><span class="nav-number">1.4.</span> <span class="nav-text">JavaScript 函数与 Getter的访问方法不同</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-对象构造器"><span class="nav-number">2.</span> <span class="nav-text">JavaScript 对象构造器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象类型（蓝图）（类）"><span class="nav-number">2.2.</span> <span class="nav-text">对象类型（蓝图）（类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this-关键词"><span class="nav-number">2.3.</span> <span class="nav-text">this 关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为-已有-对象添加属性"><span class="nav-number">2.4.</span> <span class="nav-text">为(已有)对象添加属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为-已有-对象添加方法"><span class="nav-number">2.5.</span> <span class="nav-text">为(已有)对象添加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为构造器添加属性"><span class="nav-number">2.6.</span> <span class="nav-text">为构造器添加属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为构造器添加方法"><span class="nav-number">2.7.</span> <span class="nav-text">为构造器添加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建-JavaScript-构造器"><span class="nav-number">2.8.</span> <span class="nav-text">内建 JavaScript 构造器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-对象原型"><span class="nav-number">3.</span> <span class="nav-text">JavaScript 对象原型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型继承"><span class="nav-number">3.1.</span> <span class="nav-text">原型继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-prototype-属性为对象构造器添加新属性-方法"><span class="nav-number">3.2.</span> <span class="nav-text">使用 prototype 属性为对象构造器添加新属性/方法</span></a></li></ol></li></ol>
     
     </div>
   </aside>
