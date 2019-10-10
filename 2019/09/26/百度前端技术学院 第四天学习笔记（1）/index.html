@@ -19,18 +19,18 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="补充：margin和padding的区别 在CSS中margin是指从自身边框到另一个容器边框之间的距离，就是容器外距离。 在CSS中padding是指自身边框到自身内部另一个容器边框之间的距离，就是容器内边距。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2nozasfj30mo0dnq56.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7rrmx1l16j30aj05owf2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7rzeyt29tj30eu05g3yg.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7rzdg9ar3j30e005k0so.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7rzlwz4elj30f005yt8m.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2mwns5yj30du056myo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2m3hdu4j30dx054mye.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2nozasfj30mo0dnq56.jpg">
-<meta property="og:updated_time" content="2019-10-09T12:05:31.589Z">
+<meta property="og:updated_time" content="2019-10-10T01:48:29.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端技术学院 第四天学习笔记（CSS背景）（1）">
 <meta name="twitter:description" content="补充：margin和padding的区别 在CSS中margin是指从自身边框到另一个容器边框之间的距离，就是容器外距离。 在CSS中padding是指自身边框到自身内部另一个容器边框之间的距离，就是容器内边距。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7rrmx1l16j30aj05owf2.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2nozasfj30mo0dnq56.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -174,7 +174,7 @@
 <hr>
 <h1 id="特别注意"><a href="#特别注意" class="headerlink" title="特别注意"></a>特别注意</h1><ul>
 <li><strong>background内如果想要放background-size的值呢就必须有position的值才行</strong></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background" target="_blank" rel="noopener">参考MDN</a><br>并且，<code>&lt;background-size&gt;</code>值只能紧接在<code>&lt;position&gt;</code>后面，并<strong>以’/‘字符分隔</strong>，例如：“ left/cover”。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background" target="_blank" rel="noopener">参考MDN</a><br>并且，<code>&lt;background-size&gt;</code>值只能紧接在<code>&lt;position&gt;</code>后面，并<strong>以<code>/</code>字符分隔</strong>，例如：“ left/cover”。</li>
 <li><strong>不起作用</strong>：</li>
 </ul>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: url(<span class="string">上校.jpg</span>) cover no-repeat fixed;</span><br></pre></td></tr></table></figure>
@@ -190,6 +190,34 @@
 <h1 id="背景background总结"><a href="#背景background总结" class="headerlink" title="背景background总结"></a>背景background总结</h1><ul>
 <li>为了清晰地显示出段落和链接的背景图像，需要为它们设置了少许内边距（padding），外边距（margin）是没用的。</li>
 </ul>
+<hr>
+<h1 id="【推荐使用】background简写所有背景属性"><a href="#【推荐使用】background简写所有背景属性" class="headerlink" title="【推荐使用】background简写所有背景属性"></a>【推荐使用】background简写所有背景属性</h1><h2 id="编写background值时，需要遵循一些规则"><a href="#编写background值时，需要遵循一些规则" class="headerlink" title="编写background值时，需要遵循一些规则"></a>编写background值时，需要遵循一些规则</h2><p>例如：</p>
+<ol>
+<li>background-color只能在最后一个逗号后指定。</li>
+<li>background-size只能紧随在background-position后并以<code>/</code>字符分隔，如下所示：<code>center80%</code>。</li>
+<li><a href="httpsdeveloper.mozilla.orgen-USdocsWebCSSbackground">所有注意事项</a></li>
+</ol>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span></span><br><span class="line">  &#123; </span><br><span class="line">  <span class="attribute">background</span> <span class="selector-id">#00FF00</span> url(bgimage<span class="selector-class">.gif</span>) no-repeat fixed <span class="attribute">top</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通常建议使用这个属性，而不是分别使用单个属性，因为这个属性在较老的浏览器中能够得到更好的支持。</li>
+<li>注意：属性值之间使用空格分隔开。如果使用多个背景，则需要为第一个背景指定所有属性，然后在逗号后添加下一个背景。</li>
+<li>如果不设置其中的某个值，也不会出问题，所有省略的子值都将设置为其初始值。</li>
+<li>可以设置如下属性：</li>
+</ul>
+<ol>
+<li>background-color  </li>
+<li>background-position</li>
+<li>background-size</li>
+<li>background-repeat</li>
+<li>background-origin</li>
+<li>background-clip</li>
+<li>background-attachment</li>
+<li>background-image</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  background   </span><br><span class="line">    linear-gradient(<span class="number">105</span>deg, rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">.2</span>) <span class="number">39</span>%, rgba(<span class="number">51</span>,<span class="number">56</span>,<span class="number">57</span>,<span class="number">1</span>) <span class="number">96</span>%) center <span class="number">400</span>px <span class="number">200</span>px no-repeat,<span class="comment">/*渐变*/</span></span><br><span class="line">    url(big-star.png) center no-repeat, <span class="comment">/*background-size（400px 200px）只能紧随在background-position（center）后并以'/'字符分隔*/</span></span><br><span class="line">    purple;<span class="comment">/*紫色背景色要放在最后*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2nozasfj30mo0dnq56.jpg" alt="效果图"></p>
 <hr>
 <h1 id="background-color属性设置背景颜色"><a href="#background-color属性设置背景颜色" class="headerlink" title="background-color属性设置背景颜色"></a>background-color属性设置背景颜色</h1><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">background</span>-<span class="built_in">color</span>: gray;</span><br></pre></td></tr></table></figure>
 
@@ -335,7 +363,7 @@
 <li><p>当不同的属性具有不同数量的值时,数量较少的值会循环,在上面的示例中，有四个背景图像，但只有两个background-position值。前两个位置值将应用于前两个图像，然后它们将再次循环返回(image3将获得第一个位置值，并将image4获得第二个位置值。)</p>
 </li>
 </ul>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>最后列出的背景图像位于堆栈底部，而每个先前的图像堆栈均位于代码后的背景图像的顶部：</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p>最后列出的背景图像位于堆栈底部，而每个先前的图像堆栈均位于代码后的背景图像的顶部：</p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="built_in">box</span> &#123;</span><br><span class="line">  <span class="built_in">background</span>-<span class="built_in">image</span> url(star.png), url(big-star.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div <span class="keyword">class</span>=<span class="keyword">wrapper</span></span><br><span class="line">  div <span class="keyword">class</span>=boxdiv</span><br><span class="line">div</span><br></pre></td></tr></table></figure>
@@ -344,34 +372,6 @@
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="keyword">box </span>&#123;</span><br><span class="line">  <span class="keyword">background-imageurl(big-star.png), </span>url(star.png)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2m3hdu4j30dx054mye.jpg" alt="大星星在小星星上方"></p>
-<hr>
-<h1 id="background【推荐使用】简写所有背景属性"><a href="#background【推荐使用】简写所有背景属性" class="headerlink" title="background【推荐使用】简写所有背景属性"></a>background【推荐使用】简写所有背景属性</h1><h2 id="编写background值时，需要遵循一些规则"><a href="#编写background值时，需要遵循一些规则" class="headerlink" title="编写background值时，需要遵循一些规则"></a>编写background值时，需要遵循一些规则</h2><p>例如：</p>
-<ol>
-<li>background-color只能在最后一个逗号后指定。</li>
-<li>background-size只能紧随在background-position后并以’’字符分隔，如下所示：<code>center80%</code>。</li>
-<li><a href="httpsdeveloper.mozilla.orgen-USdocsWebCSSbackground">所有注意事项</a></li>
-</ol>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span></span><br><span class="line">  &#123; </span><br><span class="line">  <span class="attribute">background</span> <span class="selector-id">#00FF00</span> url(bgimage<span class="selector-class">.gif</span>) no-repeat fixed <span class="attribute">top</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通常建议使用这个属性，而不是分别使用单个属性，因为这个属性在较老的浏览器中能够得到更好的支持。</li>
-<li>注意：属性值之间使用空格分隔开。如果使用多个背景，则需要为第一个背景指定所有属性，然后在逗号后添加下一个背景。</li>
-<li>如果不设置其中的某个值，也不会出问题，所有省略的子值都将设置为其初始值。</li>
-<li>可以设置如下属性：</li>
-</ul>
-<ol>
-<li>background-color  </li>
-<li>background-position</li>
-<li>background-size</li>
-<li>background-repeat</li>
-<li>background-origin</li>
-<li>background-clip</li>
-<li>background-attachment</li>
-<li>background-image</li>
-</ol>
-<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  background   </span><br><span class="line">    linear-gradient(<span class="number">105</span>deg, rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">.2</span>) <span class="number">39</span>%, rgba(<span class="number">51</span>,<span class="number">56</span>,<span class="number">57</span>,<span class="number">1</span>) <span class="number">96</span>%) center <span class="number">400</span>px <span class="number">200</span>px no-repeat,<span class="comment">/*渐变*/</span></span><br><span class="line">    url(big-star.png) center no-repeat, <span class="comment">/*background-size（400px 200px）只能紧随在background-position（center）后并以'/'字符分隔*/</span></span><br><span class="line">    purple;<span class="comment">/*紫色背景色要放在最后*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7s2nozasfj30mo0dnq56.jpg" alt="效果图"></p>
 <hr>
 <p><a href="httpsdeveloper.mozilla.orgen-USdocsLearnCSSBuilding_blocksBackgrounds_and_borders">MDN参考</a></p>
 
@@ -445,7 +445,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：margin和padding的区别"><span class="nav-number">1.</span> <span class="nav-text">补充：margin和padding的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特别注意"><span class="nav-number">2.</span> <span class="nav-text">特别注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#背景background总结"><span class="nav-number">3.</span> <span class="nav-text">背景background总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-color属性设置背景颜色"><span class="nav-number">4.</span> <span class="nav-text">background-color属性设置背景颜色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-image属性设置背景图片"><span class="nav-number">5.</span> <span class="nav-text">background-image属性设置背景图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-size属性设置背景图片大小"><span class="nav-number">6.</span> <span class="nav-text">background-size属性设置背景图片大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-repeat属性设置背景重复"><span class="nav-number">7.</span> <span class="nav-text">background-repeat属性设置背景重复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-position属性设置背景定位"><span class="nav-number">8.</span> <span class="nav-text">background-position属性设置背景定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用关键字提供属性值"><span class="nav-number">8.1.</span> <span class="nav-text">使用关键字提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用百分数值提供属性值"><span class="nav-number">8.2.</span> <span class="nav-text">使用百分数值提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用长度值提供属性值"><span class="nav-number">8.3.</span> <span class="nav-text">使用长度值提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性值混合使用"><span class="nav-number">8.4.</span> <span class="nav-text">属性值混合使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-attachment属性固定背景图片（背景关联）"><span class="nav-number">9.</span> <span class="nav-text">background-attachment属性固定背景图片（背景关联）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个背景图像"><span class="nav-number">10.</span> <span class="nav-text">多个背景图像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">10.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background【推荐使用】简写所有背景属性"><span class="nav-number">11.</span> <span class="nav-text">background【推荐使用】简写所有背景属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写background值时，需要遵循一些规则"><span class="nav-number">11.1.</span> <span class="nav-text">编写background值时，需要遵循一些规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">11.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">11.3.</span> <span class="nav-text">例子</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：margin和padding的区别"><span class="nav-number">1.</span> <span class="nav-text">补充：margin和padding的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特别注意"><span class="nav-number">2.</span> <span class="nav-text">特别注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#背景background总结"><span class="nav-number">3.</span> <span class="nav-text">背景background总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【推荐使用】background简写所有背景属性"><span class="nav-number">4.</span> <span class="nav-text">【推荐使用】background简写所有背景属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写background值时，需要遵循一些规则"><span class="nav-number">4.1.</span> <span class="nav-text">编写background值时，需要遵循一些规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">4.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-color属性设置背景颜色"><span class="nav-number">5.</span> <span class="nav-text">background-color属性设置背景颜色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-image属性设置背景图片"><span class="nav-number">6.</span> <span class="nav-text">background-image属性设置背景图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-size属性设置背景图片大小"><span class="nav-number">7.</span> <span class="nav-text">background-size属性设置背景图片大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-repeat属性设置背景重复"><span class="nav-number">8.</span> <span class="nav-text">background-repeat属性设置背景重复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-position属性设置背景定位"><span class="nav-number">9.</span> <span class="nav-text">background-position属性设置背景定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用关键字提供属性值"><span class="nav-number">9.1.</span> <span class="nav-text">使用关键字提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用百分数值提供属性值"><span class="nav-number">9.2.</span> <span class="nav-text">使用百分数值提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用长度值提供属性值"><span class="nav-number">9.3.</span> <span class="nav-text">使用长度值提供属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性值混合使用"><span class="nav-number">9.4.</span> <span class="nav-text">属性值混合使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background-attachment属性固定背景图片（背景关联）"><span class="nav-number">10.</span> <span class="nav-text">background-attachment属性固定背景图片（背景关联）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个背景图像"><span class="nav-number">11.</span> <span class="nav-text">多个背景图像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">11.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol>
     
     </div>
   </aside>
