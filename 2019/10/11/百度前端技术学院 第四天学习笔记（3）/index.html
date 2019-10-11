@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>百度前端技术学院 第四天学习笔记（伪类选择器、组合、选择器的优先级）（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CSS">
+  
+  
+  
+  
+  <meta name="description" content="伪类选择器:first-child表示一组同级元素中的第一元素">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端技术学院 第四天学习笔记（伪类选择器、组合、选择器的优先级）（3）">
+<meta property="og:url" content="http://yoursite.com/2019/10/11/百度前端技术学院 第四天学习笔记（3）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="伪类选择器:first-child表示一组同级元素中的第一元素">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uh35khahj308706q3yj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhbexo98j30rk06kdg6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhf7g8tvj30eo06gaaf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhyg4jjrj306803kt8l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7ui51z3frj30q106zq33.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uji217kfj30r10d8jt1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7ujylefphj30q809t0t1.jpg">
+<meta property="og:updated_time" content="2019-10-11T12:59:11.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度前端技术学院 第四天学习笔记（伪类选择器、组合、选择器的优先级）（3）">
+<meta name="twitter:description" content="伪类选择器:first-child表示一组同级元素中的第一元素">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uh35khahj308706q3yj.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-百度前端技术学院 第四天学习笔记（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      百度前端技术学院 第四天学习笔记（伪类选择器、组合、选择器的优先级）（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/11/百度前端技术学院 第四天学习笔记（3）/" class="article-date">
+	  <time datetime="2019-10-11T12:58:05.000Z" itemprop="datePublished">十月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h1><h2 id="first-child表示一组同级元素中的第一元素"><a href="#first-child表示一组同级元素中的第一元素" class="headerlink" title=":first-child表示一组同级元素中的第一元素"></a><code>:first-child</code>表示一组同级元素中的第一元素</h2><a id="more"></a>
+
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3</span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3.1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3.2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3.3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uh35khahj308706q3yj.jpg" alt="可以看到红色对每一个ul的第一个li选择器都生效了"></p>
+<hr>
+<h2 id="last-child表示一组同级元素中的最后一个元素"><a href="#last-child表示一组同级元素中的最后一个元素" class="headerlink" title=":last-child表示一组同级元素中的最后一个元素"></a><code>:last-child</code>表示一组同级元素中的最后一个元素</h2><ul>
+<li>用法与<code>:first-child</code>相似。</li>
+</ul>
+<hr>
+<h2 id="only-child表示没有任何兄弟姐妹的元素"><a href="#only-child表示没有任何兄弟姐妹的元素" class="headerlink" title=":only-child表示没有任何兄弟姐妹的元素"></a><code>:only-child</code>表示没有任何兄弟姐妹的元素</h2><ul>
+<li>例子1：</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span>&gt;I am <span class="keyword">an</span> only child.&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span>&gt;I am <span class="keyword">the</span> <span class="number">1</span>st sibling.&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span>&gt;I am <span class="keyword">the</span> <span class="number">2</span>nd sibling.&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span>&gt;I am <span class="keyword">the</span> <span class="number">3</span>rd sibling, &lt;<span class="keyword">div</span>&gt;but this is <span class="keyword">an</span> only child.&lt;/<span class="keyword">div</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:only-child</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">6px</span>;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">1px</span> solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhbexo98j30rk06kdg6.jpg" alt="效果图"></p>
+<ul>
+<li>例子2：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>First</span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>This list has just one element.<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Second</span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>This list has three elements.<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>This list has three elements.<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>This list has three elements.<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">li </span><span class="string">li </span>&#123;</span><br><span class="line">  <span class="built_in">list-style-type:</span> <span class="string">disc;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">li:only-</span><span class="string">child </span>&#123;</span><br><span class="line">  <span class="string">color:</span> <span class="string">red;</span></span><br><span class="line">  <span class="built_in">list-style-type:</span> <span class="string">square;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhf7g8tvj30eo06gaaf.jpg" alt="效果图"></p>
+<hr>
+<h2 id="invalid设置值无效时的样式"><a href="#invalid设置值无效时的样式" class="headerlink" title=":invalid设置值无效时的样式"></a><code>:invalid</code>设置值无效时的样式</h2><ul>
+<li>用于在表单元素中的值是<strong>非法时设置指定样式</strong>。该伪类对于突出显示用户的字段错误很有用。</li>
+<li><a href="https://www.runoob.com/try/try.php?filename=trycss_sel_invalid" target="_blank" rel="noopener">例子</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" target="_blank" rel="noopener">参考</a></li>
+</ul>
+<hr>
+<h1 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h1><h2 id="后代选择器（Descendant-selector）"><a href="#后代选择器（Descendant-selector）" class="headerlink" title="后代选择器（Descendant selector）"></a>后代选择器（Descendant selector）</h2><ul>
+<li>用<strong>空格</strong>分隔开两个选择器。</li>
+<li>这些选择器选择的元素是其他选择器的后代。他们<strong>不需要是直接子元素就可以配对(子孙后代都可以)</strong>。</li>
+<li>通过这个概念我们遇到父元素有class时子元素就不需要再添加额外的class了。</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>="box"&gt;&lt;p&gt;<span class="type">Text</span> <span class="keyword">in</span> .box&lt;/p&gt;&lt;/div&gt;</span><br><span class="line">&lt;p&gt;<span class="type">Text</span> <span class="keyword">not</span> <span class="keyword">in</span> .box&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uhyg4jjrj306803kt8l.jpg" alt="效果图"></p>
+<hr>
+<h2 id="儿童组合器（Child-combinator）"><a href="#儿童组合器（Child-combinator）" class="headerlink" title="儿童组合器（Child combinator）"></a>儿童组合器（Child combinator）</h2><ul>
+<li>用<strong>大于号</strong>分隔开两个选择器。</li>
+<li>仅当选择器选择<strong>直接子元素时才匹配</strong>。层次结构后面的子孙不匹配。（<strong>注意</strong>：直接子元素并不是一定只有一个，要与伪类选择器<code>:first-child</code>区别开来）</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">5px</span> solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--这个`&lt;li&gt;`是`&lt;ul&gt;`的直接子元素--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unordered item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--这个`&lt;li&gt;`也是`&lt;ul&gt;`的直接子元素--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unordered item</span><br><span class="line">        <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7ui51z3frj30q106zq33.jpg" alt="效果图"></p>
+<ul>
+<li>上面的例子中有一个无序列表，嵌套在其中的是另一个无序列表。我正在使用<strong>子组合器</strong>来选择仅<code>&lt;li&gt;</code>是<code>&lt;ul&gt;</code>的直接子元素的元素，并为其<strong>赋予了顶部边框</strong>。</li>
+<li>如果<strong>删除<code>&gt;</code></strong>,则最终<code>&lt;li&gt;</code>将得到<strong>后代选择器</strong>，<strong>所有元素都将显示红色边框</strong>。</li>
+</ul>
+<hr>
+<h2 id="直接相邻的同级选择器-Adjacent-sibling"><a href="#直接相邻的同级选择器-Adjacent-sibling" class="headerlink" title="直接相邻的同级选择器(Adjacent sibling)"></a>直接相邻的同级选择器(Adjacent sibling)</h2><ul>
+<li>用<strong>加号</strong>分隔开两个选择器。</li>
+<li>用于选择与层次结构中<strong>相同级别的另一个元素相邻的对象</strong>。</li>
+<li><strong>注意</strong>：这两个选择器不仅要是同级别的，还要直接相邻。</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> + <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">background-color</span>: green;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">padding</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>A heading<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo</span><br><span class="line">            melon azuki bean garlic.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard</span><br><span class="line">            greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7uji217kfj30r10d8jt1.jpg" alt="效果图"></p>
+<ul>
+<li>一个常见的用例是对标题后面的段落进行处理，如上面的额例子所示。在这里，我们正在寻找<strong>与<code>&lt;h1&gt;</code>相邻的段落，并为其设置样式</strong>。</li>
+<li>如果在<code>&lt;h1&gt;</code>与<code>&lt;p&gt;</code>之间插入其他元素，例如<code>&lt;h2&gt;</code>，则会发现该段落不再与选择器匹配，因此当该元素相邻时，也不会应用背景色和前景色。</li>
+</ul>
+<hr>
+<h2 id="一般同级（General-sibling）-不相邻的同级选择器"><a href="#一般同级（General-sibling）-不相邻的同级选择器" class="headerlink" title="一般同级（General sibling）[不相邻的同级选择器]"></a>一般同级（General sibling）[不相邻的同级选择器]</h2><ul>
+<li>用<code>~</code>分隔开两个选择器。</li>
+<li>用于选择与层次结构中<strong>相同级别的所有指定选择器的对象（包括直接相邻的同级）</strong>，也可以使用常规的同级组合器。</li>
+<li><strong>注意</strong>：空格分隔开的是父元素与子元素组成的后代选择器，<code>~</code>分隔开的是同级别的所有指定选择器的对象。</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>~<span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#333</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">padding</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>A heading<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>I am a paragraph.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>I am a div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>I am another paragraph.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7ujylefphj30q809t0t1.jpg" alt="效果图"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/09/百度前端技术学院 第四天学习笔记（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第四天学习笔记（CSS边框、列表）（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#伪类选择器"><span class="nav-number">1.</span> <span class="nav-text">伪类选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#first-child表示一组同级元素中的第一元素"><span class="nav-number">1.1.</span> <span class="nav-text">:first-child表示一组同级元素中的第一元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#last-child表示一组同级元素中的最后一个元素"><span class="nav-number">1.2.</span> <span class="nav-text">:last-child表示一组同级元素中的最后一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#only-child表示没有任何兄弟姐妹的元素"><span class="nav-number">1.3.</span> <span class="nav-text">:only-child表示没有任何兄弟姐妹的元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invalid设置值无效时的样式"><span class="nav-number">1.4.</span> <span class="nav-text">:invalid设置值无效时的样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组合"><span class="nav-number">2.</span> <span class="nav-text">组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后代选择器（Descendant-selector）"><span class="nav-number">2.1.</span> <span class="nav-text">后代选择器（Descendant selector）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#儿童组合器（Child-combinator）"><span class="nav-number">2.2.</span> <span class="nav-text">儿童组合器（Child combinator）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接相邻的同级选择器-Adjacent-sibling"><span class="nav-number">2.3.</span> <span class="nav-text">直接相邻的同级选择器(Adjacent sibling)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般同级（General-sibling）-不相邻的同级选择器"><span class="nav-number">2.4.</span> <span class="nav-text">一般同级（General sibling）[不相邻的同级选择器]</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
