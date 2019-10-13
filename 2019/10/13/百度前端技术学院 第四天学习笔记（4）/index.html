@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>百度前端技术学院 第四天学习笔记（选择器的优先级、了解级联、!important）（4） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CSS">
+  
+  
+  
+  
+  <meta name="description" content="选择器的优先级级联（cascade） 对于相同的选择器，在CSS中排在最后的那个将被使用。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端技术学院 第四天学习笔记（选择器的优先级、了解级联、!important）（4）">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/百度前端技术学院 第四天学习笔记（4）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="选择器的优先级级联（cascade） 对于相同的选择器，在CSS中排在最后的那个将被使用。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vf8tmkasj30c601tq2t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vfccgqy7j30cf01vwed.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vfnmmzcrj30p705sdgf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vga7ln0yj30qr08egmf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vivulrdbj309c059jrl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7viwyvzsoj308q054aa9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vj1rpzjjj30pt06qt8w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vnynx93rj312a0bn40a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vorymqfyj309904pdfo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vp529a3cj30qx04q0st.jpg">
+<meta property="og:updated_time" content="2019-10-13T03:02:04.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度前端技术学院 第四天学习笔记（选择器的优先级、了解级联、!important）（4）">
+<meta name="twitter:description" content="选择器的优先级级联（cascade） 对于相同的选择器，在CSS中排在最后的那个将被使用。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vf8tmkasj30c601tq2t.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-百度前端技术学院 第四天学习笔记（4）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      百度前端技术学院 第四天学习笔记（选择器的优先级、了解级联、!important）（4）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/13/百度前端技术学院 第四天学习笔记（4）/" class="article-date">
+	  <time datetime="2019-10-13T12:58:05.000Z" itemprop="datePublished">十月 13, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h1><h2 id="级联（cascade）"><a href="#级联（cascade）" class="headerlink" title="级联（cascade）"></a>级联（cascade）</h2><ul>
+<li><p>对于相同的选择器，在CSS中<strong>排在最后的那个将被使用</strong>。</p>
+<a id="more"></a>
+</li>
+<li><p>例子：</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123; </span><br><span class="line">    <span class="attribute">color</span>: red; </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123; </span><br><span class="line">    <span class="attribute">color</span>: blue; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;This <span class="keyword">is</span> <span class="keyword">my</span> heading.&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vf8tmkasj30c601tq2t.jpg" alt="蓝色字体"></p>
+<hr>
+<h2 id="特异性"><a href="#特异性" class="headerlink" title="特异性"></a>特异性</h2><ul>
+<li>有多个选择器作用于同一元素时，<strong>类选择器的优先级高于元素选择器。</strong>（但这个是针对同一属性的时候，两个选择器没有重合的属性实际都作用于该元素）</li>
+<li>例子中有两个适用于<code>h1</code>的规则。<strong>类选择器</strong>为其规则赋予了<strong>更高的特异性</strong>，下面的内容<code>h1</code>最终变为红色。因此即使带有颜色的<strong>元素选择器</strong>的规则在源顺序中排在更下方，类选择器的颜色也将被应用。但元素选择器的其他属性还是会生效。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main-heading</span> &#123; </span><br><span class="line">    <span class="attribute">color</span>: red; <span class="comment">/*生效*/</span></span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-tag">h1</span> &#123; </span><br><span class="line">    <span class="attribute">color</span>: blue; <span class="comment">/*未生效*/</span></span><br><span class="line">    <span class="attribute">text-decoration</span>:underline;<span class="comment">/*生效*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 <span class="built_in">class</span>=<span class="string">"main-heading"</span>&gt;This <span class="keyword">is</span> <span class="keyword">my</span> heading.&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vfccgqy7j30cf01vwed.jpg" alt="红色下划线"></p>
+<hr>
+<h2 id="继承（Inheritance）"><a href="#继承（Inheritance）" class="headerlink" title="继承（Inheritance）"></a>继承（Inheritance）</h2><ul>
+<li>如果在元素上设置color和font-family，除非它直接应用了不同的颜色和字体值，否则其中的每个元素也将使用该颜色和字体的样式。</li>
+<li><strong>某些属性不会继承</strong>。width, margin, padding,border 等内容不会继承。例如，如果在width元素上设置50％的值，则其所有后代的宽度都不会达到其父级宽度的50％。</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;As <span class="keyword">the</span> body has been <span class="built_in">set</span> <span class="built_in">to</span> have <span class="keyword">a</span> color <span class="keyword">of</span> blue this is inherited through <span class="keyword">the</span> descendants.&lt;/p&gt;</span><br><span class="line">&lt;p&gt;We can change <span class="keyword">the</span> color <span class="keyword">by</span> targetting <span class="keyword">the</span> <span class="keyword">element</span> <span class="keyword">with</span> <span class="keyword">a</span> selector, such <span class="keyword">as</span> this &lt;span&gt;span&lt;/span&gt;.&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vfnmmzcrj30p705sdgf.jpg" alt="效果图"></p>
+<ul>
+<li><strong>提示</strong>：在MDN CSS属性参考页上，通常可以在规格部分的<strong>底部</strong>找到一个<strong>技术信息框</strong>，其中列出了有关该属性的许多数据点，<strong>包括是否继承</strong>。例如，<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color#Specifications" target="_blank" rel="noopener">MDN颜色属性</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vga7ln0yj30qr08egmf.jpg" alt="部分技术信息框"></li>
+</ul>
+<hr>
+<h2 id="通过四个属性值控制继承"><a href="#通过四个属性值控制继承" class="headerlink" title="通过四个属性值控制继承"></a>通过四个属性值控制继承</h2><p>CSS提供了四个特殊的<strong>通用属性值</strong>来控制继承。<strong>每个CSS属性都接受这些值</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>inherit（继承）</td>
+<td>将应用于选定元素的属性值<strong>设置为其父元素的属性值</strong></td>
+</tr>
+<tr>
+<td>initial（最初的）</td>
+<td>将应用于所选元素的属性值<strong>设置为与浏览器默认样式表中为该元素设置的值相同</strong>。如果浏览器的默认样式表未设置任何值，就会继承该属性，相当于将属性值设置为inherit。</td>
+</tr>
+<tr>
+<td>unset（重置）</td>
+<td>将属性<strong>重置为其自然值</strong>，这意味着，<strong>如果该属性是自然继承的，则其行为类似于inherit，否则，其行为类似于initial</strong>。</td>
+</tr>
+<tr>
+<td>新值  revert</td>
+<td>它对浏览器的支持有限。<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/revert" target="_blank" rel="noopener">revert</a></td>
+</tr>
+</tbody></table>
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line">          </span><br><span class="line"><span class="selector-class">.my-class-1</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: inherit<span class="comment">/*设置为其父元素的属性值*/</span></span><br><span class="line">&#125;</span><br><span class="line">          </span><br><span class="line"><span class="selector-class">.my-class-2</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: initial;<span class="comment">/*设置为与浏览器默认样式表中为该元素设置的值相同*/</span></span><br><span class="line">&#125;</span><br><span class="line">          </span><br><span class="line"><span class="selector-class">.my-class-3</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: unset;<span class="comment">/*重置为其自然值.如果该属性是自然继承的，则其行为类似于inherit，否则，其行为类似于initial*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Default <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span> color<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"my-class-1"</span>&gt;</span>Inherit the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span> color<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"my-class-2"</span>&gt;</span>Reset the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span> color<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"my-class-3"</span>&gt;</span>Unset the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span> color<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vivulrdbj309c059jrl.jpg" alt="效果图"></p>
+<ul>
+<li>如果添加<code>a { color: red; }</code>则<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7viwyvzsoj308q054aa9.jpg" alt="只有第一行超链接字体变红色"></li>
+</ul>
+<hr>
+<h2 id="通过all属性重置所有属性值"><a href="#通过all属性重置所有属性值" class="headerlink" title="通过all属性重置所有属性值"></a>通过all属性重置所有属性值</h2><ul>
+<li>all速记属性一次控制（几乎）所有属性的继承，该属性将其值应用于所有属性。这是<strong>撤消对样式所做的更改的便捷方法</strong>。</li>
+<li>属性值：inherit，<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/initial" target="_blank" rel="noopener">initial</a>，<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/unset" target="_blank" rel="noopener">unset</a>，和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/revert" target="_blank" rel="noopener">revert</a></li>
+<li><strong>inherit关键字</strong>允许作者显式指定的继承,它<strong>适用于继承和非继承属性</strong>。可以使用all速记属性一次控制所有属性的继承，该属性将其值应用于所有属性。例如：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">font</span>: &#123;</span><br><span class="line">  <span class="attribute">all</span>: revert;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">200%</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这会<strong>将font属性的样式还原为用户代理的默认样式</strong>，除非存在用户样式表，否则将使用该样式表。然后将字体大小加倍，并应用font-weight的”bold”。<blockquote>
+<p>默认样式表由浏览器供应商提供。(浏览器默认的CSS)<br><br>用户样式表由浏览器的用户提供,用户自定义的CSS（用户自己写的）。<br><br>作者样式表由网页作者提供（前端开发人员写的CSS)。</p>
+</blockquote>
+</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">blockquote</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid green;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.fix-this</span> &#123;</span><br><span class="line">    <span class="attribute">all</span>: unset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This blockquote is styled<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">blockquote</span> <span class="attr">class</span>=<span class="string">"fix-this"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This blockquote is not styled<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vj1rpzjjj30pt06qt8w.jpg" alt="效果图"></p>
+<hr>
+<h1 id="了解级联"><a href="#了解级联" class="headerlink" title="了解级联"></a>了解级联</h1><ul>
+<li>要考虑三个因素，这里按<strong>重要性从高到低</strong>的顺序列出。较早的优先于较晚的：<strong>重要性、特异性、源顺序</strong>。</li>
+<li><strong>注意</strong>：并不是整个规则都会被覆盖，只是相同的属性。</li>
+</ul>
+<h2 id="源顺序（Source-order）"><a href="#源顺序（Source-order）" class="headerlink" title="源顺序（Source order）"></a>源顺序（Source order）</h2><p>如果有多个选择器作用于同一个元素，则靠后的将获胜，也就是说靠后的选择器更加接近元素，他们将覆盖早期的规则，直到最后一个规则获胜并开始为元素设置样式。</p>
+<h2 id="特异性（Specificity）"><a href="#特异性（Specificity）" class="headerlink" title="特异性（Specificity）"></a>特异性（Specificity）</h2><ul>
+<li>选择器具有的<strong>特异性程度是使用四个不同的值</strong>（或成分）来衡量的，可以将其视为<strong>千位，百位，十位和个位</strong>这四列中的四个个位数：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>千</td>
+<td>如果<strong>声明位于style属性内（也称为内联样式</strong>）内，则在此列中<strong>得一千分</strong>。这样的声明没有选择器，因此它们的特异性始终只是1000</td>
+</tr>
+<tr>
+<td>百</td>
+<td>在此列中为<strong>整体选择器中包含的每个ID选择器</strong>打分（<strong>有几个ID选择器就几百分</strong>）</td>
+</tr>
+<tr>
+<td>十</td>
+<td>在此列中为<strong>整体选择器中</strong>包含的<strong>每个类选择器，属性选择器或伪类</strong>计分（注意属性选择器的书写方法）</td>
+</tr>
+<tr>
+<td>一</td>
+<td>在此列中为<strong>整体选择器中</strong>包含的<strong>每个元素选择器或伪元素*</strong>打一分。</td>
+</tr>
+<tr>
+<td><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vnynx93rj312a0bn40a.jpg" alt="计算举例"></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"outer"</span> <span class="keyword">class</span>="<span class="symbol">container</span>"&gt;</span><br><span class="line">    &lt;<span class="symbol">div</span> <span class="symbol">id</span>="<span class="symbol">inner</span>" <span class="symbol">class</span>="<span class="symbol">container</span>"&gt;</span><br><span class="line">        &lt;<span class="symbol">ul</span>&gt;</span><br><span class="line">            &lt;<span class="symbol">li</span> <span class="symbol">class</span>="<span class="symbol">nav</span>"&gt;&lt;<span class="symbol">a</span> <span class="symbol">href</span>="#"&gt;<span class="symbol">One</span>&lt;/<span class="symbol">a</span>&gt;&lt;/<span class="symbol">li</span>&gt;</span><br><span class="line">            &lt;<span class="symbol">li</span> <span class="symbol">class</span>="<span class="symbol">nav</span>"&gt;&lt;<span class="symbol">a</span> <span class="symbol">href</span>="#"&gt;<span class="symbol">Two</span>&lt;/<span class="symbol">a</span>&gt;&lt;/<span class="symbol">li</span>&gt;</span><br><span class="line">        &lt;/<span class="symbol">ul</span>&gt;</span><br><span class="line">    &lt;/<span class="symbol">div</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0101 */</span></span><br><span class="line"><span class="selector-id">#outer</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="comment">/* specificity: 0201 */</span></span><br><span class="line"><span class="selector-id">#outer</span> <span class="selector-id">#inner</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0104 */</span></span><br><span class="line"><span class="selector-id">#outer</span> <span class="selector-tag">div</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: yellow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0113 */</span></span><br><span class="line"><span class="selector-id">#outer</span> <span class="selector-tag">div</span> <span class="selector-tag">ul</span> <span class="selector-class">.nav</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0024 */</span></span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> <span class="selector-tag">li</span>:nth-child(<span class="number">2</span>) <span class="selector-tag">a</span>:hover &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">10px</span> solid black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0023 */</span></span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">li</span>:nth-child(<span class="number">2</span>) <span class="selector-tag">a</span>:hover &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">10px</span> dashed black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* specificity: 0033 */</span></span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> <span class="selector-class">.nav</span>:nth-child(<span class="number">2</span>) <span class="selector-tag">a</span>:hover &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">10px</span> double black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释</strong>：</p>
+<ul>
+<li>前两个选择器在<strong>争夺链接背景颜色</strong>的样式上竞争,第二个选择器获胜并使背景颜色变成蓝色，因为它在链中有一个额外的ID选择器,其特异性是201对101。</li>
+<li>第三和第四个选择器正在<strong>争夺链接文本颜色</strong>的样式,第二个选择器获胜并使文本变成白色，因为尽管元素选择器（1分）少了一个，但缺少的选择器却换成了一个<strong>类选择器</strong>(10分)。因此获胜的特异性是113比104。</li>
+<li>选择器5–7在<strong>争夺链接边框的样式</strong>。选择器6显然输给了5，特异性为23 vs. 24，链中元素选择器少了一个。但是，选择器7击败了5和6，它在子链中具有与五个相同的子选择器数量，但是一个元素已换成类选择器。因此获胜的特异性是33 vs. 23和24。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vorymqfyj309904pdfo.jpg" alt="蓝底白字效果图"></li>
+</ul>
+<hr>
+<h1 id="important"><a href="#important" class="headerlink" title="!important"></a><code>!important</code></h1><ul>
+<li>他可以用来<strong>推翻所有上述计算</strong>，但是使用它时应格外小心。<code>!important</code>用于使特定属性和值成为最特定的事物，从而<strong>超越了级联的常规规则</strong>。</li>
+<li>语法：<code>选择器{属性: 属性值 !important;}</code></li>
+<li><strong>注意</strong>：覆盖此<code>!important</code>声明的方法是<strong>在源顺序中稍后的同样特异性的声明中包含另一个<code>!important</code>声明</strong>，或者<strong>在更高特异性的声明中包含另一个<code>!important</code>声明</strong>。</li>
+<li><strong>强烈建议除非绝对必要，否则不要使用它</strong>。<code>!important</code>更改了级联的正常工作方式，因此可能很难解决调试CSS问题.</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#winning</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.better</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: gray;</span><br><span class="line">    <span class="attribute">border</span>: none <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p <span class="built_in">class</span>=<span class="string">"better"</span>&gt;This <span class="keyword">is</span> a <span class="built_in">paragraph</span>.&lt;/p&gt;</span><br><span class="line">&lt;p <span class="built_in">class</span>=<span class="string">"better"</span> <span class="built_in">id</span>=<span class="string">"winning"</span>&gt;One selector <span class="keyword">to</span> rule them all!&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g7vp529a3cj30qx04q0st.jpg" alt="效果图"></p>
+<p><strong>解释</strong>：</p>
+<ol>
+<li>可以看到已应用了第三条规则color和padding值，但尚未应用background-color。为什么？确实应该确实适用所有这三个规则，因为源顺序中的后面的规则通常会覆盖前面的规则。</li>
+<li>但是，上面的规则会获胜，因为类选择器比元素选择器具有更高的特异性。</li>
+<li>这两种元素都有class的better，但第二个一个有一个id的winning了。由于ID 比类具有更高的特异性（页面上每个ID只能具有一个元素，但是具有相同类的许多元素-ID选择器针对的对象非常具体），红色背景色和1像素黑色边框应同时应用于第二个元素，第一个元素将获得灰色背景色，并且没有边框（如该类所指定）。</li>
+<li>第二个元素的确获得红色背景色，但没有边框。为什么？由于!important第二条规则中的声明-后面加上该字符串border: none意味着即使ID具有更高的特异性，此声明也将超过上一条规则中的边界值。</li>
+</ol>
+<hr>
+<h1 id="声明覆盖顺序（针对冲突声明）"><a href="#声明覆盖顺序（针对冲突声明）" class="headerlink" title="声明覆盖顺序（针对冲突声明）"></a>声明覆盖顺序（针对冲突声明）</h1><p><strong>冲突声明</strong>将按以下顺序应用，<strong>后面的声明将覆盖前面的声明</strong>：</p>
+<ul>
+<li>用户代理样式表中的声明（例如，浏览器的默认样式，未设置其他样式时使用）。</li>
+<li>用户样式表中的<strong>常规</strong>声明（用户设置的自定义样式）。</li>
+<li>作者样式表中的<strong>常规</strong>声明（这些是我们，Web开发人员设置的样式）。</li>
+<li>作者样式表中的<strong>重要</strong>声明。</li>
+<li><strong>用户样式表</strong>中的<strong>重要</strong>声明。</li>
+</ul>
+<blockquote>
+<p>最后，注意到CSS声明的重要性取决于在其中指定的样式表，这也是有用的。<strong>用户可以设置自定义样式表中的<code>！important</code>来覆盖开发人员的样式</strong>。</p>
+</blockquote>
+<p><strong>说明</strong>:</p>
+<ul>
+<li>Web开发人员的样式表覆盖用户样式表是有意义的，因此可以按预期进行设计。</li>
+<li>但是如上所述，<strong>用户有充分的理由覆盖Web开发人员样式时可以通过<code>!important</code>在其规则中使用来实现</strong>。例如，用户可能在视觉上有缺陷，并且想要将所访问的所有网页上的字体大小设置为正常大小的两倍，以便于阅读</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/11/百度前端技术学院 第四天学习笔记（3）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第四天学习笔记（伪类选择器、组合）（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#选择器的优先级"><span class="nav-number">1.</span> <span class="nav-text">选择器的优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#级联（cascade）"><span class="nav-number">1.1.</span> <span class="nav-text">级联（cascade）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特异性"><span class="nav-number">1.2.</span> <span class="nav-text">特异性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承（Inheritance）"><span class="nav-number">1.3.</span> <span class="nav-text">继承（Inheritance）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过四个属性值控制继承"><span class="nav-number">1.4.</span> <span class="nav-text">通过四个属性值控制继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过all属性重置所有属性值"><span class="nav-number">1.5.</span> <span class="nav-text">通过all属性重置所有属性值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#了解级联"><span class="nav-number">2.</span> <span class="nav-text">了解级联</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源顺序（Source-order）"><span class="nav-number">2.1.</span> <span class="nav-text">源顺序（Source order）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特异性（Specificity）"><span class="nav-number">2.2.</span> <span class="nav-text">特异性（Specificity）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#important"><span class="nav-number">3.</span> <span class="nav-text">!important</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明覆盖顺序（针对冲突声明）"><span class="nav-number">4.</span> <span class="nav-text">声明覆盖顺序（针对冲突声明）</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
