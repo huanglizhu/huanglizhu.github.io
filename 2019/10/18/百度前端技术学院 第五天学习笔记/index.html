@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>百度前端技术学院 第五天学习笔记（CSS盒模型） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CSS">
+  
+  
+  
+  
+  <meta name="description" content="块和内联布局 水平书写模式时块垂直放置，但在垂直书写模式下块将水平放置：">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端技术学院 第五天学习笔记（CSS盒模型）">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/百度前端技术学院 第五天学习笔记/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="块和内联布局 水平书写模式时块垂直放置，但在垂直书写模式下块将水平放置：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81fgqhvefj30it0gggm1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g894ftj4hcj30p20dpq3x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g894jcmyulj30pu049dg0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g894vg4rt0j30p802yjrp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g899exufjlj30pz0bw0uo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g896t4eon8j31e50dxwhv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8919nvk1fj30p5053glm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g89155ep7jj30py029q2u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81h5p8c9oj30qu09sdgj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81h964o41j30mf0bimxo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g891fyhyypj30ko0c83zc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g891e4xfu6j30is09hdgd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81g1tqmp5j30q208gt9k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81g3xlzkej30pr08d754.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g898jdepvvj30nb073glr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g898rnmmsaj30o307gjrw.jpg">
+<meta property="og:updated_time" content="2019-10-24T06:18:54.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度前端技术学院 第五天学习笔记（CSS盒模型）">
+<meta name="twitter:description" content="块和内联布局 水平书写模式时块垂直放置，但在垂直书写模式下块将水平放置：">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g81fgqhvefj30it0gggm1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-百度前端技术学院 第五天学习笔记" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      百度前端技术学院 第五天学习笔记（CSS盒模型）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/18/百度前端技术学院 第五天学习笔记/" class="article-date">
+	  <time datetime="2019-10-18T08:20:00.000Z" itemprop="datePublished">十月 18, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="块和内联布局"><a href="#块和内联布局" class="headerlink" title="块和内联布局"></a>块和内联布局</h1><ul>
+<li>水平书写模式时块垂直放置，但<strong>在垂直书写模式下块将水平放置</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g81fgqhvefj30it0gggm1.jpg" alt="垂直书写模式下"><a id="more"></a>
+
+</li>
+</ul>
+<p>–</p>
+<h1 id="display属性值"><a href="#display属性值" class="headerlink" title="display属性值"></a>display属性值</h1><h2 id="block"><a href="#block" class="headerlink" title="block"></a>block</h2><ul>
+<li>从下方例子中可以看到，display属性block使span元素<strong>像一个块元素</strong>，独占一行被包含在p元素内。</li>
+</ul>
+<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><ul>
+<li>display属性定义框及其内部任何框的行为。</li>
+<li>flex的行为就<strong>像一个块元素</strong>（自己占一行），它显示在新行上并占据其在行内方向上可以使用的所有空间。</li>
+<li>如果应用在<code>&lt;ul&gt;</code>上则会让<code>&lt;li&gt;</code>都显示在一行上，并占据其在行内方向上可以使用的所有空间。</li>
+</ul>
+<h2 id="block与flex的例子"><a href="#block与flex的例子" class="headerlink" title="block与flex的例子"></a>block与flex的例子</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g894ftj4hcj30p20dpq3x.jpg" alt="display属性block与flex例子效果图"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g894jcmyulj30pu049dg0.jpg" alt="没有设置display:block的span元素效果图"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>, </span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid rebeccapurple;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.block</span>,</span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">5em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.block</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>I am a paragraph. A short one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item One<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item Two<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item Three<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>I am another paragraph. Some of the <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"block"</span>&gt;</span>words<span class="tag">&lt;/<span class="name">span</span>&gt;</span> have been wrapped in a <span class="tag">&lt;<span class="name">span</span>&gt;</span>span element<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g894vg4rt0j30p802yjrp.jpg" alt="display属性inline可以让p这种块元素像行内元素"></p>
+<h2 id="inline-flex"><a href="#inline-flex" class="headerlink" title="inline-flex"></a>inline-flex</h2><ul>
+<li>inline-flex与flex比起来更<strong>像一个行内元素</strong>，它后面如果有一个段落的话，inline-flex容器和段落都<strong>在一行上一起运行</strong>，而不是像flex显示为块级元素那样将它们换成新行。</li>
+</ul>
+<h2 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h2><ul>
+<li>这个属性可以让内联盒子不与包含他的盒子内容重叠，也就是说他会让内联盒子的width与height属性生效。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g899exufjlj30pz0bw0uo.jpg" alt="对比效果图"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: lightblue;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">    I am a <span class="built_in">paragraph</span> <span class="keyword">and</span> this <span class="keyword">is</span> a &lt;span&gt;span&lt;/span&gt; inside <span class="keyword">that</span> <span class="built_in">paragraph</span>. A span <span class="keyword">is</span> an inline element <span class="keyword">and</span> so <span class="keyword">does</span> <span class="keyword">not</span> respect width <span class="keyword">and</span> height.</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="display各属性值直观对比图"><a href="#display各属性值直观对比图" class="headerlink" title="display各属性值直观对比图"></a>display各属性值直观对比图</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g896t4eon8j31e50dxwhv.jpg" alt="对比图"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8919nvk1fj30p5053glm.jpg" alt="没有对ul使用display属性时li不会在一行内显示"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g89155ep7jj30py029q2u.jpg" alt="ul{display:flex;}时像块元素"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g81h5p8c9oj30qu09sdgj.jpg" alt="ul{display:inline-flex;}时像行内元素"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>, </span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid rebeccapurple;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">span</span>,</span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-flex;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="selector-class">.inline</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    I am a paragraph. Some of the</span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>words<span class="tag">&lt;/<span class="name">span</span>&gt;</span> have been wrapped in a</span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>span element<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item One<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item Two<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item Three<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"inline"</span>&gt;</span>I am a paragraph. A short one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"inline"</span>&gt;</span>I am another paragraph. Also a short one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h1><h2 id="盒子的组成"><a href="#盒子的组成" class="headerlink" title="盒子的组成"></a>盒子的组成</h2><ul>
+<li>内容框：显示内容的区域，可以使用width和属性来调整大小height。</li>
+<li>填充框：填充物围绕内容位于空白处；可以使用padding和相关属性控制其大小。</li>
+<li>边框：边框用于包装内容和任何填充。可以使用border及其相关属性来控制其大小和样式。</li>
+<li>边距框：边距是最外层，将内容，填充和边框包装为此框与其他元素之间的空白。可以使用margin及其相关属性来控制其大小。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g81h964o41j30mf0bimxo.jpg" alt="盒子的组成图"></li>
+<li><strong>注意</strong>：边距（margin）影响框外的空间以及框在页面上所占的总空间，但它不计入框的实际大小。<strong>框的区域在边界处（border）停止，不会延伸到边缘</strong>。</li>
+</ul>
+<h2 id="标准盒模型"><a href="#标准盒模型" class="headerlink" title="标准盒模型"></a>标准盒模型</h2><ul>
+<li>在标准盒模型中，盒子占用的总大小由框的宽度（width）和高度（height）以及任何填充（padding）和边框（border）相加得到。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g891fyhyypj30ko0c83zc.jpg" alt="标准盒模型中盒子的宽高计算"></li>
+<li>例子中盒子占用的空间宽度实际上将为410px（350 + 25 + 25 + 5 + 5），高度为210px（150 + 25 + 25 + 5 + 5），因为填充和边框为添加到用于内容框的宽度。</li>
+</ul>
+<h2 id="替代盒模型"><a href="#替代盒模型" class="headerlink" title="替代盒模型"></a>替代盒模型</h2><ul>
+<li><p>使用此模型，任何宽度都是页面上可见框的宽度（不用加上padding与border），因此<strong>内容区域的宽度是该宽度减去填充和边框的宽度</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g891e4xfu6j30is09hdgd.jpg" alt="替代盒模型"></p>
+</li>
+<li><p>默认情况下，浏览器使用标准盒模型。如果要为元素打开替代模型，可以通过对其进行设置<code>box-sizing: border-box;</code>来实现。如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123; </span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果希望所有元素都使用替代盒模型，请在<html>元素上设置box-sizing属性，然后将所有其他元素设置为继承该值，如</html></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line">*, *<span class="selector-pseudo">::before</span>, *<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h1 id="块之间的-外边距margin折叠"><a href="#块之间的-外边距margin折叠" class="headerlink" title="(块之间的)外边距margin折叠"></a>(块之间的)外边距margin折叠</h1><ul>
+<li>补充：margin可以是负值。</li>
+<li>首先，两个兄弟块之间的垂直距离由<strong>margin属性</strong> （外边距）确定。</li>
+<li>通过两个例子我们可以发现<strong>折叠</strong>的是两个块之间<strong>较小的</strong>边距。</li>
+<li>也就是说如果有两个具有边距的元素撞在一起，作用于同一个位置的边距将<strong>合并为一个边距，即最大单个边距的大小</strong>。两个边距撞在一起会合并（折叠），而不是等于两个边距的总和。</li>
+<li>例子1：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid green;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0</span> <span class="number">40px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>="<span class="symbol">box</span>"&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">1</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">2</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g81g1tqmp5j30q208gt9k.jpg" alt="例子1效果"></p>
+<ul>
+<li>例子2：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>="<span class="symbol">box</span>"&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">1</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">2</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>="<span class="symbol">box</span>"&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">1</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">    &lt;<span class="symbol">p</span>&gt;文段<span class="symbol">2</span>&lt;/<span class="symbol">p</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g81g3xlzkej30pr08d754.jpg" alt="例子2效果"></p>
+<hr>
+<h1 id="边框border"><a href="#边框border" class="headerlink" title="边框border"></a>边框border</h1><ul>
+<li>简写包括border-width、border-style、border-color</li>
+<li>也可以只设置单边的这三个属性</li>
+<li>例子：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">border-top</span>: <span class="number">5px</span> dotted green;</span><br><span class="line">  <span class="attribute">border-right</span>: <span class="number">1px</span> solid black;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">20px</span> double <span class="built_in">rgb</span>(23,45,145);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#333333</span>;</span><br><span class="line">  <span class="attribute">border-top-style</span>: dotted;</span><br><span class="line">  <span class="attribute">border-right-width</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">border-bottom-color</span>: hotpink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"container"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"box"</span>&gt;Change <span class="keyword">my</span> borders.&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g898jdepvvj30nb073glr.jpg" alt="效果图"></p>
+<hr>
+<h1 id="内边距（填充）padding"><a href="#内边距（填充）padding" class="headerlink" title="内边距（填充）padding"></a>内边距（填充）padding</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g898rnmmsaj30o307gjrw.jpg" alt="image.png"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">4em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"container"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"box"</span>&gt;Change <span class="keyword">my</span> padding.&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/百度前端技术学院/">百度前端技术学院</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/15/let/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">let命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#块和内联布局"><span class="nav-number">1.</span> <span class="nav-text">块和内联布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display属性值"><span class="nav-number">2.</span> <span class="nav-text">display属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#block"><span class="nav-number">2.1.</span> <span class="nav-text">block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex"><span class="nav-number">2.2.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#block与flex的例子"><span class="nav-number">2.3.</span> <span class="nav-text">block与flex的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">2.4.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-flex"><span class="nav-number">2.5.</span> <span class="nav-text">inline-flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block"><span class="nav-number">2.6.</span> <span class="nav-text">inline-block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display各属性值直观对比图"><span class="nav-number">2.7.</span> <span class="nav-text">display各属性值直观对比图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#盒模型"><span class="nav-number">3.</span> <span class="nav-text">盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子的组成"><span class="nav-number">3.1.</span> <span class="nav-text">盒子的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准盒模型"><span class="nav-number">3.2.</span> <span class="nav-text">标准盒模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替代盒模型"><span class="nav-number">3.3.</span> <span class="nav-text">替代盒模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#块之间的-外边距margin折叠"><span class="nav-number">4.</span> <span class="nav-text">(块之间的)外边距margin折叠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#边框border"><span class="nav-number">5.</span> <span class="nav-text">边框border</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内边距（填充）padding"><span class="nav-number">6.</span> <span class="nav-text">内边距（填充）padding</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
