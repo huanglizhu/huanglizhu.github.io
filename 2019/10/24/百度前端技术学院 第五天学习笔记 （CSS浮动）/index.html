@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g89hyk7ac8j30pg0ca47e.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g89i04m8e2j30pi0c5jzu.jpg">
-<meta property="og:updated_time" content="2019-10-24T12:55:24.088Z">
+<meta property="og:updated_time" content="2019-10-28T11:48:04.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端技术学院 第五天学习笔记（CSS浮动）">
 <meta name="twitter:description" content="补充：margin:auto;与margin: 0 auto; 意思不同。margin:auto=margin:auto auto auto auto，表示上下左右都为auto；margin:0 auto=margin:0 auto 0 auto，表示上下为0，左右为auto； 居中方式不同。margin:auto表示横竖都居中。margin: 0 auto表示横居中，竖不居中。">
@@ -211,15 +211,26 @@
 </tr>
 </tbody></table>
 <ul>
-<li>当你把clear 属性应用到一个元素上时，它主要意味着”此处停止浮动”,<strong>这个元素和源码中后面的元素将不浮动</strong>，除非您稍后将一个新的float声明应用到此后的另一个元素。</li>
-<li><strong>注意及时清理浮动</strong>，必要时增加clearfix块。<strong>（不推荐使用）</strong><code>&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</code>来设定<code>.clearfix {clear: both;}</code>使得自他以后的元素都清除浮动。</li>
-<li><strong>建议使用<code>::after 伪元素</code>来清除浮动：</strong><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;<span class="attribute">content</span>:<span class="string">"."</span>; <span class="attribute">display</span>:block; <span class="attribute">height</span>:<span class="number">0</span>; <span class="attribute">visibility</span>:hidden; <span class="attribute">clear</span>:both; &#125;</span><br></pre></td></tr></table></figure>
-
+<li><p>当你把clear 属性应用到一个元素上时，它主要意味着”此处停止浮动”,<strong>这个元素和源码中后面的元素将不浮动</strong>，除非您稍后将一个新的float声明应用到此后的另一个元素。</p>
+</li>
+<li><p><strong>注意及时清理浮动</strong>，必要时增加clearfix块。<strong>（不推荐使用）</strong><code>&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</code>来设定<code>.clearfix {clear: both;}</code>使得自他以后的元素都清除浮动。</p>
+</li>
+<li><p><strong>建议使用<code>::after 伪元素</code>来清除浮动：</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span>:after &#123;<span class="attribute">content</span>:<span class="string">"."</span>; <span class="attribute">display</span>:block; <span class="attribute">height</span>:<span class="number">0</span>; <span class="attribute">visibility</span>:hidden; <span class="attribute">clear</span>:both; &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>::after</code>的意思是在<code>.clearfix</code>内部的最后加入伪元素<code>::after</code></p>
+</li>
+<li><p>首先要显示伪元素，所以<code>display:block</code></p>
+</li>
+<li><p>然后为伪元素加入空内容，以便伪元素中不会有内容显示在页面中，所以， <code>content:&quot;&quot;；</code>(<code>.</code>也可以，只要加上<code>visibility:hidden;</code>)</p>
+</li>
+<li><p>其次，为使伪元素不影响页面布局，将伪元素高度设置为0，所以， <code>height:0</code></p>
+</li>
+<li><p>最后，要清除浮动，所以，<code>clear:both</code>。 </p>
+</li>
+<li><p>after伪元素其实是通过 content 在元素的后面生成了内容为一个点的块级元素。这样一来只要设置这两个非浮动元素之间的距离就行了。</p>
 </li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.clearfix &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>after伪元素其实也是通过 content 在元素的后面生成了内容为一个点的块级元素。</p>
 <h1 id="浮动中可能遇到的问题"><a href="#浮动中可能遇到的问题" class="headerlink" title="浮动中可能遇到的问题"></a>浮动中可能遇到的问题</h1><h2 id="给浮动框加上样式时原有的布局有可能因为宽度不够被挤乱"><a href="#给浮动框加上样式时原有的布局有可能因为宽度不够被挤乱" class="headerlink" title="给浮动框加上样式时原有的布局有可能因为宽度不够被挤乱"></a>给浮动框加上样式时原有的布局有可能因为宽度不够被挤乱</h2><ul>
 <li><p>在上面的例子中三列浮动没什么问题，但<strong>给这些框加上样式时</strong>，比如添加背景、外边距、内边距等等，就<strong>有可能出现由于内边距和边界引入的额外宽度，一行容纳不下三列了，因此第三列下降到另外两列之下的情况</strong>。</p>
 </li>
@@ -230,12 +241,17 @@
 </li>
 </ul>
 <hr>
-<h2 id="非浮动元素的外边距不能用于它们和浮动元素之间来创建空间"><a href="#非浮动元素的外边距不能用于它们和浮动元素之间来创建空间" class="headerlink" title="非浮动元素的外边距不能用于它们和浮动元素之间来创建空间"></a>非浮动元素的外边距不能用于它们和浮动元素之间来创建空间</h2><p>使用<code>::after 伪元素</code>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;<span class="attribute">content</span>:<span class="string">"."</span>; <span class="attribute">display</span>:block; <span class="attribute">height</span>:<span class="number">0</span>; <span class="attribute">visibility</span>:hidden; <span class="attribute">clear</span>:both; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="非浮动元素的外边距不能用于它们和浮动元素之间来创建空间"><a href="#非浮动元素的外边距不能用于它们和浮动元素之间来创建空间" class="headerlink" title="非浮动元素的外边距不能用于它们和浮动元素之间来创建空间"></a>非浮动元素的外边距不能用于它们和浮动元素之间来创建空间</h2><p>使用<code>::after 伪元素</code>(利用::after在元素内部插入元素块，从而达到清除浮动的效果)：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span>:after &#123;<span class="attribute">content</span>:<span class="string">"."</span>; <span class="attribute">display</span>:block; <span class="attribute">height</span>:<span class="number">0</span>; <span class="attribute">visibility</span>:hidden; <span class="attribute">clear</span>:both; &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.clearfix &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>after伪元素其实是通过 content 在元素的后面生成了内容为一个点的块级元素。这样一来只要设置这两个非浮动元素之间的距离就行了。</p>
+<ul>
+<li><code>::after</code>的意思是在<code>.clearfix</code>内部的最后加入伪元素<code>::after</code></li>
+<li>首先要显示伪元素，所以<code>display:block</code></li>
+<li>然后为伪元素加入空内容，以便伪元素中不会有内容显示在页面中，所以， <code>content:&quot;&quot;；</code>(<code>.</code>也可以，只要加上<code>visibility:hidden;</code>)</li>
+<li>其次，为使伪元素不影响页面布局，将伪元素高度设置为0，所以， <code>height:0</code></li>
+<li>最后，要清除浮动，所以，<code>clear:both</code>。 </li>
+<li>after伪元素其实是通过 content 在元素的后面生成了内容为一个点的块级元素。这样一来只要设置这两个非浮动元素之间的距离就行了。</li>
+</ul>
 <h3 id="注意及时清除浮动元素"><a href="#注意及时清除浮动元素" class="headerlink" title="注意及时清除浮动元素"></a>注意及时清除浮动元素</h3><ul>
 <li>我们在文章中建立的简单例子很容易理解，但是当布局变得更加复杂时清理（clearing）也会变得更加复杂。你需要确保所有的浮动都能尽快清除，以避免它们给下方的内容制造麻烦。如果没有一个方便的容器来进行清理，那么在必要的时候使用clearfix块。</li>
 </ul>
@@ -267,6 +283,7 @@
 </ul>
 <p><strong>参考解决方法:</strong></p>
 <ol>
+<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">Flexbox</a>可以自动地延长列，这样他们就会像最长的一列一样。（具体用法可看下一篇笔记）</li>
 <li>将这些<strong>列的背景颜色设置为父元素的背景颜色</strong>，这样您就不会看到高度是不同的。这是目前最好的选择。</li>
 <li>将它们设置为<strong>固定的高度（height）</strong>，并使<strong>内容滚动（<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow" target="_blank" rel="noopener">overflow</a>属性）</strong>。</li>
 </ol>
@@ -275,6 +292,7 @@
 <li><a href="https://www.zhihu.com/question/19915431" target="_blank" rel="noopener">关于闭合浮动与清除浮动</a>(所以应该是闭合还是清除呢？)</li>
 <li>其实我们想要达到的效果更确切地说是闭合浮动，而不是单纯的清除浮动，在footer上设置clear：both清除浮动并不能解决warp高度塌陷的问题。</li>
 </ul>
+<hr>
 
       
     </div>
