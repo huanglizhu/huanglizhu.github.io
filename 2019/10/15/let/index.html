@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
+  <meta name="description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象） 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="let命令">
 <meta property="og:url" content="http://yoursite.com/2019/10/15/let/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
+<meta property="og:description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象） 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-17T01:25:02.495Z">
+<meta property="og:updated_time" content="2019-10-31T11:17:06.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="let命令">
-<meta name="twitter:description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
+<meta name="twitter:description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象） 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -158,7 +158,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="了解块级作用域"><a href="#了解块级作用域" class="headerlink" title="了解块级作用域"></a>了解块级作用域</h1><ul>
-<li>块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。</li>
+<li>块级作用域是一个语句，将多个操作封装在一起，通常是放在一个<strong>大括号</strong>里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象）</li>
 <li><strong>块级作用域之中的每个函数都类似一个代码块</strong>。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）<a id="more"></a>
 
 </li>
@@ -177,7 +177,7 @@
 <h2 id="ES6-允许块级作用域的任意嵌套"><a href="#ES6-允许块级作用域的任意嵌套" class="headerlink" title="ES6 允许块级作用域的任意嵌套"></a>ES6 允许块级作用域的任意嵌套</h2><p>先了解一下，<strong>匿名立即执行函数</strong>表达式（匿名 IIFE）可以用块级作用域实现：</p>
 <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IIFE 写法</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    var a = 1;</span></span></span><br><span class="line"><span class="function"><span class="comment">    console.log(a);</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span><span class="params">()</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 块级作用域写法</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    let a = 1;</span></span><br><span class="line"><span class="comment">    console.log(a);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>下面代码使用了一个<strong>五层的块级作用域</strong>，每一层都是一个单独的作用域。<strong>第四层作用域无法读取第五层作用域的内部变量</strong>。</p>
+<p>下面代码使用了一个<strong>五层的块级作用域</strong>，每一层都是一个单独的作用域。。</p>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#123;&#123;</span><br><span class="line">  let insane = 'Hello World';</span><br><span class="line">  &#123;let insane = 'Hello World'&#125;</span><br><span class="line">&#125;&#125;&#125;&#125;<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
 <p>注意：内层作用域可以定义外层作用域的同名变量。</p>
