@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ES6扩展 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CSS">
+  
+  
+  
+  
+  <meta name="description" content="补充：敲代码中需要注意的地方永远记住对象的属性键值对中间是冒号不是等号！！（具体参考下方“模版字符串”的例子1）">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6扩展">
+<meta property="og:url" content="http://yoursite.com/2019/11/07/ES6扩展/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="补充：敲代码中需要注意的地方永远记住对象的属性键值对中间是冒号不是等号！！（具体参考下方“模版字符串”的例子1）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8psg7l864j30vm0ahdgu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8pslhdlrvj308x06pdg3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8pryeatn0j30pa0d0164.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ps2f16duj30es04xmzk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8psb83emwj30qv0bzdnx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8prmiipmqj30k50natlm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8prnd78abj30ot0ny14o.jpg">
+<meta property="og:updated_time" content="2019-11-07T13:31:08.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6扩展">
+<meta name="twitter:description" content="补充：敲代码中需要注意的地方永远记住对象的属性键值对中间是冒号不是等号！！（具体参考下方“模版字符串”的例子1）">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8psg7l864j30vm0ahdgu.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6扩展" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6扩展
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/07/ES6扩展/" class="article-date">
+	  <time datetime="2019-11-07T13:29:42.000Z" itemprop="datePublished">十一月 7, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="补充：敲代码中需要注意的地方"><a href="#补充：敲代码中需要注意的地方" class="headerlink" title="补充：敲代码中需要注意的地方"></a>补充：敲代码中需要注意的地方</h1><p>永远记住对象的属性键值对中间<strong>是冒号不是等号</strong>！！（具体参考下方“模版字符串”的例子1）</p>
+<a id="more"></a>
+
+<hr>
+<h1 id="补充：forEach-调用数组的每个元素"><a href="#补充：forEach-调用数组的每个元素" class="headerlink" title="补充：forEach()调用数组的每个元素"></a>补充：<code>forEach()</code>调用数组的每个元素</h1><ul>
+<li>forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。</li>
+<li>注意: forEach() 对于空数组是不会执行回调函数的。</li>
+<li>语法：<code>array.forEach(function(currentValue, index, arr), thisValue)</code><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8psg7l864j30vm0ahdgu.jpg" alt="参数与描述"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>点击按钮列出数组的每个元素。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"numbers.forEach(myFunction)"</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">demoP = <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>);</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> numbers = [<span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(item, index)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    demoP.innerHTML = demoP.innerHTML + <span class="string">"index["</span> + index + <span class="string">"]: "</span> + item + <span class="string">"&lt;br&gt;"</span>; </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8pslhdlrvj308x06pdg3.jpg" alt="结果"><br><a href="https://www.runoob.com/try/try.php?filename=tryjsref_foreach3" target="_blank" rel="noopener">使用3个参数的例子</a></p>
+<hr>
+<h1 id="补充：在js文件里插入html代码的规则"><a href="#补充：在js文件里插入html代码的规则" class="headerlink" title="补充：在js文件里插入html代码的规则"></a>补充：在js文件里插入html代码的规则</h1><ul>
+<li>方法一：html代码放在一行内显示（去掉所有空格/tab/换行）</li>
+<li>方法二：想要保留格式可以在每行代码尾部加反斜线<code>\</code><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8pryeatn0j30pa0d0164.jpg" alt="例子"></li>
+</ul>
+<ul>
+<li>普通字符串拼接中，与变量的拼接可使用<code>+</code>，<strong>行尾有<code>+</code>则不需要<code>\</code>即可折行</strong>（如下图例子）但是<code>+</code>前后需要使用引号将html标签单独括起来。<strong>（复杂，推荐使用模板字符串）</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ps2f16duj30es04xmzk.jpg" alt="“模版字符串”的例子2代码1中部分代码"></li>
+<li><strong>模板字符串中插入html代码时可以换行，行尾不需要插入转义符<code>\</code></strong>，但要注意模板字符串是使用反引号`代替引号的。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8psb83emwj30qv0bzdnx.jpg" alt="使用模板字符串插入html"></li>
+</ul>
+<hr>
+<h1 id="复习：数组的join-将数组转换为字符串"><a href="#复习：数组的join-将数组转换为字符串" class="headerlink" title="复习：数组的join()将数组转换为字符串"></a>复习：数组的join()将数组转换为字符串</h1><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组.<span class="keyword">join</span>(分隔符)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分隔符默认为<code>,</code></li>
+<li>参数类型为string，需要修改分隔符时注意用<strong>引号</strong></li>
+</ul>
+<hr>
+<h1 id="字符串扩展"><a href="#字符串扩展" class="headerlink" title="字符串扩展"></a>字符串扩展</h1><h2 id="模版字符串"><a href="#模版字符串" class="headerlink" title="模版字符串"></a>模版字符串</h2><p>模版字符串：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`一些值<span class="subst">$&#123;想要拼接的值，变量等&#125;</span>另一些值`</span></span><br></pre></td></tr></table></figure>
+
+<p>以前常用的字符串拼接：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"一些值"</span>+变量+<span class="string">"另一些值"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模板字符串中<strong>插入html代码时可以换行</strong>，行尾不需要插入转义符<code>\</code>。</li>
+<li>普通的字符串拼接插入html代码时不能换行，换行时行尾需要插入转义符<code>\</code>。</li>
+</ul>
+<h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><ul>
+<li>从say1和say4可以看出，<strong>使用反引号`来代替最外层引号,使用<code>${}</code>将需要引入的变量括起来代替前后的连接符<code>+</code></strong>。</li>
+<li>从say2可以看出<code>${}</code>内还可以包裹<code>${}</code>。也就是模板字符串内还可以拼接模板字符串。  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">const</span> xiaoming = &#123;</span></span><br><span class="line"><span class="actionscript">            name: <span class="string">"xiaoming"</span>,</span></span><br><span class="line"><span class="actionscript">            age: <span class="number">14</span>, <span class="comment">//永远记住属性键值对中间是冒号不是等号！！</span></span></span><br><span class="line"><span class="actionscript">            say1: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"我叫"</span> + <span class="keyword">this</span>.name.toUpperCase() + <span class="string">",我今年"</span> + <span class="keyword">this</span>.age + <span class="string">"岁！"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            say2: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;<span class="string">`Mr.<span class="subst">$&#123;<span class="keyword">this</span>.name.toUpperCase() &#125;</span>`</span>&#125;</span>,我今年<span class="subst">$&#123;<span class="keyword">this</span>.age &#125;</span>岁！`</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            say3: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;<span class="keyword">this</span>.name.toUpperCase() &#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.age &#125;</span>岁是我的年龄！`</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            say4: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;<span class="keyword">this</span>.name.toUpperCase() &#125;</span>,我今年<span class="subst">$&#123;<span class="keyword">this</span>.age &#125;</span>岁！`</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    xiaoming.say1();<span class="comment">//我叫XIAOMING,我今年14岁！</span></span></span><br><span class="line"><span class="actionscript">    xiaoming.say2();<span class="comment">//我叫Mr.XIAOMING,我今年14岁！</span></span></span><br><span class="line"><span class="actionscript">    xiaoming.say3();<span class="comment">//我叫XIAOMING14岁是我的年龄！</span></span></span><br><span class="line"><span class="actionscript">    xiaoming.say4();<span class="comment">//我叫XIAOMING,我今年14岁！</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><p>在该例子中使用数组的join()将数组转换为字符串时类似于:</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[`&lt;<span class="built_in">li</span>&gt;<span class="number">123</span>&lt;/<span class="built_in">li</span>&gt;`,`&lt;<span class="built_in">li</span>&gt;<span class="number">456</span>&lt;/<span class="built_in">li</span>&gt;`].<span class="built_in">join</span>(<span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+
+<p>会得到<code>&lt;li&gt;123&lt;/li&gt;&lt;li&gt;456&lt;/li&gt;</code><br>此时只要把准换好的字符串放入ul标签即可得到无序列表<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8prmiipmqj30k50natlm.jpg" alt="代码1"><br>在代码1中，我们可以发现：<br>字符串中<strong>插入html代码很麻烦</strong>，行尾需要插入转义符<code>\</code>。</p>
+<p><strong>推荐将代码1插入html部分改为模板字符串：</strong><br>模板字符串中<strong>插入html代码时可以换行</strong>，行尾不需要插入转义符<code>\</code>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8prnd78abj30ot0ny14o.jpg" alt="代码2"><br>在代码2中，我们可以发现：</p>
+<ul>
+<li>模板字符串可以对模板字符串进行嵌套。</li>
+<li>模板字符串内可以插入简单表达式（比如调用函数）</li>
+</ul>
+<hr>
+<h2 id="字符串的部分新方法"><a href="#字符串的部分新方法" class="headerlink" title="字符串的部分新方法"></a>字符串的部分新方法</h2><h3 id="padStart-与padEnd-补全字符串"><a href="#padStart-与padEnd-补全字符串" class="headerlink" title="padStart()与padEnd()补全字符串"></a>padStart()与padEnd()补全字符串</h3><ul>
+<li>第一个参数：补全后的字符串总长度</li>
+<li>第二个参数：用来补全的字符串</li>
+<li>返回值：字符串</li>
+<li>语法：<code>返回的字符串=调用该方法的字符串.padStart(补全后的字符串总长度,用来补全的字符串);</code></li>
+<li>当<code>参数1&gt;调用该方法的字符串长度+用来补全的字符串长度</code>时，用来补全的字符串会被循环使用。（如下面例子str3）</li>
+<li>padStart()<strong>从调用该方法的字符串前面开始</strong>插入参数2给出的字符串</li>
+<li>padEnd()<strong>从调用该方法的字符串后面开始</strong>插入参数2给出的字符串</li>
+</ul>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">str</span>=<span class="string">"L"</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">let</span> str1=<span class="built_in">str</span>.padStart(<span class="number">4</span>,<span class="string">"OVE"</span>);</span><br><span class="line">    console.<span class="built_in">log</span>(str1);<span class="comment">//OVEL</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">let</span> str2=<span class="built_in">str</span>.padEnd(<span class="number">4</span>,<span class="string">"OVE"</span>);</span><br><span class="line">    console.<span class="built_in">log</span>(str2);<span class="comment">//LOVE</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">let</span> str3=<span class="built_in">str</span>.padEnd(<span class="number">8</span>,'OVE');</span><br><span class="line">    console.<span class="built_in">log</span>(str3);<span class="comment">//LOVEOVEO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="repeat-重复字符串"><a href="#repeat-重复字符串" class="headerlink" title="repeat()重复字符串"></a>repeat()重复字符串</h3><ul>
+<li>语法：<code>返回的字符串=调用该方法的字符串.repeat(重复的次数);</code></li>
+<li>注意：参数可以是大于-1的小数，如果是小数则取整（如：2.33取2，-0.88取0）<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    console.log(<span class="string">"hlb"</span>.repeat(<span class="number">5</span>))<span class="comment">;//hlbhlbhlbhlbhlb</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>也可以自己实现一个简易的repeat方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以自己实现一个repeat方法，将需要重复的字符串str和重复次数num传进去</span></span><br><span class="line"><span class="keyword">function</span> repeat<span class="constructor">Me(<span class="params">str</span>,<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//（返回的数组+1）转换为字符串，间隔符为传入的字符串str</span></span><br><span class="line">    return <span class="keyword">new</span> <span class="constructor">Array(<span class="params">num</span>+1)</span>.join(str);</span><br><span class="line">&#125;</span><br><span class="line">console.log(repeat<span class="constructor">Me(<span class="string">"hlb"</span>,3)</span>);<span class="comment">//hlbhlbhlb</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="startsWith-与endsWith-判断字符串是否以xx开头或者以xx结尾"><a href="#startsWith-与endsWith-判断字符串是否以xx开头或者以xx结尾" class="headerlink" title="startsWith()与endsWith()判断字符串是否以xx开头或者以xx结尾"></a>startsWith()与endsWith()判断字符串是否以xx开头或者以xx结尾</h3><ul>
+<li>语法：<code>需要被判断的字符串.startsWith(&quot;想要验证的字符或者字符串&quot;)</code></li>
+<li>返回值：是则返回true，不是则返回false</li>
+<li>字符串中<code>中文</code>/<code>英文</code>/<code>标点符号</code>都支持<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    const str=<span class="string">"I am a extremely happy girl"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    console.log(<span class="name">str.startsWith</span>(<span class="string">"b"</span>))<span class="comment">;//false</span></span><br><span class="line">    console.log(<span class="name">str.startsWith</span>(<span class="string">"I am"</span>))<span class="comment">;//true</span></span><br><span class="line"></span><br><span class="line">    console.log(<span class="name">str.endsWith</span>(<span class="string">"py girl"</span>))<span class="comment">;//true</span></span><br><span class="line">    console.log(<span class="name">str.endsWith</span>(<span class="string">"b"</span>))<span class="comment">;//false</span></span><br><span class="line"></span><br><span class="line">    const str1=<span class="string">"我超级棒的！"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    console.log(<span class="name">str1.startsWith</span>(<span class="string">"我"</span>))<span class="comment">;//true</span></span><br><span class="line">    console.log(<span class="name">str1.startsWith</span>(<span class="string">"I"</span>))<span class="comment">;//false</span></span><br><span class="line"></span><br><span class="line">    console.log(<span class="name">str1.endsWith</span>(<span class="string">"的！"</span>))<span class="comment">;//true</span></span><br><span class="line">    console.log(<span class="name">str1.endsWith</span>(<span class="string">"b"</span>))<span class="comment">;//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="include"><a href="#include" class="headerlink" title="include()"></a>include()</h3><h4 id="补充：没有include-之前字符串实现该功能的方法"><a href="#补充：没有include-之前字符串实现该功能的方法" class="headerlink" title="补充：没有include()之前字符串实现该功能的方法"></a>补充：没有include()之前字符串实现该功能的方法</h4><ul>
+<li>在没有include()之前字符串使用查询字符串下标indexOf()的方式来判断字符串是否拥有另一个字符或者字符串。</li>
+<li><strong>原理</strong>：如果该字符串不包含参数中的字符或者字符串则返回值为-1，如果包含则返回值为数组下标。<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">str</span> = <span class="string">"I am a extremely happy girl"</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">str</span>.indexOf(<span class="string">"哈哈"</span>) != <span class="number">-1</span>) &#123;<span class="comment">//不存在</span></span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">"存在"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">"不存在"</span>);                </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="补充：按位取反"><a href="#补充：按位取反" class="headerlink" title="补充：按位取反~"></a>补充：按位取反<code>~</code></h4><ul>
+<li>按位取反<code>~</code>可以简单的理解为<code>~x=-(x+1)</code></li>
+<li>使用按位取反替换上面的例子：<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">str</span> = <span class="string">"I am a extremely happy girl"</span>;</span><br><span class="line"><span class="keyword">if</span>(~<span class="built_in">str</span>.indexOf(<span class="string">"哈哈"</span>))&#123;<span class="comment">//不存在</span></span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">"存在"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">"不存在"</span>);                </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>原理</strong>：当<code>str.indexOf(&quot;哈哈&quot;)</code>值为-1时就是没取到，此时使用按位取反结果为0，在if中0为false。</p>
+<hr>
+<h2 id="新的Unicode表示法和遍历方式"><a href="#新的Unicode表示法和遍历方式" class="headerlink" title="新的Unicode表示法和遍历方式"></a>新的Unicode表示法和遍历方式</h2>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/06/百度前端技术学院 第五天学习总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第五天学习总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：敲代码中需要注意的地方"><span class="nav-number">1.</span> <span class="nav-text">补充：敲代码中需要注意的地方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：forEach-调用数组的每个元素"><span class="nav-number">2.</span> <span class="nav-text">补充：forEach()调用数组的每个元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：在js文件里插入html代码的规则"><span class="nav-number">3.</span> <span class="nav-text">补充：在js文件里插入html代码的规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：数组的join-将数组转换为字符串"><span class="nav-number">4.</span> <span class="nav-text">复习：数组的join()将数组转换为字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串扩展"><span class="nav-number">5.</span> <span class="nav-text">字符串扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模版字符串"><span class="nav-number">5.1.</span> <span class="nav-text">模版字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子1"><span class="nav-number">5.1.1.</span> <span class="nav-text">例子1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子2"><span class="nav-number">5.1.2.</span> <span class="nav-text">例子2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的部分新方法"><span class="nav-number">5.2.</span> <span class="nav-text">字符串的部分新方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#padStart-与padEnd-补全字符串"><span class="nav-number">5.2.1.</span> <span class="nav-text">padStart()与padEnd()补全字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repeat-重复字符串"><span class="nav-number">5.2.2.</span> <span class="nav-text">repeat()重复字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startsWith-与endsWith-判断字符串是否以xx开头或者以xx结尾"><span class="nav-number">5.2.3.</span> <span class="nav-text">startsWith()与endsWith()判断字符串是否以xx开头或者以xx结尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include"><span class="nav-number">5.2.4.</span> <span class="nav-text">include()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：没有include-之前字符串实现该功能的方法"><span class="nav-number">5.2.4.1.</span> <span class="nav-text">补充：没有include()之前字符串实现该功能的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：按位取反"><span class="nav-number">5.2.4.2.</span> <span class="nav-text">补充：按位取反~</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的Unicode表示法和遍历方式"><span class="nav-number">5.3.</span> <span class="nav-text">新的Unicode表示法和遍历方式</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
