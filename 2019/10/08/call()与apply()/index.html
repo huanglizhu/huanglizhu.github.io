@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="方法重用：call() 和 apply() 不带参数的使用方法非常相似。 带参数的使用方法有所区别：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-09T02:24:49.832Z">
+<meta property="og:updated_time" content="2019-11-14T07:33:58.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="call（）与apply（）">
 <meta name="twitter:description" content="方法重用：call() 和 apply() 不带参数的使用方法非常相似。 带参数的使用方法有所区别：">
@@ -221,8 +221,32 @@
 <p><a href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_arguments" target="_blank" rel="noopener">完整例子</a></p>
 <hr>
 <h1 id="JavaScript-函数-Apply"><a href="#JavaScript-函数-Apply" class="headerlink" title="JavaScript 函数 Apply"></a>JavaScript 函数 Apply</h1><ul>
+<li><code>apply()</code>会改变this的指向，</li>
 <li><strong>可以通过 <code>apply()</code> 方法调用属于另一个对象的方法。</strong></li>
-<li>apply() 方法与 call() 方法非常相似。</li>
+<li>但不仅限于此，<strong>当设置第一个参数为null时可以在某些本来需要写成遍历数组变量的任务中使用内建的函数</strong>【如：下方例子“使用Apply（）在数组上模拟 max 方法”】</li>
+<li>call()方法的作用和 apply() 方法类似，区别就是call()方法接受的是<strong>参数列表</strong>，而apply()方法接受的是一个<strong>参数数组</strong>。</li>
+<li>apply() 方法调用一个<strong>具有给定this值的函数</strong>，以及作为一个<strong>数组（或类似数组对象</strong>）提供的参数。</li>
+<li><strong>语法</strong>：<code>func.apply(thisArg, [argsArray])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>thisArg</td>
+<td>可选的。<br>在 func 函数运行时使用的 this 值。<br>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
+</tr>
+<tr>
+<td>argsArray</td>
+<td>可选的。<br>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br>如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。<br>从ECMAScript 5 开始可以使用类数组对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>返回值</strong>：调用有指定this值和参数的函数的结果。</li>
+<li><strong>描述</strong>：在调用一个存在的函数时，你可以为其指定一个 this 对象。 this 指当前对象，也就是正在调用这个函数的对象。 使用 apply， 你可以只写一次这个方法然后在另一个对象中继承它，而不用在新对象中重复写该方法。<br>你也可以使用 arguments对象作为 argsArray 参数。 arguments 是一个函数的局部变量。 它可以被用作被调用对象的所有未指定的参数。 这样，你在使用apply函数的时候就不需要知道被调用对象的所有参数。 你可以使用arguments来把所有的参数传递给被调用对象。 被调用对象接下来就负责处理这些参数。</li>
 </ul>
 <h2 id="例子：使用函数Apply"><a href="#例子：使用函数Apply" class="headerlink" title="例子：使用函数Apply"></a>例子：使用函数Apply</h2><p><strong>让person1去调用person的fullName 方法</strong>：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">" "</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName: <span class="string">"Bill"</span>,</span><br><span class="line">    lastName: <span class="string">"Gates"</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.apply(person1);  <span class="comment">// 将返回 "Bill Gates"</span></span><br></pre></td></tr></table></figure>

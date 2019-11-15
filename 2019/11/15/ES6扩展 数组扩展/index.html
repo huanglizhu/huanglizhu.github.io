@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ES6扩展 数组扩展 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="CSS">
+  
+  
+  
+  
+  <meta name="description" content="结合扩展运算符(...)复习：数组合并、复制数组 在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6扩展 数组扩展">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/ES6扩展 数组扩展/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="结合扩展运算符(...)复习：数组合并、复制数组 在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8xv8deiswj30nw069q33.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yir158p3j30nk057mx8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yiwh9b9dj30mo05m3yt.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yizjtablj30nk055jrh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yk1vbrnmj30na03ggll.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ykgek0bhj30dk02yt9a.jpg">
+<meta property="og:updated_time" content="2019-11-15T03:37:09.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6扩展 数组扩展">
+<meta name="twitter:description" content="结合扩展运算符(...)复习：数组合并、复制数组 在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8xv8deiswj30nw069q33.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6扩展 数组扩展" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6扩展 数组扩展
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/15/ES6扩展 数组扩展/" class="article-date">
+	  <time datetime="2019-11-15T03:36:21.000Z" itemprop="datePublished">十一月 15, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="结合扩展运算符"><a href="#结合扩展运算符" class="headerlink" title="结合扩展运算符(...)"></a>结合扩展运算符(<code>...</code>)</h1><h2 id="复习：数组合并、复制数组"><a href="#复习：数组合并、复制数组" class="headerlink" title="复习：数组合并、复制数组"></a>复习：数组合并、复制数组</h2><ul>
+<li>在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组<a id="more"></a>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">const</span> arr2 = [<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">const</span> arr3 = [<span class="string">"nihao"</span>, <span class="number">2.2</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组合并</span></span><br><span class="line"><span class="keyword">const</span> cArr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, ...arr1];</span><br><span class="line">console.log(cArr1);<span class="comment">//[1, 2, 3, 1, 2, 3, 4]</span></span><br><span class="line"><span class="keyword">const</span> cArr2 = [...arr1, ...arr2, ...arr3];</span><br><span class="line">console.log(cArr2);<span class="comment">// [1, 2, 3, 4, 4, 3, 2, 1, "nihao", 2.2, false]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//复制数组arr3</span></span><br><span class="line"><span class="keyword">const</span> cArr3 = [...arr3];</span><br><span class="line">console.log(cArr3);<span class="comment">//["nihao", 2.2, false]</span></span><br><span class="line"><span class="keyword">const</span> [...cArr4] = arr3;</span><br><span class="line">console.log(cArr4);<span class="comment">//["nihao", 2.2, false]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="读取并展开数组用作多个参数"><a href="#读取并展开数组用作多个参数" class="headerlink" title="读取并展开数组用作多个参数"></a>读取并展开数组用作多个参数</h2><ul>
+<li><strong>另一个作用</strong>：在调用函数时把一个数组展开来作为这个函数的参数。</li>
+<li><strong>简单例子</strong>：<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo(a, b, c) &#123;</span><br><span class="line">    console.<span class="built-in">log</span>(a);<span class="comment">//1</span></span><br><span class="line">    console.<span class="built-in">log</span>(b);<span class="comment">//3</span></span><br><span class="line">    console.<span class="built-in">log</span>(c);<span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">foo</span>(<span class="params">...[1, 3, 2]</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="复习：apply"><a href="#复习：apply" class="headerlink" title="复习：apply()"></a>复习：<code>apply()</code></h3><ul>
+<li><strong>语法</strong>：<code>func.apply(thisArg, [argsArray])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>thisArg</td>
+<td>可选的。<br>在 func 函数运行时使用的 this 值。<br>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
+</tr>
+<tr>
+<td>argsArray</td>
+<td>可选的。<br>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br>如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。<br>从ECMAScript 5 开始可以使用类数组对象。</td>
+</tr>
+</tbody></table>
+<h3 id="实用例子"><a href="#实用例子" class="headerlink" title="实用例子"></a>实用例子</h3><ul>
+<li><p>在实际运用中，我们经常将用户信息按照一定的顺序放在数组中而不是对象，这可以节省流量。</p>
+</li>
+<li><p>在这个例子中，我们可以<strong>使用扩展运算符简便的读取数组中的每一个元素并作用与对应的参数</strong>，避免了重复使用<code>[]</code>去读取各个数组元素）。</p>
+</li>
+<li><p><strong>补充</strong>：使用数组的<code>join()</code>将数组hobby转换为字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = [<span class="string">"小明"</span>, <span class="number">15</span>, [<span class="string">"吃饭"</span>, <span class="string">"睡觉"</span>, <span class="string">"打游戏"</span>], <span class="string">"我没有女朋友"</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">name, age, hobby, desc</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;name&#125;</span>,我今年<span class="subst">$&#123;age&#125;</span>岁，我平时喜欢<span class="subst">$&#123;hobby.join(<span class="string">"和"</span>)&#125;</span>，<span class="subst">$&#123;desc&#125;</span>。`</span>);</span><br><span class="line">&#125;</span><br><span class="line">say(user[<span class="number">0</span>],user[<span class="number">1</span>],user[<span class="number">2</span>],user[<span class="number">3</span>]);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line">say(...user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还可以使用<code>apply()</code>【<strong>他会将数组元素将作为单独的参数传给 say 函数</strong>】进行数组变对应参数的调用，但是使用扩展运算符语义更加清晰，而且参数如果传入过多会有超出JavaScript引擎的参数长度限制的风险。<strong>故不推荐使用<code>apply()</code>。</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="补充：生成器函数"><a href="#补充：生成器函数" class="headerlink" title="补充：生成器函数"></a>补充：生成器函数</h2><ul>
+<li><strong>语法</strong>：<code>function* name([param[, param[, ... param]]]) { statements }</code></li>
+<li><strong>参数</strong>：  </li>
+</ul>
+<p><strong>name</strong>：函数名<br><strong>param</strong>：要传递给函数的一个参数的名称，一个函数最多可以有255个参数。<br><strong>statements</strong>：普通JS语句。</p>
+<ul>
+<li><strong>描述</strong>：生成器函数在执行时能暂停，后面又能从暂停处继续执行。  </li>
+</ul>
+<p><strong>调用一个生成器函数并不会马上执行它里面的语句</strong>，而是返回一个这个生成器的 迭代器 （iterator ）对象。<strong>当这个迭代器的 next() 方法被首次（后续）调用时</strong>，其内的语句会执行到第一个（后续）出现yield的位置为止，yield 后紧跟迭代器要返回的值。或者如果用的是 yield<code>*</code>（多了个星号），则表示将执行权移交给另一个生成器函数（当前生成器暂停执行）。【<strong>也就是说,首次执行生成器函数需要调用它的next()，当然也可以使用扩展运算符进行迭代调用，例子在下方“扩展运算符与生成器函数”中</strong>】</p>
+<ul>
+<li>通过<code>yield</code>关键字可<strong>暂停函数的执行</strong></li>
+<li>通过<code>next</code>关键字可<strong>继续函数的执行</strong></li>
+<li>与promise类似</li>
+</ul>
+<h2 id="扩展运算符与生成器函数"><a href="#扩展运算符与生成器函数" class="headerlink" title="扩展运算符与生成器函数"></a>扩展运算符与生成器函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">g</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"hi~"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"imooc~"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用扩展运算符相当于迭代（循环）执行生成器函数【在这也就是执行了两次函数g()】</span></span><br><span class="line"><span class="comment">// const arr = [...g()];//分别输出1,2</span></span><br><span class="line"><span class="comment">//使用扩展运算符一行代码的效果类似于下面的代码</span></span><br><span class="line"><span class="keyword">const</span> gg = g();</span><br><span class="line">gg.next();<span class="comment">//1</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    gg.next();<span class="comment">//2</span></span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="结合去重函数Set"><a href="#结合去重函数Set" class="headerlink" title="结合去重函数Set()"></a>结合去重函数<code>Set()</code></h2><ul>
+<li><code>Set()</code>参数可放入数组，返回值是字符串类型，想要让他<strong>完成去重后返回数组则可使用扩展运算符</strong>：<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let <span class="keyword">set</span> = new <span class="comment">Set([1, 2, 3, 3])</span>;</span><br><span class="line">console.<span class="built-in">log</span>(<span class="keyword">set</span>);<span class="comment">//&#123;1, 2, 3&#125;</span></span><br><span class="line">console.<span class="built-in">log</span>([...set]);<span class="comment">//[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h1 id="新的方法"><a href="#新的方法" class="headerlink" title="新的方法"></a>新的方法</h1><h2 id="复习：数组字面量"><a href="#复习：数组字面量" class="headerlink" title="复习：数组字面量"></a>复习：数组字面量</h2><ul>
+<li>数组字面量可用于创建数组。（类似的，对象字面量用于创建对象）</li>
+<li>创建数组有两种方法。</li>
+</ul>
+<p><strong>第一：构造函数法</strong></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="type">Array</span>();</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二：数组字面量法</strong></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var arr</span>=[<span class="string">"zhu"</span>,<span class="string">"zhen"</span>,<span class="string">"wei"</span>];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在调用数组的内建方法时可以使用<code>Array.prototype.内建方法名</code>,也直接使用数组字面量<code>[]</code>，写作<code>[].内建方法名</code>即可少写<code>Array.prototype</code>。（具体例子在下方“<code>Array.from()</code>将类数组转换为数组”例子中）</li>
+</ul>
+<hr>
+<h2 id="Array-from-将类数组转换为数组"><a href="#Array-from-将类数组转换为数组" class="headerlink" title="Array.from()将类数组转换为数组"></a><code>Array.from()</code>将类数组转换为数组</h2><ul>
+<li><strong><code>Array.from()</code>将类数组对象或者Iterable对象转换为数组对象</strong>。</li>
+<li>比如：<code>arguments函数、document.querySelectorAll、 document.getElementByTagName、 document.getElementsByName、 document.getElementsByClassName</code>返回的都是类数组对象。</li>
+<li><strong>注意</strong>：<br>类数组对象的<strong>属性名必须是数值型或者字符串型的数字</strong>。<br>类数组对象的length属性值会直接影响数组长度。<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="number">1</span>: "22",</span><br><span class="line">    <span class="number">2</span>: <span class="keyword">false</span>,</span><br><span class="line">    length: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line">console.log(<span class="keyword">Array</span>.<span class="keyword">from</span>(obj));// [<span class="number">1</span>, "22"]</span><br><span class="line">//<span class="keyword">Array</span>.<span class="keyword">from</span>()还可以接收一个回调函数作为第二个参数对类数组对象进行一些处理</span><br><span class="line">//在这里箭头函数item将传入的参数item都*<span class="number">2</span>并返回，"22"隐式转换为<span class="number">22</span>后也乘以<span class="number">2</span>倍</span><br><span class="line">console.log(<span class="keyword">Array</span>.<span class="keyword">from</span>(obj, item =&gt; item * <span class="number">2</span>));// [<span class="number">2</span>, <span class="number">44</span>]</span><br><span class="line"></span><br><span class="line">//后面三种方法虽然也可以将类数组转换为数组，但无法使用回调函数对数组对象进行处理。</span><br><span class="line">//方法<span class="number">1</span>：使用<span class="keyword">call</span>()让对象obj调用<span class="keyword">Array</span>的<span class="keyword">slice</span>方法以此转换成数组对象</span><br><span class="line">console.log(<span class="keyword">Array</span>.prototype.<span class="keyword">slice</span>.<span class="keyword">call</span>(obj));// [<span class="number">1</span>, "22"]</span><br><span class="line"></span><br><span class="line">//方法<span class="number">2</span>：直接使用数组字面量`[]`即可少写`<span class="keyword">Array</span>.prototype`</span><br><span class="line">console.log([].<span class="keyword">slice</span>.<span class="keyword">call</span>(obj));// [<span class="number">1</span>, "22"]</span><br><span class="line"></span><br><span class="line">//方法<span class="number">3</span>：添加遍历器接口(`Symbol.iterator`)后使用扩展运算符【具体例子在下面“使用扩展运算符将类数组转换为数组”中】</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="补充：使用扩展运算符将类数组转换为数组"><a href="#补充：使用扩展运算符将类数组转换为数组" class="headerlink" title="补充：使用扩展运算符将类数组转换为数组"></a>补充：使用扩展运算符将类数组转换为数组</h2><ul>
+<li><p>扩展运算符<code>...</code>背后调用的是<strong>遍历器接口(<code>Symbol.iterator</code>)</strong>，所以任何有interator接口的对象都可以用<code>...</code>转化为真正的数组。</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator" target="_blank" rel="noopener">MDN 关于遍历器接口(<code>Symbol.iterator</code>)</a></p>
+</li>
+<li><p>而<strong>类数组对象是有interator接口</strong>的，所以我们也可以使用扩展运算符将类数组转换为数组。</p>
+</li>
+<li><p><strong>注意</strong>：扩展运算符背后调用的是遍历器接口(<code>Symbol.iterator</code>)，如果一个对象没有部署这个接口，就无法转换。所以如果这个类数组对象是我们自己写的就一定要记得为它部署 Iterator 接口，否则无法使用扩展运算符将它转换为数组。（如下所示）</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">"22"</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="literal">false</span>,</span><br><span class="line">    length: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line">console.log([...obj]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在这个例子中，我们没有部署<code>Symbol.iterator</code>接口，就无法转换为数组并<strong>报错：<code>TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))</code></strong></p>
+</li>
+<li><p><strong>正确写法</strong>：添加遍历器接口(<code>Symbol.iterator</code>)：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">"22"</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="literal">false</span>,</span><br><span class="line">    length: <span class="number">2</span>,</span><br><span class="line">    [Symbol.iterator]: Array.prototype[Symbol.iterator]<span class="comment">//添加遍历器接口</span></span><br><span class="line">&#125;;</span><br><span class="line">console.log([...obj]);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>注意：</strong><br>不能在对象外面使用<code>obj.obj[Symbol.iterator]= Array.prototype[Symbol.iterator];</code>去添加遍历器接口。<br><strong>只有类数组对象才可以直接使用 Array 的 Iterator</strong>，普通对象部署数组的Symbol.iterator方法，并无效果。普通对象需要手动添加 Iterator 方法，添加 Iterator 接口的一种比较常用的方法,是使用Generator函数。普通的对象就算没有实现 Iterator 接口，不能使用 for … of 的情况下，仍然可以使用 for … in 来遍历 key。</p>
+<hr>
+<h2 id="Array-of-将参数合成数组"><a href="#Array-of-将参数合成数组" class="headerlink" title="Array.of()将参数合成数组"></a><code>Array.of()</code>将参数合成数组</h2><ul>
+<li><code>Array.of()</code>将传入的参数合成数组。</li>
+<li><strong>语法</strong>：<code>Array.of(参数1,参数2,参数3)</code><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(<span class="keyword">Array</span>.<span class="keyword">of</span>(<span class="number">1</span>, <span class="number">2</span>, "123", <span class="number">2.2</span>, <span class="keyword">false</span>));//[<span class="number">1</span>, <span class="number">2</span>, "123", <span class="number">2.2</span>, <span class="keyword">false</span>]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="Array-fill"><a href="#Array-fill" class="headerlink" title="Array#fill()"></a><code>Array#fill()</code></h2><ul>
+<li><strong>注意</strong>：fill不是静态方法，不能通过<code>Array.fill</code>来调用。</li>
+<li><code>fill()</code>方法用于<strong>将一个固定值替换数组的元素</strong>。并且可以<strong>指定填充的范围</strong>（起始值与结束值的数组下标）。</li>
+<li><strong>语法</strong>：<code>array.fill(value, start, end)</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>必需。填充的值。</td>
+</tr>
+<tr>
+<td>start</td>
+<td>可选。开始填充位置的数组下标。</td>
+</tr>
+<tr>
+<td>end</td>
+<td>可选。停止填充位置的数组下标 (默认为 array.length)<br>【<strong>注意：不包括end</strong>，也就是说<code>array.fill(1, 0, 3)</code>替换的是数组[0]、[1]、[2]】</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>注意</strong>：数组原有参数会被填充的值覆盖。</p>
+</li>
+<li><p>例子：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span><br><span class="line">fruits.fill(<span class="string">"lalala"</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出结果：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Banana,</span>Orange,lalala,lalala</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="补充：使用Array-创建数组对象"><a href="#补充：使用Array-创建数组对象" class="headerlink" title="补充：使用Array()创建数组对象"></a>补充：使用<code>Array()</code>创建数组对象</h2><ul>
+<li>使用<code>Array()</code>创建数组对象时，<strong>如果只有一个数字参数则默认是用于设置数组长度</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"10"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr1);<span class="comment">//["10"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr2);<span class="comment">// [empty × 10]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="Array-includes-判断是否含有某元素"><a href="#Array-includes-判断是否含有某元素" class="headerlink" title="Array.includes()判断是否含有某元素"></a><code>Array.includes()</code>判断是否含有某元素</h2><ul>
+<li><strong>与字符串类似，数组也有<code>includes()</code></strong>，用于检测数组中是否包含某元素，是则返回true，否则返回false。</li>
+<li>可以代替以前的<code>indexOf()</code>来判断元素是否存在，但<code>indexOf()</code>可以找到数组下标，这个不可替代。</li>
+<li><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">console.log(arr.includes(<span class="number">1</span>));<span class="comment">//true</span></span><br><span class="line">console.log(arr.includes(<span class="number">55</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="keys-和values-还有entries"><a href="#keys-和values-还有entries" class="headerlink" title="keys()和values()还有entries()"></a><code>keys()</code>和<code>values()</code>还有<code>entries()</code></h2><ul>
+<li><strong>与对象类似的，数组也有<code>keys()</code>和<code>values()</code>还有<code>entries()</code></strong>，不过它们是<strong>作用在实例上</strong>的，即<code>arr.keys()</code>和<code>arr.values()</code>还有<code>arr.entries()</code>。而<strong>对象是作用在Object上</strong><code>Object.keys(obj实例)</code></li>
+</ul>
+<h3 id="arr-keys-拿到数组下标"><a href="#arr-keys-拿到数组下标" class="headerlink" title="arr.keys()拿到数组下标"></a><code>arr.keys()</code>拿到数组下标</h3><ul>
+<li><strong>补充</strong>：拥有迭代（遍历）器接口iterator的对象都可以使用<code>for-of</code>语句。</li>
+<li>可以使用<code>keys()</code>拿到数组每一项元素的数组下标。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4.4</span>, <span class="string">"lalal"</span>, <span class="literal">false</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr.keys());<span class="comment">//Array Iterator &#123;&#125;,说明arr.keys()含有迭代器接口Iterator ，故可以使用`for-of`</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> arr.keys()) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8xv8deiswj30nw069q33.jpg" alt="运行结果"></p>
+<hr>
+<h3 id="arr-values-拿到数组元素"><a href="#arr-values-拿到数组元素" class="headerlink" title="arr.values()拿到数组元素"></a><code>arr.values()</code>拿到数组元素</h3><p>使用<code>values()</code>可以<strong>按顺序</strong>拿到数组中的每一项。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4.4</span>, <span class="string">"lalal"</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let v of arr.values()) &#123;</span><br><span class="line">    console.log(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yir158p3j30nk057mx8.jpg" alt="运行效果"></p>
+<hr>
+<h3 id="arr-entries-同时拿到数组下标和元素"><a href="#arr-entries-同时拿到数组下标和元素" class="headerlink" title="arr.entries()同时拿到数组下标和元素"></a><code>arr.entries()</code>同时拿到数组下标和元素</h3><ul>
+<li>使用<code>entries()</code>可同时拿到数组下标和元素。</li>
+<li><strong>返回值</strong>：数组，<code>[数组下标，对应的数组元素]</code></li>
+<li><strong>例子</strong>：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4.4</span>, <span class="string">"lalal"</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let e of arr.entries()) &#123;</span><br><span class="line">    console.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yiwh9b9dj30mo05m3yt.jpg" alt="运行结果"></p>
+<ul>
+<li>上面例子拿到的e都是数组形式的，所以我们可以对取出来的e进行<strong>数组的解构赋值</strong>，同时拿到数组下标i和数组元素v：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4.4</span>, <span class="string">"lalal"</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let [i,v] of arr.entries()) &#123;<span class="comment">//对取出来的e进行数组的解构赋值，e = [i,v] </span></span><br><span class="line">    console.log(i,v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yizjtablj30nk055jrh.jpg" alt="运行结果"></p>
+<hr>
+<h2 id="find-返回数组中满足回调函数的第一个元素"><a href="#find-返回数组中满足回调函数的第一个元素" class="headerlink" title="find()返回数组中满足回调函数的第一个元素"></a><code>find()</code>返回数组中满足回调函数的第一个元素</h2><ul>
+<li><code>find()</code>方法会<strong>按顺序</strong>对数组中的<strong>每一项元素执行一次 callback 函数</strong>，直至有一个 callback 返回 true。当找到了这样一个元素后，该方法会<strong>立即返回这个元素的值</strong>，否则返回 <code>undefined</code>。</li>
+<li><strong>语法</strong>：<code>arr.find(callback[, thisArg])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>callback</td>
+<td>在数组每一项上执行的<strong>测试函数(回调函数)</strong>，接收 3 个参数：<br>element:当前遍历到的元素。<br>index:<strong>可选</strong>,当前遍历到的索引。<br>array:<strong>可选</strong>,数组本身。</td>
+</tr>
+<tr>
+<td>thisArg</td>
+<td><strong>可选</strong>,执行回调时用作this的对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>返回值</strong>：数组中满足提供的测试函数(回调函数)的<strong>第一个元素的值</strong>。否则返回 <code>undefined</code>。</li>
+<li><strong>例子</strong>(使用<code>find()</code>找到双数的数组元素)：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> res = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">3</span>].find(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"value"</span>, value);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> value % <span class="number">2</span> === <span class="number">0</span>;<span class="comment">//通过取余找到双数</span></span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(res);<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yk1vbrnmj30na03ggll.jpg" alt="运行结果"></p>
+<ul>
+<li><strong>例子分析</strong>：可以从运行结果上看到，1和7循环以后都不符合要求，循环到6时符合要求，输出6。</li>
+<li><strong>使用箭头函数简化例子</strong>：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> res = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">3</span>].find(value =&gt; value % <span class="number">2</span> === <span class="number">0</span>);<span class="comment">//通过取余找到双数</span></span><br><span class="line">console.log(res);<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="findIndex-返回数组中找到的元素的下标"><a href="#findIndex-返回数组中找到的元素的下标" class="headerlink" title="findIndex()返回数组中找到的元素的下标"></a><code>findIndex()</code>返回数组中找到的元素的下标</h2><ul>
+<li>根据条件（回调函数）按顺序遍历数组,当回调返回true时就<strong>返回当前遍历到的下标</strong>,语法、参数都与<code>find()</code>非常相似。</li>
+<li><strong>语法</strong>：<code>arr.findIndex(callback[, thisArg])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>callback</td>
+<td>在数组每一项上执行的<strong>测试函数(回调函数)</strong>，接收 3 个参数：<br>element:当前遍历到的元素。<br>index:<strong>可选</strong>,当前遍历到的索引。<br>array:<strong>可选</strong>,数组本身。</td>
+</tr>
+<tr>
+<td>thisArg</td>
+<td><strong>可选</strong>,执行回调时用作this的对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>返回值</strong>：数组中满足提供的测试函数的<strong>第一个元素的索引(下标)</strong>。否则返回<code>-1</code>。</li>
+<li><strong>例子</strong>（找到双数的数组元素的下标）：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> res = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">3</span>].findIndex(value =&gt; value % <span class="number">2</span> === <span class="number">0</span>);<span class="comment">//通过取余找到双数</span></span><br><span class="line">console.log(res);<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="findIndex-与indexOf-的区别"><a href="#findIndex-与indexOf-的区别" class="headerlink" title="findIndex()与indexOf()的区别"></a><code>findIndex()</code>与<code>indexOf()</code>的区别</h3><ul>
+<li><code>findIndex()</code>与<code>indexOf()</code>都是返回查找元素的数组下标的，但是<code>findIndex()</code>多了一个回调函数（测试函数），所以可以做一些<code>indexOf()</code>做不到的事情。</li>
+<li><strong><code>indexOf()</code>无法查询数组中是否含有<code>NaN</code></strong>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ykgek0bhj30dk02yt9a.jpg" alt="`indexOf()`无法查询数组中是否含有`NaN`"></li>
+<li>但是<code>findIndex()</code>可以<strong>通过回调函数</strong>里调用<code>Number</code>的<code>isNaN()</code>来判断数组里是否含有<code>NaN</code>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> res = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="literal">NaN</span>].findIndex(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">Number</span>.isNaN(value));</span><br><span class="line"><span class="built_in">console</span>.log(res);<span class="comment">//4,也就是说找到了NaN的下标为4</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/13/ES6扩展 对象扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6扩展 对象扩展</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结合扩展运算符"><span class="nav-number">1.</span> <span class="nav-text">结合扩展运算符(...)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：数组合并、复制数组"><span class="nav-number">1.1.</span> <span class="nav-text">复习：数组合并、复制数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取并展开数组用作多个参数"><span class="nav-number">1.2.</span> <span class="nav-text">读取并展开数组用作多个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复习：apply"><span class="nav-number">1.2.1.</span> <span class="nav-text">复习：apply()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用例子"><span class="nav-number">1.2.2.</span> <span class="nav-text">实用例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：生成器函数"><span class="nav-number">1.3.</span> <span class="nav-text">补充：生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展运算符与生成器函数"><span class="nav-number">1.4.</span> <span class="nav-text">扩展运算符与生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合去重函数Set"><span class="nav-number">1.5.</span> <span class="nav-text">结合去重函数Set()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的方法"><span class="nav-number">2.</span> <span class="nav-text">新的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：数组字面量"><span class="nav-number">2.1.</span> <span class="nav-text">复习：数组字面量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-from-将类数组转换为数组"><span class="nav-number">2.2.</span> <span class="nav-text">Array.from()将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：使用扩展运算符将类数组转换为数组"><span class="nav-number">2.3.</span> <span class="nav-text">补充：使用扩展运算符将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-of-将参数合成数组"><span class="nav-number">2.4.</span> <span class="nav-text">Array.of()将参数合成数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-fill"><span class="nav-number">2.5.</span> <span class="nav-text">Array#fill()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：使用Array-创建数组对象"><span class="nav-number">2.6.</span> <span class="nav-text">补充：使用Array()创建数组对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-includes-判断是否含有某元素"><span class="nav-number">2.7.</span> <span class="nav-text">Array.includes()判断是否含有某元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keys-和values-还有entries"><span class="nav-number">2.8.</span> <span class="nav-text">keys()和values()还有entries()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-keys-拿到数组下标"><span class="nav-number">2.8.1.</span> <span class="nav-text">arr.keys()拿到数组下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-values-拿到数组元素"><span class="nav-number">2.8.2.</span> <span class="nav-text">arr.values()拿到数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-entries-同时拿到数组下标和元素"><span class="nav-number">2.8.3.</span> <span class="nav-text">arr.entries()同时拿到数组下标和元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-返回数组中满足回调函数的第一个元素"><span class="nav-number">2.9.</span> <span class="nav-text">find()返回数组中满足回调函数的第一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findIndex-返回数组中找到的元素的下标"><span class="nav-number">2.10.</span> <span class="nav-text">findIndex()返回数组中找到的元素的下标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#findIndex-与indexOf-的区别"><span class="nav-number">2.10.1.</span> <span class="nav-text">findIndex()与indexOf()的区别</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2019
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

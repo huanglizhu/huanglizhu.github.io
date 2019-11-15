@@ -11,20 +11,20 @@
   
   
   
-  <meta name="description" content="简洁表示法 对象的属性名可以直接从与变量名同名后从属性名:变量名省略为属性名。">
+  <meta name="description" content="简洁表示法（简写对象属性、方法） 简写对象属性：对象的属性名与变量名同名后可从属性名:变量名简写为属性名。">
 <meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6扩展 对象扩展">
 <meta property="og:url" content="http://yoursite.com/2019/11/13/ES6扩展 对象扩展/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="简洁表示法 对象的属性名可以直接从与变量名同名后从属性名:变量名省略为属性名。">
+<meta property="og:description" content="简洁表示法（简写对象属性、方法） 简写对象属性：对象的属性名与变量名同名后可从属性名:变量名简写为属性名。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8wh84tko4j30mz02imx1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8wh84tko4j30mz02imx1.jpg">
-<meta property="og:updated_time" content="2019-11-13T09:43:13.020Z">
+<meta property="og:updated_time" content="2019-11-14T02:55:14.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6扩展 对象扩展">
-<meta name="twitter:description" content="简洁表示法 对象的属性名可以直接从与变量名同名后从属性名:变量名省略为属性名。">
+<meta name="twitter:description" content="简洁表示法（简写对象属性、方法） 简写对象属性：对象的属性名与变量名同名后可从属性名:变量名简写为属性名。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8wh84tko4j30mz02imx1.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -164,9 +164,9 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="简洁表示法"><a href="#简洁表示法" class="headerlink" title="简洁表示法"></a>简洁表示法</h1><ul>
-<li>对象的属性名可以直接从与变量名同名后从<code>属性名:变量名</code>省略为<code>属性名</code>。<a id="more"></a></li>
-<li>对象的方法可以直接省略冒号和<code>function</code>,从<code>方法名:function(){函数体}</code>简写为<code>方法名(){函数体}</code></li>
+        <h1 id="简洁表示法（简写对象属性、方法）"><a href="#简洁表示法（简写对象属性、方法）" class="headerlink" title="简洁表示法（简写对象属性、方法）"></a>简洁表示法（简写对象属性、方法）</h1><ul>
+<li><strong>简写对象属性</strong>：对象的属性名与变量名同名后可从<code>属性名:变量名</code>简写为<code>属性名</code>。<a id="more"></a></li>
+<li><strong>简写对象方法</strong>：对象的方法可以直接省略冒号和<code>function</code>,从<code>方法名:function(){函数体}</code>简写为<code>方法名(){函数体}</code></li>
 <li>例子：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getUserInfo = <span class="function">(<span class="params">id = <span class="number">1</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//AJAX...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> name = <span class="string">"xiaoming"</span>;</span><br><span class="line">    <span class="keyword">const</span> age = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        name,<span class="comment">//相当于`name:name`简写以后属性名name会自动去找到和它同名的变量，把它的值拿过来当值</span></span><br><span class="line">        age,<span class="comment">//相当于`age:age`</span></span><br><span class="line">        say() &#123;<span class="comment">//相当于say:function()&#123;&#125;,简写可以省略冒号与function</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="keyword">this</span>.age);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> xiaoming = getUserInfo();</span><br><span class="line"><span class="built_in">console</span>.log(xiaoming);<span class="comment">//&#123;name: "xiaoming", age: 10, say: ƒ&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(xiaoming.say());<span class="comment">//xiaoming10</span></span><br></pre></td></tr></table></figure>
 
 </li>
@@ -194,15 +194,17 @@
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: &#123;</span><br><span class="line">        aa: <span class="number">3</span>,</span><br><span class="line">        bb: <span class="number">4</span></span><br><span class="line">    &#125;,</span><br><span class="line">    s:<span class="number">8</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> obj2=&#123;</span><br><span class="line">    a:<span class="number">555</span>,</span><br><span class="line">    d:<span class="number">33</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> newObj=&#123;</span><br><span class="line">    ...obj1,</span><br><span class="line">    ...obj2</span><br><span class="line">&#125;;</span><br><span class="line">console.log(newObj);<span class="comment">//&#123;a: 555, b: 2, c: &#123;…&#125;, s: 8, d: 33&#125;</span></span><br><span class="line"></span><br><span class="line">newObj.c.aa=<span class="number">999</span>;</span><br><span class="line">console.log(obj1.c.aa);<span class="comment">//999，证明合并对象也是浅拷贝的</span></span><br></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="部分新方法"><a href="#部分新方法" class="headerlink" title="部分新方法"></a>部分新方法</h1><h2 id="Object-is-类似"><a href="#Object-is-类似" class="headerlink" title="Object.is()类似==="></a><code>Object.is()</code>类似<code>===</code></h2><ul>
-<li>传入两个参数到<code>Object.is()</code>，如果全等则返回true，否则返回false。</li>
-<li>与<code>===</code>的区别体现在<code>+0与-0</code>、<code>NaN与NaN</code>的判断上。</li>
+<h1 id="部分新方法"><a href="#部分新方法" class="headerlink" title="部分新方法"></a>部分新方法</h1><h2 id="Object-is-判断全等-类似"><a href="#Object-is-判断全等-类似" class="headerlink" title="Object.is()判断全等(类似===)"></a><code>Object.is()</code>判断全等(类似<code>===</code>)</h2><ul>
+<li><strong>语法</strong>：传入<strong>两个参数</strong>到<code>Object.is()</code></li>
+<li><strong>返回值</strong>：全等则返回true，否则返回false。</li>
+<li><strong>与<code>===</code>的区别</strong>体现在<code>+0与-0</code>、<code>NaN与NaN</code>的判断上：</li>
 </ul>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(<span class="keyword">Object</span>.<span class="keyword">is</span>(+<span class="number">0</span>, <span class="number">-0</span>));//<span class="keyword">false</span></span><br><span class="line">console.log(+<span class="number">0</span> === <span class="number">-0</span>);//<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">console.log(<span class="keyword">Object</span>.<span class="keyword">is</span>(<span class="keyword">NaN</span>, <span class="keyword">NaN</span>));//<span class="keyword">true</span></span><br><span class="line">console.log(<span class="keyword">NaN</span> === <span class="keyword">NaN</span>);//<span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">console.log(<span class="keyword">Object</span>.<span class="keyword">is</span>(<span class="keyword">true</span>, <span class="keyword">false</span>));//<span class="keyword">false</span></span><br><span class="line">console.log(<span class="keyword">true</span> === <span class="keyword">false</span>);//<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="Object-assign-类似-扩展运算符"><a href="#Object-assign-类似-扩展运算符" class="headerlink" title="Object.assign()类似...(扩展运算符)"></a><code>Object.assign()</code>类似<code>...</code>(扩展运算符)</h2><ul>
+<h2 id="Object-assign-合并对象-类似-扩展运算符"><a href="#Object-assign-合并对象-类似-扩展运算符" class="headerlink" title="Object.assign()合并对象(类似...扩展运算符)"></a><code>Object.assign()</code>合并对象(类似<code>...</code>扩展运算符)</h2><ul>
 <li>assign:分配/赋值.</li>
+<li><strong>语法</strong>：<code>Object.assign(对象1,对象2,对象3);</code></li>
 <li><code>Object.assign()</code>类似<code>...</code>(扩展运算符),可用于<strong>合并对象</strong>。</li>
 <li><code>Object.assign()</code>与扩展运算符在合并对象时都是<strong>浅拷贝</strong>的。当合并的多个对象拥有相同属性时<strong>后面的属性值覆盖前面的</strong>。</li>
 </ul>
@@ -212,7 +214,7 @@
 <h2 id="Object-keys-和Object-values-和Object-entries"><a href="#Object-keys-和Object-values-和Object-entries" class="headerlink" title="Object.keys()和Object.values()和Object.entries()"></a><code>Object.keys()</code>和<code>Object.values()</code>和<code>Object.entries()</code></h2><ul>
 <li><strong>注意</strong>：这三个方法都是返回对象自身的对应元素的，不包含对象内的对象的元素。</li>
 <li><strong>参数</strong>：对象。</li>
-<li><code>Object.keys()</code>返回由对象<strong>自身</strong>的<strong>键（属性名）组成的数组</strong>。（注意：数组每一项都是放在引号内的）</li>
+<li><code>Object.keys()</code>返回由对象<strong>自身</strong>的<strong>键（属性名）组成的数组</strong>。（注意：数组每一项都是放在引号内的【<strong>字符串形式</strong>】）</li>
 <li><code>Object.values()</code>返回由对象<strong>自身</strong>的<strong>值（属性值）组成的数组</strong>。</li>
 <li><code>Object.entries()</code>返回由对象<strong>自身</strong>的<strong>键值（属性名和属性值）组成的数组</strong>。</li>
 </ul>
@@ -222,30 +224,57 @@
 <h3 id="补充：Object的hasOwnProperty-方法"><a href="#补充：Object的hasOwnProperty-方法" class="headerlink" title="补充：Object的hasOwnProperty()方法"></a>补充：Object的hasOwnProperty()方法</h3><ul>
 <li><strong>语法</strong>：<code>obj.hasOwnProperty(&quot;属性名&quot;)</code></li>
 <li><strong>参数</strong>：要检测的属性的 String <strong>字符串形式</strong>表示的名称。</li>
-<li><strong>返回</strong>：布尔值，判断对象自身属性中是否具有指定的属性。</li>
+<li><strong>返回</strong>：布尔值，是对象自身属性则true，不是则false。</li>
+<li><strong>例子</strong>：下面“for-in遍历对象自身属性”的例子中。</li>
 </ul>
-<h3 id="补充：for-in遍历对象属性"><a href="#补充：for-in遍历对象属性" class="headerlink" title="补充：for-in遍历对象属性"></a>补充：for-in遍历对象属性</h3><ul>
+<h3 id="补充：for-in判断对象自身属性-不推荐"><a href="#补充：for-in判断对象自身属性-不推荐" class="headerlink" title="补充：for-in判断对象自身属性(不推荐)"></a>补充：<code>for-in</code>判断对象自身属性(不推荐)</h3><ul>
 <li>用 <code>for-in</code> 语句遍历对象属性时我们可以使用<code>hasOwnProperty()</code>方法判断属性来源。</li>
-<li>关于<code>for-in</code>与<code>hasOwnProperty()</code>的例子：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: &#123;</span><br><span class="line">        j: <span class="number">222</span>,</span><br><span class="line">        a: <span class="number">66</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (let key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;</span><br><span class="line">        console.log(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>关于<code>for-in</code>与<code>hasOwnProperty()</code>遍历对象自身属性的例子：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: &#123;</span><br><span class="line">        j: <span class="number">222</span>,</span><br><span class="line">        a: <span class="number">66</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (let key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;</span><br><span class="line">        console.log(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8wh84tko4j30mz02imx1.jpg" alt="运行结果"></p>
 <hr>
-<h3 id="运用在for-of中判断是否为自身属性"><a href="#运用在for-of中判断是否为自身属性" class="headerlink" title="运用在for-of中判断是否为自身属性"></a>运用在for-of中判断是否为自身属性</h3><ul>
-<li>可代替上面例子中的<code>hasOwnProperty()</code>来判断是否为自身属性。</li>
+<h3 id="Object-keys-结合for-of判断自身属性（推荐使用）"><a href="#Object-keys-结合for-of判断自身属性（推荐使用）" class="headerlink" title="Object.keys()结合for-of判断自身属性（推荐使用）"></a><code>Object.keys()</code>结合<code>for-of</code>判断自身属性（推荐使用）</h3><ul>
+<li>可使用<code>Object.keys()</code>代替上面例子中的<code>hasOwnProperty()</code>来判断是否为自身属性。</li>
 <li><code>for-of</code>语句遍历对象属性。</li>
-<li>使用<code>for-of</code>语句与<code>hasOwnProperty()</code>打印自身属性的例子：</li>
+<li>使用<code>for-of</code>语句与<code>Object.keys()</code>打印自身属性的例子：</li>
 </ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">const</span> <span class="string">obj = &#123;</span></span><br><span class="line">    <span class="attr">a</span>: <span class="string">1,</span></span><br><span class="line">    <span class="attr">b</span>: <span class="string">2,</span></span><br><span class="line">    <span class="attr">c</span>: <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">j</span>: <span class="string">222,</span></span><br><span class="line">        <span class="attr">a</span>: <span class="string">66</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="attr">for</span> <span class="string">(let key of Object.keys(obj)) &#123;</span></span><br><span class="line">    <span class="attr">console.log(key);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8wh84tko4j30mz02imx1.jpg" alt="运行结果"></p>
+<ul>
+<li>注意：<code>for-of</code>语句与<code>Object.keys()</code>搭配，<code>for-in</code>与<code>hasOwnProperty()</code>搭配。</li>
+</ul>
 <hr>
-<h3 id="for-in-与-Object-keys-与-hasOwnProperty区别"><a href="#for-in-与-Object-keys-与-hasOwnProperty区别" class="headerlink" title="for in 与 Object.keys 与 hasOwnProperty区别"></a>for in 与 Object.keys 与 hasOwnProperty区别</h3><ul>
-<li><code>for-in</code>遍历对象所有可枚举属性，包括原型链上的属性。</li>
-<li><code>Object.keys()</code>遍历对象所有可枚举属性，不包括原型链上的属性。</li>
-<li><code>hasOwnProperty()</code> 检查对象是否包含属性名，无法检查原型链上是否具有此属性名。</li>
-<li>操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性。所以，<strong>尽量不要用for-in循环，而用<code>for-of</code>与<code>Object.keys()</code>代替</strong>。</li>
+<h3 id="for-in与Object-keys-与hasOwnProperty-区别"><a href="#for-in与Object-keys-与hasOwnProperty-区别" class="headerlink" title="for-in与Object.keys()与hasOwnProperty()区别"></a><code>for-in</code>与<code>Object.keys()</code>与<code>hasOwnProperty()</code>区别</h3><ul>
+<li><p><code>for-in</code>遍历对象所有可枚举属性，包括原型链上的属性。</p>
+</li>
+<li><p><code>Object.keys()</code>遍历对象所有可枚举属性，不包括原型链上的属性。(仅自身属性)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> obj = <span class="built_in">Object</span>.create(obj1);<span class="comment">//以obj1为原型创建对象obj</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj));<span class="comment">//[],可以看到Object.keys()并未枚举原型上的属性</span></span><br><span class="line">obj.b = <span class="number">22</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj));<span class="comment">//["b"]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>hasOwnProperty()</code> 检查对象是否包含属性名，无法检查原型链上是否具有此属性名。结合<code>for-in</code>可遍历自身属性（同样不包含原型上的属性），但语句复杂且不是直接放入数组，故<strong>不推荐使用</strong>。</p>
+</li>
+<li><p>操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性。所以，<strong>尽量不要用<code>for-in</code>循环，而用<code>for-of</code>与<code>Object.keys()</code>结合来代替</strong>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="for-in与for-of"><a href="#for-in与for-of" class="headerlink" title="for-in与for-of"></a><code>for-in</code>与<code>for-of</code></h3><ul>
+<li>无论是<code>for-in</code>还是<code>for-of</code>语句都是迭代一些东西。它们之间的主要区别在于它们的迭代方式。</li>
+<li><code>for-in</code> 语句以原始插入顺序迭代对象的可枚举属性。</li>
+<li><code>for-of</code> 语句遍历可迭代对象定义要迭代的数据。</li>
+</ul>
+<hr>
+<h4 id="for-in"><a href="#for-in" class="headerlink" title="for-in"></a><code>for-in</code></h4><ul>
+<li><code>for-in</code> 语句用于<strong>遍历数组或者对象的属性</strong>（对数组或者对象的属性进行循环操作）。</li>
+<li>使用<code>for-in</code>会遍历数组所有的可枚举属性，<strong>包括原型</strong>。index索引为<strong>字符串型数字</strong>，不能直接进行几何运算。故更加适合用于<strong>遍历对象</strong>。（不是对象属性！）</li>
+<li>因为迭代的顺序是依赖于执行环境的，所以<strong>数组遍历不一定按次序访问元素</strong>。因此当迭代访问顺序很重要的数组时，最好用整数索引去进行for循环（或者使用 Array.prototype.forEach() 或 <code>for-of</code> 循环）。</li>
+</ul>
+<hr>
+<h4 id="for-of【ES6引入】"><a href="#for-of【ES6引入】" class="headerlink" title="for-of【ES6引入】"></a><code>for-of</code>【ES6引入】</h4><ul>
+<li><code>for-of</code>语句在可迭代对象（包括<code>Array，Map，Set，String，TypedArray，arguments</code>对象等等）上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句。</li>
+<li><code>for-of</code>更加适合用于<strong>遍历对象属性</strong>。</li>
+<li><code>for-in</code>遍历的是数组的索引（即键名），而<code>for-of</code>遍历的是数组元素值，而<strong>不包括原型属性</strong>method和索引name。</li>
 </ul>
 <hr>
 <h2 id="proto-属性读取对象原型"><a href="#proto-属性读取对象原型" class="headerlink" title="__proto__属性读取对象原型"></a><code>__proto__</code>属性读取对象原型</h2><ul>
@@ -330,6 +359,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2019/11/15/ES6扩展 数组扩展/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6扩展 数组扩展
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/11/12/ES6扩展 函数扩展/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -347,7 +385,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简洁表示法"><span class="nav-number">1.</span> <span class="nav-text">简洁表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#属性名表达式"><span class="nav-number">2.</span> <span class="nav-text">属性名表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：扩展运算符复制对象"><span class="nav-number">3.</span> <span class="nav-text">复习：扩展运算符复制对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：扩展运算符合并对象"><span class="nav-number">4.</span> <span class="nav-text">复习：扩展运算符合并对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部分新方法"><span class="nav-number">5.</span> <span class="nav-text">部分新方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-is-类似"><span class="nav-number">5.1.</span> <span class="nav-text">Object.is()类似===</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-assign-类似-扩展运算符"><span class="nav-number">5.2.</span> <span class="nav-text">Object.assign()类似...(扩展运算符)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-keys-和Object-values-和Object-entries"><span class="nav-number">5.3.</span> <span class="nav-text">Object.keys()和Object.values()和Object.entries()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：Object的hasOwnProperty-方法"><span class="nav-number">5.3.1.</span> <span class="nav-text">补充：Object的hasOwnProperty()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：for-in遍历对象属性"><span class="nav-number">5.3.2.</span> <span class="nav-text">补充：for-in遍历对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运用在for-of中判断是否为自身属性"><span class="nav-number">5.3.3.</span> <span class="nav-text">运用在for-of中判断是否为自身属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-in-与-Object-keys-与-hasOwnProperty区别"><span class="nav-number">5.3.4.</span> <span class="nav-text">for in 与 Object.keys 与 hasOwnProperty区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-属性读取对象原型"><span class="nav-number">5.4.</span> <span class="nav-text">__proto__属性读取对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：Object-create-创建对象并指定原型"><span class="nav-number">5.5.</span> <span class="nav-text">补充：Object.create()创建对象并指定原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-setPrototypeOf-修改对象原型"><span class="nav-number">5.6.</span> <span class="nav-text">Object.setPrototypeOf()修改对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-getPrototypeOf-读取对象原型"><span class="nav-number">5.7.</span> <span class="nav-text">Object.getPrototypeOf()读取对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super关键字-访问原型对象"><span class="nav-number">5.8.</span> <span class="nav-text">super关键字(访问原型对象)</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简洁表示法（简写对象属性、方法）"><span class="nav-number">1.</span> <span class="nav-text">简洁表示法（简写对象属性、方法）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#属性名表达式"><span class="nav-number">2.</span> <span class="nav-text">属性名表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：扩展运算符复制对象"><span class="nav-number">3.</span> <span class="nav-text">复习：扩展运算符复制对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：扩展运算符合并对象"><span class="nav-number">4.</span> <span class="nav-text">复习：扩展运算符合并对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部分新方法"><span class="nav-number">5.</span> <span class="nav-text">部分新方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-is-判断全等-类似"><span class="nav-number">5.1.</span> <span class="nav-text">Object.is()判断全等(类似===)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-assign-合并对象-类似-扩展运算符"><span class="nav-number">5.2.</span> <span class="nav-text">Object.assign()合并对象(类似...扩展运算符)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-keys-和Object-values-和Object-entries"><span class="nav-number">5.3.</span> <span class="nav-text">Object.keys()和Object.values()和Object.entries()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：Object的hasOwnProperty-方法"><span class="nav-number">5.3.1.</span> <span class="nav-text">补充：Object的hasOwnProperty()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：for-in判断对象自身属性-不推荐"><span class="nav-number">5.3.2.</span> <span class="nav-text">补充：for-in判断对象自身属性(不推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-keys-结合for-of判断自身属性（推荐使用）"><span class="nav-number">5.3.3.</span> <span class="nav-text">Object.keys()结合for-of判断自身属性（推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-in与Object-keys-与hasOwnProperty-区别"><span class="nav-number">5.3.4.</span> <span class="nav-text">for-in与Object.keys()与hasOwnProperty()区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-in与for-of"><span class="nav-number">5.3.5.</span> <span class="nav-text">for-in与for-of</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#for-in"><span class="nav-number">5.3.5.1.</span> <span class="nav-text">for-in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-of【ES6引入】"><span class="nav-number">5.3.5.2.</span> <span class="nav-text">for-of【ES6引入】</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-属性读取对象原型"><span class="nav-number">5.4.</span> <span class="nav-text">__proto__属性读取对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：Object-create-创建对象并指定原型"><span class="nav-number">5.5.</span> <span class="nav-text">补充：Object.create()创建对象并指定原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-setPrototypeOf-修改对象原型"><span class="nav-number">5.6.</span> <span class="nav-text">Object.setPrototypeOf()修改对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-getPrototypeOf-读取对象原型"><span class="nav-number">5.7.</span> <span class="nav-text">Object.getPrototypeOf()读取对象原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super关键字-访问原型对象"><span class="nav-number">5.8.</span> <span class="nav-text">super关键字(访问原型对象)</span></a></li></ol></li></ol>
     
     </div>
   </aside>
