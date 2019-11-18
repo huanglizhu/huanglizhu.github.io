@@ -6,13 +6,13 @@
   <title>ES6扩展 数组扩展 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="CSS">
+  <meta name="keywords" content="ES6">
   
   
   
   
   <meta name="description" content="结合扩展运算符(...)复习：数组合并、复制数组 在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组">
-<meta name="keywords" content="CSS">
+<meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6扩展 数组扩展">
 <meta property="og:url" content="http://yoursite.com/2019/11/15/ES6扩展 数组扩展/index.html">
@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yizjtablj30nk055jrh.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8yk1vbrnmj30na03ggll.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ykgek0bhj30dk02yt9a.jpg">
-<meta property="og:updated_time" content="2019-11-15T03:37:09.502Z">
+<meta property="og:updated_time" content="2019-11-15T07:25:39.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6扩展 数组扩展">
 <meta name="twitter:description" content="结合扩展运算符(...)复习：数组合并、复制数组 在解构赋值中讲解了使用扩展运算符将数组合并以及复制数组">
@@ -175,15 +175,10 @@
 </li>
 </ul>
 <hr>
-<h2 id="读取并展开数组用作多个参数"><a href="#读取并展开数组用作多个参数" class="headerlink" title="读取并展开数组用作多个参数"></a>读取并展开数组用作多个参数</h2><ul>
-<li><strong>另一个作用</strong>：在调用函数时把一个数组展开来作为这个函数的参数。</li>
-<li><strong>简单例子</strong>：<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo(a, b, c) &#123;</span><br><span class="line">    console.<span class="built-in">log</span>(a);<span class="comment">//1</span></span><br><span class="line">    console.<span class="built-in">log</span>(b);<span class="comment">//3</span></span><br><span class="line">    console.<span class="built-in">log</span>(c);<span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">foo</span>(<span class="params">...[1, 3, 2]</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<hr>
-<h3 id="复习：apply"><a href="#复习：apply" class="headerlink" title="复习：apply()"></a>复习：<code>apply()</code></h3><ul>
+<h2 id="复习：apply"><a href="#复习：apply" class="headerlink" title="复习：apply()"></a>复习：<code>apply()</code></h2><ul>
 <li><strong>语法</strong>：<code>func.apply(thisArg, [argsArray])</code></li>
+<li><strong>可以通过 <code>apply()</code> 方法调用属于另一个对象的方法。</strong></li>
+<li>但不仅限于此，<strong>当设置第一个参数为null时可以在某些本来需要写成遍历数组变量的任务中使用内建的函数</strong>,也就是说此时apply()的作用不是调用属于另一个对象的方法，而是<strong>使参数数组中的每一个元素都去执行func函数</strong>。【如：下方“读取并展开数组用作多个参数”的“实用例子”中】</li>
 </ul>
 <table>
 <thead>
@@ -194,24 +189,35 @@
 </thead>
 <tbody><tr>
 <td>thisArg</td>
-<td>可选的。<br>在 func 函数运行时使用的 this 值。<br>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
+<td><strong>可选</strong>的。<br>在 func 函数运行时使用的 this 值。<br>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
 </tr>
 <tr>
 <td>argsArray</td>
-<td>可选的。<br>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br>如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。<br>从ECMAScript 5 开始可以使用类数组对象。</td>
+<td><strong>可选</strong>的。<br>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br>如果该参数的值为 <strong>null 或  undefined，则表示不需要传入任何参数</strong>。<br>从ECMAScript 5 开始可以使用类数组对象。</td>
 </tr>
 </tbody></table>
-<h3 id="实用例子"><a href="#实用例子" class="headerlink" title="实用例子"></a>实用例子</h3><ul>
-<li><p>在实际运用中，我们经常将用户信息按照一定的顺序放在数组中而不是对象，这可以节省流量。</p>
+<ul>
+<li><strong>例子</strong>：在“读取并展开数组用作多个参数”的“实用例子”中。</li>
+</ul>
+<hr>
+<h2 id="读取并展开数组用作多个参数"><a href="#读取并展开数组用作多个参数" class="headerlink" title="读取并展开数组用作多个参数"></a>读取并展开数组用作多个参数</h2><ul>
+<li><p><strong>另一个作用</strong>：在调用函数时把一个数组展开来作为这个函数的参数。</p>
 </li>
-<li><p>在这个例子中，我们可以<strong>使用扩展运算符简便的读取数组中的每一个元素并作用与对应的参数</strong>，避免了重复使用<code>[]</code>去读取各个数组元素）。</p>
+<li><p><strong>简单例子</strong>：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo(a, b, c) &#123;</span><br><span class="line">    console.<span class="built-in">log</span>(a);<span class="comment">//1</span></span><br><span class="line">    console.<span class="built-in">log</span>(b);<span class="comment">//3</span></span><br><span class="line">    console.<span class="built-in">log</span>(c);<span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">foo</span>(<span class="params">...[1, 3, 2]</span>)</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>补充</strong>：使用数组的<code>join()</code>将数组hobby转换为字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = [<span class="string">"小明"</span>, <span class="number">15</span>, [<span class="string">"吃饭"</span>, <span class="string">"睡觉"</span>, <span class="string">"打游戏"</span>], <span class="string">"我没有女朋友"</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">name, age, hobby, desc</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;name&#125;</span>,我今年<span class="subst">$&#123;age&#125;</span>岁，我平时喜欢<span class="subst">$&#123;hobby.join(<span class="string">"和"</span>)&#125;</span>，<span class="subst">$&#123;desc&#125;</span>。`</span>);</span><br><span class="line">&#125;</span><br><span class="line">say(user[<span class="number">0</span>],user[<span class="number">1</span>],user[<span class="number">2</span>],user[<span class="number">3</span>]);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line">say(...user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>还可以使用<code>apply()</code>【<strong>他会将数组元素将作为单独的参数传给 say 函数</strong>】进行数组变对应参数的调用，但是使用扩展运算符语义更加清晰，而且参数如果传入过多会有超出JavaScript引擎的参数长度限制的风险。<strong>故不推荐使用<code>apply()</code>。</strong></p>
+<li><p><strong>实用例子</strong>：<br>在实际运用中，我们经常将用户信息按照一定的顺序放在数组中而不是对象，这可以节省流量。<br>在这个例子中，我们可以<strong>使用扩展运算符简便的读取数组中的每一个元素并作用与对应的参数</strong>，避免了重复使用<code>[]</code>去读取各个数组元素）。</p>
 </li>
 </ul>
+<p><strong>补充</strong>：需要使用数组的<code>join()</code>将数组hobby转换为字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = [<span class="string">"小明"</span>, <span class="number">15</span>, [<span class="string">"吃饭"</span>, <span class="string">"睡觉"</span>, <span class="string">"打游戏"</span>], <span class="string">"我没有女朋友"</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">name, age, hobby, desc</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`我叫<span class="subst">$&#123;name&#125;</span>,我今年<span class="subst">$&#123;age&#125;</span>岁，我平时喜欢<span class="subst">$&#123;hobby.join(<span class="string">"和"</span>)&#125;</span>，<span class="subst">$&#123;desc&#125;</span>。`</span>);</span><br><span class="line">&#125;</span><br><span class="line">say(user[<span class="number">0</span>],user[<span class="number">1</span>],user[<span class="number">2</span>],user[<span class="number">3</span>]);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line">say(...user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还可以<strong>使用<code>apply()</code>(不推荐)</strong>：<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const user = [<span class="string">"小明"</span>, <span class="number">15</span>, [<span class="string">"吃饭"</span>, <span class="string">"睡觉"</span>, <span class="string">"打游戏"</span>], <span class="string">"我没有女朋友"</span>];</span><br><span class="line">function <span class="built_in">say</span>(<span class="built_in">name</span>, age, hobby, desc) &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(`我叫$&#123;<span class="built_in">name</span>&#125;,我今年$&#123;age&#125;岁，我平时喜欢$&#123;hobby.<span class="built_in">join</span>(<span class="string">"和"</span>)&#125;，$&#123;desc&#125;。`);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">say</span>.<span class="built_in">apply</span>(null,user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line"><span class="built_in">say</span>.<span class="built_in">apply</span>(<span class="string">""</span>,user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line"><span class="built_in">say</span>.<span class="built_in">apply</span>(<span class="number">0</span>,user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br><span class="line"><span class="built_in">say</span>.<span class="built_in">apply</span>(<span class="number">1</span>,user);<span class="comment">//我叫小明,我今年15岁，我平时喜欢吃饭和睡觉和打游戏，我没有女朋友。</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>【<strong>他会将数组元素将作为单独的参数传给 say 函数</strong>】进行数组变对应参数的调用，但是使用扩展运算符语义更加清晰，而且参数如果传入过多会有超出JavaScript引擎的参数长度限制的风险。<strong>故不推荐使用<code>apply()</code>。</strong></p>
 <hr>
 <h2 id="补充：生成器函数"><a href="#补充：生成器函数" class="headerlink" title="补充：生成器函数"></a>补充：生成器函数</h2><ul>
 <li><strong>语法</strong>：<code>function* name([param[, param[, ... param]]]) { statements }</code></li>
@@ -236,19 +242,20 @@
 </li>
 </ul>
 <hr>
-<h1 id="新的方法"><a href="#新的方法" class="headerlink" title="新的方法"></a>新的方法</h1><h2 id="复习：数组字面量"><a href="#复习：数组字面量" class="headerlink" title="复习：数组字面量"></a>复习：数组字面量</h2><ul>
+<h1 id="新的方法"><a href="#新的方法" class="headerlink" title="新的方法"></a>新的方法</h1><h2 id="复习：构造函数法注意事项与数组字面量法创建数组"><a href="#复习：构造函数法注意事项与数组字面量法创建数组" class="headerlink" title="复习：构造函数法注意事项与数组字面量法创建数组"></a>复习：<code>构造函数法</code>注意事项与<code>数组字面量法</code>创建数组</h2><ul>
 <li>数组字面量可用于创建数组。（类似的，对象字面量用于创建对象）</li>
-<li>创建数组有两种方法。</li>
+<li>创建数组有两种方法：构造函数法、数组字面量法。</li>
 </ul>
 <p><strong>第一：构造函数法</strong></p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="type">Array</span>();</span><br></pre></td></tr></table></figure>
 
+<p><strong>注意</strong>:使用<code>Array()</code>创建数组对象时，<strong>如果只有一个数字参数则默认是用于设置数组长度</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"10"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr1);<span class="comment">//["10"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr2);<span class="comment">// [empty × 10]</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>第二：数组字面量法</strong></p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var arr</span>=[<span class="string">"zhu"</span>,<span class="string">"zhen"</span>,<span class="string">"wei"</span>];</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>在调用数组的内建方法时可以使用<code>Array.prototype.内建方法名</code>,也直接使用数组字面量<code>[]</code>，写作<code>[].内建方法名</code>即可少写<code>Array.prototype</code>。（具体例子在下方“<code>Array.from()</code>将类数组转换为数组”例子中）</li>
-</ul>
+<p>在调用数组的内建方法时可以使用<code>Array.prototype.内建方法名</code>,也直接使用数组字面量<code>[]</code>，写作<code>[].内建方法名</code>即可少写<code>Array.prototype</code>。（具体例子在下方“<code>Array.from()</code>将类数组转换为数组”例子中）</p>
 <hr>
 <h2 id="Array-from-将类数组转换为数组"><a href="#Array-from-将类数组转换为数组" class="headerlink" title="Array.from()将类数组转换为数组"></a><code>Array.from()</code>将类数组转换为数组</h2><ul>
 <li><strong><code>Array.from()</code>将类数组对象或者Iterable对象转换为数组对象</strong>。</li>
@@ -284,7 +291,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="Array-fill"><a href="#Array-fill" class="headerlink" title="Array#fill()"></a><code>Array#fill()</code></h2><ul>
+<h2 id="Array-fill-固定值替换数组的元素"><a href="#Array-fill-固定值替换数组的元素" class="headerlink" title="Array#fill()固定值替换数组的元素"></a><code>Array#fill()</code>固定值替换数组的元素</h2><ul>
 <li><strong>注意</strong>：fill不是静态方法，不能通过<code>Array.fill</code>来调用。</li>
 <li><code>fill()</code>方法用于<strong>将一个固定值替换数组的元素</strong>。并且可以<strong>指定填充的范围</strong>（起始值与结束值的数组下标）。</li>
 <li><strong>语法</strong>：<code>array.fill(value, start, end)</code></li>
@@ -321,16 +328,9 @@
 </li>
 </ul>
 <hr>
-<h2 id="补充：使用Array-创建数组对象"><a href="#补充：使用Array-创建数组对象" class="headerlink" title="补充：使用Array()创建数组对象"></a>补充：使用<code>Array()</code>创建数组对象</h2><ul>
-<li>使用<code>Array()</code>创建数组对象时，<strong>如果只有一个数字参数则默认是用于设置数组长度</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"10"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr1);<span class="comment">//["10"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr2);<span class="comment">// [empty × 10]</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<hr>
 <h2 id="Array-includes-判断是否含有某元素"><a href="#Array-includes-判断是否含有某元素" class="headerlink" title="Array.includes()判断是否含有某元素"></a><code>Array.includes()</code>判断是否含有某元素</h2><ul>
 <li><strong>与字符串类似，数组也有<code>includes()</code></strong>，用于检测数组中是否包含某元素，是则返回true，否则返回false。</li>
-<li>可以代替以前的<code>indexOf()</code>来判断元素是否存在，但<code>indexOf()</code>可以找到数组下标，这个不可替代。</li>
-<li><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">console.log(arr.includes(<span class="number">1</span>));<span class="comment">//true</span></span><br><span class="line">console.log(arr.includes(<span class="number">55</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<li>可以代替以前的<code>indexOf()</code>来判断元素是否存在，但<code>indexOf()</code>可以找到数组下标，这个不可替代。<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">console.log(arr.includes(<span class="number">1</span>));<span class="comment">//true</span></span><br><span class="line">console.log(arr.includes(<span class="number">55</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -444,7 +444,7 @@
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li></ul>
 
       
         
@@ -479,6 +479,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2019/11/17/JS闭包/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS闭包和面试题
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/11/13/ES6扩展 对象扩展/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -496,7 +505,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结合扩展运算符"><span class="nav-number">1.</span> <span class="nav-text">结合扩展运算符(...)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：数组合并、复制数组"><span class="nav-number">1.1.</span> <span class="nav-text">复习：数组合并、复制数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取并展开数组用作多个参数"><span class="nav-number">1.2.</span> <span class="nav-text">读取并展开数组用作多个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复习：apply"><span class="nav-number">1.2.1.</span> <span class="nav-text">复习：apply()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用例子"><span class="nav-number">1.2.2.</span> <span class="nav-text">实用例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：生成器函数"><span class="nav-number">1.3.</span> <span class="nav-text">补充：生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展运算符与生成器函数"><span class="nav-number">1.4.</span> <span class="nav-text">扩展运算符与生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合去重函数Set"><span class="nav-number">1.5.</span> <span class="nav-text">结合去重函数Set()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的方法"><span class="nav-number">2.</span> <span class="nav-text">新的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：数组字面量"><span class="nav-number">2.1.</span> <span class="nav-text">复习：数组字面量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-from-将类数组转换为数组"><span class="nav-number">2.2.</span> <span class="nav-text">Array.from()将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：使用扩展运算符将类数组转换为数组"><span class="nav-number">2.3.</span> <span class="nav-text">补充：使用扩展运算符将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-of-将参数合成数组"><span class="nav-number">2.4.</span> <span class="nav-text">Array.of()将参数合成数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-fill"><span class="nav-number">2.5.</span> <span class="nav-text">Array#fill()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：使用Array-创建数组对象"><span class="nav-number">2.6.</span> <span class="nav-text">补充：使用Array()创建数组对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-includes-判断是否含有某元素"><span class="nav-number">2.7.</span> <span class="nav-text">Array.includes()判断是否含有某元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keys-和values-还有entries"><span class="nav-number">2.8.</span> <span class="nav-text">keys()和values()还有entries()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-keys-拿到数组下标"><span class="nav-number">2.8.1.</span> <span class="nav-text">arr.keys()拿到数组下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-values-拿到数组元素"><span class="nav-number">2.8.2.</span> <span class="nav-text">arr.values()拿到数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-entries-同时拿到数组下标和元素"><span class="nav-number">2.8.3.</span> <span class="nav-text">arr.entries()同时拿到数组下标和元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-返回数组中满足回调函数的第一个元素"><span class="nav-number">2.9.</span> <span class="nav-text">find()返回数组中满足回调函数的第一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findIndex-返回数组中找到的元素的下标"><span class="nav-number">2.10.</span> <span class="nav-text">findIndex()返回数组中找到的元素的下标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#findIndex-与indexOf-的区别"><span class="nav-number">2.10.1.</span> <span class="nav-text">findIndex()与indexOf()的区别</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结合扩展运算符"><span class="nav-number">1.</span> <span class="nav-text">结合扩展运算符(...)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：数组合并、复制数组"><span class="nav-number">1.1.</span> <span class="nav-text">复习：数组合并、复制数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：apply"><span class="nav-number">1.2.</span> <span class="nav-text">复习：apply()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取并展开数组用作多个参数"><span class="nav-number">1.3.</span> <span class="nav-text">读取并展开数组用作多个参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：生成器函数"><span class="nav-number">1.4.</span> <span class="nav-text">补充：生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展运算符与生成器函数"><span class="nav-number">1.5.</span> <span class="nav-text">扩展运算符与生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合去重函数Set"><span class="nav-number">1.6.</span> <span class="nav-text">结合去重函数Set()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的方法"><span class="nav-number">2.</span> <span class="nav-text">新的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习：构造函数法注意事项与数组字面量法创建数组"><span class="nav-number">2.1.</span> <span class="nav-text">复习：构造函数法注意事项与数组字面量法创建数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-from-将类数组转换为数组"><span class="nav-number">2.2.</span> <span class="nav-text">Array.from()将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：使用扩展运算符将类数组转换为数组"><span class="nav-number">2.3.</span> <span class="nav-text">补充：使用扩展运算符将类数组转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-of-将参数合成数组"><span class="nav-number">2.4.</span> <span class="nav-text">Array.of()将参数合成数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-fill-固定值替换数组的元素"><span class="nav-number">2.5.</span> <span class="nav-text">Array#fill()固定值替换数组的元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-includes-判断是否含有某元素"><span class="nav-number">2.6.</span> <span class="nav-text">Array.includes()判断是否含有某元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keys-和values-还有entries"><span class="nav-number">2.7.</span> <span class="nav-text">keys()和values()还有entries()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-keys-拿到数组下标"><span class="nav-number">2.7.1.</span> <span class="nav-text">arr.keys()拿到数组下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-values-拿到数组元素"><span class="nav-number">2.7.2.</span> <span class="nav-text">arr.values()拿到数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arr-entries-同时拿到数组下标和元素"><span class="nav-number">2.7.3.</span> <span class="nav-text">arr.entries()同时拿到数组下标和元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-返回数组中满足回调函数的第一个元素"><span class="nav-number">2.8.</span> <span class="nav-text">find()返回数组中满足回调函数的第一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findIndex-返回数组中找到的元素的下标"><span class="nav-number">2.9.</span> <span class="nav-text">findIndex()返回数组中找到的元素的下标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#findIndex-与indexOf-的区别"><span class="nav-number">2.9.1.</span> <span class="nav-text">findIndex()与indexOf()的区别</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

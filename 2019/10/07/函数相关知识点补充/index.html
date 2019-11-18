@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="函数是对象 JavaScript 函数是通过 function 关键词定义的。JavaScript 中的 typeof 运算符会为函数返回 “function”。但是最好是把 JavaScript 函数描述为对象。 JavaScript 函数都有属性和方法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T13:06:44.335Z">
+<meta property="og:updated_time" content="2019-11-17T02:48:12.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数相关知识点补充">
 <meta name="twitter:description" content="函数是对象 JavaScript 函数是通过 function 关键词定义的。JavaScript 中的 typeof 运算符会为函数返回 “function”。但是最好是把 JavaScript 函数描述为对象。 JavaScript 函数都有属性和方法。">
@@ -179,7 +179,6 @@
 <h1 id="函数声明与函数表达式"><a href="#函数声明与函数表达式" class="headerlink" title="函数声明与函数表达式"></a>函数声明与函数表达式</h1><h2 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h2><ul>
 <li>被声明的函数<strong>不会直接执行</strong>。它们被“保存供稍后使用”，当它们被调用时执行。</li>
 <li><strong>无法对函数声明进行自调用</strong></li>
-<li>函数声明存在函数提升。</li>
 <li>一个名为multiply的函数声明：<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function multiply(<span class="symbol">x</span>, <span class="symbol">y</span>) &#123;</span><br><span class="line">   <span class="keywords">return</span> <span class="symbol">x</span> * <span class="symbol">y</span>;</span><br><span class="line">&#125; <span class="comment">// 没有分号</span></span><br></pre></td></tr></table></figure>
 
 </li>
@@ -192,8 +191,6 @@
 <li><p>在变量中保存函数表达式之后，<strong>此变量可用作函数</strong>.</p>
 </li>
 <li><p><strong>存放在变量中的函数不需要函数名</strong>。他们总是使用变量名调用。</p>
-</li>
-<li><p>函数表达式不存在函数提升。</p>
 </li>
 <li><p>一个<strong>匿名函数的函数表达式</strong>，被赋值给变量multiply：</p>
 <figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keywords">var</span> multiply = function(<span class="symbol">x</span>, <span class="symbol">y</span>) &#123;</span><br><span class="line">   <span class="keywords">return</span> <span class="symbol">x</span> * <span class="symbol">y</span>;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
@@ -220,10 +217,18 @@
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Hoisting" target="_blank" rel="noopener">关于提升MDN</a></li>
 <li>首先要明确，<strong>变量是申明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
 <li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
-<li>函数声明式寻在函数提升，<strong>函数表达式的写法不存在函数提升</strong>。</li>
+<li>函数声明式存在函数提升，<strong>函数表达式的写法不存在函数提升</strong>。</li>
 <li><strong>函数和变量相比，会被优先提升</strong>。这意味着函数会被提升到更靠前的位置。</li>
 <li>ES5中说，在全局和函数作用域中定义的<strong>函数的声明和定义都将会被提前</strong>到当前作用域的顶部。</li>
 </ul>
+<h2 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h2><ul>
+<li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
+<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。</li>
+<li><strong>注意</strong>：变量声明被提升到了<strong>当前作用域</strong>的头部， ES6之前只有<strong>全局作用域和函数作用域</strong>，<strong>if不是函数作用域</strong>，所以变量tmp提升到了foo函数的头部。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (x &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tmp = x - <span class="number">100</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tmp;<span class="comment">//注意：提升到了if的外面</span></span><br><span class="line">  <span class="keyword">if</span> (x &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    tmp = x - <span class="number">100</span>;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
 <h2 id="函数提升例子"><a href="#函数提升例子" class="headerlink" title="函数提升例子"></a>函数提升例子</h2><p>我们正常书写的代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'I am outside!'</span>); &#125;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="comment">// 重复声明一次函数f</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'I am inside!'</span>); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  f();</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
 
@@ -323,7 +328,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数是对象"><span class="nav-number">1.</span> <span class="nav-text">函数是对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象属性arguments-length"><span class="nav-number">1.1.</span> <span class="nav-text">函数的对象属性arguments.length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象方法toString"><span class="nav-number">1.2.</span> <span class="nav-text">函数的对象方法toString()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数声明与函数表达式"><span class="nav-number">2.</span> <span class="nav-text">函数声明与函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数声明"><span class="nav-number">2.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数表达式"><span class="nav-number">2.2.</span> <span class="nav-text">函数表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自调用函数"><span class="nav-number">3.</span> <span class="nav-text">自调用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量与函数提升"><span class="nav-number">4.</span> <span class="nav-text">变量与函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数提升例子"><span class="nav-number">4.1.</span> <span class="nav-text">函数提升例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#箭头函数"><span class="nav-number">5.</span> <span class="nav-text">箭头函数</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数是对象"><span class="nav-number">1.</span> <span class="nav-text">函数是对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象属性arguments-length"><span class="nav-number">1.1.</span> <span class="nav-text">函数的对象属性arguments.length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象方法toString"><span class="nav-number">1.2.</span> <span class="nav-text">函数的对象方法toString()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数声明与函数表达式"><span class="nav-number">2.</span> <span class="nav-text">函数声明与函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数声明"><span class="nav-number">2.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数表达式"><span class="nav-number">2.2.</span> <span class="nav-text">函数表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自调用函数"><span class="nav-number">3.</span> <span class="nav-text">自调用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量与函数提升"><span class="nav-number">4.</span> <span class="nav-text">变量与函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量提升"><span class="nav-number">4.1.</span> <span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数提升例子"><span class="nav-number">4.2.</span> <span class="nav-text">函数提升例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#箭头函数"><span class="nav-number">5.</span> <span class="nav-text">箭头函数</span></a></li></ol>
     
     </div>
   </aside>
