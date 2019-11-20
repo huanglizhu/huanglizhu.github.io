@@ -15,7 +15,7 @@
 <meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="百度前端技术学院 第七天学习笔记（CSS position）">
-<meta property="og:url" content="http://yoursite.com/2019/11/17/百度前端技术学院 第七天学习笔记 （CSS position)/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/19/百度前端技术学院 第七天学习笔记 （CSS position)/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="position属性position属性用于指定一个元素在文档中的定位方式。top，right，bottom 和 left 属性则决定了该元素的最终位置。">
 <meta property="og:locale" content="zh-CN">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g914496mvaj31hc0ligqm.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9156m1sroj30g10bbacr.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g915dv0qj2j30md0g377g.jpg">
-<meta property="og:updated_time" content="2019-11-19T13:11:36.282Z">
+<meta property="og:updated_time" content="2019-11-20T11:22:50.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端技术学院 第七天学习笔记（CSS position）">
 <meta name="twitter:description" content="position属性position属性用于指定一个元素在文档中的定位方式。top，right，bottom 和 left 属性则决定了该元素的最终位置。">
@@ -151,8 +151,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/11/17/百度前端技术学院 第七天学习笔记 （CSS position)/" class="article-date">
-	  <time datetime="2019-11-17T13:02:24.000Z" itemprop="datePublished">十一月 17, 2019</time>
+	<a href="/2019/11/19/百度前端技术学院 第七天学习笔记 （CSS position)/" class="article-date">
+	  <time datetime="2019-11-19T13:12:24.000Z" itemprop="datePublished">十一月 19, 2019</time>
 	</a>
 
       
@@ -179,7 +179,7 @@
 </thead>
 <tbody><tr>
 <td>absolute</td>
-<td>生成<strong>绝对定位</strong>的元素，<strong>不为元素预留空间</strong>。<br>通过指定元素<strong>相对于最近的非 static定位祖先元素</strong>的偏移，来确定元素位置。（<strong>如果所有父元素都没是默认<code>position</code>值则绝对定位相对浏览器窗口进行定位</strong>）<br>绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。<br>元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。<br></td>
+<td>生成<strong>绝对定位</strong>的元素，<strong>不为元素预留空间</strong>。<br>通过指定元素<strong>相对于最近的非 static定位祖先元素</strong>的偏移，来确定元素位置。（<strong>如果所有父元素都没是默认<code>position</code>值则绝对定位元素相对文档的 body 元素进行定位，并且它会随着页面滚动而移动</strong>）<br>绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。<br>元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。<br></td>
 </tr>
 <tr>
 <td>fixed</td>
@@ -217,18 +217,15 @@
 <h2 id="绝对定位absolute"><a href="#绝对定位absolute" class="headerlink" title="绝对定位absolute"></a>绝对定位<code>absolute</code></h2><ul>
 <li>使用<code>position:absolute;</code>生成绝对定位的元素，它会<strong>相对于第一个非 <code>static</code> 的父元素</strong>进行<strong>定位</strong>。</li>
 <li>生成绝对定位的元素，<strong>不为元素预留空间</strong>。</li>
-<li><strong>如果所有的父元素都没有显式地定义<code>position</code>属性(即全部是默认值)</strong>，那么所有的父元素默认情况下<code>position</code>属性都是<code>static</code>。结果，<strong>绝对定位元素会被包含在初始块容器中</strong>。这个初始块容器有着和浏览器窗口一样的尺寸，并且<code>&lt;html&gt;</code>元素也被包含在这个容器里面。<strong>简单来说，绝对定位元素会被放在<code>&lt;html&gt;</code>元素的外面，并且根据浏览器窗口来定位</strong>。（可以通过<strong>子绝父相</strong>来解决这一问题）</li>
+<li><strong>如果所有的父元素都没有显式地定义<code>position</code>属性(即全部是默认值)</strong>，那么所有的父元素默认情况下<code>position</code>属性都是<code>static</code>。结果，<strong>绝对定位元素会相对于文档的 body 元素进行定位，并且它会随着页面滚动而移动</strong>。（通过<strong>子绝父相</strong>可使绝对定位元素相对“相对定位”的父元素进行定位）</li>
 <li>将上面例子中的<code>position</code>值改为<code>absolute</code>:<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">position</span>: absolute;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g913up6zirj31h10ocn2a.jpg" alt="效果图"></p>
-<ul>
-<li>绝对定位元素在HTML源代码中，是被放在<code>&lt;body&gt;</code>中的，但是在最终的布局里面，它是离浏览器窗口页面的左边界、上边界有30px的距离。(<strong>而不是<code>&lt;body&gt;</code></strong>)</li>
-</ul>
 <hr>
 <h3 id="定位上下文（子绝父相）"><a href="#定位上下文（子绝父相）" class="headerlink" title="定位上下文（子绝父相）"></a>定位上下文（子绝父相）</h3><ul>
-<li>上面的例子绝对定位元素会被放在<code>&lt;html&gt;</code>元素的外面，并且根据浏览器窗口来定位。（可以通过<strong>子绝父相</strong>来解决这一问题）</li>
+<li>上面的例子绝对定位元素会相对于文档的 body 元素进行定位，并且它会随着页面滚动而移动。</li>
 <li>可以通过<strong>设置绝对定位元素的其中一个父元素的定位属性为相对定位<code>relative</code></strong>来使得绝对定位元素不相对初始块容器进行定位，比如下面例子中将body的css样式设为<code>position: relative;</code>就可以使得body中绝对定位的p元素相对body进行定位。</li>
 <li><strong>【子绝父相】</strong>：我们可以改变<strong>定位上下文(绝对定位的元素的相对位置元素)</strong>来使绝对元素相对于<code>body</code>进行定位，而不是相对于浏览器窗口进行定位。也就是<strong>设置绝对定位元素的其中一个父元素的定位属性为相对定位<code>relative</code></strong>，给<code>body</code>添加css样式：<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">position</span>: relative;</span><br></pre></td></tr></table></figure>
 
@@ -258,9 +255,10 @@
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g915dv0qj2j30md0g377g.jpg" alt="修改z-index值后"></p>
 <hr>
 <h2 id="固定定位fixed"><a href="#固定定位fixed" class="headerlink" title="固定定位fixed"></a>固定定位<code>fixed</code></h2><ul>
-<li><code>fixed</code>与<code>absolute</code>的工作方式<strong>完全相同</strong>，只有一个<strong>主要区别：父元素都是默认position时，<code>absolute</code>固定元素是相对于浏览器窗口本身的， 但“子绝父相”，当父元素有相对定位时将相对其最近的相对定位祖先来固定元素。而<code>fixed</code>固定元素则一直是相对于浏览器窗口本身</strong>。 </li>
+<li><code>fixed</code>与<code>absolute</code>的工作方式<strong>完全相同</strong>，只有一个<strong>主要区别：当父元素都是默认position属性值时，<code>absolute</code>固定元素是相对于body元素的，且它会随着页面滚动而移动。 但“子绝父相”，当父元素有相对定位时将相对其最近的相对定位祖先来固定元素。而<code>fixed</code>固定元素则一直是相对于浏览器窗口本身，且不会随着页面滚动而移动</strong>。 </li>
 <li>生成固定定位的元素，也<strong>不为元素预留空间</strong>。</li>
 <li>这意味着您可以创建固定的有用的UI项目，如<strong>持久导航菜单</strong>。</li>
+<li>但移动浏览器对 fixed 的支持很差，<a href="https://bradfrost.com/blog/post/fixed-position/" target="_blank" rel="noopener">可以通过参考这个解决</a></li>
 </ul>
 <hr>
 <h2 id="粘性定位sticky"><a href="#粘性定位sticky" class="headerlink" title="粘性定位sticky"></a>粘性定位<code>sticky</code></h2><ul>
@@ -383,19 +381,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/19/HTML知识补充（section和article以及aside标签）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/20/百度前端技术学院 第七天学习笔记 （CSS flexbox）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          HTML知识补充（section和article以及aside标签）
+          百度前端技术学院 第七天学习笔记（CSS flexbox）
         
       </div>
     </a>
   
   
-    <a href="/2019/11/17/JS闭包/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/19/HTML知识补充（section和article以及aside标签）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">JS闭包和面试题</div>
+      <div class="article-nav-title">HTML知识补充（section和article以及aside标签）</div>
     </a>
   
 </nav>
