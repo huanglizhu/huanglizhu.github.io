@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9alssa2gfj30iw05s76o.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9al8sgg94j314b0jkai6.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9aldys46mj30hj02cjsx.jpg">
-<meta property="og:updated_time" content="2019-11-26T11:51:55.056Z">
+<meta property="og:updated_time" content="2019-11-27T12:12:54.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React.js基础精讲（1）">
 <meta name="twitter:description" content="react.js文档中文文档较为滞后，建议阅读英文文档。">
@@ -245,7 +245,7 @@
 <li>通过<code>&lt;input value={this.state.inputValue} /&gt;</code>我们将状态中的<code>inputValue</code>赋给了输入框，此时输入框具有默认值，但如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的。</li>
 <li>此时我们需要不给输入框<strong>绑定事件<code>onChange</code></strong>，使<strong>输入框内容发生变化时触动函数h<code>andleInputChange</code></strong>，通过函数<code>handleInputChange</code><strong>将我们输入的值存储到状态中的<code>inputValue</code>上从而使页面发生变化</strong>。(<strong>注意：绑定事件处理函数的调用没有括号</strong><code>onChange={this.handleInputChange}</code>，有括号就直接调用该处理函数了，没有括号则是指向处理函数地址，只有触动该事件时才调用函数)</li>
 <li>在<strong>绑定事件处理函数<code>handleInputChange</code>中</strong>，传入一个<strong>参数</strong>也就是<strong>事件对象e</strong>(语法上，事件处理函数默认只传递一个参数，也就是事件对象) ，target对应的是事件对象e对应的DOM节点（也就是input节点），<strong>input节点的value值实际上就是输入框中的内容</strong>，我们需要<strong>将状态中的inputValue修改为input节点的value值</strong>，从而使得输入以后页面输入框内容有所变化。</li>
-<li>尝试将e.target.value赋给inputValue:<code>this.state.inputValue = e.target.value;</code>报错，显示state未定义，说明this指向有问题，打印出this发现是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要<strong>使用<code>bind(this)</code>将函数内的this指向TodoList组件</strong>以便调用存放在它的状态中的inputValue。</li>
+<li>尝试将e.target.value赋给inputValue:<code>this.state.inputValue = e.target.value;</code>报错，显示state未定义，说明this指向有问题，打印出this发现是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要<strong>使用<code>bind(this)</code>将函数内的this指向TodoList组件</strong>以便调用存放在它的状态中的inputValue。<strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></li>
 <li>转换this指向以后还是报错，是因为<strong>react中改变状态中的数据需要调用组件的setState方法</strong>：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">this</span><span class="selector-class">.setState</span>(&#123;</span><br><span class="line">  <span class="attribute">inputValue</span>:e.target.value</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 </li>
@@ -254,7 +254,7 @@
 <li>在js里每个类（组件）都会有一个<strong>自带的构造函数</strong><code>constructor(props){}</code>，（注意带一个参数props），当我们使用这个组件时，它会<strong>在render函数之前执行</strong>。构造函数内<strong>必须有<code>super(props);</code> 去继承父类component的props</strong>，构造函数内所有定义的<strong>数据</strong>都需要挂靠在当前对象的状态下，也就是<strong>写在<code>this. state={}</code>里面</strong>。</li>
 <li>render函数中写的是JSX语法，<code>constructor(props){}</code>中写的是js代码，如果<strong>想在JSX中插入js的变量或者表达式则需要使用<code>{}</code>将其框起</strong>。（如render函数中<code>&lt;input value={this.state.inputValue} /&gt;</code>）</li>
 <li>原生js中内容变化时的<strong>事件绑定</strong>是<code>onchange</code>，而react中是<code>onChange</code>。<strong>在react中事件绑定时驼峰形式的！（如<code>onClick</code>,<code>onChange</code>等）</strong></li>
-<li><strong>事件绑定时要使用<code>bind(this)</code>进行函数作用域变更使函数中的this指向</strong>使其指向事件对象（即组件）才能调用组件的构造函数中的数据，否则函数中的this指向undefined。</li>
+<li><strong>事件绑定时要使用<code>bind(this)</code>进行函数作用域变更使函数中的this指向</strong>使其指向事件对象（即组件）才能调用组件的构造函数中的数据，否则函数中的this指向undefined。<strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></li>
 <li><strong>修改<code>this. state</code>中的数据需要通过setState方法</strong>：想要改变<code>this. state</code>里面的数据直接引用<code>this. state</code>进行赋值是不行的，要使用<code>this. setState({state中需要修改的属性:修改以后的属性值;})</code>（其实就是将需要修改的属性通过对象的方式传入setState函数）</li>
 </ul>
 <hr>
@@ -284,11 +284,13 @@
 </ul>
 <hr>
 <h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
-<li><p><strong>给每个li标签绑定一个 onClick 事件函数 handleItemDelete</strong> ，通过 bind 绑定 this 指向组件 TodoList 的同时<strong>将数组下标 index 通过第二个参数传到 handleItemDelete 中，以便我们在 handleItemDelete函数 中获取到数组下标</strong>。</p>
+<li><strong>给每个li标签绑定一个 onClick 事件函数 handleItemDelete</strong> ，通过 bind 绑定 this 指向组件 TodoList 的同时<strong>将数组下标 index 通过第二个参数传到 handleItemDelete 中，以便我们在 handleItemDelete函数 中获取到数组下标</strong>。</li>
+</ol>
+<p><strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></p>
 <figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span></span></span></span><br><span class="line"><span class="xml">  key=</span><span class="template-variable">&#123;index&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  onClick=</span><span class="template-variable">&#123;this.handleItemDelete.bind(this, index)&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  </span><span class="template-variable">&#123;item&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用扩展运算符<strong>拷贝 state 中的 list 到 变量list1 中</strong>，对 变量list 使用 splice方法 <strong>删除选中数组下标为 index 的数组元素</strong>，再使用 setState方法 <strong>将删除被点击元素后的 变量list1 赋给 state 中的list</strong>。</p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handleItemDelete(index) &#123;</span><br><span class="line">  const list1 = [...this.<span class="keyword">state</span>.list]</span><br><span class="line">  list1.splice(index, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  this.<span class="built_in">set</span>State(&#123;</span><br><span class="line">    list: list1</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用扩展运算符<strong>拷贝 state 中的 list 到 变量list1 中</strong>，对 变量list 使用 splice方法 <strong>删除选中数组下标为 index 的数组元素</strong>，再使用 setState方法 <strong>将删除被点击元素后的 变量list1 赋给 state 中的list</strong>。<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handleItemDelete(index) &#123;</span><br><span class="line">  const list1 = [...this.<span class="keyword">state</span>.list]</span><br><span class="line">  list1.splice(index, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  this.<span class="built_in">set</span>State(&#123;</span><br><span class="line">    list: list1</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
