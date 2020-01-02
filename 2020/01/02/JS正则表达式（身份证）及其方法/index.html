@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>正则表达式（身份证）及其方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JS">
+  
+  
+  
+  
+  <meta name="description" content="JS中生成RegExp对象的两种方法 RegExp 对象表示正则表达式。 修饰符包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式（身份证）及其方法">
+<meta property="og:url" content="http://yoursite.com/2020/01/02/JS正则表达式（身份证）及其方法/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="JS中生成RegExp对象的两种方法 RegExp 对象表示正则表达式。 修饰符包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai8s3ya73j30rf0frjso.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai8spb15wj30xf0ehq40.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai99hpmy5j30pb0djmy7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9h0b4ecj30dh0gst9h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9jfsodqj30r20bm3z5.jpg">
+<meta property="og:updated_time" content="2020-01-02T08:02:03.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式（身份证）及其方法">
+<meta name="twitter:description" content="JS中生成RegExp对象的两种方法 RegExp 对象表示正则表达式。 修饰符包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai8s3ya73j30rf0frjso.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS正则表达式（身份证）及其方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      正则表达式（身份证）及其方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/02/JS正则表达式（身份证）及其方法/" class="article-date">
+	  <time datetime="2020-01-02T08:01:23.000Z" itemprop="datePublished">一月 2, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JS中生成RegExp对象的两种方法"><a href="#JS中生成RegExp对象的两种方法" class="headerlink" title="JS中生成RegExp对象的两种方法"></a>JS中生成RegExp对象的两种方法</h1><ul>
+<li>RegExp 对象<strong>表示正则表达式</strong>。</li>
+<li><strong>修饰符</strong>包含属性 “g”、”i” 和 “m”，分别用于指定<strong>全局匹配、区分大小写的匹配和多行匹配</strong>。<a id="more"></a>
+
+</li>
+</ul>
+<p><strong>方法1：使用直接量的方式</strong><br><strong>规则用<code>//</code>包裹</strong>起来，修饰符跟在后面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp1=<span class="regexp">/规则/</span>修饰符;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//^表示开头，g表示全局匹配。即：开头为a的字符串就满足这个正则表达式</span></span><br><span class="line"><span class="keyword">const</span> regexp1=<span class="regexp">/^a/g</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2：使用构造函数RegExp的方式</strong><br><strong>规则和修饰符都用引号</strong>包裹起来：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'规则'</span>,<span class="string">'修饰符'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^a'</span>,<span class="string">'g'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/规则/</span>修饰符);</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp3=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/^a/g</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="正则方法"><a href="#正则方法" class="headerlink" title="正则方法"></a>正则方法</h1><ul>
+<li><strong>字符串的正则方法</strong>有：match()、replace()、search()、split()</li>
+<li><strong>正则对象</strong>的方法有：exec()、test()</li>
+<li>注意<strong>区分match()和exec()</strong>，他们都是返回匹配结果的<strong>数组</strong>，但区别如下表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>match()</th>
+<th>exec()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符串的正则方法，使用字符串对象进行调用</td>
+<td>正则对象的方法，使用RegExp对象进行调用</td>
+</tr>
+<tr>
+<td>返回的是<strong>匹配完成后完整的数组</strong></td>
+<td>每调用一次返回<strong>单次对应的匹配结果</strong>并用<strong>数组</strong>的方式显示</td>
+</tr>
+</tbody></table>
+<ul>
+<li>区分match()和exec()的例子：<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const r1 = /imooc/g;</span><br><span class="line"></span><br><span class="line">const str = "imoocimooc_imooc";</span><br><span class="line"></span><br><span class="line">console.log(r1.exec(str));//["imooc", <span class="keyword">index</span>: <span class="number">0</span>, <span class="keyword">input</span>: "imoocimooc_imooc", <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//["imooc", <span class="keyword">index</span>: <span class="number">5</span>, <span class="keyword">input</span>: "imoocimooc_imooc", <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//["imooc", <span class="keyword">index</span>: <span class="number">11</span>, <span class="keyword">input</span>: "imoocimooc_imooc", <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//<span class="keyword">null</span></span><br><span class="line"></span><br><span class="line">console.log(str.match(r1));//["imooc", "imooc", "imooc"]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="match-方法"><a href="#match-方法" class="headerlink" title="match() 方法"></a>match() 方法</h2><ul>
+<li>match() 方法可<strong>在字符串内检索指定的值，或找到一个或多个正则表达式的匹配</strong>。</li>
+<li>该方法类似 indexOf() 和 lastIndexOf()，但是它<strong>返回指定的值(数组)</strong>，而不是字符串的位置。</li>
+<li><strong>返回值</strong>:存放匹配结果的<strong>数组</strong>。</li>
+<li><strong>语法</strong>：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>Object.match(searchvalue)</span><br><span class="line"><span class="built_in">string</span>Object.match(regexp)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>searchvalue</td>
+<td>必需。规定要检索的字符串值。</td>
+</tr>
+<tr>
+<td>regexp</td>
+<td>必需。规定要匹配的模式的 RegExp 对象。<br>如果该参数不是 RegExp 对象，则需要首先把它传递给 RegExp 构造函数，将其转换为 RegExp 对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例子：在下面<strong>正则表达式完整例子</strong>中使用。</li>
+</ul>
+<hr>
+<h2 id="exec-方法"><a href="#exec-方法" class="headerlink" title="exec()方法"></a>exec()方法</h2><ul>
+<li>exec() 方法用于使用正则表达式，检索字符串中的正则表达式的匹配。</li>
+<li><strong>语法</strong>：<code>RegExpObject.exec(要检索的字符串)</code></li>
+<li>返回一个<strong>数组</strong>，其中存放匹配的结果。如果未找到匹配，则返回值为 <strong>null</strong>。</li>
+<li>与match()类似，他们都是返回匹配结果的<strong>数组</strong>，但<strong>match()是字符串的正则方法（是使用字符串对象进行调用），exec()是正则对象的方法（使用RegExp对象进行调用）</strong>。</li>
+<li>例子：在下面<strong>y粘连修饰符的例子*</strong>中使用。</li>
+</ul>
+<hr>
+<h2 id="test-方法"><a href="#test-方法" class="headerlink" title="test()方法"></a>test()方法</h2><ul>
+<li>test()方法用于检测一个字符串是否匹配某个模式.</li>
+<li><strong>返回值：布尔型</strong>。如果字符串中有匹配的值返回 true ，否则返回 false。</li>
+<li>注意：和match()类似，不过他返回的是布尔值而不是匹配值构成的数组。</li>
+<li><strong>语法</strong>：<code>RegExp对象.test(要检测的字符串)</code></li>
+<li>例子：在下面<strong>u修饰符的例子</strong>中使用。</li>
+</ul>
+<hr>
+<h1 id="正则表达式完整例子"><a href="#正则表达式完整例子" class="headerlink" title="正则表达式完整例子"></a>正则表达式完整例子</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//^表示开头，g表示全局匹配。即：开头为"你"的字符串就满足这个正则表达式</span></span><br><span class="line"><span class="keyword">const</span> regexp1 = <span class="regexp">/^你/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"你好呀你好呀你好呀"</span>.match(regexp1));<span class="comment">//["你"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> regexp2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^你好"</span>, <span class="string">"g"</span>);<span class="comment">//不要漏掉g的引号</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"你好呀你好呀你好呀"</span>.match(regexp2));<span class="comment">//["你好"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> regexp3 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/^我/g</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"你好呀你好呀你好呀"</span>.match(regexp3));<span class="comment">//null，不符合规则</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> regexp4 = <span class="regexp">/你/g</span>;<span class="comment">//去掉^</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"你好呀你好呀你好呀"</span>.match(regexp4));<span class="comment">//["你", "你", "你"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> regexp5 = <span class="regexp">/你/</span>;<span class="comment">//去掉g,不再全局搜索</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"你好呀你好呀你好呀"</span>.match(regexp5));<span class="comment">//["你"]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="正则表达式构造函数RegExp的变化"><a href="#正则表达式构造函数RegExp的变化" class="headerlink" title="正则表达式构造函数RegExp的变化"></a>正则表达式构造函数RegExp的变化</h1><p><strong>不管有多少个“原来的修饰符”，都会被“新增的修饰符”覆盖</strong>，注意：新增的修饰符需要引号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/规则/</span>原来的修饰符,<span class="string">"新增的修饰符"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/^你/igm</span>,<span class="string">"i"</span>);<span class="comment">//最后生效的是i</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h1><ul>
+<li>^    匹配输入字符串<strong>开始</strong>的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</li>
+<li>$    匹配输入字符串<strong>结尾</strong>的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</li>
+</ul>
+<hr>
+<h1 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h1><ul>
+<li><strong>[a-z]</strong><br>字符范围。匹配指定范围内的任意一个字符。例如，’[a-z]’ 可以匹配 ‘a’ 到 ‘z’ 范围内的任意小写字母字符。</li>
+<li><strong>\d</strong><br>匹配一个数字字符。等价于 [0-9]。</li>
+<li><strong>{n}</strong><br>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</li>
+<li><strong>x|y</strong><br>匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”。’(z|f)ood’ 则匹配 “zood” 或 “food”。</li>
+<li><strong>[xyz]</strong><br>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</li>
+<li><strong>\w</strong><br>匹配字母、数字或者下划线,等价于<code>[A-Za-z0-9_]</code></li>
+<li><strong>+</strong><br>匹配前面一个表达式 1 次或者多次</li>
+<li><hr>
+匹配前一个表达式 0 次或多次</li>
+<li><strong>/g</strong><br>全局匹配</li>
+</ul>
+<p>关于<code>+</code>和<code>*</code>可以看下面“其他相关题目”理解其用法。</p>
+<hr>
+<h1 id="身份证相关题目"><a href="#身份证相关题目" class="headerlink" title="身份证相关题目"></a>身份证相关题目</h1><h2 id="15位身份证（第一代）"><a href="#15位身份证（第一代）" class="headerlink" title="15位身份证（第一代）"></a>15位身份证（第一代）</h2><h3 id="15位号码各位的含义"><a href="#15位号码各位的含义" class="headerlink" title="15位号码各位的含义"></a>15位号码各位的含义</h3><ol>
+<li>1-2位省、自治区、直辖市代码；</li>
+<li>3-4位地级市、盟、自治州代码；</li>
+<li>5-6位县、县级市、区代码；</li>
+<li>7-12位出生年月日,比如670401代表1967年4月1日（<strong>这是与18位的第一个区别</strong>）；</li>
+<li>13-15位为顺序号，其中15位男为单数，女为双数；</li>
+</ol>
+<h3 id="举例介绍"><a href="#举例介绍" class="headerlink" title="举例介绍"></a>举例介绍</h3><p>130503 670401 001的含义: 13为河北，05为邢台，03为桥西区，出生日期为1967年4月1日，顺序号为001。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai8s3ya73j30rf0frjso.jpg" alt="面试题"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai8spb15wj30xf0ehq40.jpg" alt="解释"></p>
+<hr>
+<h2 id="18位身份证（第二代）"><a href="#18位身份证（第二代）" class="headerlink" title="18位身份证（第二代）"></a>18位身份证（第二代）</h2><p>要注意最后一位！<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai99hpmy5j30pb0djmy7.jpg" alt="解释"></p>
+<hr>
+<h1 id="其他相关题目"><a href="#其他相关题目" class="headerlink" title="其他相关题目"></a>其他相关题目</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9h0b4ecj30dh0gst9h.jpg" alt="题目"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9jfsodqj30r20bm3z5.jpg" alt="解释"><br>正则方法<code>match()</code>可在字符串内<strong>检索指定的值</strong>，或找到一个或多个正则表达式的匹配，<strong>返回指定的值(数组)</strong>。(更多相关知识可查阅“ES6扩展 正则扩展”中的“<code>match() 方法</code>”)<br>因为<code>+</code>和<code>*</code>都是<strong>贪婪匹配</strong>，它们会尽可能多地匹配字符，<br>所以<strong><code>\d+</code>匹配”75”，<code>\w*</code>匹配”team2017”</strong>，而<code>/g</code>就没有表演的机会了。<br>最后选C。<br><strong>关于<code>&amp;quot</code></strong>:属于html中的<strong>特殊字符的转义</strong>，选项中为双引号。</p>
+<hr>
+<p>更多可参考<a href="https://www.liaoxuefeng.com/wiki/897692888725344/923056128128864" target="_blank" rel="noopener">廖雪峰的相关解释</a><br> <a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">正则表达式 - 元字符 参考</a> </p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/31/nodejs介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">nodejs介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS中生成RegExp对象的两种方法"><span class="nav-number">1.</span> <span class="nav-text">JS中生成RegExp对象的两种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则方法"><span class="nav-number">2.</span> <span class="nav-text">正则方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#match-方法"><span class="nav-number">2.1.</span> <span class="nav-text">match() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec-方法"><span class="nav-number">2.2.</span> <span class="nav-text">exec()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-方法"><span class="nav-number">2.3.</span> <span class="nav-text">test()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式完整例子"><span class="nav-number">3.</span> <span class="nav-text">正则表达式完整例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式构造函数RegExp的变化"><span class="nav-number">4.</span> <span class="nav-text">正则表达式构造函数RegExp的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位符"><span class="nav-number">5.</span> <span class="nav-text">定位符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元字符"><span class="nav-number">6.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#身份证相关题目"><span class="nav-number">7.</span> <span class="nav-text">身份证相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#15位身份证（第一代）"><span class="nav-number">7.1.</span> <span class="nav-text">15位身份证（第一代）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15位号码各位的含义"><span class="nav-number">7.1.1.</span> <span class="nav-text">15位号码各位的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例介绍"><span class="nav-number">7.1.2.</span> <span class="nav-text">举例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">7.1.3.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18位身份证（第二代）"><span class="nav-number">7.2.</span> <span class="nav-text">18位身份证（第二代）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他相关题目"><span class="nav-number">8.</span> <span class="nav-text">其他相关题目</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
