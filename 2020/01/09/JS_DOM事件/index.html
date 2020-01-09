@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>DOM事件 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JS">
+  
+  
+  
+  
+  <meta name="description" content="事件注意 代码从上往下执行，在DOM事件中，如果先在&amp;lt;script&amp;gt;里获取对象再通过&amp;lt;div&amp;gt;定义对象会报错，因为这个对象的定义是出现在了获取的后面，你想要获取的时候还没定义。此时可以在&amp;lt;script&amp;gt;里使用鼠标事件中的onload（例子在下方）">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM事件">
+<meta property="og:url" content="http://yoursite.com/2020/01/09/JS_DOM事件/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="事件注意 代码从上往下执行，在DOM事件中，如果先在&amp;lt;script&amp;gt;里获取对象再通过&amp;lt;div&amp;gt;定义对象会报错，因为这个对象的定义是出现在了获取的后面，你想要获取的时候还没定义。此时可以在&amp;lt;script&amp;gt;里使用鼠标事件中的onload（例子在下方）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-09T06:38:37.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DOM事件">
+<meta name="twitter:description" content="事件注意 代码从上往下执行，在DOM事件中，如果先在&amp;lt;script&amp;gt;里获取对象再通过&amp;lt;div&amp;gt;定义对象会报错，因为这个对象的定义是出现在了获取的后面，你想要获取的时候还没定义。此时可以在&amp;lt;script&amp;gt;里使用鼠标事件中的onload（例子在下方）">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS_DOM事件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      DOM事件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/09/JS_DOM事件/" class="article-date">
+	  <time datetime="2020-01-09T06:38:27.000Z" itemprop="datePublished">一月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>代码从上往下执行，在DOM事件中，如果先在<code>&lt;script&gt;</code>里获取对象再通过<code>&lt;div&gt;</code>定义对象会报错，因为这个对象的定义是出现在了获取的后面，你想要获取的时候还没定义。<strong>此时可以在<code>&lt;script&gt;</code>里使用鼠标事件中的onload（例子在下方）</strong><a id="more"></a>
+
+</li>
+</ul>
+<h2 id="关于this指向"><a href="#关于this指向" class="headerlink" title="关于this指向"></a>关于this指向</h2><ul>
+<li>在事件触发的（function）函数中，this是对该DOM对象的引用。</li>
+<li>可以通过<code>console.log(this)</code>来看this在这个函数中指的是什么。</li>
+</ul>
+<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ul>
+<li>onload：页面加载时触发 <strong>（页面加载完成后才执行）</strong></li>
+<li>onclick：鼠标点击时触发</li>
+<li>onmouseover：鼠标滑过时触发</li>
+<li>onmouseout：鼠标离开时触发</li>
+<li>onmousedown：鼠标按钮在元素上按下时触发</li>
+<li>onmousemove：在鼠标指针移动时发生</li>
+<li>onmouseup：在元素上松开鼠标按钮时触发</li>
+<li>onfoucs：获得焦点时触发 <strong>（只能用于：input标签type为text、password<br>textarea标签）</strong> </li>
+<li>onblur：失去焦点时触发</li>
+<li>onchange：域的内容改变时发生 <strong>（一般作用于（下拉框）select或checkbox或radio）</strong></li>
+<li>onsubmit：表单中的<strong>确认按钮被点击时发生</strong> <strong>（onsubmit事件</strong>不是加在按钮上，而是表单上<strong>）</strong></li>
+<li>onresize：当调整浏览器窗口的大小时触发</li>
+<li>onscroll：拖动滚动条滚动时触发</li>
+</ul>
+<hr>
+<h1 id="HTML事件中调用JS函数时不加括号"><a href="#HTML事件中调用JS函数时不加括号" class="headerlink" title="HTML事件中调用JS函数时不加括号"></a>HTML事件中调用JS函数时不加括号</h1><ul>
+<li>加括号就是直接执行函数了，不加括号则是指向函数地址，当发生事件时才去调用函数。</li>
+<li><code>事件=function(){}</code>或者<code>事件=函数名</code>都是可以的，不能使用<code>事件=(function(){})(参数)</code>或<code>事件=函数名()</code>。</li>
+<li>如果事件绑定函数想要传参可以使用<code>xx.onclick=function(){函数名(参数);}</code>，也就是绑定一个函数，函数在触发onclick时执行，函数内容是执行你想传参的那个函数。</li>
+</ul>
+<hr>
+<h2 id="对window使用onload的例子"><a href="#对window使用onload的例子" class="headerlink" title="对window使用onload的例子"></a>对window使用onload的例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 页面加载完成后才执行</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 获取box</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> box =<span class="built_in">document</span>.getElementById(<span class="string">"box"</span>);</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> clicked=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">"我被点击了！"</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">            box.onclick=clicked;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span>这是一个box<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="onfocus事件"><a href="#onfocus事件" class="headerlink" title="onfocus事件"></a>onfocus事件</h2><ul>
+<li>只能用于：input标签type为text、password</li>
+<li>textarea标签</li>
+</ul>
+<h2 id="onfocus和onblur事件的例子"><a href="#onfocus和onblur事件的例子" class="headerlink" title="onfocus和onblur事件的例子"></a>onfocus和onblur事件的例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">       <span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="css">       	  <span class="selector-tag">padding</span><span class="selector-pseudo">:50px</span>;</span></span><br><span class="line">       &#125;</span><br><span class="line"><span class="css">       <span class="selector-class">.left</span>,<span class="selector-class">.tip</span>&#123;</span></span><br><span class="line"><span class="css">       	  <span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span></span><br><span class="line">       &#125;</span><br><span class="line"><span class="css">       <span class="selector-class">.left</span>&#123;<span class="attribute">margin-right</span>:<span class="number">10px</span>;&#125;</span></span><br><span class="line"><span class="css">       <span class="selector-class">.tip</span>&#123;<span class="attribute">display</span>:none;<span class="attribute">font-size</span>:<span class="number">14px</span>;&#125;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">       	  <span class="comment">// 获取文本框和提示框</span></span></span><br><span class="line"><span class="javascript">       	  <span class="keyword">var</span> phone=<span class="built_in">document</span>.getElementById(<span class="string">"phone"</span>),</span></span><br><span class="line"><span class="javascript">              tip=<span class="built_in">document</span>.getElementById(<span class="string">"tip"</span>);</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// 给文本框绑定激活的事件</span></span></span><br><span class="line"><span class="actionscript">          phone.onfocus=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">          	  <span class="comment">// 让tip显示出来</span></span></span><br><span class="line"><span class="actionscript">          	  tip.style.display=<span class="string">'block'</span>;</span></span><br><span class="line">          &#125;</span><br><span class="line"><span class="actionscript">          <span class="comment">// 给文本框绑定失去焦点的事件</span></span></span><br><span class="line"><span class="actionscript">          phone.onblur=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="comment">// 获取文本框的值,value用于获取表单元素的值</span></span></span><br><span class="line"><span class="actionscript">             <span class="keyword">var</span> phoneVal=<span class="keyword">this</span>.value;</span></span><br><span class="line"><span class="actionscript">             <span class="comment">// 判断手机号码是否是11位的数字</span></span></span><br><span class="line"><span class="actionscript">             <span class="comment">// 如果输入正确，则显示对号图标，否则显示错号图标</span></span></span><br><span class="line"><span class="javascript">             <span class="keyword">if</span>(phoneVal.length**<span class="number">11</span> &amp;&amp; <span class="built_in">isNaN</span>(phoneVal)**<span class="literal">false</span>)&#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">                tip.innerHTML='<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"E:/慕课网 前端小白入门系列课程完整版/JavaScript/6.javascriptDoM事件/img/right.png"</span>&gt;</span>';</span></span></span><br><span class="line"><span class="actionscript">             &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">             	tip.innerHTML='<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"E:/慕课网 前端小白入门系列课程完整版/JavaScript/6.javascriptDoM事件/img/error.png"</span>&gt;</span>';</span></span></span><br><span class="line">             &#125;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"phone"</span> <span class="attr">placeholder</span>=<span class="string">"请输入手机号码"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tip"</span> <span class="attr">id</span>=<span class="string">"tip"</span>&gt;</span></span><br><span class="line">           请输入有效的手机号码</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>实现效果可以看E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\index4.html</p>
+<h2 id="“onchange：域的内容改变时发生”的例子"><a href="#“onchange：域的内容改变时发生”的例子" class="headerlink" title="“onchange：域的内容改变时发生”的例子"></a>“onchange：域的内容改变时发生”的例子</h2><p>change事件,一般作用域（下拉框）select或checkbox或radio。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">       <span class="comment">// 页面加载（注意这是对DOM0级事件的命名函数调用，不要括号）</span></span></span><br><span class="line"><span class="javascript">       <span class="built_in">window</span>.onload=init;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">       <span class="comment">// 初始化</span></span></span><br><span class="line"><span class="actionscript">       <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// 获取下拉菜单</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> menu=<span class="built_in">document</span>.getElementById(<span class="string">"menu"</span>);</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// 给菜单绑定change事件,一般作用域select或checkbox或radio</span></span></span><br><span class="line"><span class="actionscript">          menu.onchange=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="comment">// 获取当前选中的值</span></span></span><br><span class="line"><span class="actionscript">             <span class="keyword">var</span> bgcolor=<span class="keyword">this</span>.value;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//  var bgcolor=menu.options[menu.selectedIndex].value;</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">            <span class="comment">// 可以先打印出来看看选中选项以后得到的value是什么</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">// console.log(bgcolor);</span></span></span><br><span class="line">             </span><br><span class="line"><span class="actionscript">             <span class="comment">// 设置body的背景色             </span></span></span><br><span class="line"><span class="actionscript">             <span class="comment">//如果bgcolor为空，则下面的脚本将不执行，否则是选择的颜色</span></span></span><br><span class="line"><span class="actionscript">             <span class="keyword">if</span>(bgcolor**<span class="string">""</span>)&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="actionscript">             &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">             	<span class="built_in">document</span>.body.style.background=bgcolor;</span></span><br><span class="line">             &#125;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">		请选择您喜欢的背景色：</span><br><span class="line">		<span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"#f00"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"#0f0"</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"#00f"</span>&gt;</span>蓝色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"#ff0"</span>&gt;</span>黄色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"#ccc"</span>&gt;</span>灰色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="在html中使用js中的onchange"><a href="#在html中使用js中的onchange" class="headerlink" title="在html中使用js中的onchange"></a>在html中使用js中的<code>onchange</code></h2><p><strong>注意</strong>：<br>事件函数中调用函数都不用括号。<br>不建议使用html事件，建议使用DOM事件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">upperCase</span><span class="params">(x)</span></span></span></span><br><span class="line">&#123;</span><br><span class="line"><span class="javascript"><span class="keyword">var</span> y=<span class="built_in">document</span>.getElementById(x).value</span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.getElementById(x).value=y.toUpperCase()</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">Enter your name: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"fname"</span> <span class="attr">onchange</span>=<span class="string">"upperCase(this.id)"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=hdom_onchange" target="_blank" rel="noopener">效果</a></p>
+<hr>
+<h1 id="onchange事件编程练习"><a href="#onchange事件编程练习" class="headerlink" title="onchange事件编程练习"></a>onchange事件编程练习</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>if的条件判断一定要注意是<strong>两个</strong>等号！！</li>
+</ul>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>小伙伴们，今天我们学习了onchange鼠标事件，实现下列功能：</p>
+<ul>
+<li>（1）选择下拉列表中不同的选项，页面中的d iv就设置成不同的背景颜色，div中的内容也发生变化。</li>
+<li>比如：选择黄色选项，div的背景颜色就变为黄色，文本内容就变为“我的背景颜色变成了yellow色”</li>
+<li>（2）当选择下拉列表中的“请选择”时，div的背累颜色变成白色，文本变为“我没有发生任何变化”</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-id">#div</span> &#123;</span></span><br><span class="line">            width: 300px;</span><br><span class="line">            height: 300px;</span><br><span class="line">            border: 2px solid gray;</span><br><span class="line">            margin: 100px 0 0 200px;</span><br><span class="line">            display: none;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 页面加载完成后才执行</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 获取下拉框与文字</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> colorSelect = <span class="built_in">document</span>.getElementById(<span class="string">"color"</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> bgText=<span class="built_in">document</span>.getElementById(<span class="string">"div"</span>);</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// console.log(bgText.innerHTML)</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 绑定事件</span></span></span><br><span class="line">            colorSelect.onchange = choose;</span><br><span class="line"><span class="actionscript">            <span class="function"><span class="keyword">function</span> <span class="title">choose</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">// console.log(this.value);</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">var</span> bgColor=<span class="keyword">this</span>.value;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">// 选择颜色时让下方文字框可见</span></span></span><br><span class="line"><span class="actionscript">                bgText.style.display=<span class="string">"block"</span>;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">// 一定要注意是两个等号！</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">if</span>(bgColor**<span class="string">"0"</span>)&#123;</span></span><br><span class="line"><span class="actionscript">                    bgText.innerHTML=<span class="string">"我没有变化呀"</span>;</span></span><br><span class="line"><span class="actionscript">                &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="actionscript">                    bgText.innerHTML=<span class="string">"我变成"</span>+bgColor+<span class="string">"色了诶"</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="built_in">document</span>.body.style.background=bgColor;</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>请选择您喜欢的颜色：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"color"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"0"</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"yellow"</span>&gt;</span>黄色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"orange"</span>&gt;</span>橘色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"pink"</span>&gt;</span>粉色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"purple"</span>&gt;</span>紫色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div"</span>&gt;</span>我是下方文字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>地址：E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\test.html</p>
+<hr>
+<h1 id="onsubmit事件"><a href="#onsubmit事件" class="headerlink" title="onsubmit事件"></a>onsubmit事件</h1><p>不是加在按钮上，而是form表单上。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 表单中的确认按钮被点击时发生 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>当提交表单是，触发函数并弹出提示信息。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"demo-form.php"</span> <span class="attr">id</span>=<span class="string">"form_ok"</span>&gt;</span></span><br><span class="line">        输入名字: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"fname"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 获取表单（不是确认按钮！）</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> ok=<span class="built_in">document</span>.getElementById(<span class="string">"form_ok"</span>);</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 绑定事件</span></span></span><br><span class="line">        ok.onsubmit=myFunction;</span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            alert(<span class="string">"表单已提交"</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\onsubmit.html</p>
+<hr>
+<h1 id="三个比较简单的鼠标事件"><a href="#三个比较简单的鼠标事件" class="headerlink" title="三个比较简单的鼠标事件"></a>三个比较简单的鼠标事件</h1><p>想了解可以看index6.html</p>
+<ul>
+<li>onmousedown：鼠标按钮在元素上按下时触发</li>
+<li>onmousemove：在鼠标指针移动时发生</li>
+<li>onmouseup：在元素上松开鼠标按钮时触发</li>
+</ul>
+<h2 id="需要知道的"><a href="#需要知道的" class="headerlink" title="需要知道的"></a>需要知道的</h2><ul>
+<li>onmousedown与onmouseup组成了onclick事件</li>
+</ul>
+<hr>
+<h1 id="经常作用于window对象的两个事件"><a href="#经常作用于window对象的两个事件" class="headerlink" title="经常作用于window对象的两个事件"></a>经常作用于window对象的两个事件</h1><ul>
+<li>onresize：当调整浏览器窗口的大小时触发</li>
+<li>onscroll：拖动滚动条滚动时触发</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/02/JS正则表达式（身份证）及其方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">正则表达式（身份证）及其方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于this指向"><span class="nav-number">1.2.</span> <span class="nav-text">关于this指向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鼠标事件"><span class="nav-number">1.3.</span> <span class="nav-text">鼠标事件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML事件中调用JS函数时不加括号"><span class="nav-number">2.</span> <span class="nav-text">HTML事件中调用JS函数时不加括号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对window使用onload的例子"><span class="nav-number">2.1.</span> <span class="nav-text">对window使用onload的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onfocus事件"><span class="nav-number">2.2.</span> <span class="nav-text">onfocus事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onfocus和onblur事件的例子"><span class="nav-number">2.3.</span> <span class="nav-text">onfocus和onblur事件的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“onchange：域的内容改变时发生”的例子"><span class="nav-number">2.4.</span> <span class="nav-text">“onchange：域的内容改变时发生”的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在html中使用js中的onchange"><span class="nav-number">2.5.</span> <span class="nav-text">在html中使用js中的onchange</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#onchange事件编程练习"><span class="nav-number">3.</span> <span class="nav-text">onchange事件编程练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要求"><span class="nav-number">3.2.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#onsubmit事件"><span class="nav-number">4.</span> <span class="nav-text">onsubmit事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三个比较简单的鼠标事件"><span class="nav-number">5.</span> <span class="nav-text">三个比较简单的鼠标事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要知道的"><span class="nav-number">5.1.</span> <span class="nav-text">需要知道的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经常作用于window对象的两个事件"><span class="nav-number">6.</span> <span class="nav-text">经常作用于window对象的两个事件</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
