@@ -24,7 +24,8 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai99hpmy5j30pb0djmy7.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9h0b4ecj30dh0gst9h.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9jfsodqj30r20bm3z5.jpg">
-<meta property="og:updated_time" content="2020-01-02T08:02:03.829Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gatruj0506j30th0fnmy3.jpg">
+<meta property="og:updated_time" content="2020-01-12T06:53:30.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式（身份证）及其方法">
 <meta name="twitter:description" content="JS中生成RegExp对象的两种方法 RegExp 对象表示正则表达式。 修饰符包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。">
@@ -280,16 +281,23 @@
 <h1 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h1><ul>
 <li><strong>[a-z]</strong><br>字符范围。匹配指定范围内的任意一个字符。例如，’[a-z]’ 可以匹配 ‘a’ 到 ‘z’ 范围内的任意小写字母字符。</li>
 <li><strong>\d</strong><br>匹配一个数字字符。等价于 [0-9]。</li>
-<li><strong>{n}</strong><br>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</li>
 <li><strong>x|y</strong><br>匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”。’(z|f)ood’ 则匹配 “zood” 或 “food”。</li>
 <li><strong>[xyz]</strong><br>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</li>
 <li><strong>\w</strong><br>匹配字母、数字或者下划线,等价于<code>[A-Za-z0-9_]</code></li>
-<li><strong>+</strong><br>匹配前面一个表达式 1 次或者多次</li>
-<li><hr>
-匹配前一个表达式 0 次或多次</li>
 <li><strong>/g</strong><br>全局匹配</li>
 </ul>
-<p>关于<code>+</code>和<code>*</code>可以看下面“其他相关题目”理解其用法。</p>
+<h1 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h1><ul>
+<li>\<br>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， <code>n</code>匹配字符 <code>n</code>。<code>\n</code>匹配换行符。序列 <code>\\</code>匹配 <code>\</code>，而 <code>\(</code>则匹配 <code>(</code>。</li>
+</ul>
+<h1 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h1><ul>
+<li><strong>+</strong><br>匹配前面一个表达式 <strong>1 次或者多次</strong>,要匹配 + 字符，请使用 <code>\+</code>。</li>
+<li>*<br>匹配前一个表达式 <strong>0 次或多次</strong>，要匹配 * 字符，请使用 <code>\*</code>。</li>
+<li><strong>？</strong><br>出现<strong>0次或1次</strong>,或指明一个非贪婪限定符。要匹配 ? 字符，请使用 <code>\?</code>。</li>
+<li><strong>{n}</strong><br>n 是一个非负整数。<strong>匹配确定的 n 次</strong>。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</li>
+<li><strong>{n,}</strong><br>n 是一个非负整数。<strong>至少匹配n 次</strong>。例如，<code>o{2,}</code> 不能匹配 “Bob” 中的 <code>o</code>，但能匹配 “foooood” 中的所有 o。<code>o{1,}</code> 等价于 <code>o+</code>。’o{0,}’ 则等价于 <code>o*</code>。</li>
+<li><strong>{n,m}</strong><br>m 和 n 均为非负整数，其中<strong>n <code>&lt;=</code> m</strong>。<strong>最少匹配 n 次且最多匹配 m 次</strong>。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 <code>o?</code>。请注意<strong>在逗号和两个数之间不能有空格</strong>。</li>
+</ul>
+<p>关于<code>+</code>和<code>*</code>可以看下面“match相关题目1”理解其用法。</p>
 <hr>
 <h1 id="身份证相关题目"><a href="#身份证相关题目" class="headerlink" title="身份证相关题目"></a>身份证相关题目</h1><h2 id="15位身份证（第一代）"><a href="#15位身份证（第一代）" class="headerlink" title="15位身份证（第一代）"></a>15位身份证（第一代）</h2><h3 id="15位号码各位的含义"><a href="#15位号码各位的含义" class="headerlink" title="15位号码各位的含义"></a>15位号码各位的含义</h3><ol>
 <li>1-2位省、自治区、直辖市代码；</li>
@@ -303,9 +311,25 @@
 <hr>
 <h2 id="18位身份证（第二代）"><a href="#18位身份证（第二代）" class="headerlink" title="18位身份证（第二代）"></a>18位身份证（第二代）</h2><p>要注意最后一位！<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai99hpmy5j30pb0djmy7.jpg" alt="解释"></p>
 <hr>
-<h1 id="其他相关题目"><a href="#其他相关题目" class="headerlink" title="其他相关题目"></a>其他相关题目</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9h0b4ecj30dh0gst9h.jpg" alt="题目"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9jfsodqj30r20bm3z5.jpg" alt="解释"><br>正则方法<code>match()</code>可在字符串内<strong>检索指定的值</strong>，或找到一个或多个正则表达式的匹配，<strong>返回指定的值(数组)</strong>。(更多相关知识可查阅“ES6扩展 正则扩展”中的“<code>match() 方法</code>”)<br>因为<code>+</code>和<code>*</code>都是<strong>贪婪匹配</strong>，它们会尽可能多地匹配字符，<br>所以<strong><code>\d+</code>匹配”75”，<code>\w*</code>匹配”team2017”</strong>，而<code>/g</code>就没有表演的机会了。<br>最后选C。<br><strong>关于<code>&amp;quot</code></strong>:属于html中的<strong>特殊字符的转义</strong>，选项中为双引号。</p>
+<h1 id="match相关题目1"><a href="#match相关题目1" class="headerlink" title="match相关题目1"></a>match相关题目1</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9h0b4ecj30dh0gst9h.jpg" alt="题目"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gai9jfsodqj30r20bm3z5.jpg" alt="解释"><br>正则方法<code>match()</code>可在字符串内<strong>检索指定的值</strong>，或找到一个或多个正则表达式的匹配，<strong>返回指定的值(数组)</strong>。(更多相关知识可查阅“ES6扩展 正则扩展”中的“<code>match() 方法</code>”)<br>因为<code>+</code>和<code>*</code>都是<strong>贪婪匹配</strong>，它们会尽可能多地匹配字符，<br>所以<strong><code>\d+</code>匹配”75”，<code>\w*</code>匹配”team2017”</strong>，而<code>/g</code>就没有表演的机会了。<br>最后选C。<br><strong>关于<code>&amp;quot</code></strong>:属于html中的<strong>特殊字符的转义</strong>，选项中为双引号。</p>
 <hr>
-<p>更多可参考<a href="https://www.liaoxuefeng.com/wiki/897692888725344/923056128128864" target="_blank" rel="noopener">廖雪峰的相关解释</a><br> <a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">正则表达式 - 元字符 参考</a> </p>
+<h1 id="match相关题目2"><a href="#match相关题目2" class="headerlink" title="match相关题目2"></a>match相关题目2</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gatruj0506j30th0fnmy3.jpg" alt="题目"><br><strong>需要明确：</strong></p>
+<ol>
+<li>关于<code>//</code>的含义请到笔记顶部看“JS中生成RegExp对象的两种方法”的“方法1”</li>
+<li>正则表达式里：</li>
+</ol>
+<ul>
+<li>出现0次或多次.  [0,+∞]</li>
+</ul>
+<ul>
+<li>出现1次或多次  [1,+∞]</li>
+</ul>
+<ol start="3">
+<li>g是全局匹配</li>
+<li>/b+/ 也就是b出现1次或多次，/b*/ 是b出现0次或多次，/b{1,4}/ 是b至少出现1次，至多出现4次，/b{1,5}/ 是b至少出现1次，至多出现5次。</li>
+</ol>
+<hr>
+<p>更多可参考<a href="https://www.liaoxuefeng.com/wiki/897692888725344/923056128128864" target="_blank" rel="noopener">廖雪峰的相关解释</a><br> <a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">正则表达式 - 元字符 参考</a><br> <a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">正则表达式 - 语法参考</a></p>
 
       
     </div>
@@ -377,7 +401,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS中生成RegExp对象的两种方法"><span class="nav-number">1.</span> <span class="nav-text">JS中生成RegExp对象的两种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则方法"><span class="nav-number">2.</span> <span class="nav-text">正则方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#match-方法"><span class="nav-number">2.1.</span> <span class="nav-text">match() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec-方法"><span class="nav-number">2.2.</span> <span class="nav-text">exec()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-方法"><span class="nav-number">2.3.</span> <span class="nav-text">test()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式完整例子"><span class="nav-number">3.</span> <span class="nav-text">正则表达式完整例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式构造函数RegExp的变化"><span class="nav-number">4.</span> <span class="nav-text">正则表达式构造函数RegExp的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位符"><span class="nav-number">5.</span> <span class="nav-text">定位符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元字符"><span class="nav-number">6.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#身份证相关题目"><span class="nav-number">7.</span> <span class="nav-text">身份证相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#15位身份证（第一代）"><span class="nav-number">7.1.</span> <span class="nav-text">15位身份证（第一代）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15位号码各位的含义"><span class="nav-number">7.1.1.</span> <span class="nav-text">15位号码各位的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例介绍"><span class="nav-number">7.1.2.</span> <span class="nav-text">举例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">7.1.3.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18位身份证（第二代）"><span class="nav-number">7.2.</span> <span class="nav-text">18位身份证（第二代）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他相关题目"><span class="nav-number">8.</span> <span class="nav-text">其他相关题目</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS中生成RegExp对象的两种方法"><span class="nav-number">1.</span> <span class="nav-text">JS中生成RegExp对象的两种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则方法"><span class="nav-number">2.</span> <span class="nav-text">正则方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#match-方法"><span class="nav-number">2.1.</span> <span class="nav-text">match() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec-方法"><span class="nav-number">2.2.</span> <span class="nav-text">exec()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-方法"><span class="nav-number">2.3.</span> <span class="nav-text">test()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式完整例子"><span class="nav-number">3.</span> <span class="nav-text">正则表达式完整例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式构造函数RegExp的变化"><span class="nav-number">4.</span> <span class="nav-text">正则表达式构造函数RegExp的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位符"><span class="nav-number">5.</span> <span class="nav-text">定位符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元字符"><span class="nav-number">6.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特殊字符"><span class="nav-number">7.</span> <span class="nav-text">特殊字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#限定符"><span class="nav-number">8.</span> <span class="nav-text">限定符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#身份证相关题目"><span class="nav-number">9.</span> <span class="nav-text">身份证相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#15位身份证（第一代）"><span class="nav-number">9.1.</span> <span class="nav-text">15位身份证（第一代）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15位号码各位的含义"><span class="nav-number">9.1.1.</span> <span class="nav-text">15位号码各位的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例介绍"><span class="nav-number">9.1.2.</span> <span class="nav-text">举例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">9.1.3.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18位身份证（第二代）"><span class="nav-number">9.2.</span> <span class="nav-text">18位身份证（第二代）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#match相关题目1"><span class="nav-number">10.</span> <span class="nav-text">match相关题目1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#match相关题目2"><span class="nav-number">11.</span> <span class="nav-text">match相关题目2</span></a></li></ol>
     
     </div>
   </aside>
