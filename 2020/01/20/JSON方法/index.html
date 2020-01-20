@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JSON方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="parse()将JSON字符串转换为 JS 对象（接受服务器数据）JSON 通常用于与服务端交换数据。在接收服务器数据时一般是JSON字符串（JSON字符串长的很像JS对象）。">
+<meta name="keywords" content="JSON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSON方法">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/JSON方法/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="parse()将JSON字符串转换为 JS 对象（接受服务器数据）JSON 通常用于与服务端交换数据。在接收服务器数据时一般是JSON字符串（JSON字符串长的很像JS对象）。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-20T14:15:02.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON方法">
+<meta name="twitter:description" content="parse()将JSON字符串转换为 JS 对象（接受服务器数据）JSON 通常用于与服务端交换数据。在接收服务器数据时一般是JSON字符串（JSON字符串长的很像JS对象）。">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JSON方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JSON方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/20/JSON方法/" class="article-date">
+	  <time datetime="2020-01-20T14:14:18.000Z" itemprop="datePublished">一月 20, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JSON学习/">JSON学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="parse-将JSON字符串转换为-JS-对象（接受服务器数据）"><a href="#parse-将JSON字符串转换为-JS-对象（接受服务器数据）" class="headerlink" title="parse()将JSON字符串转换为 JS 对象（接受服务器数据）"></a>parse()将JSON字符串转换为 JS 对象（接受服务器数据）</h1><p>JSON 通常用于与服务端交换数据。<br>在<strong>接收服务器数据时一般是JSON字符串</strong>（JSON字符串长的很像JS对象）。<a id="more"></a><br>我们可以使用 JSON.parse() 方法<strong>将JSON字符串数据转换为 JavaScript 对象</strong>。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p><code>JSON.parse(text[, reviver])</code><br><strong>参数</strong>：<br>text:必需， 一个有效的 <strong>JSON 字符串</strong>。（确保你的数据是<strong>标准的 JSON 格式</strong>，否则会解析出错）<br>reviver: 可选，<strong>一个转换结果的函数， 将为对象的每个成员调用此函数</strong>。(例子在下面“JSON 不能存储 Date 对象的解决方法”中)</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>例如我们从服务器接收了这样的<strong>JSON字符串数据</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">"name"</span>:<span class="string">"runoob"</span>, <span class="attr">"alexa"</span>:<span class="number">10000</span>, <span class="attr">"site"</span>:<span class="string">"www.runoob.com"</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 JSON.parse() 方法</strong>处理以上数据，将其转换为 JavaScript 对象：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> obj = JSON.<span class="built_in">parse</span>('&#123; <span class="string">"name"</span>:<span class="string">"runoob"</span>, <span class="string">"alexa"</span>:<span class="number">10000</span>, <span class="string">"site"</span>:<span class="string">"www.runoob.com"</span> &#125;');</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：解析前要确保你的数据是标准的 JSON 格式</strong>，否则会解析出错。<br>可以使用在线工具检测：<a href="https://c.runoob.com/front-end/53。" target="_blank" rel="noopener">https://c.runoob.com/front-end/53。</a><br><a href="https://www.runoob.com/try/try.php?filename=tryjson_parse3" target="_blank" rel="noopener">完整例子</a></p>
+<hr>
+<h2 id="从服务端接收-JSON-数据"><a href="#从服务端接收-JSON-数据" class="headerlink" title="从服务端接收 JSON 数据"></a>从服务端接收 JSON 数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xmlhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        myObj = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = myObj.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xmlhttp.open(<span class="string">"GET"</span>, <span class="string">"/try/ajax/json_demo.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 AJAX 从服务器请求 JSON 数据，并解析为 JavaScript 对象。<br><a href="https://www.runoob.com/try/try.php?filename=tryjson_ajax" target="_blank" rel="noopener">完整例子</a></p>
+<hr>
+<h2 id="从服务端接收数组的-JSON-数据"><a href="#从服务端接收数组的-JSON-数据" class="headerlink" title="从服务端接收数组的 JSON 数据"></a>从服务端接收数组的 JSON 数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xmlhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        myArr = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText);</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = myArr[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xmlhttp.open(<span class="string">"GET"</span>, <span class="string">"/try/ajax/json_demo_array.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/try/try.php?filename=tryjson_ajax_array" target="_blank" rel="noopener">完整例子</a></p>
+<hr>
+<h2 id="JSON-不能存储-Date-对象的解决方法"><a href="#JSON-不能存储-Date-对象的解决方法" class="headerlink" title="JSON 不能存储 Date 对象的解决方法"></a>JSON 不能存储 Date 对象的解决方法</h2><p>JSON <strong>不能存储 Date 对象</strong>。<br>如果你需要存储 Date 对象，<strong>需要将其转换为字符串</strong>,之后<strong>再将字符串转换为 Date 对象</strong>。</p>
+<p><strong>例子</strong>（<a href="https://www.runoob.com/try/try.php?filename=tryjson_parse_date" target="_blank" rel="noopener">完整例子点击这里</a>）：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var text = '&#123; <span class="string">"name"</span>:<span class="string">"Runoob"</span>, <span class="string">"initDate"</span>:<span class="string">"2013-12-14"</span>, <span class="string">"site"</span>:<span class="string">"www.runoob.com"</span>&#125;';</span><br><span class="line">var obj = <span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(text);<span class="comment">//将其转换为字符串</span></span><br><span class="line">obj.initDate = <span class="keyword">new</span> <span class="constructor">Date(<span class="params">obj</span>.<span class="params">initDate</span>)</span>;<span class="comment">//再将字符串转换为 Date 对象</span></span><br><span class="line"> </span><br><span class="line">document.get<span class="constructor">ElementById(<span class="string">"demo"</span>)</span>.innerHTML = obj.name + <span class="string">"创建日期: "</span> + obj.initDate;<span class="comment">//Runoob创建日期: Sat Dec 14 2013 08:00:00 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以启用 <strong>JSON.parse 的第二个参数 reviver</strong>，一个转换结果的函数，<strong>对象的每个成员调用此函数</strong>：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var text = '&#123; <span class="string">"name"</span>:<span class="string">"Runoob"</span>, <span class="string">"initDate"</span>:<span class="string">"2013-12-14"</span>, <span class="string">"site"</span>:<span class="string">"www.runoob.com"</span>&#125;';</span><br><span class="line"><span class="comment">//将其转换为字符串</span></span><br><span class="line">var obj = <span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(text, <span class="keyword">function</span> (key, value) &#123;</span><br><span class="line"><span class="comment">//每个对象都走一遍，遇到initDate时将字符串值转换为 Date 对象</span></span><br><span class="line">    <span class="keyword">if</span> (key<span class="operator"> == </span><span class="string">"initDate"</span>) &#123;</span><br><span class="line">        return <span class="keyword">new</span> <span class="constructor">Date(<span class="params">value</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        return value;</span><br><span class="line">&#125;&#125;);</span><br><span class="line"> </span><br><span class="line">document.get<span class="constructor">ElementById(<span class="string">"demo"</span>)</span>.innerHTML = obj.name + <span class="string">"创建日期："</span> + obj.initDate;</span><br></pre></td></tr></table></figure>
+
+<p>（<a href="https://www.runoob.com/try/try.php?filename=tryjson_parse_reviver" target="_blank" rel="noopener">完整例子点击这里</a>）</p>
+<hr>
+<h2 id="JSON解析函数的方法"><a href="#JSON解析函数的方法" class="headerlink" title="JSON解析函数的方法"></a>JSON解析函数的方法</h2><p>首先，<strong>不建议在 JSON 中使用函数</strong>。<strong>JSON 不允许包含函数</strong>！！<br>但你<strong>可以将函数作为字符串存储，之后再将字符串转换为函数</strong>：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">text</span> = '&#123; <span class="string">"name"</span><span class="symbol">:</span><span class="string">"Runoob"</span>, <span class="string">"alexa"</span><span class="symbol">:</span><span class="string">"function () &#123;return 10000;&#125;"</span>, <span class="string">"site"</span><span class="symbol">:</span><span class="string">"www.runoob.com"</span>&#125;';</span><br><span class="line"><span class="built_in">var</span> obj = JSON.parse(<span class="built_in">text</span>);</span><br><span class="line">obj.alexa = eval(<span class="string">"("</span> + obj.alexa + <span class="string">")"</span>);</span><br><span class="line"> </span><br><span class="line">document.getElementById(<span class="string">"demo"</span>).innerHTML = obj.name + <span class="string">" Alexa 排名："</span> + obj.alexa();</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/try/try.php?filename=tryjson_parse_function" target="_blank" rel="noopener">完整例子</a></p>
+<hr>
+<h1 id="stringify-将-JS-对象转换为JSON字符串-向服务器发送数据"><a href="#stringify-将-JS-对象转换为JSON字符串-向服务器发送数据" class="headerlink" title="stringify()将 JS 对象转换为JSON字符串(向服务器发送数据)"></a>stringify()将 JS 对象转换为JSON字符串(向服务器发送数据)</h1><p>JSON 通常用于与服务端交换数据。<br>在<strong>向服务器发送数据时一般是JSON字符串</strong>。<br>我们可以使用<code>JSON.stringify()</code> 方法<strong>将 JavaScript 对象转换为JSON字符串</strong>。</p>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">JSON</span><span class="selector-class">.stringify</span>(<span class="selector-tag">value</span><span class="selector-attr">[, replacer[, space]</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>value</strong>:<br><strong>必需， 要转换的 JavaScript 值（通常为对象或数组）</strong>。</p>
+<p><strong>replacer</strong>:<br><strong>可选</strong>。用于转换结果的函数或数组。<br>如果 replacer 为函数，则 JSON.stringify 将调用该函数，并传入每个成员的键和值。使用返回值而不是原始值。如果此函数返回 undefined，则排除成员。根对象的键是一个空字符串：””。<br>如果 replacer 是一个数组，则仅转换该数组中具有键值的成员。成员的转换顺序与键在数组中的顺序一样。当 value 参数也为数组时，将忽略 replacer 数组。</p>
+<p><strong>space</strong>:<br><strong>可选</strong>，文本添加缩进、空格和换行符，如果 space 是一个数字，则返回值文本在每个级别缩进指定数目的空格，如果 space 大于 10，则文本缩进 10 个空格。space 也可以使用非数字，如：<code>\t</code>。</p>
+<hr>
+<h2 id="JavaScript-对象转换为JSON字符串"><a href="#JavaScript-对象转换为JSON字符串" class="headerlink" title="JavaScript 对象转换为JSON字符串"></a>JavaScript 对象转换为JSON字符串</h2><p>例如我们向服务器发送以下JS对象数据：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; <span class="string">name:</span><span class="string">"hlz"</span>, <span class="string">alexa:</span><span class="number">10000</span>, <span class="string">site:</span><span class="string">"www.baidu.com"</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>JSON.stringify()</code> 方法<strong>处理以上JS对象，将其转换为字符串</strong>：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var myJSON</span> = JSON.stringify(obj);</span><br></pre></td></tr></table></figure>
+
+<p><strong>myJSON 为JSON字符串</strong>。</p>
+<p><a href="https://www.runoob.com/try/try.php?filename=tryjson_stringify1" target="_blank" rel="noopener">完整例子</a>:</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> obj = &#123; <span class="built_in">na</span><span class="symbol">me:</span><span class="string">"hlz"</span>, ale<span class="symbol">xa:10000</span>, si<span class="symbol">te:</span><span class="string">"www.baidu.com"</span>&#125;;</span><br><span class="line"><span class="built_in">var</span> myJSON = JSON.stringify(obj);</span><br><span class="line">document.getElementById(<span class="string">"demo"</span>).innerHTML = myJSON;//&#123;<span class="string">"name"</span><span class="symbol">:</span><span class="string">"hlz"</span>,<span class="string">"alexa"</span><span class="symbol">:10000</span>,<span class="string">"site"</span><span class="symbol">:</span><span class="string">"www.baidu.com"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="JavaScript-数组转换为-JSON-字符串"><a href="#JavaScript-数组转换为-JSON-字符串" class="headerlink" title="JavaScript 数组转换为 JSON 字符串"></a>JavaScript 数组转换为 JSON 字符串</h2><p>也可以将 JavaScript 数组转换为 JSON 字符串,myJSON 为JSON字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [ <span class="string">"Google"</span>, <span class="string">"Runoob"</span>, <span class="string">"Taobao"</span>, <span class="string">"Facebook"</span> ];</span><br><span class="line"><span class="keyword">var</span> myJSON = <span class="built_in">JSON</span>.stringify(arr);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = myJSON;</span><br></pre></td></tr></table></figure>
+
+<p>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_stringify2" target="_blank" rel="noopener">完整例子</a>)</p>
+<hr>
+<h2 id="JSON-不能存储-Date-对象的解决方法-1"><a href="#JSON-不能存储-Date-对象的解决方法-1" class="headerlink" title="JSON 不能存储 Date 对象的解决方法"></a>JSON 不能存储 Date 对象的解决方法</h2><p><strong>JSON 不能存储 Date 对象</strong>。<br>可以使用 <code>JSON.stringify()</code> 将所有日期转换为JSON字符串myJSON：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; <span class="type">name</span>:"Runoob", initDate:<span class="built_in">new</span> <span class="type">Date</span>(), site:"www.runoob.com"&#125;;//obj是一个JS对象</span><br><span class="line">var myJSON = <span class="type">JSON</span>.stringify(obj);//将所有日期转换为<span class="type">JSON</span>字符串myJSON</span><br><span class="line">document.getElementById("demo").innerHTML = myJSON;//&#123;"name":"Runoob","initDate":"2020-01-20T14:04:12.438Z","site":"www.runoob.com"&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后可以再将JSON字符串myJSON转换为 Date 对象。（<a href="https://www.runoob.com/try/try.php?filename=tryjson_stringify_date" target="_blank" rel="noopener">完整例子</a>）。</p>
+<hr>
+<h2 id="解析函数的方法"><a href="#解析函数的方法" class="headerlink" title="解析函数的方法"></a>解析函数的方法</h2><p><strong>JSON 不允许包含函数,不建议在 JSON 中使用函数。</strong><br><strong><code>JSON.stringify()</code> 会删除 JavaScript 对象的函数，包括 key 和 value</strong>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_stringify_function" target="_blank" rel="noopener">完整例子</a>):</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; name:<span class="string">"Runoob"</span>, alexa:<span class="keyword">function</span> <span class="title"></span>() &#123;<span class="keyword">return</span> <span class="type">10000</span>;&#125;, site:<span class="string">"www.runoob.com"</span>&#125;;</span><br><span class="line">var myJSON = JSON.stringify(obj);</span><br><span class="line"> </span><br><span class="line">document.getElementById(<span class="string">"demo"</span>).innerHTML = myJSON;//&#123;<span class="string">"name"</span>:<span class="string">"Runoob"</span>,<span class="string">"site"</span>:<span class="string">"www.runoob.com"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以<strong>在执行 <code>JSON.stringify()</code> 函数前将函数转换为字符串来避免以上问题的发生</strong>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_stringify_function_tostring" target="_blank" rel="noopener">完整例子</a>)：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; name:<span class="string">"Runoob"</span>, alexa:<span class="keyword">function</span> <span class="title"></span>() &#123;<span class="keyword">return</span> <span class="type">10000</span>;&#125;, site:<span class="string">"www.runoob.com"</span>&#125;;</span><br><span class="line">obj.alexa = obj.alexa.toString();</span><br><span class="line">var myJSON = JSON.stringify(obj);</span><br><span class="line"> </span><br><span class="line">document.getElementById(<span class="string">"demo"</span>).innerHTML = myJSON;//&#123;<span class="string">"name"</span>:<span class="string">"Runoob"</span>,<span class="string">"alexa"</span>:<span class="string">"function () &#123;return 10000;&#125;"</span>,<span class="string">"site"</span>:<span class="string">"www.runoob.com"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JSON学习/">JSON学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSON/">JSON</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/20/JS_Date对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS Date 对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#parse-将JSON字符串转换为-JS-对象（接受服务器数据）"><span class="nav-number">1.</span> <span class="nav-text">parse()将JSON字符串转换为 JS 对象（接受服务器数据）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从服务端接收-JSON-数据"><span class="nav-number">1.3.</span> <span class="nav-text">从服务端接收 JSON 数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从服务端接收数组的-JSON-数据"><span class="nav-number">1.4.</span> <span class="nav-text">从服务端接收数组的 JSON 数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-不能存储-Date-对象的解决方法"><span class="nav-number">1.5.</span> <span class="nav-text">JSON 不能存储 Date 对象的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON解析函数的方法"><span class="nav-number">1.6.</span> <span class="nav-text">JSON解析函数的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stringify-将-JS-对象转换为JSON字符串-向服务器发送数据"><span class="nav-number">2.</span> <span class="nav-text">stringify()将 JS 对象转换为JSON字符串(向服务器发送数据)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法-1"><span class="nav-number">2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-对象转换为JSON字符串"><span class="nav-number">2.2.</span> <span class="nav-text">JavaScript 对象转换为JSON字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-数组转换为-JSON-字符串"><span class="nav-number">2.3.</span> <span class="nav-text">JavaScript 数组转换为 JSON 字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-不能存储-Date-对象的解决方法-1"><span class="nav-number">2.4.</span> <span class="nav-text">JSON 不能存储 Date 对象的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析函数的方法"><span class="nav-number">2.5.</span> <span class="nav-text">解析函数的方法</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
