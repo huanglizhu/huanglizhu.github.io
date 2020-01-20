@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JSON基础 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="什么是 JSON JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation） JSON 是存储和交换文本信息的语法。">
+<meta name="keywords" content="JSON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSON基础">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/JSON基础/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="什么是 JSON JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation） JSON 是存储和交换文本信息的语法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gb334yxjrsj30vb0g3q4j.jpg">
+<meta property="og:updated_time" content="2020-01-20T11:07:04.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON基础">
+<meta name="twitter:description" content="什么是 JSON JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation） JSON 是存储和交换文本信息的语法。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gb334yxjrsj30vb0g3q4j.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JSON基础" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JSON基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/20/JSON基础/" class="article-date">
+	  <time datetime="2020-01-20T11:05:55.000Z" itemprop="datePublished">一月 20, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JSON学习/">JSON学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是-JSON"><a href="#什么是-JSON" class="headerlink" title="什么是 JSON"></a>什么是 JSON</h1><ul>
+<li>JSON 指的是 <strong>JavaScript 对象表示法</strong>（JavaScript Object Notation）</li>
+<li>JSON 是<strong>存储和交换文本信息的语法</strong>。<a id="more"></a></li>
+<li>JSON 类似 XML，但它比 XML 更小、更快、更易解析。</li>
+<li><strong>JSON 独立于语言：JSON 使用 Javascript语法来描述数据对象</strong>，但是 JSON 仍然独立于语言和平台。JSON 解析器和 JSON 库支持许多不同的编程语言。 目前<strong>非常多的动态（PHP，JSP，.NET）编程语言都支持JSON</strong>。</li>
+<li>JSON 文件的<strong>文件类型是 “.json”</strong>。JSON 文本的 MIME 类型是 <strong>“application/json”</strong>。(http返回的请求中设置返回格式为json就实用了<code>&quot;Content-type&quot;:&quot;application/json&quot;</code>)</li>
+</ul>
+<hr>
+<h1 id="JSON-与-XML-的异同"><a href="#JSON-与-XML-的异同" class="headerlink" title="JSON 与 XML 的异同"></a>JSON 与 XML 的异同</h1><p>JSON 和 XML 都用于<strong>接收 web 服务端的数据</strong>。</p>
+<p><strong>JSON 与 XML 的相同之处</strong>：</p>
+<ul>
+<li>JSON 和 XML 数据具有“自我描述性”，易于理解（<strong>人类可读</strong>）</li>
+<li>JSON 和 XML 数据具有<strong>层级结构</strong>（值中存在值）</li>
+<li>JSON 和 XML 数据可通过 JavaScript 进行解析，可以<strong>被大多数编程语言使用</strong></li>
+<li>JSON 和 XML 数据数据可使用 AJAX 进行传输</li>
+</ul>
+<p><strong>JSON 相比 XML 的不同之处</strong>：</p>
+<ul>
+<li>JSON <strong>不需要结束标签</strong></li>
+<li>JSON <strong>更短</strong></li>
+<li>JSON <strong>读写的速度更快</strong></li>
+<li>JSON 能够使用内建的 <code>JavaScript eval()</code>方法进行解析</li>
+<li>JSON <strong>可以使用数组</strong></li>
+<li>JSON 不使用保留字</li>
+</ul>
+<p><strong>最大的不同</strong>：<br>XML 需要使用 XML 解析器来解析，JSON 可以使用标准的 JavaScript 函数来解析：<br><code>JSON.parse()</code>: 将一个 JSON 字符串转换为 JavaScript 对象。<br><code>JSON.stringify()</code>: 于将 JavaScript 值转换为 JSON 字符串。</p>
+<hr>
+<h1 id="为什么使用-JSON"><a href="#为什么使用-JSON" class="headerlink" title="为什么使用 JSON"></a>为什么使用 JSON</h1><p>XML 比 JSON 更难解析。JSON 可以直接使用现有的 JavaScript 对象解析。对于 AJAX 应用程序来说，JSON 比 XML 更快更易使用：</p>
+<p><strong>使用 XML 需要</strong>:</p>
+<ol>
+<li>读取 XML 文档</li>
+<li>使用 XML DOM 来循环遍历文档</li>
+<li>读取值并存储在变量中</li>
+</ol>
+<p><strong>使用 JSON</strong>：</p>
+<ol>
+<li>读取 JSON 字符串</li>
+<li><code>JSON.Parse()</code> 解析 JSON 字符串</li>
+</ol>
+<hr>
+<h1 id="JSON-语法"><a href="#JSON-语法" class="headerlink" title="JSON 语法"></a>JSON 语法</h1><p>JSON 语法是 JavaScript 语法的子集。</p>
+<ul>
+<li>数据在<strong>名称/值对</strong>中</li>
+<li>数据由<strong>逗号</strong>分隔</li>
+<li><strong>花括号</strong>保存<strong>对象</strong></li>
+<li><strong>方括号</strong>保存<strong>数组</strong></li>
+</ul>
+<h2 id="JSON-书写格式"><a href="#JSON-书写格式" class="headerlink" title="JSON 书写格式"></a>JSON 书写格式</h2><p>JSON 数据的<strong>书写格式</strong>是：<strong>名称/值对</strong>，也就是<strong><code>&quot;名称&quot;:值</code></strong><br>比如：<code>&quot;name&quot; : &quot;我就是你想放进去的值呀&quot;</code>等价于这条 JavaScript 语句：<code>name = &quot;我就是你想放进去的值呀&quot;</code></p>
+<h2 id="JSON-值"><a href="#JSON-值" class="headerlink" title="JSON 值"></a>JSON 值</h2><p>JSON 值可以是：<br><strong>数字</strong>（整数或浮点数）:<strong><code>&quot;age&quot;:233</code></strong><br><strong>字符串</strong>（在双引号中）:<strong><code>&quot;name&quot;:&quot;aaaaaa&quot;</code></strong><br><strong>逻辑值</strong>（true 或 false）:<strong><code>&quot;flag&quot;:true</code></strong><br><strong>数组</strong>（在中括号中）:例子在下面<br><strong>对象</strong>（在大括号中）:例子在下面<br><strong>null</strong>:<strong><code>&quot;name&quot;:null</code></strong></p>
+<hr>
+<h1 id="JSON-对象"><a href="#JSON-对象" class="headerlink" title="JSON 对象"></a>JSON 对象</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>JSON 对象放在<strong>大括号<code>{}</code>中</strong>。<br>对象可以包含多个 <strong>key/value（键/值）对</strong>，key 和 value 中<strong>使用冒号<code>:</code>分割</strong>。<br><strong>key 必须是字符串，value 可以是合法的 JSON 数据类型</strong>（字符串, 数字, 对象, 数组, 布尔值或 null）。<br>多个 key/value对 之间<strong>使用逗号<code>,</code>分割</strong>。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"菜鸟教程"</span> , </span><br><span class="line">    <span class="attr">"url"</span>:<span class="string">"www.runoob.com"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与之<strong>等价的 JavaScript 语句</strong>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name</span> = <span class="string">"菜鸟教程"</span></span><br><span class="line"><span class="attr">url</span> = <span class="string">"www.runoob.com"</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="访问对象值-或"><a href="#访问对象值-或" class="headerlink" title="访问对象值(.或[])"></a>访问对象值(<code>.</code>或<code>[]</code>)</h2><p>可以<strong>使用点号<code>.</code></strong>来访问对象的值：</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keywords">var</span> myObj, <span class="symbol">x</span>;</span><br><span class="line">myObj = &#123; <span class="string">"name"</span>:<span class="string">"hlz"</span>, <span class="string">"alexa"</span>:<span class="number">10000</span>, <span class="string">"site"</span>:null &#125;;</span><br><span class="line"><span class="symbol">x</span> = myObj.name;<span class="comment">//hlz</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以<strong>使用中括号<code>[]</code></strong>来访问对象的值(<strong>记住带上双引号</strong>)：</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keywords">var</span> myObj, <span class="symbol">x</span>;</span><br><span class="line">myObj = &#123; <span class="string">"name"</span>:<span class="string">"hlz"</span>, <span class="string">"alexa"</span>:<span class="number">10000</span>, <span class="string">"site"</span>:null &#125;;</span><br><span class="line"><span class="symbol">x</span> = myObj[<span class="string">"name"</span>];<span class="comment">//hlz</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="循环对象的属性与值-for-in"><a href="#循环对象的属性与值-for-in" class="headerlink" title="循环对象的属性与值( for-in )"></a>循环对象的属性与值( <code>for-in</code> )</h2><p><strong>注意</strong>：在 <code>for-in</code> 循环对象的属性时，<strong>不能使用<code>.</code>来访问属性的值</strong>（循环不到）！需要使用<strong>中括号<code>[]</code>来访问属性的值</strong>。</p>
+<p>使用 <code>for-in</code> 来循环对象的<strong>属性</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> myObj = &#123; <span class="string">"name"</span>:<span class="string">"runoob"</span>, <span class="string">"alexa"</span>:<span class="number">10000</span>, <span class="string">"site"</span>:<span class="literal">null</span> &#125;;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">for</span> (x <span class="keyword">in</span> myObj) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML += x + <span class="string">"&lt;br&gt;"</span>;<span class="comment">//name alexa site</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>for-in</code> 循环对象的属性时，使用<strong>中括号<code>[]</code>来访问属性的值</strong>(注意<strong>不能使用<code>.</code>来访问属性的值</strong>)：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> myObj = &#123; <span class="string">"name"</span>:<span class="string">"runoob"</span>, <span class="string">"alexa"</span>:<span class="number">10000</span>, <span class="string">"site"</span>:<span class="literal">null</span> &#125;;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">for</span> (x <span class="keyword">in</span> myObj) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML += myObj[x] + <span class="string">"&lt;br&gt;"</span>;<span class="comment">//runoob 10000 null</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="嵌套-JSON-对象"><a href="#嵌套-JSON-对象" class="headerlink" title="嵌套 JSON 对象"></a>嵌套 JSON 对象</h2><p>JSON 对象中可以包含另外一个 JSON 对象：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myObj = &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"hlz"</span>,</span><br><span class="line">    <span class="string">"alexa"</span>:10000,</span><br><span class="line">    <span class="string">"sites"</span>: &#123;</span><br><span class="line">        <span class="string">"site1"</span>:<span class="string">"www.baidu.com"</span>,</span><br><span class="line">        <span class="string">"site2"</span>:<span class="string">"m.baidu.com"</span>,</span><br><span class="line">        <span class="string">"site3"</span>:<span class="string">"c.baidu.com"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以<strong>使用点号<code>.</code>或者中括号<code>[]</code>来访问嵌套的 JSON 对象</strong>:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x</span> = myObj.sites.site1<span class="comment">;//www.baidu.com</span></span><br><span class="line"><span class="attr">x</span> = myObj.sites[<span class="string">"site1"</span>]<span class="comment">;//www.baidu.com</span></span><br><span class="line"><span class="attr">x</span> = myObj[<span class="string">"sites"</span>][<span class="string">"site1"</span>]<span class="comment">;//www.baidu.com</span></span><br><span class="line"><span class="attr">x</span> = myObj[<span class="string">"sites"</span>].site1<span class="comment">;//www.baidu.com</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/try/try.php?filename=tryjson_object_nested" target="_blank" rel="noopener">实际运行起来的例子</a></p>
+<hr>
+<h2 id="修改对象的值-或"><a href="#修改对象的值-或" class="headerlink" title="修改对象的值(.或[])"></a>修改对象的值(<code>.</code>或<code>[]</code>)</h2><p>使用<strong>点号<code>.</code></strong>来修改 JSON 对象的值,比如修改myObj对象中的sites对象的site1属性值：<code>myObj.sites.site1 = &quot;www.google.com&quot;;</code>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_object_modify" target="_blank" rel="noopener">例子</a>)<br>可以使用<strong>中括号<code>[]</code></strong>来修改 JSON 对象的值：<code>myObj.sites[&quot;site1&quot;] = &quot;www.google.com&quot;;</code>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_object_modify_bracket" target="_blank" rel="noopener">例子</a>)<br>(至于访问嵌套对象的值的多种方法可以看上面“嵌套 JSON 对象”)</p>
+<hr>
+<h2 id="删除对象属性-delete-关键字"><a href="#删除对象属性-delete-关键字" class="headerlink" title="删除对象属性(delete 关键字)"></a>删除对象属性(<code>delete</code> 关键字)</h2><p>可以使用 <strong><code>delete</code> 关键字</strong>来删除 JSON 对象的属性。<br>比如删除myObj对象中的sites对象的site1属性值（不同的调用属性值方法都是可以的）：<br><code>delete myObj.sites.site1;</code>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_object_delete" target="_blank" rel="noopener">例子</a>)或者<code>delete myObj.sites[&quot;site1&quot;]</code>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_object_delete_bracket" target="_blank" rel="noopener">例子</a>)</p>
+<hr>
+<h1 id="JSON-数组"><a href="#JSON-数组" class="headerlink" title="JSON 数组"></a>JSON 数组</h1><h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><p>JSON 数组放在<strong>中括号</strong>中，数组值（数组元素）必须是合法的 JSON 数据类型（字符串, 数字, <strong>对象</strong>, 数组, 布尔值或 null）。<br>数组元素之间使用<strong>逗号分隔</strong>。</p>
+<p>JavaScript 中，数组值可以是以上的 JSON 数据类型，也可以是 JavaScript 的表达式，包括函数，日期，及 undefined。</p>
+<p><strong>例子</strong>：<br>对象属性的值可以是一个数组：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"name"</span>:<span class="string">"网站"</span>,</span><br><span class="line"><span class="attr">"num"</span>:<span class="number">3</span>,</span><br><span class="line"><span class="attr">"sites"</span>:[ <span class="string">"Google"</span>, <span class="string">"Runoob"</span>, <span class="string">"Taobao"</span> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用索引值来访问数组(<a href="https://www.runoob.com/try/try.php?filename=tryjson_array_access" target="_blank" rel="noopener">完整例子</a>)：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x</span> = myObj.sites[<span class="number">0</span>]<span class="comment">;//Google</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数组元素为对象的数组例子</strong>：<br>JSON 数组放在<strong>中括号</strong>中，数组<strong>可包含多个对象</strong>,数据由<strong>逗号分隔</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"sites"</span>: [</span><br><span class="line">        &#123; <span class="attr">"name"</span>:<span class="string">"菜鸟教程"</span> , <span class="attr">"url"</span>:<span class="string">"www.runoob.com"</span> &#125;, </span><br><span class="line">        &#123; <span class="attr">"name"</span>:<span class="string">"google"</span> , <span class="attr">"url"</span>:<span class="string">"www.google.com"</span> &#125;, </span><br><span class="line">        &#123; <span class="attr">"name"</span>:<span class="string">"微博"</span> , <span class="attr">"url"</span>:<span class="string">"www.weibo.com"</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，<strong>对象 “sites”是包含三个对象的数组,每个对象代表一条关于某个网站（name、url）的记录。</strong></p>
+<hr>
+<h2 id="循环数组（for-in或for-循环）"><a href="#循环数组（for-in或for-循环）" class="headerlink" title="循环数组（for-in或for 循环）"></a>循环数组（<code>for-in</code>或<code>for 循环</code>）</h2><p>可以使用 <code>for-in</code> 来访问数组(<a href="https://www.runoob.com/try/try.php?filename=tryjson_array_loop_in" target="_blank" rel="noopener">例子</a>)：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">i</span> in myObj.sites) &#123;</span><br><span class="line">    x += myObj.sites[<span class="built_in">i</span>] + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 <code>for 循环</code>(<a href="https://www.runoob.com/try/try.php?filename=tryjson_array_loop" target="_blank" rel="noopener">例子</a>)：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; myObj.sites.<span class="built_in">length</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">    x += myObj.sites[<span class="built_in">i</span>] + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="嵌套-JSON-对象中的数组"><a href="#嵌套-JSON-对象中的数组" class="headerlink" title="嵌套 JSON 对象中的数组"></a>嵌套 JSON 对象中的数组</h2><p>JSON 对象中<strong>数组可以包含另外一个数组，或者另外一个 JSON 对象</strong>,但是记住了：JSON值可以是任意符合要求的（可以是另外一个数组/对象），但是<strong>JSON名称必须是字符串</strong>！</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myObj = &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"网站"</span>,</span><br><span class="line">    <span class="string">"num"</span>:<span class="number">3</span>,</span><br><span class="line">    <span class="string">"sites"</span>: [</span><br><span class="line">        &#123; <span class="string">"name"</span>:<span class="string">"Google"</span>, <span class="string">"info"</span>:[ <span class="string">"Android"</span>, <span class="string">"Google 搜索"</span>, <span class="string">"Google 翻译"</span> ] &#125;,</span><br><span class="line">        &#123; <span class="string">"name"</span>:<span class="string">"Runoob"</span>, <span class="string">"info"</span>:[ <span class="string">"菜鸟教程"</span>, <span class="string">"菜鸟工具"</span>, <span class="string">"菜鸟微信"</span> ] &#125;,</span><br><span class="line">        &#123; <span class="string">"name"</span>:<span class="string">"Taobao"</span>, <span class="string">"info"</span>:[ <span class="string">"淘宝"</span>, <span class="string">"网购"</span> ] &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <strong><code>for-in</code> 来循环访问每个数组</strong>：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">i</span> in myObj.sites) &#123;</span><br><span class="line">    x += <span class="string">"&lt;h1&gt;"</span> + myObj.sites[<span class="built_in">i</span>].name + <span class="string">"&lt;/h1&gt;"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">j</span> in myObj.sites[<span class="built_in">i</span>].info) &#123;</span><br><span class="line">        x += myObj.sites[<span class="built_in">i</span>].info[<span class="built_in">j</span>] + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/try/try.php?filename=tryjson_array_nested" target="_blank" rel="noopener">完整例子</a></p>
+<hr>
+<h2 id="修改数组值"><a href="#修改数组值" class="headerlink" title="修改数组值"></a>修改数组值</h2><p>可以使用索引值来修改数组值(<a href="https://www.runoob.com/try/try.php?filename=tryjson_array_modify" target="_blank" rel="noopener">完整例子</a>)：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">myObj.sites[1]</span> = <span class="string">"Github"</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="删除数组元素"><a href="#删除数组元素" class="headerlink" title="删除数组元素"></a>删除数组元素</h2><p>可以使用 <strong>delete 关键字</strong>来删除数组元素(<a href="https://www.runoob.com/json/js-json-arrays.html" target="_blank" rel="noopener">完整例子</a>)：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">delete</span> <span class="selector-tag">myObj</span><span class="selector-class">.sites</span><span class="selector-attr">[1]</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="JSON-使用-JavaScript-语法"><a href="#JSON-使用-JavaScript-语法" class="headerlink" title="JSON 使用 JavaScript 语法"></a>JSON 使用 JavaScript 语法</h1><p>JSON 文本格式<strong>在语法上</strong>与创建 JavaScript 对象的代码<strong>相同</strong>。<br>由于这种相似性，<strong>无需解析器</strong>，JavaScript 程序能够使用<strong>内建的 eval() 函数</strong>，用 JSON 数据来生成原生的 JavaScript 对象。<br>但<strong>使用 JSON 解析器</strong>将 JSON 转换为 JavaScript 对象是<strong>更安全</strong>的做法。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gb334yxjrsj30vb0g3q4j.jpg" alt="例子"><br>在下面的章节，将学会<strong>如何把 JSON 文本转换为 JavaScript 对象</strong>。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JSON学习/">JSON学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSON/">JSON</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/19/Node.js开发博客项目之接口(2)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">开发博客项目之接口(2)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-JSON"><span class="nav-number">1.</span> <span class="nav-text">什么是 JSON</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-与-XML-的异同"><span class="nav-number">2.</span> <span class="nav-text">JSON 与 XML 的异同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用-JSON"><span class="nav-number">3.</span> <span class="nav-text">为什么使用 JSON</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-语法"><span class="nav-number">4.</span> <span class="nav-text">JSON 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-书写格式"><span class="nav-number">4.1.</span> <span class="nav-text">JSON 书写格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-值"><span class="nav-number">4.2.</span> <span class="nav-text">JSON 值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-对象"><span class="nav-number">5.</span> <span class="nav-text">JSON 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">5.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问对象值-或"><span class="nav-number">5.2.</span> <span class="nav-text">访问对象值(.或[])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环对象的属性与值-for-in"><span class="nav-number">5.3.</span> <span class="nav-text">循环对象的属性与值( for-in )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套-JSON-对象"><span class="nav-number">5.4.</span> <span class="nav-text">嵌套 JSON 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改对象的值-或"><span class="nav-number">5.5.</span> <span class="nav-text">修改对象的值(.或[])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除对象属性-delete-关键字"><span class="nav-number">5.6.</span> <span class="nav-text">删除对象属性(delete 关键字)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-数组"><span class="nav-number">6.</span> <span class="nav-text">JSON 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法-1"><span class="nav-number">6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环数组（for-in或for-循环）"><span class="nav-number">6.2.</span> <span class="nav-text">循环数组（for-in或for 循环）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套-JSON-对象中的数组"><span class="nav-number">6.3.</span> <span class="nav-text">嵌套 JSON 对象中的数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数组值"><span class="nav-number">6.4.</span> <span class="nav-text">修改数组值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数组元素"><span class="nav-number">6.5.</span> <span class="nav-text">删除数组元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-使用-JavaScript-语法"><span class="nav-number">7.</span> <span class="nav-text">JSON 使用 JavaScript 语法</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
