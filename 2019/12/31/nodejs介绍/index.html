@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="ES，js和nodejs区别 ES是语法规范，没有api只靠它自己什么也做不了（ES文档看阮一峰的书） js是ES+web API,可以完成浏览器端操作   nodejs是ES+node API，可以完成server端操作nodejs的API文档 在nodejs中尽量使用ES6的语法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-01T07:53:51.876Z">
+<meta property="og:updated_time" content="2020-01-22T05:07:27.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs介绍">
 <meta name="twitter:description" content="ES，js和nodejs区别 ES是语法规范，没有api只靠它自己什么也做不了（ES文档看阮一峰的书） js是ES+web API,可以完成浏览器端操作   nodejs是ES+node API，可以完成server端操作nodejs的API文档 在nodejs中尽量使用ES6的语法。">
@@ -206,6 +206,8 @@
 <h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>server端要随时准备接收各种恶意攻击，前端则少很多。<br>如：越权操作（比如用户想删除别的用户的博客），数据库攻击等。<br>后面会讲解<strong>登录验证，预防XSS攻击和sql注入（XSS攻击前端也有一部分责任）</strong></p>
 <h2 id="集群和服务拆分"><a href="#集群和服务拆分" class="headerlink" title="集群和服务拆分"></a>集群和服务拆分</h2><p>产品发展速度快，流量可能会迅速增加。server端需要考虑如何通过扩展机器和服务拆分来承载大流量。</p>
 <hr>
+<h1 id="module-exports-与-exports"><a href="#module-exports-与-exports" class="headerlink" title="module.exports 与 exports"></a>module.exports 与 exports</h1><p><strong>强烈建议使用<code>module.exports = xxx</code>的方式来输出模块变量，它可以应对任何情况。</strong><br>具体原因可以参考<a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023027697415616" target="_blank" rel="noopener">廖雪峰的博客</a></p>
+<hr>
 
       
     </div>
@@ -277,7 +279,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ES，js和nodejs区别"><span class="nav-number">1.</span> <span class="nav-text">ES，js和nodejs区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#commonjs模块化规范"><span class="nav-number">2.</span> <span class="nav-text">commonjs模块化规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debugge"><span class="nav-number">3.</span> <span class="nav-text">debugge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#server端和前端的区别"><span class="nav-number">4.</span> <span class="nav-text">server端和前端的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务稳定性"><span class="nav-number">4.1.</span> <span class="nav-text">服务稳定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU和内存的优化、扩展"><span class="nav-number">4.2.</span> <span class="nav-text">CPU和内存的优化、扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志记录"><span class="nav-number">4.3.</span> <span class="nav-text">日志记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">4.4.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和服务拆分"><span class="nav-number">4.5.</span> <span class="nav-text">集群和服务拆分</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ES，js和nodejs区别"><span class="nav-number">1.</span> <span class="nav-text">ES，js和nodejs区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#commonjs模块化规范"><span class="nav-number">2.</span> <span class="nav-text">commonjs模块化规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debugge"><span class="nav-number">3.</span> <span class="nav-text">debugge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#server端和前端的区别"><span class="nav-number">4.</span> <span class="nav-text">server端和前端的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务稳定性"><span class="nav-number">4.1.</span> <span class="nav-text">服务稳定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU和内存的优化、扩展"><span class="nav-number">4.2.</span> <span class="nav-text">CPU和内存的优化、扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志记录"><span class="nav-number">4.3.</span> <span class="nav-text">日志记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">4.4.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和服务拆分"><span class="nav-number">4.5.</span> <span class="nav-text">集群和服务拆分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#module-exports-与-exports"><span class="nav-number">5.</span> <span class="nav-text">module.exports 与 exports</span></a></li></ol>
     
     </div>
   </aside>
