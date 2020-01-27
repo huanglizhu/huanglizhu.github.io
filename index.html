@@ -133,52 +133,52 @@
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2020/01/22/Node.js函数引用与解构赋值/">Node.js函数引用与解构赋值</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="article-meta">
       
 	<a href="/2020/01/22/Node.js函数引用与解构赋值/" class="article-date">
-	  <time datetime="2020-01-22T09:23:19.000Z" itemprop="datePublished">一月 22, 2020</time>
+	  <time datetime="2020-01-22T09:22:48.431Z" itemprop="datePublished">一月 22, 2020</time>
 	</a>
 
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>
- 
+       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="Node-js函数引用与解构赋值"><a href="#Node-js函数引用与解构赋值" class="headerlink" title="Node.js函数引用与解构赋值"></a>Node.js函数引用与解构赋值</h1><p>标签（空格分隔）： Node.js</p>
+<hr>
+<h1 id="函数引用什么时候要使用-进行解构赋值？"><a href="#函数引用什么时候要使用-进行解构赋值？" class="headerlink" title="函数引用什么时候要使用{}进行解构赋值？"></a>函数引用什么时候要使用{}进行解构赋值？</h1><p>什么时候引用外部js文件中的函数时要使用<code>{}</code>进行解构赋值？<br>输出时使用了<code>{}</code>来包裹的在外部js文件中引用时需要使用<code>{}</code>将变量括起。（具体可看下面的事例）</p>
+<p><strong>我的理解是：输出的时候是以 对象的属性 的形式输出，那么引用时就要使用 解构赋值 的方法将这些 属性 都分解出来再赋给变量，自然就会用上 解构赋值 。而输出时就以变量形式输出的引用时就变量形式引用即可。</strong></p>
+<h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><p>在js文件顶部引用controller文件夹下blog.js文件内的getList函数时使用的是：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">const</span> &#123; <span class="variable">getList</span> &#125; = <span class="function"><span class="title">require</span>(<span class="string">"../controller/blog"</span>)</span></span><br></pre></td></tr></table></figure>
 
-          
-          <div class="entry-summary">
-          函数引用什么时候要使用{}进行解构赋值？什么时候引用外部js文件中的函数时要使用{}进行解构赋值？输出时使用了{}来包裹的在外部js文件中引用时需要使用{}将变量括起。（具体可看下面的事例）
+<p>其实相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span>  getList  = <span class="built_in">require</span>(<span class="string">"../controller/blog"</span>).getList</span><br></pre></td></tr></table></figure>
 
-        
-          <p class="article-more-link">
-            <a href="/2020/01/22/Node.js函数引用与解构赋值/#more">阅读全文</a>
-          </p>
-        </div>
+<p>之所以<strong>需要这样引用应该是输出的原因</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接下来还会有函数需要输出，所以先使用对象的方式进行返回</span></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    getList</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反观输出时采用<code>module.exports = handleBlogRouter</code>的引用时使用<code>const handleBlogRouter = require(&quot;./src/router/blog&quot;)</code>即可。</p>
+<hr>
+<h2 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h2><p>在resModel.js中输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    SuccessModel,</span><br><span class="line">    ErrorModel</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在blog.js中引用resModel.js中的SuccessModel、ErrorModel两个模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入resModel.js中的两个模块</span></span><br><span class="line"><span class="keyword">const</span>  &#123; SuccessModel, ErrorModel &#125; = <span class="built_in">require</span>(<span class="string">"../model/resModel"</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h2><p>在blog.js中输出handleBlogRouter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 不要忘记输出函数 */</span></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = handleBlogRouter</span><br></pre></td></tr></table></figure>
+
+<p>在app.js中引用handleBlogRouter路由组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用路由组件</span></span><br><span class="line"><span class="keyword">const</span> handleBlogRouter = <span class="built_in">require</span>(<span class="string">"./src/router/blog"</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+
       
     </div>
     <footer class="entry-meta entry-footer">
       
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>
-
       
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
-
       
     </footer>
     <hr class="entry-footer-hr">
@@ -788,7 +788,7 @@ JSON 是存储和交换文本信息的语法。
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 17.5px;">ES6</a> <a href="/tags/HTML/" style="font-size: 16.25px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.75px;">JS</a> <a href="/tags/JSON/" style="font-size: 11.25px;">JSON</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Node-js/" style="font-size: 13.75px;">Node.js</a> <a href="/tags/React-js/" style="font-size: 12.5px;">React.js</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hipaper/" style="font-size: 10px;">hipaper</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a>
+      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 17.14px;">ES6</a> <a href="/tags/HTML/" style="font-size: 15.71px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.57px;">JS</a> <a href="/tags/JSON/" style="font-size: 11.43px;">JSON</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Node-js/" style="font-size: 12.86px;">Node.js</a> <a href="/tags/React-js/" style="font-size: 12.86px;">React.js</a> <a href="/tags/hexo/" style="font-size: 14.29px;">hexo</a> <a href="/tags/hipaper/" style="font-size: 10px;">hipaper</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a>
     </div>
   </div>
 
@@ -797,7 +797,7 @@ JSON 是存储和交换文本信息的语法。
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li></ul>
     </div>
   </div>
 
@@ -828,7 +828,7 @@ JSON 是存储和交换文本信息的语法。
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2020/01/22/Node.js函数引用与解构赋值/">Node.js函数引用与解构赋值</a></h6>
+              <h6 style="margin: 0;"><a href="/2020/01/22/Node.js函数引用与解构赋值/">(no title)</a></h6>
               <span>一月 22, 2020</span>
             </div>
 
@@ -903,7 +903,7 @@ JSON 是存储和交换文本信息的语法。
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
