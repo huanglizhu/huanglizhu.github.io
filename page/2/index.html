@@ -378,7 +378,7 @@ NaN ：即非数值（ Not a Number ）是一个特殊的数值
 <!-- Table of Contents -->
 
   
-    <article id="post-React基础精讲(2)"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-React.js基础精讲"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -386,7 +386,7 @@ NaN ：即非数值（ Not a Number ）是一个特殊的数值
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/11/26/React基础精讲(2)/">React.js基础精讲（2）</a>
+      <a class="article-title" href="/2019/11/26/React.js基础精讲/">React.js基础精讲</a>
     </h1>
   
 
@@ -394,13 +394,13 @@ NaN ：即非数值（ Not a Number ）是一个特殊的数值
     
     <div class="article-meta">
       
-	<a href="/2019/11/26/React基础精讲(2)/" class="article-date">
+	<a href="/2019/11/26/React.js基础精讲/" class="article-date">
 	  <time datetime="2019-11-26T13:25:34.000Z" itemprop="datePublished">十一月 26, 2019</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
  
       
     </div>
@@ -410,11 +410,127 @@ NaN ：即非数值（ Not a Number ）是一个特殊的数值
 
           
           <div class="entry-summary">
-          JSX语法细节补充注释语句在JSX中写注释相当于写js语句，所以一样需要{}将注释括起来。第一种注释语法很好理解，但是第二种注释语法需要注意：必须换行，否则结尾的花括号会被注释以至于无法包裹注释语句。
+          react中的组件
+页面是由很多个组件构成的。
+只要让自定义的类继承React的Component，那么自定义的类就会成为组件（记得要在最后export default自定义的类）。
+在需要的js文件中使用import 组建名 from 定义组件的js文件名即可引入组件来使用。
+
+（具体请参考ES6“解构赋值”）
+
+import React,{Component} from &quot;react&quot;;等价于：
+1234567891011import React,&#123;Component&#125; from "react";//等价于import React from "react";const Component = React.Component;import &#123;Component&#125; from "react";//从ES6看相当于import Component from "react".Component;//又因为import React from "react";//所以
+
+
+组件的使用步骤
+在APP.js文件中定义组件APP并在最后使用export default App;导出（不导出的话在index.js中是无法引用的）
+在index.js文件中通过import 组件名 from 定义组件的js文件名来引入组件并使用ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));将组件APP挂载到public文件夹的index.html内的id为root的DOM节点上。
+
+注意：  
+
+在APP.js文件中需要引入import React from &#39;react&#39;;：挂载组件时使用的&lt;App /&gt;是JSX语法，如果不import React from &#39;react&#39;;就会编译失败而报错。  
+在APP.js文件中要先import ReactDOM from &#39;react-dom&#39;;才能使用ReactDOM这个第三方块的render方法来帮我们将组件挂载到DOM节点上。  
+在index.js文件中也需要引入React，这是因为render函数中的所有看起来像是html标签的代码其实都是JSX语法。
+
+
+React中最基础的JSX语法
+我们把html代码直接写在js文件里这就算是JSX语法，之前提到的APP.js文件中使用的&lt;App /&gt;也是JSX语法。
+JSX语法中，如果我们要使用自己创建的组件（例如APP.js中自定义的组件APP），必须大写字母开头，通过类似html标签的形式进行调用（&lt;App /&gt;）。
+注意：在render函数的return（）括号中写类似html代码时，只允许存在1个最外层标签，否则报错。（也就是说所有标签都必须包含在1个父元素下）
+
+
+使用React编写TodoList功能
+在index.js文件中引入TodoList.js文件TodoList组件时使用的import App from &#39;./TodoList&#39;;其实省略了.js，这是因为你不写.js的话脚手架工具会自动到目录下去找js后缀的文件（但是你在根目录下创建TodoList.js时不要忘记后缀！）
+
+在TodoList.js中1.先引入React才能使用JSX语法，引入{ Component }才能使我们自定义的组件继承Component：
+1import React, &#123; Component &#125; from 'react';/* 快捷键imrc */
+
+2.自定义的组件一定要继承Component，通过render函数返回组件显示的内容，将组件返回的内容写在return（）内（注意是小括号！）：
+1234567class TodoList extends Component&#123;    render()&#123;        return(                    )    &#125;&#125;
+
+3.在最后必须使用export default TodoList;导出组件（不导出的话组件在外部是无法引用的）
+1export default TodoList;
+
+4.对于render函数来说，4个空格一个缩进太大了，我们可以将它修改为2个空格一个缩进。（修改方法如下）
+修改缩进长度
+5.不要忘记在render函数的return（）括号中写类似html代码时，只允许存在1个最外层标签，否则报错。（也就是说所有标签都必须包含在1个父元素下）但很多时候我们并不希望他们有父元素，此时可以使用React16提供的占位符Fragment代替父元素标签。记得先引入Fragment:
+1import React, &#123; Component,Fragment &#125; from 'react';
+
+然后可以使用&lt;Fragment&gt;代替&lt;div&gt;作为父元素使用，当你在页面F12时可以发现子元素全部都直接挂靠在了我们指定的index.html的root节点上：
+1234567891011121314151617181920import React, &#123; Component,Fragment &#125; from 'react';/* 快捷键imrc */class TodoList extends Component &#123;  render() &#123;    return (      &lt;Fragment&gt;        &lt;div&gt;          &lt;input/&gt;          &lt;button&gt;提交&lt;/button&gt;        &lt;/div&gt;        &lt;ul&gt;          &lt;li&gt;学习&lt;/li&gt;          &lt;li&gt;做题&lt;/li&gt;        &lt;/ul&gt;      &lt;/Fragment&gt;    )  &#125;&#125;export default TodoList;
+
+想要实现输入框中输入的内容被提交以后显示在下方列表中则需要下面讲到的“React中的响应式设计思想和事件绑定”。
+
+React中的响应式设计思想和事件绑定
+react在英语中就是“响应、做出反应”的意思，也就是说代码中的数据发生变化时会直接反应在页面上。（也就是说当数据被修改时会被直接反应在页面上）所以在写react时我们不是去改变DOM，而是去修改数据，数据被修改以后会自己反应在DOM上。也就是说我们不需要去关注DOM方面的操作，只需要考虑数据层的操作即可。
+实现功能：在输入框中键入时页面输入框可同步变化数据内容123456789101112131415161718192021222324252627282930313233343536373839404142434445import React, &#123; Component, Fragment &#125; from 'react';/* 快捷键imrc */class TodoList extends Component &#123;  constructor(props) &#123;/* 构造函数constructor带有参数props */    super(props);/* 继承父类Component的props */    this.state = &#123;/* 所有的数据都需要保存在状态里（即this.state） */      /* inputValue用于存放输入框内容 */      inputValue: "",      /* list列表用于存放输入框下方数据 */      list: []    &#125;  &#125;  render() &#123;    return (      &lt;Fragment&gt;        &lt;div&gt;          &#123;/* 注意如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */&#125;          &lt;input value=&#123;this.state.inputValue&#125;            onChange=&#123;this.handleInputChange.bind(this)&#125;          /&gt;          &lt;button&gt;提交&lt;/button&gt;        &lt;/div&gt;        &lt;ul&gt;          &lt;li&gt;学习&lt;/li&gt;          &lt;li&gt;做题&lt;/li&gt;        &lt;/ul&gt;      &lt;/Fragment&gt;    )  &#125;  handleInputChange(e) &#123;/* 传入一个事件对象e */    /* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue */    // console.log(e.target.value);    /* 尝试将e.target.value赋给inputValue，但发现this指向有问题 */    // this.state.inputValue = e.target.value;//报错，显示state未定义，那么就是this指向有问题    // console.log(this);//打印出的是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要使用bind(this)将函数内的this指向TodoList组件以便调用存放在它的状态中的inputValue    // this.state.inputValue = e.target.value;//转换this指向以后还是报错，是因为react中改变状态中的数据需要调用组件的setState方法    this.setState(&#123;      inputValue:e.target.value    &#125;)  &#125;&#125;export default TodoList;
+
+
+
+代码分析
+constructor(props){}函数是构造函数，在js里每个类都会有一个自带的构造函数（注意带一个参数props），当我们使用这个组件时，它会在render函数之前执行。构造函数内必须有super(props); 去继承父类component的props，构造函数内所有定义的数据都需要挂靠在当前对象的状态下，也就是写在this. state={}里面。当状态中的数据发生变化时他的变化会直接反应在页面上。（所以你希望页面数据变化时可以直接修改存在状态内的数据）
+为了能在输入框中输入数据后显示在输入框下方，我们的需要在构造函数中定义两个数据：inputValue用于存储输入框的值，list设为数组，用于存储显示在下方的列表。（注意：数据是存储在this. state={}里的）
+注意：render函数中写的是JSX语法，constructor(props){}中写的是js代码，如果想在JSX中插入js的变量或者表达式则需要使用{}将其框起。（如render函数中&lt;input value={this.state.inputValue} /&gt;）
+通过&lt;input value={this.state.inputValue} /&gt;我们将状态中的inputValue赋给了输入框，此时输入框具有默认值，但如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的。
+此时我们需要不给输入框绑定事件onChange，使输入框内容发生变化时触动函数handleInputChange，通过函数handleInputChange将我们输入的值存储到状态中的inputValue上从而使页面发生变化。(注意：绑定事件处理函数的调用没有括号onChange={this.handleInputChange}，有括号就直接调用该处理函数了，没有括号则是指向处理函数地址，只有触动该事件时才调用函数)
+在绑定事件处理函数handleInputChange中，传入一个参数也就是事件对象e(语法上，事件处理函数默认只传递一个参数，也就是事件对象) ，target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，我们需要将状态中的inputValue修改为input节点的value值，从而使得输入以后页面输入框内容有所变化。
+尝试将e.target.value赋给inputValue:this.state.inputValue = e.target.value;报错，显示state未定义，说明this指向有问题，打印出this发现是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要使用bind(this)将函数内的this指向TodoList组件以便调用存放在它的状态中的inputValue。（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考“bind（）”笔记）
+转换this指向以后还是报错，是因为react中改变状态中的数据需要调用组件的setState方法：123this.setState(&#123;  inputValue:e.target.value&#125;)
+
+
+
+总结
+在js里每个类（组件）都会有一个自带的构造函数constructor(props){}，（注意带一个参数props），当我们使用这个组件时，它会在render函数之前执行。构造函数内必须有super(props); 去继承父类component的props，构造函数内所有定义的数据都需要挂靠在当前对象的状态下，也就是写在this. state={}里面。
+render函数中写的是JSX语法，constructor(props){}中写的是js代码，如果想在JSX中插入js的变量或者表达式则需要使用{}将其框起。（如render函数中&lt;input value={this.state.inputValue} /&gt;）
+原生js中内容变化时的事件绑定是onchange，而react中是onChange。在react中事件绑定时驼峰形式的！（如onClick,onChange等）
+事件绑定时要使用bind(this)进行函数作用域变更使函数中的this指向使其指向事件对象（即组件）才能调用组件的构造函数中的数据，否则函数中的this指向undefined。（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考“bind（）”笔记）
+修改this. state中的数据需要通过setState方法：想要改变this. state里面的数据直接引用this. state进行赋值是不行的，要使用this. setState({state中需要修改的属性:修改以后的属性值;})（其实就是将需要修改的属性通过对象的方式传入setState函数）
+
+
+实现 TodoList 新增及删除功能新增功能在这之前我们实现的功能是：在输入框中输入文字时我们输入的内容可以同步显示在页面上（是的，虽然这个功能看起来完全不需要我们去实现）现在要完成的功能是：点击“提交”按钮之后，输入的内容会显示在下方的列表之中并清空输入框内容。
+思路注意，我们不关心DOM层面上的操作，我们只要让state中的数据发生变化页面就会发生变化，也就是只要点击按钮后将inputValue的值放到list数组中并清空inputValue即可。
+
+点击“提交”按钮之后触发onClick事件绑定函数handleBtnClick，在函数中通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list，然后清空输入框中的值。（到这我们虽然把输入框的值翻入数组中，但数组并未设置在页面中显示）
+我们需要通过数组的map方法将原本页面写死的ul列表改成数组list中遍历读出的内容，注意给数组中的每一项一个唯一的key属性值作为标识符。
+
+注意：JSX语法中写js表达式和js变量都需要{}括起来，表达式中的变量也需要再用{}括起来！！
+JavaScript Array map()遍历数组并进行操作ES5中提供的JavaScript Array map() 方法可以遍历数组列表并按顺序对数组中的每一项执行回调函数。
+react中遍历数组时需要加key值在react中循环渲染（遍历数组）时需要给每一项增加一个唯一的key值作为标识符，否则虽不会报错但是会在控制台显示“Warning”：在这里我们暂时使用数组下标index作为key值，实际编程中这样的习惯是很不好的，但具体原因留到后面再写：
+完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import React, &#123; Component, Fragment &#125; from 'react';/* 快捷键imrc */class TodoList extends Component &#123;  constructor(props) &#123;/* 构造函数constructor带有参数props */    super(props);/* 继承父类Component的props */    this.state = &#123;/* 所有的数据都需要保存在状态里（即this.state） */      /* inputValue用于存放输入框内容 */      inputValue: "",      /* list列表用于存放输入框下方数据 */      list: []    &#125;  &#125;  render() &#123;    return (      &lt;Fragment&gt;        &lt;div&gt;          &#123;/* 注意如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */&#125;          &#123;/* 事件绑定函数handleInputChange被调用后，handleInputChange函数内的this指向会丢失（即undefined），需要使用bind()绑定handleInputChange的this指向使其指向TodoList组件的this以便在handleInputChange函数中可以获取TodoList组件的inputValue */&#125;          &lt;input value=&#123;this.state.inputValue&#125;            onChange=&#123;this.handleInputChange.bind(this)&#125;          /&gt;          &lt;button onClick=&#123;this.handleBtnClick.bind(this)&#125;&gt;提交&lt;/button&gt;        &lt;/div&gt;        &lt;ul&gt;          &#123;            this.state.list.map((item, index) =&gt; &#123;              return &lt;li key=&#123;index&#125;&gt;&#123;item&#125;&lt;/li&gt;            &#125;)          &#125;        &lt;/ul&gt;      &lt;/Fragment&gt;    )  &#125;  /* 传入一个参数事件对象e(语法上，事件处理函数默认只传递一个参数，也就是事件对象) */  handleInputChange(e) &#123;    /* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue，react中改变状态中的数据需要调用组件的setState方法 */    this.setState(&#123;      inputValue: e.target.value    &#125;)  &#125;  handleBtnClick() &#123;    this.setState(&#123;      /* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */      list: [...this.state.list, this.state.inputValue],      /* 清空输入框中的值 */      inputValue: ""    &#125;)  &#125;&#125;export default TodoList;
+
+
+删除功能实现功能：点击列表中的某一项时该项被删除。
+复习：splice()删除数组部分的元素splice()可用于删除、插入、替换数组中部分元素，无论如何返回值都是从原数组中删除的元素组成的数组。
+复习删除用法注意：删除时，返回的是含有删除部分的元素的数组，原数组会变成被删除以后的数组。
+
+语法:arrayObject.splice(index,count)
+功能:删除从index处开始的零个或多个元素.
+返回值:含有被删除的元素的数组.
+说明:count是要删除的项目数量,如果设置为0,则不会删除项目.如果不设置,则删除从index开始的所有值.
+例子：12345678var arr = ["a", "b", "c", "d", "e", "f"];//删除var delArr = arr.splice(5);//从数组下标为5的元素开始，包括5【注意是数组下标】console.log(arr);// ["a", "b", "c", "d", "e"]console.log(delArr);//["f"]var delArr = arr.splice(2, 2);console.log(arr);// ["a", "b", "e"]console.log(delArr);//["c", "d"]
+
+
+
+
+思路
+给每个li标签绑定一个 onClick 事件函数 handleItemDelete ，通过 bind 绑定 this 指向组件 TodoList 的同时将数组下标 index 通过第二个参数传到 handleItemDelete 中，以便我们在 handleItemDelete函数 中获取到数组下标。
+
+（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考“bind（）”笔记）
+123456&lt;li  key=&#123;index&#125;  onClick=&#123;this.handleItemDelete.bind(this, index)&#125;&gt;  &#123;item&#125;&lt;/li&gt;
+
+
+使用扩展运算符拷贝 state 中的 list 到 变量list1 中，对 变量list 使用 splice方法 删除选中数组下标为 index 的数组元素，再使用 setState方法 将删除被点击元素后的 变量list1 赋给 state 中的list。12345678handleItemDelete(index) &#123;  const list1 = [...this.state.list]  list1.splice(index, 1);  this.setState(&#123;    list: list1  &#125;)&#125;
+
+
+
+注意：必须将state中的值拷贝出来再对拷贝出来的变量进行修改，不能直接修改state中的值，否则后期性能优化会很麻烦。（immutable：state 不允许我们做任何的改变）
+完整代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071import React, &#123; Component, Fragment &#125; from 'react';/* 快捷键imrc */class TodoList extends Component &#123;  constructor(props) &#123;/* 构造函数constructor带有参数props */    super(props);/* 继承父类Component的props */    this.state = &#123;/* 所有的数据都需要保存在状态里（即this.state） */      /* inputValue用于存放输入框内容 */      inputValue: "",      /* list列表用于存放输入框下方数据 */      list: []    &#125;  &#125;  render() &#123;    return (      &lt;Fragment&gt;        &lt;div&gt;          &#123;/* 注意如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */&#125;          &#123;/* 事件绑定函数handleInputChange被调用后，handleInputChange函数内的this指向会丢失（即undefined），需要使用bind()绑定handleInputChange的this指向使其指向TodoList组件的this以便在handleInputChange函数中可以获取TodoList组件的inputValue */&#125;          &lt;input value=&#123;this.state.inputValue&#125;            onChange=&#123;this.handleInputChange.bind(this)&#125;          /&gt;          &lt;button onClick=&#123;this.handleBtnClick.bind(this)&#125;&gt;提交&lt;/button&gt;        &lt;/div&gt;        &lt;ul&gt;          &#123;            this.state.list.map((item, index) =&gt; &#123;              return (                &lt;li                  key=&#123;index&#125;                  onClick=&#123;this.handleItemDelete.bind(this, index)&#125;                &gt;                  &#123;item&#125;                &lt;/li&gt;              )            &#125;)          &#125;        &lt;/ul&gt;      &lt;/Fragment&gt;    )  &#125;  /* 传入一个参数事件对象e(语法上，事件处理函数默认只传递一个参数，也就是事件对象) */  handleInputChange(e) &#123;    /* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue，react中改变状态中的数据需要调用组件的setState方法 */    this.setState(&#123;      inputValue: e.target.value    &#125;)  &#125;  handleBtnClick() &#123;    this.setState(&#123;      /* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */      list: [...this.state.list, this.state.inputValue],      /* 清空输入框中的值 */      inputValue: ""    &#125;)  &#125;  handleItemDelete(index) &#123;    const list1 = [...this.state.list]    list1.splice(index, 1);    this.setState(&#123;      list: list1    &#125;)  &#125;&#125;export default TodoList;
+
+
+JSX语法细节补充注释语句在JSX中写注释相当于写js语句，所以一样需要{}将注释括起来。第一种注释语法很好理解，但是第二种注释语法需要注意：必须换行，否则结尾的花括号会被注释以至于无法包裹注释语句。
 
         
           <p class="article-more-link">
-            <a href="/2019/11/26/React基础精讲(2)/#more">阅读全文</a>
+            <a href="/2019/11/26/React.js基础精讲/#more">阅读全文</a>
           </p>
         </div>
       
@@ -422,7 +538,7 @@ NaN ：即非数值（ Not a Number ）是一个特殊的数值
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
 
       
   <span class="ico-tags"></span>
@@ -624,7 +740,7 @@ npm start或者yarn start
 <!-- Table of Contents -->
 
   
-    <article id="post-React基础精讲(1)"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-React.js初探"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -632,7 +748,7 @@ npm start或者yarn start
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/11/24/React基础精讲(1)/">React.js初探</a>
+      <a class="article-title" href="/2019/11/24/React.js初探/">React.js初探</a>
     </h1>
   
 
@@ -640,7 +756,7 @@ npm start或者yarn start
     
     <div class="article-meta">
       
-	<a href="/2019/11/24/React基础精讲(1)/" class="article-date">
+	<a href="/2019/11/24/React.js初探/" class="article-date">
 	  <time datetime="2019-11-24T13:00:00.000Z" itemprop="datePublished">十一月 24, 2019</time>
 	</a>
 
@@ -660,7 +776,7 @@ npm start或者yarn start
 
         
           <p class="article-more-link">
-            <a href="/2019/11/24/React基础精讲(1)/#more">阅读全文</a>
+            <a href="/2019/11/24/React.js初探/#more">阅读全文</a>
           </p>
         </div>
       
@@ -801,7 +917,7 @@ npm start或者yarn start
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 17.14px;">ES6</a> <a href="/tags/HTML/" style="font-size: 15.71px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.57px;">JS</a> <a href="/tags/JSON/" style="font-size: 11.43px;">JSON</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Node-js/" style="font-size: 12.86px;">Node.js</a> <a href="/tags/React-js/" style="font-size: 12.86px;">React.js</a> <a href="/tags/hexo/" style="font-size: 14.29px;">hexo</a> <a href="/tags/hipaper/" style="font-size: 10px;">hipaper</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a>
+      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 17.5px;">ES6</a> <a href="/tags/HTML/" style="font-size: 16.25px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.75px;">JS</a> <a href="/tags/JSON/" style="font-size: 11.25px;">JSON</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Node-js/" style="font-size: 13.75px;">Node.js</a> <a href="/tags/React-js/" style="font-size: 12.5px;">React.js</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hipaper/" style="font-size: 10px;">hipaper</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a>
     </div>
   </div>
 
@@ -810,7 +926,7 @@ npm start或者yarn start
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简书项目/">简书项目</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简书项目/">简书项目</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -841,8 +957,8 @@ npm start或者yarn start
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2020/01/22/Node.js函数引用与解构赋值/">(no title)</a></h6>
-              <span>一月 22, 2020</span>
+              <h6 style="margin: 0;"><a href="/2020/01/23/Node.js函数引用与解构赋值/">Node.js函数引用与解构赋值</a></h6>
+              <span>一月 23, 2020</span>
             </div>
 
           </li>
@@ -916,7 +1032,7 @@ npm start或者yarn start
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 

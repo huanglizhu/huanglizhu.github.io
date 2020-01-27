@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React.js基础精讲 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="react中的组件 页面是由很多个组件构成的。 只要让自定义的类继承React的Component，那么自定义的类就会成为组件（记得要在最后export default自定义的类）。 在需要的js文件中使用import 组建名 from 定义组件的js文件名即可引入组件来使用。  （具体请参考ES6“解构赋值”）  import React,{Component} from &amp;quot;react">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React.js基础精讲">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/React.js基础精讲/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="react中的组件 页面是由很多个组件构成的。 只要让自定义的类继承React的Component，那么自定义的类就会成为组件（记得要在最后export default自定义的类）。 在需要的js文件中使用import 组建名 from 定义组件的js文件名即可引入组件来使用。  （具体请参考ES6“解构赋值”）  import React,{Component} from &amp;quot;react">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g973svsg2xj30jq0g4n3s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbb36f76u2j30hh03kgn6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u06ar13j316j0rrdis.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u1scc6lj30q009t74x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u4686ifj30qk0dqdh9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g983inuy6fj309s04mgli.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ak03uw5aj30ey05owez.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ak4zt0jxj30bw05nq33.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9alssa2gfj30iw05s76o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9al8sgg94j314b0jkai6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9aldys46mj30hj02cjsx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9boyj2id4j30sz0acgra.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9boxnpx0cj30uq0g2n3r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bpf0jowzj31ha07mwfj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bpma6ul0j31hc05j3z3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bqnk9v9fj30ec06kjsb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bqlh8gzxj30sr05c0sz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bra749hqj31hc07tjsj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9brbvbdiyj31hc05jmxu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cu8c695ej30ws0drgnk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cu9a8ywuj30vf05zdh3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ctuad5vtj30x10p8gqc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cue7gz2qj30wc0e576q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cw4ryl20j30vn0c6wgf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cwepu82wj30w90pradt.jpg">
+<meta property="og:updated_time" content="2020-01-27T08:07:12.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React.js基础精讲">
+<meta name="twitter:description" content="react中的组件 页面是由很多个组件构成的。 只要让自定义的类继承React的Component，那么自定义的类就会成为组件（记得要在最后export default自定义的类）。 在需要的js文件中使用import 组建名 from 定义组件的js文件名即可引入组件来使用。  （具体请参考ES6“解构赋值”）  import React,{Component} from &amp;quot;react">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g973svsg2xj30jq0g4n3s.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React.js基础精讲" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React.js基础精讲
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/26/React.js基础精讲/" class="article-date">
+	  <time datetime="2019-11-26T13:25:34.000Z" itemprop="datePublished">十一月 26, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="react中的组件"><a href="#react中的组件" class="headerlink" title="react中的组件"></a>react中的组件</h1><ul>
+<li>页面是由很多个组件构成的。</li>
+<li><strong>只要让自定义的类继承React的Component，那么自定义的类就会成为组件</strong>（记得要在最后export default自定义的类）。</li>
+<li>在需要的js文件中使用<code>import 组建名 from 定义组件的js文件名</code>即可引入组件来使用。</li>
+</ul>
+<p><strong>（具体请参考ES6“解构赋值”）</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g973svsg2xj30jq0g4n3s.jpg" alt="联系对象的解构赋值理解{component}"></p>
+<p><code>import React,{Component} from &quot;react&quot;;</code>等价于：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbb36f76u2j30hh03kgn6.jpg" alt="image.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123;Component&#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">const</span> Component = React.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Component&#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="comment">//从ES6看相当于</span></span><br><span class="line"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">"react"</span>.Component;</span><br><span class="line"><span class="comment">//又因为</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="comment">//所以</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="组件的使用步骤"><a href="#组件的使用步骤" class="headerlink" title="组件的使用步骤"></a>组件的使用步骤</h2><ol>
+<li>在APP.js文件中定义组件APP并在最后使用<code>export default App;</code>导出（<strong>不导出的话在index.js中是无法引用的</strong>）</li>
+<li>在index.js文件中通过<code>import 组件名 from 定义组件的js文件名</code>来引入组件并使用<code>ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code>将组件APP挂载到public文件夹的index.html内的id为root的DOM节点上。</li>
+</ol>
+<p><strong>注意</strong>：  </p>
+<ol>
+<li><strong>在APP.js文件中需要引入<code>import React from &#39;react&#39;;</code></strong>：挂载组件时使用的<code>&lt;App /&gt;</code>是JSX语法，如果不<code>import React from &#39;react&#39;;</code>就会编译失败而报错。  </li>
+<li><strong>在APP.js文件中要先<code>import ReactDOM from &#39;react-dom&#39;;</code>才能使用ReactDOM</strong>这个第三方块的render方法来帮我们将组件挂载到DOM节点上。  </li>
+<li><strong>在index.js文件中也需要引入<code>React</code></strong>，这是因为render函数中的所有看起来像是html标签的代码其实都是JSX语法。</li>
+</ol>
+<hr>
+<h1 id="React中最基础的JSX语法"><a href="#React中最基础的JSX语法" class="headerlink" title="React中最基础的JSX语法"></a>React中最基础的JSX语法</h1><ul>
+<li>我们把html代码直接写在js文件里这就算是JSX语法，之前提到的APP.js文件中使用的<code>&lt;App /&gt;</code>也是JSX语法。</li>
+<li>JSX语法中，如果我们要使用自己创建的组件（例如APP.js中自定义的组件APP），<strong>必须大写字母开头</strong>，通过类似html标签的形式进行调用（<code>&lt;App /&gt;</code>）。</li>
+<li><strong>注意</strong>：在<strong>render函数的<code>return（）</code></strong>括号中写类似html代码时，<strong>只允许存在1个最外层标签</strong>，否则报错。（也就是说所有标签都必须包含在1个父元素下）</li>
+</ul>
+<hr>
+<h1 id="使用React编写TodoList功能"><a href="#使用React编写TodoList功能" class="headerlink" title="使用React编写TodoList功能"></a>使用React编写TodoList功能</h1><ul>
+<li>在index.js文件中<strong>引入TodoList.js文件TodoList组件时</strong>使用的<code>import App from &#39;./TodoList&#39;;</code>其实<strong>省略了<code>.js</code></strong>，这是因为你不写<code>.js</code>的话脚手架工具会自动到目录下去找js后缀的文件（但是你<strong>在根目录下创建<code>TodoList.js</code>时不要忘记后缀！</strong>）</li>
+</ul>
+<h2 id="在TodoList-js中"><a href="#在TodoList-js中" class="headerlink" title="在TodoList.js中"></a>在<code>TodoList.js</code>中</h2><p>1.先引入<code>React</code>才能使用JSX语法，引入<code>{ Component }</code>才能使我们自定义的组件继承Component：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;<span class="comment">/* 快捷键imrc */</span></span><br></pre></td></tr></table></figure>
+
+<p>2.自定义的组件一定要继承Component，通过render函数返回组件显示的内容，将组件返回的内容写在<code>return（）</code>内（注意是小括号！）：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span>(</span><br><span class="line">            </span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.在最后必须使用<code>export default TodoList;</code>导出组件（<strong>不导出的话组件在外部是无法引用的</strong>）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>TodoList;</span><br></pre></td></tr></table></figure>
+
+<p>4.对于render函数来说，4个空格一个缩进太大了，我们可以将它修改为2个空格一个缩进。（修改方法如下）</p>
+<h3 id="修改缩进长度"><a href="#修改缩进长度" class="headerlink" title="修改缩进长度"></a>修改缩进长度</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u06ar13j316j0rrdis.jpg" alt="步骤1、2"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u1scc6lj30q009t74x.jpg" alt="步骤3"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g97u4686ifj30qk0dqdh9.jpg" alt="修改缩进以后"></p>
+<p>5.不要忘记在<strong>render函数的<code>return（）</code></strong>括号中写类似html代码时，<strong>只允许存在1个最外层标签</strong>，否则报错。（也就是说所有标签都必须包含在1个父元素下）但很多时候我们并不希望他们有父元素，此时可以使用React16提供的占位符<code>Fragment</code>代替父元素标签。<br><strong>记得先引入<code>Fragment</code></strong>:</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component,Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后可以使用<code>&lt;Fragment&gt;</code>代替<code>&lt;div&gt;</code>作为父元素使用，当你在页面F12时可以发现子元素全部都直接挂靠在了我们指定的index.html的root节点上：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component,Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;<span class="comment">/* 快捷键imrc */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;input/&gt;</span><br><span class="line">          &lt;button&gt;提交&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &lt;li&gt;学习&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;做题&lt;/</span>li&gt;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoList;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g983inuy6fj309s04mgli.jpg" alt="效果图"><br>想要实现输入框中输入的内容被提交以后显示在下方列表中则需要下面讲到的“React中的响应式设计思想和事件绑定”。</p>
+<hr>
+<h1 id="React中的响应式设计思想和事件绑定"><a href="#React中的响应式设计思想和事件绑定" class="headerlink" title="React中的响应式设计思想和事件绑定"></a>React中的响应式设计思想和事件绑定</h1><ul>
+<li>react在英语中就是“响应、做出反应”的意思，也就是说<strong>代码中的数据发生变化时会直接反应在页面上</strong>。（也就是说当数据被修改时会被直接反应在页面上）所以在写react时我们不是去改变DOM，而是去修改数据，数据被修改以后会自己反应在DOM上。<strong>也就是说我们不需要去关注DOM方面的操作，只需要考虑数据层的操作即可。</strong></li>
+<li><strong>实现功能</strong>：在输入框中键入时页面输入框可同步变化数据内容<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, Fragment &#125; <span class="keyword">from</span> 'react';/* 快捷键imrc */</span><br><span class="line"></span><br><span class="line">class TodoList extends Component &#123;</span><br><span class="line">  constructor(props) &#123;/* 构造函数constructor带有参数props */</span><br><span class="line">    super(props);/* 继承父类Component的props */</span><br><span class="line">    this.<span class="keyword">state</span> = &#123;/* 所有的数据都需要保存在状态里（即this.<span class="keyword">state</span>） */</span><br><span class="line">      /* inputValue用于存放输入框内容 */</span><br><span class="line">      inputValue: <span class="string">""</span>,</span><br><span class="line">      /* list列表用于存放输入框下方数据 */</span><br><span class="line">      list: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      <span class="variable">&lt;Fragment&gt;</span></span><br><span class="line">        <span class="variable">&lt;div&gt;</span></span><br><span class="line">          &#123;/* 注意如果不绑定<span class="keyword">on</span>Change事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */&#125;</span><br><span class="line">          <span class="variable">&lt;input value=&#123;this.state.inputValue&#125;</span></span><br><span class="line"><span class="variable">            onChange=&#123;this.handleInputChange.bind(this)&#125;</span></span><br><span class="line"><span class="variable">          /&gt;</span></span><br><span class="line">          <span class="variable">&lt;button&gt;</span>提交&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        <span class="variable">&lt;ul&gt;</span></span><br><span class="line">          <span class="variable">&lt;li&gt;</span>学习&lt;/li&gt;</span><br><span class="line">          <span class="variable">&lt;li&gt;</span>做题&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  handleInputChange(e) &#123;/* 传入一个事件对象e */</span><br><span class="line">    /* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue */</span><br><span class="line">    // console.<span class="keyword">log</span>(e.target.value);</span><br><span class="line">    /* 尝试将e.target.value赋给inputValue，但发现this指向有问题 */</span><br><span class="line">    // this.<span class="keyword">state</span>.inputValue = e.target.value;//报错，显示<span class="keyword">state</span>未定义，那么就是this指向有问题</span><br><span class="line">    // console.<span class="keyword">log</span>(this);//打印出的是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要使用bind(this)将函数内的this指向TodoList组件以便调用存放在它的状态中的inputValue</span><br><span class="line">    // this.<span class="keyword">state</span>.inputValue = e.target.value;//转换this指向以后还是报错，是因为react中改变状态中的数据需要调用组件的<span class="built_in">set</span>State方法</span><br><span class="line">    this.<span class="built_in">set</span>State(&#123;</span><br><span class="line">      inputValue:e.target.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> TodoList;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><ol>
+<li><code>constructor(props){}</code>函数是<strong>构造函数</strong>，在js里每个类都会有一个自带的构造函数（注意带一个参数props），当我们使用这个组件时，它会<strong>在render函数之前执行</strong>。构造函数内<strong>必须有<code>super(props);</code> 去继承父类component的props</strong>，构造函数内所有定义的<strong>数据</strong>都需要挂靠在当前对象的状态下，也就是<strong>写在<code>this. state={}</code>里面</strong>。当状态中的数据发生变化时他的变化会直接反应在页面上。（所以你<strong>希望页面数据变化时可以直接修改存在状态内的数据</strong>）</li>
+<li>为了能在输入框中输入数据后显示在输入框下方，我们的需要<strong>在构造函数中定义两个数据</strong>：<code>inputValue</code>用于存储输入框的值，<code>list</code>设为数组，用于存储显示在下方的列表。（<strong>注意：数据是存储在<code>this. state={}</code>里的</strong>）</li>
+<li><strong>注意</strong>：render函数中写的是JSX语法，<code>constructor(props){}</code>中写的是js代码，如果<strong>想在JSX中插入js的变量或者表达式则需要使用<code>{}</code>将其框起</strong>。（如render函数中<code>&lt;input value={this.state.inputValue} /&gt;</code>）</li>
+<li>通过<code>&lt;input value={this.state.inputValue} /&gt;</code>我们将状态中的<code>inputValue</code>赋给了输入框，此时输入框具有默认值，但如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的。</li>
+<li>此时我们需要不给输入框<strong>绑定事件<code>onChange</code></strong>，使<strong>输入框内容发生变化时触动函数h<code>andleInputChange</code></strong>，通过函数<code>handleInputChange</code><strong>将我们输入的值存储到状态中的<code>inputValue</code>上从而使页面发生变化</strong>。(<strong>注意：绑定事件处理函数的调用没有括号</strong><code>onChange={this.handleInputChange}</code>，有括号就直接调用该处理函数了，没有括号则是指向处理函数地址，只有触动该事件时才调用函数)</li>
+<li>在<strong>绑定事件处理函数<code>handleInputChange</code>中</strong>，传入一个<strong>参数</strong>也就是<strong>事件对象e</strong>(语法上，事件处理函数默认只传递一个参数，也就是事件对象) ，target对应的是事件对象e对应的DOM节点（也就是input节点），<strong>input节点的value值实际上就是输入框中的内容</strong>，我们需要<strong>将状态中的inputValue修改为input节点的value值</strong>，从而使得输入以后页面输入框内容有所变化。</li>
+<li>尝试将e.target.value赋给inputValue:<code>this.state.inputValue = e.target.value;</code>报错，显示state未定义，说明this指向有问题，打印出this发现是undefined，说明handleInputChange函数内的this并未指向TodoList组件，我们需要<strong>使用<code>bind(this)</code>将函数内的this指向TodoList组件</strong>以便调用存放在它的状态中的inputValue。<strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></li>
+<li>转换this指向以后还是报错，是因为<strong>react中改变状态中的数据需要调用组件的setState方法</strong>：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">this</span><span class="selector-class">.setState</span>(&#123;</span><br><span class="line">  <span class="attribute">inputValue</span>:e.target.value</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>在js里每个类（组件）都会有一个<strong>自带的构造函数</strong><code>constructor(props){}</code>，（注意带一个参数props），当我们使用这个组件时，它会<strong>在render函数之前执行</strong>。构造函数内<strong>必须有<code>super(props);</code> 去继承父类component的props</strong>，构造函数内所有定义的<strong>数据</strong>都需要挂靠在当前对象的状态下，也就是<strong>写在<code>this. state={}</code>里面</strong>。</li>
+<li>render函数中写的是JSX语法，<code>constructor(props){}</code>中写的是js代码，如果<strong>想在JSX中插入js的变量或者表达式则需要使用<code>{}</code>将其框起</strong>。（如render函数中<code>&lt;input value={this.state.inputValue} /&gt;</code>）</li>
+<li>原生js中内容变化时的<strong>事件绑定</strong>是<code>onchange</code>，而react中是<code>onChange</code>。<strong>在react中事件绑定时驼峰形式的！（如<code>onClick</code>,<code>onChange</code>等）</strong></li>
+<li><strong>事件绑定时要使用<code>bind(this)</code>进行函数作用域变更使函数中的this指向</strong>使其指向事件对象（即组件）才能调用组件的构造函数中的数据，否则函数中的this指向undefined。<strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></li>
+<li><strong>修改<code>this. state</code>中的数据需要通过setState方法</strong>：想要改变<code>this. state</code>里面的数据直接引用<code>this. state</code>进行赋值是不行的，要使用<code>this. setState({state中需要修改的属性:修改以后的属性值;})</code>（其实就是将需要修改的属性通过对象的方式传入setState函数）</li>
+</ul>
+<hr>
+<h1 id="实现-TodoList-新增及删除功能"><a href="#实现-TodoList-新增及删除功能" class="headerlink" title="实现 TodoList 新增及删除功能"></a>实现 TodoList 新增及删除功能</h1><h2 id="新增功能"><a href="#新增功能" class="headerlink" title="新增功能"></a>新增功能</h2><p>在这之前我们实现的功能是：在输入框中输入文字时我们输入的内容可以同步显示在页面上（是的，虽然这个功能看起来完全不需要我们去实现）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ak03uw5aj30ey05owez.jpg" alt="之前实现的功能"><br>现在要完成的功能是：<strong>点击“提交”按钮之后，输入的内容会显示在下方的列表之中并清空输入框内容。</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ak4zt0jxj30bw05nq33.jpg" alt="现在要实现的功能"></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>注意，我们不关心DOM层面上的操作，我们只要让state中的数据发生变化页面就会发生变化，也就是只要<strong>点击按钮后将inputValue的值放到list数组中并清空inputValue</strong>即可。</p>
+<ol>
+<li><strong>点击“提交”按钮之后触发onClick事件绑定函数handleBtnClick</strong>，在函数中通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list，然后清空输入框中的值。（到这我们虽然把输入框的值翻入数组中，但数组并未设置在页面中显示）</li>
+<li>我们需要通过数组的map方法<strong>将原本页面写死的ul列表改成数组list中遍历读出的内容</strong>，注意给数组中的每一项一个唯一的key属性值作为标识符。</li>
+</ol>
+<p><strong>注意</strong>：JSX语法中写js表达式和js变量都需要<code>{}</code>括起来，<strong>表达式中的变量也需要再用<code>{}</code>括起来！！</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9alssa2gfj30iw05s76o.jpg" alt="image.png"></p>
+<h3 id="JavaScript-Array-map-遍历数组并进行操作"><a href="#JavaScript-Array-map-遍历数组并进行操作" class="headerlink" title="JavaScript Array map()遍历数组并进行操作"></a><code>JavaScript Array map()</code>遍历数组并进行操作</h3><p>ES5中提供的<a href="https://www.runoob.com/jsref/jsref-map.html" target="_blank" rel="noopener">JavaScript Array map() 方法</a>可以<strong>遍历数组列表并按顺序对数组中的每一项执行回调函数</strong>。</p>
+<h3 id="react中遍历数组时需要加key值"><a href="#react中遍历数组时需要加key值" class="headerlink" title="react中遍历数组时需要加key值"></a>react中遍历数组时需要加key值</h3><p>在react中循环渲染（遍历数组）时需要给每一项增加一个唯一的key值作为标识符，否则虽不会报错但是会在控制台显示“Warning”：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9al8sgg94j314b0jkai6.jpg" alt="没有key值在控制台会报“警告”"><br>在这里我们暂时使用数组下标index作为key值，实际编程中这样的习惯是很不好的，但具体原因留到后面再写：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9aldys46mj30hj02cjsx.jpg" alt="使用数组下标index作为key值"></p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; from <span class="string">'react'</span>;<span class="comment">/* 快捷键imrc */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="title">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;<span class="comment">/* 构造函数constructor带有参数props */</span></span><br><span class="line">    <span class="keyword">super</span>(props);<span class="comment">/* 继承父类Component的props */</span></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="comment">/* 所有的数据都需要保存在状态里（即this.state） */</span></span><br><span class="line">      <span class="comment">/* inputValue用于存放输入框内容 */</span></span><br><span class="line">      inputValue: <span class="string">""</span>,</span><br><span class="line">      <span class="comment">/* list列表用于存放输入框下方数据 */</span></span><br><span class="line">      list: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &#123;<span class="comment">/* 注意如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */</span>&#125;</span><br><span class="line">          &#123;<span class="comment">/* 事件绑定函数handleInputChange被调用后，handleInputChange函数内的this指向会丢失（即undefined），需要使用bind()绑定handleInputChange的this指向使其指向TodoList组件的this以便在handleInputChange函数中可以获取TodoList组件的inputValue */</span>&#125;</span><br><span class="line">          &lt;input value=&#123;<span class="keyword">this</span>.state.inputValue&#125;</span><br><span class="line">            onChange=&#123;<span class="keyword">this</span>.handleInputChange.bind(<span class="keyword">this</span>)&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">          &lt;button onClick=&#123;<span class="keyword">this</span>.handleBtnClick.bind(<span class="keyword">this</span>)&#125;&gt;提交&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">this</span>.state.list.map((item, index) =&gt; &#123;</span><br><span class="line">              <span class="keyword">return</span> &lt;li key=&#123;index&#125;&gt;&#123;item&#125;&lt;/li&gt;</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 传入一个参数事件对象e(语法上，事件处理函数默认只传递一个参数，也就是事件对象) */</span></span><br><span class="line">  handleInputChange(e) &#123;</span><br><span class="line">    <span class="comment">/* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue，react中改变状态中的数据需要调用组件的setState方法 */</span></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      inputValue: e.target.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleBtnClick() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">      list: [...<span class="keyword">this</span>.state.list, <span class="keyword">this</span>.state.inputValue],</span><br><span class="line">      <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">      inputValue: <span class="string">""</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> TodoList;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="删除功能"><a href="#删除功能" class="headerlink" title="删除功能"></a>删除功能</h2><p>实现功能：点击列表中的某一项时该项被删除。</p>
+<h3 id="复习：splice-删除数组部分的元素"><a href="#复习：splice-删除数组部分的元素" class="headerlink" title="复习：splice()删除数组部分的元素"></a>复习：splice()删除数组部分的元素</h3><p>splice()可用于删除、插入、替换数组中部分元素，无论如何<strong>返回值都是从原数组中删除的元素组成的数组。</strong></p>
+<p><strong>复习删除用法</strong><br><strong>注意：删除时，返回的是含有删除部分的元素的数组，原数组会变成被删除以后的数组。</strong></p>
+<ul>
+<li>语法:<code>arrayObject.splice(index,count)</code></li>
+<li>功能:删除从index处开始的零个或多个元素.</li>
+<li>返回值:含有被删除的元素的数组.</li>
+<li>说明:<br>count是要删除的项目数量,如果设置为0,则不会删除项目.<br>如果不设置,则删除从index开始的所有值.</li>
+<li>例子：<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>];</span><br><span class="line">//删除</span><br><span class="line"><span class="built_in">var</span> delArr = arr.<span class="built_in">splice</span>(<span class="number">5</span>);//从数组下标为<span class="number">5</span>的元素开始，包括<span class="number">5</span>【注意是数组下标】</span><br><span class="line">console.<span class="built_in">log</span>(arr);// [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>]</span><br><span class="line">console.<span class="built_in">log</span>(delArr);//[<span class="string">"f"</span>]</span><br><span class="line"><span class="built_in">var</span> delArr = arr.<span class="built_in">splice</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">console.<span class="built_in">log</span>(arr);// [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"e"</span>]</span><br><span class="line">console.<span class="built_in">log</span>(delArr);//[<span class="string">"c"</span>, <span class="string">"d"</span>]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><strong>给每个li标签绑定一个 onClick 事件函数 handleItemDelete</strong> ，通过 bind 绑定 this 指向组件 TodoList 的同时<strong>将数组下标 index 通过第二个参数传到 handleItemDelete 中，以便我们在 handleItemDelete函数 中获取到数组下标</strong>。</li>
+</ol>
+<p><strong>（注意：在这里建议在构造函数中绑定bind（），比较节省性能，可以参考<a href="https://huanglizhu.github.io/2019/11/24/bind()/" target="_blank" rel="noopener">“bind（）”笔记</a>）</strong></p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span></span></span></span><br><span class="line"><span class="xml">  key=</span><span class="template-variable">&#123;index&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  onClick=</span><span class="template-variable">&#123;this.handleItemDelete.bind(this, index)&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  </span><span class="template-variable">&#123;item&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用扩展运算符<strong>拷贝 state 中的 list 到 变量list1 中</strong>，对 变量list 使用 splice方法 <strong>删除选中数组下标为 index 的数组元素</strong>，再使用 setState方法 <strong>将删除被点击元素后的 变量list1 赋给 state 中的list</strong>。<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handleItemDelete(index) &#123;</span><br><span class="line">  const list1 = [...this.<span class="keyword">state</span>.list]</span><br><span class="line">  list1.splice(index, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  this.<span class="built_in">set</span>State(&#123;</span><br><span class="line">    list: list1</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>注意：必须将state中的值拷贝出来再对拷贝出来的变量进行修改，不能直接修改state中的值</strong>，否则后期性能优化会很麻烦。（immutable：state 不允许我们做任何的改变）</p>
+<h3 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; from <span class="string">'react'</span>;<span class="comment">/* 快捷键imrc */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="title">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;<span class="comment">/* 构造函数constructor带有参数props */</span></span><br><span class="line">    <span class="keyword">super</span>(props);<span class="comment">/* 继承父类Component的props */</span></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="comment">/* 所有的数据都需要保存在状态里（即this.state） */</span></span><br><span class="line">      <span class="comment">/* inputValue用于存放输入框内容 */</span></span><br><span class="line">      inputValue: <span class="string">""</span>,</span><br><span class="line">      <span class="comment">/* list列表用于存放输入框下方数据 */</span></span><br><span class="line">      list: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &#123;<span class="comment">/* 注意如果不绑定onChange事件你不管输入什么框内都不会有所变化，因为每次他都是从状态中读取inputValue再显示在页面上，而inputValue是没有变的 */</span>&#125;</span><br><span class="line">          &#123;<span class="comment">/* 事件绑定函数handleInputChange被调用后，handleInputChange函数内的this指向会丢失（即undefined），需要使用bind()绑定handleInputChange的this指向使其指向TodoList组件的this以便在handleInputChange函数中可以获取TodoList组件的inputValue */</span>&#125;</span><br><span class="line">          &lt;input value=&#123;<span class="keyword">this</span>.state.inputValue&#125;</span><br><span class="line">            onChange=&#123;<span class="keyword">this</span>.handleInputChange.bind(<span class="keyword">this</span>)&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">          &lt;button onClick=&#123;<span class="keyword">this</span>.handleBtnClick.bind(<span class="keyword">this</span>)&#125;&gt;提交&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">this</span>.state.list.map((item, index) =&gt; &#123;</span><br><span class="line">              <span class="keyword">return</span> (</span><br><span class="line">                &lt;li</span><br><span class="line">                  key=&#123;index&#125;</span><br><span class="line">                  onClick=&#123;<span class="keyword">this</span>.handleItemDelete.bind(<span class="keyword">this</span>, index)&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                  &#123;item&#125;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">              )</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 传入一个参数事件对象e(语法上，事件处理函数默认只传递一个参数，也就是事件对象) */</span></span><br><span class="line">  handleInputChange(e) &#123;</span><br><span class="line">    <span class="comment">/* target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue，react中改变状态中的数据需要调用组件的setState方法 */</span></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      inputValue: e.target.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleBtnClick() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">      list: [...<span class="keyword">this</span>.state.list, <span class="keyword">this</span>.state.inputValue],</span><br><span class="line">      <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">      inputValue: <span class="string">""</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleItemDelete(index) &#123;</span><br><span class="line">    <span class="keyword">const</span> list1 = [...<span class="keyword">this</span>.state.list]</span><br><span class="line">    list1.splice(index, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      list: list1</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> TodoList;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="JSX语法细节补充"><a href="#JSX语法细节补充" class="headerlink" title="JSX语法细节补充"></a>JSX语法细节补充</h1><h2 id="注释语句"><a href="#注释语句" class="headerlink" title="注释语句"></a>注释语句</h2><p>在JSX中写注释相当于写js语句，所以一样需要<code>{}</code>将注释括起来。<br>第一种注释语法很好理解，但是<strong>第二种注释语法需要注意：必须换行，否则结尾的花括号会被注释以至于无法包裹注释语句。</strong><a id="more"></a></p>
+<p><strong>第一种注释语法：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="comment">/*注释语句*/</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9boyj2id4j30sz0acgra.jpg" alt="第一种注释语法"></p>
+<p><strong>第二种注释语法：</strong><br>必须换行，否则结尾的花括号会被注释以至于无法包裹注释语句。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="comment">//注释语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9boxnpx0cj30uq0g2n3r.jpg" alt="第二种注释语法"></p>
+<hr>
+<h2 id="外联CSS样式表及其注意事项"><a href="#外联CSS样式表及其注意事项" class="headerlink" title="外联CSS样式表及其注意事项"></a>外联CSS样式表及其注意事项</h2><h3 id="引入外联样式表的方法"><a href="#引入外联样式表的方法" class="headerlink" title="引入外联样式表的方法"></a>引入外联样式表的方法</h3><ol>
+<li><strong>在src下新建样式表<code>style.css</code></strong>并给input设置红色边框的样式</li>
+<li>在<strong>组件页面<code>TodoList.js</code>顶部引入样式表<code>import &quot;./style.css&quot;</code></strong>即可</li>
+</ol>
+<hr>
+<h3 id="使用className代替class"><a href="#使用className代替class" class="headerlink" title="使用className代替class"></a>使用className代替class</h3><p>react中会<strong>混淆 标签样式定义类class 与 组件<code>class TodoList extends Component{}</code>中的<code>class</code></strong>，给标签<strong>定义样式类名时使用class</strong>虽然不会报错，但控制台会<strong>提示警告</strong>:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">class=<span class="string">"input"</span></span><br><span class="line">value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">onChange=&#123;this<span class="selector-class">.handleInputChange</span><span class="selector-class">.bind</span>(this)&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bpf0jowzj31ha07mwfj.jpg" alt="虽显示样式，但报出警告"><br>所以我们在<strong>定义样式表<code>class</code>名称时需要使用<code>className</code>代替<code>class</code></strong>:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">className=<span class="string">"input"</span></span><br><span class="line">value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">onChange=&#123;this<span class="selector-class">.handleInputChange</span><span class="selector-class">.bind</span>(this)&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bpma6ul0j31hc05j3z3.jpg" alt="使用className代替class后"></p>
+<hr>
+<h2 id="dangerouslySetInnerHTML使JSX中部分内容不转译"><a href="#dangerouslySetInnerHTML使JSX中部分内容不转译" class="headerlink" title="dangerouslySetInnerHTML使JSX中部分内容不转译"></a><code>dangerouslySetInnerHTML</code>使JSX中部分内容不转译</h2><ul>
+<li>如果在JSX中<strong>不希望内容被转译</strong>可使用 <code>dangerouslySetInnerHTML</code>(也就是希望输入框中输入的html标签可以被识别使用) </li>
+<li>虽然这样做<strong>存在被XSS攻击的可能</strong>，但有时候也需要这样不转译的设置页面内容的情况。</li>
+<li>例子：</li>
+</ul>
+<p><strong>原代码</strong>：</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">li</span></span></span></span><br><span class="line"><span class="xml">  key=</span><span class="template-variable">&#123;index&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  onClick=</span><span class="template-variable">&#123;this.handleItemDelete.bind(this, index)&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  </span><span class="template-variable">&#123;item&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bqnk9v9fj30ec06kjsb.jpg" alt="原代码"></p>
+<p><strong>使用 <code>dangerouslySetInnerHTML</code> 后</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">  <span class="attr">key</span>=<span class="string">&#123;index&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemDelete.bind(this,</span> <span class="attr">index</span>)&#125;</span></span><br><span class="line"><span class="tag">  <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;__html:item&#125;&#125;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bqlh8gzxj30sr05c0sz.jpg" alt="使用 `dangerouslySetInnerHTML` 后"><br><strong><code>__html</code>属性设置的是需要不转译显示在页面上的内容</strong>，这里设置为当前<code>item</code>，则li标签中间的<code>{item}</code>key省去（<strong>外层<code>{}</code>是代表里面写的是js表达式，内层<code>{}</code>代表是个js对象</strong>）</p>
+<hr>
+<h2 id="使用htmlFor代替属性for"><a href="#使用htmlFor代替属性for" class="headerlink" title="使用htmlFor代替属性for"></a>使用<code>htmlFor</code>代替属性<code>for</code></h2><p><strong>在react中，会混淆 元素标签的for属性 与 for循环</strong>，使用 for属性 会报出警告提示，所以我们需要属性<code>for</code>时应<strong>使用<code>htmlFor</code>代替属性<code>for</code></strong>。<br>比如：<br>在<code>&lt;label&gt;</code>中使用 <code>for</code>属性 使点击 “输入内容” 时鼠标自动聚焦于输入框内时，<strong>使用 <code>for</code>属性*</strong> :</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">label</span> <span class="keyword">for</span>=<span class="string">"inserArea"</span>&gt;输入内容&lt;/label&gt;</span><br><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">"inserArea"</span></span><br><span class="line">  className=<span class="string">"input"</span></span><br><span class="line">  value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">  onChange=&#123;this<span class="selector-class">.handleInputChange</span><span class="selector-class">.bind</span>(this)&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9bra749hqj31hc07tjsj.jpg" alt="使用 `for`属性"><br><strong>使用<code>htmlFor</code>代替属性<code>for</code></strong>：<code>&lt;label htmlFor=&quot;inserArea&quot;&gt;输入内容&lt;/label&gt;</code><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9brbvbdiyj31hc05jmxu.jpg" alt="使用`htmlFor`代替属性`for`后"></p>
+<hr>
+<h1 id="组件拆分-与-组件之间的传值"><a href="#组件拆分-与-组件之间的传值" class="headerlink" title="组件拆分 与 组件之间的传值"></a>组件拆分 与 组件之间的传值</h1><p><strong>总结</strong>：</p>
+<ol>
+<li>在render函数的<strong>return（）括号中只允许存在1个最外层标签，否则报错</strong>。（也就是说所有标签都必须包含在1个父元素下）<strong>return（）中的注释也会被当成一个子元素！</strong>（可以看：“父组件向子组件传递数据”的例子）</li>
+<li>自定义组件名<strong>首字母大写</strong>。</li>
+<li>定义组件后不要忘记在js文件最后<code>export default 组件名;</code>,<strong>一定要导出组件它才能在外部被引用</strong>。</li>
+<li><strong>组件的使用方式和JSX元素标签的使用方式类似</strong>。比如自定义子组件为<code>TodoItem</code>,在父组件<code>TodoList</code>的return（）中通过<code>&lt;TodoItem /&gt;</code>来引用。（<strong>不要忘记在父组件<code>TodoList</code>顶部引入子组件</strong>）</li>
+<li><strong>在JSX中想要使用变量或者js表达式时必须用<code>{}</code>括起来，参数与属性名则不需要</strong>。（比如：“父组件向子组件传递数据”的例子中<code>TodoList.js</code>中的<code>&lt;TodoItem content={item} /&gt;</code>,item就是变量，必须用<code>{}</code>括起来）</li>
+<li>绑定事件函数是记得到组件的<strong>构造函数中使用<code>bind()</code>绑定<code>this</code>指向</strong>。（<a href="https://huanglizhu.github.io/2019/11/24/bind()/#事件绑定函数与bind-this" target="_blank" rel="noopener">参考另一篇笔记的传送门</a>）</li>
+<li><strong>在父组件内</strong>通过<strong>在子组件标签上添加属性的方式</strong>将<strong>数据或者方法</strong>传给子组件。<strong>属性名是自定义的，属性值为需要传递的数据或者方法</strong>，注意数据变量与方法都需要<code>{}</code>括起来，方法不要忘记<code>this.方法名</code>。</li>
+<li><strong>子组件如果想要调用父组件的方法，在父组件中通过属性传递该方法时必须先通过bind()绑定该方法的this永远指向父组件</strong>,否则报错。因为通过<code>this.方法名</code>传过去后this变为子组件，而子组件中并无该方法。（可参考下方“子组件向父组件传递数据”中例子）</li>
+</ol>
+<hr>
+<h2 id="组件拆分"><a href="#组件拆分" class="headerlink" title="组件拆分"></a>组件拆分</h2><p>网页可拆分为多个不同的父组件与子组件，子组件又可以嵌套其他的子组件形成树形结构。</p>
+<hr>
+<h2 id="组件之间的传值"><a href="#组件之间的传值" class="headerlink" title="组件之间的传值"></a>组件之间的传值</h2><h3 id="父组件向子组件传递数据（或方法）"><a href="#父组件向子组件传递数据（或方法）" class="headerlink" title="父组件向子组件传递数据（或方法）"></a>父组件向子组件传递数据（或方法）</h3><ol>
+<li><strong>父组件</strong>通过<strong>在子组件上添加属性的方式</strong>将数据传给子组件（<strong>属性名是自定义的，属性值为需要传递的数据</strong>）注意<strong>数据变量与方法都需要<code>{}</code>括起来</strong>，方法不要忘记<code>this.方法名</code>。</li>
+<li>在<strong>子组件内</strong>需要使用父组件传递过来的数据的位置<strong>通过<code>{this.props.属性名}</code>来接受对应属性值（数据）</strong>。</li>
+</ol>
+<p><strong>注意：父组件向子组件传递方法时，必须在父组件中通过属性传递该方法的同时通过bind()绑定该方法的this永远指向父组件</strong>,否则报错。因为通过<code>this.方法名</code>传过去后this变为子组件，而子组件中并无该方法。在父组件中通过属性传递该方法时必须先通过bind()绑定该方法的this永远指向父组件**,否则报错。因为通过<code>this.方法名</code>传过去后this变为子组件，而子组件中并无该方法。（可参考下方“子组件向父组件传递数据”中例子）</p>
+<p><strong>例子</strong>：<br>点击按钮以后希望列表中显示输入框中内容则<strong>需要父组件将数据传给子组件</strong>，也就是 <strong>父组件TodoList 将输入框中得到的 item数据 传给 子组件TodoItem</strong>：</p>
+<ol>
+<li>定义子组件并导出：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cu8c695ej30ws0drgnk.jpg" alt="定义子组件并导出"></li>
+<li>在父组件中引入子组件：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cu9a8ywuj30vf05zdh3.jpg" alt="在父组件中引入子组件"></li>
+<li>父组件向子组件传递数据：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9ctuad5vtj30x10p8gqc.jpg" alt="父组件向子组件传递数据"></li>
+<li>子组件内通过<code>{this.props.属性名}</code>来获取从父组件传递过来的数据（对应属性值）：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cue7gz2qj30wc0e576q.jpg" alt></li>
+</ol>
+<hr>
+<h3 id="子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）"><a href="#子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）" class="headerlink" title="子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）"></a>子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）</h3><ol>
+<li>在<strong>父组件中</strong>通过属性的方式将 数据item 、 数组下标index 、方法handleItemDelete 都传递到父组件中：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cw4ryl20j30vn0c6wgf.jpg" alt="父组件部分代码"></li>
+</ol>
+<p><strong>注意：在父组件中将handleItemDelete传给子组件之前必须使用bind绑定this永远指向父组件</strong>，否则在子组件中调用<code>this.props.deleteItem</code>时实际上相当于调用<code>this.handleItemDelete</code>,但在子组件中this指向子组件，子组件中并没有handleItemDelete函数，因此报错。</p>
+<ol start="2">
+<li><strong>子组件中</strong>，点击子组件时触动<code>onClick</code>事件绑定的函数<code>handelClick</code>，在函数<code>handelClick</code>内 将父组件传递过来的index值作为参数 通过属性名调用父组件的<code>deleteItem</code>方法（即父组件的<code>handleItemDelete</code>方法）完成点击数据即删除的功能：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g9cwepu82wj30w90pradt.jpg" alt="子组件"></li>
+</ol>
+<p><strong>需要修改state数据的方法可以保留在父组件中，在子组件中通过调用父组件方法来修改数据。</strong></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/15/JS_Number/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Number类及其方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/25/hexo 404/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hexo deploy到github后404问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#react中的组件"><span class="nav-number">1.</span> <span class="nav-text">react中的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的使用步骤"><span class="nav-number">1.1.</span> <span class="nav-text">组件的使用步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中最基础的JSX语法"><span class="nav-number">2.</span> <span class="nav-text">React中最基础的JSX语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用React编写TodoList功能"><span class="nav-number">3.</span> <span class="nav-text">使用React编写TodoList功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在TodoList-js中"><span class="nav-number">3.1.</span> <span class="nav-text">在TodoList.js中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改缩进长度"><span class="nav-number">3.1.1.</span> <span class="nav-text">修改缩进长度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中的响应式设计思想和事件绑定"><span class="nav-number">4.</span> <span class="nav-text">React中的响应式设计思想和事件绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">4.1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现-TodoList-新增及删除功能"><span class="nav-number">5.</span> <span class="nav-text">实现 TodoList 新增及删除功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新增功能"><span class="nav-number">5.1.</span> <span class="nav-text">新增功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">5.1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-Array-map-遍历数组并进行操作"><span class="nav-number">5.1.2.</span> <span class="nav-text">JavaScript Array map()遍历数组并进行操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react中遍历数组时需要加key值"><span class="nav-number">5.1.3.</span> <span class="nav-text">react中遍历数组时需要加key值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整代码"><span class="nav-number">5.1.4.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除功能"><span class="nav-number">5.2.</span> <span class="nav-text">删除功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复习：splice-删除数组部分的元素"><span class="nav-number">5.2.1.</span> <span class="nav-text">复习：splice()删除数组部分的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整代码-1"><span class="nav-number">5.2.3.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX语法细节补充"><span class="nav-number">6.</span> <span class="nav-text">JSX语法细节补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注释语句"><span class="nav-number">6.1.</span> <span class="nav-text">注释语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外联CSS样式表及其注意事项"><span class="nav-number">6.2.</span> <span class="nav-text">外联CSS样式表及其注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入外联样式表的方法"><span class="nav-number">6.2.1.</span> <span class="nav-text">引入外联样式表的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用className代替class"><span class="nav-number">6.2.2.</span> <span class="nav-text">使用className代替class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dangerouslySetInnerHTML使JSX中部分内容不转译"><span class="nav-number">6.3.</span> <span class="nav-text">dangerouslySetInnerHTML使JSX中部分内容不转译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用htmlFor代替属性for"><span class="nav-number">6.4.</span> <span class="nav-text">使用htmlFor代替属性for</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件拆分-与-组件之间的传值"><span class="nav-number">7.</span> <span class="nav-text">组件拆分 与 组件之间的传值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件拆分"><span class="nav-number">7.1.</span> <span class="nav-text">组件拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件之间的传值"><span class="nav-number">7.2.</span> <span class="nav-text">组件之间的传值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件向子组件传递数据（或方法）"><span class="nav-number">7.2.1.</span> <span class="nav-text">父组件向子组件传递数据（或方法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）"><span class="nav-number">7.2.2.</span> <span class="nav-text">子组件向父组件传递数据（子组件如何调用父组件的方法修改父组件的数据）</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
