@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-27T12:07:55.118Z">
+<meta property="og:updated_time" content="2020-01-29T06:10:54.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bind()">
 <meta name="twitter:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
@@ -193,6 +193,7 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  constructor(props) &#123;<span class="comment">/*构造函数，用于实例化对象*/</span></span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.foo = <span class="keyword">this</span>.foo.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  foo() &#123;</span><br><span class="line">    <span class="comment">// todo something</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;<span class="type">View</span>&gt;</span><br><span class="line">        &lt;<span class="type">Button</span> onPress=&#123;<span class="keyword">this</span>.foo&#125;/&gt;</span><br><span class="line">      &lt;/<span class="type">View</span>&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>事件绑定处理函数（<code>onPress={this.foo}</code>）时，foo方法内部的this的指向就会丢失(此时在foo函数内部打印this得到的是undefined)</strong>。这就会出现外部的foo方法内部的this会丢失指向。<br>为了解决这个问题，我们需要在实例化对象的时候就<strong>需要在构造函数中绑定this（<code>this.foo = this.foo.bind(this);</code>），使得无论事件处理函数如何传递，它的this的指向都是固定的，固定指向我们所实例化的对象（App组件）</strong>。<br>（虽然在render函数中<code>&lt;Button onPress={this.foo.bind(this)}/&gt;</code>效果一样，但比较消耗性能，<strong>不推荐</strong>。）</p>
+<p>（<a href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React中的响应式设计思想和事件绑定" target="_blank" rel="noopener">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a>）</p>
 
       
     </div>

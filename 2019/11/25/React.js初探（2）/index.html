@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g973svsg2xj30jq0g4n3s.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbb36f76u2j30hh03kgn6.jpg">
-<meta property="og:updated_time" content="2020-01-27T08:30:36.416Z">
+<meta property="og:updated_time" content="2020-01-31T07:04:35.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React.js初探(2)">
 <meta name="twitter:description" content="react中的组件 页面是由很多个组件构成的。 只要让自定义的类继承React的Component，那么自定义的类就会成为组件（记得要在最后export default自定义的类）。">
@@ -176,20 +176,40 @@
 
 <hr>
 <h2 id="组件的使用步骤"><a href="#组件的使用步骤" class="headerlink" title="组件的使用步骤"></a>组件的使用步骤</h2><ol>
-<li>在APP.js文件中定义组件APP并在最后使用<code>export default App;</code>导出（<strong>不导出的话在index.js中是无法引用的</strong>）</li>
-<li>在index.js文件中通过<code>import 组件名 from 定义组件的js文件名</code>来引入组件并使用<code>ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code>将组件APP挂载到public文件夹的index.html内的id为root的DOM节点上。</li>
+<li>在src下的App.js文件中定义组件App并在最后使用<code>export default App;</code>导出组件（<strong>不导出的话在index.js中是无法引用的</strong>）</li>
+<li>在src下的index.js文件中通过<code>import 组件名 from 定义组件的js文件名</code>来引入组件并使用<code>ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code>将组件App挂载到public文件夹下的index.html内的id为root的DOM节点上。（注意：index.html内并未使用script标签引入index.js）</li>
 </ol>
 <p><strong>注意</strong>：  </p>
 <ol>
-<li><strong>在APP.js文件中需要引入<code>import React from &#39;react&#39;;</code></strong>：挂载组件时使用的<code>&lt;App /&gt;</code>是JSX语法，如果不<code>import React from &#39;react&#39;;</code>就会编译失败而报错。  </li>
-<li><strong>在APP.js文件中要先<code>import ReactDOM from &#39;react-dom&#39;;</code>才能使用ReactDOM</strong>这个第三方块的render方法来帮我们将组件挂载到DOM节点上。  </li>
-<li><strong>在index.js文件中也需要引入<code>React</code></strong>，这是因为render函数中的所有看起来像是html标签的代码其实都是JSX语法。</li>
+<li><strong>在index.js文件中需要引入<code>import React from &#39;react&#39;;</code></strong>，是因为挂载组件时使用的<code>&lt;App /&gt;</code>是JSX语法，如果不<code>import React from &#39;react&#39;;</code>就会编译失败而报错。  </li>
+<li><strong>在index.js文件中要先<code>import ReactDOM from &#39;react-dom&#39;;</code>才能使用ReactDOM</strong>这个第三方的render方法来帮我们将组件挂载到DOM节点上。  </li>
+<li><strong>在App.js文件中也需要引入<code>React</code></strong>，这是因为render函数中的所有看起来像是html标签的代码其实都是JSX语法。</li>
 </ol>
 <hr>
+<h2 id="react里的index-js是怎么跟index-html结合起来的"><a href="#react里的index-js是怎么跟index-html结合起来的" class="headerlink" title="react里的index.js是怎么跟index.html结合起来的"></a>react里的index.js是怎么跟index.html结合起来的</h2><p>可以注意到，index.html里没有用script标签引入index.js。</p>
+<p>也许是create-react-app实现的？</p>
+<p>create-react-app 把webpack、babel等配置都封装到了依赖项目react-script中，所以你无法直观的看到这些配置。<br>而index.html与index.js的结合是用html-webpack-plugin这个plugin实现的。</p>
+<hr>
+<h1 id="总结：关于不同的引用"><a href="#总结：关于不同的引用" class="headerlink" title="总结：关于不同的引用"></a>总结：关于不同的引用</h1><h2 id="引入React（涉及JSX语法）"><a href="#引入React（涉及JSX语法）" class="headerlink" title="引入React（涉及JSX语法）"></a>引入<code>React</code>（涉及JSX语法）</h2><p>使用<strong>JSX语法</strong>时需要<code>import React from &#39;react&#39;;</code>，否则就会编译失败而报错。<br>比如：</p>
+<ol>
+<li>App.js文件中render函数中的所有<strong>看起来像是html标签的代码</strong>实际上<strong>是JSX代码</strong>。</li>
+<li>index.js文件中<strong>挂载组件</strong>时使用的<strong><code>&lt;App /&gt;</code>是JSX语法</strong>。</li>
+</ol>
+<h2 id="引入ReactDOM"><a href="#引入ReactDOM" class="headerlink" title="引入ReactDOM"></a>引入<code>ReactDOM</code></h2><p>在index.js文件中要先<code>import ReactDOM from &#39;react-dom&#39;;</code>才能使用ReactDOM这个第三方的render方法来帮我们<strong>将组件挂载到index.html文件的DOM节点上</strong>。 </p>
+<h2 id="引入-Component"><a href="#引入-Component" class="headerlink" title="引入{ Component }"></a>引入<code>{ Component }</code></h2><p><strong>定义组件时需要继承 React 的 Component</strong> ，需要先引入才能继承。此时可以使用ES6的解构赋值简单的引入Component：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>相当于：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'react'</span>.Component;</span><br></pre></td></tr></table></figure>
+
+<p>也相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">const</span> Component = React.Component;</span><br></pre></td></tr></table></figure>
+
+<hr>
 <h1 id="React中最基础的JSX语法"><a href="#React中最基础的JSX语法" class="headerlink" title="React中最基础的JSX语法"></a>React中最基础的JSX语法</h1><ul>
-<li>我们把html代码直接写在js文件里这就算是JSX语法，之前提到的APP.js文件中使用的<code>&lt;App /&gt;</code>也是JSX语法。</li>
-<li>JSX语法中，如果我们要使用自己创建的组件（例如APP.js中自定义的组件APP），<strong>必须大写字母开头</strong>，通过类似html标签的形式进行调用（<code>&lt;App /&gt;</code>）。</li>
-<li><strong>注意</strong>：在<strong>render函数的<code>return（）</code></strong>括号中写类似html代码时，<strong>只允许存在1个最外层标签</strong>，否则报错。（也就是说所有标签都必须包含在1个父元素下）</li>
+<li>我们把html代码直接写在js文件里这就算是JSX语法，之前提到的index.js文件中使用的<code>&lt;App /&gt;</code>也是JSX语法。</li>
+<li>JSX语法中，如果我们要使用<strong>自己创建的组件</strong>（例如App.js中自定义的组件App），<strong>必须大写字母开头</strong>，通过类似html标签的形式进行调用（比如index.js中将组件挂载在index.html页面的DOM节点上使用的<code>&lt;App /&gt;</code>）。</li>
+<li><strong>注意</strong>：在<strong>render函数的<code>return()</code></strong>括号中写类似html代码时，<strong>只允许存在1个最外层标签</strong>，否则报错。（也就是说所有标签都必须包含在1个父元素下）</li>
 </ul>
 <hr>
 
@@ -263,7 +283,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#react中的组件"><span class="nav-number">1.</span> <span class="nav-text">react中的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的使用步骤"><span class="nav-number">1.1.</span> <span class="nav-text">组件的使用步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中最基础的JSX语法"><span class="nav-number">2.</span> <span class="nav-text">React中最基础的JSX语法</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#react中的组件"><span class="nav-number">1.</span> <span class="nav-text">react中的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的使用步骤"><span class="nav-number">1.1.</span> <span class="nav-text">组件的使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react里的index-js是怎么跟index-html结合起来的"><span class="nav-number">1.2.</span> <span class="nav-text">react里的index.js是怎么跟index.html结合起来的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结：关于不同的引用"><span class="nav-number">2.</span> <span class="nav-text">总结：关于不同的引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入React（涉及JSX语法）"><span class="nav-number">2.1.</span> <span class="nav-text">引入React（涉及JSX语法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入ReactDOM"><span class="nav-number">2.2.</span> <span class="nav-text">引入ReactDOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入-Component"><span class="nav-number">2.3.</span> <span class="nav-text">引入{ Component }</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中最基础的JSX语法"><span class="nav-number">3.</span> <span class="nav-text">React中最基础的JSX语法</span></a></li></ol>
     
     </div>
   </aside>
