@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-02T12:18:14.002Z">
+<meta property="og:updated_time" content="2020-02-04T11:29:58.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中的同步与异步">
 <meta name="twitter:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
@@ -247,10 +247,14 @@
 <li>每个 foo() 函数调用后，给 count（全局变量） 加一，然后被弹出执行栈，而全局执行上下文的生命周期将伴随着整个程序，所以第一次调用打印 1，第二次调用打印 2，第 n 次调用打印 n。</li>
 </ul>
 <hr>
+<h1 id="JS的同步与异步"><a href="#JS的同步与异步" class="headerlink" title="JS的同步与异步"></a>JS的同步与异步</h1><h2 id="为什么会有同步和异步"><a href="#为什么会有同步和异步" class="headerlink" title="为什么会有同步和异步"></a>为什么会有同步和异步</h2><p>因为JavaScript是<strong>单线程</strong>，因此单一时间内只能处理单一任务，所有任务都需要排队，<strong>前一个任务执行完，才能继续执行下一个任务</strong>。<br>但是，如果前一个任务的执行时间很长，比如文件的读取操作或ajax操作，后一个任务就不得不等着，拿ajax来说，当用户向后台获取大量的数据时，不得不等到所有数据都获取完毕才能进行下一步操作，用户只能在那里干等着，<strong>严重影响用户体验</strong>。<br>因此，JavaScript在设计的时候，就已经考虑到这个问题，主线程可以完全不用等待文件的读取完毕或ajax的加载成功，<strong>可以先挂起处于等待中的加载任务，先运行排在后面的任务，等到文件的读取或ajax有了结果后，再回过头执行挂起的任务（这就是异步）</strong>，因此，任务就可以分为同步任务和异步任务。</p>
+<h2 id="同步任务"><a href="#同步任务" class="headerlink" title="同步任务"></a>同步任务</h2><p><strong>同步任务是指在主线程上排队执行的任务</strong>，只有前一个任务执行完毕，才能继续执行下一个任务。<br>当我们打开网站时，网站的渲染过程，比如元素的渲染，其实就是一个同步任务。</p>
+<h2 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h2><p><strong>异步任务是指不进入主线程，而进入任务队列的任务，只有任务队列通知主线程，某个异步任务可以执行了，该任务才会进入主线程。</strong><br>当我们打开网站时，像图片的加载，音乐的加载，其实就是一个异步任务</p>
+<hr>
 <h1 id="js的异步机制"><a href="#js的异步机制" class="headerlink" title="js的异步机制"></a>js的异步机制</h1><ul>
 <li>同步任务进入总线程，异步任务不会进入主线程，而是会先进入任务队列，任务队列其实是一个先进先出的数据结构，也是一个事件队列。</li>
-<li>比如说文件读取操作，因为这是一个异步任务，因此该任务会被添加到任务队列中，等到IO（输入输出）完成后，就会在<strong>任务队列中添加一个事件</strong>，表示<strong>异步任务完成</strong>啦，<strong>可以进入执行栈</strong>啦~但是这时候呀，主线程不一定有空，当主线程处理完其它任务有空时，就会读取任务队列，读取里面有哪些事件，排在前面的事件会被优先进行处理，如果该任务指定了回调函数，那么主线程在处理该事件时，就会执行回调函数中的代码，也就是执行异步任务啦</li>
-<li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等到，直到有新的任务，这就叫做<strong>任务循环</strong>，因为每个任务都是由一个事件触发的，因此也叫作<strong>事件循环</strong>。</li>
+<li>比如说文件读取操作，因为这是一个异步任务，因此该任务会被添加到任务队列中，等到IO（输入输出）完成后，就会在<strong>任务队列中添加一个事件</strong>，表示<strong>异步任务准备好</strong>啦，<strong>可以进入执行栈</strong>啦~但是这时候呀，主线程不一定有空，当主线程处理完其它任务有空时，就会读取任务队列，读取里面有哪些事件，排在前面的事件会被优先进行处理，如果该任务指定了回调函数，那么主线程在处理该事件时，就会执行回调函数中的代码，也就是执行异步任务啦</li>
+<li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等，直到有新的任务，这就叫做<strong>任务循环</strong>，因为每个任务都是由一个事件触发的，因此也叫作<strong>事件循环</strong>。</li>
 </ul>
 <p><strong>步骤总结</strong>：</p>
 <ol>
@@ -339,7 +343,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形参与实参"><span class="nav-number">3.</span> <span class="nav-text">形参与实参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">4.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">5.</span> <span class="nav-text">js的异步机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">6.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">6.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">6.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形参与实参"><span class="nav-number">3.</span> <span class="nav-text">形参与实参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">4.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS的同步与异步"><span class="nav-number">5.</span> <span class="nav-text">JS的同步与异步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会有同步和异步"><span class="nav-number">5.1.</span> <span class="nav-text">为什么会有同步和异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步任务"><span class="nav-number">5.2.</span> <span class="nav-text">同步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">5.3.</span> <span class="nav-text">异步任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">6.</span> <span class="nav-text">js的异步机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">7.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">7.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">7.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
     
     </div>
   </aside>
