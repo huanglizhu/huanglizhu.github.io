@@ -15,12 +15,13 @@
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS笔试遇到的知识点（2）">
-<meta property="og:url" content="http://yoursite.com/2020/01/18/JS笔试题遇到的知识点（2）/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/01/18/JS笔试遇到的知识点（2）/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg">
-<meta property="og:updated_time" content="2020-01-18T04:09:34.568Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblcwmgaqbj312p06bdhe.jpg">
+<meta property="og:updated_time" content="2020-02-05T13:58:10.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS笔试遇到的知识点（2）">
 <meta name="twitter:description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。">
@@ -131,7 +132,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-JS笔试题遇到的知识点（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-JS笔试遇到的知识点（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -147,7 +148,7 @@
     
     <div class="article-meta">
       
-	<a href="/2020/01/18/JS笔试题遇到的知识点（2）/" class="article-date">
+	<a href="/2020/01/18/JS笔试遇到的知识点（2）/" class="article-date">
 	  <time datetime="2020-01-18T04:08:59.000Z" itemprop="datePublished">一月 18, 2020</time>
 	</a>
 
@@ -224,7 +225,35 @@
 <hr>
 <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>js中，数组会自动根据最大下标延长一位，既下标为n，则数组的长度为n+1。<strong>没有填值默认为undefinded</strong>。</p>
 <hr>
-<p># </p>
+<h1 id="分母为0isNaN-1-0"><a href="#分母为0isNaN-1-0" class="headerlink" title="分母为0isNaN(1/0)"></a>分母为0<code>isNaN(1/0)</code></h1><ul>
+<li>任何 <strong>数值除以0</strong> 都会导致错误而<strong>终止程序执行</strong>。但是<strong>在 JavaScript 中，会返回出特殊的值，因此不会影响程序的执行</strong>。</li>
+<li>比0大的数除以0，则会得到无穷大，所以 js 用 <strong>Infinity （无穷）</strong>来显示。</li>
+<li>也就是1/0得到的是Infinity。<strong><code>isNaN(1/0)</code>返回的是false。但是isNaN(0/0)返回的就是true</strong>。</li>
+</ul>
+<hr>
+<h1 id="in操作符"><a href="#in操作符" class="headerlink" title="in操作符"></a>in操作符</h1><p>（可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/in" target="_blank" rel="noopener">MDN的in运算符</a>）</p>
+<ul>
+<li>如果指定的 <strong>属性</strong> 在指定的对象或其原型链中，则in 运算符返回true。</li>
+<li>如果指定的 <strong>数组索引</strong> 在数组中，则in 运算符返回true。</li>
+<li><strong><code>1 in [1]</code>并不是表示数字1在不在数组里。而是表示数组中含不含有1这个索引index值。</strong></li>
+<li>数组长度为1，所以只含有的index值为0，<code>1 in [1]</code>返回fasle。</li>
+</ul>
+<hr>
+<h1 id="运算符优先级-1"><a href="#运算符优先级-1" class="headerlink" title="运算符优先级"></a>运算符优先级</h1><p>参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">MDN的运算符优先级</a>中的“汇总表”</p>
+<hr>
+<h1 id="逻辑运算符-amp-amp-和-的规律"><a href="#逻辑运算符-amp-amp-和-的规律" class="headerlink" title="逻辑运算符&amp;&amp;和||的规律"></a>逻辑运算符<code>&amp;&amp;</code>和<code>||</code>的规律</h1><p>可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_Operators" target="_blank" rel="noopener">MDN的逻辑运算符</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblcwmgaqbj312p06bdhe.jpg" alt="逻辑运算符"></p>
+<p><strong>规律</strong>：</p>
+<ol>
+<li>只要<code>&amp;&amp;</code>前面是false，无论<code>&amp;&amp;</code>后面是true还是false，结果都将返回<code>&amp;&amp;</code>前面的值;</li>
+<li>只要<strong><code>&amp;&amp;</code>前面是true</strong>，无论<code>&amp;&amp;</code>后面是true还是false，结果都将<strong>返回<code>&amp;&amp;</code>后面的值</strong>;</li>
+<li>只要<code>||</code>前面为false，无论<code>||</code>后面是true还是false，结果都返回<code>||</code>后面的值。</li>
+<li>只要<strong><code>||</code>前面为true</strong>，无论<code>||</code>后面是true还是false，结果都<strong>返回<code>||</code>前面的值</strong>。</li>
+</ol>
+<p><strong>会被转换为 false 的表达式有</strong>：<br>null； NaN； 0； 空字符串（”” or ‘’ or ``）； undefined。</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><strong>问题</strong>：<code>1 &amp;&amp; 2&gt;1</code>返回的布尔值？<br><strong>答案</strong>：true<br><strong>解析</strong>：<code>&gt;</code>的优先级排在前，所以先判断右边的表达式，<code>2&gt;1</code> 结果为true，<code>1&amp;&amp;true</code>返回的结果也是true。</p>
+<hr>
+<h1 id="cookie的生命期"><a href="#cookie的生命期" class="headerlink" title="cookie的生命期"></a>cookie的生命期</h1><p><strong>cookie的有效时间默认为-1，如果不进行设置的话，就会默认在浏览器会话关闭时结束</strong>。<br>可以通过<code>setMaxAge()</code>方法设置cookie的生命期。<br>当<code>setMaxAge(0)</code>表示立刻删除该浏览器上指定的cookie。</p>
+<hr>
 
       
     </div>
@@ -270,19 +299,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/19/Node.js开发博客项目之接口(2)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/18/JS笔试题遇到的知识点（2）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          开发博客项目之接口(2)
+          JS笔试遇到的知识点（2）
         
       </div>
     </a>
   
   
-    <a href="/2020/01/18/JS笔试遇到的知识点（2）/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/01/16/hexo deploy中报错_Nunjucks Error/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">JS笔试遇到的知识点（2）</div>
+      <div class="article-nav-title">hexo deploy中报错：Nunjucks Error</div>
     </a>
   
 </nav>
@@ -296,7 +325,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js中同名函数后面会覆盖前面的"><span class="nav-number">1.</span> <span class="nav-text">js中同名函数后面会覆盖前面的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void关键词"><span class="nav-number">2.</span> <span class="nav-text">void关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按位与运算-amp"><span class="nav-number">3.</span> <span class="nav-text">按位与运算&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#返回值和输出值不一样"><span class="nav-number">4.</span> <span class="nav-text">返回值和输出值不一样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义函数的三种方法"><span class="nav-number">5.</span> <span class="nav-text">定义函数的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个常见的事件的方法"><span class="nav-number">6.</span> <span class="nav-text">几个常见的事件的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">7.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null与undefined"><span class="nav-number">8.</span> <span class="nav-text">null与undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符instanceof、-、"><span class="nav-number">9.</span> <span class="nav-text">运算符instanceof、===、==</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS继承方式"><span class="nav-number">10.</span> <span class="nav-text">JS继承方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换为布尔值"><span class="nav-number">11.</span> <span class="nav-text">转换为布尔值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">12.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6中promise的三种状态"><span class="nav-number">13.</span> <span class="nav-text">ES6中promise的三种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">14.</span> <span class="nav-text">数组</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js中同名函数后面会覆盖前面的"><span class="nav-number">1.</span> <span class="nav-text">js中同名函数后面会覆盖前面的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void关键词"><span class="nav-number">2.</span> <span class="nav-text">void关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按位与运算-amp"><span class="nav-number">3.</span> <span class="nav-text">按位与运算&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#返回值和输出值不一样"><span class="nav-number">4.</span> <span class="nav-text">返回值和输出值不一样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义函数的三种方法"><span class="nav-number">5.</span> <span class="nav-text">定义函数的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个常见的事件的方法"><span class="nav-number">6.</span> <span class="nav-text">几个常见的事件的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">7.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null与undefined"><span class="nav-number">8.</span> <span class="nav-text">null与undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符instanceof、-、"><span class="nav-number">9.</span> <span class="nav-text">运算符instanceof、===、==</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS继承方式"><span class="nav-number">10.</span> <span class="nav-text">JS继承方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换为布尔值"><span class="nav-number">11.</span> <span class="nav-text">转换为布尔值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">12.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6中promise的三种状态"><span class="nav-number">13.</span> <span class="nav-text">ES6中promise的三种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">14.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分母为0isNaN-1-0"><span class="nav-number">15.</span> <span class="nav-text">分母为0isNaN(1/0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#in操作符"><span class="nav-number">16.</span> <span class="nav-text">in操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级-1"><span class="nav-number">17.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑运算符-amp-amp-和-的规律"><span class="nav-number">18.</span> <span class="nav-text">逻辑运算符&amp;&amp;和||的规律</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">18.1.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的生命期"><span class="nav-number">19.</span> <span class="nav-text">cookie的生命期</span></a></li></ol>
     
     </div>
   </aside>
