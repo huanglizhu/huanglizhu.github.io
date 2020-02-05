@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="数组的位置查找方法注意：  需要严格相等（**=）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
+  <meta name="description" content="数组的位置查找方法注意：  需要严格相等（===）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS对象之数组(2)">
 <meta property="og:url" content="http://yoursite.com/2019/08/11/JS对象之数组（2）/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="数组的位置查找方法注意：  需要严格相等（**=）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
+<meta property="og:description" content="数组的位置查找方法注意：  需要严格相等（===）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-04T04:00:03.461Z">
+<meta property="og:updated_time" content="2020-02-05T03:44:27.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS对象之数组(2)">
-<meta name="twitter:description" content="数组的位置查找方法注意：  需要严格相等（**=）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
+<meta name="twitter:description" content="数组的位置查找方法注意：  需要严格相等（===）才能查找位置。 这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -163,7 +163,7 @@
       
         <h1 id="数组的位置查找方法"><a href="#数组的位置查找方法" class="headerlink" title="数组的位置查找方法"></a>数组的位置查找方法</h1><p><strong>注意</strong>：</p>
 <ol>
-<li>需要严格相等（**=）才能查找位置。</li>
+<li>需要严格相等（<code>===</code>）才能查找位置。</li>
 <li>这两个方法都只能用于IE9以上的浏览器，以下的则需要我们封装一个方法来使用。（将其补充在下面）<a id="more"></a>
 
 </li>
@@ -190,6 +190,22 @@
 
 <hr>
 <h1 id="map-方法遍历数组并进行操作"><a href="#map-方法遍历数组并进行操作" class="headerlink" title="map() 方法遍历数组并进行操作"></a>map() 方法遍历数组并进行操作</h1><p>ES5中提供的<a href="https://www.runoob.com/jsref/jsref-map.html" target="_blank" rel="noopener">JavaScript Array map() 方法</a>可以遍历数组列表并按顺序对数组中的每一项执行回调函数。</p>
+<hr>
+<h2 id="补充：in运算符"><a href="#补充：in运算符" class="headerlink" title="补充：in运算符"></a>补充：in运算符</h2><p>（可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/in" target="_blank" rel="noopener">MDN的in运算符</a>）</p>
+<ul>
+<li>如果指定的 <strong>属性</strong> 在指定的对象或其原型链中，则in 运算符返回true。</li>
+<li>如果指定的 <strong>数组索引</strong> 在数组中，则in 运算符返回true。</li>
+<li><strong>注意：不是数组元素，是数组下标！</strong></li>
+<li>语法：<code>prop in object</code><blockquote>
+<p><strong>prop</strong><br>一个字符串类型或者 symbol 类型的属性名或者数组索引（非symbol类型将会强制转为字符串）。<br></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>objectName</strong><br>检查它（或其原型链）是否包含具有指定名称的属性的对象。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"><span class="keyword">var</span> trees = <span class="keyword">new</span> <span class="type">Array</span>(<span class="string">"redwood"</span>, <span class="string">"bay"</span>, <span class="string">"cedar"</span>, <span class="string">"oak"</span>, <span class="string">"maple"</span>);</span><br><span class="line"><span class="number">0</span> <span class="keyword">in</span> trees        <span class="comment">// 返回true</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">in</span> trees        <span class="comment">// 返回true</span></span><br><span class="line"><span class="number">6</span> <span class="keyword">in</span> trees        <span class="comment">// 返回false</span></span><br><span class="line"><span class="string">"bay"</span> <span class="keyword">in</span> trees    <span class="comment">// 返回false (必须使用索引号,而不是数组元素的值)</span></span><br><span class="line"></span><br><span class="line"><span class="string">"length"</span> <span class="keyword">in</span> trees <span class="comment">// 返回true (length是一个数组属性)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
 
       
     </div>
@@ -247,7 +263,7 @@
   
     <a href="/2019/08/10/JS对象之数组（1）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">JS对象之数组(1)</div>
+      <div class="article-nav-title">JS对象之数组（1）</div>
     </a>
   
 </nav>
@@ -261,7 +277,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的位置查找方法"><span class="nav-number">1.</span> <span class="nav-text">数组的位置查找方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf"><span class="nav-number">1.1.</span> <span class="nav-text">indexOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lastIndexOf"><span class="nav-number">1.2.</span> <span class="nav-text">lastIndexOf()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">2.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IE9以下的浏览器使用封装方法进行位置查找"><span class="nav-number">3.</span> <span class="nav-text">IE9以下的浏览器使用封装方法进行位置查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map-方法遍历数组并进行操作"><span class="nav-number">4.</span> <span class="nav-text">map() 方法遍历数组并进行操作</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的位置查找方法"><span class="nav-number">1.</span> <span class="nav-text">数组的位置查找方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf"><span class="nav-number">1.1.</span> <span class="nav-text">indexOf()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lastIndexOf"><span class="nav-number">1.2.</span> <span class="nav-text">lastIndexOf()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">2.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IE9以下的浏览器使用封装方法进行位置查找"><span class="nav-number">3.</span> <span class="nav-text">IE9以下的浏览器使用封装方法进行位置查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map-方法遍历数组并进行操作"><span class="nav-number">4.</span> <span class="nav-text">map() 方法遍历数组并进行操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：in运算符"><span class="nav-number">4.1.</span> <span class="nav-text">补充：in运算符</span></a></li></ol></li></ol>
     
     </div>
   </aside>
