@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS原型和原型链 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS原型和原型链">
+<meta property="og:url" content="http://yoursite.com/2020/02/08/JS原型和原型链/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo3vz5n6tj30md0bodmx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo40wpy9qj30m60bsn42.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo450tq6cj30mt0c845m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo48sbc76j30o00c9ahj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4n6amavj30km0drwla.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4y7apgfj30n307rdk6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo58g8ra2j30kh0dlwlb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo5xg6djfj30v70dsjvd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7555wotj30jh0eags2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8ksrpqsj31g803zt94.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8kkyt95j31hb0k778b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8rm3hsfj31fo0lttbi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7e0k737j30xx0bb45g.jpg">
+<meta property="og:updated_time" content="2020-02-08T13:32:17.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS原型和原型链">
+<meta name="twitter:description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS原型和原型链" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS原型和原型链
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/08/JS原型和原型链/" class="article-date">
+	  <time datetime="2020-02-08T13:26:39.000Z" itemprop="datePublished">二月 8, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
+<li>如何准确判断一个变量是<strong>数组类型</strong>（typeof肯定不行）【instanceof】</li>
+<li>写一个<strong>原型链继承</strong>的例子【原型扩展属性（函数）】</li>
+<li>描述<strong>new一个对象</strong>的过程【考察 构造函数】</li>
+<li>zepto（或其他框架）源码中如何使用原型链</li>
+</ul>
+<p><strong>【解答在最下面】</strong></p>
+<a id="more"></a>
+
+<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><ul>
+<li>构造函数命名使用<strong>大写字母开头</strong>。</li>
+<li>所有的<strong>引用类型都有构造函数</strong>（对象、数组、函数）<br>（所以<strong>精确判断 引用类型 时</strong>我们无法使用typeof，但<strong>可以通过 <code>instanceof</code> 判断她们的构造函数</strong>）</li>
+</ul>
+<p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg" alt="例子"></p>
+<p><strong>解析</strong>：<br><strong>构造函数Foo</strong>，第五行代码屏蔽与都不影响，因为<strong>默认就是把this这个对象返回给调用这个构造函数的对象</strong>。<br>当我们执行第7行代码时，实际<strong>先把Foo函数内的this变成了一个空对象</strong>，this再指向f，然后往Foo函数中传入两个参数赋值在this上，<strong>在Foo函数中完成绑定后再把this对象返回给f</strong>，可以得到f.name=’zhangsan’,f.age=20。</p>
+<p><strong>过程</strong>：</p>
+<ol>
+<li>创建一个新对象f</li>
+<li>构造函数Foo()的this指向这个新对象f（这里的this是个空对象）</li>
+<li>执行Foo()函数代码（即降属性绑定在this上）</li>
+<li>返回this对象给f（屏蔽第5行代码也是一样的效果，默认返回，此时this已经不是空对象了）</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li><code>vara ={}</code>其实是<code>var a = new Object（）</code>的语法糖</li>
+<li><code>vara=[]</code>其实是<code>var a = new Array（）</code>的语法糖</li>
+<li><code>function Foo(){...}</code>其实是<code>var Foo = new Function(){...}</code>的语法糖</li>
+<li>可以使用<code>instanceof</code>判断 引用类型（数组、对象、函数） 属于哪个 构造函数。</li>
+</ul>
+<p><strong>判断一个变量是否为“数组”</strong>：<br><code>变量 instanceof Array</code></p>
+<hr>
+<h1 id="原型规则（5条）"><a href="#原型规则（5条）" class="headerlink" title="原型规则（5条）"></a>原型规则（5条）</h1><p><strong>原型规则</strong>是学习<strong>原型链</strong>的基础</p>
+<h2 id="引用类型的自由扩展属性"><a href="#引用类型的自由扩展属性" class="headerlink" title="引用类型的自由扩展属性"></a>引用类型的自由扩展属性</h2><p>所有的<strong>引用类型（数组、对象、函数</strong>），都<strong>具有对象特性，即可自由扩展属性</strong>。（除了”null”）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo3vz5n6tj30md0bodmx.jpg" alt="例子"></p>
+<h2 id="引用类型的-proto-属性（隐式原型）"><a href="#引用类型的-proto-属性（隐式原型）" class="headerlink" title="引用类型的__proto__属性（隐式原型）"></a>引用类型的<code>__proto__</code>属性（隐式原型）</h2><p>所有的<strong>引用类型（数组、对象、函数），都有一个<code>__proto__</code>属性(隐式原型)，属性值是一个普通的对象</strong>。（除了”null”）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo40wpy9qj30m60bsn42.jpg" alt="例子"></p>
+<h2 id="函数的prototype属性（显式原型）"><a href="#函数的prototype属性（显式原型）" class="headerlink" title="函数的prototype属性（显式原型）"></a>函数的<code>prototype</code>属性（显式原型）</h2><p><strong>所有的函数都有一个<code>prototype</code>属性（显式原型），属性值也是一个普通的对象。</strong><br><strong>【注意：数组、对象没有<code>prototype</code>属性】</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo450tq6cj30mt0c845m.jpg" alt="例子"></p>
+<h2 id="proto-与prototype属性值"><a href="#proto-与prototype属性值" class="headerlink" title="__proto__与prototype属性值"></a><code>__proto__</code>与<code>prototype</code>属性值</h2><p>所有的<strong>引用类型（数组、对象、函数）的<code>__proto__</code>属性值 都指向它的 构造函数的<code>prototype</code>属性值。</strong>（除了”null”）<br>【<strong>“指向”即“全等”</strong>，<code>__proto__</code>属性值<code>===</code>它的构造函数的<code>prototype</code>属性值】<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo48sbc76j30o00c9ahj.jpg" alt="例子"></p>
+<h2 id="第五条原型规则"><a href="#第五条原型规则" class="headerlink" title="第五条原型规则"></a>第五条原型规则</h2><p>当试图得到一个对象的某个属性时，<strong>如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>属性（即它的构造函数的<code>prototype</code>属性）中寻找</strong>。</p>
+<p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4n6amavj30km0drwla.jpg" alt="例子"></p>
+<p><strong>解析</strong>：<br><strong>看第15行代码</strong>，f是通过构造函数Foo创建的对象，f只有第10行添加的printName属性，<strong>没有alertName属性</strong>，根据第五条原则，<strong>f会去它的<code>__proto__</code>属性（即它的构造函数Foo函数的<code>prototype</code>属性）中寻找</strong>，找到第5行的<code>alert（this.name)</code>，<strong>弹出’zhangsan’</strong>。</p>
+<p><strong>注意：第6行的this也是指向对象f</strong>，14行打印出的也是’zhangsan’。</p>
+<hr>
+<h2 id="hasOwnProperty-判断原型属性"><a href="#hasOwnProperty-判断原型属性" class="headerlink" title="hasOwnProperty()判断原型属性"></a><code>hasOwnProperty()</code>判断原型属性</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4y7apgfj30n307rdk6.jpg" alt="例子"><br>在<strong>使用<code>for in</code>循环对象属性时</strong>，我们希望<strong>避开他来自原型的属性</strong>，虽然现在高级浏览器上已经回屏蔽，但为了保证 程序健壮性 还是<strong>建议大家加上这个判断</strong>，能在第6行打印的就是来自原型的属性。</p>
+<hr>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo58g8ra2j30kh0dlwlb.jpg" alt="例子"></p>
+<p><strong>解析</strong>：<br><strong>f中找不到toString()</strong>，根据第五条规则，去f的<code>__proto__</code>属性（即f的构造函数Foo()的<code>prototype</code>属性）中寻找,也没找到。<br><strong>注意</strong>：原型规则中提到<strong><code>__proto__</code>属性值是一个普通的对象</strong>，又因为<strong>每个对象都有一个<code>__proto__</code>属性</strong>，所以我们去<code>f.__proto__</code>（一个对象）的<code>__proto__</code>中查找。<br>根据第四条原则，我们知道 <strong>对象的<code>__proto__</code> 全等于 它的构造函数（Object）的<code>prototype</code>属性值</strong>，也就是说要去Object的<code>prototype</code>属性值 中找toString()，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="noopener">Object.prototype.toString()</a>是存在的。</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li><strong>Object是构造函数，不是对象！</strong></li>
+<li><strong>JS为了防止死循环，到<code>Object.prototype</code>（构造函数的显示类型）如果找不到再继续往下的话就是到null了</strong>】</li>
+</ol>
+<p><strong>示意图</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo5xg6djfj30v70dsjvd.jpg" alt="示意图"></p>
+<hr>
+<h2 id="instanceof运算符"><a href="#instanceof运算符" class="headerlink" title="instanceof运算符"></a><code>instanceof</code>运算符</h2><ul>
+<li>作用：判断<strong>引用类型</strong>（对象、数组、函数）属于哪个<strong>构造函数</strong>（Object()、Array()、Funtion()）。【也就是让我们去<strong>找这个 引用类型 里有没有 构造函数的显示原型</strong>】</li>
+<li>语法：<code>object instanceof constructor</code></li>
+<li>参数：object（要检测的引用类型）；constructor（某个构造函数）</li>
+<li>返回值：测试它 <strong>左边的引用类型</strong> 是否是它 <strong>右边的构造函数的实例</strong>，返回 boolean 的数据类型。<strong>是则返回true，否则返回false</strong>。</li>
+<li><strong>注意</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> === <span class="string">'object'</span> <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><p>结合上一个例子，<code>f instanceof Foo</code>的<strong>判断逻辑</strong>是：</p>
+<ol>
+<li>判断f是否是Foo函数的实例，即判断f中是否能找到Foo函数的显示原型prototype。</li>
+<li>根据原则，f中找不到该属性时，顺着f的<code>__proto__</code>一层一层往上，看看能否对应到<code>Foo.prototype</code></li>
+<li>找到了，返回true</li>
+</ol>
+<hr>
+<h1 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h1><h2 id="如何准确判断一个变量是数组类型（typeof肯定不行）"><a href="#如何准确判断一个变量是数组类型（typeof肯定不行）" class="headerlink" title="如何准确判断一个变量是数组类型（typeof肯定不行）"></a>如何准确判断一个变量是<strong>数组类型</strong>（typeof肯定不行）</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"></p>
+<hr>
+<h2 id="写一个原型链继承的例子"><a href="#写一个原型链继承的例子" class="headerlink" title="写一个原型链继承的例子"></a>写一个原型链继承的例子</h2><p><strong>基础例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7555wotj30jh0eags2.jpg" alt="基础例子"><br>1-12：创建<strong>两个构造函数Animal()、Dog()</strong>:<br>13：将<strong>Dog的显示类型<code>prototype</code>更改为Animal()的一个对象</strong>:<br>15：new一个Dog()的对象hashiqi，此时<strong>hashiqi不仅有Dog()的属性bark，还有一个继承自<code>Dog.prototype</code>(即Animal()的一个对象)的eat属性</strong>。<br><strong>【eat属性 就来自原型链继承。】</strong></p>
+<p><strong>【面试千万别写这么简单，写下面的例子】</strong></p>
+<h3 id="封装DOM查询的例子"><a href="#封装DOM查询的例子" class="headerlink" title="封装DOM查询的例子"></a>封装DOM查询的例子</h3><ul>
+<li><strong>功能：获取DOM节点的内容并给节点绑定一个事件。</strong></li>
+<li><strong>原理</strong>：通过<strong>扩展原型</strong>的方式来：根据id获取一个DOM节点，扩展Elem的显式原型方法 html(),调用html()可改变/返回节点的innerHTML。再扩展一个原型方法on()，调用on()可绑定一个事件函数。</li>
+<li><strong>测试方法</strong>：先通过不传参的html()测试是否能成功获取该id的DOM节点的innerHTML，可以则传参改变该innerHTML，并使用on()绑定click函数用于点击节点后弹出警示框。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据传入的id获取DOM元素elem</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Elem</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//this.elem是获取到的对象</span></span><br><span class="line">    <span class="keyword">this</span>.elem = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改Elem的显式原型,调用html()可改/返innerHTML</span></span><br><span class="line">Elem.prototype.html = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;<span class="comment">//绑定elem</span></span><br><span class="line">    <span class="comment">//如果有传参就用参数替换掉获取到的DOM元素的innerHTML</span></span><br><span class="line">    <span class="keyword">if</span> (val) &#123;</span><br><span class="line">        elem.innerHTML = val;</span><br><span class="line">        <span class="comment">// 可不反回this，返回是为了实现链式操作</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> elem.innerHTML;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用on()可绑定事件函数,type是函数名，fn是函数</span></span><br><span class="line">Elem.prototype.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;</span><br><span class="line">    elem.addEventListener(type, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> div1 = <span class="keyword">new</span> Elem(<span class="string">"main-navigation"</span>);</span><br><span class="line"><span class="comment">// console.log(div1.html());说明能够获取innerHTML</span></span><br><span class="line">div1.html(<span class="string">"&lt;p&gt;你好呀&lt;/p&gt;"</span>);</span><br><span class="line">div1.on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"你点击了我！"</span>) ;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>【关于“addEventListener”可参考笔记<a href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-添加事件句柄-click" target="_blank" rel="noopener">DOM基础</a>的添加事件句柄。要区别于<code>xx.onclick=function(){函数名(参数);}</code>】</p>
+<p><strong>测试</strong>：打开一个网页，<strong>找到菜单栏对应的id</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8ksrpqsj31g803zt94.jpg" alt="测试1"><br>将<strong>此id</strong>用作<strong>参数</strong>调用<strong>构造函数Elem()创建一个对象div1</strong>，可打印出菜单栏的innerHTML，<strong>说明可以成功获取到div1的innerHTML</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8kkyt95j31hb0k778b.jpg" alt="测试2"><br><strong>调用div1的显式原型中的html()进行数据的替换，调用div1的显式原型中的on()进行事件函数的绑定</strong>，点击div1后弹出警示框：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8rm3hsfj31fo0lttbi.jpg" alt="测试3"></p>
+<h4 id="补充：链式操作"><a href="#补充：链式操作" class="headerlink" title="补充：链式操作"></a>补充：链式操作</h4><p>因为我们的html()返回的是this，相当于返回了div1，所以可以链式操作：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div1.html(<span class="string">"&lt;p&gt;你好呀&lt;/p&gt;"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="string">"你点击了我！"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="描述new一个对象的过程"><a href="#描述new一个对象的过程" class="headerlink" title="描述new一个对象的过程"></a>描述new一个对象的过程</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7e0k737j30xx0bb45g.jpg" alt="答案"></p>
+<ol>
+<li>创建一个新对象f</li>
+<li>构造函数Foo()的this指向这个新对象f（这里的this是个空对象）</li>
+<li>执行Foo()函数代码（即对this进行赋值）</li>
+<li>返回this对象给f（屏蔽第5行代码也是一样的效果，默认返回，此时this已经不是空对象了）</li>
+</ol>
+<hr>
+<h2 id="zepto（或其他框架）源码中如何使用原型链"><a href="#zepto（或其他框架）源码中如何使用原型链" class="headerlink" title="zepto（或其他框架）源码中如何使用原型链"></a>zepto（或其他框架）源码中如何使用原型链</h2><ul>
+<li>阅读源码是高效提高技能的方式</li>
+<li>但不能“埋头苦钻”有技巧在其中</li>
+<li>慕课网搜索”zepto设计和源码分析”</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/08/使用react-transition-group实现动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">使用react-transition-group实现动画</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">2.1.</span> <span class="nav-text">扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型规则（5条）"><span class="nav-number">3.</span> <span class="nav-text">原型规则（5条）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的自由扩展属性"><span class="nav-number">3.1.</span> <span class="nav-text">引用类型的自由扩展属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的-proto-属性（隐式原型）"><span class="nav-number">3.2.</span> <span class="nav-text">引用类型的__proto__属性（隐式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的prototype属性（显式原型）"><span class="nav-number">3.3.</span> <span class="nav-text">函数的prototype属性（显式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-与prototype属性值"><span class="nav-number">3.4.</span> <span class="nav-text">__proto__与prototype属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五条原型规则"><span class="nav-number">3.5.</span> <span class="nav-text">第五条原型规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hasOwnProperty-判断原型属性"><span class="nav-number">3.6.</span> <span class="nav-text">hasOwnProperty()判断原型属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">4.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceof运算符"><span class="nav-number">4.2.</span> <span class="nav-text">instanceof运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目解答"><span class="nav-number">5.</span> <span class="nav-text">题目解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何准确判断一个变量是数组类型（typeof肯定不行）"><span class="nav-number">5.1.</span> <span class="nav-text">如何准确判断一个变量是数组类型（typeof肯定不行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写一个原型链继承的例子"><span class="nav-number">5.2.</span> <span class="nav-text">写一个原型链继承的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装DOM查询的例子"><span class="nav-number">5.2.1.</span> <span class="nav-text">封装DOM查询的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：链式操作"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">补充：链式操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述new一个对象的过程"><span class="nav-number">5.3.</span> <span class="nav-text">描述new一个对象的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zepto（或其他框架）源码中如何使用原型链"><span class="nav-number">5.4.</span> <span class="nav-text">zepto（或其他框架）源码中如何使用原型链</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
