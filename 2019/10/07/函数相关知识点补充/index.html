@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
-<meta property="og:updated_time" content="2020-02-09T03:15:33.622Z">
+<meta property="og:updated_time" content="2020-02-09T14:37:12.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数相关知识点补充">
 <meta name="twitter:description" content="函数是对象 JavaScript 函数是通过 function 关键词定义的。JavaScript 中的 typeof 运算符会为函数返回 “function”。但是最好是把 JavaScript 函数描述为对象。 JavaScript 函数都有属性和方法。">
@@ -221,15 +221,19 @@
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Hoisting" target="_blank" rel="noopener">关于提升MDN</a></li>
 <li>首先要明确，<strong>变量是声明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
 <li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
-<li>函数声明式存在函数提升，<strong>函数表达式的写法不存在函数提升</strong>。</li>
+<li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
+<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。（变量的提升只会对<code>var</code>命令声明的变量有效，其他不是用var命令声明的变量，不会发生变量的提升。）</li>
+<li><strong>注意</strong>：变量的提升只存在全局/函数作用域中，<strong><code>if(){}</code>或<code>for(){}</code></strong>都不是函数作用域，他们<strong>里面的变量会提升到包裹他们的全局/函数作用域的顶部</strong>。</li>
+<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在块级，使用<strong>let声明的变量不存在变量提升</strong>。</li>
 <li><strong>函数和变量相比，会被优先提升</strong>。这意味着函数会被提升到更靠前的位置。</li>
 <li>ES5中说，在全局和函数作用域中定义的<strong>函数的声明和定义都将会被提前</strong>到当前作用域的顶部。</li>
 <li><strong>补充</strong>：当出现多个同名变量与同名函数时，<strong>调用该变量名时的优先级为：变量声明&lt; 函数声明 &lt; 变量赋值</strong>（具体参考牛客网20191215第7题）</li>
-<li>通过声明方式创建的函数会被提升，通过表达式方法创建的函数不会被提升：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="帮助理解"></li>
+<li>通过函数声明方式创建的函数会被提升，<strong>通过表达式方法创建的函数不会被提升</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="帮助理解"></li>
 </ul>
 <h2 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h2><ul>
 <li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
-<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。</li>
+<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。（变量的提升只会对<code>var</code>命令声明的变量有效，其他不是用var命令声明的变量，不会发生变量的提升。）</li>
+<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在块级，使用<strong><code>let</code>声明的变量不存在变量提升</strong>。</li>
 <li><strong>注意</strong>：变量声明被提升到了<strong>当前作用域</strong>的头部， ES6之前只有<strong>全局作用域和函数作用域</strong>，<strong>if不是函数作用域</strong>，所以变量tmp提升到了foo函数的头部。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (x &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tmp = x - <span class="number">100</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tmp;<span class="comment">//注意：提升到了if的外面</span></span><br><span class="line">  <span class="keyword">if</span> (x &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    tmp = x - <span class="number">100</span>;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 
 </li>
