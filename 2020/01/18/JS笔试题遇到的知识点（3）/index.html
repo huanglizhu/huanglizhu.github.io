@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS笔试遇到的知识点（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="运算符优先级参考MDN的运算符优先级中的“汇总表”">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔试遇到的知识点（3）">
+<meta property="og:url" content="http://yoursite.com/2020/01/18/JS笔试题遇到的知识点（3）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="运算符优先级参考MDN的运算符优先级中的“汇总表”">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbluno9m0qj30s90lgtcu.jpg">
+<meta property="og:updated_time" content="2020-02-09T11:25:32.331Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS笔试遇到的知识点（3）">
+<meta name="twitter:description" content="运算符优先级参考MDN的运算符优先级中的“汇总表”">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS笔试题遇到的知识点（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS笔试遇到的知识点（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/18/JS笔试题遇到的知识点（3）/" class="article-date">
+	  <time datetime="2020-01-18T04:08:59.000Z" itemprop="datePublished">一月 18, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/牛客网题目/">牛客网题目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h1><p>参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">MDN的运算符优先级</a>中的“汇总表”</p>
+<a id="more"></a>
+
+<hr>
+<h1 id="逻辑运算符-amp-amp-和-的规律"><a href="#逻辑运算符-amp-amp-和-的规律" class="headerlink" title="逻辑运算符&amp;&amp;和||的规律"></a>逻辑运算符<code>&amp;&amp;</code>和<code>||</code>的规律</h1><p>可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_Operators" target="_blank" rel="noopener">MDN的逻辑运算符</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg" alt="逻辑运算符"></p>
+<p><strong>明确：<code>&amp;&amp;</code>和<code>||</code>返回的是表达式，<code>!</code>返回的是布尔值！</strong></p>
+<p><strong>会被转换为 false 的表达式有</strong>：<br>null； NaN； 0； 空字符串（<code>&quot;&quot;</code> or <code>&#39;&#39;</code> or ``）； undefined。</p>
+<h2 id="帮助理解"><a href="#帮助理解" class="headerlink" title="帮助理解"></a>帮助理解</h2><p><strong>返回表达式的原则：从前往后判断，只要到了能判断出 整个表达式的真假 的位置我们就停下来返回这个位置的部分表达式。</strong></p>
+<p><strong>&amp;&amp;：前后都为真才是真，只要有一个是假的就是假。</strong>所以只要有第一个表达式是假的我们就不用继续判断了，返回第一个表达式。如果第一个表达式是真的我们就继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
+<p><strong>||：只要有一个是真就是真。</strong>所以只要有第一个表达式是真的就可以判断整个表达式都是真的，故返回第一个表达式。如果第一个表达式是假的那我们就要继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span><span class="number">10</span>可被强转为<span class="literal">true</span>，<span class="number">0</span>则是<span class="literal">false</span>，有一个错的就返回错的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span> &amp;&amp; <span class="number">0</span>);<span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="regexp">//</span><span class="string">""</span>可被强转为<span class="literal">false</span>，<span class="string">"abc"</span>可被强转为<span class="literal">true</span>，有一个是真的就返回真的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">""</span> || <span class="string">"abc"</span>);<span class="regexp">//</span><span class="string">"abc"</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="built_in">window</span>.abc);<span class="regexp">//</span><span class="literal">true</span>。`<span class="javascript"><span class="built_in">window</span>.abc</span>`是<span class="literal">undefined</span>，强转为<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><strong>问题</strong>：<code>1 &amp;&amp; 2&gt;1</code>返回的布尔值？<br><strong>答案</strong>：true<br><strong>解析</strong>：<br><code>&gt;</code>的优先级排在前，所以先判断右边的表达式，<code>2&gt;1</code> 结果为true。<br>得到<code>1&amp;&amp;true</code>，1可被强转为true，所以返回的结果是 运算符后面的表达式 ，也就是true。</p>
+<p><strong>改一下问题</strong>：console.log(2 &gt; 1 &amp;&amp;  1);<br><strong>答案</strong>：1<br><strong>解析</strong>：<br><code>2&gt;1</code> 结果为true，所以返回 运算符后面的表达式，也就是1.</p>
+<hr>
+<h1 id="cookie的生命期"><a href="#cookie的生命期" class="headerlink" title="cookie的生命期"></a>cookie的生命期</h1><p><strong>cookie的有效时间默认为-1，如果不进行设置的话，就会默认在浏览器会话关闭时结束</strong>。<br>可以通过<code>setMaxAge()</code>方法设置cookie的生命期。<br>当<code>setMaxAge(0)</code>表示立刻删除该浏览器上指定的cookie。</p>
+<hr>
+<h1 id="Ajax技术的工作原理（XMLHttpRequest）"><a href="#Ajax技术的工作原理（XMLHttpRequest）" class="headerlink" title="Ajax技术的工作原理（XMLHttpRequest）"></a>Ajax技术的工作原理（XMLHttpRequest）</h1><p>可参考笔记<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/" target="_blank" rel="noopener">AJAX异步更新</a></p>
+<p><strong>Ajax技术核心就是XMLHttpRequest对象。</strong></p>
+<p>Ajax技术的<strong>工作原理</strong>(可以分成<strong>3步</strong>):</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 创建XMLHttpRequest对象：</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">//2. xhr 发送请求：</span></span><br><span class="line">xhr.open(<span class="string">'get'</span>,<span class="string">'test.html'</span>,<span class="string">'true'</span>);</span><br><span class="line">xhr.send();</span><br><span class="line"><span class="comment">//3. xhr获取响应：</span></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(xhr.readystate == <span class="number">4</span>)&#123;<span class="comment">//请求的状态码</span></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    0:请求还没有建立（open执行前）</span></span><br><span class="line"><span class="comment">    1：请求建立了还没发送（执行了open）</span></span><br><span class="line"><span class="comment">    2：请求正式发送（执行了send）</span></span><br><span class="line"><span class="comment">    3：请求已受理，有部分数据可以用，但还没有处理完成</span></span><br><span class="line"><span class="comment">    4：请求完全处理完成</span></span><br><span class="line"><span class="comment">       */</span> </span><br><span class="line">    alert(xhr.responseText);<span class="comment">//返回的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，<strong>send()前是open()</strong></p>
+<p>在笔记“<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#向服务器发送请求" target="_blank" rel="noopener">AJAX异步更新</a>的向服务器发送请求”中也提到：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbluno9m0qj30s90lgtcu.jpg" alt="AJAX异步更新 步骤"></p>
+<hr>
+<h1 id="解释型语言的特性-非独立、效率低"><a href="#解释型语言的特性-非独立、效率低" class="headerlink" title="解释型语言的特性:非独立、效率低"></a>解释型语言的特性:非独立、效率低</h1><p><strong>非独立</strong>：JavaScript语言依赖执行环境，对于客户端来说是浏览器，对于服务端来说是node。<br><strong>效率低</strong>：执行前不需要编译，执行时才编译，因此效率低。</p>
+<h2 id="解释性语言和编译性语言"><a href="#解释性语言和编译性语言" class="headerlink" title="解释性语言和编译性语言"></a>解释性语言和编译性语言</h2><p>计算机不能直接理解高级语言，只能直接理解机器语言，所以必须要把高级语言翻译成机器语言，计算机才能执行高级语言编写的程序。<br><strong>翻译的方式有两种，一个是编译，一个是解释。两种方式只是翻译的时间不同。</strong></p>
+<h3 id="解释性语言的定义"><a href="#解释性语言的定义" class="headerlink" title="解释性语言的定义"></a>解释性语言的定义</h3><p><strong>解释性语言的程序不需要编译，在运行程序的时候才翻译，每个语句都是执行的时候才翻译</strong>。这样解释性语言每执行一次就需要逐行翻译一次，效率比较低。<br>现代解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。</p>
+<h3 id="编译性语言的定义"><a href="#编译性语言的定义" class="headerlink" title="编译性语言的定义"></a>编译性语言的定义</h3><p>编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高。</p>
+<hr>
+<h1 id="动态语言与静态语言"><a href="#动态语言与静态语言" class="headerlink" title="动态语言与静态语言"></a>动态语言与静态语言</h1><p><strong>JavaScript是动态语言。</strong></p>
+<h2 id="静态语言（强类型语言）"><a href="#静态语言（强类型语言）" class="headerlink" title="静态语言（强类型语言）"></a>静态语言（强类型语言）</h2><p>静态语言是<strong>在编译时</strong>变量的数据类型即可确定的语言，多数静态类型语言<strong>要求在使用变量之前必须声明数据类型</strong>。 </p>
+<p>例如：<strong>C++、Java、Delphi、C#、Objective-C等</strong>。</p>
+<h2 id="动态语言（弱类型语言）"><a href="#动态语言（弱类型语言）" class="headerlink" title="动态语言（弱类型语言）"></a>动态语言（弱类型语言）</h2><p>动态语言是<strong>在运行时</strong>确定数据类型的语言。<strong>变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。</strong><br>例如：<strong>PHP/ASP/Ruby/Python/Perl/ABAP/SQL/JavaScript/Unix Shell等等</strong>。</p>
+<hr>
+<h1 id="区别-字符串字面量-和-String对象"><a href="#区别-字符串字面量-和-String对象" class="headerlink" title="区别 字符串字面量 和 String对象"></a>区别 字符串字面量 和 String对象</h1><p>首先注意：<strong>typeof来判断数据类型其实并不准确</strong>。比如<strong>数组、正则、日期、对象的typeof返回值都是object</strong>，这就会造成一些误差。<br>准确判断可以从<strong>构造函数（instanceof）</strong>、<strong>原型链（prototype.isPrototypeOf）</strong>上下手，具体可以看笔记 <a href="https://huanglizhu.github.io/2019/07/01/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#（面试题）如何判断一个对象是不是数组类型" target="_blank" rel="noopener">JS数据类型</a></p>
+<p><strong>JS 中值的类型分为原始值类型和对象类型</strong>。<br>原始值类型包括 number, string, boolean, null 和 undefined；（记忆：纳尼USB）<br>对象类型即 object。首先明确<strong>原始值类型不是对象</strong>。</p>
+<p>另外，要<strong>注意 <code>&quot;hello&quot;</code> 和 <code>new String(&#39;hello&#39;)</code> 的区别，前者是字符串字面值，属于原始类型，而后者是对象</strong>。<br>用 typeof 运算符返回的值也是完全不一样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span> <span class="keyword">typeof</span> <span class="string">'hello'</span>;<span class="comment">// 'string'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'hello'</span>);<span class="comment">// 'object'</span></span><br></pre></td></tr></table></figure>
+
+<p>很多人分不清字符串字面值和 String 对象，是因为 JS 的语法中的“装箱”：<br>当执行 <code>&#39;hello&#39;.length</code> 时，返回 5，很多人就觉得 <code>&#39;hello&#39;</code> 就是 <code>String 对象</code>，不然它怎么会有 String 对象的属性。<br>其实，这是由于 JS 在执行到这条语句的时候，内部将 <code>&#39;hello&#39;</code> 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 <strong>“装箱”</strong>，在其他面向对象语言里也有（如 C#）。<br>不要认为 JS 帮你装箱了，你就可以在写代码的时候不分箱里箱外了！<br>【题目可看20200205第十题】</p>
+<hr>
+<p># </p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/牛客网题目/">牛客网题目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/19/Node.js开发博客项目之接口(2)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          开发博客项目之接口(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/18/JS笔试遇到的知识点（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS笔试遇到的知识点（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">1.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑运算符-amp-amp-和-的规律"><span class="nav-number">2.</span> <span class="nav-text">逻辑运算符&amp;&amp;和||的规律</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助理解"><span class="nav-number">2.1.</span> <span class="nav-text">帮助理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">2.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.3.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的生命期"><span class="nav-number">3.</span> <span class="nav-text">cookie的生命期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax技术的工作原理（XMLHttpRequest）"><span class="nav-number">4.</span> <span class="nav-text">Ajax技术的工作原理（XMLHttpRequest）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解释型语言的特性-非独立、效率低"><span class="nav-number">5.</span> <span class="nav-text">解释型语言的特性:非独立、效率低</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解释性语言和编译性语言"><span class="nav-number">5.1.</span> <span class="nav-text">解释性语言和编译性语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释性语言的定义"><span class="nav-number">5.1.1.</span> <span class="nav-text">解释性语言的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译性语言的定义"><span class="nav-number">5.1.2.</span> <span class="nav-text">编译性语言的定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态语言与静态语言"><span class="nav-number">6.</span> <span class="nav-text">动态语言与静态语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态语言（强类型语言）"><span class="nav-number">6.1.</span> <span class="nav-text">静态语言（强类型语言）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态语言（弱类型语言）"><span class="nav-number">6.2.</span> <span class="nav-text">动态语言（弱类型语言）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区别-字符串字面量-和-String对象"><span class="nav-number">7.</span> <span class="nav-text">区别 字符串字面量 和 String对象</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
