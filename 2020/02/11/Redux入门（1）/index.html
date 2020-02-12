@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbsbylzw2vj30kt09jq3f.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbsh09bqlsj310p0fkta2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbshhmmzhyj30yu0fbmyi.jpg">
-<meta property="og:updated_time" content="2020-02-11T08:12:22.936Z">
+<meta property="og:updated_time" content="2020-02-12T09:52:21.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux入门（1）">
 <meta name="twitter:description" content="Redux概念简述 Redux 是全球范围内比较推荐的 和React进行搭配的 数据层框架。 无论程序多么复杂，都不需要我们手动传值了，数据传递的过程都是：组件数据改变-&amp;gt; Store改变 -&amp;gt; 其他组件取值 Redux=Reducer+Flux（Flux是FaceBook公司最早配合React推出的数据层框架，但是它问题很多，所以作者Dan引入Reducer的概念创造了Redux）">
@@ -235,13 +235,13 @@
 </ul>
 <p><strong>改变<code>store</code>中数据时</strong>：</p>
 <ul>
-<li>想要改变<code>store</code>中的数据就需要在 组件 中<strong>创建一个<code>action</code></strong>。（在<code>react</code>中，<strong><code>action</code>是一个对象的形式，<code>type</code>属性 描述要做的事情，<code>value</code>属性 为需要传的值</strong>。）</li>
+<li>想要改变<code>store</code>中的数据就需要在 组件 中<strong>创建一个<code>action</code></strong>。（在<code>react</code>中，<strong><code>action</code>是一个对象的形式，<code>type</code>属性 描述要做的事情，<code>value</code>属性 为需要传的值</strong>。）<br>【<strong>注意：value属性名是自定义的，根据你需要传的值的名字来定</strong>】</li>
 <li><code>store</code>提供了一个<code>dispatch</code>方法,<strong>可使用<code>store.dispatch(action)</code>将<code>action</code>传给<code>store</code></strong>。</li>
 <li><code>store</code>将<strong>自动将 接收到的数据 和<code>action</code>一起传给<code>reducer</code></strong>，<code>reducer</code>返回的函数中的<strong><code>state</code>就是 上次传过来的数据，<code>action</code>就是组件想要修改<code>state</code>的那句话</strong>。</li>
 <li><code>reducer</code>会<strong>根据<code>store</code>传来的 上一次的数据（<code>state</code>） 和<code>action</code></strong>整合起来后进行处理，<strong>给<code>store</code>返回一个新数据<code>newState</code></strong>。</li>
 <li><strong><code>reducer</code>处理过程</strong>：<strong>reducer 可以接受<code>state</code>，但是决不能修改<code>state</code></strong>。所以我们需要对<code>store</code>传进来的<code>state</code>进行<strong>深拷贝</strong>成<code>newState</code>，然后再进行<code>action</code>的处理，最后返回<code>newState</code>给<code>store</code></li>
 <li>此时页面和<code>store</code>数据并未同步，需要使用在 组件的构造函数 中使用<code>store.subscribe(this.handleStoreChange);</code>让<strong>组件订阅<code>store</code></strong>，那么只要<code>store</code>发生改变，handleStoreChange函数 就会被执行一次。</li>
-<li>在handleStoreChange函数中，<strong>使用<code>getState（）</code>获取<code>store</code>中的数据 替换 组件中的<code>state</code>数据</strong>。那么组件的数据一更新页面自然重新渲染。</li>
+<li>在handleStoreChange函数中，<strong>使用<code>getState（）</code>获取<code>store</code>中的数据 替换 组件中的<code>state</code>数据</strong>，组件的<code>state</code>发生改变后，页面自然重新渲染。</li>
 </ul>
 <h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><p><strong>获取<code>store</code>数据</strong>：</p>
 <ol>
@@ -252,12 +252,12 @@
 </ol>
 <p><strong>改变<code>store</code>数据</strong>：</p>
 <ol>
-<li>在组件中<strong>创建 对象<code>action</code></strong>，<code>type</code>属性 描述要做的事情，<code>value</code>属性 为需要传的值**。（<code>TodoList.js</code>-<code>handleInputChange（）</code>）</li>
+<li>点击输入框时，在组件中<strong>创建 对象<code>action</code></strong>，<code>type</code>属性 描述要做的事情，<code>value</code>属性 为需要传的值。（<code>TodoList.js</code>-<code>handleInputChange（）</code>）</li>
 <li>使用<code>store.dispatch(action)</code><strong>将<code>action</code>传给<code>store</code></strong>。（<code>TodoList.js</code>-<code>handleInputChange（）</code>）</li>
 <li><code>store</code><strong>自动将 接收到的数据（<code>state</code>） 和<code>action</code>一起传给<code>reducer</code></strong></li>
 <li><code>reducer</code>会<strong>根据<code>store</code>传来的 上一次的数据（<code>state</code>） 和<code>action</code></strong>整合起来后<strong>进行处理</strong>，<strong>给<code>store</code>返回一个新数据<code>newState</code></strong>（<code>reducer.js</code>中输出的函数中）</li>
 <li><strong><code>reducer</code>处理过程</strong>：对<code>store</code>传进来的<code>state</code>进行<strong>深拷贝</strong>成<code>newState</code>，然后再进行<code>action</code>希望的处理，最后返回<code>newState</code>给<code>store</code></li>
-<li>在 组件的构造函数 中使用<code>store.subscribe(this.handleStoreChange);</code>让<strong>组件订阅<code>store</code></strong>，那么只要<code>store</code>发生改变，handleStoreChange函数 就会被执行一次。</li>
+<li>在 组件的构造函数 中<strong>使用<code>store.subscribe(this.handleStoreChange);</code></strong>让<strong>组件订阅<code>store</code></strong>，那么只要<code>store</code>发生改变，handleStoreChange函数 就会被执行一次。</li>
 <li>在handleStoreChange函数中，<strong>使用<code>getState（）</code>获取<code>store</code>中的数据 替换 组件中的<code>state</code>数据</strong>。那么组件的数据一更新页面自然重新渲染。</li>
 </ol>
 <hr>
