@@ -25,7 +25,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbtri7h4q7j31g90cm3zr.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbuk7o2oj7j30p90ffjtl.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbukryzgp7j31d90afdix.jpg">
-<meta property="og:updated_time" content="2020-02-13T07:01:25.278Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusumjpsgj30sa05jwk0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusvzsyf9j30sd05o441.jpg">
+<meta property="og:updated_time" content="2020-02-13T07:43:41.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux入门（2）">
 <meta name="twitter:description" content="使用redux完成TodoList列表功能实现效果：继续上一篇笔记的例子，我们希望在点击 “提交”按钮 后，input框中的 数据value 存到store中的list中，并清空input框。">
@@ -197,15 +200,16 @@
 
 <p><strong>实现效果：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbtri7h4q7j31g90cm3zr.jpg" alt="实现效果"></p>
 <hr>
-<h1 id="actionTypes拆分type属性值"><a href="#actionTypes拆分type属性值" class="headerlink" title="actionTypes拆分type属性值"></a><code>actionTypes</code>拆分<code>type</code>属性值</h1><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<h1 id="actionTypes拆分type属性值"><a href="#actionTypes拆分type属性值" class="headerlink" title="actionTypes拆分type属性值"></a><code>actionTypes</code>拆分<code>type</code>属性值</h1><p><strong>注意</strong>：</p>
+<ul>
 <li>在<code>actionType.js</code>中<strong>输出的是各个常量名</strong>，在别的文件也是使用对象的方式引用多个常量名再进行使用。（常量名的引用没有引号，区分于字符串）</li>
 <li><strong>常量的输出不能使用<code>export default</code>,只能使用<code>export</code></strong>.仅允许表达式、函数或类作为“默认”导出:<blockquote>
 <p>Parsing error: Only expressions, functions or classes are allowed as the <code>default</code> export.</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="拆分过程"><a href="#拆分过程" class="headerlink" title="拆分过程"></a>拆分过程</h2><p>我们应该<strong>把所有<code>action</code>中的 <code>type</code>属性值</strong> 拆分出来<strong>写在<code>store</code>文件夹下的<code>actionType.js</code>中</strong>,然后再<strong>在组件<code>TodoList.js</code>和<code>reducer.js</code>中</strong>分别<strong>引用<code>actionType.js</code>中对应 <code>type</code>属性值的各个 常量（<code>const</code>）</strong>。</p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>我们之前<strong>在<code>action</code>中</strong>都是使用<strong>字符串</strong>作为<strong>属性值</strong>（<code>type: &quot;add_todo_item&quot;</code>），<strong>在<code>reducer.js</code>中</strong>（<code>if(action.type === &quot;add_todo_item&quot;){}</code>）也都是调用的<strong>字符串</strong>。<br>假设<strong>一旦字符串中有一个字母输错了，页面不会报错，但功能无法实现</strong>，所以我们需要把这个 字符串 保存在另一个js文件的常量（<code>const</code>）中，在需要使用他们的时候再进行文件和常量的引用。这样一来，<strong>一旦 常量书写错误，页面就会进行相应的报错</strong>。</p>
+<h2 id="拆分过程"><a href="#拆分过程" class="headerlink" title="拆分过程"></a>拆分过程</h2><p>我们应该<strong>把所有<code>action</code>中的 <code>type</code>属性值</strong> 拆分出来<strong>写在<code>store</code>文件夹下的<code>actionType.js</code>中</strong>,然后再<strong>在组件<code>TodoList.js</code>和<code>reducer.js</code>中</strong>分别<strong>引用<code>actionType.js</code>中对应 <code>type</code>属性值的各个 常量（<code>const</code>）</strong>。</p>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>1.在<code>store</code>文件夹下<strong>新建<code>actionType.js</code></strong>用于存放所有<code>action</code>中的 <code>type</code>属性值，<strong>记得把这些常量输出</strong>：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记得输出才能在别的文件引用</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CHANGE_INPUT_VALUE = <span class="string">"change_input_value"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_DOTO_ITEM = <span class="string">"add_todo_item"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> DELETE_TODO_ITEM = <span class="string">"delete_todo_item"</span>;</span><br></pre></td></tr></table></figure>
 
@@ -244,11 +248,11 @@
 <p><code>const action =getButtonClickAction();</code>和<code>const action = getItemDeleteAction(index);</code></p>
 <p>3.<strong>删除<code>TodoList.js</code>中无用的引用</strong>:<code>import { CHANGE_INPUT_VALUE, ADD_DOTO_ITEM, DELETE_TODO_ITEM } from &quot;./store/actionTypes&quot;;</code></p>
 <hr>
-<h1 id="重新归纳redux的工作流程"><a href="#重新归纳redux的工作流程" class="headerlink" title="重新归纳redux的工作流程"></a>重新归纳<code>redux</code>的工作流程</h1><p>使用<code>actionCreator</code>以后，工作流程变更为：<br>在组件中调用<code>actionCreator</code>创建<code>action</code>方法，然后<code>store</code>使用<code>dispatch()</code>将<code>action</code>传给<code>store</code></p>
+<h1 id="重新归纳redux的工作流程"><a href="#重新归纳redux的工作流程" class="headerlink" title="重新归纳redux的工作流程"></a>重新归纳<code>redux</code>的工作流程</h1><p>使用<code>actionCreator</code>以后，工作流程变更为：<br>在组件中调用<code>actionCreator</code>创建<code>action</code>方法，然后<code>store</code>使用<code>dispatch()</code>将<code>action</code>传给<code>store</code><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg" alt="示意图"></p>
 <h2 id="获取store中数据"><a href="#获取store中数据" class="headerlink" title="获取store中数据"></a>获取<code>store</code>中数据</h2><ul>
 <li><strong>创建<code>store</code>：</strong>在<code>store</code>文件夹下的<code>index.js</code>中，通过引用自<code>react</code>的<code>createStore（）</code>创建<code>store</code>。（记得输出<code>store</code>）</li>
-<li><strong>创建<code>reducers</code>：</strong>在<code>store</code>文件夹下的<code>reducers.js</code>中，需要输出一个参数为<code>state</code>和<code>action</code>的函数，通过设置<code>state</code>的默认值<code>defaultState</code>并在函数中返回，<strong>将默认<code>state</code>的值返回给<code>store</code></strong></li>
-<li><strong><code>store</code>连接<code>reducers</code></strong>：将<code>reducers.js</code>中的<code>reducers</code>作为<code>createStore（）</code>的第一个参数传给 <code>store</code>。<code>store</code>从<code>reducers</code>获取到初始<code>state</code>值</li>
+<li><strong>创建<code>reducers</code>：</strong>在<code>store</code>文件夹下的<code>reducers.js</code>中，需要输出一个参数为<code>state</code>和<code>action</code>的函数，<code>reducer</code>中的<code>state</code>就是<code>store</code>的<code>state</code>。所以我们可以通过设置<code>state</code>的默认值<code>defaultState</code>并在函数中返回，<strong>将默认<code>state</code>的值返回给<code>store</code></strong></li>
+<li><strong><code>store</code>连接<code>reducers</code></strong>：将<code>reducers.js</code>中的<code>reducers</code>作为<code>createStore（）</code>的第一个参数传给 <code>store</code>。<code>store</code>从<code>reducers</code>获取到初始<code>state</code>值，然后<code>store</code>将其替换掉自身的<code>state</code>.</li>
 <li><strong>组件<code>TodoList</code>连接<code>store</code>获取数据</strong>:在组件的构造函数中通过<code>store.subscribe();</code>监听一个函数，在被监听的函数中把<code>store</code>的<code>state</code>赋值给 组件的<code>state</code>，这样第一次渲染页面时，组件的<code>state</code>的就会获取到<code>store</code>中的<code>state</code>值。</li>
 </ul>
 <h2 id="改变store中数据"><a href="#改变store中数据" class="headerlink" title="改变store中数据"></a>改变<code>store</code>中数据</h2><ul>
@@ -259,6 +263,23 @@
 <li><strong><code>reducer</code>处理<code>action</code>并返回<code>newState</code>值给<code>store</code>：</strong><code>reducer</code>根据<code>action</code>中不同的<code>type</code>属性值做出不同的处理并返回新的<code>newState</code>值给<code>store</code></li>
 <li><strong><code>store</code>获取到<code>newState</code>后自动替换<code>state</code></strong></li>
 <li><strong>组件中<code>state</code>由于监听函数，更新后页面重新渲染：</strong>组件中之前通过<code>store.subscribe();</code>监听的函数会在<code>store</code>的<code>state</code>改变时将<code>store</code>的<code>state</code>赋值给 组件的<code>state</code>，组件自然重新渲染。</li>
+</ul>
+<hr>
+<h1 id="Redux设计和使用的三大基本原则"><a href="#Redux设计和使用的三大基本原则" class="headerlink" title="Redux设计和使用的三大基本原则"></a><code>Redux</code>设计和使用的三大基本原则</h1><h2 id="store是唯一的"><a href="#store是唯一的" class="headerlink" title="store是唯一的"></a><code>store</code>是唯一的</h2><h2 id="只有store能改变自己的内容"><a href="#只有store能改变自己的内容" class="headerlink" title="只有store能改变自己的内容"></a>只有<code>store</code>能改变自己的内容</h2><ul>
+<li><code>reducer</code>从<code>store</code>拿到之前的<code>state</code>数据，深拷贝为一个新的<code>newState</code>，修改<code>newState</code>后返回给<code>store</code>，<strong><code>store</code>拿到<code>newState</code>后自己把<code>state</code>替换掉，所以最后其实是<code>store</code>自己改变了自己的内容</strong>。</li>
+<li><strong><code>reducer</code>中的<code>state</code>就是<code>store</code>的<code>state</code></strong>,这也就是为什么我们需要深拷贝一个<code>newState</code>出来用而<strong>不能直接修改<code>reducer</code>中的<code>state</code></strong>。</li>
+</ul>
+<h2 id="reducer必须是纯函数"><a href="#reducer必须是纯函数" class="headerlink" title="reducer必须是纯函数"></a><code>reducer</code>必须是纯函数</h2><ul>
+<li><strong>纯函数</strong>指的是：<strong>给定固定的输入，就一定会有固定的输出，且不能对传入的参数进行修改</strong>。</li>
+<li>纯函数不能涉及 异步 或者是关于 时间 的操作，一旦函数中<strong>涉及 AJAX请求、<code>new Date()</code>、<code>setTimeout()</code></strong> ,他就 <strong>不是纯函数</strong>。</li>
+</ul>
+<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h3><p><strong>纯函数:</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusumjpsgj30sa05jwk0.jpg" alt="纯函数"><br>也就是说<code>state</code>和<code>action</code>确定时，返回的<code>newState</code>就是确定的。</p>
+<p><strong>非纯函数：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusvzsyf9j30sd05o441.jpg" alt="非纯函数"><br><code>state</code>和<code>action</code>确定时，返回的<code>newState</code>是不固定的，他会收到当前时间的影响。</p>
+<h1 id="Redux中的核心api"><a href="#Redux中的核心api" class="headerlink" title="Redux中的核心api"></a><code>Redux</code>中的核心api</h1><ul>
+<li><code>redux</code>的<code>createStore（）</code>可以帮助我们创建<code>store</code></li>
+<li><code>store.dispatch()</code>帮助我们将<code>action</code>传给<code>store</code></li>
+<li><code>store.getState()</code>帮助我们获取<code>store</code>中的所有数据</li>
+<li><code>store.subscribe()</code>帮助我们订阅<code>store</code>的改变，只要<code>store</code>发生改变，<code>store.subscribe()</code>接收的回调函数就会执行</li>
 </ul>
 <hr>
 
@@ -306,6 +327,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2020/02/13/CSS非布局样式：背景/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          CSS非布局样式：背景
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/02/13/export和export default的区别/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -323,7 +353,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用redux完成TodoList列表功能"><span class="nav-number">1.</span> <span class="nav-text">使用redux完成TodoList列表功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Redux完成TodoList删除功能"><span class="nav-number">2.</span> <span class="nav-text">使用Redux完成TodoList删除功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionTypes拆分type属性值"><span class="nav-number">3.</span> <span class="nav-text">actionTypes拆分type属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分过程"><span class="nav-number">3.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">3.3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.4.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.5.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionCreator统一创建action"><span class="nav-number">4.</span> <span class="nav-text">actionCreator统一创建action</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#好处"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分过程-1"><span class="nav-number">4.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改第一个action"><span class="nav-number">4.3.1.</span> <span class="nav-text">修改第一个action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改剩下的action"><span class="nav-number">4.3.2.</span> <span class="nav-text">修改剩下的action</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重新归纳redux的工作流程"><span class="nav-number">5.</span> <span class="nav-text">重新归纳redux的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取store中数据"><span class="nav-number">5.1.</span> <span class="nav-text">获取store中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变store中数据"><span class="nav-number">5.2.</span> <span class="nav-text">改变store中数据</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用redux完成TodoList列表功能"><span class="nav-number">1.</span> <span class="nav-text">使用redux完成TodoList列表功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Redux完成TodoList删除功能"><span class="nav-number">2.</span> <span class="nav-text">使用Redux完成TodoList删除功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionTypes拆分type属性值"><span class="nav-number">3.</span> <span class="nav-text">actionTypes拆分type属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">3.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分过程"><span class="nav-number">3.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionCreator统一创建action"><span class="nav-number">4.</span> <span class="nav-text">actionCreator统一创建action</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#好处"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分过程-1"><span class="nav-number">4.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改第一个action"><span class="nav-number">4.3.1.</span> <span class="nav-text">修改第一个action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改剩下的action"><span class="nav-number">4.3.2.</span> <span class="nav-text">修改剩下的action</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重新归纳redux的工作流程"><span class="nav-number">5.</span> <span class="nav-text">重新归纳redux的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取store中数据"><span class="nav-number">5.1.</span> <span class="nav-text">获取store中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变store中数据"><span class="nav-number">5.2.</span> <span class="nav-text">改变store中数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux设计和使用的三大基本原则"><span class="nav-number">6.</span> <span class="nav-text">Redux设计和使用的三大基本原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#store是唯一的"><span class="nav-number">6.1.</span> <span class="nav-text">store是唯一的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只有store能改变自己的内容"><span class="nav-number">6.2.</span> <span class="nav-text">只有store能改变自己的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reducer必须是纯函数"><span class="nav-number">6.3.</span> <span class="nav-text">reducer必须是纯函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux中的核心api"><span class="nav-number">7.</span> <span class="nav-text">Redux中的核心api</span></a></li></ol>
     
     </div>
   </aside>
