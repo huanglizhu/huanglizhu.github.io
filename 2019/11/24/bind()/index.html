@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-09T11:56:59.005Z">
+<meta property="og:updated_time" content="2020-02-14T02:43:52.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bind()">
 <meta name="twitter:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
@@ -200,6 +200,23 @@
 
 <p><strong>事件绑定处理函数（<code>onPress={this.foo}</code>）时，foo方法内部的this的指向就会丢失(此时在foo函数内部打印this得到的是undefined)</strong>。这就会出现外部的foo方法内部的this会丢失指向。<br>为了解决这个问题，我们需要在实例化对象的时候就<strong>需要在构造函数中绑定this（<code>this.foo = this.foo.bind(this);</code>），使得无论事件处理函数如何传递，它的this的指向都是固定的，固定指向我们所实例化的对象（App组件）</strong>。<br>（虽然在render函数中<code>&lt;Button onPress={this.foo.bind(this)}/&gt;</code>效果一样，但比较消耗性能，<strong>不推荐</strong>。）</p>
 <p>（<a href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React中的响应式设计思想和事件绑定" target="_blank" rel="noopener">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a>）</p>
+<hr>
+<h1 id="事件绑定函数传参"><a href="#事件绑定函数传参" class="headerlink" title="事件绑定函数传参"></a>事件绑定函数传参</h1><p><strong>方法1</strong>：<br>在React<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#使用Redux完成TodoList删除功能" target="_blank" rel="noopener">这个例子</a>中使用bind绑定事件函数handleItemDelete的this指向时<strong>还要将参数index传入函数</strong>，那么我们可以在绑定时传入：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;List<span class="selector-class">.Item</span> onClick=&#123;this<span class="selector-class">.handleItemDelete</span><span class="selector-class">.bind</span>(this, index)&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2</strong>：<br>但如果<strong>事件函数和bind绑定都在父组件中，而函数的调用和传参在子组件</strong>，就可以这样传参：</p>
+<ol>
+<li>在<strong>父组件</strong>的构造函数中使用bind绑定<code>this.handleItemDelete=this.handleItemDelete.bind();</code></li>
+<li>我们知道bind()返回的还是一个函数，所以在<strong>子组件</strong>中，我们通过<strong>箭头函数</strong>在每次调用handleItemDelete()时传入参数index：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;List<span class="selector-class">.Item</span> onClick=&#123;()=&gt;&#123;this<span class="selector-class">.props</span><span class="selector-class">.handleItemDelete</span>(index)&#125;&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<ol>
+<li><strong>在这里不能直接使用<code>handleItemDelete(index)</code>传参</strong>是因为<code>handleItemDelete(index)</code>直接执行了函数，而<code>onClick</code>需要<strong>绑定的事件函数是不能立即执行的</strong>，所以需要新建一个箭头函数让他不立即执行。</li>
+<li><strong>箭头函数是JS表达式，在JSX中需要使用<code>{}</code></strong>，调用的父组件的函数也是JS表达式，同样中需要使用<code>{}</code>。</li>
+</ol>
+<hr>
 
       
     </div>
@@ -271,7 +288,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bind"><span class="nav-number">1.</span> <span class="nav-text">bind()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#javascript中apply、call和bind的共同点"><span class="nav-number">2.</span> <span class="nav-text">javascript中apply、call和bind的共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind（）与apply（）、call（）使用上的区别"><span class="nav-number">3.</span> <span class="nav-text">bind（）与apply（）、call（）使用上的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无参数情况"><span class="nav-number">3.1.</span> <span class="nav-text">无参数情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参情况"><span class="nav-number">3.2.</span> <span class="nav-text">传参情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件绑定函数与bind-this"><span class="nav-number">4.</span> <span class="nav-text">事件绑定函数与bind(this)</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bind"><span class="nav-number">1.</span> <span class="nav-text">bind()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#javascript中apply、call和bind的共同点"><span class="nav-number">2.</span> <span class="nav-text">javascript中apply、call和bind的共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind（）与apply（）、call（）使用上的区别"><span class="nav-number">3.</span> <span class="nav-text">bind（）与apply（）、call（）使用上的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无参数情况"><span class="nav-number">3.1.</span> <span class="nav-text">无参数情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参情况"><span class="nav-number">3.2.</span> <span class="nav-text">传参情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件绑定函数与bind-this"><span class="nav-number">4.</span> <span class="nav-text">事件绑定函数与bind(this)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件绑定函数传参"><span class="nav-number">5.</span> <span class="nav-text">事件绑定函数传参</span></a></li></ol>
     
     </div>
   </aside>
