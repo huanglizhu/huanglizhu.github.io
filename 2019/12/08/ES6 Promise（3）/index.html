@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ES6 Promise（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="同步异步执行顺序注意：在Promise构造函数的内部，执行顺序是同步的。等内部执行完成后，再选择调用then或catch方法，then方法执行是异步的。">
+<meta name="keywords" content="ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Promise（3）">
+<meta property="og:url" content="http://yoursite.com/2019/12/08/ES6 Promise（3）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="同步异步执行顺序注意：在Promise构造函数的内部，执行顺序是同步的。等内部执行完成后，再选择调用then或catch方法，then方法执行是异步的。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzfl15vwoj30gw0c4gqm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzfli0mdmj30lx068jsp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzg3qpg51j30u10bk7cp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzg3zdsb1j30lk039dgn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0ezbeh0kj30nq0n7ngi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f66ho5nj30yz073qde.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f2w2k0fj30sa0i3h45.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f3ylw4uj30kh0a1n1o.jpg">
+<meta property="og:updated_time" content="2020-02-18T04:27:50.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 Promise（3）">
+<meta name="twitter:description" content="同步异步执行顺序注意：在Promise构造函数的内部，执行顺序是同步的。等内部执行完成后，再选择调用then或catch方法，then方法执行是异步的。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzfl15vwoj30gw0c4gqm.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6 Promise（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6 Promise（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/12/08/ES6 Promise（3）/" class="article-date">
+	  <time datetime="2019-12-08T04:22:25.000Z" itemprop="datePublished">十二月 8, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="同步异步执行顺序"><a href="#同步异步执行顺序" class="headerlink" title="同步异步执行顺序"></a>同步异步执行顺序</h1><p><strong>注意：</strong>在<strong>Promise构造函数的内部，执行顺序是同步的</strong>。等内部执行完成后，再选择调用<code>then</code>或<code>catch</code>方法，<strong>then方法执行是异步的</strong>。</p>
+<a id="more"></a>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzfl15vwoj30gw0c4gqm.jpg" alt="例子"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzfli0mdmj30lx068jsp.jpg" alt="结果"><br>53：打印1<br>55：注意：<strong>Promise构造函数的回调函数（参数）是同步执行的</strong>，它的then()是异步任务<br>56:打印2<br>57：resolve()相当于调用了63-65，<strong>p.then()是异步任务，所以在本轮事件循环中所有同步任务执行完以后才会执行，所以5在最后打印</strong>。<br>58：打印3<br>61：打印4<br>67：打印6<br>63-65：打印5</p>
+<hr>
+<h1 id="把同步任务转为异步任务"><a href="#把同步任务转为异步任务" class="headerlink" title="把同步任务转为异步任务"></a>把同步任务转为异步任务</h1><p>72-74：创建一个函数<code>createAsyncTask（）</code>用于将传入的同步任务<code>syncTask</code>转换为<strong>已经决议为成功</strong>的Promise实例，由于已成功的状态，该实例会立即调用then()的第一个回调函数：把<code>syncTask</code>传给<code>syncTask()</code>并立即执行<code>syncTask()</code>。那么<strong>最后被返回出去的就是Promise实例<code>syncTask()</code></strong>。<br>76-81：调用这个函数<code>createAsyncTask（）</code>，往里传入一个thenable对象作为参数。<br>那么这个参数就会使用<code>Promise.resolve()</code>将自己变成 Promise实例，这个Promise实例执行完后返回2并成为<strong>已成功</strong>的状态，所以就会触发then()的第一个回调函数，该回调函数接收Promise实例返回的2作为参数：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzg3qpg51j30u10bk7cp.jpg" alt="例子"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzg3zdsb1j30lk039dgn.jpg" alt="结果"></p>
+<hr>
+<h1 id="小案例"><a href="#小案例" class="headerlink" title="小案例"></a>小案例</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0ezbeh0kj30nq0n7ngi.jpg" alt="代码"><br>可以看到3张图片的加载时间是不同的，而是在最后一张图片加载完成后页面才显示出图片：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f66ho5nj30yz073qde.jpg" alt="结果"></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>事件函数绑定时<strong>不能使用<code>img.onload = resolve(img);</code></strong>这样图片还没加载完成，<strong>在赋值阶段函数<code>resolve(img)</code>就直接被调用了</strong>。</p>
+<h2 id="检验错误"><a href="#检验错误" class="headerlink" title="检验错误"></a>检验错误</h2><p>可以增加一个<strong>检验错误</strong>，多往数组中放入一个<code>src</code>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f2w2k0fj30sa0i3h45.jpg" alt="检验错误代码"><br>结果就会返回我们在<code>loadImg()</code>中的<code>onerror()</code>中返回的错误对象e：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0f3ylw4uj30kh0a1n1o.jpg" alt="结果"></p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>Promise 改善了传统回调造成的代码难维护、控制反转的问题。</li>
+<li>Promise是异步的，但Promise构造函数中代码的执行时同步的。</li>
+<li>如果<code>Promise.all()</code>接收的是空数组，那么马上会被决议为成功。</li>
+<li>如果<code>Promise.race()</code>接收的是空数组，那么会永远挂起。</li>
+<li><code>catch()</code>返回的Promise实例，可以无线捕获错误问题（链式）。</li>
+</ul>
+<h2 id="Promise-resolve方法的传参"><a href="#Promise-resolve方法的传参" class="headerlink" title="Promise.resolve方法的传参"></a>Promise.resolve方法的传参</h2><ul>
+<li>如果 resolve() 接收的是<strong>普通的值</strong>，就会立即被决议为成功，直接<strong>传递这个值</strong>。</li>
+<li>如果 resolve() 接收的是一个<strong>Promise实例</strong>，则<strong>返回这个Promise实例</strong>。</li>
+<li>如果 resolve() 接收的是一个<strong>thenable对象</strong>，则会把该对象<strong>包装成Promise实例</strong>，<strong>并立即执行该thenable对象的<code>then()</code></strong></li>
+</ul>
+<h2 id="Promise-reject方法的传参"><a href="#Promise-reject方法的传参" class="headerlink" title="Promise.reject方法的传参"></a>Promise.reject方法的传参</h2><p>Promise.reject()会产生一个决议失败的Promise实例，并<strong>直接传递</strong>接收到的参数。（<strong>不会有任何处理</strong>，假设参数是thenable对象，那么thenable对象也会被直接作为错误信息传递<a href="https://huanglizhu.github.io/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/#例子：参数为thenable对象-1" target="_blank" rel="noopener">例子</a>）</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/08/setTimeout()与setInterval() /" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          setTimeout()与setInterval()
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/07/ES6 Promise（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6 Promise（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#同步异步执行顺序"><span class="nav-number">1.</span> <span class="nav-text">同步异步执行顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#把同步任务转为异步任务"><span class="nav-number">2.</span> <span class="nav-text">把同步任务转为异步任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小案例"><span class="nav-number">3.</span> <span class="nav-text">小案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验错误"><span class="nav-number">3.2.</span> <span class="nav-text">检验错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-resolve方法的传参"><span class="nav-number">4.1.</span> <span class="nav-text">Promise.resolve方法的传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-reject方法的传参"><span class="nav-number">4.2.</span> <span class="nav-text">Promise.reject方法的传参</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

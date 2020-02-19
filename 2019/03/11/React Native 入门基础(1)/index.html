@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React Native 入门基础(1) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="React Native是facebook开源的用于开发移动端跨平台App的技术框架，其代码托管在GitHub上。 React Native中文文档">
+<meta name="keywords" content="React Native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 入门基础(1)">
+<meta property="og:url" content="http://yoursite.com/2019/03/11/React Native 入门基础(1)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="React Native是facebook开源的用于开发移动端跨平台App的技术框架，其代码托管在GitHub上。 React Native中文文档">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0sailmf7j30nt0bmgmq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0si6wcttj30no0dbabg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0uisxs50j30mr09376r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1fzhzpi8j30sl0dhdjc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g5027wlj30os0c90w9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g5ot663j30c704oaba.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g8pa84dj30vw08rgog.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1hr3iatdj307t0f5dhs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1idg08pzj30rw08c421.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1j6pysnwj30u604tgni.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1jds99jlj30fe0f1413.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1jfsd6wnj30fr0f477h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0uisxs50j30mr09376r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0ukz71xej310v0hdq7u.jpg">
+<meta property="og:updated_time" content="2020-02-19T08:12:32.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 入门基础(1)">
+<meta name="twitter:description" content="React Native是facebook开源的用于开发移动端跨平台App的技术框架，其代码托管在GitHub上。 React Native中文文档">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0sailmf7j30nt0bmgmq.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React Native 入门基础(1)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React Native 入门基础(1)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/03/11/React Native 入门基础(1)/" class="article-date">
+	  <time datetime="2019-03-11T03:35:11.000Z" itemprop="datePublished">三月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>React Native是facebook开源的用于开发<strong>移动端跨平台App的技术框架</strong>，其代码托管在GitHub上。</li>
+<li><a href="https://reactnative.cn/docs" target="_blank" rel="noopener">React Native中文文档</a><a id="more"></a>
+
+</li>
+</ul>
+<h1 id="React-Native-优点"><a href="#React-Native-优点" class="headerlink" title="React Native 优点"></a>React Native 优点</h1><ul>
+<li>代码复用率高，可以使用ReactNative跑在 安卓/ios 上</li>
+<li>跨平台，可以用它开发安卓/ios</li>
+<li>具有本地能力，App占用体积小</li>
+<li>性能高，更新快</li>
+<li>可以发布，且支持动态更新（直接在用户设备上更新，不需要通过app store）</li>
+<li>开发成本低</li>
+</ul>
+<h1 id="运行命令"><a href="#运行命令" class="headerlink" title="运行命令"></a>运行命令</h1><ul>
+<li><strong>新建项目</strong> <code>react-native init xxx</code> </li>
+<li><strong>运行项目</strong> <code>react-native run-android</code></li>
+<li><strong>检验雷电模拟器连接</strong> <code>adb devices</code>（连接成功会显示：<code>daemon started successfully</code>）</li>
+<li><strong>热重载</strong> 进入app-“更多”-“摇一摇”打开开发者菜单-点击<strong>热重载Enable Hot Reloading</strong>（修改App.js，保存即可看见修改后的效果）<br>【或者可以在终端输入<code>adb shell input keyevent 82</code>来打开开发者菜单】</li>
+</ul>
+<h1 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h1><ul>
+<li>React Native是一个专注于<strong>UI构建</strong>的框架，</li>
+<li>设计的初衷是为了屏蔽平台的差异化显示。</li>
+<li>所以<strong>界面</strong>是React Native开发中的一个重要的组成部分。</li>
+<li>flexbox布局可参考笔记<a href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20flexbox%EF%BC%89/#flexbox弹性盒子" target="_blank" rel="noopener">CSS flexbox</a></li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>默认情况下，<strong>flex的方向是column，即从上往下的</strong>。（这个与移动端与web页面不同，在web页面用CSS设置flex布局，默认的fiex-direction是row，即水平从左往右）。</li>
+<li><strong>如果父容器的尺寸为零（即没有设置宽高，或者没有设定flex），即使子组件如果使用了flex，也是无法显示的</strong>。所以可以给父组件设置<code>flex:1</code>，表示让它占据了垂直的整个空间。</li>
+</ul>
+<h2 id="长度的单位"><a href="#长度的单位" class="headerlink" title="长度的单位"></a>长度的单位</h2><ul>
+<li>首先需要知道，在<strong>写React Native组件样式时，长度的不带单位的</strong>，它表示“与设备像素密度<strong>无关</strong>的逻辑像素点”。</li>
+<li>在React Native中，拥有一个<strong>类似于dp的长度单位</strong>。</li>
+</ul>
+<h3 id="理解px"><a href="#理解px" class="headerlink" title="理解px"></a>理解px</h3><p>如果我们<strong>以像素为单位</strong>来设置一个界面元素的大小，比如说<strong>2px的高度</strong>，那么这2px的长度在不同的设备中就会是下面这个样子：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0sailmf7j30nt0bmgmq.jpg" alt="同样都是2px"><br>可以发现：<strong>它们真实显示出的长度是不一样的</strong>。</p>
+<h3 id="理解dp"><a href="#理解dp" class="headerlink" title="理解dp"></a>理解dp</h3><p>在同样物理尺寸大小的屏幕上（不论分辨率谁高谁低，只要物理尺寸大小一样即可），1个单位的长度所代表的物理尺寸是一样的。这种单位就应该是独立于分辨率的，把它起一个名字叫做 density-independent pixels，简称dp。这其实就是Android系统中所使用的长度单位。</p>
+<p><strong>例子：</strong><br>2dp宽，2dp高的内容，在不同分辨率但屏幕尺寸一样的设备上所显示出的物理大小是一样的（一个题外话：有些Android开发者建议所有可点击的按钮，宽高都不应该少于48dp。）：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0si6wcttj30no0dbabg.jpg" alt="同样都是2dp"></p>
+<hr>
+<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><p>组件的引用需要从<code>&#39;react-native&#39;</code>库进行引用,比如：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Alert, StyleSheet, <span class="keyword">View</span>, <span class="type">Text</span>, StatusBar, Image, ImageBackground, TextInput, TouchableOpacity, ToastAndroid, BackHandler, AsyncStorage &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><p>用于布局的最基础组件，是所有组件布局的基本、底层元素。<strong>类似于<code>&lt;div&gt;</code></strong>。每一个View都可以当成是一个FlexBox<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0uisxs50j30mr09376r.jpg" alt="例子"></p>
+<h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>React Native提供了多种方式加载图片，如加载网络图片、静态资源、本地图片、或读取用户相册中的图片。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1fzhzpi8j30sl0dhdjc.jpg" alt="例子"></p>
+<h2 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h2><p><strong>Text放在View中</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g5027wlj30os0c90w9.jpg" alt="例子"><br><strong>Text中嵌套Text，只有一行显示不下才会换行</strong>。应用于动态文本内容：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g5ot663j30c704oaba.jpg" alt="例子"></p>
+<h2 id="TextInput"><a href="#TextInput" class="headerlink" title="TextInput"></a>TextInput</h2><p><strong>注意</strong>： rn 中的 onChangeText对应的是react 中的 onChange<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1g8pa84dj30vw08rgog.jpg" alt="例子"></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>placehoder</td>
+<td><strong>提示文本</strong></td>
+</tr>
+<tr>
+<td>placehoderTextColor</td>
+<td><strong>提示文本颜色</strong></td>
+</tr>
+<tr>
+<td>defaultValue</td>
+<td><strong>默认值</strong></td>
+</tr>
+<tr>
+<td>editable</td>
+<td><strong>是否可以编辑</strong>。默认值为true，如果为false则文本框是不可编辑的</td>
+</tr>
+<tr>
+<td>secureTextEntry</td>
+<td><strong>设置是否为密码组件</strong>。如果为true，文本框会遮住之前输入的文字，这样类似密码之类的敏感文字可以更加安全。默认值为false。<code>multiline={true}</code>时不可用</td>
+</tr>
+<tr>
+<td>underlineColorAndroid</td>
+<td><strong>设置Android下的文本框下划线颜色</strong>(如果要去掉文本框的边框，请将此属性设为透明<code>transparent</code>)</td>
+</tr>
+<tr>
+<td>clearTextOnFocus</td>
+<td><strong>组件获得焦点开始编辑时自动清空内容</strong>。如果为true，每次开始输入的时候都会清除文本框的内容</td>
+</tr>
+<tr>
+<td>onChangeText</td>
+<td>属性值是方法。<strong>当文本框内容变化时调用此回调函数。改变后的文字内容会作为参数传递</strong>。(rn 中的 onChangeText对应的是react 中的 onChange )</td>
+</tr>
+<tr>
+<td>onSubmitEditing</td>
+<td>属性值是方法。<strong>在文本被用户按下软键盘上的提交键后调用此回调函数</strong>，所传参数为<code>{nativeEvent: {text, eventCount, target}}</code></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clear()</td>
+<td>清空输入框中内容</td>
+</tr>
+</tbody></table>
+<h3 id="onChangeText的例子"><a href="#onChangeText的例子" class="headerlink" title="onChangeText的例子"></a>onChangeText的例子</h3><p>假如我们要实现当用户输入时，实时将其以单词为单位翻译为另一种文字。我们假设这另一种文字来自某个吃货星球，只有一个单词： 🍕。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; from <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Text, TextInput, View &#125; from <span class="string">'react-native'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="built_in">default</span> class PizzaTranslator extends Component &#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    <span class="built_in">text</span>: <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="built_in">return</span> (</span><br><span class="line">      &lt;View style=&#123;&#123;padding: <span class="number">10</span>&#125;&#125;&gt;</span><br><span class="line">        &lt;TextInput</span><br><span class="line">          style=&#123;&#123;<span class="built_in">height</span>: <span class="number">40</span>&#125;&#125;</span><br><span class="line">          placeholder=<span class="string">"Type here to translate!"</span></span><br><span class="line">          onChangeText=&#123;(<span class="built_in">text</span>) =&gt; <span class="keyword">this</span>.setState(&#123;<span class="built_in">text</span>&#125;)&#125;</span><br><span class="line">          value=&#123;<span class="keyword">this</span>.state.<span class="built_in">text</span>&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;Text style=&#123;&#123;padding: <span class="number">10</span>, fontSize: <span class="number">42</span>&#125;&#125;&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.state.<span class="built_in">text</span>.split(<span class="string">' '</span>).<span class="built_in">map</span>((<span class="keyword">word</span>) =&gt; <span class="keyword">word</span> &amp;&amp; <span class="string">'🍕'</span>).join(<span class="string">' '</span>)&#125;</span><br><span class="line">        &lt;/Text&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1hr3iatdj307t0f5dhs.jpg" alt="效果"><br>如果你想要在用户输入的时候进行<strong>验证</strong>，需要学习 <strong>React中的受限组件</strong> 。</p>
+<hr>
+<h1 id="触摸处理类组件（Touchable-系列组件）"><a href="#触摸处理类组件（Touchable-系列组件）" class="headerlink" title="触摸处理类组件（Touchable 系列组件）"></a>触摸处理类组件（Touchable 系列组件）</h1><ul>
+<li>移动应用上的用户交互基本靠“摸”。当然，“摸”也是有各种姿势的：在一个按钮上点击，在一个列表上滑动，或是在一个地图上缩放。</li>
+<li>React Native 提供了可以<strong>处理常见触摸手势（例如点击或滑动）的组件</strong>， 以及可用于识别更复杂的手势的完整的<a href="https://reactnative.cn/docs/gesture-responder-system/" target="_blank" rel="noopener">手势响应系统</a>。</li>
+</ul>
+<h2 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h2><ul>
+<li>Button 是一个简单的跨平台的按钮组件。</li>
+<li>Button组件的<strong>样式是固定的</strong>，如果想要修改外观就需要<strong>使用<code>TouchableOpacity</code>或是<code>TouchableNativeFeedback</code>组件来定制自己所需要的按钮，<a href="https://v.youku.com/v_show/id_XMTQ5OTE3MjkzNg==.html?f=26822355&from=y1.7-1.3" target="_blank" rel="noopener">视频教程</a>讲述了完整的按钮制作过程</strong>。【当我们希望简单的拥有自己样式的按钮时可以使用 <strong>TouchableOpacity 包裹 Text 组件</strong> 来做一个自己的按钮。（利用触摸类事件的onPress属性）】<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">Button</span></span><br><span class="line">  onPress=&#123;() =&gt; &#123;</span><br><span class="line">    Alert.alert(<span class="string">"你点击了按钮！"</span>)<span class="comment">;</span></span><br><span class="line">  &#125;&#125;</span><br><span class="line">  <span class="keyword">title</span>=<span class="string">"点我！"</span></span><br><span class="line">  <span class="keyword">color</span>=<span class="string">"#841584"</span></span><br><span class="line">  accessibilityLabel=<span class="string">"点击我了解更多信息"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onPress</td>
+<td>属性值是函数。<strong>用户点击此按钮时所调用的处理函数</strong></td>
+</tr>
+<tr>
+<td>title</td>
+<td><strong>按钮内显示的文本</strong></td>
+</tr>
+<tr>
+<td>accessibilityLabel</td>
+<td><strong>用于给残障人士显示的文本</strong>（比如读屏应用可能会读取这一内容）</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>设置为 <strong>true 时此按钮将不可点击</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="TouchableHighlight【按下变暗】"><a href="#TouchableHighlight【按下变暗】" class="headerlink" title="TouchableHighlight【按下变暗】"></a>TouchableHighlight【按下变暗】</h2><ul>
+<li>TouchableHighlight <strong>组件的背景</strong> 会在用户手指<strong>按下时变暗</strong>。</li>
+<li>该组件<strong>可以包含View组件、Image、Text</strong>等等。但<strong>只能包裹一个层级的子元素</strong>。如果有很多组件需要包裹其中，那就需要使用 View组件 将其中所有的元素包裹起来，再放置在 TouchableHighlight组件 下。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1idg08pzj30rw08c421.jpg" alt="例子"></p>
+<p>属性 | 含义<br>underlayColor | 有<strong>触摸操作时</strong>显示出来的<strong>底层的颜色</strong><br>style | 属性值为样式，如<code>style={styles.button}</code>。包装被点击后显示的样式<br>onPress | 属性值为<strong>点击时执行的回调函数</strong><br>onLongPress | 属性值为<strong>长按时执行的回调函数</strong></p>
+<hr>
+<h2 id="TouchableNativeFeedback【Android平台】"><a href="#TouchableNativeFeedback【Android平台】" class="headerlink" title="TouchableNativeFeedback【Android平台】"></a>TouchableNativeFeedback【Android平台】</h2><p>TouchableNativeFeedback组件<strong>只能在Android平台下使用</strong>，提供了原生级别的组件渲染体验。它会在用户手指<strong>按下时形成类似墨水涟漪的视觉效果</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1j6pysnwj30u604tgni.jpg" alt="例子"></p>
+<hr>
+<h2 id="TouchableOpacity【按下降低透明度】"><a href="#TouchableOpacity【按下降低透明度】" class="headerlink" title="TouchableOpacity【按下降低透明度】"></a>TouchableOpacity【按下降低透明度】</h2><ul>
+<li>TouchableOpacity会在用户手指<strong>按下时降低按钮的透明度，而不会改变背景的颜色</strong>。</li>
+<li>当<strong>触摸点击</strong>的时候，被TouchableOpacity<strong>包裹的View会进行透明化处理</strong>，所以<strong>包裹的View可以不需要设置背景色</strong>。这样的组件样式可以使用在一些单纯的文字点击上，并提供一个简单的反馈效果。</li>
+<li>可参考<a href="https://reactnative.cn/docs/touchableopacity/" target="_blank" rel="noopener">文档</a></li>
+</ul>
+<p><strong>例子：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  StyleSheet,</span><br><span class="line">  TouchableOpacity,</span><br><span class="line">  Text,</span><br><span class="line">  View,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"> render() &#123;</span><br><span class="line">   <span class="keyword">return</span> (</span><br><span class="line">     &lt;View style=&#123;styles.container&#125;&gt;</span><br><span class="line">       &lt;TouchableOpacity</span><br><span class="line">         style=&#123;styles.button&#125;</span><br><span class="line">       &gt;</span><br><span class="line">         &lt;Text&gt; Touch Here &lt;<span class="regexp">/Text&gt;</span></span><br><span class="line"><span class="regexp">       &lt;/</span>TouchableOpacity&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const styles = StyleSheet.create(&#123;</span></span><br><span class="line"><span class="regexp">  container: &#123;</span></span><br><span class="line"><span class="regexp">    flex: 1,</span></span><br><span class="line"><span class="regexp">    justifyContent: 'center',</span></span><br><span class="line"><span class="regexp">    paddingHorizontal: 10</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  button: &#123;</span></span><br><span class="line"><span class="regexp">    alignItems: 'center',</span></span><br><span class="line"><span class="regexp">    backgroundColor: '#DDDDDD',</span></span><br><span class="line"><span class="regexp">    padding: 10</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1jds99jlj30fe0f1413.jpg" alt="效果"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc1jfsd6wnj30fr0f477h.jpg" alt="效果"></p>
+<hr>
+<h1 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h1><p><strong>注意：</strong>在RN中，<strong>css样式表</strong>不要独立出来放在另一个文件中，<strong>应采用<code>CSS in JS</code>写法</strong>.(可以参考<a href="http://www.ruanyifeng.com/blog/2017/04/css_in_js.html" target="_blank" rel="noopener">阮一峰的博客</a>)</p>
+<h2 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0uisxs50j30mr09376r.jpg" alt="内联样式"></p>
+<h2 id="外部样式"><a href="#外部样式" class="headerlink" title="外部样式"></a>外部样式</h2><p>同一个js文件中：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc0ukz71xej310v0hdq7u.jpg" alt="外部样式"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/01/JS数据类型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS数据类型
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Native-优点"><span class="nav-number">1.</span> <span class="nav-text">React Native 优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行命令"><span class="nav-number">2.</span> <span class="nav-text">运行命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面布局"><span class="nav-number">3.</span> <span class="nav-text">页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长度的单位"><span class="nav-number">3.2.</span> <span class="nav-text">长度的单位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解px"><span class="nav-number">3.2.1.</span> <span class="nav-text">理解px</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解dp"><span class="nav-number">3.2.2.</span> <span class="nav-text">理解dp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件"><span class="nav-number">4.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#View"><span class="nav-number">4.1.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image"><span class="nav-number">4.2.</span> <span class="nav-text">Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Text"><span class="nav-number">4.3.</span> <span class="nav-text">Text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TextInput"><span class="nav-number">4.4.</span> <span class="nav-text">TextInput</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#onChangeText的例子"><span class="nav-number">4.4.1.</span> <span class="nav-text">onChangeText的例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触摸处理类组件（Touchable-系列组件）"><span class="nav-number">5.</span> <span class="nav-text">触摸处理类组件（Touchable 系列组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Button"><span class="nav-number">5.1.</span> <span class="nav-text">Button</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableHighlight【按下变暗】"><span class="nav-number">5.2.</span> <span class="nav-text">TouchableHighlight【按下变暗】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableNativeFeedback【Android平台】"><span class="nav-number">5.3.</span> <span class="nav-text">TouchableNativeFeedback【Android平台】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableOpacity【按下降低透明度】"><span class="nav-number">5.4.</span> <span class="nav-text">TouchableOpacity【按下降低透明度】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS样式"><span class="nav-number">6.</span> <span class="nav-text">CSS样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内联样式"><span class="nav-number">6.1.</span> <span class="nav-text">内联样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部样式"><span class="nav-number">6.2.</span> <span class="nav-text">外部样式</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
