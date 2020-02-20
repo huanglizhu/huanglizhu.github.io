@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ReactNative进阶(1) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="Android 独有的组件ReactNative组件和API参考文档 ToastAndroid 弹出一个Toast提示框。 更多信息可参考文档">
+<meta name="keywords" content="React Native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative进阶(1)">
+<meta property="og:url" content="http://yoursite.com/2019/05/03/ReactNative进阶(1)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="Android 独有的组件ReactNative组件和API参考文档 ToastAndroid 弹出一个Toast提示框。 更多信息可参考文档">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2q7idjxlj31050ag789.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2uat5uswj30xs0cv792.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2vjni7i8j30sn0g6jwy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2vxjc9vij30zu0dl46l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2w45qmgaj31050a9n1t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22xrve02j30ps0bo76d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22ygkpeyj30lu089768.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22ytn1gbj30f805f0tp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22zb06tdj30lx06cjsf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2302aht0j30dr04pgmd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc230f71r3j30i20b4q4j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc231583y2j30qk0ein0e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc231uok2qj30nv066abe.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc233mrippj30m1079q4y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc234g8rlnj30g706pt9q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc234r86zfj30im03kt9o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc23504lf6j30bt014glp.jpg">
+<meta property="og:updated_time" content="2020-02-20T14:18:03.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative进阶(1)">
+<meta name="twitter:description" content="Android 独有的组件ReactNative组件和API参考文档 ToastAndroid 弹出一个Toast提示框。 更多信息可参考文档">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2q7idjxlj31050ag789.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ReactNative进阶(1)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ReactNative进阶(1)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/05/03/ReactNative进阶(1)/" class="article-date">
+	  <time datetime="2019-05-03T14:16:40.000Z" itemprop="datePublished">五月 3, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android-独有的组件"><a href="#Android-独有的组件" class="headerlink" title="Android 独有的组件"></a>Android 独有的组件</h1><p><a href="https://reactnative.cn/docs/components-and-apis/" target="_blank" rel="noopener">ReactNative组件和API参考文档</a></p>
+<h2 id="ToastAndroid"><a href="#ToastAndroid" class="headerlink" title="ToastAndroid"></a>ToastAndroid</h2><ul>
+<li><strong>弹出一个Toast提示框</strong>。</li>
+<li>更多信息可参考<a href="https://reactnative.cn/docs/toastandroid.html" target="_blank" rel="noopener">文档</a><a id="more"></a>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>show(String message,int duration)</td>
+<td><strong>String message</strong>: 一个<strong>字符串</strong>，表示将要显示的文本内容。<br><strong>int duration</strong>: 提示信息<strong>持续显示的时间</strong>。可以是<code>ToastAndroid.SHORT</code>或者<code>ToastAndroid.LONG</code></td>
+</tr>
+<tr>
+<td>showWithGravity()</td>
+<td><strong>指定弹出的位置</strong>。参数值可以是<code>ToastAndroid.TOP</code>, <code>ToastAndroid.BOTTOM</code>, <code>ToastAndroid.CENTER</code></td>
+</tr>
+</tbody></table>
+<p><strong>例子：</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ToastAndroid &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>; </span><br><span class="line"></span><br><span class="line">ToastAndroid.show(<span class="string">"A pikachu appeared nearby !"</span>, ToastAndroid.<span class="keyword">SHORT</span>);</span><br><span class="line">ToastAndroid.showWithGravity(</span><br><span class="line">  <span class="string">"All Your Base Are Belong To Us"</span>,</span><br><span class="line">  ToastAndroid.<span class="keyword">SHORT</span>,</span><br><span class="line">  ToastAndroid.CENTER</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用导航器跳转页面（React-Navigation）"><a href="#使用导航器跳转页面（React-Navigation）" class="headerlink" title="使用导航器跳转页面（React Navigation）"></a>使用导航器跳转页面（React Navigation）</h1><ul>
+<li>移动应用基本不会只由一个页面组成。<strong>管理多个页面的呈现、跳转的组件</strong>就是我们通常所说的<strong>导航器（navigator）</strong>。</li>
+<li>React Native 有几个导航组件。<strong>刚开始接触直接选择React Navigation就好</strong>。 React Navigation 提供了简单易用的跨平台导航方案，在 iOS 和 Android 上都可以进行翻页式、tab 选项卡式和抽屉式的导航布局。</li>
+<li>如果你想同时在iOS和Android上达到看起来像原生，或者你想把RN整合到一个已经有原生导航管理的APP里, 下面这个库提供了在两个平台都适用的原生导航: <code>react-native-navigation</code>.</li>
+<li>可以参考<a href="https://reactnavigation.org/docs/zh-Hans/hello-react-navigation.html" target="_blank" rel="noopener">React Navigation使用指南</a>，也可以在慕课<a href="https://coding.imooc.com/class/304.html" target="_blank" rel="noopener">这个视频教程</a>中学习到React Navigation。</li>
+</ul>
+<h2 id="什么是导航器"><a href="#什么是导航器" class="headerlink" title="什么是导航器"></a>什么是导航器</h2><ul>
+<li>导航器也可以看成是一个普通的React组件，你可以通过导航器来定义你的App的导航结构。</li>
+<li>导航器还可以渲染通用元素，例如可以配置的标题栏和选项卡栏。</li>
+</ul>
+<p><strong>在react-navigation中有以下5种类型的导航器</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>导航器</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>createStackNavigator</td>
+<td><strong>屏幕上方导航栏</strong>，类似于普通的Navigator</td>
+</tr>
+<tr>
+<td>createBottomTabNavigator</td>
+<td><strong>屏幕底部的导航栏</strong>，相当于iOS里面的TabBarController</td>
+</tr>
+<tr>
+<td>createMaterialTopTabNavigator</td>
+<td><strong>屏幕顶部的材料设计主题导航栏</strong></td>
+</tr>
+<tr>
+<td>createDrawerNavigator</td>
+<td><strong>抽屉效果，侧边滑出</strong></td>
+</tr>
+<tr>
+<td>createSwitchNavigator</td>
+<td>SwitchNavigator 的用途是<strong>一次只显示一个页面</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="导航器的属性"><a href="#导航器的属性" class="headerlink" title="导航器的属性"></a>导航器的属性</h2><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ref</td>
+<td>可以通过ref属性获取到Navigation</td>
+</tr>
+<tr>
+<td>onNavigationStateChange（prevState，newState，action）</td>
+<td>顶级节点除了ref 属性之外，还接受onNav igat ionStateChange（prevState，newState，action）属性，每次<strong>当导航器所管理的state发生改变时，都会回调该方法</strong><br>。<strong>prevState</strong>：变化之前的state；<br>。<strong>newState</strong>：新的state；<br>。导致state变化的<strong>action</strong></td>
+</tr>
+<tr>
+<td>screenProps</td>
+<td><strong>向子屏幕传递额外的数据</strong>，子屏幕可以通过<code>this.props.screenProps</code>获取到该数据</td>
+</tr>
+</tbody></table>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2q7idjxlj31050ag789.jpg" alt="例子"></p>
+<hr>
+<h2 id="导航器相关的两个概念"><a href="#导航器相关的两个概念" class="headerlink" title="导航器相关的两个概念"></a>导航器相关的两个概念</h2><p>在开始学习导航器之前，我们需要先了解两个和导航相关的概念：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Screen navigation prop</strong>（屏幕导航属性）</td>
+<td><strong>通过navigatioh</strong>可以完成屏幕之间的调度操作，例如<strong>打开另一个屏幕</strong></td>
+</tr>
+<tr>
+<td><strong>Screen navigationOptions</strong>（屏幕导航选项）</td>
+<td>通过navigationOptions可以<strong>定制导航器显示的方式</strong>（例如：<strong>头部标题，选项卡标签</strong>等）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="Screen-Navigation-Prop（屏幕导航属性）"><a href="#Screen-Navigation-Prop（屏幕导航属性）" class="headerlink" title="Screen Navigation Prop（屏幕导航属性）"></a>Screen Navigation Prop（屏幕导航属性）</h3><p>当导航器中的屏幕被打开时，它会收到一个<code>navigation prop</code>，<code>navigation prop</code>是整个导航环节的关键一员，接下来就详细讲解一下navigation的作用。</p>
+<h4 id="navigation的属性"><a href="#navigation的属性" class="headerlink" title="navigation的属性"></a>navigation的属性</h4><ul>
+<li>navigate()：跳转到其他界面</li>
+<li>state：屏幕的当前state</li>
+<li>setParams()：改变路由的params</li>
+<li>goBack：关闭当前屏幕</li>
+<li>dispatch()：向路由发送一个action</li>
+<li>addListener：订阅导航生命周期的更新</li>
+<li>isFocused：true 标识屏幕获取了焦点</li>
+<li>getParam：获取具有回退的特定参数</li>
+<li>dangerouslyGetParent：返回父导航器</li>
+</ul>
+<p><strong>注意</strong>：一个navigation有可能没有navigate、setParams 以及goBack，只有state与dispatch，所以<strong>在使用navigate时要进行判断，如果没有navigate可以使用navigation去dispatch一个新的action</strong>。<br>如：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2uat5uswj30xs0cv792.jpg" alt="使用navigation去dispatch一个新的action"><br><strong>提示</strong>：这里的<code>reset</code>在2.0及以后版本中被从<code>NavigationActions</code>中移到了<code>StackActions</code>中，使用时记得留意。</p>
+<hr>
+<h4 id="StackNavigator的navigation的额外功能"><a href="#StackNavigator的navigation的额外功能" class="headerlink" title="StackNavigator的navigation的额外功能"></a>StackNavigator的navigation的额外功能</h4><ul>
+<li>当且仅当 <strong>当前navigator 是 stack navigator时，<code>this.props.navigation</code>上有一些附加功能</strong>。</li>
+<li>这些函数是navigate和goBack的替代方法，你可以使用任何你喜 欢的方法。这些功能是：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>this.props.navigation的属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push</td>
+<td>导航到堆栈中的一个新的路由</td>
+</tr>
+<tr>
+<td>pop</td>
+<td>返回堆栈中的上一个页面</td>
+</tr>
+<tr>
+<td>popToTop</td>
+<td>跳转到堆栈中最顶层的页面</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>用新路由替换当前路由</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>擦除导航器状态并将其替换为多个操作的结果</td>
+</tr>
+<tr>
+<td>dismiss</td>
+<td>关闭当前栈</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="Screen-navigationOptions（屏幕导航选项）"><a href="#Screen-navigationOptions（屏幕导航选项）" class="headerlink" title="Screen navigationOptions（屏幕导航选项）"></a>Screen navigationOptions（屏幕导航选项）</h3><p>支持以下参数：</p>
+<ul>
+<li>title: 可以作为<strong>headerTitle的备选字段</strong>(当<strong>没设置headerTitle时会用该字段作为标题</strong>)，也可以作为TabNavigator的tabBarLabel以及DrawerNavigator的drawerLabel。</li>
+<li>header: <strong>自定义导航条</strong>，可以通过设置null来隐藏导航条；</li>
+<li>headerTitle: <strong>标题</strong>；</li>
+<li>headerTitleAllowFontScaling: <strong>标题是否允许缩放</strong>，默认true；</li>
+<li>headerBackTitle: 定义在iOS上<strong>当前页面进入到下一页面的回退标题</strong>，可以通过设置null来禁用它；</li>
+<li>headerTruncatedBackTitle: <strong>当回退标题不能显示的时候显示此属性的标题</strong>，比如回退标题太长了；</li>
+<li>headerBackImage：React 元素或组件在标题的<strong>后退按钮中显示自定义图片（回退图标）</strong>。 当组件被调用时，它会在渲染时收到许多 props 如：（tintColor，title）。 默认为带有 react-navigation/views/assets/back-icon.png 这张图片的组件，后者是平台的默认后图标图像（iOS上为向左的符号，Android上为箭头）。</li>
+<li>headerRight: 定义<strong>导航栏右边视图</strong>；</li>
+<li>headerLeft: 定义<strong>导航栏左边视图</strong>；</li>
+<li>headerStyle: 定义<strong>导航栏的样式</strong>，比如背景色等；</li>
+<li>headerTitleStyle: 定义<strong>标题的样式</strong>；</li>
+<li>headerLeftContainerStyle：自定义 <strong>headerLeft 组件(导航栏左边视图)容器的样式</strong>，例如，增加 padding。</li>
+<li>headerRightContainerStyle：自定义 <strong>headerRight 组件(导航栏右边视图)容器的样式</strong>,例如，增加 padding。</li>
+<li>headerTitleContainerStyle：自定义 <strong>headerTitle 组件容器的样式</strong>, 例如，增加 padding。</li>
+<li>headerBackTitleStyle: 定义返回标题的样式；</li>
+<li>headerPressColorAndroid：颜色为材料波纹 (Android &gt;= 5.0)；</li>
+<li>headerTintColor: 定义导航条的tintColor，会覆盖headerTitleStyle中的颜色；</li>
+<li>headerTransparent：默认为 false。如果 true, 则标头将不会有背景, 除非您显式提供 headerStyle 或 headerBackground。</li>
+<li>headerBackground：与headerTransparent一起使用，以提供在标题后台呈现的组件。 例如，您可以使用模糊视图来创建半透明标题。</li>
+<li>gesturesEnabled: 定义<strong>是否能侧滑返回</strong>，iOS默认true，Android默认false；</li>
+<li>gestureResponseDistance: 定义<strong>滑动返回的有效距离</strong>，水平状态下默认：25，垂直状态默认135；</li>
+<li>gestureDirection: <strong>设置关闭手势的方向</strong>。默认从左向右，可以设置从右到左的滑动操作。</li>
+</ul>
+<hr>
+<h2 id="使用navigate进行界面之间的跳转"><a href="#使用navigate进行界面之间的跳转" class="headerlink" title="使用navigate进行界面之间的跳转"></a>使用navigate进行界面之间的跳转</h2><p><strong>语法：</strong></p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">navigation.navigate（&#123;routeName，<span class="built_in">params</span>，<span class="built_in">action</span>，key&#125;）</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">navigation.navigate（routeName，<span class="built_in">params</span>，<span class="built_in">action</span>）</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>routeName</td>
+<td>要跳转到的界面的<strong>路由名</strong>，也就是在导航其中配置的路由名</td>
+</tr>
+<tr>
+<td>params</td>
+<td>要<strong>传递给下一个界面的参数</strong></td>
+</tr>
+<tr>
+<td>action</td>
+<td>(可选) 如果该界面是一个navigator的话，将运行这个sub-action</td>
+</tr>
+<tr>
+<td>key</td>
+<td>(可选) 要导航到的路由的可选标识符。如果已存在，将后退到此路由</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="例子：页面跳转"><a href="#例子：页面跳转" class="headerlink" title="例子：页面跳转"></a>例子：页面跳转</h3><p>HomeScreen跳转到Page1：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2vjni7i8j30sn0g6jwy.jpg" alt="HomeScreen跳转到Page1"></p>
+<hr>
+<h2 id="使用state的params"><a href="#使用state的params" class="headerlink" title="使用state的params"></a>使用state的params</h2><p>可以通过<code>this.props.state.params</code>来<strong>获取通过<code>setParams（）</code>，或<code>navigat ion.navigate（）</code>传递的参数</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2vxjc9vij30zu0dl46l.jpg" alt="例子"></p>
+<hr>
+<h2 id="使用setParams-改变路由的params"><a href="#使用setParams-改变路由的params" class="headerlink" title="使用setParams()改变路由的params"></a>使用setParams()改变路由的params</h2><p>setParams：function setParams（params）：我们可以借助<code>setParams</code>来改变route params。比如，<strong>通过<code>setParams</code>来更新页面顶部的标题，返回按钮</strong>等。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2w45qmgaj31050a9n1t.jpg" alt="例子"><br><strong>注意</strong>：<br><code>navigation.setParams</code><strong>改变的是当前页面的Params</strong>，如果<strong>要改变其他页面的Params可以通过<code>NavigationActions.setParams</code>完成</strong>，下文会讲到。</p>
+<hr>
+<h1 id="屏幕上方导航栏createStackNavigator（定义路由）"><a href="#屏幕上方导航栏createStackNavigator（定义路由）" class="headerlink" title="屏幕上方导航栏createStackNavigator（定义路由）"></a>屏幕上方导航栏createStackNavigator（定义路由）</h1><p>组件createStackNavigator提供<strong>APP屏幕之间切换的能力</strong>，它是以栈的形式还管理屏幕之间的切换，新切换到的屏幕会放在栈的顶部。</p>
+<p><strong>屏幕转场风格</strong><br>默认情况下，createStackNavigator提供了转场过渡效果，在Android和iOS上过渡效果是不同的，这也<strong>是React Native重平台性的一个体现</strong>，<strong>在Android上从屏幕底部淡入，在iOS上是从屏幕的右侧划入</strong>，当然你也可以通过配置让StackNavigator支持屏幕从底部滑入的效果。</p>
+<hr>
+<h2 id="createStackNavigator-API"><a href="#createStackNavigator-API" class="headerlink" title="createStackNavigator API"></a>createStackNavigator API</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createStackNavigator(<span class="name">RouteConfigs</span>, StackNavigatorConfig)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数RouteConfigs-必选"><a href="#参数RouteConfigs-必选" class="headerlink" title="参数RouteConfigs(必选)"></a>参数RouteConfigs(必选)</h3><p>RouteConfigs：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么。RouteConfigs 支持三个参数screen、path以及navigationOptions。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>screen <strong>(必选)</strong></td>
+<td><strong>指定一个 React 组件作为屏幕的主要显示内容</strong>，当这个组件被createStackNavigator加载时，它会<strong>被分配一个navigation prop</strong></td>
+</tr>
+<tr>
+<td>path(可选)</td>
+<td>用来设置支持schema跳转时使用，具体使用会在下文的有关Schema章节中讲到</td>
+</tr>
+<tr>
+<td>navigationOptions(可选)</td>
+<td>用以配置全局的屏幕导航选项如：title、headerRight、headerLeft等</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="参数StackNavigatorConfig-可选"><a href="#参数StackNavigatorConfig-可选" class="headerlink" title="参数StackNavigatorConfig(可选)"></a>参数StackNavigatorConfig(可选)</h3><ul>
+<li><strong>StackNavigatorConfig：配置导航器的路由</strong>(如：默认首屏，navigationOptions，paths等)、<strong>样式</strong>(如，转场模式mode、头部模式等)。</li>
+<li>从react-navigation源码中可以看出<strong>StackNavigatorConfig支持配置的参数有10个</strong>:<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function createStackNavigator(routeConfigMap, stackConfig = &#123;&#125;) &#123;</span><br><span class="line">  const &#123;</span><br><span class="line"><span class="built_in">    initialRouteKey,</span></span><br><span class="line"><span class="built_in">    initialRouteName,</span></span><br><span class="line"><span class="built_in">    initialRouteParams,</span></span><br><span class="line"><span class="built_in">    paths,</span></span><br><span class="line"><span class="built_in">    navigationOptions,</span></span><br><span class="line"><span class="built_in">    disableKeyboardHandling,</span></span><br><span class="line">    getCustomActionCreators</span><br><span class="line">  &#125; = stackConfig<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这7个参数可以根据作用不同分为<strong>路由配置、视图样式配置</strong>两类。</p>
+<h4 id="用于路由配置的参数"><a href="#用于路由配置的参数" class="headerlink" title="用于路由配置的参数"></a>用于路由配置的参数</h4><ul>
+<li>initialRouteName: 设置<strong>默认的页面组件</strong>，必须是上面已注册的页面组件(也就是说<strong>必须是RouteConfigs中配置过的页面组件</strong>)。</li>
+<li>initialRouteParams: 初始化路由的参数。</li>
+<li>navigationOptions: 屏幕导航的默认选项，下文会详细讲解。</li>
+<li>initialRouteKey - 初始路由的可选标识符。</li>
+<li>paths: 用来设置支持schema跳转时使用，具体使用会在下文的有关Schema章节中讲到。</li>
+</ul>
+<h4 id="用于导航样式配置的参数"><a href="#用于导航样式配置的参数" class="headerlink" title="用于导航样式配置的参数"></a>用于导航样式配置的参数</h4><ul>
+<li>mode: <strong>页面切换模式</strong>。<ul>
+<li>card: 普通app常用的<strong>左右切换</strong>(相当于iOS中的push效果)。</li>
+<li>modal: <strong>上下切换</strong>(相当于iOS中的modal效果)  。</li>
+</ul>
+</li>
+<li>headerMode: <strong>导航栏的显示模式</strong>。<ul>
+<li>float: <strong>无透明效果</strong>, 默认。</li>
+<li>screen: <strong>有渐变透明效果</strong>, 如微信QQ的一样。</li>
+<li>none: <strong>隐藏导航栏</strong>。</li>
+</ul>
+</li>
+<li>headerBackTitleVisible : 提供合理的默认值以确定<strong>后退按钮标题是否可见</strong>，但如果要覆盖它，则可以使用true或 false 在此选项中。<ul>
+<li>fade-in-place（默认值）: 标题组件交叉淡入淡出而不移动，类似于iOS的Twitter，Instagram和Facebook应用程序。</li>
+<li>uikit: iOS的默认行为的近似值。</li>
+<li>headerTransitionPreset: 指定在启用<code>headerMode：float</code>时header应如何从一个屏幕转换到另一个屏幕。</li>
+</ul>
+</li>
+<li>cardStyle: <strong>样式</strong>（iOS上页面切换会有白色渐变蒙层，想去掉则可以这样设置<code>cardStyle: { opacity: null }</code>,切换页面时的页面边框也在这里可以设置）。</li>
+<li>onTransitionStart: <strong>页面切换开始时的回调函数</strong> (我们可以在这里注册一些通知，告知我们切面切换的状态，方便后面处理页面切换事件)。</li>
+<li>onTransitionEnd: <strong>页面切换结束时的回调函数</strong>。</li>
+</ul>
+<hr>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="创建一个StackNavigator类型的导航器"><a href="#创建一个StackNavigator类型的导航器" class="headerlink" title="创建一个StackNavigator类型的导航器"></a>创建一个StackNavigator类型的导航器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用createStackNavigator()创建StackNavigator类型的导航器</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AppStackNavigator = createStackNavigator(&#123;</span><br><span class="line">    <span class="comment">//配置4个页面</span></span><br><span class="line">    HomePage: &#123;</span><br><span class="line">        screen: HomePage</span><br><span class="line">    &#125;,</span><br><span class="line">    Page1: &#123;</span><br><span class="line">        screen: Page1,</span><br><span class="line">        navigationOptions: <span class="function">(<span class="params">&#123;navigation&#125;</span>) =&gt;</span> (&#123;</span><br><span class="line">            <span class="comment">//动态设置navigationOptions</span></span><br><span class="line">            title: <span class="string">`<span class="subst">$&#123;navigation.state.params.name&#125;</span>页面名`</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    Page2: &#123;</span><br><span class="line">        screen: Page2,</span><br><span class="line">        navigationOptions: &#123;</span><br><span class="line">            <span class="comment">//在这里定义每个页面的导航属性，静态配置</span></span><br><span class="line">            title: <span class="string">"This is Page2."</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    Page3: &#123;</span><br><span class="line">        screen: Page3,</span><br><span class="line">        navigationOptions: <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">//在这里定义每个页面的导航属性，动态配置</span></span><br><span class="line">            <span class="keyword">const</span> &#123;navigation&#125; = props;</span><br><span class="line">            <span class="keyword">const</span> &#123;state, setParams&#125; = navigation;</span><br><span class="line">            <span class="keyword">const</span> &#123;params&#125; = state;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                title: params.title ? params.title : <span class="string">'This is Page3'</span>,</span><br><span class="line">                headerRight: (</span><br><span class="line">                    &lt;Button</span><br><span class="line">                        title=&#123;params.mode === <span class="string">'edit'</span> ? <span class="string">'保存'</span> : <span class="string">'编辑'</span>&#125;</span><br><span class="line">                        onPress=&#123;<span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">                            setParams(&#123;mode: params.mode === <span class="string">'edit'</span> ? <span class="string">''</span> : <span class="string">'edit'</span>&#125;)&#125;</span><br><span class="line">                    /&gt;</span><br><span class="line">                ),</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    defaultNavigationOptions: &#123;</span><br><span class="line">        <span class="comment">// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar</span></span><br><span class="line">        <span class="comment">// header: null,</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h1><p>例子：<strong>LoginScreen跳转到MainScreen</strong></p>
+<p>1.编写 LoginScreen:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22xrve02j30ps0bo76d.jpg" alt="LoginScreen"></p>
+<p>2.编写 MainScreen:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22ygkpeyj30lu089768.jpg" alt="MainScreen"></p>
+<p>3.定义路由<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22ytn1gbj30f805f0tp.jpg" alt="定义路由"></p>
+<p>4.渲染路由组件<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc22zb06tdj30lx06cjsf.jpg" alt="渲染路由组件"></p>
+<p>5.<strong>返回</strong>：每个界面的头部导航栏左边默认设置了一个返回按钮，通过它可以返回到之前一个页面。如果想要取消某个页面的头部导航栏，需要在该页面组件中定义:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc2302aht0j30dr04pgmd.jpg" alt="返回"><br>若要取消所有页面的头部导航栏，需要在路由中定义:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc230f71r3j30i20b4q4j.jpg" alt="取消所有页面的头部导航栏"></p>
+<p>6.<strong>手动返回</strong>，可以调用this.props.navigation.goBack()<br>eg:MainScreen中添加按钮，点击该按钮，回到LoginScreen<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc231583y2j30qk0ein0e.jpg" alt="手动返回"></p>
+<p>7.如何向上一个页面返回数据：<br>MainScreen：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc231uok2qj30nv066abe.jpg" alt="MainScreen"><br>调用this.props.navigation.state.params.refresh方法返回数据</p>
+<p>8.LoginScreen：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc233mrippj30m1079q4y.jpg" alt="LoginScreen"><br>refresh中事件函数的形参接收MainScreen返回回来的数据<br>若是将数据显示在ToastAndroid中，则直接show。<br>若是显示在界面控件中，需用state处理，因为此时界面状态发生了改变</p>
+<p>9.通过state将界面重新渲染：<br>①初始化state<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc234g8rlnj30g706pt9q.jpg" alt="初始化state"></p>
+<p>②设置state属性值<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc234r86zfj30im03kt9o.jpg" alt="设置state属性值"></p>
+<p>③获取state属性值<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc23504lf6j30bt014glp.jpg" alt="获取state属性值"></p>
+<h2 id="Tab导航"><a href="#Tab导航" class="headerlink" title="Tab导航"></a>Tab导航</h2><h3 id><a href="#" class="headerlink" title=" "></a> </h3>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/01/JS数据类型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS数据类型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/01/ReactNative入门基础(2)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ReactNative入门基础(2)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-独有的组件"><span class="nav-number">1.</span> <span class="nav-text">Android 独有的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ToastAndroid"><span class="nav-number">1.1.</span> <span class="nav-text">ToastAndroid</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用导航器跳转页面（React-Navigation）"><span class="nav-number">2.</span> <span class="nav-text">使用导航器跳转页面（React Navigation）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是导航器"><span class="nav-number">2.1.</span> <span class="nav-text">什么是导航器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航器的属性"><span class="nav-number">2.2.</span> <span class="nav-text">导航器的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航器相关的两个概念"><span class="nav-number">2.3.</span> <span class="nav-text">导航器相关的两个概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen-Navigation-Prop（屏幕导航属性）"><span class="nav-number">2.3.1.</span> <span class="nav-text">Screen Navigation Prop（屏幕导航属性）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#navigation的属性"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">navigation的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StackNavigator的navigation的额外功能"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">StackNavigator的navigation的额外功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen-navigationOptions（屏幕导航选项）"><span class="nav-number">2.3.2.</span> <span class="nav-text">Screen navigationOptions（屏幕导航选项）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用navigate进行界面之间的跳转"><span class="nav-number">2.4.</span> <span class="nav-text">使用navigate进行界面之间的跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：页面跳转"><span class="nav-number">2.4.1.</span> <span class="nav-text">例子：页面跳转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用state的params"><span class="nav-number">2.5.</span> <span class="nav-text">使用state的params</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用setParams-改变路由的params"><span class="nav-number">2.6.</span> <span class="nav-text">使用setParams()改变路由的params</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#屏幕上方导航栏createStackNavigator（定义路由）"><span class="nav-number">3.</span> <span class="nav-text">屏幕上方导航栏createStackNavigator（定义路由）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#createStackNavigator-API"><span class="nav-number">3.1.</span> <span class="nav-text">createStackNavigator API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数RouteConfigs-必选"><span class="nav-number">3.1.1.</span> <span class="nav-text">参数RouteConfigs(必选)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数StackNavigatorConfig-可选"><span class="nav-number">3.1.2.</span> <span class="nav-text">参数StackNavigatorConfig(可选)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于路由配置的参数"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">用于路由配置的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用于导航样式配置的参数"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">用于导航样式配置的参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例"><span class="nav-number">3.2.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个StackNavigator类型的导航器"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建一个StackNavigator类型的导航器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面跳转"><span class="nav-number">4.</span> <span class="nav-text">页面跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tab导航"><span class="nav-number">4.1.</span> <span class="nav-text">Tab导航</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.1.1.</span> <span class="nav-text"> </span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
