@@ -20,12 +20,17 @@
 <meta property="og:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）  客户端（浏览器）：    DNS解析：通过输入的域名解析到一个IP地址；建立TCP连接（三次握手）；发送http请求。  服务端：    server接收到http请求（Request），处理，并返回HTTP报文（Response）。（具体处理过程在“开发博客项目之接口(1)”中的“nodejs处理HTTP请求”中）（res返回的都是字符串">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gax05noxydj313j0ihqfd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc65rf21q6j30dt0f3gvk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gax0sujmrxj31340lxar4.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gax12b0xzxj31340iowtf.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gax144st8fj313c0l7x4z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc675tgshnj30mp0kw7df.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc678v4bxqj30mn0dewjh.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbtzwhq7txj30pj0bd0zh.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbu1boh32dj30rk0ap0tv.jpg">
-<meta property="og:updated_time" content="2020-02-14T12:10:44.463Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc687bb3j7j30kk0k0dl5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5l7o6jbgj312e0jhthd.jpg">
+<meta property="og:updated_time" content="2020-02-23T05:08:51.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从输入url到页面显示都经历了什么">
 <meta name="twitter:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）  客户端（浏览器）：    DNS解析：通过输入的域名解析到一个IP地址；建立TCP连接（三次握手）；发送http请求。  服务端：    server接收到http请求（Request），处理，并返回HTTP报文（Response）。（具体处理过程在“开发博客项目之接口(1)”中的“nodejs处理HTTP请求”中）（res返回的都是字符串">
@@ -200,22 +205,80 @@
 </thead>
 <tbody><tr>
 <td>第1次</td>
-<td>客户端（浏览器）询问服务器（server端）：“你是否可以使用？”</td>
+<td>客户端（浏览器）询问服务器（server端）：“你是否可以使用？”【客户机发送一个<strong>TCP连接请求报文</strong> 】</td>
 </tr>
 <tr>
 <td>第2次</td>
-<td>服务器（server端）回答客户端（浏览器）：“我可以用。”</td>
+<td>服务器（server端）回答客户端（浏览器）：“我可以用。”【服务器回送一个<strong>TCP确认响应报文</strong>】</td>
 </tr>
 <tr>
 <td>第3次</td>
-<td>客户端（浏览器）告诉服务器（server端）：“我知道啦，接下来我会访问你哦。”</td>
+<td>客户端（浏览器）告诉服务器（server端）：“我知道啦，我来访问你啦。”【客户机向服务器发送一个<strong>包含“HTTP请求”与“TCP确认”的报文</strong>】</td>
 </tr>
 </tbody></table>
-<h3 id="客户端（浏览器）发送http请求"><a href="#客户端（浏览器）发送http请求" class="headerlink" title="客户端（浏览器）发送http请求"></a>客户端（浏览器）发送http请求</h3><p><strong>浏览器根据 URL 内容生成 HTTP 请求</strong>，<strong>HTTP请求报文</strong> 是由三部分组成: <strong>请求行, 请求报头和请求正文</strong>。</p>
-<p><strong>例子：</strong><br>客户端（浏览器）通过url使用get方法向服务端发送http请求，头部包含了请求信息，他们告诉了服务端这个客户端（浏览器）是什么样子的以及有什么要求。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gax0sujmrxj31340lxar4.jpg" alt="发送http请求"><br><strong>（注意：请求req都是客户端发起的，而回复res都是服务端做的。）</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc65rf21q6j30dt0f3gvk.jpg" alt="三次握手图示"></p>
+<p><strong>计算机网络知识补充</strong>：<br><strong>HTTP是无状态协议</strong>：服务器不保存关于客户机的任何信息。<br>HTTP协议使用的<strong>底层运输协议</strong>是TCP。<br>TCP是<strong>面向连接（握手）的、可靠的</strong>传输服务，TCP协议能保证交付所有的数据，但并<strong>不保证</strong>这些数据传输的<strong>速率</strong>以及期待的<strong>传输时延</strong>（<strong>不适合实时应用</strong>，实时应用可采用无握手过程的UDP协议，不过UDP是不可靠数据传输）。 </p>
+<h3 id="客户端（浏览器）发送http请求"><a href="#客户端（浏览器）发送http请求" class="headerlink" title="客户端（浏览器）发送http请求"></a>客户端（浏览器）发送http请求</h3><p><strong>例子：</strong><br>客户端（浏览器）通过url使用get方法向服务端发送http请求，头部包含了请求信息，他们告诉了服务端这个客户端（浏览器）是什么样子的以及有什么要求。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gax0sujmrxj31340lxar4.jpg" alt="发送http请求"><br><strong>（注意：请求req都是客户端发起的，而回复res都是服务端做的。）</strong></p>
+<h4 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h4><p><strong>浏览器根据 URL 内容生成 HTTP 请求</strong>，<strong>HTTP请求报文</strong> 是由三部分组成: <strong>请求行, 首部行和报文主体</strong>。</p>
+<ol>
+<li><strong>请求行（请求方法 URI 协议/版本）</strong>：<ul>
+<li>例如：<code>GET/sample.jsp HTTP/1.1</code>“GET”代表<strong>请求方法</strong>，“/sample.jsp”表示<strong>URI</strong>，“HTTP/1.1代表<strong>协议和协议的版本</strong>。</li>
+</ul>
+</li>
+<li><strong>首部行</strong>包含许多有关的客户端环境和请求正文的有用信息。例如，声明浏览器所用的语言，请求正文的长度等。例如：<ul>
+<li><code>Accept:image/gif.image/jpeg.*/*</code></li>
+<li><code>Accept-Language:zh-cn</code></li>
+<li><code>Connection:Keep-Alive</code></li>
+<li><code>Host:localhost</code></li>
+<li><code>User-Agent:Mozila/4.0(compatible:MSIE5.01:Windows NT5.0)</code></li>
+<li><code>Accept-Encoding:gzip,deflate.</code></li>
+</ul>
+</li>
+<li><strong>报文主体</strong><ul>
+<li>报文首部 和 报文主体 之间是一个<strong>空行</strong>，这个行非常重要，它表示 报文首部 已经结束，接下来的是 报文主体。</li>
+<li><strong>报文主体 中可以包含客户提交的查询字符串信息</strong>：<br><code>username=jinqiao&amp;password=1234</code></li>
+<li>在实际应用中，HTTP请求报文主体可以包含更多的内容。</li>
+</ul>
+</li>
+</ol>
 <h3 id="server端接收http请求，处理并返回"><a href="#server端接收http请求，处理并返回" class="headerlink" title="server端接收http请求，处理并返回"></a>server端接收http请求，处理并返回</h3><p>我们已经清楚：<strong>server端就是这个IP地址的服务器</strong>。<br><strong>server端</strong>接到HTTP请求后，会根据 HTTP 请求中的内容来决定如何获取相应的 HTML 文件，再将得到的 <strong>HTML 文件发送给浏览器（客户端）</strong>，最后返回<strong>HTTP响应报文</strong>。</p>
-<h4 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h4><p><strong>HTTP响应报文</strong>也是由三部分组成: <strong>状态码, 响应报头和响应报文</strong><br><strong>状态码</strong>：<br>1xx：指示信息–表示请求已接收，继续处理。<br>2xx：成功–表示请求已被成功接收、理解、接受。<br>3xx：重定向–要完成请求必须进行更进一步的操作。<br>4xx：客户端错误–请求有语法错误或请求无法实现。<br>5xx：服务器端错误–服务器未能实现合法的请求。<br><strong>响应报头</strong>：<br>常见的响应报头字段有: Server, Connection…<br><strong>响应报文</strong>：<br>服务器返回给浏览器的文本信息，通常HTML, CSS, JS, 图片等文件就放在这一部分。</p>
 <p><strong>例子：</strong><br>例子中，服务器 通过Response Headers 告诉客户端：我<strong>反回的是html代码而不是纯文本</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gax12b0xzxj31340iowtf.jpg" alt="server端回复的信息"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gax144st8fj313c0l7x4z.jpg" alt="server端反回的html代码"></p>
+<h4 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h4><p><strong>HTTP响应报文</strong>也是由三部分组成: <strong>状态行, 首部行和报文实体</strong></p>
+<ol>
+<li><p><strong>状态行（版本，状态码，状态短语）</strong>：</p>
+<ul>
+<li>1xx：<strong>指示信息</strong>–表示请求已接收，继续处理。</li>
+<li>2xx：<strong>成功</strong>–表示请求已被成功接收、理解、接受。<ul>
+<li><code>200 OK</code>:请求成功，请求的对象在这个报文后面</li>
+</ul>
+</li>
+<li>3xx：<strong>重定向</strong>–要完成请求必须进行更进一步的操作。<ul>
+<li><code>301 Moved Permanently</code>:请求的对象已转移，新的URL在响应报文的<code>Location:首部行</code>中指定。</li>
+</ul>
+</li>
+<li>4xx：<strong>客户端错误</strong>–请求有语法错误或请求无法实现。<ul>
+<li><code>400 Bad Request</code>:请求报文不为服务器理解</li>
+<li><code>404 Not Found</code>:请求的文档没有在该服务器上发现</li>
+</ul>
+</li>
+<li>5xx：<strong>服务器端错误</strong>–服务器未能实现合法的请求。<ul>
+<li><code>505 HTTP Version Not Supported</code>:服务器不支持请求报文使用的HTTP版本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>首部行</strong>：</p>
+<ul>
+<li>常见的首部行字段有: Content-Type（发送的数据类型）,Date（发送日期）,Content-Length(对象长度),Connection（close为关闭连接）…</li>
+</ul>
+</li>
+<li><p><strong>报文实体</strong>：</p>
+<ul>
+<li>服务器返回给浏览器的文本信息，通常HTML, CSS, JS, 图片等文件就放在这一部分。</li>
+</ul>
+</li>
+</ol>
+<h4 id="对比-请求报文、响应报文"><a href="#对比-请求报文、响应报文" class="headerlink" title="对比 请求报文、响应报文"></a>对比 请求报文、响应报文</h4><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc675tgshnj30mp0kw7df.jpg" alt="图示"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc678v4bxqj30mn0dewjh.jpg" alt="实体首部字段"></p>
 <h3 id="客户端（浏览器-解析数据-渲染页面"><a href="#客户端（浏览器-解析数据-渲染页面" class="headerlink" title="客户端（浏览器)解析数据 渲染页面"></a>客户端（浏览器)解析数据 渲染页面</h3><ul>
 <li><strong>客户端（浏览器）</strong>接收到server端返回的 HTML 文件 后就会<strong>解析这些html代码</strong>，在还<strong>没有完全接收 HTML 文件</strong>时便<strong>开始渲染、显示网页</strong>。</li>
 <li>在执行 HTML 中代码时，先是解析html，解析html过程中遇到引入了css，则会在解析html的同时解析css。</li>
@@ -234,14 +297,62 @@
 <li>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容，这个过程称为<strong>repain(重绘)</strong>。</li>
 <li><strong>页面在首次加载时必然会经历reflow和repain</strong>。reflow和repain过程是<strong>非常消耗性能</strong>的，尤其是在移动设备上，它会破坏用户体验，有时会造成页面卡顿。所以我们应该<strong>尽可能少的减少reflow和repain</strong>。</li>
 </ul>
-<h4 id="JS的解析"><a href="#JS的解析" class="headerlink" title="JS的解析"></a>JS的解析</h4><ul>
+<h4 id="JS的解析（同步、异步）"><a href="#JS的解析（同步、异步）" class="headerlink" title="JS的解析（同步、异步）"></a>JS的解析（同步、异步）</h4><ul>
 <li><strong>JS的解析是由浏览器中的JS解析引擎完成的</strong>。</li>
 <li>JS是<strong>单线程运行</strong>，也就是说，<strong>在同一个时间内只能做一件事</strong>，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。</li>
 <li>但是又存在某些任务比较耗时，如 IO读写 等，所以需要一种机制可以先执行排在后面的任务，这就是：<strong>同步任务(synchronous)和异步任务(asynchronous)</strong>。</li>
-<li>JS的执行机制就可以看做是一个 <strong>主线程</strong> 加上一个 <strong>任务队列</strong>(task queue)。</li>
-<li><strong>同步任务</strong>就是放在主线程上执行的任务，<strong>异步任务</strong>是放在任务队列中的任务。</li>
-<li>所有的<strong>同步任务</strong>在主线程上执行，形成一个<strong>执行栈</strong>。<strong>异步任务</strong>有了<strong>运行结果</strong>就会在<strong>任务队列</strong>中放置一个<strong>事件</strong>。<strong>脚本运行时先依次运行执行栈，然后会从任务队列里提取事件，运行任务队列中的任务</strong>，这个过程是不断重复的，所以又叫做<strong>事件循环</strong>(Event loop)。</li>
+<li><strong>同步任务</strong>就是放在主线程（执行栈）上执行的任务，<strong>异步任务</strong>是放在任务队列中的任务。【<strong>注意：异步任务中有两个任务队列：宏任务和微任务</strong>】</li>
+<li>JS的执行机制就可以看做是一个 <strong>主线程（执行栈）</strong> 加上一个 <strong>任务队列</strong>(task queue)。</li>
 </ul>
+<h5 id="JS的执行步骤（事件循环）"><a href="#JS的执行步骤（事件循环）" class="headerlink" title="JS的执行步骤（事件循环）"></a>JS的执行步骤（事件循环）</h5><ul>
+<li><strong>事件循环是解决javaScript单线程运行阻塞的一种机制</strong>。</li>
+<li>所有的<strong>同步任务</strong>在主线程上执行，形成一个<strong>执行栈</strong>。<strong>异步任务</strong>有了<strong>运行结果</strong>就会在<strong>任务队列</strong>中放置一个<strong>事件</strong>。<strong>脚本运行时先依次运行执行栈中的所有同步任务，然后会从任务队列里提取事件，选择需要首先执行的异步任务然后执行。</strong><ul>
+<li><strong>任务队列 分为 宏任务队列 和 微任务队列</strong>。</li>
+<li><strong>宏任务先于微任务执行（第一个执行的宏任务是script中的同步任务）</strong></li>
+</ul>
+</li>
+<li>在此过程中，主线程要做的就是从任务队列中去执行事件，执行完毕，再取事件，再执行事件…这样不断取事件，执行事件的循环机制就叫做<strong>事件循环机制</strong>。</li>
+</ul>
+<p><strong>总结事件循环：</strong><br><strong>执行栈 全部执行完毕后 –&gt;清空 微任务 –&gt;会取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 无线循环</strong></p>
+<h5 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h5><ul>
+<li><p><strong>异步任务分为宏任务（macrotask ）和微任务（microtask ）</strong> 两种。</p>
+</li>
+<li><p><strong>宏任务先于微任务执行</strong>。</p>
+</li>
+<li><p><strong>MacroTask（宏任务）</strong>：</p>
+<ul>
+<li>script(整体代码)</li>
+<li>setTimeout</li>
+<li>setInterval</li>
+<li>I/O</li>
+<li>UI交互事件</li>
+<li>postMessage</li>
+<li>MessageChannel</li>
+<li>setImmediate(浏览器暂时不支持，只有IE10支持，具体可见MDN)</li>
+</ul>
+</li>
+<li><p><strong>MicroTask（微任务）</strong>：</p>
+<ul>
+<li>Process.nextTick（Node独有）</li>
+<li>Promise</li>
+<li>MutationObserver（具体使用方式查看这里）</li>
+</ul>
+</li>
+</ul>
+<p>在<strong>挂起异步任务时</strong>，JS 引擎会<strong>将所有异步任务按照类别分到这两个队列</strong>中，首先在 宏任务 的队列中取出第一个任务，执行完毕后取出 微任务 队列中的所有任务顺序执行；之后再取 宏任务，周而复始，直至两个队列的任务都取完。<br>【<strong>注意：同步任务也属于宏任务，所以第一个取出的宏任务是同步任务</strong>】</p>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc687bb3j7j30kk0k0dl5.jpg" alt="宏任务和微任务"></p>
+<h6 id="事件循环例子（面试题）"><a href="#事件循环例子（面试题）" class="headerlink" title="事件循环例子（面试题）"></a>事件循环例子（面试题）</h6><figure class="highlight scilab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">'script start'</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">'timer over'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">Promise.resolve().<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">'promise1'</span>)</span><br><span class="line">&#125;).<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">    console.<span class="built_in">log</span>(<span class="string">'promise2'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">'script end'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// script start</span></span><br><span class="line"><span class="comment">// script end</span></span><br><span class="line"><span class="comment">// promise1</span></span><br><span class="line"><span class="comment">// promise2</span></span><br><span class="line"><span class="comment">// timer over</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>整体代码script是宏任务</strong>，所以<strong>先打印<code>script start</code></strong></li>
+<li>再执行到<strong>setTimeout属于异步任务，也是宏任务</strong>的一种，<strong>放到 宏任务队列 里面</strong></li>
+<li>接着就<strong>执行到Promise也是异步任务，但是属于微任务，进入到 微任务队列</strong></li>
+<li>然后<strong>执行到 script的最后打印出<code>script end</code>，主线程（执行栈）被清空</strong></li>
+<li>这里要注意的是<strong>主线程一旦全部执行完毕就会取清空微任务</strong>，所以接下来微任务队列中的 <code>Promise.then()</code>被加入到主线程中执行。执行了回调，<strong>打印出<code>promise1</code>，同时产生了新的微任务 <code>Promise.then()</code></strong>，执行完毕后，<strong>主线程又被清空</strong>了</li>
+<li><strong>微任务队列</strong>里还有刚刚产生的<code>Promise.then()</code>，又被<strong>加入到主线程执行打印出<code>promise2</code></strong></li>
+<li>此时<strong>微任务队列和主线程都被清空</strong>,接着在宏任务队列里<strong>取出一个宏任务加入到主线程中执行 <code>setTimeout callback</code>，打印出<code>setTimeout</code></strong></li>
+<li>这时主线程、微任务队列、宏任务队列都被清空，代码执行完毕，所以最后的执行结果为script start、script end、promise1、promise2、setTimeout。如果宏任务队列和微任务队列还没清空，就会：<strong>执行栈 全部执行完毕后 –&gt;清空 微任务 –&gt;会取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 无线循环</strong>，这就是我们所说的<strong>事件循环</strong>（Event Loop），也就是<strong>javascript的执行机制</strong>。</li>
+</ol>
 <h3 id="连接结束"><a href="#连接结束" class="headerlink" title="连接结束"></a>连接结束</h3><ul>
 <li>主机向服务器发送一个断开连接的请求（不早了，我该走了）；</li>
 <li>服务器接到请求后发送确认收到请求的信号（知道了）；</li>
@@ -254,6 +365,18 @@
 <li>原因是<strong>因为JS有可能修改DOM结构</strong>，这就意味着JS执行完成前，后续所有资源的下载是没有必要的，这就是<strong>JS阻塞后续资源下载的根本原因</strong>。</li>
 <li>CSS文件的加载不影响JS文件的加载，但是却影响JS文件的执行。<strong>JS代码执行前浏览器必须保证CSS文件已经下载并加载完毕</strong>。</li>
 </ul>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>堆表示一大块非结构化的内存区域。对象，数据被存放在堆中。</p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ul>
+<li>栈在javascript中又称<strong>执行栈</strong>、调用栈，是一种<strong>后进先出</strong>的数组结构，</li>
+<li>Javascript 有一个 主线程（main thread）和 调用栈(或执行栈call-stack)，<strong>主线各所有的任务都会被放到执行栈等待主线程执行</strong>。</li>
+<li>JS调用栈采用的是后进先出的规则，<strong>当函数执行的时候，会被添加到栈的顶部，当执行栈执行完该函数后，函数就会从栈顶移出，直到栈内被清空</strong>。</li>
+</ul>
+<p><strong>举个例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b + <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> foo(x * y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bar(<span class="number">7</span>)); <span class="comment">// 返回 42</span></span><br></pre></td></tr></table></figure>
+
+<p>当<strong>调用 bar 时，创建了第一个帧</strong> ，帧中包含了 bar 的参数和局部变量。当 <strong>bar 调用 foo 时，第二个帧就被创建，并被压到第一个帧之上</strong>，帧中包含了 foo 的参数和局部变量。<strong>当 foo 返回时，最上层的帧就被弹出栈</strong>（剩下 bar 函数的调用帧 ）。<strong>当 bar 返回的时候，栈就空了</strong>。</p>
+<p><strong>注意：这里的堆栈，是数据结构的堆栈，不是内存中的堆栈（内存中的堆栈，堆存放引用类型的数据，栈存放基本类型的数据）</strong></p>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>队列即<strong>任务队列</strong>Task Queue，是一种<strong>先进先出</strong>的一种数据结构。在队尾添加新元素，从队头移除元素。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5l7o6jbgj312e0jhthd.jpg" alt="图示"></p>
 
       
     </div>
@@ -325,7 +448,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从输入url到页面显示都经历了什么"><span class="nav-number">1.</span> <span class="nav-text">从输入url到页面显示都经历了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例演示"><span class="nav-number">1.1.</span> <span class="nav-text">实例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器）进行DNS解析"><span class="nav-number">1.1.1.</span> <span class="nav-text">客户端（浏览器）进行DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立TCP连接"><span class="nav-number">1.1.2.</span> <span class="nav-text">建立TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器）发送http请求"><span class="nav-number">1.1.3.</span> <span class="nav-text">客户端（浏览器）发送http请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server端接收http请求，处理并返回"><span class="nav-number">1.1.4.</span> <span class="nav-text">server端接收http请求，处理并返回</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP响应报文"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">HTTP响应报文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器-解析数据-渲染页面"><span class="nav-number">1.1.5.</span> <span class="nav-text">客户端（浏览器)解析数据 渲染页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#边解析边渲染"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">边解析边渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器-reflow-回流-和repain-重绘"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">浏览器 reflow(回流)和repain(重绘)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS的解析"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">JS的解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接结束"><span class="nav-number">1.1.6.</span> <span class="nav-text">连接结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">1.1.7.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从输入url到页面显示都经历了什么"><span class="nav-number">1.</span> <span class="nav-text">从输入url到页面显示都经历了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例演示"><span class="nav-number">1.1.</span> <span class="nav-text">实例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器）进行DNS解析"><span class="nav-number">1.1.1.</span> <span class="nav-text">客户端（浏览器）进行DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立TCP连接"><span class="nav-number">1.1.2.</span> <span class="nav-text">建立TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器）发送http请求"><span class="nav-number">1.1.3.</span> <span class="nav-text">客户端（浏览器）发送http请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP请求报文"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">HTTP请求报文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server端接收http请求，处理并返回"><span class="nav-number">1.1.4.</span> <span class="nav-text">server端接收http请求，处理并返回</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP响应报文"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">HTTP响应报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对比-请求报文、响应报文"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">对比 请求报文、响应报文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端（浏览器-解析数据-渲染页面"><span class="nav-number">1.1.5.</span> <span class="nav-text">客户端（浏览器)解析数据 渲染页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#边解析边渲染"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">边解析边渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器-reflow-回流-和repain-重绘"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">浏览器 reflow(回流)和repain(重绘)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS的解析（同步、异步）"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">JS的解析（同步、异步）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JS的执行步骤（事件循环）"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">JS的执行步骤（事件循环）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#宏任务和微任务"><span class="nav-number">1.1.5.3.2.</span> <span class="nav-text">宏任务和微任务</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#事件循环例子（面试题）"><span class="nav-number">1.1.5.3.2.1.</span> <span class="nav-text">事件循环例子（面试题）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接结束"><span class="nav-number">1.1.6.</span> <span class="nav-text">连接结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">1.1.7.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#队列"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

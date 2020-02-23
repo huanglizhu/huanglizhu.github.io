@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
-<meta property="og:updated_time" content="2020-02-09T14:37:12.472Z">
+<meta property="og:updated_time" content="2020-02-22T03:56:35.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数相关知识点补充">
 <meta name="twitter:description" content="函数是对象 JavaScript 函数是通过 function 关键词定义的。JavaScript 中的 typeof 运算符会为函数返回 “function”。但是最好是把 JavaScript 函数描述为对象。 JavaScript 函数都有属性和方法。">
@@ -296,6 +296,24 @@
 <p><strong>例子</strong>：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> demo = square(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// demo will equal 9</span></span><br></pre></td></tr></table></figure>
 
+<hr>
+<h1 id="HTML事件绑定函数时不加括号"><a href="#HTML事件绑定函数时不加括号" class="headerlink" title="HTML事件绑定函数时不加括号"></a>HTML事件绑定函数时不加括号</h1><ul>
+<li>加括号就是直接<strong>执行函数</strong>了，不加括号则是指向<strong>函数地址</strong>，当事件发生时才去调用函数。</li>
+<li><code>事件=function(){}</code>或者<code>事件=函数名</code>都是可以的，不能使用<code>事件=(function(){})(参数)</code>或<code>事件=函数名()</code>。</li>
+</ul>
+<h2 id="事件绑定函数传参"><a href="#事件绑定函数传参" class="headerlink" title="事件绑定函数传参"></a>事件绑定函数传参</h2><p>如果事件绑定函数<strong>想要传参</strong>可以将传参的函数放到另一个匿名函数中，事件绑定该匿名函数。</p>
+<p><strong>例子</strong>：<br>想要使用onclick事件绑定一个想传参的函数。我们将传参的函数放入匿名函数中，再让onclick事件绑定该匿名函数:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xx.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span>&#123;函数名<span class="params">(参数)</span>;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xx.onclick= <span class="function"><span class="params">()</span>=&gt;</span>&#123;函数名(参数)&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在这里不能直接绑定<code>函数名(参数)</code>传参</strong>是因为<code>函数名(参数)</code>直接执行了函数，而<code>onClick</code>需要<strong>绑定的事件函数是不能立即执行的</strong>，所以需要新建一个 箭头函数/匿名函数 让他不立即执行。</p>
+<h3 id="区分react和html中的事件写法"><a href="#区分react和html中的事件写法" class="headerlink" title="区分react和html中的事件写法"></a>区分react和html中的事件写法</h3><ul>
+<li>react中是onClick</li>
+<li>html中是onclick</li>
+</ul>
+<hr>
 
       
     </div>
@@ -367,7 +385,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数是对象"><span class="nav-number">1.</span> <span class="nav-text">函数是对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象属性arguments-length"><span class="nav-number">1.1.</span> <span class="nav-text">函数的对象属性arguments.length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象方法toString"><span class="nav-number">1.2.</span> <span class="nav-text">函数的对象方法toString()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数声明与函数表达式"><span class="nav-number">2.</span> <span class="nav-text">函数声明与函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数声明"><span class="nav-number">2.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数表达式"><span class="nav-number">2.2.</span> <span class="nav-text">函数表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自调用函数"><span class="nav-number">3.</span> <span class="nav-text">自调用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量与函数提升"><span class="nav-number">4.</span> <span class="nav-text">变量与函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量提升"><span class="nav-number">4.1.</span> <span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数提升"><span class="nav-number">4.2.</span> <span class="nav-text">函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">4.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#箭头函数"><span class="nav-number">5.</span> <span class="nav-text">箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#返回对象需要注意"><span class="nav-number">5.1.</span> <span class="nav-text">返回对象需要注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#return"><span class="nav-number">6.</span> <span class="nav-text">return</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数是对象"><span class="nav-number">1.</span> <span class="nav-text">函数是对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象属性arguments-length"><span class="nav-number">1.1.</span> <span class="nav-text">函数的对象属性arguments.length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的对象方法toString"><span class="nav-number">1.2.</span> <span class="nav-text">函数的对象方法toString()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数声明与函数表达式"><span class="nav-number">2.</span> <span class="nav-text">函数声明与函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数声明"><span class="nav-number">2.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数表达式"><span class="nav-number">2.2.</span> <span class="nav-text">函数表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自调用函数"><span class="nav-number">3.</span> <span class="nav-text">自调用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量与函数提升"><span class="nav-number">4.</span> <span class="nav-text">变量与函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量提升"><span class="nav-number">4.1.</span> <span class="nav-text">变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数提升"><span class="nav-number">4.2.</span> <span class="nav-text">函数提升</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">4.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#箭头函数"><span class="nav-number">5.</span> <span class="nav-text">箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#返回对象需要注意"><span class="nav-number">5.1.</span> <span class="nav-text">返回对象需要注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#return"><span class="nav-number">6.</span> <span class="nav-text">return</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML事件绑定函数时不加括号"><span class="nav-number">7.</span> <span class="nav-text">HTML事件绑定函数时不加括号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件绑定函数传参"><span class="nav-number">7.1.</span> <span class="nav-text">事件绑定函数传参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区分react和html中的事件写法"><span class="nav-number">7.1.1.</span> <span class="nav-text">区分react和html中的事件写法</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

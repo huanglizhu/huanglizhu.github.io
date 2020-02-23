@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>react中使用mock.js模拟接口数据 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react中使用mock.js模拟接口数据">
+<meta property="og:url" content="http://yoursite.com/2020/02/17/react中使用mock.js模拟接口数据/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg">
+<meta property="og:updated_time" content="2020-02-22T12:45:51.707Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react中使用mock.js模拟接口数据">
+<meta name="twitter:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-react中使用mock.js模拟接口数据" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      react中使用mock.js模拟接口数据
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/17/react中使用mock.js模拟接口数据/" class="article-date">
+	  <time datetime="2020-02-17T12:16:06.000Z" itemprop="datePublished">二月 17, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原本从接口获取到数据的流程"><a href="#原本从接口获取到数据的流程" class="headerlink" title="原本从接口获取到数据的流程"></a>原本从接口获取到数据的流程</h1><p><strong>（完整例子在笔记“redux进阶（1）”中）</strong></p>
+<ol>
+<li>在组件中<strong>创建一个生命周期函数<code>componentDidMount()</code></strong>。引用 <code>axios</code> 模块，在componentDidMount函数中<strong>借助 <code>axios</code> 模块发送<code>ajax</code>请求</strong>，使用<code>axios.get(&quot;接口路径&quot;)</code>来获取某个接口路径下的数据,请求成功后执行<code>then()</code>的回调函数（接收一个参数<code>res</code>表示接收到的数据），请求失败后执行<code>catch()</code>的回调函数</li>
+<li>桌面<strong>创建<code>list.json</code>文件</strong>，并在其中放入一个数组</li>
+<li>使用接口地址在<strong><code>Charles</code>中模拟接口数据</strong>，使得发送请求到接口路径时调用我们桌面的<code>list.json</code>文件【<a href="https://huanglizhu.github.io/2020/02/06/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#Charles抓localhost的包" target="_blank" rel="noopener">使用Charles抓取localhost包需要注意更换url</a>：需要<strong>使用<code>http://localhost.charlesproxy.com:3000/</code>访问</strong>】</li>
+<li><code>then()</code>的回调函数中打印出的<code>res</code>中的内容，可得到 <strong><code>res</code>中的<code>data</code>是我们需要的数组</strong>，那么我们可以<strong>在<code>ajax</code>请求成功时通过<code>then()</code>获取<code>data</code>数据</strong><a id="more"></a>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 生命周期函数</span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 借助 `<span class="javascript">axios</span>` 模块发送`<span class="javascript">ajax</span>`请求,通过`<span class="javascript"><span class="keyword">get</span>()</span>`获取接口路径下的数据</span><br><span class="line">  axios.get(<span class="string">"/list.json"</span>).<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">    const data = res.data;</span><br><span class="line">    const action=initListAction(data);</span><br><span class="line">    <span class="regexp">//</span> <span class="built_in">console</span>.log(action);</span><br><span class="line">    store.dispatch(action);</span><br><span class="line">  &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">"失败"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<h1 id="使用mock-js后的流程"><a href="#使用mock-js后的流程" class="headerlink" title="使用mock.js后的流程"></a>使用mock.js后的流程</h1><ol>
+<li>在组件中<strong>创建一个生命周期函数<code>componentDidMount()</code></strong>。引用 <code>axios</code> 模块，在componentDidMount函数中<strong>借助 <code>axios</code> 模块发送<code>ajax</code>请求</strong>，使用<code>axios.get(&quot;接口路径&quot;)</code>来获取某个接口路径下的数据,请求成功后执行<code>then()</code>的回调函数（接收一个参数<code>res</code>表示接收到的数据），请求失败后执行<code>catch()</code>的回调函数</li>
+<li>在 src目录 下<strong>创建 mock文件夹</strong> 用于存放我们的 mock数据 的js文件，在<code>TodoListMock.js</code>中引入<code>mockjs</code>并写入我们的模拟数据。</li>
+<li>在需要发出 AJAX请求 的文件中<strong>引入我们写好的mock组件</strong>，那么接下来只要<strong>正常书写AJAX请求</strong>即可，一旦对应的请求发出，Mock就会拦截并返回数据。</li>
+</ol>
+<h2 id="在项目中安装mock-js"><a href="#在项目中安装mock-js" class="headerlink" title="在项目中安装mock.js"></a>在项目中安装mock.js</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mockjs</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建mock文件夹"><a href="#创建mock文件夹" class="headerlink" title="创建mock文件夹"></a>创建mock文件夹</h2><p>在 src目录 下创建 mock文件夹 用于存放我们的 mock数据 的js文件。</p>
+<h3 id="写入mock数据"><a href="#写入mock数据" class="headerlink" title="写入mock数据"></a>写入mock数据</h3><p><code>TodoListMock.js</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Mock <span class="keyword">from</span> <span class="string">"mockjs"</span><span class="comment">//引入Mock</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Mock.mock(<span class="string">"/list.json"</span>,&#123;</span><br><span class="line">  <span class="comment">// 随机生成长度为3的list数组，数组元素是3-10个字范围内的中文单词</span></span><br><span class="line">  <span class="string">"list|3"</span>:[<span class="string">"@cword(3,10)"</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入mock文件"><a href="#引入mock文件" class="headerlink" title="引入mock文件"></a>引入mock文件</h2><p>模拟数据完成后，我们得在 需要发出AJAX请求的页面中 <strong>引入mock文件</strong>:</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"./mock/TodoListMock"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改原代码，现在我们拿到的res.data中就会有list数组了：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 生命周期函数</span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 借助 `<span class="javascript">axios</span>` 模块发送`<span class="javascript">ajax</span>`请求,通过`<span class="javascript"><span class="keyword">get</span>()</span>`获取接口路径下的数据</span><br><span class="line">  axios.get(<span class="string">"/list.json"</span>).<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">    const data = res.data.list;</span><br><span class="line">    const action=initListAction(data);</span><br><span class="line">    <span class="regexp">//</span> <span class="built_in">console</span>.log(action);</span><br><span class="line">    store.dispatch(action);</span><br><span class="line">  &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">"失败"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg" alt="效果"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>比起原本使用的Charles，使用Mock.js不仅可以省去我们书写模拟数据的麻烦，还可以解决Charles抓包中的麻烦。</p>
+<h1 id="使用axios与jquery的区别"><a href="#使用axios与jquery的区别" class="headerlink" title="使用axios与jquery的区别"></a>使用axios与jquery的区别</h1><p>在上一篇笔记中，我的例子是<strong>使用jquery发起AJAX请求</strong>的，那个时候<strong>拿到的数据是 字符串</strong> ，如果想要方便后续操作就需要使用<code>JSON.parse()</code>将其转换为JS对象。<br>但<strong>在react中</strong>，我们<strong>通过axios发起 AJAX请求 拿到的数据直接就是对象</strong>，不需要进行转换：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg" alt="使用axios时打印的res"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/16/CSS布局（1）常用布局方法和浮动布局/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS布局（1）常用布局方法和浮动布局</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原本从接口获取到数据的流程"><span class="nav-number">1.</span> <span class="nav-text">原本从接口获取到数据的流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用mock-js后的流程"><span class="nav-number">2.</span> <span class="nav-text">使用mock.js后的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在项目中安装mock-js"><span class="nav-number">2.1.</span> <span class="nav-text">在项目中安装mock.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建mock文件夹"><span class="nav-number">2.2.</span> <span class="nav-text">创建mock文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写入mock数据"><span class="nav-number">2.2.1.</span> <span class="nav-text">写入mock数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入mock文件"><span class="nav-number">2.3.</span> <span class="nav-text">引入mock文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用axios与jquery的区别"><span class="nav-number">4.</span> <span class="nav-text">使用axios与jquery的区别</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
