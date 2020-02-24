@@ -11,20 +11,20 @@
   
   
   
-  <meta name="description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+  <meta name="description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）">
 <meta name="keywords" content="React.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react中使用mock.js模拟接口数据">
 <meta property="og:url" content="http://yoursite.com/2020/02/17/react中使用mock.js模拟接口数据/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+<meta property="og:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg">
-<meta property="og:updated_time" content="2020-02-22T12:45:51.707Z">
+<meta property="og:updated_time" content="2020-02-23T08:39:57.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react中使用mock.js模拟接口数据">
-<meta name="twitter:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&amp;quot;接口路径&amp;quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
+<meta name="twitter:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -165,15 +165,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="原本从接口获取到数据的流程"><a href="#原本从接口获取到数据的流程" class="headerlink" title="原本从接口获取到数据的流程"></a>原本从接口获取到数据的流程</h1><p><strong>（完整例子在笔记“redux进阶（1）”中）</strong></p>
+<a id="more"></a>
 <ol>
 <li>在组件中<strong>创建一个生命周期函数<code>componentDidMount()</code></strong>。引用 <code>axios</code> 模块，在componentDidMount函数中<strong>借助 <code>axios</code> 模块发送<code>ajax</code>请求</strong>，使用<code>axios.get(&quot;接口路径&quot;)</code>来获取某个接口路径下的数据,请求成功后执行<code>then()</code>的回调函数（接收一个参数<code>res</code>表示接收到的数据），请求失败后执行<code>catch()</code>的回调函数</li>
 <li>桌面<strong>创建<code>list.json</code>文件</strong>，并在其中放入一个数组</li>
 <li>使用接口地址在<strong><code>Charles</code>中模拟接口数据</strong>，使得发送请求到接口路径时调用我们桌面的<code>list.json</code>文件【<a href="https://huanglizhu.github.io/2020/02/06/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#Charles抓localhost的包" target="_blank" rel="noopener">使用Charles抓取localhost包需要注意更换url</a>：需要<strong>使用<code>http://localhost.charlesproxy.com:3000/</code>访问</strong>】</li>
-<li><code>then()</code>的回调函数中打印出的<code>res</code>中的内容，可得到 <strong><code>res</code>中的<code>data</code>是我们需要的数组</strong>，那么我们可以<strong>在<code>ajax</code>请求成功时通过<code>then()</code>获取<code>data</code>数据</strong><a id="more"></a>
+<li><code>then()</code>的回调函数中打印出的<code>res</code>中的内容，可得到 <strong><code>res</code>中的<code>data</code>是我们需要的数组</strong>，那么我们可以<strong>在<code>ajax</code>请求成功时通过<code>then()</code>获取<code>data</code>数据</strong></li>
+</ol>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 生命周期函数</span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 借助 `<span class="javascript">axios</span>` 模块发送`<span class="javascript">ajax</span>`请求,通过`<span class="javascript"><span class="keyword">get</span>()</span>`获取接口路径下的数据</span><br><span class="line">  axios.get(<span class="string">"/list.json"</span>).<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">    const data = res.data;</span><br><span class="line">    const action=initListAction(data);</span><br><span class="line">    <span class="regexp">//</span> <span class="built_in">console</span>.log(action);</span><br><span class="line">    store.dispatch(action);</span><br><span class="line">  &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">"失败"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <hr>
 <h1 id="使用mock-js后的流程"><a href="#使用mock-js后的流程" class="headerlink" title="使用mock.js后的流程"></a>使用mock.js后的流程</h1><ol>
 <li>在组件中<strong>创建一个生命周期函数<code>componentDidMount()</code></strong>。引用 <code>axios</code> 模块，在componentDidMount函数中<strong>借助 <code>axios</code> 模块发送<code>ajax</code>请求</strong>，使用<code>axios.get(&quot;接口路径&quot;)</code>来获取某个接口路径下的数据,请求成功后执行<code>then()</code>的回调函数（接收一个参数<code>res</code>表示接收到的数据），请求失败后执行<code>catch()</code>的回调函数</li>
@@ -240,10 +240,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2020/02/18/Redux进阶(2)Redux-thunk与Redux-saga中间件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Redux进阶(2)Redux-thunk与Redux-saga中间件
+        
+      </div>
+    </a>
   
-    <a href="/2020/02/16/CSS布局（1）常用布局方法和浮动布局/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2020/02/16/Mock.js的使用方法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">CSS布局（1）常用布局方法和浮动布局</div>
+      <div class="article-nav-title">Mock.js的使用方法</div>
     </a>
   
 </nav>

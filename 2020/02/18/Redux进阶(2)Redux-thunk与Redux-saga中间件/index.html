@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Redux进阶(2)Redux-thunk与Redux-saga中间件 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="使用Redux-thunk中间件实现ajax数据请求 我们之前把异步请求放在TodoList组件的生命周期函数中，当我们放在组件中的逻辑过于复杂的时候就可以使用Redux-thunk将异步请求或者其他比较复杂的逻辑移到action中进行统一管理。 在这里我们先使用中间件，关于“什么是中间件”放到下面进行解释。">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux进阶(2)Redux-thunk与Redux-saga中间件">
+<meta property="og:url" content="http://yoursite.com/2020/02/18/Redux进阶(2)Redux-thunk与Redux-saga中间件/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="使用Redux-thunk中间件实现ajax数据请求 我们之前把异步请求放在TodoList组件的生命周期函数中，当我们放在组件中的逻辑过于复杂的时候就可以使用Redux-thunk将异步请求或者其他比较复杂的逻辑移到action中进行统一管理。 在这里我们先使用中间件，关于“什么是中间件”放到下面进行解释。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5knu092cj30v70a0gn4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6fw8n6o0j30mo0mftbv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6hld6oxoj31fw0kjmyb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6i4j7pbnj30hk0e2aae.jpg">
+<meta property="og:updated_time" content="2020-02-24T03:39:14.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux进阶(2)Redux-thunk与Redux-saga中间件">
+<meta name="twitter:description" content="使用Redux-thunk中间件实现ajax数据请求 我们之前把异步请求放在TodoList组件的生命周期函数中，当我们放在组件中的逻辑过于复杂的时候就可以使用Redux-thunk将异步请求或者其他比较复杂的逻辑移到action中进行统一管理。 在这里我们先使用中间件，关于“什么是中间件”放到下面进行解释。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5knu092cj30v70a0gn4.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Redux进阶(2)Redux-thunk与Redux-saga中间件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Redux进阶(2)Redux-thunk与Redux-saga中间件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/18/Redux进阶(2)Redux-thunk与Redux-saga中间件/" class="article-date">
+	  <time datetime="2020-02-18T09:04:20.000Z" itemprop="datePublished">二月 18, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用Redux-thunk中间件实现ajax数据请求"><a href="#使用Redux-thunk中间件实现ajax数据请求" class="headerlink" title="使用Redux-thunk中间件实现ajax数据请求"></a>使用Redux-thunk中间件实现ajax数据请求</h1><ul>
+<li>我们之前把异步请求放在TodoList组件的生命周期函数中，当我们<strong>放在组件中的逻辑过于复杂</strong>的时候就可以<strong>使用Redux-thunk将异步请求或者其他比较复杂的逻辑移到action中进行统一管理</strong>。</li>
+<li>在这里我们先使用中间件，关于“什么是中间件”放到下面进行解释。<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><ol>
+<li><strong>安装Redux-thunk中间件</strong></li>
+<li>在store文件夹下的<code>index.html</code>中<strong>创建store时，在参数2中使用Redux-thunk</strong>（使用方法参考github中的<a href="https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup" target="_blank" rel="noopener">官方文档</a>）</li>
+<li>原本 创建store时 作为 参数2 的 开发者工具<code>REDUX_DEVTOOLS_EXTENSION</code> 我们可以根据github中的官方文档 换个地方放置。</li>
+<li>原本写在<code>TodoList.js</code>的生命周期函数中的<strong>AJAX请求放到<code>actionCreator.js</code>的一个函数<code>getTodoList</code>返回的匿名函数中</strong>，在匿名函数中进行<strong>AJAX请求</strong>，并通过<strong>调用<code>actionCreator.js</code>的函数<code>initListAction</code>返回一个action对象</strong>，该匿名函数可以接收到<code>dispatch（）</code>，可以将其产生的action对象<strong>传给store</strong>。（原本<code>actionCreator.js</code>中的函数必须返回的action是一个对象才能被<code>dispatch(action)</code>传递到store中，但<strong>通过thunk中间件，action可以是一个函数，当<code>dispatch</code>发现action是函数时就会自动执行该函数</strong>）</li>
+</ol>
+<hr>
+<h2 id="安装Redux-thunk中间件"><a href="#安装Redux-thunk中间件" class="headerlink" title="安装Redux-thunk中间件"></a>安装Redux-thunk中间件</h2><p>在github中搜索<code>Redux-thunk</code>可以获取他的<a href="https://github.com/reduxjs/redux-thunk#installation" target="_blank" rel="noopener">安装和使用方法</a>。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> redux-thunk</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="在创建store的文件中使用Redux-thunk"><a href="#在创建store的文件中使用Redux-thunk" class="headerlink" title="在创建store的文件中使用Redux-thunk"></a>在创建store的文件中使用Redux-thunk</h2><p><strong>store文件夹下的<code>index.html</code></strong>：</p>
+<ol>
+<li><strong>引入<code>applyMiddleware</code></strong>,它使我们可以使用Redux-thunk中间件</li>
+<li><strong>从<code>&#39;redux-thunk&#39;</code>库中引入<code>thunk</code></strong></li>
+<li>在创建store的<strong><code>createStore()</code>中添加第二个参数<code>applyMiddleware(thunk)</code>来引入thunk中间件</strong>。</li>
+<li>原本我们的在参数2的位置放了<code>window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__()</code>，其实<strong><code>REDUX_DEVTOOLS_EXTENSION</code>也是一个中间件</strong>，现在需要将它换一个地方。<ol>
+<li>参考github中的<a href="https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup" target="_blank" rel="noopener">官方文档</a>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5knu092cj30v70a0gn4.jpg" alt="官方文档"></li>
+</ol>
+</li>
+<li><code>compose</code>需要从<code>redux</code>中引入。</li>
+</ol>
+<p><strong>最终代码：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;</span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">"./reducer"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// redux-devtools-extension中间件</span></span><br><span class="line"><span class="keyword">const</span> composeEnhancers =</span><br><span class="line">  <span class="comment">//如果REDUX_DEVTOOLS_EXTENSION_COMPOSE存在就调用它，否则就调用compose函数</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;&#125;) : compose;<span class="comment">//compose要从redux中引入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// thunk中间件</span></span><br><span class="line"><span class="keyword">const</span> enhancer = composeEnhancers(</span><br><span class="line">  applyMiddleware(thunk),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建store,将reducers作为第一个参数传给store</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, enhancer);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：中间件是redux的，在创建store的时候使用。不是react的！</strong></p>
+<hr>
+<h2 id="通过action返回一个函数-进行AJAX请求"><a href="#通过action返回一个函数-进行AJAX请求" class="headerlink" title="通过action返回一个函数(进行AJAX请求)"></a>通过action返回一个函数(进行AJAX请求)</h2><p>在<code>actionCreators.js</code>中，<strong>本来action返回的是一个对象，使用了中间件Redux-thunk后，action可以返回一个函数</strong>,在<strong>这个函数中可以进行异步操作</strong>。   </p>
+<p><strong>中间件Redux-thunk的作用</strong>：<br>本来<code>store.dispatch(action);</code>中<code>action</code>必须是一个 对象 ，它才能被传递给store。<br><strong>使用中间件Redux-thunk后，<code>action</code>可以是一个函数</strong>，当调用<code>store.dispatch(action);</code>时，它<strong>识别到<code>action</code>是一个函数，便会自动执行该函数</strong>。<br><strong>且<code>dispatch()</code>会被传递到函数中，在该函数中也可以使用<code>dispatch()</code>来给store传递数据</strong>，在该函数中使用<code>dispatch(action)</code>时，它<strong>识别到<code>action</code>是一个对象，便会自动传递给<code>store</code></strong>。</p>
+<p><strong>中间件Redux-thunk的好处</strong>：<br>把复杂的逻辑（异步操作）放到action中<strong>有利于后期自动化测试</strong>，比起放在生命周期函数中，放在action中比较方便自动化测试。</p>
+<p><strong>TodoList.js</strong>:</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生命周期函数</span></span><br><span class="line">component<span class="constructor">DidMount()</span> &#123;</span><br><span class="line">  <span class="comment">// 将异步AJAX请求放到action中</span></span><br><span class="line">  const action = get<span class="constructor">TodoList()</span>;</span><br><span class="line">  <span class="comment">// 因为thunk中间件，action可以是一个函数</span></span><br><span class="line">  store.dispatch(action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>actionCreator.js</strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodoList = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span><span class="function">(<span class="params">dispatch</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 借助 `axios` 模块发送`ajax`请求,通过`get()`获取接口路径下的数据</span></span><br><span class="line">    axios.get(<span class="string">"/list.json"</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> data = res.data.list;</span><br><span class="line">      <span class="comment">// 通过initListAction()将data转为action对象</span></span><br><span class="line">      <span class="keyword">const</span> action = initListAction(data);</span><br><span class="line">      <span class="comment">// 将action对象传给store</span></span><br><span class="line">      dispatch(action);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">"失败"</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="什么是Redux的中间件"><a href="#什么是Redux的中间件" class="headerlink" title="什么是Redux的中间件"></a>什么是Redux的中间件</h1><ul>
+<li>中间件指的是<strong>action和store的中间</strong>。只有redux才有action和store，所以<strong>只有redux才有中间件</strong>！（不是react，区分清楚）</li>
+<li>总的来说，<strong>redux中间件就是对<code>dispatch()</code>做了个升级</strong>。<ul>
+<li>比如：上面介绍的<strong>redux-thunk中间件</strong>，本来原始的<code>dispatch()</code>只能接收对象类型的action，接收以后直接传递给store。但经过redux-thunk中间件升级后，<strong><code>dispatch()</code>可以接收 函数类型的 action</strong>，他会执行该函数。（在函数中就可以进行AJAX请求了）</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6fw8n6o0j30mo0mftbv.jpg" alt="示意图"></p>
+<hr>
+<h1 id="Redux-saga中间件使用入门"><a href="#Redux-saga中间件使用入门" class="headerlink" title="Redux-saga中间件使用入门"></a>Redux-saga中间件使用入门</h1><ul>
+<li>之前我们使用<strong>redux-thunk解决了异步代码</strong>的问题，通过redux-thunk将异步操作放到action函数中，方便了自动化测试和代码的拆分管理。</li>
+<li><strong>Redux-saga中间件 也是用于解决异步代码的问题</strong>的，完全可以使用Redux-saga中间件 代替 redux-thunk中间件。</li>
+<li>目前主流的react项目中有关异步的问题基本都是使用这两个中间件去完成的。</li>
+</ul>
+<h2 id="流程总结-1"><a href="#流程总结-1" class="headerlink" title="流程总结"></a>流程总结</h2><ol>
+<li><strong>安装Redux-saga中间件</strong></li>
+<li>在store文件夹下<strong>新建sagas.js文件，在index.js中配置Redux-saga中间件</strong><ol>
+<li>引入’redux-saga’的createSagaMiddleware()用于帮助<strong>创造中间件sagaMiddleware</strong></li>
+<li>和thunk中间件传入方式一样，<strong>通过applyMiddleware()将中间件sagaMiddleware放入enhancer中，再将enhancer传入createStore()作为参数2</strong></li>
+<li><strong>引入存储异步操作的文件sagas.js,并通过sagaMiddleware.run()让文件sagas.js运行起来</strong></li>
+<li>在sagas.js文件的mySaga()中<strong>通过takeEvery()捕获组件中通过dispatch传递的action，捕获到参数1的type类型的action时就执行参数2的回调函数</strong>（在该回调函数中随便打印一串字符，运行项目，测试是否可以被捕获成功）</li>
+</ol>
+</li>
+<li>sagas.js文件的<strong>takeEvery()参数2的回调函数中发起AJAX请求并将获取到的数据通过put()传递给store</strong>。注意这里<strong>使用yield替代Promise，使用try…catch代替then()/catch(),使用saga自带的put()代替store.dispatch</strong>。(sagas.js就在store文件夹中，他没有dispatch方法)</li>
+</ol>
+<h2 id="删除redux-thunk中间件的一系列操作"><a href="#删除redux-thunk中间件的一系列操作" class="headerlink" title="删除redux-thunk中间件的一系列操作"></a>删除redux-thunk中间件的一系列操作</h2><p>在这之前我们使用了redux-thunk中间件，现在我们需要<strong>将代码还原到没有使用redux-thunk时的状态</strong>。</p>
+<p>删除<code>actionCreator.js</code>中的<code>getTodoList</code>函数，将异步操作放回<code>TodoList.js</code>组件的生命周期函数中。记得在store文件夹的<code>index.js</code>中去除redux-thunk的引用。</p>
+<h2 id="安装Redux-saga中间件"><a href="#安装Redux-saga中间件" class="headerlink" title="安装Redux-saga中间件"></a>安装Redux-saga中间件</h2><p>在github中搜索<a href="https://github.com/redux-saga/redux-saga#install" target="_blank" rel="noopener">Redux-saga</a>，安装:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> redux-saga</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Redux-saga中间件"><a href="#配置Redux-saga中间件" class="headerlink" title="配置Redux-saga中间件"></a>配置Redux-saga中间件</h2><p><a href="https://github.com/redux-saga/redux-saga#usage-example" target="_blank" rel="noopener">官方案例</a></p>
+<h3 id="新建文件用于存放异步操作"><a href="#新建文件用于存放异步操作" class="headerlink" title="新建文件用于存放异步操作"></a>新建文件用于存放异步操作</h3><p>(参考<a href="https://github.com/redux-saga/redux-saga#sagasjs" target="_blank" rel="noopener">官方案例中的sagas.js</a>)<br><strong>在redux-saga中，我们会将异步操作放到一个文件中进行管理。</strong><br>所以我们需要<strong>在store文件夹下新建<code>sagas.js</code></strong>：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function* mySaga() &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>mySaga;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在这里我们先不管函数内容，先配置好Redux-saga中间件。</strong></p>
+<hr>
+<h3 id="创建store时引入Redux-saga"><a href="#创建store时引入Redux-saga" class="headerlink" title="创建store时引入Redux-saga"></a>创建store时引入Redux-saga</h3><p>(参考<a href="https://github.com/redux-saga/redux-saga#mainjs" target="_blank" rel="noopener">官方案例中的main.js</a>)<br>我们需要<strong>在创建store的文件中引入Redux-saga</strong>，所以在<strong>store文件夹的index.js中</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">"./reducer"</span>;</span><br><span class="line"><span class="comment">// 1.createSagaMiddleware()用于帮助创造中间件</span></span><br><span class="line"><span class="keyword">import</span> createSagaMiddleware <span class="keyword">from</span> <span class="string">'redux-saga'</span></span><br><span class="line"><span class="comment">// 5.引入存储异步操作的文件sagas.js</span></span><br><span class="line"><span class="keyword">import</span> todoSagas <span class="keyword">from</span> <span class="string">"./sagas"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建redux-saga中间件sagaMiddleware</span></span><br><span class="line"><span class="keyword">const</span> sagaMiddleware = createSagaMiddleware()</span><br><span class="line"></span><br><span class="line"><span class="comment">// redux-devtools-extension中间件（开发者工具）</span></span><br><span class="line"><span class="keyword">const</span> composeEnhancers =</span><br><span class="line">  <span class="comment">//如果REDUX_DEVTOOLS_EXTENSION_COMPOSE存在就调用它，否则就调用compose函数</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;&#125;) : compose;<span class="comment">//compose要从redux中引入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.和thunk中间件传入方式一样，通过applyMiddleware传入作为createStore的参数2</span></span><br><span class="line"><span class="keyword">const</span> enhancer = composeEnhancers(</span><br><span class="line">  applyMiddleware(sagaMiddleware),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.创建store,将reducers作为第一个参数传给store</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, enhancer);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6.通过sagaMiddleware.run()让文件sagas.js执行起来</span></span><br><span class="line">sagaMiddleware.run(todoSagas);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="配置成功"><a href="#配置成功" class="headerlink" title="配置成功"></a>配置成功</h3><p>重新运行后不报错说明配置成功：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6hld6oxoj31fw0kjmyb.jpg" alt="效果"></p>
+<hr>
+<h2 id="使用Redux-saga中间件的小案例"><a href="#使用Redux-saga中间件的小案例" class="headerlink" title="使用Redux-saga中间件的小案例"></a>使用Redux-saga中间件的小案例</h2><p>首先我们需要<strong>在组件<code>TodoList.js</code>的生命周期函数中移除AJAX请求的操作，改成一个从<code>actionCreator.js</code>中返回的对象类型的action</strong>（这里我们没有使用thunk中间件了，action必须是对象）</p>
+<p>1.<strong><code>actionCreator.js</code>中的getInitList()</strong>不需要返回value，只需要<strong>返回一个action对象</strong>:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getInitList = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">  <span class="keyword">type</span>: GET_INIT_LIST</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>2.<strong>组件<code>TodoList.js</code>中调用getInitList()将返回的action对象发给store</strong>:</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生命周期函数</span></span><br><span class="line">component<span class="constructor">DidMount()</span> &#123;</span><br><span class="line">  const action = get<span class="constructor">InitList()</span>;</span><br><span class="line">  store.dispatch(action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.(参考<a href="https://github.com/redux-saga/redux-saga#sagasjs" target="_blank" rel="noopener">官方案例中的sagas.js</a>)<strong>在store文件夹下的<code>sagas.js</code>中</strong>设置，<strong>当获取到type值为<code>GET_INIT_LIST</code>的action时就执行<code>sagas.js</code>中的<code>getInitList（）</code></strong><br>（因为中间件所以<code>sagas.js</code>中的<code>mySaga()</code>也能接收到<code>dispatch()</code>传给store的<code>action</code>）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; takeEvery &#125; <span class="keyword">from</span> <span class="string">'redux-saga/effects'</span></span><br><span class="line"><span class="keyword">import</span> &#123; GET_INIT_LIST &#125; <span class="keyword">from</span> <span class="string">"./actionTypes"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">getInitList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="built_in">console</span>.log(<span class="string">"abc"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里的语法涉及ES6的generator函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">mySaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// takeEvery可捕获每次发出的action，并根据type值执行参数2的函数</span></span><br><span class="line">  <span class="comment">//参数1为type值，参数2为对应会执行的函数</span></span><br><span class="line">  <span class="keyword">yield</span> takeEvery(GET_INIT_LIST, getInitList);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mySaga;</span><br></pre></td></tr></table></figure>
+
+<p><strong>流程总结：</strong><br>因为在<strong>创建<code>store</code>时我们使用了<code>redux-saga</code>中间件</strong>，所以<strong>组件使用<code>dispatch()</code>将<code>action</code>传递给<code>store</code>时，不仅<code>reducer.js</code>可以接收到这个action，<code>sagas.js</code>中的<code>mySaga()</code>也能接收到这个<code>action</code></strong>,而我们在<code>mySaga()</code>中通过<code>takeEvery()</code>声明：“当获取到type值为<code>GET_INIT_LIST</code>的action时就执行<code>sagas.js</code>中的<code>getInitList（）</code>”，所以最后会打印<code>abc</code></p>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc6i4j7pbnj30hk0e2aae.jpg" alt="成功"></p>
+<hr>
+<h2 id="使用Redux-saga中间件完成AJAX请求"><a href="#使用Redux-saga中间件完成AJAX请求" class="headerlink" title="使用Redux-saga中间件完成AJAX请求"></a>使用Redux-saga中间件完成AJAX请求</h2><p><code>sagas.js</code>中的<code>mySaga()</code>也能接收到<code>dispatch()</code>传递的<code>action</code>,并且通过<code>takeEvery()</code>设置 当获取到type值为 参数1 的action时就执行 参数2 的函数。<br><strong>所以我们可以将AJAX请求放在<code>takeEvery()</code>的参数2的回调函数中,AJAX请求获得的数据通过saga的put()传给store。</strong></p>
+<p><code>sagas.js</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; takeEvery, put &#125; <span class="keyword">from</span> <span class="string">'redux-saga/effects'</span></span><br><span class="line"><span class="keyword">import</span> &#123; GET_INIT_LIST &#125; <span class="keyword">from</span> <span class="string">"./actionTypes"</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; initListAction &#125; <span class="keyword">from</span> <span class="string">"./actionCreator"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">getInitList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 借助 `axios` 模块发送`ajax`请求,通过`get()`获取接口路径下的数据</span></span><br><span class="line">    <span class="comment">// 在saga中使用yield代替promise，等待axios请求成功就赋值给res</span></span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">yield</span> axios.get(<span class="string">"/list.json"</span>);</span><br><span class="line">    <span class="comment">// 通过initListAction()将list转为action对象</span></span><br><span class="line">    <span class="keyword">const</span> action = initListAction(res.data.list);</span><br><span class="line">    <span class="comment">// 是用saga自带的put()替代store.dispatch(action);</span></span><br><span class="line">    <span class="keyword">yield</span> put(action);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"list.json网络请求失败"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里的语法涉及ES6的generator函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">mySaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// takeEvery可捕获每次发出的action，并根据type值执行参数2的函数</span></span><br><span class="line">  <span class="comment">//参数1为type值，参数2为对应会执行的函数</span></span><br><span class="line">  <span class="keyword">yield</span> takeEvery(GET_INIT_LIST, getInitList);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mySaga;</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意的是</strong>：</p>
+<ol>
+<li>在saga中发送AJAX请求，<strong>使用yield代替promise</strong>，yield会等待axios请求成功就赋值给res。</li>
+<li>没有了Promise的then()和catch(),在这里我们<strong>把错误判断放到<code>try...catch</code>中</strong></li>
+<li>在saga文件中并没有store，所以我们需要<strong>通过<a href="https://github.com/redux-saga/redux-saga#sagasjs" target="_blank" rel="noopener">官方文档例子</a>中的put方法将action传给store</strong>（替代<code>store.dispatch()</code>）</li>
+</ol>
+<hr>
+<h1 id="对比redux-thunk和redux-saga"><a href="#对比redux-thunk和redux-saga" class="headerlink" title="对比redux-thunk和redux-saga"></a>对比redux-thunk和redux-saga</h1><ul>
+<li><strong>redux-thunk只是允许action为一个函数</strong>，我们可以将异步操作放在该函数中。</li>
+<li><strong>redux-saga是将异步操作直接分离到sagas.js文件中</strong>，当action被dispatch传递时，该sagas.js文件中的一个函数也可拦截action，并通过type值确定要执行sagas.js文件中的某个函数，在这个函数中就可进行异步操作。</li>
+<li><strong>redux-saga分离的更加彻底也更加复杂，更适合大型项目</strong>，接下来的简书项目会比较偏向使用redux-thunk。</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/17/react中使用mock.js模拟接口数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">react中使用mock.js模拟接口数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Redux-thunk中间件实现ajax数据请求"><span class="nav-number">1.</span> <span class="nav-text">使用Redux-thunk中间件实现ajax数据请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程总结"><span class="nav-number">1.1.</span> <span class="nav-text">流程总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Redux-thunk中间件"><span class="nav-number">1.2.</span> <span class="nav-text">安装Redux-thunk中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在创建store的文件中使用Redux-thunk"><span class="nav-number">1.3.</span> <span class="nav-text">在创建store的文件中使用Redux-thunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过action返回一个函数-进行AJAX请求"><span class="nav-number">1.4.</span> <span class="nav-text">通过action返回一个函数(进行AJAX请求)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Redux的中间件"><span class="nav-number">2.</span> <span class="nav-text">什么是Redux的中间件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-saga中间件使用入门"><span class="nav-number">3.</span> <span class="nav-text">Redux-saga中间件使用入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程总结-1"><span class="nav-number">3.1.</span> <span class="nav-text">流程总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除redux-thunk中间件的一系列操作"><span class="nav-number">3.2.</span> <span class="nav-text">删除redux-thunk中间件的一系列操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Redux-saga中间件"><span class="nav-number">3.3.</span> <span class="nav-text">安装Redux-saga中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Redux-saga中间件"><span class="nav-number">3.4.</span> <span class="nav-text">配置Redux-saga中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建文件用于存放异步操作"><span class="nav-number">3.4.1.</span> <span class="nav-text">新建文件用于存放异步操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建store时引入Redux-saga"><span class="nav-number">3.4.2.</span> <span class="nav-text">创建store时引入Redux-saga</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置成功"><span class="nav-number">3.4.3.</span> <span class="nav-text">配置成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Redux-saga中间件的小案例"><span class="nav-number">3.5.</span> <span class="nav-text">使用Redux-saga中间件的小案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Redux-saga中间件完成AJAX请求"><span class="nav-number">3.6.</span> <span class="nav-text">使用Redux-saga中间件完成AJAX请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比redux-thunk和redux-saga"><span class="nav-number">4.</span> <span class="nav-text">对比redux-thunk和redux-saga</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

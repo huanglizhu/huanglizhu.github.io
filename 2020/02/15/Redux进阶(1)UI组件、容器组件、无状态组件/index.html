@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Redux进阶(1) | 珠</title>
+  <title>Redux进阶(1)UI组件、容器组件、无状态组件 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。  分离UI组件TodoListUI在src下新建TodoListUI.js文件,将TodoList.js的render函数内页面渲染相关的内容都剪切过">
+  <meta name="description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。">
 <meta name="keywords" content="React.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redux进阶(1)">
-<meta property="og:url" content="http://yoursite.com/2020/02/15/Redux进阶(1)/index.html">
+<meta property="og:title" content="Redux进阶(1)UI组件、容器组件、无状态组件">
+<meta property="og:url" content="http://yoursite.com/2020/02/15/Redux进阶(1)UI组件、容器组件、无状态组件/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。  分离UI组件TodoListUI在src下新建TodoListUI.js文件,将TodoList.js的render函数内页面渲染相关的内容都剪切过">
+<meta property="og:description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwx1asqc7j30uc0b0q47.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwx45dw70j30i70gx0ts.jpg">
@@ -25,11 +25,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwx6yy04cj30mr0f50u8.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwxc8bawnj317h05w75l.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwydf1mb7j30h8096wem.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5knu092cj30v70a0gn4.jpg">
-<meta property="og:updated_time" content="2020-02-23T08:29:24.154Z">
+<meta property="og:updated_time" content="2020-02-24T03:39:35.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redux进阶(1)">
-<meta name="twitter:description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。  分离UI组件TodoListUI在src下新建TodoListUI.js文件,将TodoList.js的render函数内页面渲染相关的内容都剪切过">
+<meta name="twitter:title" content="Redux进阶(1)UI组件、容器组件、无状态组件">
+<meta name="twitter:description" content="UI组件和容器组件 我们让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑 当然有时候让 UI组件 负责一点点逻辑也是可以的。 当 UI组件 只负责页面渲染时，它实际只有一个render函数，那么此时我们可以使用无状态组件代替它以提高性能。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwx1asqc7j30uc0b0q47.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -137,7 +136,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Redux进阶(1)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Redux进阶(1)UI组件、容器组件、无状态组件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -145,7 +144,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Redux进阶(1)
+      Redux进阶(1)UI组件、容器组件、无状态组件
     </h1>
   
 
@@ -153,7 +152,7 @@
     
     <div class="article-meta">
       
-	<a href="/2020/02/15/Redux进阶(1)/" class="article-date">
+	<a href="/2020/02/15/Redux进阶(1)UI组件、容器组件、无状态组件/" class="article-date">
 	  <time datetime="2020-02-15T09:04:20.000Z" itemprop="datePublished">二月 15, 2020</time>
 	</a>
 
@@ -172,7 +171,9 @@
         <h1 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="UI组件和容器组件"></a>UI组件和容器组件</h1><ul>
 <li>我们<strong>让 UI组件 负责页面的渲染，让 容器组件 负责页面的逻辑</strong></li>
 <li>当然有时候让 UI组件 负责一点点逻辑也是可以的。</li>
-<li>当 UI组件 <strong>只负责页面渲染时</strong>，它实际只有一个<code>render</code>函数，那么此时我们可以使用<strong>无状态组件</strong>代替它以提高性能。</li>
+<li>当 UI组件 <strong>只负责页面渲染时</strong>，它实际只有一个<code>render</code>函数，那么此时我们可以使用<strong>无状态组件</strong>代替它以提高性能。<a id="more"></a>
+
+</li>
 </ul>
 <h2 id="分离UI组件TodoListUI"><a href="#分离UI组件TodoListUI" class="headerlink" title="分离UI组件TodoListUI"></a>分离UI组件<code>TodoListUI</code></h2><p>在src下<strong>新建<code>TodoListUI.js</code>文件</strong>,将<strong><code>TodoList.js</code>的render函数内页面渲染相关的内容</strong>都剪切过去，<strong>放在组件TodoListUI中</strong>。将父组件<code>TodoList.js</code>中有关页面渲染的<strong>引用</strong>都剪切到子组件<code>TodoListUI.js</code>中进行引用：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">React</span>, &#123; <span class="type">Component</span> &#125; from <span class="symbol">'reac</span>t'<span class="comment">//imcr</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="type">Input</span>, <span class="type">Button</span>, <span class="type">List</span> &#125; from <span class="symbol">'ant</span>d';</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoListUI</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span>(</span><br><span class="line">            &lt;div style=&#123;&#123; marginTop: <span class="string">"10px"</span>, marginLeft: <span class="string">"10px"</span> &#125;&#125;&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;<span class="type">Input</span></span><br><span class="line">                    value=&#123;<span class="keyword">this</span>.props.inputValue&#125;</span><br><span class="line">                    placeholder=<span class="string">"Todo info"</span></span><br><span class="line">                    style=&#123;&#123; width: <span class="string">"300px"</span>, marginRight: <span class="string">"10px"</span> &#125;&#125;</span><br><span class="line">                    onChange=&#123;<span class="keyword">this</span>.props.handleInputChange&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">                &lt;<span class="type">Button</span> <span class="class"><span class="keyword">type</span></span>=<span class="string">"primary"</span> onClick=&#123;<span class="keyword">this</span>.props.handleButtonClick&#125;&gt;提交&lt;/<span class="type">Button</span>&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;<span class="type">List</span></span><br><span class="line">                style=&#123;&#123; marginTop: <span class="string">"10px"</span>, width: <span class="string">"300px"</span> &#125;&#125;</span><br><span class="line">                bordered</span><br><span class="line">                dataSource=&#123;<span class="keyword">this</span>.props.list&#125;</span><br><span class="line">                renderItem=&#123;(item, index) =&gt; &lt;<span class="type">List</span>.<span class="type">Item</span> onClick=&#123;()=&gt;&#123;<span class="keyword">this</span>.props.handleItemDelete(index)&#125;&#125;&gt;&#123;item&#125;&lt;/<span class="type">List</span>.<span class="type">Item</span>&gt;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &lt;/div &gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> <span class="type">TodoListUI</span>;</span><br></pre></td></tr></table></figure>
@@ -256,48 +257,6 @@
 <p>【reducer中list没拿到数据】</p>
 <p>9.<code>store</code>拿到<code>newState</code>后<strong>自动</strong>将其替换掉自己原本的<code>state</code><br>10.<strong>组件</strong>通过<code>store.subscirbe(this.handleStoreChange)</code><strong>监听到<code>store</code>的数据变化</strong>时执行回调函数<code>this.handleStoreChange</code>进行<strong>自身<code>state</code>数据的更新</strong>，<strong>页面重新渲染</strong>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbwydf1mb7j30h8096wem.jpg" alt="成功"></p>
 <hr>
-<h1 id="使用Redux-thunk中间件实现ajax数据请求"><a href="#使用Redux-thunk中间件实现ajax数据请求" class="headerlink" title="使用Redux-thunk中间件实现ajax数据请求"></a>使用Redux-thunk中间件实现ajax数据请求</h1><ul>
-<li>我们之前把异步请求放在TodoList组件的生命周期函数中，当我们<strong>放在组件中的逻辑过于复杂</strong>的时候就可以<strong>使用Redux-thunk将异步请求或者其他比较复杂的逻辑移到action中进行统一管理</strong>。</li>
-<li>在这里我们先使用中间件，关于“什么是中间件”放到下一篇笔记“Redux进阶（2）”进行解释。</li>
-</ul>
-<p><strong>流程总结</strong>：</p>
-<ol>
-<li><strong>安装Redux-thunk中间件</strong></li>
-<li>在store文件夹下的<code>index.html</code>中<strong>创建store时，在参数2中使用Redux-thunk</strong>（使用方法参考github中的<a href="https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup" target="_blank" rel="noopener">官方文档</a>）</li>
-<li>原本 创建store时 作为 参数2 的 开发者工具<code>REDUX_DEVTOOLS_EXTENSION</code> 我们可以根据github中的官方文档 换个地方放置。</li>
-<li>原本写在<code>TodoList.js</code>的生命周期函数中的<strong>AJAX请求放到<code>actionCreator.js</code>的一个函数<code>getTodoList</code>返回的匿名函数中</strong>，在匿名函数中进行<strong>AJAX请求</strong>，并通过<strong>调用<code>actionCreator.js</code>的函数<code>initListAction</code>返回一个action对象</strong>，该匿名函数可以接收到<code>dispatch（）</code>，可以将其产生的action对象<strong>传给store</strong>。（原本<code>actionCreator.js</code>中的函数必须返回的action是一个对象才能被<code>dispatch(action)</code>传递到store中，但<strong>通过thunk中间件，action可以是一个函数，当<code>dispatch</code>发现action是函数时就会自动执行该函数</strong>）</li>
-</ol>
-<hr>
-<h2 id="安装Redux-thunk中间件"><a href="#安装Redux-thunk中间件" class="headerlink" title="安装Redux-thunk中间件"></a>安装Redux-thunk中间件</h2><p>在github中搜索<code>Redux-thunk</code>可以获取他的<a href="https://github.com/reduxjs/redux-thunk#installation" target="_blank" rel="noopener">安装和使用方法</a>。</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> redux-thunk</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="在创建store的文件中使用Redux-thunk"><a href="#在创建store的文件中使用Redux-thunk" class="headerlink" title="在创建store的文件中使用Redux-thunk"></a>在创建store的文件中使用Redux-thunk</h2><p><strong>store文件夹下的<code>index.html</code></strong>：</p>
-<ol>
-<li><strong>引入<code>applyMiddleware</code></strong>,它使我们可以使用Redux-thunk中间件</li>
-<li><strong>从<code>&#39;redux-thunk&#39;</code>库中引入<code>thunk</code></strong></li>
-<li>在创建store的<strong><code>createStore()</code>中添加第二个参数<code>applyMiddleware(thunk)</code>来引入thunk中间件</strong>。</li>
-<li>原本我们的在参数2的位置放了<code>window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__()</code>，其实<strong><code>REDUX_DEVTOOLS_EXTENSION</code>也是一个中间件</strong>，现在需要将它换一个地方。<ol>
-<li>参考github中的<a href="https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup" target="_blank" rel="noopener">官方文档</a>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5knu092cj30v70a0gn4.jpg" alt="官方文档"></li>
-</ol>
-</li>
-<li><code>compose</code>需要从<code>redux</code>中引入。</li>
-</ol>
-<p><strong>最终代码：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;</span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">"./reducer"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// redux-devtools-extension中间件</span></span><br><span class="line"><span class="keyword">const</span> composeEnhancers =</span><br><span class="line">  <span class="comment">//如果REDUX_DEVTOOLS_EXTENSION_COMPOSE存在就调用它，否则就调用compose函数</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;&#125;) : compose;<span class="comment">//compose要从redux中引入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// thunk中间件</span></span><br><span class="line"><span class="keyword">const</span> enhancer = composeEnhancers(</span><br><span class="line">  applyMiddleware(thunk),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建store,将reducers作为第一个参数传给store</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, enhancer);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：中间件是redux的，在创建store的时候使用。不是react的！</strong></p>
-<hr>
-<h2 id="通过action返回一个函数-进行AJAX请求"><a href="#通过action返回一个函数-进行AJAX请求" class="headerlink" title="通过action返回一个函数(进行AJAX请求)"></a>通过action返回一个函数(进行AJAX请求)</h2><p>在<code>actionCreators.js</code>中，<strong>本来action返回的是一个对象，使用了中间件Redux-thunk后，action可以返回一个函数</strong>,在<strong>这个函数中可以进行异步操作</strong>。   </p>
-<p><strong>中间件Redux-thunk的作用</strong>：<br>本来<code>store.dispatch(action);</code>中<code>action</code>必须是一个 对象 ，它才能被传递给store。<br><strong>使用中间件Redux-thunk后，<code>action</code>可以是一个函数</strong>，当调用<code>store.dispatch(action);</code>时，它<strong>识别到<code>action</code>是一个函数，便会自动执行该函数</strong>。<br><strong>且<code>dispatch()</code>会被传递到函数中，在该函数中也可以使用<code>dispatch()</code>来给store传递数据</strong>，在该函数中使用<code>dispatch(action)</code>时，它<strong>识别到<code>action</code>是一个对象，便会自动传递给<code>store</code></strong>。</p>
-<p><strong>中间件Redux-thunk的好处</strong>：<br>把复杂的逻辑（异步操作）放到action中<strong>有利于后期自动化测试</strong>，比起放在生命周期函数中，放在action中比较方便自动化测试。</p>
-<p><strong>TodoList.js</strong>:</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生命周期函数</span></span><br><span class="line">component<span class="constructor">DidMount()</span> &#123;</span><br><span class="line">  <span class="comment">// 将异步AJAX请求放到action中</span></span><br><span class="line">  const action = get<span class="constructor">TodoList()</span>;</span><br><span class="line">  <span class="comment">// 因为thunk中间件，action可以是一个函数</span></span><br><span class="line">  store.dispatch(action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>actionCreator.js</strong>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodoList = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span><span class="function">(<span class="params">dispatch</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 借助 `axios` 模块发送`ajax`请求,通过`get()`获取接口路径下的数据</span></span><br><span class="line">    axios.get(<span class="string">"/list.json"</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> data = res.data.list;</span><br><span class="line">      <span class="comment">// 通过initListAction()将data转为action对象</span></span><br><span class="line">      <span class="keyword">const</span> action = initListAction(data);</span><br><span class="line">      <span class="comment">// 将action对象传给store</span></span><br><span class="line">      dispatch(action);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">"失败"</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
 
       
     </div>
@@ -353,9 +312,9 @@
     </a>
   
   
-    <a href="/2020/02/15/CSS3 transform属性/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/14/Redux的reducer为什么不能有异步操作/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">CSS3 transform属性</div>
+      <div class="article-nav-title">Redux的reducer为什么不能有异步操作</div>
     </a>
   
 </nav>
@@ -369,7 +328,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UI组件和容器组件"><span class="nav-number">1.</span> <span class="nav-text">UI组件和容器组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分离UI组件TodoListUI"><span class="nav-number">1.1.</span> <span class="nav-text">分离UI组件TodoListUI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意：子组件事件绑定函数传参"><span class="nav-number">1.1.1.</span> <span class="nav-text">注意：子组件事件绑定函数传参</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器组件（父组件TodoList）"><span class="nav-number">1.2.</span> <span class="nav-text">容器组件（父组件TodoList）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无状态组件（性能优化）"><span class="nav-number">2.</span> <span class="nav-text">无状态组件（性能优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#好处"><span class="nav-number">2.1.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子：TodoListUI组件"><span class="nav-number">2.2.</span> <span class="nav-text">例子：TodoListUI组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：第三方模块axios（发送AJAX）"><span class="nav-number">3.</span> <span class="nav-text">复习：第三方模块axios（发送AJAX）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-中发送异步请求获取数据"><span class="nav-number">4.</span> <span class="nav-text">Redux 中发送异步请求获取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总流程"><span class="nav-number">4.1.</span> <span class="nav-text">总流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从接口获取到数据的流程"><span class="nav-number">4.1.1.</span> <span class="nav-text">从接口获取到数据的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux工作流程"><span class="nav-number">4.1.2.</span> <span class="nav-text">redux工作流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">4.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Redux-thunk中间件实现ajax数据请求"><span class="nav-number">5.</span> <span class="nav-text">使用Redux-thunk中间件实现ajax数据请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Redux-thunk中间件"><span class="nav-number">5.1.</span> <span class="nav-text">安装Redux-thunk中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在创建store的文件中使用Redux-thunk"><span class="nav-number">5.2.</span> <span class="nav-text">在创建store的文件中使用Redux-thunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过action返回一个函数-进行AJAX请求"><span class="nav-number">5.3.</span> <span class="nav-text">通过action返回一个函数(进行AJAX请求)</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UI组件和容器组件"><span class="nav-number">1.</span> <span class="nav-text">UI组件和容器组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分离UI组件TodoListUI"><span class="nav-number">1.1.</span> <span class="nav-text">分离UI组件TodoListUI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意：子组件事件绑定函数传参"><span class="nav-number">1.1.1.</span> <span class="nav-text">注意：子组件事件绑定函数传参</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器组件（父组件TodoList）"><span class="nav-number">1.2.</span> <span class="nav-text">容器组件（父组件TodoList）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无状态组件（性能优化）"><span class="nav-number">2.</span> <span class="nav-text">无状态组件（性能优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#好处"><span class="nav-number">2.1.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子：TodoListUI组件"><span class="nav-number">2.2.</span> <span class="nav-text">例子：TodoListUI组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：第三方模块axios（发送AJAX）"><span class="nav-number">3.</span> <span class="nav-text">复习：第三方模块axios（发送AJAX）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-中发送异步请求获取数据"><span class="nav-number">4.</span> <span class="nav-text">Redux 中发送异步请求获取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总流程"><span class="nav-number">4.1.</span> <span class="nav-text">总流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从接口获取到数据的流程"><span class="nav-number">4.1.1.</span> <span class="nav-text">从接口获取到数据的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux工作流程"><span class="nav-number">4.1.2.</span> <span class="nav-text">redux工作流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">4.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol>
     
     </div>
   </aside>
