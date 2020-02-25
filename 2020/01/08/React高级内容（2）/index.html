@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React 高级内容（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="React中ref的使用（尽量不用）ref-&amp;gt;reference 引用在React中我们可以使用ref来直接完成DOM的引用。">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 高级内容（2）">
+<meta property="og:url" content="http://yoursite.com/2020/01/08/React高级内容（2）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="React中ref的使用（尽量不用）ref-&amp;gt;reference 引用在React中我们可以使用ref来直接完成DOM的引用。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkns6l8q6j312w0f3n1m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkp8zhucuj30kr0cgmyn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkpdz38hxj30e80aoaad.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblt42cgmzj313r0h7k1o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblklw037yj30iw0a5abf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblkhyj11cj30d40be74j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblkqhae8fj30cy0aujrl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll58n146j30tl0aymz3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll4l8ec2j30fr0dp752.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll8kouhpj30e80dmab0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbllmabyt3j30g80fg75b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblln8esuhj30ck0c20t1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblmgun11ij30ks0it3zy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblmiotr63j30e90lpmy8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblr6ohnoxj31gh0d7q6e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblrad9lpuj30nv0eldi5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbltsm2nohj30qd0a00u6.jpg">
+<meta property="og:updated_time" content="2020-02-25T14:03:58.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 高级内容（2）">
+<meta name="twitter:description" content="React中ref的使用（尽量不用）ref-&amp;gt;reference 引用在React中我们可以使用ref来直接完成DOM的引用。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkns6l8q6j312w0f3n1m.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React高级内容（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React 高级内容（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/08/React高级内容（2）/" class="article-date">
+	  <time datetime="2020-01-08T11:39:11.000Z" itemprop="datePublished">一月 8, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React中ref的使用（尽量不用）"><a href="#React中ref的使用（尽量不用）" class="headerlink" title="React中ref的使用（尽量不用）"></a>React中ref的使用（尽量不用）</h1><p>ref-&gt;reference 引用<br><strong>在React中我们可以使用ref来直接完成DOM的引用</strong>。</p>
+<a id="more"></a>
+<p>但是<strong>尽量不要使用ref来获取页面上的DOM，要时刻记得我们要减少去操作DOM，我们在React中应该直接去操作state数据</strong>，十分复杂的情况下可使用（比如动画）。</p>
+<p>有时候<strong>同时使用ref和setState时数据的获取会有延迟</strong>，是因为<strong>setState是异步的</strong>，他并不是马上处理的，所以会停留在上一次的数据。此时<strong>可以 将获取DOM的这段代码放在setState的第二个参数的函数里，那么她就会在页面完全渲染好以后再进行DOM元素的获取</strong>。</p>
+<h2 id="使用e-target引用对应的DOM元素"><a href="#使用e-target引用对应的DOM元素" class="headerlink" title="使用e.target引用对应的DOM元素"></a>使用<code>e.target</code>引用对应的DOM元素</h2><p><strong>TodoList中</strong>:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">"inserArea"</span></span><br><span class="line">  className=<span class="string">"input"</span></span><br><span class="line">  value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">  onChange=&#123;this.handleInputChange&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkns6l8q6j312w0f3n1m.jpg" alt="TodoList中"><br><strong>我们可以通过<code>e.target</code>来获取元素对应的DOM，也可以通过ref来获取元素对应的DOM。</strong></p>
+<h2 id="使用ref引用对应的DOM元素"><a href="#使用ref引用对应的DOM元素" class="headerlink" title="使用ref引用对应的DOM元素"></a>使用ref引用对应的DOM元素</h2><p><strong>在react16的语法中，ref等于一个函数，这个函数自动接收一个参数，参数名可以自定义</strong>:<code>ref={(input) =&gt; { this.input = input }}</code></p>
+<p><strong>可改写 TodoList</strong>，render函数中:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">"inserArea"</span></span><br><span class="line">  className=<span class="string">"input"</span></span><br><span class="line">  value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">  onChange=&#123;this.handleInputChange&#125;</span><br><span class="line">  <span class="comment">//`this.input` 指input对应的DOM元素</span></span><br><span class="line">  ref=&#123;(refInput) =&gt; &#123; this<span class="selector-class">.input</span> = refInput &#125;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>同时修改TodoList中的handleInputChange：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">handleInputChange() &#123;</span><br><span class="line">  <span class="comment">// this.input相当于e.target</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">value</span> = <span class="keyword">this</span>.input.<span class="keyword">value</span>;</span><br><span class="line">  <span class="keyword">this</span>.setState(() =&gt; (&#123;</span><br><span class="line">    inputValue: <span class="keyword">value</span></span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果和上面使用<code>e.target</code>是一样的，但其实并不推荐使用ref。<strong>【原代码改回<code>e.target</code>再继续下一节课的学习】</strong></p>
+<h2 id="同时使用ref和setState时的问题与解决"><a href="#同时使用ref和setState时的问题与解决" class="headerlink" title="同时使用ref和setState时的问题与解决"></a>同时使用ref和setState时的问题与解决</h2><p>有时候<strong>同时使用ref和setState时数据的获取会有延迟</strong>，是因为<strong>setState是异步的</strong>，他并不是马上处理的，所以会停留在上一次的数据。此时<strong>可以 将获取DOM的这段代码放在setState的第二个参数的函数里，那么她就会在页面完全渲染好以后再进行DOM元素的获取</strong>。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>在TodoList的render中，我们<strong>给<code>&lt;ul&gt;</code>增加一个ref去获取对应的DOM节点</strong>（也就是ul元素）：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//this.ul指向对应的ul元素，refUl是自定义的</span></span><br><span class="line">&lt;ul <span class="built_in">ref</span>=&#123;(<span class="built_in">ref</span>Ul) =&gt; &#123; <span class="keyword">this</span>.ul = <span class="built_in">ref</span>Ul &#125;&#125;&gt;</span><br><span class="line">  &#123;<span class="keyword">this</span>.getTodoItem()&#125;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后<strong>在点击“提交”按钮的绑定事件函数 handleBtnClick 中增加一个打印语句，打印ul元素下的所有div标签的长度</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">handleBtnClick() &#123;</span><br><span class="line">  <span class="comment">// prevState：修改数据前的那一次的数据，相当于this.state，但更靠谱</span></span><br><span class="line">  <span class="keyword">this</span>.setState((prevState) =&gt; (&#123;</span><br><span class="line">    <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">    <span class="built_in">list</span>: [...prevState.<span class="built_in">list</span>, prevState.inputValue],</span><br><span class="line">    <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">    inputValue: <span class="string">""</span></span><br><span class="line">  &#125;));</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="keyword">this</span>.ul.querySelectorAll(<span class="string">"div"</span>).length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>handleBtnClick函数主要作用就是<strong>把输入框中的内容加到列表中*（state的list中）并清空输入框</strong>，按理说每输入一次div标签就会增加一个。那么输入1时长度应该是1，再次输入2时长度应该是2，可<strong>结果明显是DOM元素的获取有延迟</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkp8zhucuj30kr0cgmyn.jpg" alt="结果"><br>这是因为<strong>setState是异步的，并不会马上执行</strong>，所以获取的数据有所延迟，此时<strong>可以 将获取DOM的这段代码放在setState的第二个参数的函数里，那么她就会在页面完全渲染好以后再进行DOM元素的获取</strong>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">handleBtnClick() &#123;</span><br><span class="line">  <span class="comment">// prevState：修改数据前的那一次的数据，相当于this.state，但更靠谱</span></span><br><span class="line">  <span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123;</span><br><span class="line">    <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">    list: [...prevState.list, prevState.inputValue],</span><br><span class="line">    <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">    inputValue: <span class="string">""</span></span><br><span class="line">  &#125;), <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.ul.querySelectorAll(<span class="string">"div"</span>).length);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkpdz38hxj30e80aoaad.jpg" alt="结果"></p>
+<hr>
+<h1 id="React-的-生命周期函数"><a href="#React-的-生命周期函数" class="headerlink" title="React 的 生命周期函数"></a>React 的 生命周期函数</h1><p><strong>生命周期函数指在某一时刻组件会自动调用执行的函数。</strong></p>
+<p>React 的 生命周期函数 <strong>非常重要，建议每天回顾记忆。</strong></p>
+<p><strong>例子</strong>：</p>
+<ul>
+<li>“当props或state发生改变时，组件自动调用render函数进行页面挂载。”那么<strong>render函数其实就是生命周期函数</strong>。</li>
+<li><strong>“当组件被创建时，会自动调用 constructor函数 （构造函数）。”</strong>所以你也可以认为 constructor函数 是生命周期函数，但是 constructor函数 并不是React独有的，他是ES6自带的，所以我们<strong>不把 constructor函数 归类为 生命周期函数 ，但实际上没区别。</strong></li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblt42cgmzj313r0h7k1o.jpg" alt="总结"></p>
+<h2 id="组件-DOM第一次挂载的流程（mounting）"><a href="#组件-DOM第一次挂载的流程（mounting）" class="headerlink" title="组件/DOM第一次挂载的流程（mounting）"></a>组件/DOM第一次挂载的流程（mounting）</h2><p><strong>理解：mount 挂载 -&gt; 将组件放到页面上 -&gt; 渲染页面（第一次）</strong></p>
+<p>组件第一次挂载的<strong>流程：UNSAFE_componentWillMount函数 -&gt; render函数 -&gt;componentDidMount函数</strong></p>
+<h3 id="被React弃用并需要替代的函数们"><a href="#被React弃用并需要替代的函数们" class="headerlink" title="被React弃用并需要替代的函数们"></a>被React弃用并需要替代的函数们</h3><p>使用componentWillMount时报出警告:</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">Warning</span>: componentWillMount has been renamed, <span class="keyword">and</span> <span class="keyword">is</span> <span class="keyword">not</span> recommended <span class="keyword">for</span> <span class="keyword">use</span>.</span><br></pre></td></tr></table></figure>
+
+<p><strong>React 宣布 生命周期方法重命名为</strong>：</p>
+<ul>
+<li>componentWillMount → UNSAFE_componentWillMount</li>
+<li>componentWillReceiveProps → UNSAFE_componentWillReceiveProps</li>
+<li>componentWillUpdate → UNSAFE_componentWillUpdate</li>
+</ul>
+<h3 id="UNSAFE-componentWillMount函数"><a href="#UNSAFE-componentWillMount函数" class="headerlink" title="UNSAFE_componentWillMount函数"></a>UNSAFE_componentWillMount函数</h3><p>该函数只在页面即将被挂载时执行，<strong>也就是只在第一次将组件放（渲染）到页面上之前才会执行</strong>，后续在输入框内输入任何数据都不涉及组件挂载，也就不会执行该函数了。</p>
+<p><strong>例子</strong>：<br>在TodoList.js中添加：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblklw037yj30iw0a5abf.jpg" alt="UNSAFE_componentWillMount函数"></p>
+<h3 id="render函数（进行页面挂载）"><a href="#render函数（进行页面挂载）" class="headerlink" title="render函数（进行页面挂载）"></a>render函数（进行页面挂载）</h3><p>当props或state发生改变时，组件自动调用render函数进行页面挂载，将页面渲染出来。</p>
+<h3 id="componentDidMount函数"><a href="#componentDidMount函数" class="headerlink" title="componentDidMount函数"></a>componentDidMount函数</h3><p>在render函数下方添加componentDidMount函数：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">componentDidMount</span>() &#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"componentDidMount"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><strong>【我们在每个生命周期函数内添加了对应的打印语句来观察结果】</strong></p>
+<p>可以看到执行顺序是：UNSAFE_componentWillMount函数 -&gt; render函数 -&gt;componentDidMount函数<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblkhyj11cj30d40be74j.jpg" alt="三者顺序"></p>
+<p>清空console框，再次输入数据，此时只有render函数被执行。说明<strong>只在组件第一次挂载时才执行UNSAFE_componentWillMount函数 和 componentDidMount函数</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblkqhae8fj30cy0aujrl.jpg" alt="第一次挂载才执行两个函数"></p>
+<hr>
+<h2 id="组件更新的流程"><a href="#组件更新的流程" class="headerlink" title="组件更新的流程"></a>组件更新的流程</h2><p><strong>更新state数据的流程</strong>：<br><strong>shouldComponentUpdate函数</strong> 判断是否需要更新，不需要（false）则不再执行下面的函数，需要则顺序执行<strong>UNSAFE_componentWillUpdate函数</strong> -&gt; <strong>componentDidUpdate函数</strong> 。</p>
+<p><strong>更新props数据的流程</strong>：<br>比起更新state数据的流程要在最前方多出一个函数：<strong>componentWillReceiveProps函数</strong></p>
+<p><strong>当一个组件他自己是顶层组件，没有父组件的情况下，他没有接收到props参数，那么就不会执行 函数，比如TodoList中就没有props参数。</strong></p>
+<h3 id="shouldComponentUpdate函数"><a href="#shouldComponentUpdate函数" class="headerlink" title="shouldComponentUpdate函数"></a>shouldComponentUpdate函数</h3><p><strong>在组件更新之前会被运行，该函数要求返回一个布尔值。</strong><br>“我的组件需要被更改吗？”返回的布尔值相当于给他一个回答，<strong>当返回false时不论你怎么修改state数据，组件都在执行该函数后明白你不需要更新，那么render函数就不会被执行，页面也就不会产生任何的反馈。</strong></p>
+<p><strong>注意：shouldComponentUpdate函数其实应该自带两个参数（nextProps，nextState）表示即将更新的state和props</strong>，具体可看笔记“React高级内容（3）”中的（使用shouldComponentUpdate做性能优化）</p>
+<p><strong>例子</strong>：<br><strong>【我们在每个生命周期函数内添加了对应的打印语句来观察结果】</strong></p>
+<p>一样在TodoList中做演示：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll58n146j30tl0aymz3.jpg" alt="TodoList"><br>当我们<strong>鼠标一点进input框就会执行该函数</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll4l8ec2j30fr0dp752.jpg" alt="true的结果"><br>如果将返回值设为false，则不论你怎么修改state数据，组件都在执行该函数后明白你不需要更新，那么render函数就不会被执行，页面也就不会产生任何的反馈：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbll8kouhpj30e80dmab0.jpg" alt="false的结果"></p>
+<h3 id="UNSAFE-componentWillUpdate函数"><a href="#UNSAFE-componentWillUpdate函数" class="headerlink" title="UNSAFE_componentWillUpdate函数"></a>UNSAFE_componentWillUpdate函数</h3><p>componentWillUpdate函数被弃用，使用会报警告，应使用<code>UNSAFE_componentWillUpdate</code>函数替代:</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-dom.development.js:<span class="number">12449</span> <span class="literal">Warning</span>: componentWillUpdate has been renamed, <span class="keyword">and</span> <span class="keyword">is</span> <span class="keyword">not</span> recommended <span class="keyword">for</span> <span class="keyword">use</span>.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>组件被更新之前，他会自动执行，但是他在shouldComponentUpdate之后执行</strong></li>
+<li>如果shouldComponentUpdate返回true他才执行</li>
+<li>如果返回false，这个函数就不会被执行了</li>
+</ul>
+<p><strong>在TodoList中添加</strong>：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">UNSAFE_componentWillUpdate</span>() &#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"UNSAFE_componentWillUpdate"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="componentDidUpdate函数"><a href="#componentDidUpdate函数" class="headerlink" title="componentDidUpdate函数"></a>componentDidUpdate函数</h3><p><strong>组件更新完成后，他会被执行</strong></p>
+<p><strong>在TodoList中添加</strong>：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">componentDidUpdate</span>() &#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"componentDidUpdate"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><p><strong>【我们在每个生命周期函数内添加了对应的打印语句来观察结果】</strong></p>
+<p>shouldComponentUpdate函数返回值为true时的流程：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbllmabyt3j30g80fg75b.jpg" alt="true"></p>
+<p>shouldComponentUpdate函数返回值为false时的流程：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblln8esuhj30ck0c20t1.jpg" alt="false"></p>
+<h3 id="UNSAFE-componentWillReceiveProps函数"><a href="#UNSAFE-componentWillReceiveProps函数" class="headerlink" title="UNSAFE_componentWillReceiveProps函数"></a>UNSAFE_componentWillReceiveProps函数</h3><p>componentWillReceiveProps函数已经被React弃用， 我们需要使用UNSAFE_componentWillReceiveProps函数代替他。</p>
+<p><strong>执行条件：一个组件要从父组件接受参数</strong><br><strong>如果这个组件是第一次存在于父组件中，则该函数不会被执行</strong><br><strong>如果这个组件之前已经存在于父组件中，该函数就会执行</strong></p>
+<p><strong>在TodoList中添加该函数</strong>：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">UNSAFE_componentWillReceiveProps</span>()&#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"UNSAFE_componentWillReceiveProps"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而并无反应，因为TodoList就是顶层函数，他没有父组件，也就不会接受props参数，自然也不存在props更新。</p>
+<p><strong>在TodoItem中添加该函数</strong>：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">UNSAFE_componentWillReceiveProps</span>()&#123;</span><br><span class="line">  <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"child UNSAFE_componentWillReceiveProps"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果-2"><a href="#结果-2" class="headerlink" title="结果"></a>结果</h3><p><strong>【我们在每个生命周期函数内添加了对应的打印语句来观察结果】</strong></p>
+<p>首先我们要明确，<strong>TodoItem这个子组件控制的是输入框下面的ul列表</strong>。</p>
+<p>当我们<strong>输入1并提交</strong>，第一次往TodoItem中放入数据时，UNSAFE_componentWillReceiveProps函数并没被执行，这是因为 <strong>这个组件必须之前已经存在于父组件中，该函数才会执行</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblmgun11ij30ks0it3zy.jpg" alt="第一次放入数据"><br>当我们再次输入2并点击提交时，完美符合执行条件，该函数被执行：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblmiotr63j30e90lpmy8.jpg" alt="第二次放入数据"></p>
+<hr>
+<h2 id="把组件从页面去除的流程（unmounting）"><a href="#把组件从页面去除的流程（unmounting）" class="headerlink" title="把组件从页面去除的流程（unmounting）"></a>把组件从页面去除的流程（unmounting）</h2><p><strong>当这个组件即将从页面中剔除时，该生命周期函数会被执行</strong>。</p>
+<h3 id="componentWillUnmount函数"><a href="#componentWillUnmount函数" class="headerlink" title="componentWillUnmount函数"></a>componentWillUnmount函数</h3><p><strong>在TodoItem中添加该函数</strong>：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">componentWillUnmount</span>() &#123;</span><br><span class="line">    <span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="string">"child componentWillUnmount"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果-3"><a href="#结果-3" class="headerlink" title="结果"></a>结果</h3><p><strong>【我们在每个生命周期函数内添加了对应的打印语句来观察结果】</strong></p>
+<p>输入并提交1以后删除无序列表中的“你好呀-1”：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblr6ohnoxj31gh0d7q6e.jpg" alt="结果1"></p>
+<p>依次输入并提交1、2，再删除无序列表中的“你好呀-2”：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gblrad9lpuj30nv0eldi5.jpg" alt="结果2"></p>
+<p><strong>结果2的原因</strong>：TodoList中放在ul标签中的getTodoItem告诉我们，遍历list列表后数组中的每一项都会返回一个子组件TodoItem，所以<strong>该无序列表中的每一项都是一个子组件！</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbltsm2nohj30qd0a00u6.jpg" alt="TodoList中"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/09/JS_DOM事件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          DOM事件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/08/React高级内容（3）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React 高级内容（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React中ref的使用（尽量不用）"><span class="nav-number">1.</span> <span class="nav-text">React中ref的使用（尽量不用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用e-target引用对应的DOM元素"><span class="nav-number">1.1.</span> <span class="nav-text">使用e.target引用对应的DOM元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ref引用对应的DOM元素"><span class="nav-number">1.2.</span> <span class="nav-text">使用ref引用对应的DOM元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时使用ref和setState时的问题与解决"><span class="nav-number">1.3.</span> <span class="nav-text">同时使用ref和setState时的问题与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-的-生命周期函数"><span class="nav-number">2.</span> <span class="nav-text">React 的 生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件-DOM第一次挂载的流程（mounting）"><span class="nav-number">2.1.</span> <span class="nav-text">组件/DOM第一次挂载的流程（mounting）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#被React弃用并需要替代的函数们"><span class="nav-number">2.1.1.</span> <span class="nav-text">被React弃用并需要替代的函数们</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNSAFE-componentWillMount函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">UNSAFE_componentWillMount函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render函数（进行页面挂载）"><span class="nav-number">2.1.3.</span> <span class="nav-text">render函数（进行页面挂载）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidMount函数"><span class="nav-number">2.1.4.</span> <span class="nav-text">componentDidMount函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果"><span class="nav-number">2.1.5.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件更新的流程"><span class="nav-number">2.2.</span> <span class="nav-text">组件更新的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldComponentUpdate函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">shouldComponentUpdate函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNSAFE-componentWillUpdate函数"><span class="nav-number">2.2.2.</span> <span class="nav-text">UNSAFE_componentWillUpdate函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidUpdate函数"><span class="nav-number">2.2.3.</span> <span class="nav-text">componentDidUpdate函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNSAFE-componentWillReceiveProps函数"><span class="nav-number">2.2.5.</span> <span class="nav-text">UNSAFE_componentWillReceiveProps函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果-2"><span class="nav-number">2.2.6.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把组件从页面去除的流程（unmounting）"><span class="nav-number">2.3.</span> <span class="nav-text">把组件从页面去除的流程（unmounting）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUnmount函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">componentWillUnmount函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果-3"><span class="nav-number">2.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>使用react-transition-group实现动画 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="复习：三目运算符b?x:y对于条件表达式b ? x : y，先计算条件b，然后进行判断。如果b的值为true，计算x的值，运算结果为x的值；否则，计算y的值，运算结果为y的值。">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用react-transition-group实现动画">
+<meta property="og:url" content="http://yoursite.com/2020/01/12/使用react-transition-group实现动画/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="复习：三目运算符b?x:y对于条件表达式b ? x : y，先计算条件b，然后进行判断。如果b的值为true，计算x的值，运算结果为x的值；否则，计算y的值，运算结果为y的值。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnmb9lckcj30lo02lwed.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnms6hyv0j30ud0ckabk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnonk23fvj30a1075glu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbotybp555j30u00360t7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbotybp555j30u00360t7.jpg">
+<meta property="og:updated_time" content="2020-02-25T13:59:40.554Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用react-transition-group实现动画">
+<meta name="twitter:description" content="复习：三目运算符b?x:y对于条件表达式b ? x : y，先计算条件b，然后进行判断。如果b的值为true，计算x的值，运算结果为x的值；否则，计算y的值，运算结果为y的值。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnmb9lckcj30lo02lwed.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-使用react-transition-group实现动画" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      使用react-transition-group实现动画
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/12/使用react-transition-group实现动画/" class="article-date">
+	  <time datetime="2020-01-12T04:25:00.000Z" itemprop="datePublished">一月 12, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="复习：三目运算符b-x-y"><a href="#复习：三目运算符b-x-y" class="headerlink" title="复习：三目运算符b?x:y"></a>复习：三目运算符<code>b?x:y</code></h1><p>对于条件表达式<code>b ? x : y</code>，先计算条件b，然后进行判断。<br>如果b的值为true，计算x的值，运算结果为x的值；<br>否则，计算y的值，运算结果为y的值。</p>
+<a id="more"></a>
+
+<hr>
+<h1 id="React中实现CSS过渡动画"><a href="#React中实现CSS过渡动画" class="headerlink" title="React中实现CSS过渡动画"></a>React中实现CSS过渡动画</h1><ul>
+<li>实现功能：<strong>点击button实现hello的显示或隐藏</strong>。</li>
+<li>注意：<strong>render函数中只能return一个父标签</strong>，可以借助react的<strong>Fragment占位符</strong>，它并不会被渲染成任何一个标签。<strong>（Fragment在react库中，需引用才能使用）</strong></li>
+<li>CSS中： <strong><code>opacity</code>属性 为1时显示，为0时隐藏。<code>transition</code>属性 可实现过渡效果</strong>。<br>【opacity 不透明；transition 过渡】</li>
+</ul>
+<p><strong>例子</strong>：<br>1.将TodoList文件夹中<strong>src文件夹下删为仅剩一个<code>index.js</code>文件</strong>。<br>在<strong><code>index.js</code>中引入并挂载 组件APP 到 root节点 上</strong>:</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(&lt;App /&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>));</span><br></pre></td></tr></table></figure>
+
+<p>2.新建<strong><code>APP.js</code>编写 组件APP 的 render函数</strong> ，写出页面上的两个元素div和button：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Fragment&gt;</span><br><span class="line">      &lt;div&gt;hello world&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button&gt;toggle&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/Fragment&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，<strong>Fragment需要先引用才能使用</strong>：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnmb9lckcj30lo02lwed.jpg" alt="两个元素"></p>
+<p>3.<strong>补充<code>APP.js</code>中的 constructor构造函数</strong> ，将 div 显示与否 的 决定属性show 存在state中，使用show的值给div加上一个className属性，给button绑定一个 <strong>onclick事件函数 handleToggle</strong>，点击时让show在false与true之间进行变换（记得绑定函数handleToggle的this指向）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      show: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.handleToggle = <span class="keyword">this</span>.handleToggle.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div className=&#123;<span class="keyword">this</span>.state.show ? <span class="string">"show"</span> : <span class="string">"hide"</span>&#125;&gt;hello world&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button onClick=&#123;this.handleToggle&#125;&gt;toggle&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/Fragment&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  handleToggle() &#123;</span></span><br><span class="line"><span class="regexp">    this.setState(() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">      return (&#123;</span></span><br><span class="line"><span class="regexp">        show: this.state.show ? false : true</span></span><br><span class="line"><span class="regexp">      &#125;)</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default App;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：虽然点击按钮看不到效果变化，但实际className还是发生了改变，所以<strong>接下来我们就去设置CSS</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnms6hyv0j30ud0ckabk.jpg" alt="点击按钮前后"></p>
+<p>4.设置<code>CSS.js</code>并在 APP.js 中使用<code>import &quot;./style.css&quot;;</code>进行引用,<code>CSS.js</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.show</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hide</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：此时点击按钮可使“hello”消失/显示，但<strong>没有过渡效果</strong>，我们可以<strong>加上 <code>transition</code>属性 实现过渡效果</strong>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.show</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hide</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="React中使用CSS动画效果"><a href="#React中使用CSS动画效果" class="headerlink" title="React中使用CSS动画效果"></a>React中使用CSS动画效果</h1><ul>
+<li>实现功能：<strong>点击按钮时，hello经过红色、绿色、蓝色过渡，最后显示/消失。</strong></li>
+<li>什么叫CSS动画效果：<strong>通过 <code>@keyframes</code> 定义</strong>一些<strong>CSS动画</strong>，然后<strong>在选择器中通过 <code>animation</code>属性 进行动画的调用</strong>。</li>
+<li>CSS3中 <code>animation</code>属性 有 <strong><code>forwards</code>属性值</strong> :可以<strong>使动画结束后保留最后一个效果的样式</strong>.</li>
+</ul>
+<p><strong>例子</strong>：<br>修改<code>style.css</code>，<strong>通过 <code>@keyframes</code> 定义</strong>一些<strong>CSS动画</strong>，然后<strong>在选择器中通过 <code>animation</code>属性 进行动画的调用</strong>。（使用 <code>animation</code>属性 代替 <code>opacity</code>属性）:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.show</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hide</span>&#123;</span><br><span class="line">    <span class="attribute">animation</span>: hide-item <span class="number">2s</span> ease-in;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> hide-item&#123;</span><br><span class="line">    0%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    50%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">    100%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：<br>此时可以发现动画效果已实现，但是<strong>蓝色以后hello又回到黑色，并未消失</strong>，这是因为<strong>动画执行结束后，最后一个效果不会被保持下来</strong>。<br><strong>CSS3中有 <code>forwards</code>属性值 ，它可以使动画结束后保留最后一个效果的样式</strong>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span>&#123;</span><br><span class="line">    <span class="attribute">animation</span>: hide-item <span class="number">2s</span> ease-in forwards;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：可以发现动画效果后hello消失。</p>
+<p>给 显示 也设置动画效果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.show</span>&#123;</span><br><span class="line">    <span class="attribute">animation</span>: show-item <span class="number">2s</span> ease-in forwards;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hide</span>&#123;</span><br><span class="line">    <span class="attribute">animation</span>: hide-item <span class="number">2s</span> ease-in forwards;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> show-item&#123;</span><br><span class="line">    0%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    50%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">    100%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> hide-item&#123;</span><br><span class="line">    0%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    50%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">    100%&#123;</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用react-transition-group实现动画"><a href="#使用react-transition-group实现动画" class="headerlink" title="使用react-transition-group实现动画"></a>使用react-transition-group实现动画</h1><p>react-transition-group：<strong>react动画的第三方模块</strong><br>上面我们讲解的 CSS动画 比较局限，涉及到 JS动画 的部分就无法处理。借助 react-transition-group 这个第三方模块 ，我们可以更加方便的做一些动画效果。</p>
+<h2 id="安装react-transition-group模块"><a href="#安装react-transition-group模块" class="headerlink" title="安装react-transition-group模块"></a>安装react-transition-group模块</h2><p>进入github - 搜索<code>react-transition-group</code> - 选择星标最多的 - 下拉点击<code>Main documentation</code>(主文档) - 安装提示，<strong>在命令行中输入</strong>：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># yarn</span></span><br><span class="line">yarn <span class="keyword">add</span> react-transition-<span class="keyword">group</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>重新启动项目</strong>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> start</span><br></pre></td></tr></table></figure>
+
+<p>接着回到文档可以看到下面有 <strong>四个 动画组件</strong> ：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbnonk23fvj30a1075glu.jpg" alt="四个 动画组件 选择"></p>
+<h2 id="学习CSSTransition组件"><a href="#学习CSSTransition组件" class="headerlink" title="学习CSSTransition组件"></a>学习<code>CSSTransition</code>组件</h2><ul>
+<li><strong>我们主要讲解<code>CSSTransition</code></strong>。</li>
+<li><strong><code>Transition</code>组件</strong> 是比<code>CSSTransition</code>组件更低层的存在，当我们利用<code>CSSTransition</code>组件无法实现一些效果时，可以到<code>Transition</code>组件中去找。</li>
+</ul>
+<p>官方文档的 <strong>Example 中可以看到 <code>&lt;CSSTransition&gt;</code> 有以下属性（/JS钩子）</strong>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;CSSTransition</span><br><span class="line">  <span class="keyword">in</span>=&#123;showMessage&#125;</span><br><span class="line">  timeout=&#123;<span class="number">300</span>&#125;</span><br><span class="line">  classNames=<span class="string">"alert"</span></span><br><span class="line">  unmountOnExit</span><br><span class="line">  onEnter=&#123;<span class="function"><span class="params">()</span> =&gt;</span> setShowButton(<span class="literal">false</span>)&#125;</span><br><span class="line">  onExited=&#123;<span class="function"><span class="params">()</span> =&gt;</span> setShowButton(<span class="literal">true</span>)&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="in属性"><a href="#in属性" class="headerlink" title="in属性"></a><code>in</code>属性</h3><p><strong><code>in</code>属性 告诉<code>CSSTransition</code> 被控制元素的 入场/出场状态</strong> ，<code>CSSTransition</code>需要给 被控制的元素 增加/删除 一些样式，而 <strong><code>in</code>属性 就是告诉了<code>CSSTransition</code> 属性值 false-&gt;true时 入场，true-&gt;false时 出场。</strong></p>
+<h3 id="timeout属性"><a href="#timeout属性" class="headerlink" title="timeout属性"></a><code>timeout</code>属性</h3><p>动画持续的毫秒数（1000毫秒=1秒）</p>
+<p>###<code>classNames</code>属性<br>注意有个<code>s</code>，属性值为 <strong>自动挂载的样式 的前缀</strong>。<br>比如下面的<strong>样式<code>fade-appear</code>的前缀就是<code>fade</code>，那么我们就要设置<code>classNames=&#39;fade&#39;</code></strong></p>
+<h3 id="unmountOnExit属性"><a href="#unmountOnExit属性" class="headerlink" title="unmountOnExit属性"></a><code>unmountOnExit</code>属性</h3><p>该属性<strong>不需要属性值</strong>，添加该属性后，被控制的元素完成出场动画后将直接消失在页面（不会留下一个空白位置）。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbotybp555j30u00360t7.jpg" alt="例子"></p>
+<h3 id="JS钩子"><a href="#JS钩子" class="headerlink" title="JS钩子"></a>JS钩子</h3><ul>
+<li><strong>钩子 相当于 生命周期函数，他们都是某一时刻会自动执行的函数。</strong></li>
+<li><strong>属性值就是个JS钩子（函数）</strong>。</li>
+<li>该函数可以<strong>接收一个自命名参数，该参数 指 被<code>CSSTransition</code>控制的元素</strong>。</li>
+</ul>
+<h4 id="onEnter、onEntering、onEntered"><a href="#onEnter、onEntering、onEntered" class="headerlink" title="onEnter、onEntering、onEntered"></a><code>onEnter</code>、<code>onEntering</code>、<code>onEntered</code></h4><ul>
+<li><code>onEnter</code>：当<strong>入场动画执行的第一个时刻，<code>onEnter</code>钩子（函数）就会被自动执行</strong>。</li>
+<li><code>onEntering</code>：当<strong>入场动画执行第二帧时，<code>onEntering</code>钩子（函数）就会被自动执行</strong>。</li>
+<li><code>onEntered</code>：当<strong>入场动画执行完成后，<code>onEntered</code>钩子（函数）就会被自动执行</strong>。</li>
+</ul>
+<h4 id="onExit、onExiting、onExiting"><a href="#onExit、onExiting、onExiting" class="headerlink" title="onExit、onExiting、onExiting"></a><code>onExit</code>、<code>onExiting</code>、<code>onExiting</code></h4><ul>
+<li><code>onExit</code>：当<strong>出场动画执行的第一个时刻，<code>onExit</code>钩子（函数）就会被自动执行</strong>。</li>
+<li><code>onExiting</code>：当<strong>出场动画执行第二帧时，<code>onExiting</code>钩子（函数）就会被自动执行</strong>。</li>
+<li><code>onExiting</code>：当<strong>出场动画执行完成后，<code>onExited</code>钩子（函数）就会被自动执行</strong>。</li>
+</ul>
+<hr>
+<h3 id="自动挂载的样式-classNames"><a href="#自动挂载的样式-classNames" class="headerlink" title="自动挂载的样式(classNames)"></a>自动挂载的样式(classNames)</h3><ul>
+<li>官方文档中 Example 下给出了很多自动挂载的样式(classNames)，比如<code>fade-appear</code>, <code>fade-appear-active</code>, <code>fade-appear-done</code>,<code>fade-enter</code>, <code>fade-enter-active</code>, <code>fade-enter-done</code>, <code>fade-exit</code>,<code>fade-exit-active</code>, <code>fade-exit-done</code>.</li>
+<li>使用方法：<code>.fade-appear{color: red;}</code></li>
+<li>需要<strong>先设置<code>CSSTransition</code>标签的属性<code>classNames=&quot;fade&quot;</code>才能使用</strong>这些fade前缀的样式。</li>
+<li>需要<strong>先设置<code>CSSTransition</code>标签的属性<code>appear={true}</code>，才能使用<code>fade-appear</code>, <code>fade-appear-active</code>, <code>fade-appear-done</code></strong>。</li>
+</ul>
+<h4 id="入场动画相关的样式"><a href="#入场动画相关的样式" class="headerlink" title="入场动画相关的样式"></a>入场动画相关的样式</h4><ul>
+<li>入场动画相关的样式：<code>fade-enter</code>、<code>fade-enter-active</code>、<code>fade-enter-done</code></li>
+<li><code>fade-enter</code>：<strong>入场动画执行的第一个时刻</strong>，<code>CSSTransition</code>会往 被控制的元素上 增加<code>fade-enter</code>样式。</li>
+<li><code>fade-enter-active</code>：<strong>入场动画执行的第二个时刻到入场动画执行完成之前</strong>，此时 被控制的元素上 会一直有<code>fade-enter-active</code>样式。</li>
+<li><code>fade-enter-done</code>：<strong>整个入场动画执行完成之后</strong>，<code>fade-enter-done</code>样式会被增加并<strong>保持在 被控制的元素上</strong>。</li>
+</ul>
+<h4 id="出场动画相关的样式"><a href="#出场动画相关的样式" class="headerlink" title="出场动画相关的样式"></a>出场动画相关的样式</h4><ul>
+<li>出场动画相关有：<code>fade-exit</code>、<code>fade-exit-active</code>、<code>fade-exit-done</code>。</li>
+<li><code>fade-exit</code>：<strong>出场动画执行的第一个时刻</strong>，<code>CSSTransition</code>会往 被控制的元素上 增加<code>fade-exit</code>样式。</li>
+<li><code>fade-exit-active</code>：<strong>出场动画执行的第二个时刻到出场动画执行完成之前</strong>，此时 被控制的元素上 会一直有<code>fade-exit-active</code>样式。</li>
+<li><code>fade-exit-done</code>：<strong>整个入场动画执行完成之后</strong>，<code>fade-exit-done</code>样式会被增加并<strong>保持在 被控制的元素上</strong>。</li>
+</ul>
+<h4 id="刷新页面执行的动画相关样式"><a href="#刷新页面执行的动画相关样式" class="headerlink" title="刷新页面执行的动画相关样式"></a>刷新页面执行的动画相关样式</h4><ul>
+<li>刷新页面执行的动画相关样式有：<strong><code>fade-appear</code>、<code>fade-appear-active</code>、<code>fade-appear-done</code></strong></li>
+<li><strong>在页面刷新，DOM元素的第一次渲染时的动画效果</strong>就由这些样式来决定。</li>
+<li>注意：需要<strong>先设置<code>CSSTransition</code>标签的属性<code>appear={true}</code>，才能使用<code>fade-appear</code>, <code>fade-appear-active</code>, <code>fade-appear-done</code></strong>。</li>
+<li><code>fade-appear-done</code>不设置时，页面显示默认的状态作为动画效果的最后一个状态保持。</li>
+</ul>
+<hr>
+<h3 id="CSSTransition例子"><a href="#CSSTransition例子" class="headerlink" title="CSSTransition例子"></a><code>CSSTransition</code>例子</h3><p>之前我们是自己在state中设置一个show值用于改变div的 className（样式名字），达到 div元素显示/删除 的工作，现在<strong><code>CSSTransition</code>会帮我们完成一些 样式名字 的 添加/删除 工作</strong>，只需要<strong>使用<code>&lt;CSSTransition&gt;</code>标签包裹需要被控制的元素（div）并进行属性设置</strong>即可。</p>
+<p><strong>在<code>App.js</code>中</strong>引用<code>CSSTransition</code>组件：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CSSTransition &#125; <span class="keyword">from</span> 'react-transition-<span class="keyword">group</span>';</span><br></pre></td></tr></table></figure>
+
+<p>使用<strong><code>CSSTransition</code>标签包裹需要被控制的div标签</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CSSTransition</span></span></span><br><span class="line"><span class="tag">  <span class="attr">in</span>=<span class="string">&#123;this.state.show&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">timeout</span>=<span class="string">&#123;1000&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">classNames</span>=<span class="string">"fade"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CSSTransition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>将原本的<strong><code>style.css</code></strong>删除掉，改为:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fade-enter</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fade-enter-active</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fade-enter-done</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：在页面上可以看到点击按钮，show值由false-&gt;true时，页面有动画效果（入场效果）。接下来<strong>增加 出场动画</strong> ：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.fade-<span class="keyword">exit</span>&#123;</span><br><span class="line">    opacity: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">.fade-<span class="keyword">exit</span>-active&#123;</span><br><span class="line">    opacity: <span class="number">0</span>;</span><br><span class="line">    transition: opacity <span class="number">1</span>s ease-<span class="keyword">in</span>;</span><br><span class="line">&#125;</span><br><span class="line">.fade-<span class="keyword">exit</span>-done&#123;</span><br><span class="line">    opacity: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果</strong>：做到这里<strong>完成的效果与上一个例子效果一样</strong>，看起来似乎并没有简化，但是<strong>下面增加的就是<code>CSSTransition</code>带来的简化</strong>。</p>
+<h4 id="使用unmountOnExit属性"><a href="#使用unmountOnExit属性" class="headerlink" title="使用unmountOnExit属性"></a>使用<code>unmountOnExit</code>属性</h4><p>在<strong><code>CSSTransition</code>标签内增加<code>unmountOnExit</code>属性</strong>，该属性<strong>不需要属性值</strong>。<br>添加该属性后，被控制的元素完成出场动画后将直接消失在页面（不会留下一个空白位置）。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbotybp555j30u00360t7.jpg" alt="例子"></p>
+<h4 id="使用JS钩子onEntered"><a href="#使用JS钩子onEntered" class="headerlink" title="使用JS钩子onEntered"></a>使用JS钩子<code>onEntered</code></h4><p><strong>实现效果</strong>：hello显示完成后变为红色。<br><strong>实现方法</strong>：我们可以在CSS中通过改变<code>.fade-enter-done</code>选择器内的color实现，也可以<strong>通过 JS钩子<code>onEnter</code> 实现</strong>。</p>
+<p>在<code>CSSTransition</code>标签内增加:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onEntered=&#123;(el) =&gt; &#123; el<span class="selector-class">.style</span><span class="selector-class">.color</span> = <span class="string">"blue"</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="appear属性与对应的样式"><a href="#appear属性与对应的样式" class="headerlink" title="appear属性与对应的样式"></a><code>appear</code>属性与对应的样式</h4><p>做到这儿可以发现一个小问题：页面刚刷新时并不会显示动画效果，如果我们<strong>希望元素首次挂载在页面上就显示动画效果</strong>，可以使用<code>appear</code>属性，但<code>appear</code>属性对应的CSS样式并不是<code>.fade-enter</code>那几个，是<code>fade-appear</code>前缀的三个样式。</p>
+<p>在<code>App.js</code>中添加<code>CSSTransition</code>标签的appear属性：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">appear</span>=&#123;<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>style.css</code>中增加<code>.fade-appear</code>和<code>.fade-appear-active</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fade-enter</span>,<span class="selector-class">.fade-appear</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fade-enter-active</span>,<span class="selector-class">.fade-appear-active</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/13/react-transition-group实现多元素之间的动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          react-transition-group实现多元素之间的动画
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/11/关于setState()/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">关于setState()</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复习：三目运算符b-x-y"><span class="nav-number">1.</span> <span class="nav-text">复习：三目运算符b?x:y</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中实现CSS过渡动画"><span class="nav-number">2.</span> <span class="nav-text">React中实现CSS过渡动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中使用CSS动画效果"><span class="nav-number">3.</span> <span class="nav-text">React中使用CSS动画效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用react-transition-group实现动画"><span class="nav-number">4.</span> <span class="nav-text">使用react-transition-group实现动画</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装react-transition-group模块"><span class="nav-number">4.1.</span> <span class="nav-text">安装react-transition-group模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习CSSTransition组件"><span class="nav-number">4.2.</span> <span class="nav-text">学习CSSTransition组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#in属性"><span class="nav-number">4.2.1.</span> <span class="nav-text">in属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#timeout属性"><span class="nav-number">4.2.2.</span> <span class="nav-text">timeout属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unmountOnExit属性"><span class="nav-number">4.2.3.</span> <span class="nav-text">unmountOnExit属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS钩子"><span class="nav-number">4.2.4.</span> <span class="nav-text">JS钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#onEnter、onEntering、onEntered"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">onEnter、onEntering、onEntered</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#onExit、onExiting、onExiting"><span class="nav-number">4.2.4.2.</span> <span class="nav-text">onExit、onExiting、onExiting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动挂载的样式-classNames"><span class="nav-number">4.2.5.</span> <span class="nav-text">自动挂载的样式(classNames)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#入场动画相关的样式"><span class="nav-number">4.2.5.1.</span> <span class="nav-text">入场动画相关的样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出场动画相关的样式"><span class="nav-number">4.2.5.2.</span> <span class="nav-text">出场动画相关的样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刷新页面执行的动画相关样式"><span class="nav-number">4.2.5.3.</span> <span class="nav-text">刷新页面执行的动画相关样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSSTransition例子"><span class="nav-number">4.2.6.</span> <span class="nav-text">CSSTransition例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用unmountOnExit属性"><span class="nav-number">4.2.6.1.</span> <span class="nav-text">使用unmountOnExit属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JS钩子onEntered"><span class="nav-number">4.2.6.2.</span> <span class="nav-text">使用JS钩子onEntered</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appear属性与对应的样式"><span class="nav-number">4.2.6.3.</span> <span class="nav-text">appear属性与对应的样式</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

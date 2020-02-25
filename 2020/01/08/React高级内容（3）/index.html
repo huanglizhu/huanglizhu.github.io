@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React 高级内容（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="render函数必须存在所有的生命周期函数都可以没有，但render函数必须存在，否则报错。原因：组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。所以我们的render函数是必须自己定义的。">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 高级内容（3）">
+<meta property="og:url" content="http://yoursite.com/2020/01/08/React高级内容（3）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="render函数必须存在所有的生命周期函数都可以没有，但render函数必须存在，否则报错。原因：组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。所以我们的render函数是必须自己定义的。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi0sdt37j31hc0h10ua.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi2dbcgjj31hc0c7t9p.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi8n51ghj314v0aawg2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmive13s8j30h50aedg5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmjwks81cj31310o07bv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmkdu4mfpj30ok09smxi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmkg5j4qdj31hc0jkacp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpu7zyacj30pl0hdwfu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmptioxllj30zs0nrn59.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpwwjwpaj30ls0e00ti.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpxctqedj30lh07maah.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpykg5swj30pf0gata9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqn0eyaqj319e0dyq4z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqpscidxj30de00ymx4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqwjoubgj30xh053dg2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmr94s863j30zt0dbdjs.jpg">
+<meta property="og:updated_time" content="2020-02-25T14:03:07.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 高级内容（3）">
+<meta name="twitter:description" content="render函数必须存在所有的生命周期函数都可以没有，但render函数必须存在，否则报错。原因：组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。所以我们的render函数是必须自己定义的。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi0sdt37j31hc0h10ua.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React高级内容（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React 高级内容（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/08/React高级内容（3）/" class="article-date">
+	  <time datetime="2020-01-08T08:27:03.000Z" itemprop="datePublished">一月 8, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="render函数必须存在"><a href="#render函数必须存在" class="headerlink" title="render函数必须存在"></a>render函数必须存在</h1><p><strong>所有的生命周期函数都可以没有，但render函数必须存在，否则报错。</strong><br><strong>原因：</strong><br>组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。<br>所以我们的render函数是必须自己定义的。</p>
+<a id="more"></a>
+
+<h1 id="React生命周期函数的使用场景"><a href="#React生命周期函数的使用场景" class="headerlink" title="React生命周期函数的使用场景"></a>React生命周期函数的使用场景</h1><p>在<a href="http://localhost:3000/中**设置" target="_blank" rel="noopener">http://localhost:3000/中**设置</a> highlight<strong>，那么页面上被 重新渲染的 组件 就会被框起来：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi0sdt37j31hc0h10ua.jpg" alt="highlight"><br>可以发现</strong>输入input框时<strong>不仅父组件被渲染，</strong>子组件也被渲染**：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi2dbcgjj31hc0c7t9p.jpg" alt="子组件也被渲染"></p>
+<h2 id="利用它做性能优化"><a href="#利用它做性能优化" class="headerlink" title="利用它做性能优化"></a>利用它做性能优化</h2><h3 id="需优化原因"><a href="#需优化原因" class="headerlink" title="需优化原因"></a>需优化原因</h3><p><strong>需优化原因：父组件数据更新 子组件render也被执行</strong></p>
+<h3 id="例子：子组件TodoItem"><a href="#例子：子组件TodoItem" class="headerlink" title="例子：子组件TodoItem"></a>例子：子组件TodoItem</h3><p>在子组件TodoItem的render函数中加一个打印语句：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"child render"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>提交11时第一次执行Todoltem的render函数,<strong>在父组件的输入框中输入9个数字时</strong>不仅执行父组件的render函数9次，<strong>还执行了子组件Todoltem的render函数9次</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmi8n51ghj314v0aawg2.jpg" alt="结果"></p>
+<p>这就是我们之前讲的“<strong>当父组件的render函数被运行时，它的子组件的render都将被重新运行一次</strong>”。<br><strong>可实际上并不需要执行子组件的render，所以我们可以使用生命周期函数来做性能优化。</strong></p>
+<h4 id="使用shouldComponentUpdate"><a href="#使用shouldComponentUpdate" class="headerlink" title="使用shouldComponentUpdate"></a>使用shouldComponentUpdate</h4><p><strong>注意： shouldComponentUpdate 应该需要自带两个参数(nextProps, nextState)，他们代表即将更新的两个数据。</strong></p>
+<p>在上一篇笔记 <a href="https://huanglizhu.github.io/2020/02/05/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-的-生命周期函数" target="_blank" rel="noopener">React高级内容（2）</a> 的“React的生命周期函数”中我们提到过，<strong>不管state还是props更新都要先通过shouldComponentUpdate来判断是否需要更新。</strong></p>
+<p>在子组件TodoItem中<strong>使用 shouldComponentUpdate 做性能优化，避免content无变化时被父组件更新带动执行子组件render</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nextProps.content !== <span class="keyword">this</span>.props.content) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到子组件的render仅在提交1时执行了一次，后面父组件的10次改动都并未执行子组件的render：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmive13s8j30h50aedg5.jpg" alt="优化后"></p>
+<p><strong>总结：我们使用 shouldComponentUpdate 函数减少了虚拟DOM的比对，实现了性能优化。</strong></p>
+<hr>
+<h2 id="发生-AJAX请求-列表数据"><a href="#发生-AJAX请求-列表数据" class="headerlink" title="发生 AJAX请求 列表数据"></a>发生 AJAX请求 列表数据</h2><p>如果我们希望<strong>通过AJAX请求得到输入框下面的 列表数据</strong> ，我们需要明确：<br>首先，不能把AJAX请求放在render函数中，因为数据更新时render会被再次执行。<br>所以我们需要放在组件中一个 <strong>只会被执行一次的函数</strong> 中，那么我们可以<strong>在父组件中添加 componentDidMount 函数，在页面渲染好（render函数执行后）触发 AJAX请求。</strong></p>
+<h3 id="使用componentDidMount函数"><a href="#使用componentDidMount函数" class="headerlink" title="使用componentDidMount函数"></a>使用componentDidMount函数</h3><h4 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h4><ol>
+<li>我们需要放在组件中一个 <strong>只会被执行一次的函数</strong> 中。</li>
+<li>componentWillMount函数 也只执行一次，但是到了react native或者更深的时候放在componentWillMount函数中就会报错，所以我们默认将AJAX请求 放在 componentDidMount里。</li>
+<li>虽然constructor构造函数也只执行一次，但还是建议将AJAX请求 放在 componentDidMount里。</li>
+</ol>
+<h4 id="例子：TodoList中发送AJAX请求"><a href="#例子：TodoList中发送AJAX请求" class="headerlink" title="例子：TodoList中发送AJAX请求"></a>例子：TodoList中发送AJAX请求</h4><h5 id="借助axios模块"><a href="#借助axios模块" class="headerlink" title="借助axios模块"></a>借助axios模块</h5><p>React并不像jquery那样封装了AJAX发送的内置功能，所以我们需要借助 第三方模块axios。</p>
+<p><strong>安装第三方模块axios</strong>：<br>在程序终端输入<code>yarn add axios</code>,加载完成后输入<code>npm start</code>重启服务器:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmjwks81cj31310o07bv.jpg" alt="安装第三方模块axios"></p>
+<p>在父组件TodoList中<strong>引用axios</strong>：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过axios发送AJAX请求获取接口内容</strong>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> render执行后发生AJAX请求</span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 通过axios发送AJAX请求获取接口内容</span><br><span class="line">  axios.get(<span class="string">"/api/todolist"</span>)</span><br><span class="line">    <span class="regexp">//</span> 请求成功则执行<span class="keyword">then</span>，失败执行<span class="keyword">catch</span></span><br><span class="line">    .<span class="keyword">then</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123; alert(<span class="string">"成功"</span>); &#125;)</span><br><span class="line">    .<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123; alert(<span class="string">'失败'</span>); &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（<strong>AJAX</strong>是用JavaScript执行<strong>异步网络请求</strong>。<strong>Promise实例</strong> 里面保存着某个未来才会结束的事件（通常是一个<strong>异步操作）的结果</strong>，Promise实例拥有then()和catch()。）</p>
+<p>当然并<strong>没有这个接口</strong>，所以最后会显示：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmkdu4mfpj30ok09smxi.jpg" alt="请求失败"></p>
+<p>但是我们<strong>点开network可以发现确实发送了一个 <a href="http://localhost:3000/api/todolist" target="_blank" rel="noopener">http://localhost:3000/api/todolist</a> 的请求</strong>，只不过404了：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmkg5j4qdj31hc0jkacp.jpg" alt="network"></p>
+<hr>
+<h1 id="回顾学过的性能优化（面试）"><a href="#回顾学过的性能优化（面试）" class="headerlink" title="回顾学过的性能优化（面试）"></a>回顾学过的性能优化（面试）</h1><ol>
+<li><strong>在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定</strong>，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。（后面会细讲）</li>
+<li>React的底层内置的<strong>setState是异步</strong>的，可以<strong>把多次的数据改变结合成一次来做，降低了 虚拟DOM 的比对频率</strong>。</li>
+<li>React的底层用了<strong>虚拟DOM的概念，替代了之前的 真实的DOM（JS对象）</strong>。</li>
+<li>React的 <strong>diff算法： 同层比对、key值</strong>的运用 来<strong>提升 虚拟DOM 比对的速度</strong>。</li>
+<li>借助<strong>生命周期函数shouldComponentUpdate</strong>来提高组件性能，<strong>避免不必要的子组件render函数的渲染更新</strong>。</li>
+</ol>
+<hr>
+<h1 id="使用Charles实现本地接口数据mock"><a href="#使用Charles实现本地接口数据mock" class="headerlink" title="使用Charles实现本地接口数据mock"></a>使用Charles实现本地接口数据mock</h1><p>在上面我们调用接口获取数据时因为接口不存在所以爆出404，但是<strong>前端开发和后端是分离的</strong>，所以我们就需要在没有接口的情况下 <strong>使用 Charles 进行接口数据模拟</strong> 。</p>
+<p><strong>Charles</strong> 是一个<strong>抓包工具</strong>，他可以<strong>抓住我们的浏览器向外发送的请求并进行处理</strong>。</p>
+<p><strong>工作原理</strong>：<br>我们可以在tools里的map local中进行设置，Charles抓取到“map from”中的地址请求就会返回“map to”中选择的文件的数据。<br>Charles就是一个中间代理服务器。</p>
+<p><strong>比如</strong>：他看到我们请求的接口地址是“<a href="http://http://localhost.charlesproxy.com:3000/api/todolist”，那么通过Charles我们可以设置" target="_blank" rel="noopener">http://http://localhost.charlesproxy.com:3000/api/todolist”，那么通过Charles我们可以设置</a> 当接收这个地址的请求时就返回我们桌面的<code>todolist.json</code>文件内的数据，这也就起到了接口模拟数据的作用。</p>
+<h2 id="下载安装-Charles"><a href="#下载安装-Charles" class="headerlink" title="下载安装 Charles"></a>下载安装 Charles</h2><ul>
+<li><strong>下载地址</strong>：<a href="https://www.charlesproxy.com/latest-release/download.do" target="_blank" rel="noopener">https://www.charlesproxy.com/latest-release/download.do</a></li>
+<li><strong>安装</strong>：一路next，然后选择路径。</li>
+<li><strong>破解</strong>：<a href="https://www.zzzmode.com/mytools/charles/（替换本地lib中的jar包）" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/（替换本地lib中的jar包）</a></li>
+<li><strong>重启</strong>，就不会显示需要破解的相关信息了</li>
+</ul>
+<h2 id="Charles代理Chrome"><a href="#Charles代理Chrome" class="headerlink" title="Charles代理Chrome"></a>Charles代理Chrome</h2><p><strong>Charles在Windows下，默认只代理IE浏览器，对 Chrome 需要设置后才能抓包。</strong><br><a href="https://www.switchysharp.com/install.html" target="_blank" rel="noopener">SwitchySharp工具下载地址</a><br><a href="https://jingyan.baidu.com/article/1709ad805d6a4a4634c4f0b4.html" target="_blank" rel="noopener">Chrome设置教程</a></p>
+<hr>
+<h2 id="Charles抓localhost的包"><a href="#Charles抓localhost的包" class="headerlink" title="Charles抓localhost的包"></a>Charles抓localhost的包</h2><p>弄好之后可以发现确实可以抓取chrome的包，但并不能抓取localhost的包，<br>Charles官方对不能捕获localhost本地网页的说明，以及解决方法。全文大致意思如下：</p>
+<blockquote>
+</blockquote>
+<p>Localhost流量不会出现在Charles中<br>某些系统被硬编码为不使用代理进行本地主机流量，因此当您连接到http：// localhost /时，它不会显示在Charles中。<br>解决方法是连接到<a href="http://localhost.charlesproxy.com/。这指向IP地址127.0.0.1，因此它应该与localhost完全相同，但它的优势在于它将通过Charles。无论Charles是在跑还是你在使用Charles，这都会有效。如果您使用其他端口，例如8080，只需像往常一样添加它，例如localhost.charlesproxy.com:8080。" target="_blank" rel="noopener">http://localhost.charlesproxy.com/。这指向IP地址127.0.0.1，因此它应该与localhost完全相同，但它的优势在于它将通过Charles。无论Charles是在跑还是你在使用Charles，这都会有效。如果您使用其他端口，例如8080，只需像往常一样添加它，例如localhost.charlesproxy.com:8080。</a><br>您还可以在该域前放置任何内容，例如myapp.localhost.charlesproxy.com，它也将始终解析为127.0.0.1。<br>或者，您可以尝试添加<code>.</code>在localhost之后，或用本机名称替换localhost，或使用本地链接IP地址（例如192.168.1.2）。<br>如果Charles正在运行并且您使用Charles作为代理，那么您也可以使用local.charles作为localhost的替代方案。请注意，这仅在您使用Charles作为代理时才有效，因此上述方法是首选方法，除非您特别希望请求在不使用Charles时失败。</p>
+<p><strong>解决方法</strong>：<br>原本的网址：<code>http://localhost:3000/</code><br>现在换成：<code>http://localhost.charlesproxy.com:3000/</code><br><strong>成功抓包</strong>（例子可看下方）</p>
+<hr>
+<h2 id="例子（TodoList）"><a href="#例子（TodoList）" class="headerlink" title="例子（TodoList）"></a>例子（TodoList）</h2><p><strong>需要实现的功能：在TodoList中发送的AJAX请求（接口）获取到桌面上<code>todolist.json</code>文件内的内容并显示在输入框下作为默认的无序列表。</strong></p>
+<h3 id="获取到todolist-json内数据"><a href="#获取到todolist-json内数据" class="headerlink" title="获取到todolist.json内数据"></a>获取到<code>todolist.json</code>内数据</h3><p>桌面右键新建文件<code>todolist.json</code>并放入数据（这就是<strong>接口的模拟数据</strong>）:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"你好呀"</span>,<span class="string">"你叫什么名字？"</span>,<span class="string">"我是胡萝卜"</span>]</span><br></pre></td></tr></table></figure>
+
+<p>在<a href="http://localhost.charlesproxy.com:3000/中我们可以看到**AJAX请求的接口地址**：" target="_blank" rel="noopener">http://localhost.charlesproxy.com:3000/中我们可以看到**AJAX请求的接口地址**：</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpu7zyacj30pl0hdwfu.jpg" alt="接口地址"></p>
+<p><strong>希望在 <code>TodoList.js</code>组件中发送AJAX请求时将桌面上的<code>todolist.json</code>文件内的数据返回过来，则需要借助 <code>Charles</code> 进行设置。</strong><br><strong>打开 Charles</strong>,进行设置，抓取到请求的接口地址是“<a href="http://localhost.charlesproxy.com:3000/api/todolist”时就返回`todolist.json`文件的数据：" target="_blank" rel="noopener">http://localhost.charlesproxy.com:3000/api/todolist”时就返回`todolist.json`文件的数据：</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmptioxllj30zs0nrn59.jpg" alt="步骤1"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpwwjwpaj30ls0e00ti.jpg" alt="步骤2"></p>
+<p><strong>发送的AJAX请求 数据获取成功</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpxctqedj30lh07maah.jpg" alt="发送的AJAX请求 数据获取成功"></p>
+<p><strong>可以看到获取到的数据</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmpykg5swj30pf0gata9.jpg" alt="可以看到获取到的数据"></p>
+<hr>
+<h3 id="显示在页面上"><a href="#显示在页面上" class="headerlink" title="显示在页面上"></a>显示在页面上</h3><p>我们先<strong>修改TodoList.js的代码</strong>，打印看看成功<strong>接收到的数据res</strong>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 通过axios发送AJAX请求获取接口内容</span><br><span class="line">  axios.get(<span class="string">"/api/todolist"</span>)</span><br><span class="line">    <span class="regexp">//</span> 请求成功则执行<span class="keyword">then</span>，失败执行<span class="keyword">catch</span></span><br><span class="line">    .<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123; </span><br><span class="line">      <span class="built_in">console</span>.log(res);</span><br><span class="line">     &#125;)</span><br><span class="line">    .<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123; alert(<span class="string">'失败'</span>); &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以注意到res里面有一个 <strong>数组data</strong> 包含我们想要的数据：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqn0eyaqj319e0dyq4z.jpg" alt="接收到的数据res"></p>
+<p>修改then函数中的打印语句：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">console</span><span class="selector-class">.log</span>(<span class="selector-tag">res</span><span class="selector-class">.data</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到<strong>data就是我们想要显示在页面上的数据</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqpscidxj30de00ymx4.jpg" alt="data数组"></p>
+<p>我们知道，<strong>在React中，修改state数据页面就会重新渲染</strong>，而state中的列表是保存在<code>list: []</code>中的，所以我们可以<strong>使用setState改变state中的list数据使data数组成为无序列表显示在输入框下</strong>。<br><strong>复习：setState（）中最好传入一个函数作为参数，记得return</strong>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="regexp">//</span> 通过axios发送AJAX请求获取接口内容</span><br><span class="line">  axios.get(<span class="string">"/api/todolist"</span>)</span><br><span class="line">    <span class="regexp">//</span> 请求成功则执行<span class="keyword">then</span>，失败执行<span class="keyword">catch</span></span><br><span class="line">    .<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.setState(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          list: res.data</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123; alert(<span class="string">'获取失败'</span>); &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong>：todolist.json文件中的内容显示在输入框下面，并且可以实现点击删除，也可以提交新的数据<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmqwjoubgj30xh053dg2.jpg" alt="结果"></p>
+<p><strong>思路</strong>：<br>state中的list更新后， 父组件TodoList 就会重新执行 render函数 ，那么 render函数 中的 getTodoItem函数 也会被重新执行，在getTodoItem函数中会遍历list中的每一个数据并把他们依次传入 子组件TodoItem 中，在 子组件TodoItem 中每一项都会实现 点击删除 的功能，返回的子组件们就会在父组件的ul标签中形成无序列表。</p>
+<hr>
+<h3 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h3><p>当<strong>函数中返回的代码只有一句时，我们可以使用<code>()</code>包裹代码从而代替函数的<code>{}</code>return</strong>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbmr94s863j30zt0dbdjs.jpg" alt="优化代码1"><br>（相关原因可看笔记”<a href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#箭头函数" target="_blank" rel="noopener">函数相关知识点补充</a>“中的 箭头函数）</p>
+<p>我们之前把data放到list中<code>list: res.data</code>，但<strong>最好使用扩展运算符将其复制到list中： <code>list: [...res.data]</code></strong>，以免因为数据的改动产生不好的影响。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/08/React高级内容（2）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React 高级内容（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/07/React中的虚拟DOM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React中的虚拟DOM</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#render函数必须存在"><span class="nav-number">1.</span> <span class="nav-text">render函数必须存在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React生命周期函数的使用场景"><span class="nav-number">2.</span> <span class="nav-text">React生命周期函数的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用它做性能优化"><span class="nav-number">2.1.</span> <span class="nav-text">利用它做性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需优化原因"><span class="nav-number">2.1.1.</span> <span class="nav-text">需优化原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：子组件TodoItem"><span class="nav-number">2.1.2.</span> <span class="nav-text">例子：子组件TodoItem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shouldComponentUpdate"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">使用shouldComponentUpdate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发生-AJAX请求-列表数据"><span class="nav-number">2.2.</span> <span class="nav-text">发生 AJAX请求 列表数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用componentDidMount函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">使用componentDidMount函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">为什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：TodoList中发送AJAX请求"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">例子：TodoList中发送AJAX请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#借助axios模块"><span class="nav-number">2.2.1.2.1.</span> <span class="nav-text">借助axios模块</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回顾学过的性能优化（面试）"><span class="nav-number">3.</span> <span class="nav-text">回顾学过的性能优化（面试）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Charles实现本地接口数据mock"><span class="nav-number">4.</span> <span class="nav-text">使用Charles实现本地接口数据mock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装-Charles"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装 Charles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Charles代理Chrome"><span class="nav-number">4.2.</span> <span class="nav-text">Charles代理Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Charles抓localhost的包"><span class="nav-number">4.3.</span> <span class="nav-text">Charles抓localhost的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子（TodoList）"><span class="nav-number">4.4.</span> <span class="nav-text">例子（TodoList）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取到todolist-json内数据"><span class="nav-number">4.4.1.</span> <span class="nav-text">获取到todolist.json内数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示在页面上"><span class="nav-number">4.4.2.</span> <span class="nav-text">显示在页面上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化代码"><span class="nav-number">4.4.3.</span> <span class="nav-text">优化代码</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
