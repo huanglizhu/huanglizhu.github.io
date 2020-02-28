@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="Array 数组 数组中每一项都可以存放不同类型的数据，比如：第一个数是字符串，第二个数是数字，第三个数是布尔型。 数组大小可随着数据的添加自动增长。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-19T02:12:48.463Z">
+<meta property="og:updated_time" content="2020-02-27T08:13:05.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS对象之数组(1)">
 <meta name="twitter:description" content="Array 数组 数组中每一项都可以存放不同类型的数据，比如：第一个数是字符串，第二个数是数字，第三个数是布尔型。 数组大小可随着数据的添加自动增长。">
@@ -264,21 +264,19 @@
 </li>
 <li>功能:<br>用于对数组的元素进行<strong>排序</strong>(升序/降序),<strong>参数决定排序的顺序</strong>。</li>
 <li>返回值:数组.(<strong>注意，数组在原数组上进行排序，不生成副本。</strong>)</li>
-<li>说明:</li>
-</ul>
-<ol>
+<li>说明:<ol>
 <li>即使数组中的每一项都是数值,sort()方法比较的也是字符串.</li>
 <li>sort()方法可以接收一个<strong>比较函数</strong>作为参数.(该比较函数为含有两个参数的匿名函数)</li>
 </ol>
-<ul>
-<li><strong>原理</strong>：<br>如果调用该方法时<strong>没有使用参数</strong>，将按字母顺序对数组中的元素进行排序，说得更精确点，是<strong>按照字符编码的顺序进行排序</strong>。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。<br>如果想按照其他标准进行排序，就需要提供<strong>比较函数，该函数要比较两个值</strong>，然后返回一个用于说明这两个值的相对顺序的数字。<strong>比较函数应该具有两个参数 a 和 b，其返回值如下</strong>：  </li>
-</ul>
-<ol>
+</li>
+<li><strong>原理</strong>：<br>如果调用该方法时<strong>没有使用参数</strong>，将按字母顺序对数组中的元素进行排序，说得更精确点，是<strong>按照字符编码的顺序进行排序</strong>。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。<br>如果想按照其他标准进行排序，就需要提供<strong>比较函数，该函数要比较两个值</strong>，然后返回一个用于说明这两个值的相对顺序的数字。<strong>比较函数应该具有两个参数 a 和 b，其返回值如下</strong>：  <ol>
 <li>返回一个小于 0 的值，<strong>在排序后的数组中 a 应该出现在 b 之前</strong>。</li>
 <li>返回 0。</li>
 <li>返回一个大于 0 的值，<strong>在排序后的数组中 a 应该出现在 b 之后</strong>。</li>
 <li>注意：不管是b-a还是a-b还是别的计算式，我们只关注返回值来确定a在b的前面还是后面。</li>
 </ol>
+</li>
+</ul>
 <p><strong>例子</strong>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=[<span class="number">9</span>,<span class="number">23</span>,<span class="number">15</span>,<span class="number">-99</span>,<span class="number">88</span>,<span class="number">12</span>,<span class="number">-2</span>];</span><br><span class="line"><span class="comment">//降序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> b-a&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[88, 23, 15, 12, 9, -2, -99]</span></span><br><span class="line"><span class="comment">//升序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a-b&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[-99, -2, 9, 12, 15, 23, 88]</span></span><br></pre></td></tr></table></figure>
 

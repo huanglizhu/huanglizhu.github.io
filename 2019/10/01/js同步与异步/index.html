@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+  <meta name="description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。     总结 描述    私有作用域 函数执行都会形成一个私有作用域   全局作用域 页面一打开就会形成一个全局的作用域   私有变量 在私有作用域里边形成的变量 (通过 var 声明； 形参)   全局变量 在全局作用域形成的变量（var a">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中的同步与异步">
 <meta property="og:url" content="http://yoursite.com/2019/10/01/js同步与异步/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+<meta property="og:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。     总结 描述    私有作用域 函数执行都会形成一个私有作用域   全局作用域 页面一打开就会形成一个全局的作用域   私有变量 在私有作用域里边形成的变量 (通过 var 声明； 形参)   全局变量 在全局作用域形成的变量（var a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-04T11:29:58.971Z">
+<meta property="og:updated_time" content="2020-02-28T04:06:28.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中的同步与异步">
-<meta name="twitter:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。">
+<meta name="twitter:description" content="作用域 作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。     总结 描述    私有作用域 函数执行都会形成一个私有作用域   全局作用域 页面一打开就会形成一个全局的作用域   私有变量 在私有作用域里边形成的变量 (通过 var 声明； 形参)   全局变量 在全局作用域形成的变量（var a">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -162,9 +162,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><ul>
-<li>作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。<a id="more"></a>
-
-</li>
+<li>作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存。总的来说，作用域就是代码执行时开辟的栈内存。</li>
 </ul>
 <table>
 <thead>
@@ -251,7 +249,7 @@
 <h2 id="同步任务"><a href="#同步任务" class="headerlink" title="同步任务"></a>同步任务</h2><p><strong>同步任务是指在主线程上排队执行的任务</strong>，只有前一个任务执行完毕，才能继续执行下一个任务。<br>当我们打开网站时，网站的渲染过程，比如元素的渲染，其实就是一个同步任务。</p>
 <h2 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h2><p><strong>异步任务是指不进入主线程，而进入任务队列的任务，只有任务队列通知主线程，某个异步任务可以执行了，该任务才会进入主线程。</strong><br>当我们打开网站时，像图片的加载，音乐的加载，其实就是一个异步任务</p>
 <hr>
-<h1 id="js的异步机制"><a href="#js的异步机制" class="headerlink" title="js的异步机制"></a>js的异步机制</h1><ul>
+<h1 id="js的执行机制（事件循环）"><a href="#js的执行机制（事件循环）" class="headerlink" title="js的执行机制（事件循环）"></a>js的执行机制（事件循环）</h1><ul>
 <li>同步任务进入总线程，异步任务不会进入主线程，而是会先进入任务队列，任务队列其实是一个先进先出的数据结构，也是一个事件队列。</li>
 <li>比如说文件读取操作，因为这是一个异步任务，因此该任务会被添加到任务队列中，等到IO（输入输出）完成后，就会在<strong>任务队列中添加一个事件</strong>，表示<strong>异步任务准备好</strong>啦，<strong>可以进入执行栈</strong>啦~但是这时候呀，主线程不一定有空，当主线程处理完其它任务有空时，就会读取任务队列，读取里面有哪些事件，排在前面的事件会被优先进行处理，如果该任务指定了回调函数，那么主线程在处理该事件时，就会执行回调函数中的代码，也就是执行异步任务啦</li>
 <li>单线程从从任务队列中读取任务是不断循环的，每次栈被清空后，都会在任务队列中读取新的任务，如果没有任务，就会等，直到有新的任务，这就叫做<strong>任务循环</strong>，因为每个任务都是由一个事件触发的，因此也叫作<strong>事件循环</strong>。</li>
@@ -263,15 +261,34 @@
 <li>一旦<strong>执行栈</strong>中的所有同步任务<strong>执行完毕</strong>，系统就会<strong>读取任务队列</strong>，看看里面还有哪些事件，那些对应的异步任务，于是结束等待状态，<strong>（异步任务）进入执行栈</strong>，开始<strong>执行</strong></li>
 <li>主线程<strong>不断的重复</strong>上面的<strong>第三步</strong></li>
 </ol>
-<h1 id="js的异步编程"><a href="#js的异步编程" class="headerlink" title="js的异步编程"></a>js的异步编程</h1><h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><ul>
-<li><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023022332902400" target="_blank" rel="noopener">AJAX</a></li>
+<p><strong>注意</strong>：同步任务由JS引擎执行，异步任务挂起时由<strong>浏览器的引擎</strong>执行，直到<strong>有了结果才放入任务队列</strong>等待被执行。</p>
+<h2 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h2><ul>
+<li>所有同步任务和异步任务又会分为宏任务和微任务，所以异步任务中也分先后。</li>
+<li>可参考笔记<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#宏任务和微任务" target="_blank" rel="noopener">宏任务和微任务</a></li>
 </ul>
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><hr>
+<h1 id="js的异步编程"><a href="#js的异步编程" class="headerlink" title="js的异步编程"></a>js的异步编程</h1><h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>这是异步编程最基本的方法。</p>
 <ul>
-<li><a href="https://www.cnblogs.com/Yellow-ice/p/10433423.html" target="_blank" rel="noopener">js中的同步与异步</a></li>
-<li><a href="http://www.fly63.com/article/detial/1597" target="_blank" rel="noopener">理解 JavaScript 执行栈</a></li>
-<li><a href="https://www.jianshu.com/p/cc79f22b99fe" target="_blank" rel="noopener">作用域</a></li>
+<li>例：假定有两个函数f1和f2，后者等待前者的执行结果，如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。【此时f2是异步的，她耗费的时间并不影响同步任务的执行】<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f1"</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">f1(f2);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br><span class="line"><span class="comment">// start f1 end f2</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>可参考笔记<a href="https://huanglizhu.github.io/2019/12/06/ES6%20Promise%EF%BC%881%EF%BC%89/" target="_blank" rel="noopener">Promise1</a>、<a href="https://huanglizhu.github.io/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/" target="_blank" rel="noopener">Promise2</a>、<a href="https://huanglizhu.github.io/2019/12/08/ES6%20Promise%EF%BC%883%EF%BC%89/" target="_blank" rel="noopener">Promise3</a>.</p>
+<h2 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h2><p>任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+<ul>
+<li>例：为f1绑定一个事件，当f1发生done事件，就执行f2。</li>
+</ul>
+<h2 id="发布-订阅"><a href="#发布-订阅" class="headerlink" title="发布/订阅"></a>发布/订阅</h2><p>与”事件监听”类似。</p>
+<ul>
+<li>我们假定，存在一个”信号中心”，<strong>某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行</strong>。这就叫做”发布/订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）。</li>
+<li>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</li>
+</ul>
+<hr>
+<h1 id="前端使用异步的场景"><a href="#前端使用异步的场景" class="headerlink" title="前端使用异步的场景"></a>前端使用异步的场景</h1><ul>
+<li><strong>定时任务</strong>：setTimeout，setInverval(可参考<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/" target="_blank" rel="noopener">笔记“setTimeout()与setInterval()”</a>）</li>
+<li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载</li>
+<li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
+</ul>
+<hr>
 
       
     </div>
@@ -317,11 +334,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/10/02/综合课程问题1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/02/AJAX异步更新/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          外联样式表没有效果，但是内联正常的解决方法
+          AJAX异步更新
         
       </div>
     </a>
@@ -343,7 +360,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形参与实参"><span class="nav-number">3.</span> <span class="nav-text">形参与实参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">4.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS的同步与异步"><span class="nav-number">5.</span> <span class="nav-text">JS的同步与异步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会有同步和异步"><span class="nav-number">5.1.</span> <span class="nav-text">为什么会有同步和异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步任务"><span class="nav-number">5.2.</span> <span class="nav-text">同步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">5.3.</span> <span class="nav-text">异步任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步机制"><span class="nav-number">6.</span> <span class="nav-text">js的异步机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">7.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">7.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">7.2.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形参与实参"><span class="nav-number">3.</span> <span class="nav-text">形参与实参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行栈"><span class="nav-number">4.</span> <span class="nav-text">执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS的同步与异步"><span class="nav-number">5.</span> <span class="nav-text">JS的同步与异步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会有同步和异步"><span class="nav-number">5.1.</span> <span class="nav-text">为什么会有同步和异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步任务"><span class="nav-number">5.2.</span> <span class="nav-text">同步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">5.3.</span> <span class="nav-text">异步任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的执行机制（事件循环）"><span class="nav-number">6.</span> <span class="nav-text">js的执行机制（事件循环）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#宏任务和微任务"><span class="nav-number">6.1.</span> <span class="nav-text">宏任务和微任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js的异步编程"><span class="nav-number">7.</span> <span class="nav-text">js的异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">7.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">7.2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件监听"><span class="nav-number">7.3.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-订阅"><span class="nav-number">7.4.</span> <span class="nav-text">发布/订阅</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端使用异步的场景"><span class="nav-number">8.</span> <span class="nav-text">前端使用异步的场景</span></a></li></ol>
     
     </div>
   </aside>
