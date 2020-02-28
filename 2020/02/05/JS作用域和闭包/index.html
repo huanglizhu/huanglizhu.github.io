@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="题目 说一下对变量提升的理解 说明this的几种不同的使用场景 创建10个&amp;lt;a&amp;gt;标签，点击时弹出对应的序号 如何理解作用域 实际开发中闭包的应用">
+  <meta name="description" content="执行上下文 范围：一段&amp;lt;script&amp;gt;或者一个函数,一段&amp;lt;script&amp;gt;生成一个全局上下文，一个函数声明一个函数上下文。">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS作用域和闭包">
-<meta property="og:url" content="http://yoursite.com/2020/02/03/JS作用域和闭包/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/02/05/JS作用域和闭包/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="题目 说一下对变量提升的理解 说明this的几种不同的使用场景 创建10个&amp;lt;a&amp;gt;标签，点击时弹出对应的序号 如何理解作用域 实际开发中闭包的应用">
+<meta property="og:description" content="执行上下文 范围：一段&amp;lt;script&amp;gt;或者一个函数,一段&amp;lt;script&amp;gt;生成一个全局上下文，一个函数声明一个函数上下文。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
@@ -41,10 +41,11 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqjkil3k0j30ov0dgqf9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
-<meta property="og:updated_time" content="2020-02-27T03:18:34.776Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg">
+<meta property="og:updated_time" content="2020-02-28T13:53:41.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS作用域和闭包">
-<meta name="twitter:description" content="题目 说一下对变量提升的理解 说明this的几种不同的使用场景 创建10个&amp;lt;a&amp;gt;标签，点击时弹出对应的序号 如何理解作用域 实际开发中闭包的应用">
+<meta name="twitter:description" content="执行上下文 范围：一段&amp;lt;script&amp;gt;或者一个函数,一段&amp;lt;script&amp;gt;生成一个全局上下文，一个函数声明一个函数上下文。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -168,8 +169,8 @@
     
     <div class="article-meta">
       
-	<a href="/2020/02/03/JS作用域和闭包/" class="article-date">
-	  <time datetime="2020-02-03T14:00:08.000Z" itemprop="datePublished">二月 3, 2020</time>
+	<a href="/2020/02/05/JS作用域和闭包/" class="article-date">
+	  <time datetime="2020-02-05T14:00:08.000Z" itemprop="datePublished">二月 5, 2020</time>
 	</a>
 
       
@@ -184,18 +185,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
-<li>说一下对<strong>变量提升</strong>的理解</li>
-<li>说明<strong>this</strong>的几种不同的<strong>使用场景</strong></li>
-<li>创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号</li>
-<li>如何理解<strong>作用域</strong></li>
-<li>实际开发中<strong>闭包</strong>的应用<a id="more"></a>
-
-</li>
-</ul>
-<hr>
-<h1 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h1><ul>
-<li><strong>范围</strong>：一段<code>&lt;script&gt;</code>或者一个函数,一段<code>&lt;script&gt;</code>生成一个全局上下文，一个函数声明一个函数上下文。</li>
+        <h1 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h1><ul>
+<li><strong>范围</strong>：一段<code>&lt;script&gt;</code>或者一个函数,一段<code>&lt;script&gt;</code>生成一个全局上下文，一个函数声明一个函数上下文。<a id="more"></a></li>
 <li><strong>全局</strong>：在执行全局上下文之前会先将 <strong>变量定义、函数声明</strong>提升</li>
 <li><strong>函数</strong>：在函数<strong>执行之前</strong>（注意不是定义之前），会先将 <strong>变量定义、函数声明、<code>this</code>、<code>arguments</code>（所有参数的集合）</strong>提升</li>
 <li><strong>注意</strong>：“函数声明”<code>function fn（）{...}</code>和“函数表达式”<code>var fn =function(){...}</code>的区别。（“函数表达式”不会被提升）</li>
@@ -271,7 +262,7 @@
 <p><strong>坏处：</strong><br>由于闭包涉及跨域访问，所以会导致<strong>性能损失</strong>，我们可以通过把跨作用域变量存储在局部变量中，然后直接访问局部变量，来减轻对执行速度的影响</p>
 <p><strong>注意</strong>：<br>闭包不会造成内存泄漏（<a href="https://zhuanlan.zhihu.com/p/22486908" target="_blank" rel="noopener">参考1</a><a href="https://www.cnblogs.com/rubylouvre/p/3345294.html" target="_blank" rel="noopener">参考2</a>）：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssao9edoj30tf0eatb2.jpg" alt="知乎"></p>
 <hr>
-<h1 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h1><h2 id="说一下对变量提升的理解"><a href="#说一下对变量提升的理解" class="headerlink" title="说一下对变量提升的理解"></a>说一下对<strong>变量提升</strong>的理解</h2><p>【变量定义、函数声明（注意和函数表达式的区别）】</p>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="说一下对变量提升的理解"><a href="#说一下对变量提升的理解" class="headerlink" title="说一下对变量提升的理解"></a>说一下对<strong>变量提升</strong>的理解</h2><p>【变量定义、函数声明（注意和函数表达式的区别）】</p>
 <ul>
 <li>首先要明确，<strong>变量是声明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
 <li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
@@ -322,6 +313,23 @@
 <h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><p><strong>判断用户是不是第一次校验</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg" alt="实际应用1"><br><strong>好处</strong>：将存储用户id的 变量<code>_list</code> 封装起来,那么闭包外面就拿不到 变量<code>_list</code>，减少用户数据泄露的危险。</p>
 <p><strong>游戏中的作用</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg" alt="例子2"><br>假设我们在做一个游戏，在写其中关于「还剩几条命」的代码。如果不用闭包，你可以直接用一个全局变量：<code>window.lives = 30 // 还有三十条命</code><br>但这样看起来很不妥。万一不小心把这个值改成 <code>-1</code> 了怎么办。所以我们不能让别人「直接访问」这个变量。怎么办呢？<br><strong>用局部变量</strong>。<br>但是用局部变量别人又访问不到，怎么办呢？<br><strong>暴露一个访问器（函数），让别人可以「间接访问」生命值<code>lives</code></strong>。<br>使用闭包后，在其他的 JS 文件中就可以使用 <code>window.奖励一条命()</code> 来涨命，使用 <code>window.死一条命()</code> 来让角色掉一条命。</p>
 <hr>
+<h2 id="setTimeout-与let、闭包"><a href="#setTimeout-与let、闭包" class="headerlink" title="setTimeout()与let、闭包"></a>setTimeout()与let、闭包</h2><p>（其实和上面的“创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号”类似，事件绑定和setTimeout都是异步）</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="number">10</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(<span class="built_in">i</span>);</span><br><span class="line">  &#125;, <span class="built_in">i</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong>打印10个10<br><strong>原因：</strong><br>因为循环是同步的，setTimeout 是异步的，所以<strong>循环结束以后才会执行setTimeout</strong>。<br>而变量i是var命令声明的，在<strong>全局范围</strong>内都有效，所以全局只有一个变量i。所以<strong>每一次循环的i其实都是同一个</strong>，循环到最后时前面的i全部被最后的结果覆盖了。<br>所以最后10次打印的都是最后保存的i。</p>
+<p><strong>解决方法</strong>：<strong>局部变量</strong>的话就是每循环一次产生一个新的i，就不会被覆盖。所以我们可以通过<strong>闭包</strong>（也就是把循环的过程放到一个函数中封闭起来）</p>
+<blockquote>
+<p><a href="https://huanglizhu.github.io/2020/02/03/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#闭包" target="_blank" rel="noopener">闭包</a>：函数a内部定义一个函数b，函数b可以访问函数a的变量,函数b中的变量就是局部变量</p>
+</blockquote>
+<h3 id="如何让他输出自增队列"><a href="#如何让他输出自增队列" class="headerlink" title="如何让他输出自增队列"></a>如何让他输出自增队列</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg" alt="自增队列"></p>
+<p><strong>方法1：将var改为let</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (let <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="number">10</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">      setTimeout(() =&gt; &#123;</span><br><span class="line">        console.<span class="built_in">log</span>(<span class="built_in">i</span>);</span><br><span class="line">      &#125;, <span class="built_in">i</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>变量i是let声明的，<strong>当前的i只在本轮循环有效</strong>，所以<strong>每一次循环的i其实都是一个新的变量</strong>。</p>
+<p><strong>方法2：使用闭包(即局部变量)</strong></p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  ((<span class="name">j</span>) =&gt; &#123;</span><br><span class="line">    setTimeout(<span class="name">function</span> () &#123;</span><br><span class="line">      console.log(<span class="name">j</span>)//0-9</span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(<span class="name">i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明了10个自执行函数，保存当时的i值到内部。</strong><br>每一次循环都把<strong>i作为参数j（局部变量）保存在函数中</strong>，<strong>循环了10次函数就会产生10个局部变量j</strong>，最后每个函数中的setTimeout都对应不同的j值。</p>
 
       
     </div>
@@ -367,7 +375,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/02/03/JS基础知识面试题（1）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/05/JS基础知识面试题（1）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
@@ -377,9 +385,9 @@
     </a>
   
   
-    <a href="/2020/02/03/hexo deploy email address/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/04/JS原型和原型链/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">hexo deploy中报错：unable to auto-detect email address</div>
+      <div class="article-nav-title">JS原型和原型链</div>
     </a>
   
 </nav>
@@ -393,7 +401,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行上下文"><span class="nav-number">2.</span> <span class="nav-text">执行上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量、函数提升"><span class="nav-number">2.1.</span> <span class="nav-text">变量、函数提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">3.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于this指向window"><span class="nav-number">3.1.</span> <span class="nav-text">关于this指向window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this的使用场景"><span class="nav-number">3.2.</span> <span class="nav-text">this的使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">4.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自由变量-和-作用域链"><span class="nav-number">4.1.</span> <span class="nav-text">自由变量 和 作用域链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">5.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用闭包"><span class="nav-number">5.1.</span> <span class="nav-text">为什么使用闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的3个特性"><span class="nav-number">5.2.</span> <span class="nav-text">闭包的3个特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">5.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好处与坏处"><span class="nav-number">5.4.</span> <span class="nav-text">好处与坏处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目解答"><span class="nav-number">6.</span> <span class="nav-text">题目解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下对变量提升的理解"><span class="nav-number">6.1.</span> <span class="nav-text">说一下对变量提升的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明this的几种不同的使用场景"><span class="nav-number">6.2.</span> <span class="nav-text">说明this的几种不同的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建10个-lt-a-gt-标签，点击时弹出对应的序号"><span class="nav-number">6.3.</span> <span class="nav-text">创建10个&lt;a&gt;标签，点击时弹出对应的序号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误的例子"><span class="nav-number">6.3.1.</span> <span class="nav-text">错误的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正确示例"><span class="nav-number">6.3.2.</span> <span class="nav-text">正确示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何理解作用域"><span class="nav-number">6.4.</span> <span class="nav-text">如何理解作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际开发中闭包的应用"><span class="nav-number">6.5.</span> <span class="nav-text">实际开发中闭包的应用</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#执行上下文"><span class="nav-number">1.</span> <span class="nav-text">执行上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量、函数提升"><span class="nav-number">1.1.</span> <span class="nav-text">变量、函数提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">2.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于this指向window"><span class="nav-number">2.1.</span> <span class="nav-text">关于this指向window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this的使用场景"><span class="nav-number">2.2.</span> <span class="nav-text">this的使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">3.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自由变量-和-作用域链"><span class="nav-number">3.1.</span> <span class="nav-text">自由变量 和 作用域链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">4.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用闭包"><span class="nav-number">4.1.</span> <span class="nav-text">为什么使用闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的3个特性"><span class="nav-number">4.2.</span> <span class="nav-text">闭包的3个特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好处与坏处"><span class="nav-number">4.4.</span> <span class="nav-text">好处与坏处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关题目"><span class="nav-number">5.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下对变量提升的理解"><span class="nav-number">5.1.</span> <span class="nav-text">说一下对变量提升的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明this的几种不同的使用场景"><span class="nav-number">5.2.</span> <span class="nav-text">说明this的几种不同的使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建10个-lt-a-gt-标签，点击时弹出对应的序号"><span class="nav-number">5.3.</span> <span class="nav-text">创建10个&lt;a&gt;标签，点击时弹出对应的序号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误的例子"><span class="nav-number">5.3.1.</span> <span class="nav-text">错误的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正确示例"><span class="nav-number">5.3.2.</span> <span class="nav-text">正确示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何理解作用域"><span class="nav-number">5.4.</span> <span class="nav-text">如何理解作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际开发中闭包的应用"><span class="nav-number">5.5.</span> <span class="nav-text">实际开发中闭包的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-与let、闭包"><span class="nav-number">5.6.</span> <span class="nav-text">setTimeout()与let、闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让他输出自增队列"><span class="nav-number">5.6.1.</span> <span class="nav-text">如何让他输出自增队列</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
