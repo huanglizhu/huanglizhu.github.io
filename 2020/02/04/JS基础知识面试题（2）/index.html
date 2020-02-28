@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS基础知识面试题（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="异步与单线程同步和异步的区别，分别举例子 同步任务会阻塞代码执行，而异步不会 alert是同步，setTimeout是异步">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS基础知识面试题（2）">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/JS基础知识面试题（2）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="异步与单线程同步和异步的区别，分别举例子 同步任务会阻塞代码执行，而异步不会 alert是同步，setTimeout是异步">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcbyl1ftbhj30ez0az7aq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcatwzmi8vj30l805jgpg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcau50c3mpj30kk07xq8n.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcaz6vo3t7j30wu050td8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc4fkx371j30h80hgqbh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc4y368hgj30ul04x43n.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc5pz5qj1j31350d9dsf.jpg">
+<meta property="og:updated_time" content="2020-02-28T09:23:37.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS基础知识面试题（2）">
+<meta name="twitter:description" content="异步与单线程同步和异步的区别，分别举例子 同步任务会阻塞代码执行，而异步不会 alert是同步，setTimeout是异步">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcbyl1ftbhj30ez0az7aq.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS基础知识面试题（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS基础知识面试题（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/04/JS基础知识面试题（2）/" class="article-date">
+	  <time datetime="2020-02-04T09:19:47.000Z" itemprop="datePublished">二月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异步与单线程"><a href="#异步与单线程" class="headerlink" title="异步与单线程"></a>异步与单线程</h1><h2 id="同步和异步的区别，分别举例子"><a href="#同步和异步的区别，分别举例子" class="headerlink" title="同步和异步的区别，分别举例子"></a>同步和异步的区别，分别举例子</h2><ul>
+<li>同步任务会<strong>阻塞</strong>代码执行，而异步不会</li>
+<li>alert是同步，setTimeout是异步<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="关于setTimeout的笔试题"><a href="#关于setTimeout的笔试题" class="headerlink" title="关于setTimeout的笔试题"></a>关于setTimeout的笔试题</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcbyl1ftbhj30ez0az7aq.jpg" alt="题目"><br>连续打印1 3 5 2<br><strong>一秒后打印4</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 连续打印1 3 5 ，1秒后4 ，1秒后2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>所有的同步任务在主线程上执行，形成一个执行栈。<strong>异步任务有了 运行结果 才会在任务队列中放置一个事件</strong>。脚本运行时先依次运行执行栈中的所有同步任务，然后会从任务队列里提取事件，选择需要首先执行的异步任务然后执行。</p>
+<p><strong>4先有结果，所以4先出现在任务队列了</strong></p>
+<p><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#事件循环例子（面试题）" target="_blank" rel="noopener">补充一个微任务、宏任务的题目</a></p>
+<h2 id="前端使用异步的场景有哪些"><a href="#前端使用异步的场景有哪些" class="headerlink" title="前端使用异步的场景有哪些"></a>前端使用异步的场景有哪些</h2><ul>
+<li><strong>定时任务</strong>：setTimeout，setInverval(可参考<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/" target="_blank" rel="noopener">笔记“setTimeout()与setInterval()”</a>）</li>
+<li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载</li>
+<li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
+</ul>
+<h3 id="ajax请求的例子"><a href="#ajax请求的例子" class="headerlink" title="ajax请求的例子"></a>ajax请求的例子</h3><p>可参考<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/" target="_blank" rel="noopener">ajax请求完整笔记</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcatwzmi8vj30l805jgpg.jpg" alt="ajax请求代码示例"><br><strong>打印“start”、“end”,然后等<code>./data1.json</code>中的数据请求成功后执行函数-打印获取到的数据<code>data1</code>。</strong>（关于<code>$.get()</code>可参考<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#get-使用-AJAX-的-HTTP-GET-请求从服务器加载数据" target="_blank" rel="noopener">笔记</a>）</p>
+<h3 id="动态-lt-img-gt-加载的例子"><a href="#动态-lt-img-gt-加载的例子" class="headerlink" title="动态&lt;img&gt;加载的例子"></a>动态<code>&lt;img&gt;</code>加载的例子</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcau50c3mpj30kk07xq8n.jpg" alt="动态`&lt;img&gt;`加载的例子"><br>关于<code>createElement()</code>可以参考笔记<a href>“JS中修改/创建HTML DOM元素的方法”</a><br>关于<code>onload事件</code>可参考笔记<a href></a></p>
+<p><strong>执行顺序：</strong><br>1 <strong>打印“start”</strong><br>2 <strong>创建一个图片元素img</strong>（<a href="https://huanglizhu.github.io/2019/11/01/let%E4%B8%8Econst/#补充：createElement-方法" target="_blank" rel="noopener">可参考笔记</a>）<br>7 <strong>打印“end”</strong><br>6 <strong>给img的src赋值</strong>，src 属性值更新时浏览器会<strong>自动加载</strong>并显示出新图像。(<a href="https://huanglizhu.github.io/2019/09/04/HTML%20DOM%20Image%20%E5%AF%B9%E8%B1%A1/#src-属性（设置后自动获取并显示图片）" target="_blank" rel="noopener">可参考笔记</a>)<br>3-5 <strong>等img加载完成才会执行onload绑定的函数</strong>，打印<code>loaded</code>（<a href="https://huanglizhu.github.io/2020/01/09/JS_DOM%E4%BA%8B%E4%BB%B6/#onload-事件" target="_blank" rel="noopener">可参考笔记</a>）</p>
+<hr>
+<h3 id="事件绑定的例子"><a href="#事件绑定的例子" class="headerlink" title="事件绑定的例子"></a>事件绑定的例子</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcaz6vo3t7j30wu050td8.jpg" alt="事件绑定的例子"><br><a href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-添加事件句柄-click" target="_blank" rel="noopener">addEventListener()相关笔记</a><br>或者通过<code>object.onclick=function(){SomeJavaScriptCode};</code>绑定<code>onclick事件</code>也是一样的。</p>
+<hr>
+<h2 id="异步编程的方法"><a href="#异步编程的方法" class="headerlink" title="异步编程的方法"></a>异步编程的方法</h2><ul>
+<li><p><strong>回调函数</strong>，这是异步编程最基本的方法。</p>
+<ul>
+<li>例：假定有两个函数f1和f2，后者等待前者的执行结果，如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。【此时f2是异步的，她耗费的时间并不影响同步任务的执行】<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f1"</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">f1(f2);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br><span class="line"><span class="comment">// start f1 end f2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+<ul>
+<li>例：为f1绑定一个事件，当f1发生done事件，就执行f2。</li>
+</ul>
+</li>
+<li><p><strong>发布/订阅</strong>，与”事件监听”类似。</p>
+<ul>
+<li>我们假定，存在一个”信号中心”，<strong>某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行</strong>。这就叫做”发布/订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）。</li>
+<li>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</li>
+</ul>
+</li>
+<li><p><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。</p>
+<ul>
+<li>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</li>
+<li>例：f1的回调函数f2，f1().then(f2);</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><p>可参考笔记<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的执行步骤（事件循环）" target="_blank" rel="noopener">从输入url到页面显示都经历了什么</a><br><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</p>
+<hr>
+<h1 id="Date、Math、数组API、对象API"><a href="#Date、Math、数组API、对象API" class="headerlink" title="Date、Math、数组API、对象API"></a>Date、Math、数组API、对象API</h1><p>Date、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
+<h2 id="获取2017-06-10格式的日期"><a href="#获取2017-06-10格式的日期" class="headerlink" title="获取2017-06-10格式的日期"></a>获取2017-06-10格式的日期</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc4fkx371j30h80hgqbh.jpg" alt="获取2017-06-10格式的日期"></p>
+<ul>
+<li>1-18 函数 formatDate <strong>接受一个Date对象，返回一个格式化后的日期</strong><ul>
+<li>2-4 为防止报错，如果没有传入参数，就新建一个Date对象作为参数dt</li>
+<li>5 <code>getFullYear()</code>getFullYear()<code>获取年份</code>获取年份</li>
+<li>6 <code>getMonth()</code>获取月份，由于<strong>获取到的是0-11</strong>，所以需要+1</li>
+<li>7 <code>getDate()</code>获取日期</li>
+<li>8-15 由于我们<strong>需要格式化的日期是两位数</strong>的，所以当<code>month&lt;10</code>的时候我们需要在前面添加0。日期也是同理。<ul>
+<li>这里涉及到之前讲的<strong>字符串拼接</strong>，字符串<code>&quot;0&quot;</code>和数字month拼接后相当于<strong><a href="https://huanglizhu.github.io/2020/02/01/JS%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97/#变量计算-强制类型转换" target="_blank" rel="noopener">强制类型转换</a></strong>，month将成为字符串。</li>
+</ul>
+</li>
+<li>17 通过<code>-</code>连接，将<strong>数字拼接字符串 得到 字符串</strong></li>
+</ul>
+</li>
+<li>19 新建一个Date对象dt</li>
+<li>20 将dt传入函数formatDate，得到格式化后的日期formatDate</li>
+<li>21 打印格式化后的日期formatDate</li>
+</ul>
+<hr>
+<h2 id="获取长度一致的字符串随机数"><a href="#获取长度一致的字符串随机数" class="headerlink" title="获取长度一致的字符串随机数"></a>获取长度一致的字符串随机数</h2><p><strong>题目：获取随机数，要求是长度一致的字符串格式</strong></p>
+<p><strong>注意：字符串也有slice()，和数组的slice()类似，用于截取字符串</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc4y368hgj30ul04x43n.jpg" alt="获取长度一致的字符串格式的随机数"><br>1 获取随机数random，小数部分长度不确定<br>2 <strong>随机数后加上10个0</strong>，保证截取的时候有10位（<strong>保证不报错</strong>）。数字拼接字符串后等于<strong>强制类型转换，random 变为字符串</strong><br>3 使用字符串的<strong>slice()截取random的前10位</strong>（注意：10不在截取范围）</p>
+<hr>
+<h2 id="遍历对象和数组的通用forEach函数"><a href="#遍历对象和数组的通用forEach函数" class="headerlink" title="遍历对象和数组的通用forEach函数"></a>遍历对象和数组的通用forEach函数</h2><p><strong>题目：写一个能遍历对象和数组的通用forEach函数</strong><br>（jquery中有现成的方法,<a href="https://huanglizhu.github.io/2019/08/11/JS对象之数组（2）/#forEach-遍历数组的每个元素" target="_blank" rel="noopener">数组本身就有forEach()</a>）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc5pz5qj1j31350d9dsf.jpg" alt="能遍历对象和数组的通用forEach函数"></p>
+<ul>
+<li>1-14 <strong>定义forEach函数</strong><ul>
+<li><strong>参数1</strong>：对象/数组。<strong>参数2</strong>：函数。</li>
+<li><strong>注意：我们这里定义的forEach函数的index和item的顺序和<a href="https://huanglizhu.github.io/2019/08/11/JS对象之数组（2）/#forEach-遍历数组的每个元素" target="_blank" rel="noopener">数组自己的forEach()</a>是反的</strong></li>
+<li>3-7 判断传入的是对象/数组，<strong>如果是数组</strong>，就<strong>用<a href="(https://huanglizhu.github.io/2019/08/11/JS对象之数组（2）/#forEach-遍历数组的每个元素)">数组自己的forEach()</a></strong>，遍历数组后<strong>将index和item传入 参数2（fn函数）</strong>，通过fn函数将index与item的位置调换一下后<strong>打印</strong>。</li>
+<li>8-13 <strong>如果是对象</strong>，就通过<code>for in</code>遍历对象属性，并将 属性名称<code>key</code> 和 属性值<code>obj[key]</code>传给 参数2（fn函数），被调用后会被打印。<ul>
+<li>注意：<a href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#补充：in运算符" target="_blank" rel="noopener">in运算符</a>在 数组 中是判断有无 数组下标 的，不是数组元素。在 对象 中判断有无 属性。返回值是boolean。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>15 定义一个数组arr</li>
+<li>17-19 调用我们定义的forEach函数，传入<strong>参数1为数组arr</strong>，参数2为一个函数，该函数接收两个参数并打印他们。<ul>
+<li><strong>注意：这里的index和item的顺序和<a href="https://huanglizhu.github.io/2019/08/11/JS对象之数组（2）/#forEach-遍历数组的每个元素" target="_blank" rel="noopener">数组的forEach()</a>是反的，主要是为了照顾后面对象的<code>key</code>、<code>value</code></strong></li>
+</ul>
+</li>
+<li>21 定义一个对象obj</li>
+<li>22-24 让对象obj调用我们定义的forEach函数<ul>
+<li>key：属性名称。value：属性值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/04/JS异步与单线程、Date、Math/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS异步与单线程、Date、Math</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异步与单线程"><span class="nav-number">1.</span> <span class="nav-text">异步与单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步和异步的区别，分别举例子"><span class="nav-number">1.1.</span> <span class="nav-text">同步和异步的区别，分别举例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于setTimeout的笔试题"><span class="nav-number">1.2.</span> <span class="nav-text">关于setTimeout的笔试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端使用异步的场景有哪些"><span class="nav-number">1.3.</span> <span class="nav-text">前端使用异步的场景有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax请求的例子"><span class="nav-number">1.3.1.</span> <span class="nav-text">ajax请求的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态-lt-img-gt-加载的例子"><span class="nav-number">1.3.2.</span> <span class="nav-text">动态&lt;img&gt;加载的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件绑定的例子"><span class="nav-number">1.3.3.</span> <span class="nav-text">事件绑定的例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步编程的方法"><span class="nav-number">1.4.</span> <span class="nav-text">异步编程的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环（JS的执行机制）"><span class="nav-number">1.5.</span> <span class="nav-text">事件循环（JS的执行机制）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date、Math、数组API、对象API"><span class="nav-number">2.</span> <span class="nav-text">Date、Math、数组API、对象API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取2017-06-10格式的日期"><span class="nav-number">2.1.</span> <span class="nav-text">获取2017-06-10格式的日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取长度一致的字符串随机数"><span class="nav-number">2.2.</span> <span class="nav-text">获取长度一致的字符串随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历对象和数组的通用forEach函数"><span class="nav-number">2.3.</span> <span class="nav-text">遍历对象和数组的通用forEach函数</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
