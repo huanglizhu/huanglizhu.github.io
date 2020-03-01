@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby2pdvwxgj30q10ksgzd.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby2xhr8g2j30r70i0ws2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby5qy35hpj30ur0k9wv6.jpg">
-<meta property="og:updated_time" content="2020-02-17T08:52:19.347Z">
+<meta property="og:updated_time" content="2020-03-01T04:42:53.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 Promise（1）">
 <meta name="twitter:description" content="复习：同步与异步  同步任务会阻塞程序执行（alert、for、…） 异步任务不会阻塞程序执行（setTimeout、fs.readFile、…） 可参考笔记[异步和单线程]中的例子来帮助理解。">
@@ -212,27 +212,38 @@
 <ul>
 <li><code>resolve()</code>或<code>reject()</code>总是<strong>晚于本轮循环的同步任务</strong>。</li>
 <li><code>resolve()</code>使<code>Promise</code>对象的状态从 <code>pending</code> 变为 <code>resolved</code>。而<code>reject()</code>使<code>Promise</code>对象的状态从 <code>pending</code> 变为 <code>rejected</code>。<strong>状态一旦改变就不可逆转</strong>。</li>
-<li>可以<strong>通过<code>resolve()</code>或<code>reject()</code>传参给<code>then()</code>或<code>catch（）</code></strong>。</li>
-<li>一般来说，<strong>调用<code>resolve</code>或<code>reject</code>以后</strong>，Promise 的使命就完成了，<strong>后继操作应该放到<code>then</code>或<code>catch</code>方法里面</strong>，而不应该直接写在<code>resolve</code>或<code>reject</code>的后面。所以，最好在<code>resolve</code>或<code>reject</code>前面加上return语句，这样函数就结束了，后面语句自然也就不会执行了（<code>return resolve();</code>）。</li>
+<li>可以<strong>通过<code>resolve()</code>或<code>reject()</code>传参给<code>then()</code>或<code>catch（）</code></strong>。<ul>
+<li>（异步操作放在Promise的参数函数中）</li>
+<li>当Promise的参数函数中保存的异步操作<strong>成功</strong>，则可以调用<strong>resolve()</strong>将获取到的数据通过<strong>参数</strong>传递给<strong>then()的第一个参数函数</strong>。</li>
+<li>如果异步操作<strong>失败</strong>，则可以调用<strong>reject()</strong>将错误信息通过<strong>参数</strong>传递给<strong>then()的第二个参数函数/catch()的参数函数</strong>。</li>
+</ul>
+</li>
+<li>一般来说，<strong>调用<code>resolve</code>或<code>reject</code>以后</strong>，Promise 的使命就完成了，<strong>后继操作应该放到<code>then</code>或<code>catch</code>方法里面</strong>，而不应该直接写在<code>resolve</code>或<code>reject</code>的后面。所以，最好<strong>在<code>resolve</code>或<code>reject</code>前面加上return语句，这样函数就结束了</strong>，后面语句自然也就不会执行了（<code>return resolve();</code>）。</li>
 </ul>
 <hr>
 <h4 id="帮助理解resolve-和reject"><a href="#帮助理解resolve-和reject" class="headerlink" title="帮助理解resolve()和reject()"></a>帮助理解<code>resolve()</code>和<code>reject()</code></h4><ul>
 <li>调用<code>resolve()</code>或<code>reject()</code><strong>并不会终结 Promise 的参数函数的执行</strong>。</li>
-<li>但是<strong>调用<code>resolve()</code></strong>时会将 <strong>Promise 对象的状态</strong>会从“未完成”变为“成功”（即<strong>从 <code>pending</code> 变为 <code>resolved</code></strong>），那么<strong><code>then()</code>方法的第一参数（函数）就会执行</strong>。</li>
-<li>而<strong>调用<code>reject()</code></strong>时会将<strong><code>Promise</code>对象的状态</strong>从“未完成”变为“失败”（即<strong>从 <code>pending</code> 变为 <code>rejected</code></strong>），那么<strong><code>then()</code>方法的第二参数（函数）或者<code>catch()</code>就会执行</strong>。</li>
+<li>但是<strong>调用<code>resolve()</code></strong>时会将 <strong>Promise 对象的状态（即Promise的参数函数中的异步操作）</strong>会从“未完成”变为“成功”（即<strong>从 <code>pending</code> 变为 <code>resolved</code></strong>），那么<strong><code>then()</code>方法的第一参数（函数）就会执行</strong>。<ul>
+<li>调用<code>resolve()</code>时可将异步操作获取到的数据通过<strong>传参</strong>给<code>then()</code>方法的第一参数函数。</li>
+</ul>
+</li>
+<li>而<strong>调用<code>reject()</code></strong>时会将<strong><code>Promise</code>对象的状态</strong>从“未完成”变为“失败”（即<strong>从 <code>pending</code> 变为 <code>rejected</code></strong>），那么<strong><code>then()</code>方法的第二参数（函数）或者<code>catch()</code>就会执行</strong>。<ul>
+<li>调用<strong>reject()</strong>将错误信息通过<strong>参数</strong>传递给<strong>then()的第二个参数函数/catch()的参数函数</strong>。</li>
+</ul>
+</li>
 <li>也就是说，调用<code>resolve()</code>或<code>reject()</code>不会终结 Promise 的参数函数的执行,但它可以告诉我们接下来运行<code>then()</code>还是<code>catch()</code>，所以为了防止<code>resolve()</code>或<code>reject()</code>后面的函数还继续执行，<strong>最好在<code>resolve</code>或<code>reject</code>前面加上return语句，这样函数就结束了，后面语句自然也就不会执行了（<code>return resolve();</code>）</strong>。</li>
 </ul>
 <p><strong><code>resolve</code>函数</strong>：</p>
 <ol>
 <li>在<strong>异步操作成功时调用</strong>，并<strong>将 异步操作的结果 作为 参数 传递出去</strong>。</li>
 <li><strong>作用</strong>：是将<strong>Promise对象的状态</strong>从“未完成”变为“成功”（即<strong>从 <code>pending</code> 变为 <code>resolved</code></strong>）。</li>
-<li>可传参，通过resolve()传递的参数会在then()的第一个参数（函数）中接收到。（但<strong>只能传递一个参数</strong>）</li>
+<li>可<strong>传参</strong>，通过resolve()传递的参数会在then()的第一个参数（函数）中接收到。（但<strong>只能传递一个参数</strong>）</li>
 </ol>
 <p><strong><code>reject</code>函数</strong>：</p>
 <ol>
 <li>在<strong>异步操作失败时调用</strong>，并<strong>将 异步操作报出的错误 作为 参数 传递出去</strong>。</li>
 <li><strong>作用</strong>：将<strong><code>Promise</code>对象的状态</strong>从“未完成”变为“失败”（即<strong>从 <code>pending</code> 变为 <code>rejected</code></strong>）。</li>
-<li>可传参，通过 reject()传递的参数会在then()的第二个参数（函数）/catch()中接收到。（但<strong>只能传递一个参数</strong>）</li>
+<li>可<strong>传参</strong>，通过 reject()传递的参数会在then()的第二个参数（函数）/catch()中接收到。（但<strong>只能传递一个参数</strong>）</li>
 </ol>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>下面代码<strong>创造了一个Promise实例</strong>:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ... some code</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>)&#123;</span><br><span class="line">    resolve(value);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>

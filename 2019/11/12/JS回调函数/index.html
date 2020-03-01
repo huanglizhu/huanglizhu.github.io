@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8vbrly9zzj30vq0b0jse.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8vbnd1fv3j30au04jt8v.jpg">
-<meta property="og:updated_time" content="2019-11-25T08:39:07.513Z">
+<meta property="og:updated_time" content="2020-02-29T09:02:56.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回调函数">
 <meta name="twitter:description" content="回调函数 回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数。这个过程就叫做回调。">
@@ -186,6 +186,31 @@
 </li>
 </ul>
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8vbnd1fv3j30au04jt8v.jpg" alt="运行结果"></p>
+<hr>
+<h1 id="同步回调与异步回调"><a href="#同步回调与异步回调" class="headerlink" title="同步回调与异步回调"></a>同步回调与异步回调</h1><p>其实回调函数并不一定是同步/异步的，主要看我们的函数是否支持异步处理，一旦支持我们就当做异步回调来看。</p>
+<h2 id="同步回调"><a href="#同步回调" class="headerlink" title="同步回调"></a>同步回调</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params">arg3</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'callback Totle is:'</span> + arg3)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">arg1, arg2, cb</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Total = arg1 + arg2;</span><br><span class="line">  cb(Total);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'mainFunction Totle is:'</span> + Total)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn(<span class="number">2</span>, <span class="number">2</span>, callback)   <span class="comment">// 调用fn()函数，并传入2, 2, callback作为参数</span></span><br></pre></td></tr></table></figure>
+
+<p>执行结果为：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">callback Totle <span class="keyword">is</span>:<span class="number">4</span></span><br><span class="line">mainFunction Totle <span class="keyword">is</span>:<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h2><h3 id="js中的例子"><a href="#js中的例子" class="headerlink" title="js中的例子"></a>js中的例子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'f2 finished'</span>) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    setTimeout(cb,<span class="number">1000</span>)        <span class="comment">//用setTimeout()模拟耗时操作</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'f1 finished'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1(f2);    <span class="comment">//得到的结果是 f1 finished ，f2 finished</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>js中的<strong>setTimeout()函数支持异步处理</strong>。</li>
+<li>所以我们可以<strong>用setTimeout()来模拟耗时操作</strong>。得到的结果是：<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">f1</span> <span class="string">finished </span></span><br><span class="line"><span class="attr">f2</span> <span class="string">finished</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="nodejs中的例子"><a href="#nodejs中的例子" class="headerlink" title="nodejs中的例子"></a>nodejs中的例子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'input.txt'</span>,<span class="string">'utf-8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行结束!"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>执行的结果是:</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span> <span class="title">app</span></span><br><span class="line">程序执行结束!</span><br><span class="line">我们来测试一下异步回调函数</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面例子中我们先<strong>创建了一个文件input.txt，里面的内容是:’我们来测试一下异步回调函数’</strong></li>
+<li>首先我们要明确，node中<strong>fs.readFile()读取文件内容是异步的</strong>。</li>
+<li>因此程序执行到这儿的时候并不会阻塞，而是继续向后执行，当文件读取完毕之后再自动调用传入的匿名回调函数，因此出现了上面的结果。</li>
+</ul>
 
       
     </div>
@@ -257,7 +282,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回调函数"><span class="nav-number">1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回调函数与调用普通函数的区别"><span class="nav-number">2.</span> <span class="nav-text">回调函数与调用普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：数组的reduce-方法"><span class="nav-number">3.</span> <span class="nav-text">补充：数组的reduce()方法</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回调函数"><span class="nav-number">1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回调函数与调用普通函数的区别"><span class="nav-number">2.</span> <span class="nav-text">回调函数与调用普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：数组的reduce-方法"><span class="nav-number">3.</span> <span class="nav-text">补充：数组的reduce()方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步回调与异步回调"><span class="nav-number">4.</span> <span class="nav-text">同步回调与异步回调</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步回调"><span class="nav-number">4.1.</span> <span class="nav-text">同步回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步回调"><span class="nav-number">4.2.</span> <span class="nav-text">异步回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#js中的例子"><span class="nav-number">4.2.1.</span> <span class="nav-text">js中的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs中的例子"><span class="nav-number">4.2.2.</span> <span class="nav-text">nodejs中的例子</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

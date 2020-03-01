@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg">
-<meta property="og:updated_time" content="2020-02-28T13:53:41.505Z">
+<meta property="og:updated_time" content="2020-03-01T05:01:20.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS作用域和闭包">
 <meta name="twitter:description" content="执行上下文 范围：一段&amp;lt;script&amp;gt;或者一个函数,一段&amp;lt;script&amp;gt;生成一个全局上下文，一个函数声明一个函数上下文。">
@@ -286,12 +286,13 @@
 <hr>
 <h2 id="创建10个-lt-a-gt-标签，点击时弹出对应的序号"><a href="#创建10个-lt-a-gt-标签，点击时弹出对应的序号" class="headerlink" title="创建10个&lt;a&gt;标签，点击时弹出对应的序号"></a>创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号</h2><h3 id="错误的例子"><a href="#错误的例子" class="headerlink" title="错误的例子"></a>错误的例子</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqip6zftwj30pl0c07h5.jpg" alt="错误的例子"><br><strong>错误原因分析</strong>：</p>
 <ol>
-<li>确实<strong>可以得到1-10的10个<code>&lt;a&gt;</code>标签</strong>。</li>
-<li>但是<strong><code>addEventListener()</code>中添加的函数时要点击以后才会执行的</strong>，当我们10个标签都出现在页面上以后，i值变为10。</li>
+<li>确实<strong>可以得到0-9的10个<code>&lt;a&gt;</code>标签</strong>。</li>
+<li>但是<strong><code>addEventListener()</code>中添加的函数时要点击以后才会执行的</strong>，当我们10个标签都出现在页面上以后，<strong>i值变为10</strong>。</li>
 <li>而<strong>for循环这10下是个很快的过程，等循环结束我们点击a标签，触发click的函数时，i是个自由变量，他要去父级作用域中找i的值，此时i已经循环到了10</strong>。</li>
 <li>所以<strong>不管点击哪个标签，弹出的警示框的i都是10，并不是对应的序号</strong>。</li>
 </ol>
 <p><strong>总结：之所以会错就是因为这里的i是 全局作用域 下的i。</strong></p>
+<p><strong>理解方式2：</strong><br>1.循环是<strong>同步</strong>的，所以创建标签时得到0-9是没问题的。<br>2.但 事件绑定是<strong>异步</strong>的，所以他会<strong>等循环全部结束以后才开始执行</strong>。<br>3.可<strong>i是全局变量</strong>，也就是说每次循环改变的都是同一个i的值，循环结束后<strong>i值变为10</strong>，此时事件绑定函数才开始执行，那么他每次到<strong>父级作用域</strong>中取到的其实都是<strong><code>i=10</code></strong>,所以<strong>不管点击哪个标签弹出的都是10</strong>。</p>
 <h3 id="正确示例"><a href="#正确示例" class="headerlink" title="正确示例"></a>正确示例</h3><p><strong>【将i传进函数中作为 函数作用域 的变量】</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqjkil3k0j30ov0dgqf9.jpg" alt="正确示例"></p>
 <ol>
 <li><code>i=0</code>时生成一个函数，<code>i=1</code>时又生成另外一个函数，<strong>总共通过循环创建了10个函数</strong>。</li>
@@ -313,10 +314,10 @@
 <h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><p><strong>判断用户是不是第一次校验</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg" alt="实际应用1"><br><strong>好处</strong>：将存储用户id的 变量<code>_list</code> 封装起来,那么闭包外面就拿不到 变量<code>_list</code>，减少用户数据泄露的危险。</p>
 <p><strong>游戏中的作用</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg" alt="例子2"><br>假设我们在做一个游戏，在写其中关于「还剩几条命」的代码。如果不用闭包，你可以直接用一个全局变量：<code>window.lives = 30 // 还有三十条命</code><br>但这样看起来很不妥。万一不小心把这个值改成 <code>-1</code> 了怎么办。所以我们不能让别人「直接访问」这个变量。怎么办呢？<br><strong>用局部变量</strong>。<br>但是用局部变量别人又访问不到，怎么办呢？<br><strong>暴露一个访问器（函数），让别人可以「间接访问」生命值<code>lives</code></strong>。<br>使用闭包后，在其他的 JS 文件中就可以使用 <code>window.奖励一条命()</code> 来涨命，使用 <code>window.死一条命()</code> 来让角色掉一条命。</p>
 <hr>
-<h2 id="setTimeout-与let、闭包"><a href="#setTimeout-与let、闭包" class="headerlink" title="setTimeout()与let、闭包"></a>setTimeout()与let、闭包</h2><p>（其实和上面的“创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号”类似，事件绑定和setTimeout都是异步）</p>
+<h2 id="setTimeout-与let、闭包"><a href="#setTimeout-与let、闭包" class="headerlink" title="setTimeout()与let、闭包"></a>setTimeout()与let、闭包</h2><p>（其实和上面的“创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号”类似，事件绑定和setTimeout都是异步。而他们到<strong>父级作用域（这里是全局作用域）</strong>中找i时拿到的都是同一个i，所以我们要<strong>想办法让他们的 父级作用域 变成 函数作用域</strong>，每个i都保存在不同的函数中，这样就不会重复了）</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="number">10</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(<span class="built_in">i</span>);</span><br><span class="line">  &#125;, <span class="built_in">i</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>结果：</strong>打印10个10<br><strong>原因：</strong><br>因为循环是同步的，setTimeout 是异步的，所以<strong>循环结束以后才会执行setTimeout</strong>。<br>而变量i是var命令声明的，在<strong>全局范围</strong>内都有效，所以全局只有一个变量i。所以<strong>每一次循环的i其实都是同一个</strong>，循环到最后时前面的i全部被最后的结果覆盖了。<br>所以最后10次打印的都是最后保存的i。</p>
+<p><strong>结果：</strong>打印10个10<br><strong>原因：</strong><br>因为循环是同步的，setTimeout 是异步的，所以<strong>循环结束以后才会执行setTimeout</strong>。<br>而变量i是var命令声明的，在<strong>全局范围</strong>内都有效，所以全局只有一个变量i。所以<strong>每一次循环的i其实都是同一个</strong>，循环到最后时前面的i全部被最后的结果覆盖了。<br>所以最后，每次执行setTimeout时到<strong>父级作用域（这里是全局作用域）</strong>中找到的i都是10，10次打印的都是最后保存的i。</p>
 <p><strong>解决方法</strong>：<strong>局部变量</strong>的话就是每循环一次产生一个新的i，就不会被覆盖。所以我们可以通过<strong>闭包</strong>（也就是把循环的过程放到一个函数中封闭起来）</p>
 <blockquote>
 <p><a href="https://huanglizhu.github.io/2020/02/03/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#闭包" target="_blank" rel="noopener">闭包</a>：函数a内部定义一个函数b，函数b可以访问函数a的变量,函数b中的变量就是局部变量</p>
@@ -329,7 +330,11 @@
 <p><strong>方法2：使用闭包(即局部变量)</strong></p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  ((<span class="name">j</span>) =&gt; &#123;</span><br><span class="line">    setTimeout(<span class="name">function</span> () &#123;</span><br><span class="line">      console.log(<span class="name">j</span>)//0-9</span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(<span class="name">i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>声明了10个自执行函数，保存当时的i值到内部。</strong><br>每一次循环都把<strong>i作为参数j（局部变量）保存在函数中</strong>，<strong>循环了10次函数就会产生10个局部变量j</strong>，最后每个函数中的setTimeout都对应不同的j值。</p>
+<p><strong>【将i传进函数中作为 函数作用域 的变量】</strong></p>
+<ol>
+<li><code>i=0</code>时生成一个函数，<code>i=1</code>时又生成另外一个函数，<strong>总共通过循环创建了10个函数</strong>，<strong>循环了10次函数就会产生10个局部变量j</strong>，最后每个函数中的setTimeout都对应不同的j值。</li>
+<li>那么<strong>setTimeout的参数函数去获取i的值时就会到当前的 父级作用域（函数作用域）中找</strong>，自然也不会10个标签都找到同一个i了。</li>
+</ol>
 
       
     </div>
