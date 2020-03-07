@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9p7h8fopj31hc02v0sv.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9tdnb036j314a07cq84.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vb2jsb2j31h803ewes.jpg">
-<meta property="og:updated_time" content="2020-02-26T14:43:40.732Z">
+<meta property="og:updated_time" content="2020-03-06T13:29:00.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简书Header组件开发（样式组件的className、属性的样式）">
 <meta name="twitter:description" content="总结样式组件的className 找到几个组件之间的共性后只需要生成一个样式组件 在style.js中定义该样式时添加&amp;amp;.yourClassName{xxx:xxx} 在使用样式组件时添加专属的className即可">
@@ -175,9 +175,18 @@
 
 </li>
 </ol>
+<h3 id="解释-amp-的含义"><a href="#解释-amp-的含义" class="headerlink" title="解释&amp;的含义"></a>解释<code>&amp;</code>的含义</h3><p><strong>&amp;表示当前元素</strong>，例如</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a&#123;</span><br><span class="line">    &amp;<span class="selector-class">.b</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>编译之后就是<code>a.b{}</code></strong><br>没有&amp;就成了<code>a .b</code>（中间有个空格，b这个class成了a的后代元素的了）</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>在style.js中我们会给大部分样式相同的元素<strong>创建一个组件A</strong>，并通过<code>styled.div 写在模板字符串中的各种样式;</code>来<strong>定义组件A的样式</strong>。</li>
+<li>在index.js中直接<strong>使用<code>&lt;A&gt;...&lt;/A&gt;</code>即可调用组件</strong>。但有时候我们使用<code>&lt;A&gt;...&lt;/A&gt;</code>创建了几个组件，但希望这几个组件能拥有一些<strong>不同的样式</strong>，此时就可以在style.js的<strong>组件A的样式中再通过<code>&amp;.yourClassName{各种样式}</code>来定义这些有区别的样式</strong>。</li>
+<li>在index.js中直接<strong>使用<code>&lt;A className={yourClassName}&gt;...&lt;/A&gt;</code>即可调用有不同样式的组件</strong>了。</li>
+</ol>
 <h2 id="样式组件的属性的样式"><a href="#样式组件的属性的样式" class="headerlink" title="样式组件的属性的样式"></a>样式组件的属性的样式</h2><ol>
 <li>在style.js或index.js中给<strong>样式组件增添属性</strong>（比如placeholder）</li>
-<li>在style.js中<strong>定义该样式时添加<code>&amp;::属性名{xxx:xxx}</code></strong></li>
+<li>在style.js中<strong>定义该样式时添加<code>&amp;::属性名{xxx:xxx}</code></strong>（比如<code>&amp;::placeholder{color: #999;}</code>就是给placeholder的字体定义颜色）</li>
 </ol>
 <hr>
 <h1 id="Header组件中间部分：导航栏（Nav组件）"><a href="#Header组件中间部分：导航栏（Nav组件）" class="headerlink" title="Header组件中间部分：导航栏（Nav组件）"></a>Header组件中间部分：导航栏（Nav组件）</h1><p>之前我们写了logo，现在来完成logo右边的导航部分：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9o0816kdj313x01w3zc.jpg" alt="实现效果"></p>
@@ -288,11 +297,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/02/01/ES6对象简写/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/25/简书Header组件开发（使用iconfont、实现搜索框动画效果）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          ES6对象简写
+          简书Header组件开发（使用iconfont、实现搜索框动画效果）
         
       </div>
     </a>
@@ -314,7 +323,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#样式组件的className"><span class="nav-number">1.1.</span> <span class="nav-text">样式组件的className</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式组件的属性的样式"><span class="nav-number">1.2.</span> <span class="nav-text">样式组件的属性的样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header组件中间部分：导航栏（Nav组件）"><span class="nav-number">2.</span> <span class="nav-text">Header组件中间部分：导航栏（Nav组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义导航栏（Nav组件）"><span class="nav-number">2.1.</span> <span class="nav-text">定义导航栏（Nav组件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入并使用导航栏（Nav组件）"><span class="nav-number">2.2.</span> <span class="nav-text">引入并使用导航栏（Nav组件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义4个NavItem组件"><span class="nav-number">2.3.</span> <span class="nav-text">定义4个NavItem组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同一组件实现左右浮动"><span class="nav-number">2.3.1.</span> <span class="nav-text">同一组件实现左右浮动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#amp-的使用（类似className的选择器）"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">&amp;.的使用（类似className的选择器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NavItem组件-className的使用"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">使用NavItem组件(className的使用)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个className的使用"><span class="nav-number">2.3.2.</span> <span class="nav-text">多个className的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索框NavSearch组件"><span class="nav-number">2.4.</span> <span class="nav-text">搜索框NavSearch组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-placeholder定义-属性placeholder-的样式"><span class="nav-number">2.4.1.</span> <span class="nav-text">&amp;::placeholder定义 属性placeholder 的样式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header组件最右部分：Addition组件"><span class="nav-number">3.</span> <span class="nav-text">Header组件最右部分：Addition组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#“注册”和“写文章”按钮"><span class="nav-number">3.1.</span> <span class="nav-text">“注册”和“写文章”按钮</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#样式组件的className"><span class="nav-number">1.1.</span> <span class="nav-text">样式组件的className</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释-amp-的含义"><span class="nav-number">1.1.1.</span> <span class="nav-text">解释&amp;的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式组件的属性的样式"><span class="nav-number">1.2.</span> <span class="nav-text">样式组件的属性的样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header组件中间部分：导航栏（Nav组件）"><span class="nav-number">2.</span> <span class="nav-text">Header组件中间部分：导航栏（Nav组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义导航栏（Nav组件）"><span class="nav-number">2.1.</span> <span class="nav-text">定义导航栏（Nav组件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入并使用导航栏（Nav组件）"><span class="nav-number">2.2.</span> <span class="nav-text">引入并使用导航栏（Nav组件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义4个NavItem组件"><span class="nav-number">2.3.</span> <span class="nav-text">定义4个NavItem组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同一组件实现左右浮动"><span class="nav-number">2.3.1.</span> <span class="nav-text">同一组件实现左右浮动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#amp-的使用（类似className的选择器）"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">&amp;.的使用（类似className的选择器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NavItem组件-className的使用"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">使用NavItem组件(className的使用)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个className的使用"><span class="nav-number">2.3.2.</span> <span class="nav-text">多个className的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索框NavSearch组件"><span class="nav-number">2.4.</span> <span class="nav-text">搜索框NavSearch组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-placeholder定义-属性placeholder-的样式"><span class="nav-number">2.4.1.</span> <span class="nav-text">&amp;::placeholder定义 属性placeholder 的样式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Header组件最右部分：Addition组件"><span class="nav-number">3.</span> <span class="nav-text">Header组件最右部分：Addition组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#“注册”和“写文章”按钮"><span class="nav-number">3.1.</span> <span class="nav-text">“注册”和“写文章”按钮</span></a></li></ol></li></ol>
     
     </div>
   </aside>

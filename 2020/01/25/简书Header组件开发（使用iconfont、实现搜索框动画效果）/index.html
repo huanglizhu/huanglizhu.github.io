@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>简书Header组件开发（使用iconfont、实现搜索框动画效果） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="总结 上一篇笔记中，我们在定义组件样式时，使用过 &amp;amp;.yourClassName来给使用同一组件名创造的不同组件设置独特的样式 比如：在style.js中我们给&amp;lt;A&amp;gt;组件规定了统一的样式,在统一的样式中又使用&amp;amp;.aa{样式们}和&amp;amp;.bb{}设置了不同的样式，那么在index.js中我们就可以使用&amp;lt;A className=&amp;quot;aa&amp;quot;&amp;gt;">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简书Header组件开发（使用iconfont、实现搜索框动画效果）">
+<meta property="og:url" content="http://yoursite.com/2020/01/25/简书Header组件开发（使用iconfont、实现搜索框动画效果）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="总结 上一篇笔记中，我们在定义组件样式时，使用过 &amp;amp;.yourClassName来给使用同一组件名创造的不同组件设置独特的样式 比如：在style.js中我们给&amp;lt;A&amp;gt;组件规定了统一的样式,在统一的样式中又使用&amp;amp;.aa{样式们}和&amp;amp;.bb{}设置了不同的样式，那么在index.js中我们就可以使用&amp;lt;A className=&amp;quot;aa&amp;quot;&amp;gt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vtu9r3ij30jb0kmgmd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vuxp94cj313x01n752.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vxrja2nj31et0kfdif.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9w0x48o1j30cl0n00t3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9w7f5n8mj30wn0gfjt9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xs548p1j30zm05dq48.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9wv2h2udj30sz09tad3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9wwsb1taj30jt0mhtb4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xkb3ogcj30x80cmgma.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xtk83a4j30gb03cdg6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xzrh2sbj30ke06w74k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9y529wmfj31gx02kglv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gca6jp9idkj31hc02pdg5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckgf5caqdj31h605c3zj.jpg">
+<meta property="og:updated_time" content="2020-03-06T13:36:13.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简书Header组件开发（使用iconfont、实现搜索框动画效果）">
+<meta name="twitter:description" content="总结 上一篇笔记中，我们在定义组件样式时，使用过 &amp;amp;.yourClassName来给使用同一组件名创造的不同组件设置独特的样式 比如：在style.js中我们给&amp;lt;A&amp;gt;组件规定了统一的样式,在统一的样式中又使用&amp;amp;.aa{样式们}和&amp;amp;.bb{}设置了不同的样式，那么在index.js中我们就可以使用&amp;lt;A className=&amp;quot;aa&amp;quot;&amp;gt;">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vtu9r3ij30jb0kmgmd.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-简书Header组件开发（使用iconfont、实现搜索框动画效果）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      简书Header组件开发（使用iconfont、实现搜索框动画效果）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/25/简书Header组件开发（使用iconfont、实现搜索框动画效果）/" class="article-date">
+	  <time datetime="2020-01-25T14:40:52.000Z" itemprop="datePublished">一月 25, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>上一篇笔记中，我们在定义组件样式时，使用过 <strong><code>&amp;.yourClassName</code>来给使用同一组件名创造的不同组件设置独特的样式</strong><ul>
+<li>比如：在style.js中我们<strong>给<code>&lt;A&gt;</code>组件规定了统一的样式</strong>,在统一的样式中<strong>又使用<code>&amp;.aa{样式们}</code>和<code>&amp;.bb{}</code>设置了不同的样式</strong>，那么在index.js中我们就可以<strong>使用<code>&lt;A className=&quot;aa&quot;&gt;&lt;A/&gt;</code>和<code>&lt;A className=&quot;bb&quot; &gt;&lt;A/&gt;</code>来创建样式有些许不同的A组件</strong>了。<a id="more"></a></li>
+</ul>
+</li>
+<li>也在定义组件的样式中使用过 <strong><code>&amp;::placeholder</code>给组件的<code>placeholder</code>属性 设置样式</strong>。</li>
+<li>之前我们都是给同一层级的组件定义样式。而 <strong><code>.yourClassName</code>是给组件中的组件（即子组件）设置样式</strong>。<ul>
+<li>比如：我们在index.js中使用 <strong>iconfont图标</strong> 时组件是span，这并<strong>不是我们自己定义的组件</strong>，所以想要<strong>修改iconfont图标的部分样式</strong>时，我们 <strong>可以在SearchWrapper的样式中加入<code>.iconfont{样式们}</code></strong> 来设置。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchWrapper</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">NavSearch</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">"iconfont"</span>&gt;</span>&amp;#xe62d;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchWrapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>同时调用多个样式名时，用<strong>空格分隔样式名</strong>。</li>
+<li><strong>&amp;表示当前元素</strong><ul>
+<li>例如下面代码<strong>编译之后就是<code>a.b{}</code></strong>（表示className为b的a组件），没有&amp;就成了<code>a .b</code>（中间有个空格，b这个class成了a的后代元素的了）。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a&#123;</span><br><span class="line">    &amp;<span class="selector-class">.b</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="使用iconfont嵌入头部图标"><a href="#使用iconfont嵌入头部图标" class="headerlink" title="使用iconfont嵌入头部图标"></a>使用iconfont嵌入头部图标</h1><p>需要借助<strong><a href="https://www.iconfont.cn/" target="_blank" rel="noopener">iconfont官网</a></strong>完成以下操作。</p>
+<h2 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h2><p>打开<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">iconfont官网</a>-注册登录-“图标管理”-“我的项目”-（点击右边图标）<strong>新建项目（图标仓库）</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vtu9r3ij30jb0kmgmd.jpg" alt="新建项目"></p>
+<p>目前我们需要3个图标：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vuxp94cj313x01n752.jpg" alt="目前我们需要3个图标"></p>
+<h2 id="添加图标"><a href="#添加图标" class="headerlink" title="添加图标"></a>添加图标</h2><p>1.在顶部<strong>搜索框</strong>中搜索我们需要的图标-<strong>加入“购物车”</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9vxrja2nj31et0kfdif.jpg" alt="搜索并添加图标"></p>
+<p>2.点击右上角 购物车图标 -<strong>“添加至项目”</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9w0x48o1j30cl0n00t3.jpg" alt="添加至项目"></p>
+<p>3.修改羽毛颜色后，<strong>“下载至本地”</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9w7f5n8mj30wn0gfjt9.jpg" alt="修改羽毛颜色"></p>
+<p>4.得到压缩文件<code>download</code>，此时文件中<strong><code>demo_index.html</code>教我们如何使用iconfont</strong>，真正有用的是下面5个文件：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xs548p1j30zm05dq48.jpg" alt="有用的6个文件"></p>
+<p>5.将<strong>有用的6个文件</strong>添加至 <strong>src\statics下新建的iconfont文件夹</strong>中。</p>
+<h2 id="使用图标"><a href="#使用图标" class="headerlink" title="使用图标"></a>使用图标</h2><h3 id="修改iconfont-css为全局样式组件"><a href="#修改iconfont-css为全局样式组件" class="headerlink" title="修改iconfont.css为全局样式组件"></a>修改iconfont.css为全局样式组件</h3><p><strong>iconfont.css是iconfont主要的css文件。</strong></p>
+<h4 id="改为相对路径"><a href="#改为相对路径" class="headerlink" title="改为相对路径"></a>改为相对路径</h4><p>1.我们需要<strong>给iconfont.css中每个url的路径前加<code>./</code></strong>，将其<strong>改为相对路径</strong>(<strong>以<code>data:</code>开头的路径不需要加</strong>，他是base64的文件)<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9wv2h2udj30sz09tad3.jpg" alt="添加./改为相对路径"></p>
+<p>2.下面的几个class可以先删除：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9wwsb1taj30jt0mhtb4.jpg" alt="image.png"></p>
+<h4 id="改为全局样式组件"><a href="#改为全局样式组件" class="headerlink" title="改为全局样式组件"></a>改为全局样式组件</h4><p>因为我们<strong>整个项目都可能需要用到iconfont</strong>，所以iconfont.css 改为全局样式组件会更合适。</p>
+<ol>
+<li><strong>定义全局样式组件</strong>：将iconfont.css<strong>重命名为iconfont.js</strong>，在iconfont.js中，借助’styled-components’的createGlobalStyle<strong>定义全局样式组件GlobalIconFontStyle</strong>。</li>
+<li><strong>使用全局样式组件</strong>：在src-App.js中，<strong>引入并使用 全局样式组件GlobalIconFontStyle</strong>（注意引用路径和Globalstyle不同）</li>
+</ol>
+<p><strong>iconfont.js中，定义全局样式组件GlobalIconFontStyle</strong>：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createGlobalStyle &#125; <span class="keyword">from</span> <span class="string">'styled-components'</span></span><br><span class="line"></span><br><span class="line">export const GlobalIconFontStyle = createGlobalStyle`</span><br><span class="line">@font-face &#123;font-<span class="keyword">family</span>: "iconfont";</span><br><span class="line">  src: url(<span class="string">'./iconfont.eot?t=1582706509034'</span>); <span class="comment">/* IE9 */</span></span><br><span class="line">  src: url(<span class="string">'./iconfont.eot?t=1582706509034#iefix'</span>) format(<span class="string">'embedded-opentype'</span>), <span class="comment">/* IE6-IE8 */</span></span><br><span class="line">  url(<span class="string">'data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAARMAAsAAAAACGQAAAP/AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqEJINqATYCJAMQCwoABCAFhG0HQhtWB1GUL0qG7EtMRUbWKynSLdb02Bgu0Ffng0EHFQEAALwATC6AXxwQD1/7vZ67e9/PBphcJjYpjCdUBEa0sqo1hoyr8R3PqkLlx7XfvhgmfZh9bYj7ydv9/fPdsOahkgid6pFkmvDMQJ5WOIOSTiJe5+CkN90D/8yLK9Q8y/lsov5/rqmXzw8stm9nc4lqq6S2wwGOWwcW0VQgA96Abawbxq68iMMEBqyo5braPTiJgpIxKhBvqSKgYMoma6jQjL2Shdkfn3CdVj4QDvnofz/+iUeQoquMo64975JR60+llP4v9aiW4d6N5wFbRsURJImXpb7HPGHiiMeA0t3rFNI0hbHaqpBiL7pm/uVRhEr0GLohRJ5o64nJbY7CzziCn2wqxHN4Qz++4T8gl+6eqtLaNJAxNHosmZ12J8MzLSHdb/5QmHHE6yucA8MZiIFtp4z62/gyH58df3NDr81ZXOkc0HCBx0egqDeG+SCIFwwHWxrPQJK8FEXz6iHv7rKFGdCrq6+3k6eAMQ17Tq4Kdu8z6mV3o0fAMAgeyip29oFdQAOz58IEmJJB/nywJ8LMsvlY+KV3JzRErGege5pnwDfFfDDMoIe5hYBAD6aAvYNdD0+jbR5lLe9Fsf0XLd7ijV283ObhtBnz/jbOyLzSVcGTzZRT5LzjMoMAB9P6t8s+/JoP/M0v9VFKGHcnv4t4fUXsMsWu2DF1xtmdRfnuiQkCVOdjCbQRxrEY/R7oTRprza++OfHS2t/eamE/SxlebBNdv0nF6Rpw6d7CPELhQ6vrevmGPWwnOtzOhmm2iazIIGs+3lOAcH3XkSyVfnMwvxXtVUGBnhXanWzxxJn5XraZuV8epThC3gpPRaL9yaa5W7BZr1w7fW7evnoV0ghGCcuUXlKk5rtidwT4jSILwsV/p9Uf/t7javj/X6Wpvv/xg9z93H4ewm74tQFXHv6x6yBStdP7e/LW8t9sSYka5K9KVRr2TLlcbuJQuvgnBNN1g48oGDCAn5thwucY+ukZZG6gmY6h6LMMVbOFJnkEnUEn0NOcwYBDPcsHTWI8Ivtx4ABAGHMMxYjvUI25RZP8gM6Mf+gZCw8MuBPcGw7aCZpmwUDgIGNxC1PJNIjl5GlB7jgoa5rAkkqfngbm0DCOhaPZdA8YwMaY4qwrcc4JJszUcTc4DjTNxBYzUyDxcJJzqz4SIWUvCkumjtJcwQABB2SYaAtGSUwG4lbn0nKfHwcUazQCVsOriE4DjIN2jsWERVugPTqjFe9aujvWKeI4juBhBGPSYd3QAzQzYcKs8n4pQMKFJXvELPUiqBJpqwvPb9CfcA0MMG7PKFEjo1MuCSEnQTEoocACeWu6YIoUIQA='</span>) format(<span class="string">'woff2'</span>),</span><br><span class="line">  url(<span class="string">'./iconfont.woff?t=1582706509034'</span>) format(<span class="string">'woff'</span>),</span><br><span class="line">  url(<span class="string">'./iconfont.ttf?t=1582706509034'</span>) format(<span class="string">'truetype'</span>), <span class="comment">/* chrome, firefox, opera, Safari, Android, iOS 4.2+ */</span></span><br><span class="line">  url(<span class="string">'./iconfont.svg?t=1582706509034#iconfont'</span>) format(<span class="string">'svg'</span>); <span class="comment">/* iOS 4.1- */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.iconfont &#123;</span><br><span class="line">  font-<span class="keyword">family</span>: "iconfont" !important;</span><br><span class="line">  font-size: <span class="number">16</span>px;</span><br><span class="line">  font-style: normal;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p><strong>App.js中，引入并使用 全局样式组件GlobalIconFontStyle</strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component,Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Globalstyle &#125; <span class="keyword">from</span> <span class="string">'./style'</span>;</span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">"./common/header"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;GlobalIconFontStyle&#125; <span class="keyword">from</span> <span class="string">"./statics/iconfont/iconfont"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;Globalstyle /&gt;</span><br><span class="line">        &lt;GlobalIconFontStyle /&gt;</span><br><span class="line">        &lt;Header /&gt;</span><br><span class="line">      &lt;<span class="regexp">/Fragment&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default App;</span></span><br></pre></td></tr></table></figure>
+
+<p>控制台未报错，说明iconfont成功引入：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xkb3ogcj30x80cmgma.jpg" alt="控制台未报错"></p>
+<hr>
+<h3 id="使用Aa图标"><a href="#使用Aa图标" class="headerlink" title="使用Aa图标"></a>使用<code>Aa</code>图标</h3><p><strong>根据demo的使用方法，使用<code>&lt;span&gt;</code>标签替换我们common-header-index.js中的<code>Aa</code>.</strong><br><strong>注意：在react中使用className代替class</strong></p>
+<p>1.文件夹中的<strong><code>demo_index.html</code>-<code>Unicode</code></strong>拉到最下面有教我们<strong>使用方法</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xtk83a4j30gb03cdg6.jpg" alt="使用方法"><br>几年前是<code>&lt;i&gt;</code>标签用于引用字体图标，现在文档改为了<code>&lt;span&gt;</code>，其实你写<code>&lt;div&gt;</code>也可以,但最好和官方保持一致。</p>
+<p><strong>文档中的字体编码：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9xzrh2sbj30ke06w74k.jpg" alt="文档中的字体编码"></p>
+<p>2.<strong>common-header-index.js中，使用<code>&lt;span&gt;</code>标签替换我们原本的字符串<code>Aa</code>:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">NavItem</span> <span class="attr">className</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">"iconfont"</span>&gt;</span>&amp;#xe636;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">NavItem</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：在react中使用className代替class</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc9y529wmfj31gx02kglv.jpg" alt="成功"></p>
+<hr>
+<h3 id="使用羽毛笔图标"><a href="#使用羽毛笔图标" class="headerlink" title="使用羽毛笔图标"></a>使用羽毛笔图标</h3><p>common-header-index.js:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">className</span>=<span class="string">"writting"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">"iconfont"</span>&gt;</span>&amp;#xe6e5;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  写文章</span><br><span class="line"><span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用搜索图标（-iconfont设置图标样式）"><a href="#使用搜索图标（-iconfont设置图标样式）" class="headerlink" title="使用搜索图标（.iconfont设置图标样式）"></a>使用搜索图标（<code>.iconfont</code>设置图标样式）</h3><ul>
+<li><strong>使用SearchWrapper组件：因为搜索框（input）内不能再放置组件，所以我们只能把</strong>搜索图标放在搜索框外<strong>，然后使用</strong>SearchWrapper组件（div）将他们包裹**起来。</li>
+<li><strong>使用子绝父相对图标进行定位</strong>：为了<strong>让图标</strong>出现在搜索框内，我们需要将它<strong>绝对定位</strong>以脱离文档流。为了布局方便，他的父元素SearchWrapper组件需要设置为相对定位。</li>
+<li><strong>注意：在包裹图标的 父组件样式 中添加<code>.iconfont</code>设置（子组件）图标的样式</strong><ul>
+<li><strong>回顾</strong>：</li>
+<li>以前我们在定义组件样式时，使用过<strong><code>&amp;.yourClassName</code>来给使用某个<code>className</code>的样式组件设置不同的样式</strong>（比如<code>&lt;A className=&quot;aa&quot; /&gt;</code>和<code>&lt;A className=&quot;bb&quot; /&gt;</code>就可以在样式上稍有不同）。</li>
+<li>也使用过<strong><code>&amp;::placeholder</code>给<code>placeholder</code>属性 设置样式</strong>。他们都是同一个组件中的内容。</li>
+<li>而<strong>iconfont使用的span组件并不是我们自己定义</strong>的，所以他的样式要去父组件中给子组件（即span）设置，我们可以通过<strong>在父组件中增加<code>.iconfont</code>给组件中的组件（即子组件）设置样式</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>common-header-style.js:</strong><br><strong>复习：</strong><code>line-height</code>设置</p>
+<ol>
+<li><strong>SearchWrapper组件需要左浮动</strong>：因为他前面的组件全都浮动了，浮动的组件脱离了文档流，所以她也需要浮动才能出现在我们希望的位置。</li>
+<li><strong>图标<code>line-hight</code>垂直居中</strong>：因为这个图标是<code>&lt;span&gt;</code>元素，所以可以使用<code>line-hight</code>实现垂直居中。<strong>【绝对定位使得元素成为inline-block，所以虽然表现为块状，但仍然可以使用行内元素的<code>line-hight</code>属性实现垂直居中】</strong></li>
+<li><strong>图标<code>text-align</code>水平居中</strong>：因为这个图标是<code>&lt;span&gt;</code>元素，所以可以使用<code>text-align</code>水平居中。</li>
+</ol>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const SearchWrapper = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> position: relative<span class="comment">;</span></span><br><span class="line"><span class="symbol">  float:</span>left<span class="comment">;</span></span><br><span class="line">  .iconfont&#123;</span><br><span class="line"><span class="symbol">    position:</span> absolute<span class="comment">;</span></span><br><span class="line"><span class="symbol">    right:</span><span class="number">5</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">    bottom:</span><span class="number">5</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">    width:</span><span class="number">30</span>px<span class="comment">;</span></span><br><span class="line">    line-height:<span class="number">30</span>px<span class="comment">;</span></span><br><span class="line">    text-align:center<span class="comment">;</span></span><br><span class="line">    <span class="keyword">border-radius:15px;</span></span><br><span class="line"><span class="keyword"> </span>   <span class="keyword">background:green;</span></span><br><span class="line"><span class="keyword"> </span> &#125;</span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>common-header-index.js:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchWrapper</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">NavSearch</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">"iconfont"</span>&gt;</span>&amp;#xe62d;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchWrapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gca6jp9idkj31hc02pdg5.jpg" alt="最终效果"><br>搜索图标上的绿色背景是为点击以后的动态效果所保留的（具体效果可以从简书官网看到）</p>
+<hr>
+<h1 id="实现搜索框动画效果"><a href="#实现搜索框动画效果" class="headerlink" title="实现搜索框动画效果"></a>实现搜索框动画效果</h1><p>要<strong>实现的效果</strong>：点击搜索框时<strong>搜索框变长</strong>且搜索<strong>按钮变为灰底白字</strong>。</p>
+<h2 id="搜索框两种样式"><a href="#搜索框两种样式" class="headerlink" title="搜索框两种样式"></a>搜索框两种样式</h2><p>首先我们<strong>不考虑逻辑，只考虑如何做出两个样式</strong>。<br><strong>样式1</strong>：我们原本的搜索框样式（窄且按钮无底色）<br><strong>样式2</strong>：点击后显示的样式，<strong>搜索框长且按钮为灰底白字</strong>。</p>
+<p><strong>注意：</strong> react中我们<strong>尽量不操作DOM</strong>，我们<strong>使用数据的改变来让页面发生改变</strong>。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>在Header组件的index.js中创造一个构造函数，<strong>在state中保存一个变量<code>focused</code>表示搜索框是否被选中</strong>，选中则为true，未选中则为false。</li>
+<li>在Header组件的style.js中，<strong>给搜索框的样式NavSearch增加<code>&amp;.focused{}</code>样式</strong>，设置搜索框<strong>宽度拉长</strong>。</li>
+<li>在Header组件的style.js中，<strong>在<code>.iconfont{}</code>中添加<code>&amp;.focused{}</code></strong>设置点击后<strong>背景变为灰色，图标变为白色</strong>。</li>
+<li>在组件的<strong>className中结合 三目运算符</strong>实现：<strong>根据state中 <code>focused</code>变量 值 改变 样式名</strong>。<ul>
+<li><strong>假设点击时focused为true</strong>，则搜索框的样式对应<code>&amp;.focused{}</code>，图标的样式对应<code>.iconfont{}</code>中添加<code>&amp;.focused{}</code></li>
+<li><strong>假设未点击时focused为false</strong>，则搜索框的样式对应空（即使用NavSearch组件原本的样式），图标的样式对应 iconfont（即原定样式）</li>
+<li>当然此时我们还没做逻辑判断，通过<strong>手动修改state中focused的值来看两种不同的效果</strong>。</li>
+<li><strong>注意</strong>：组件使用多个样式表时，<strong>使用 空格 分隔多个样式表名</strong>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p><strong>1.Header-index.js</strong>：<br>在Header组件中<strong>创造一个构造函数，在state中保存一个变量<code>focused</code>表示搜索框是否被选中</strong>，选中则为true，未选中则为false：</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constructor</span><span class="params">(props)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  super(props);</span></span></span><br><span class="line"><span class="function"><span class="comment">  this.state = &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    focused: false</span></span></span><br><span class="line"><span class="function"><span class="comment">  &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.Header-style.js：</strong><br><strong>给搜索框的样式NavSearch增加<code>&amp;.focused{}</code>样式</strong>，设置搜索框<strong>宽度拉长</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">const</span> <span class="string">NavSearch</span> <span class="string">=</span> <span class="string">styled.input.attrs(&#123;</span></span><br><span class="line"><span class="attr">  placeholder:</span> <span class="string">"搜索"</span></span><br><span class="line"><span class="string">&#125;)`</span></span><br><span class="line"><span class="attr">  width:</span> <span class="number">160</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  height:</span> <span class="number">38</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  padding:</span> <span class="number">0</span> <span class="number">30</span><span class="string">px</span> <span class="number">0</span> <span class="number">20</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  margin-top:</span><span class="number">9</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  margin-left:</span><span class="number">20</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  box-sizing:</span><span class="string">border-box;</span></span><br><span class="line"><span class="attr">  border:</span><span class="string">none;</span></span><br><span class="line"><span class="attr">  outline:</span><span class="string">none;</span></span><br><span class="line"><span class="attr">  border-radius:</span><span class="number">19</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  background:</span> <span class="comment">#eee;</span></span><br><span class="line"><span class="attr">  font-size:</span> <span class="number">14</span><span class="string">px;</span></span><br><span class="line"><span class="attr">  color:</span> <span class="comment">#666;</span></span><br><span class="line">  <span class="string">&amp;::placeholder&#123;</span></span><br><span class="line"><span class="attr">    color:</span> <span class="comment">#999;    </span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&amp;.focused&#123;</span></span><br><span class="line"><span class="attr">    width:</span><span class="number">240</span><span class="string">px;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">`;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.<strong>在<code>.iconfont{}</code>中添加<code>&amp;.focused{}</code></strong>设置点击后<strong>背景变为灰色，图标变为白色</strong>：<br>(注意：是在<code>.iconfont{}</code>中添加，<strong>由于iconfont不是我们定义的组件</strong>，所以想要给她设置样式则需要通过 在iconfont的父组件中设置子组件的样式 的方式)</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export const SearchWrapper = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> position: relative<span class="comment">;</span></span><br><span class="line"><span class="symbol">  float:</span>left<span class="comment">;</span></span><br><span class="line">  .iconfont&#123;</span><br><span class="line"><span class="symbol">    position:</span> absolute<span class="comment">;</span></span><br><span class="line"><span class="symbol">    right:</span><span class="number">5</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">    bottom:</span><span class="number">5</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">    width:</span><span class="number">30</span>px<span class="comment">;</span></span><br><span class="line">    line-height:<span class="number">30</span>px<span class="comment">;</span></span><br><span class="line">    text-align:center<span class="comment">;</span></span><br><span class="line">    <span class="keyword">border-radius:15px;</span></span><br><span class="line"><span class="keyword"> </span>   &amp;.focused&#123;</span><br><span class="line"><span class="symbol">      background:</span> <span class="comment">#777;</span></span><br><span class="line"><span class="symbol">      color:</span> <span class="comment">#fff;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4.index.js:</strong><br>在组件的<strong>className中结合 三目运算符</strong>实现：<strong>根据state中 <code>focused</code>变量 值 改变 样式名</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;SearchWrapper&gt;</span><br><span class="line">  &lt;NavSearch className=&#123;<span class="keyword">this</span>.state.focused ? <span class="string">"focused"</span> : <span class="string">""</span>&#125; /&gt;</span><br><span class="line">  &lt;span className=&#123;<span class="keyword">this</span>.state.focused ? <span class="string">"focused iconfont"</span> : <span class="string">"iconfont"</span>&#125;&gt;</span><br><span class="line">    &amp;#xe62d;</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/SearchWrapper&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们<strong>假设点击时focused为true</strong>，则搜索框的样式对应<code>&amp;.focused{}</code>，图标的样式对应<code>.iconfont{}</code>中添加<code>&amp;.focused{}</code>。<br><strong>假设未点击时focused为false</strong>，则搜索框的样式对应空（即使用NavSearch组件原本的样式），图标的样式对应 iconfont（即原定样式）。<br><strong>注意</strong>：组件使用多个样式表时，<strong>使用 空格 分隔多个样式表名</strong>。</p>
+<p><strong>5.效果展示</strong><br>当然此时我们还没做逻辑判断，可以通过<strong>手动修改state中focused的值来看两种不同的效果</strong>。</p>
+<p><code>focused: false</code>时：</p>
+<p><code>focused: true</code>时：</p>
+<hr>
+<h2 id="实现逻辑判断"><a href="#实现逻辑判断" class="headerlink" title="实现逻辑判断"></a>实现逻辑判断</h2><p><strong>实现效果</strong>：点击搜索框则修改state中的focused值为true，搜索框失去焦点时state中的focused值变为false。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>在Header组件中，<strong>给搜索框NavSearch绑定<code>onFocus</code>事件函数</strong><code>handleInputFocus</code>(记得在构造函数中使用bind()绑定this指向)</li>
+<li><strong>创建handleInputFocus函数</strong>，在函数中调用setState()将focused值设为true。</li>
+<li><strong>给搜索框NavSearch绑定<code>onBlur</code>事件函数</strong><code>handleInputBlur</code>(记得在构造函数中使用bind()绑定this指向)</li>
+<li><strong>创建handleInputBlur函数</strong>，在函数中调用setState()将focused值设为 false。</li>
+</ol>
+<p>通过focused值的改变就能改变样式，但目前<strong>还没有动画效果</strong>。</p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p><strong>Header-index.js</strong><br>给搜索框NavSearch<strong>绑定<code>onFocus</code>事件函数</strong><code>handleInputFocus</code>，以及<strong><code>onBlur</code>事件函数</strong><code>handleInputBlur</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;NavSearch</span><br><span class="line">  className=&#123;<span class="keyword">this</span>.state.focused ? <span class="string">"focused"</span> : <span class="string">""</span>&#125;</span><br><span class="line">  onFocus=&#123;<span class="keyword">this</span>.handleInputFocus&#125;</span><br><span class="line">  onBlur=&#123;<span class="keyword">this</span>.handleInputBlur&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>记得在构造函数中使用bind()绑定this指向:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">  <span class="keyword">super</span>(props);</span><br><span class="line">  <span class="keyword">this</span>.state = &#123;</span><br><span class="line">    focused: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.handleInputFocus = <span class="keyword">this</span>.handleInputFocus.bind(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.handleInputBlur = <span class="keyword">this</span>.handleInputBlur.bind(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建handleInputFocus函数</strong>，在函数中调用setState()将focused值设为true。<strong>创建handleInputBlur函数</strong>，在函数中调用setState()将focused值设为 false:</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handleInputFocus</span>() &#123;</span></span><br><span class="line"><span class="function">  <span class="variable">this.setState</span>(&#123;</span></span><br><span class="line"><span class="function">    <span class="variable">focused</span>: <span class="variable"><span class="literal">true</span></span></span></span><br><span class="line"><span class="function">  &#125;)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">handleInputBlur</span>() &#123;</span></span><br><span class="line"><span class="function">  <span class="variable">this.setState</span>(&#123;</span></span><br><span class="line"><span class="function">    <span class="variable">focused</span>: <span class="variable"><span class="literal">false</span></span></span></span><br><span class="line"><span class="function">  &#125;)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckgf5caqdj31h605c3zj.jpg" alt="实现效果"></p>
+<hr>
+<h2 id="实现动画效果"><a href="#实现动画效果" class="headerlink" title="实现动画效果"></a>实现动画效果</h2><p>要实现动画效果就需要用到之前笔记提到过的<strong><a href="https://reactcommunity.org/react-transition-group/" target="_blank" rel="noopener"><code>react-transition-group</code></a></strong>(可以在github上搜索到)</p>
+<p><strong>1.在项目中安装<code>react-transition-group</code></strong>：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span> react-transition-<span class="keyword">group</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.使用<a href="https://reactcommunity.org/react-transition-group/css-transition" target="_blank" rel="noopener">CSSTransition</a>实现简单的过渡动画</strong>（可参考<a href="https://huanglizhu.github.io/2020/01/12/%E4%BD%BF%E7%94%A8react-transition-group%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB/#学习CSSTransition组件" target="_blank" rel="noopener">笔记</a>）：</p>
+<p><strong>header-index.js:</strong><br>（复习<a href="https://huanglizhu.github.io/2019/10/28/CSS%20transition%E5%B1%9E%E6%80%A7/#transition-属性实现过渡效果" target="_blank" rel="noopener">CSS transition属性</a>）<br><strong>引入CSSTransition组件:</strong></p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CSSTransition &#125; <span class="keyword">from</span> 'react-transition-<span class="keyword">group</span>';</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 CSSTransition组件 包裹 NavSearch组件：</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;CSSTransition</span><br><span class="line">  <span class="keyword">in</span>=&#123;<span class="keyword">this</span>.state.focused&#125;</span><br><span class="line">  timeout=&#123;<span class="number">200</span>&#125;</span><br><span class="line">  classNames=<span class="string">"slide"</span></span><br><span class="line">&gt;</span><br><span class="line">  &lt;NavSearch</span><br><span class="line">    className=&#123;<span class="keyword">this</span>.state.focused ? <span class="string">"focused"</span> : <span class="string">""</span>&#125;</span><br><span class="line">    onFocus=&#123;<span class="keyword">this</span>.handleInputFocus&#125;</span><br><span class="line">    onBlur=&#123;<span class="keyword">this</span>.handleInputBlur&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">&lt;/CSSTransition&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：<code>classNames</code>属性值决定了对应的样式前缀</strong></p>
+<p><strong>style.js：</strong><br>由于CSSTransition依旧<strong>不是我们自定义的组件</strong>，所以想定义他的样式要通过<strong>去父组件中给子组件定义的方式</strong>来实现：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">export const SearchWrapper = styled.div`</span><br><span class="line">  position: relative;</span><br><span class="line">  float:left;</span><br><span class="line">  <span class="regexp">//</span> 入场动画</span><br><span class="line">  .slide-enter&#123;</span><br><span class="line">    transition: all .<span class="number">2</span>s ease-out;</span><br><span class="line">  &#125;</span><br><span class="line">  .slide-enter-active&#123;</span><br><span class="line">    width:<span class="number">240</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="regexp">//</span> 出场动画</span><br><span class="line">  .slide-<span class="keyword">exit</span>&#123;</span><br><span class="line">    transition: all .<span class="number">2</span>s ease-out;</span><br><span class="line">  &#125;</span><br><span class="line">  .slide-<span class="keyword">exit</span>-active&#123;</span><br><span class="line">    width:<span class="number">160</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">  .iconfont&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    right:<span class="number">5</span>px;</span><br><span class="line">    bottom:<span class="number">5</span>px;</span><br><span class="line">    width:<span class="number">30</span>px;</span><br><span class="line">    line-height:<span class="number">30</span>px;</span><br><span class="line">    text-align:center;</span><br><span class="line">    border-radius:<span class="number">15</span>px;</span><br><span class="line">    &amp;.focused&#123;</span><br><span class="line">      background: <span class="comment">#777;</span></span><br><span class="line">      color: <span class="comment">#fff;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h3><p><strong>动画效果的样式是针对NavSearch组件的</strong>，可我们上面把他们放在了CSSTransition的父组件SearchWrapper的样式中，这样虽然执行没问题，但我们应该<strong>将它们放到NavSearch组件的样式中会更好</strong>：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">export const NavSearch = styled.input.attrs(&#123;</span><br><span class="line">  placeholder: <span class="string">"搜索"</span></span><br><span class="line">&#125;)`</span><br><span class="line">  width: <span class="number">160</span>px;</span><br><span class="line">  height: <span class="number">38</span>px;</span><br><span class="line">  padding: <span class="number">0</span> <span class="number">30</span>px <span class="number">0</span> <span class="number">20</span>px;</span><br><span class="line">  margin-top:<span class="number">9</span>px;</span><br><span class="line">  margin-left:<span class="number">20</span>px;</span><br><span class="line">  box-sizing:border-box;</span><br><span class="line">  border:none;</span><br><span class="line">  outline:none;</span><br><span class="line">  border-radius:<span class="number">19</span>px;</span><br><span class="line">  background: <span class="comment">#eee;</span></span><br><span class="line">  font-size: <span class="number">14</span>px;</span><br><span class="line">  color: <span class="comment">#666;</span></span><br><span class="line">  &amp;::placeholder&#123;</span><br><span class="line">    color: <span class="comment">#999;    </span></span><br><span class="line">  &#125;</span><br><span class="line">  &amp;.focused&#123;</span><br><span class="line">    width:<span class="number">240</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="regexp">//</span> 入场动画</span><br><span class="line">  &amp;.slide-enter&#123;</span><br><span class="line">    transition: all .<span class="number">2</span>s ease-out;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;.slide-enter-active&#123;</span><br><span class="line">    width:<span class="number">240</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="regexp">//</span> 出场动画</span><br><span class="line">  &amp;.slide-<span class="keyword">exit</span>&#123;</span><br><span class="line">    transition: all .<span class="number">2</span>s ease-out;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;.slide-<span class="keyword">exit</span>-active&#123;</span><br><span class="line">    width:<span class="number">160</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>在这里动画样式是针对NavSearch组件的，不再是针对子组件，所以<strong>要加上<code>&amp;</code>！</strong>表示当前组件的动画样式</p>
+<p><strong>复习：</strong><br><strong>&amp;表示当前元素</strong>，例如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a&#123;</span><br><span class="line">    &amp;<span class="selector-class">.b</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>编译之后就是<code>a.b{}</code></strong><br>没有&amp;就成了<code>a .b</code>（中间有个空格，b这个class成了a的后代元素的了）</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/01/ES6对象简写/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6对象简写
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/24/简书Header组件开发（样式组件的className、属性的样式）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">简书Header组件开发（样式组件的className、属性的样式）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用iconfont嵌入头部图标"><span class="nav-number">2.</span> <span class="nav-text">使用iconfont嵌入头部图标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建项目"><span class="nav-number">2.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加图标"><span class="nav-number">2.2.</span> <span class="nav-text">添加图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用图标"><span class="nav-number">2.3.</span> <span class="nav-text">使用图标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改iconfont-css为全局样式组件"><span class="nav-number">2.3.1.</span> <span class="nav-text">修改iconfont.css为全局样式组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#改为相对路径"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">改为相对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改为全局样式组件"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">改为全局样式组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Aa图标"><span class="nav-number">2.3.2.</span> <span class="nav-text">使用Aa图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用羽毛笔图标"><span class="nav-number">2.3.3.</span> <span class="nav-text">使用羽毛笔图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用搜索图标（-iconfont设置图标样式）"><span class="nav-number">2.3.4.</span> <span class="nav-text">使用搜索图标（.iconfont设置图标样式）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现搜索框动画效果"><span class="nav-number">3.</span> <span class="nav-text">实现搜索框动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索框两种样式"><span class="nav-number">3.1.</span> <span class="nav-text">搜索框两种样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">3.1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">3.1.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现逻辑判断"><span class="nav-number">3.2.</span> <span class="nav-text">实现逻辑判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现动画效果"><span class="nav-number">3.3.</span> <span class="nav-text">实现动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化代码"><span class="nav-number">3.3.1.</span> <span class="nav-text">优化代码</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
