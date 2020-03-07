@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ES6 class（1） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="类与对象 类：具有相同特征的事物可以看做是一类的。 比如：男生女生都是“人类”，自行车、卡车都是“车类”。   对象：由 类 生产的 具体的东西 就是对象。">
+<meta name="keywords" content="ES6,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 class（1）">
+<meta property="og:url" content="http://yoursite.com/2020/02/09/ES6 class（1）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="类与对象 类：具有相同特征的事物可以看做是一类的。 比如：男生女生都是“人类”，自行车、卡车都是“车类”。   对象：由 类 生产的 具体的东西 就是对象。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcjesau64kj30ym0820yz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck132iw99j30lk0lq7hj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcjdzglog4j30ea0f0gq2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1feho5aj30hs0h5tev.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1jrj40uj30b20luae8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1puok4ij30t3047q7h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck2fh344oj30h60cfq9g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck2f2191cj30f30o5gug.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck70m610fj30i80e3wku.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck70xrny4j30eh03tdhb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck7asum53j30d50fw0y1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck7m9yh85j30tn0exaka.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8fzw3u8j30i00g7dly.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8fzw3u8j30i00g7dly.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8l63ckgj30he04rgo8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck93o2w1bj30qt0ajwo3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gck930mkwaj30sf0ceq7v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckaf1gha2j30rw0b8dlz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckarttgtaj30q50ca0yr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckau0est9j30u60dr11x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckbe79gtzj30q60imn7r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckf76kk6zj31790fm18g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckf2klqqvj310w0hi4bs.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gckg74xv62j30g90irgto.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclp6i5f1ij30t008rwio.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpctmt2zj30nk050mze.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpe7n6pqj30ln03y76q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclphs12anj30m806bq80.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpl52myej30mi08hdmk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpx2mmmyj30lq05vgpy.jpg">
+<meta property="og:updated_time" content="2020-03-07T14:18:52.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 class（1）">
+<meta name="twitter:description" content="类与对象 类：具有相同特征的事物可以看做是一类的。 比如：男生女生都是“人类”，自行车、卡车都是“车类”。   对象：由 类 生产的 具体的东西 就是对象。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcjesau64kj30ym0820yz.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6 class（1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6 class（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/09/ES6 class（1）/" class="article-date">
+	  <time datetime="2020-02-09T14:17:02.000Z" itemprop="datePublished">二月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h1><ul>
+<li><strong>类</strong>：具有相同特征的事物可以看做是一类的。<ul>
+<li>比如：男生女生都是“人类”，自行车、卡车都是“车类”。</li>
+</ul>
+</li>
+<li><strong>对象</strong>：由 类 生产的 具体的东西 就是对象。<a id="more"></a>
+
+</li>
+</ul>
+<p><strong>例子</strong></p>
+<ul>
+<li><strong>“车类”</strong> 拥有<strong>共同特性</strong> ，对每一辆车来说他们都有这些特性（属性/方法），只是值不同。 <ul>
+<li>比如：颜色、材质、轮子（属性），会加速、能删车（方法）。</li>
+</ul>
+</li>
+<li><strong>类 就像是工厂，工程生产出的就是对象</strong>。<ul>
+<li>比如“车类”就像是“造车工厂”，“造车工厂”造出来的每一辆车就是一个“<strong>对象</strong>”。</li>
+</ul>
+</li>
+<li>所以我们<strong>写好一个类就相当于有了一个工厂</strong>，只要我们<strong>给工厂一些数据</strong>就能<strong>得到</strong>我们想要的<strong>对象</strong>。</li>
+</ul>
+<hr>
+<h2 id="ES6中的类"><a href="#ES6中的类" class="headerlink" title="ES6中的类"></a>ES6中的类</h2><ul>
+<li>使用<strong><code>class</code>创建类</strong>(类相当于工厂)</li>
+<li>类中<strong>有用于创建对象的构造函数<code>constructer()</code></strong>(构造函数相当于工厂中的接头人)</li>
+<li><strong>实例化：类创建对象的过程</strong>(相当于造车的过程)</li>
+</ul>
+<p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcjesau64kj30ym0820yz.jpg" alt="例子1"><br><strong>注意</strong>：“<strong>剩余参数<code>...</code>是做聚合的，而扩展运算符<code>...</code>是做展开的，符号都是<code>...</code>,但含义不同</strong>。”(复习一下<a href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95/#结合扩展运算符-（剩余参数）" target="_blank" rel="noopener">扩展运算符用于剩余参数</a>的用法。)</p>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck132iw99j30lk0lq7hj.jpg" alt="例子2"></p>
+<hr>
+<h2 id="面向过程开发（差）"><a href="#面向过程开发（差）" class="headerlink" title="面向过程开发（差）"></a>面向过程开发（差）</h2><p>把不同的操作都封装在函数中是“面向<strong>过程</strong>开发”，<strong>复用率极低</strong>。</p>
+<p><strong>例子：贪吃蛇小游戏</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcjdzglog4j30ea0f0gq2.jpg" alt="第一条蛇"><br>一条蛇看起来没什么问题，但如果我们希望<strong>多一条蛇</strong>则需要<strong>整个复制修改</strong>，以此让函数们作用于不同的蛇对象，<strong>复用率极低</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1feho5aj30hs0h5tev.jpg" alt="第二条蛇"></p>
+<h2 id="面向对象开发"><a href="#面向对象开发" class="headerlink" title="面向对象开发"></a>面向对象开发</h2><ul>
+<li><strong>OOP（面向对象开发）</strong>的<strong>核心是封装</strong></li>
+</ul>
+<p>同一个例子，我们<strong>使用类的写法</strong>就方便很多。<br><strong>创建Snake类</strong>，将函数们放入类中，<strong>通过类创建的每个对象之间都是独立的（即属性/方法都只作用于该对象）</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1jrj40uj30b20luae8.jpg" alt="使用类的写法"></p>
+<p>使用上面 ES6的类中的例子 来演示一下<strong>同一个类创建两个不同的对象</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck1puok4ij30t3047q7h.jpg" alt="ES6的类中的例子衍生"></p>
+<hr>
+<h3 id="类的三大基本特性"><a href="#类的三大基本特性" class="headerlink" title="类的三大基本特性"></a>类的三大基本特性</h3><ul>
+<li><strong>多态</strong>：同一个接口，不同的表现。即同一个操作用在不同的对象上会有不同的结果。（目前ES基本不支持多态）</li>
+<li><strong>继承</strong>（笔记在后面另一篇）</li>
+<li><strong>封装</strong>（笔记在后面另一篇）</li>
+</ul>
+<hr>
+<h2 id="实例：音乐播放器类"><a href="#实例：音乐播放器类" class="headerlink" title="实例：音乐播放器类"></a>实例：音乐播放器类</h2><p>在这个例子中我们并没有真正使用到<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLAudioElement/Audio" target="_blank" rel="noopener">Audio构造函数</a>，只是演示一下。</p>
+<p><strong>index.html:</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck2fh344oj30h60cfq9g.jpg" alt="index.html"><br><strong>index.js:</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck2f2191cj30f30o5gug.jpg" alt="index.js"><br><strong>使用方法</strong>：调用<strong>AudioPlayer类</strong>，将 <strong>DOM元素的id</strong> 传入 AudioPlayer类 即可创建一个<strong>音乐播放器对象</strong>。</p>
+<h3 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h3><ul>
+<li><strong>创建AudioPlayer类</strong>，构造函数 <strong>接受 containner参数（即我们调用时传入的DOM元素id）</strong>。</li>
+<li>在类中<strong>创建函数getSongs()</strong>来<strong>获取歌曲资源地址</strong>及相关信息。</li>
+<li>在类中<strong>创建函数createElement()</strong>来<strong>生成一个DOM元素</strong>用于放置“播放按钮、进度条”(假装)，将DOM元素绑定在调用类创建的对象的dom属性上。</li>
+<li>在类中<strong>创建函数bindElement()</strong>给刚刚创建的元素<strong>绑定点击事件</strong>，点击则打印“开始播放”。</li>
+<li>在类中<strong>创建函数render()</strong>来将 创建好的DOM元素 <strong>添加到 传入的DOM元素 的后面</strong>，以显示在页面上。</li>
+</ul>
+<p><strong>注意：</strong><br>在<strong>类中创建的方法</strong>都要<strong>在构造函数中调用</strong>才能<strong>在创建对象时自动执行</strong>。<br><strong>在构造函数中调用这些函数时使用的是<code>this 函数名()</code></strong>，因为类中的函数们是挂在通过类创建出的不同对象身上的，不是构造函数内部的，所以在构造函数中我们要调用的是<code>对象.函数名()</code>，而对象名是多变的，但构造函数中<code>this</code>指向对象，所以可以使用<code>this 函数名()</code>。</p>
+<hr>
+<h1 id="静态方法与静态属性"><a href="#静态方法与静态属性" class="headerlink" title="静态方法与静态属性"></a>静态方法与静态属性</h1><ul>
+<li>静态方法与静态属性 <strong>都是类自身的</strong>，通过类创建的<strong>对象不会拥有</strong>。</li>
+<li>静态方法与静态属性 <strong>都只能通过类名进行调用</strong>。（不是对象名！）</li>
+<li><strong>静态方法</strong>：<ul>
+<li><strong>声明</strong>：在<strong>类中</strong>使用<code>static</code>关键字进行声明（<strong><code>static 函数名 (){...}</code></strong>）。（注意函数与构造函数并排，不包含）</li>
+<li><strong>使用</strong>：在<strong>类外</strong>通过<strong><code>类名.函数名(对象名);</code></strong>的方式让对象调用该静态方法。</li>
+</ul>
+</li>
+<li><strong>静态属性</strong>：<ul>
+<li><strong>声明</strong>：在<strong>类中/外</strong>使用<strong><code>类名.属性名=属性值;</code></strong>的方式进行定义。</li>
+<li><strong>使用</strong>：在<strong>类外</strong>通过<strong><code>类名.属性名;</code></strong>的方式让对象调用该静态方法。</li>
+</ul>
+</li>
+</ul>
+<p>静态方法的例子：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck70m610fj30i80e3wku.jpg" alt="静态方法的例子"><br>静态属性的例子：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck70xrny4j30eh03tdhb.jpg" alt="静态属性的例子"></p>
+<h2 id="静态属性的例子"><a href="#静态属性的例子" class="headerlink" title="静态属性的例子"></a>静态属性的例子</h2><p>使用 <strong>静态属性<code>totalCar</code></strong> 来<strong>记录通过Car类生成了多少个对象</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck7asum53j30d50fw0y1.jpg" alt="静态属性的例子"><br>由于每生成一个对象就会调用一次构造函数，而构造函数中 静态属性<code>totalCar</code> 是累加的，所以生成多少个对象<code>totalCar</code> 就累加多少次。</p>
+<h2 id="静态方法的例子"><a href="#静态方法的例子" class="headerlink" title="静态方法的例子"></a>静态方法的例子</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck7m9yh85j30tn0exaka.jpg" alt="静态方法的例子"></p>
+<ul>
+<li><strong>通过 Programmer类 创建了一个 程序猿对象programmer</strong> ，此时programmer的 属性haveGilrFriend和hair都是false。</li>
+<li>我们<strong>让 程序猿对象programmer 调用 Person类的静态方法format</strong>，在该方法中将 程序猿对象programmer 的两个属性都改为true。</li>
+<li>此时 程序猿对象programmer 的两个属性姐发生了变化。</li>
+</ul>
+<hr>
+<h1 id="类的表达式"><a href="#类的表达式" class="headerlink" title="类的表达式"></a>类的表达式</h1><ul>
+<li>之前我们使用的都是<strong>类的声明</strong>，就像函数声明与表达式一样，<strong>类也有表达式的定义方法</strong>。</li>
+<li><strong>语法</strong><ul>
+<li><strong><code>const 常量名 = class {...}</code></strong>，使用<code>new 常量名()</code>创建对象</li>
+<li><strong>或者<code>const 常量名 = class 类名 {...}</code></strong>，一样使用<code>new 常量名()</code>创建对象。其中，<strong><code>类名===常量名</code>,但 类名 只能在类中使用</strong>，类外会报错！<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8fzw3u8j30i00g7dly.jpg" alt="类名 只能在类中使用"></li>
+</ul>
+</li>
+<li>使用<strong>类表达式</strong>时想要在类内部<strong>定义 静态属性/方法 建议使用 类名</strong>，放置类名变化导致静态属性/方法失效。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8fzw3u8j30i00g7dly.jpg" alt="使用类表达式时定义静态属性/方法"></li>
+<li>有趣但少用的特点：使用类表达式定义的类可以<strong>自执行</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck8l63ckgj30he04rgo8.jpg" alt="自执行类"></li>
+</ul>
+<hr>
+<h1 id="getter和setter"><a href="#getter和setter" class="headerlink" title="getter和setter"></a>getter和setter</h1><ul>
+<li>类似于<strong>给属性提供钩子</strong></li>
+<li>在 <strong>获取</strong>属性值 和 <strong>设置</strong>属性值 的时候做一些额外的事情</li>
+</ul>
+<h2 id="回顾ES5的getter-setter"><a href="#回顾ES5的getter-setter" class="headerlink" title="回顾ES5的getter/setter"></a>回顾ES5的getter/setter</h2><h3 id="在对象字面量中书写get-set方法"><a href="#在对象字面量中书写get-set方法" class="headerlink" title="在对象字面量中书写get/set方法"></a>在对象字面量中书写get/set方法</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="noopener">get()</a>将在对象的<strong>属性被获取时</strong>被触发。</li>
+<li><a href="https://www.baidu.com/link?url=ODP0RtHj0QS1Fp1q2q-w5jSlHLlry4uZviafhgLLjwssdH3n1jSnVZL1_ta5FielD80Ou8ckS6-2IfdgbJWe20yIl3gIlYS5cL-CaGERCbdzTKroXMWr8RtMjOaLJdTL&wd=&eqid=8b3f487500043427000000065e620875" target="_blank" rel="noopener">set()</a>将在对象的<strong>属性被设置时</strong>被触发。</li>
+<li><strong>定义：</strong>在ES5中我们<strong>在对象字面量中定义get()/set()</strong>。</li>
+<li><strong>使用：</strong><code>对象名.get方法名;</code>或<code>对象名.set方法名=属性值;</code>（注意不是去调用属性，是方法名！另，调用方法和普通函数的调用方法是不同的）</li>
+<li><strong>注意：get()/set()与属性不要同名</strong>,避免造成死循环。</li>
+</ul>
+<p><strong>调用get()的错误示范</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck93o2w1bj30qt0ajwo3.jpg" alt="get()与属性同名造成死循环"><br><strong>注意：</strong><br>get()/set()与属性不要同名,避免造成死循环。<br>20触发的是obj的get()。</p>
+<p><strong>调用set()的正确示范</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gck930mkwaj30sf0ceq7v.jpg" alt="在对象字面量中书写get/set方法的例子"></p>
+<hr>
+<h3 id="Object-defineProperty-添加属性"><a href="#Object-defineProperty-添加属性" class="headerlink" title="Object.defineProperty()添加属性"></a>Object.defineProperty()添加属性</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty()</a>方法会直接在一个对象上<strong>定义一个新属性</strong>，或者<strong>修改一个对象的现有属性</strong>，并<strong>返回这个对象</strong>。</li>
+<li><strong>语法：</strong><code>Object.defineProperty(对象名，&quot;属性名&quot;,属性描述符 )</code><ul>
+<li><strong>属性描述符</strong>：分为 <strong>数据描述符 和 存取描述符</strong>（详细的 可选描述符 可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">MDN文档</a>，这里只列举了例子中用到的）<ul>
+<li><strong>数据描述符</strong>是一个具有值的属性，该值可能是可写的，也可能不是可写的。</li>
+<li><strong>存取描述符</strong>是由getter-setter函数对描述的属性。</li>
+<li><strong>属性描述符</strong> 必须是这两种形式之一，<strong>不能同时是 数据描述符 和 存取描述符</strong>。<ul>
+<li><strong>enumerable：当且仅当该属性的enumerable为true时，该属性才能够出现在对象的枚举（遍历）属性中</strong>。默认为 false。（数据描述符和存取描述符均具有该键值）</li>
+<li><strong>value：该属性对应的值</strong>。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。（数据描述符具有该键值）</li>
+<li><strong>get：给属性提供 getter 的方法</strong>，如果没有 getter 则为 undefined。当访问该属性时，该方法会被执行，方法执行时没有参数传入，但是会<strong>传入this对象</strong>（由于继承关系，这里的this并不一定是定义该属性的对象）。</li>
+<li><strong>set：给属性提供 setter 的方法</strong>，如果没有 setter 则为 undefined。当属性值修改时，触发执行该方法。该方法将<strong>接受唯一参数</strong>，即<strong>该属性新的参数值</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>注意：默认情况下，使用 Object.defineProperty() 添加的属性值是不可遍历/修改的。</strong><ul>
+<li>而通过 <strong>赋值操作 添加的普通属性是可遍历的</strong>（<code>for...in</code> 或 <code>Object.keys</code> 方法），这些属性的值可以被改变，也可以被删除的。</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据描述符的例子：</strong><br>通过Object.defineProperty()给obj对象添加属性age，属性值由<code>value</code>设置：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckaf1gha2j30rw0b8dlz.jpg" alt="Object.defineProperty()生成的属性不可遍历"><br>可以看到<code>_name</code>和<code>age</code>属性的颜色是不一样的，使用<code>for...in</code>遍历obj属性时也没有<code>age</code>，这是<strong>因为通过<code>Object.defineProperty()</code>生成的属性不可遍历。</strong></p>
+<p><strong>在属性描述符中添加enumerable为true</strong>，则添加的属性可出现在<strong>对象遍历的属性中</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckarttgtaj30q50ca0yr.jpg" alt="属性描述符中添加enumerable为true"></p>
+<p><strong>存取描述符的例子</strong>：<br>通过 存取描述符get和set 给调用的对象obj添加了get()和set()，这里this指obj，<strong>参数2name是get()/set()的名字</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckau0est9j30u60dr11x.jpg" alt="存取描述符的例子"></p>
+<hr>
+<h2 id="ES6中的getter-setter"><a href="#ES6中的getter-setter" class="headerlink" title="ES6中的getter/setter"></a>ES6中的getter/setter</h2><ul>
+<li><strong>ES6中在类中定义get与set</strong>，而ES5是在对象字面量中定义的。</li>
+<li><strong>使用：</strong><code>对象名.get方法名;</code>或<code>对象名.set方法名=属性值;</code>，调用方法和ES5中是相同的。（与 静态属性/方法 的调用方式区分开）</li>
+</ul>
+<p><strong>例子：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckbe79gtzj30q60imn7r.jpg" alt="例子"></p>
+<p><strong>用在播放器中的例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckf76kk6zj31790fm18g.jpg" alt="用在播放器中的例子"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckf2klqqvj310w0hi4bs.jpg" alt="效果展示"><br>也可以在构造函数中添加init(),使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLAudioElement/Audio" target="_blank" rel="noopener">Audio构造函数</a>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gckg74xv62j30g90irgto.jpg" alt="使用Audio对象"></p>
+<hr>
+<h1 id="name属性获取类名"><a href="#name属性获取类名" class="headerlink" title="name属性获取类名"></a>name属性获取类名</h1><ul>
+<li>name属性：用于<strong>获取类的名字</strong>。</li>
+<li>采用“类的声明”的类名很好理解，如果采用的是<strong>“类的表达式”</strong>，则类有名字就返回类名，<strong>没有名字时返回常量的名字</strong>。</li>
+<li>开发中极少使用，了解即可。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Person.name);<span class="comment">//Person</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Humen = <span class="class"><span class="keyword">class</span> </span>&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Humen.name);<span class="comment">//Humen</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Humen = <span class="class"><span class="keyword">class</span> <span class="title">P</span></span>&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Humen.name);<span class="comment">//P</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="new-target属性"><a href="#new-target属性" class="headerlink" title="new.target属性"></a>new.target属性</h1><ul>
+<li>new.target属性<strong>不能直接访问</strong>，会报错。<strong>只能在 类的构造函数/new调用的普通函数 中使用</strong>。</li>
+<li><strong>new.target属性值</strong> 实际上是 <strong>new 后面的 函数体/构造函数体</strong>，如果没有new，则是undefined。</li>
+<li><strong>使用new普通函数也可使用new.target属性</strong>是因为：<strong>在ES5中普通函数前加new就相当于构造函数。</strong></li>
+</ul>
+<p><strong>用在构造函数中的例子</strong>:<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclp6i5f1ij30t008rwio.jpg" alt="构造函数中的例子"></p>
+<p><strong>用在普通函数中，没有new的例子：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpctmt2zj30nk050mze.jpg" alt="用在普通函数中，没有new的例子"></p>
+<p><strong>用在普通函数中，有new的例子：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpe7n6pqj30ln03y76q.jpg" alt="用在普通函数中，有new的例子"></p>
+<h2 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h2><h3 id="普通函数容错判断"><a href="#普通函数容错判断" class="headerlink" title="普通函数容错判断"></a>普通函数容错判断</h3><p><strong>容错判断</strong>（规定Car只能通过new调用，否则报错）：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclphs12anj30m806bq80.jpg" alt="容错判断"></p>
+<p>在以前<strong>没有new.target属性时，我们使用instanceof判断</strong>Car是否是被new关键字调用的：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpl52myej30mi08hdmk.jpg" alt="使用instanceof判断"><br>因为this指向使用new调用Car()生成的对象，所以this的<a href="https://huanglizhu.github.io/2020/02/04/JS%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/#第五条原型规则" target="_blank" rel="noopener">显示原型</a>和Car是有关系的。<br><code>this instanceof Car</code>如果是true则说明this是使用<code>new Car()</code>创建的对象。</p>
+<h3 id="类中容错判断"><a href="#类中容错判断" class="headerlink" title="类中容错判断"></a>类中容错判断</h3><p>在类中<strong>不需要手动设置报错</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gclpx2mmmyj30lq05vgpy.jpg" alt="在类中不需要手动设置报错"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/08/as与export、import/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">as与export/import</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类与对象"><span class="nav-number">1.</span> <span class="nav-text">类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6中的类"><span class="nav-number">1.1.</span> <span class="nav-text">ES6中的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向过程开发（差）"><span class="nav-number">1.2.</span> <span class="nav-text">面向过程开发（差）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象开发"><span class="nav-number">1.3.</span> <span class="nav-text">面向对象开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的三大基本特性"><span class="nav-number">1.3.1.</span> <span class="nav-text">类的三大基本特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例：音乐播放器类"><span class="nav-number">1.4.</span> <span class="nav-text">实例：音乐播放器类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码思路"><span class="nav-number">1.4.1.</span> <span class="nav-text">代码思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态方法与静态属性"><span class="nav-number">2.</span> <span class="nav-text">静态方法与静态属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态属性的例子"><span class="nav-number">2.1.</span> <span class="nav-text">静态属性的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态方法的例子"><span class="nav-number">2.2.</span> <span class="nav-text">静态方法的例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的表达式"><span class="nav-number">3.</span> <span class="nav-text">类的表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getter和setter"><span class="nav-number">4.</span> <span class="nav-text">getter和setter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾ES5的getter-setter"><span class="nav-number">4.1.</span> <span class="nav-text">回顾ES5的getter/setter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在对象字面量中书写get-set方法"><span class="nav-number">4.1.1.</span> <span class="nav-text">在对象字面量中书写get/set方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-defineProperty-添加属性"><span class="nav-number">4.1.2.</span> <span class="nav-text">Object.defineProperty()添加属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6中的getter-setter"><span class="nav-number">4.2.</span> <span class="nav-text">ES6中的getter/setter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#name属性获取类名"><span class="nav-number">5.</span> <span class="nav-text">name属性获取类名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#new-target属性"><span class="nav-number">6.</span> <span class="nav-text">new.target属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实际运用"><span class="nav-number">6.1.</span> <span class="nav-text">实际运用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通函数容错判断"><span class="nav-number">6.1.1.</span> <span class="nav-text">普通函数容错判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类中容错判断"><span class="nav-number">6.1.2.</span> <span class="nav-text">类中容错判断</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
