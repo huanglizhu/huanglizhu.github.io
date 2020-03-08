@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="热门搜索样式布局 那么我们就需要在style.js中创建以下组件：">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）">
+<meta property="og:url" content="http://yoursite.com/2020/01/28/简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="热门搜索样式布局 那么我们就需要在style.js中创建以下组件：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmfap50lnj313z07kwjc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmi6sxq09j30wd06mdg1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmickp7a7j30z006laab.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmimz4gd2j310d06xq38.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmj2084s8j30tc0833yz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmj7npi99j30vr07o74q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmn5m8j9gj30xt0873z0.jpg">
+<meta property="og:updated_time" content="2020-03-08T13:25:07.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）">
+<meta name="twitter:description" content="热门搜索样式布局 那么我们就需要在style.js中创建以下组件：">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmfap50lnj313z07kwjc.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/28/简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）/" class="article-date">
+	  <time datetime="2020-01-28T13:19:48.000Z" itemprop="datePublished">一月 28, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="热门搜索样式布局"><a href="#热门搜索样式布局" class="headerlink" title="热门搜索样式布局"></a>热门搜索样式布局</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmfap50lnj313z07kwjc.jpg" alt="热门搜索样式布局"></p>
+<p>那么我们就需要<strong>在style.js中创建以下组件</strong>：</p>
+<a id="more"></a>
+
+<p>组件名 | 类型 | 含义 | 备注<br>—|—|—<br><strong>SearchInfo</strong> | div | 整个外框 | 绝对定位<br><strong>SearchInfoTitle</strong> | div | “热门搜索” |<br><strong>SearchInfoSwith</strong> | span | “换一批” | 右浮动<br><strong>SearchInfoList</strong> | div | 所有标签的外框 | overflow：hidden<br>(<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">BFC</a>、<a href="https://huanglizhu.github.io/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/#通过overflow属性控制父元素宽高" target="_blank" rel="noopener">解决浮动元素的父元素高度塌陷</a>）<br><strong>SearchInfoItem</strong> | a | 各个标签 | display：block，左浮动</p>
+<h2 id="热门搜索框SearchInfo"><a href="#热门搜索框SearchInfo" class="headerlink" title="热门搜索框SearchInfo"></a>热门搜索框SearchInfo</h2><p><strong>1.header-style.js定义组件SearchInfo(绝对定位)：</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">const</span> SearchInfo = styled.div`</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: <span class="number">0</span>;</span><br><span class="line">  top: <span class="number">56</span>px;</span><br><span class="line">  width: <span class="number">240</span>px; </span><br><span class="line">  padding:<span class="number">0</span> <span class="number">20</span>px;</span><br><span class="line">  height:<span class="number">100</span>px;</span><br><span class="line">  box-shadow:<span class="number">0</span> <span class="number">0</span> <span class="number">8</span>px rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">.2</span>);</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js引入、使用组件SearchInfo:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchWrapper</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">CSSTransition</span></span></span><br><span class="line"><span class="tag">    <span class="attr">in</span>=<span class="string">&#123;props.focused&#125;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">timeout</span>=<span class="string">&#123;200&#125;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">classNames</span>=<span class="string">"slide"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NavSearch</span></span></span><br><span class="line"><span class="tag">      <span class="attr">className</span>=<span class="string">&#123;props.focused</span> ? "<span class="attr">focused</span>" <span class="attr">:</span> ""&#125;</span></span><br><span class="line"><span class="tag">      <span class="attr">onFocus</span>=<span class="string">&#123;props.handleInputFocus&#125;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">onBlur</span>=<span class="string">&#123;props.handleInputBlur&#125;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">CSSTransition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">&#123;props.focused</span> ? "<span class="attr">focused</span> <span class="attr">iconfont</span>" <span class="attr">:</span> "<span class="attr">iconfont</span>"&#125;&gt;</span></span><br><span class="line">    &amp;#xe62d;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">  <span class="tag">&lt;/<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchWrapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmi6sxq09j30wd06mdg1.jpg" alt="效果"></p>
+<hr>
+<h2 id="“热门搜索”SearchInfoTitle"><a href="#“热门搜索”SearchInfoTitle" class="headerlink" title="“热门搜索”SearchInfoTitle"></a>“热门搜索”SearchInfoTitle</h2><p><strong>1.header-style.js定义组件 SearchInfoTitle：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const SearchInfoTitle = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> margin-top: <span class="number">20</span>px<span class="comment">;</span></span><br><span class="line">  margin-<span class="keyword">bottom: </span><span class="number">15</span>px<span class="comment">;</span></span><br><span class="line">  line-height: <span class="number">20</span>px<span class="comment">;</span></span><br><span class="line">  font-size:<span class="number">14</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">  color:</span> <span class="comment">#969696;</span></span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js引入、使用组件 SearchInfoTitle:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchInfoTitle</span>&gt;</span>热门搜索<span class="tag">&lt;/<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchInfo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmickp7a7j30z006laab.jpg" alt="效果"></p>
+<hr>
+<h2 id="“换一批”SearchInfoSwitch"><a href="#“换一批”SearchInfoSwitch" class="headerlink" title="“换一批”SearchInfoSwitch"></a>“换一批”SearchInfoSwitch</h2><p><strong>1.header-style.js定义组件 SearchInfoSwitch（右浮动）：</strong></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SearchInfoSwitch = styled.div`</span><br><span class="line">  <span class="keyword">float</span>:right;</span><br><span class="line">  font-<span class="built_in">size</span>:<span class="number">13</span>px;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js引入、使用组件 SearchInfoSwitch:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line">    热门搜索</span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoSwitch</span>&gt;</span>换一批<span class="tag">&lt;/<span class="name">SearchInfoSwitch</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchInfo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmimz4gd2j310d06xq38.jpg" alt="效果"></p>
+<hr>
+<h2 id="标签-SearchInfoItem"><a href="#标签-SearchInfoItem" class="headerlink" title="标签 SearchInfoItem"></a>标签 SearchInfoItem</h2><p><strong>1.header-style.js定义组件 SearchInfoItem（左浮动，块级以定义宽高）：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">export const SearchInfoItem = styled.a`</span><br><span class="line"><span class="symbol">  display:</span> <span class="keyword">block;</span></span><br><span class="line"><span class="keyword"> </span> float: left<span class="comment">;</span></span><br><span class="line">  line-height: <span class="number">20</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">  padding:</span> <span class="number">0</span> <span class="number">5</span>px<span class="comment">;</span></span><br><span class="line">  margin-right: <span class="number">10</span>px<span class="comment">;</span></span><br><span class="line">  margin-<span class="keyword">bottom: </span><span class="number">10</span>px<span class="comment">;</span></span><br><span class="line">  font-size: <span class="number">12</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">  border:</span> <span class="number">1</span>px solid <span class="comment">#ddd;</span></span><br><span class="line"><span class="symbol">  color:</span> <span class="comment">#787878;</span></span><br><span class="line">  <span class="keyword">border-radius: </span><span class="number">3</span>px<span class="comment">;</span></span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js引入、使用组件 SearchInfoItem:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line">    热门搜索</span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoSwitch</span>&gt;</span>换一批<span class="tag">&lt;/<span class="name">SearchInfoSwitch</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>理财<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>毕业<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>手帐<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>简书交友<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>古风<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>故事<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>暖寄归人<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchInfo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmj2084s8j30tc0833yz.jpg" alt="效果"><br>可以看到此时标签没有撑起框，因为<strong>之前我们把外边框高度写死了</strong></p>
+<hr>
+<h2 id="SearchInfoList-所有标签的外框"><a href="#SearchInfoList-所有标签的外框" class="headerlink" title="SearchInfoList 所有标签的外框"></a>SearchInfoList 所有标签的外框</h2><ul>
+<li>了解一下<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">BFC</a></li>
+<li><a href="https://huanglizhu.github.io/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/#通过overflow属性控制父元素宽高" target="_blank" rel="noopener">通过overflow属性控制父元素宽高,解决父级元素高度塌陷<br>通过overflow属性控制父</a></li>
+<li><a href="https://huanglizhu.github.io/2019/10/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E6%B5%AE%E5%8A%A8%EF%BC%89/#使用overflow属性防止浮动的图片溢出容器" target="_blank" rel="noopener">浮动时给父组件添加overflow属性放置浮动元素溢出</a></li>
+</ul>
+<p><strong>1.header-style.js中，删除SearchInfo中的死高度100px，定义组件 SearchInfoList：</strong></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SearchItemList = styled.div`</span><br><span class="line">  <span class="built_in">overflow</span>: hidden;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js引入、使用组件 SearchInfoList:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line">    热门搜索</span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoSwitch</span>&gt;</span>换一批<span class="tag">&lt;/<span class="name">SearchInfoSwitch</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">SearchInfoTitle</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SearchItemList</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>理财<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>毕业<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>手帐<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>简书交友<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>古风<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>故事<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">SearchInfoItem</span>&gt;</span>暖寄归人<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">SearchItemList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchInfo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmj7npi99j30vr07o74q.jpg" alt="效果"></p>
+<hr>
+<h2 id="实现点击显示效果"><a href="#实现点击显示效果" class="headerlink" title="实现点击显示效果"></a>实现点击显示效果</h2><ul>
+<li><strong>实现效果：</strong>点击搜索框则显示“热门搜索框”，搜索框失去焦点时“热门搜索框”消失。</li>
+<li><strong>实现思路：</strong><ol>
+<li>新建一个<strong>函数<code>getListArea()</code></strong>,该函数接收一个<strong>参数<code>show</code>,<code>show</code>为true时显示“热门搜索框”</strong>，为false时隐藏“热门搜索框”。</li>
+<li><strong><code>show</code>为true时，返回“热门搜索框”的所有组件</strong>。</li>
+<li><code>show</code>为false时，返回null（空对象）。</li>
+<li><strong>在SearchWrapper组件中调用函数<code>getListArea()</code>，参数为<code>props.focused</code></strong>。</li>
+</ol>
+</li>
+</ul>
+<p><strong>1.header-index.js新建函数<code>getListArea()</code>:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getListArea = <span class="function">(<span class="params">show</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (show) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;SearchInfo&gt;</span><br><span class="line">        &lt;SearchInfoTitle&gt;</span><br><span class="line">          热门搜索</span><br><span class="line">              &lt;SearchInfoSwitch&gt;换一批&lt;<span class="regexp">/SearchInfoSwitch&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>SearchInfoTitle&gt;</span><br><span class="line">        &lt;SearchItemList&gt;</span><br><span class="line">          &lt;SearchInfoItem&gt;理财&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchInfoItem&gt;毕业&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">          &lt;SearchInfoItem&gt;手帐&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchInfoItem&gt;简书交友&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">          &lt;SearchInfoItem&gt;spring&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchInfoItem&gt;古风&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">          &lt;SearchInfoItem&gt;故事&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchInfoItem&gt;暖寄归人&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">        &lt;<span class="regexp">/SearchItemList&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>SearchInfo&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.header-index.js调用函数<code>getListArea()</code>:</strong></p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">SearchWrapper</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">CSSTransition</span></span></span></span><br><span class="line"><span class="xml">    in=</span><span class="template-variable">&#123;props.focused&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    timeout=</span><span class="template-variable">&#123;200&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    classNames="slide"</span></span><br><span class="line"><span class="xml">  &gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">NavSearch</span></span></span></span><br><span class="line"><span class="xml">      className=</span><span class="template-variable">&#123;props.focused ? "focused" : ""&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      onFocus=</span><span class="template-variable">&#123;props.handleInputFocus&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      onBlur=</span><span class="template-variable">&#123;props.handleInputBlur&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    /&gt;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">CSSTransition</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=</span></span><span class="template-variable">&#123;props.focused ? "focused iconfont" : "iconfont"&#125;</span><span class="xml"><span class="tag">&gt;</span></span></span><br><span class="line"><span class="xml">    &amp;#xe62d;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-variable">&#123;getListArea(props.focused)&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">SearchWrapper</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Ajax获取推荐数据"><a href="#Ajax获取推荐数据" class="headerlink" title="Ajax获取推荐数据"></a>Ajax获取推荐数据</h1><p>上面我们显示的标签是写死的，<strong>现在我们要实现点击搜索框以后 通过AJAX获取数据</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcmn5m8j9gj30xt0873z0.jpg" alt="通过AJAX获取数据"></p>
+<p><strong>思路：</strong></p>
+<ol>
+<li>往组件的<strong>state</strong>中增添一个<strong><code>list</code>数组用于存储标签数据</strong></li>
+<li>使用<strong>redux-thunk中间件使action可以是函数</strong><ul>
+<li><strong>中间件</strong>指的是action和store的“中间”，实际是<strong>对dispatch的一个升级</strong></li>
+<li>原本<strong>actionCreators中返回的action</strong>都只能是对象，使用redux-thunk后<strong>可返回函数（该函数接受dispatch方法作为参数）</strong></li>
+<li>在<strong>创建store时添加中间件</strong>（dispatch是store的方法）</li>
+</ul>
+</li>
+<li><strong>public文件夹下新建api文件夹，新建json文件，模拟假数据</strong><ul>
+<li><strong>注意：</strong>当js页面中向某个接口发出请求获取数据时，项目会先去node中找，<strong>找不到就会去public文件夹中找相应的路径下是否有数据</strong>。</li>
+<li><strong>所以假设接口是<code>/api/headerList.json</code>,那可以在public文件夹下=&gt;新建api文件夹=&gt;新建headerList.json，放置相应假数据</strong></li>
+</ul>
+</li>
+<li>将<strong>AJAX请求写在函数action中</strong>，异步AJAX请求需要借助<strong>第三方模块axios</strong></li>
+<li><strong>reducer处理action，将AJAX获取到的数据放到state的list中</strong></li>
+<li><strong>组件</strong>使用connect的参数1获取state的list，使用map()<strong>循环渲染list数组于页面上</strong>。</li>
+</ol>
+<h2 id="将Header改回容器组件"><a href="#将Header改回容器组件" class="headerlink" title="将Header改回容器组件"></a>将Header改回容器组件</h2><p>目前<strong>header-index.js</strong>中Header组件是<strong>无状态组件，只能通过函数嵌套来添加函数</strong>，但接下来会添加比较多东西，所以<strong>先将Header组件转回 容器组件</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  getListArea(show) &#123;</span><br><span class="line">    <span class="keyword">if</span> (show) &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;SearchInfo&gt;</span><br><span class="line">          &lt;SearchInfoTitle&gt;</span><br><span class="line">            热门搜索</span><br><span class="line">                &lt;SearchInfoSwitch&gt;换一批&lt;<span class="regexp">/SearchInfoSwitch&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>SearchInfoTitle&gt;</span><br><span class="line">          &lt;SearchItemList&gt;</span><br><span class="line">            &lt;SearchInfoItem&gt;理财&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;SearchInfoItem&gt;毕业&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">            &lt;SearchInfoItem&gt;手帐&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;SearchInfoItem&gt;简书交友&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">            &lt;SearchInfoItem&gt;spring&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;SearchInfoItem&gt;古风&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">            &lt;SearchInfoItem&gt;故事&lt;<span class="regexp">/SearchInfoItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;SearchInfoItem&gt;暖寄归人&lt;/</span>SearchInfoItem&gt;</span><br><span class="line">          &lt;<span class="regexp">/SearchItemList&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>SearchInfo&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;HeaderWrapper&gt;</span><br><span class="line">        &lt;Logo /&gt;</span><br><span class="line">        &lt;Nav&gt;</span><br><span class="line">          &lt;NavItem className=<span class="string">"left active"</span>&gt;首页&lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;NavItem className="left"&gt;下载App&lt;/</span>NavItem&gt;</span><br><span class="line">          &lt;NavItem className=<span class="string">"right"</span>&gt;登录&lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;NavItem className="right"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span className="iconfont"&gt;&amp;#xe636;&lt;/</span>span&gt;</span><br><span class="line">          &lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchWrapper&gt;</span></span><br><span class="line"><span class="regexp">            &lt;CSSTransition</span></span><br><span class="line"><span class="regexp">              in=&#123;this.props.focused&#125;</span></span><br><span class="line"><span class="regexp">              timeout=&#123;200&#125;</span></span><br><span class="line"><span class="regexp">              classNames="slide"</span></span><br><span class="line"><span class="regexp">            &gt;</span></span><br><span class="line"><span class="regexp">              &lt;NavSearch</span></span><br><span class="line"><span class="regexp">                className=&#123;this.props.focused ? "focused" : ""&#125;</span></span><br><span class="line"><span class="regexp">                onFocus=&#123;this.props.handleInputFocus&#125;</span></span><br><span class="line"><span class="regexp">                onBlur=&#123;this.props.handleInputBlur&#125;</span></span><br><span class="line"><span class="regexp">              /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/CSSTransition&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span className=&#123;this.props.focused ? "focused iconfont" : "iconfont"&#125;&gt;</span></span><br><span class="line"><span class="regexp">              &amp;#xe62d;</span></span><br><span class="line"><span class="regexp">              &lt;/</span>span&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.getListArea(<span class="keyword">this</span>.props.focused)&#125;</span><br><span class="line">          &lt;<span class="regexp">/SearchWrapper&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Nav&gt;</span><br><span class="line">        &lt;Addition&gt;</span><br><span class="line">          &lt;Button className=<span class="string">"writting"</span>&gt;</span><br><span class="line">            &lt;span className="iconfont"&gt;&amp;#xe6e5;&lt;/span&gt;</span><br><span class="line">            写文章</span><br><span class="line">            &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">          &lt;Button className="reg"&gt;注册&lt;/</span>Button&gt;</span><br><span class="line">        &lt;<span class="regexp">/Addition&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>HeaderWrapper&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用class和Component，将<code>props</code>转回<code>this.props</code>（可使用ctrl+d多选辅助）</li>
+<li>将函数getListArea放入容器组件中，使用<code>this.getListArea()</code>进行调用<br>(注意：写在组件中的函数是<code>getListArea(){...}</code>，写在组件外的函数是<code>const getListArea = ()=&gt;{...}</code>)</li>
+</ol>
+<hr>
+<h2 id="state中增添一个list数组"><a href="#state中增添一个list数组" class="headerlink" title="state中增添一个list数组"></a>state中增添一个<code>list</code>数组</h2><p><strong>headet-store-reducer.js</strong>往state中增添一个<code>list</code>数组用于存储标签数据:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">const</span> <span class="string">defaultState</span> <span class="string">=</span> <span class="string">fromJS(&#123;</span></span><br><span class="line"><span class="attr">  focused:</span> <span class="literal">false</span><span class="string">,</span></span><br><span class="line"><span class="attr">  list:</span> <span class="string">[]</span></span><br><span class="line"><span class="string">&#125;);</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置redux-thunk中间件"><a href="#配置redux-thunk中间件" class="headerlink" title="配置redux-thunk中间件"></a>配置redux-thunk中间件</h2><p><strong>使用redux-thunk使action中可以写函数</strong>，我们<strong>将AJAX请求写在函数action中</strong>。</p>
+<p><strong>1.安装redux-thunk</strong>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> redux-thunk</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>复习中间件：</strong>指的是action和store的“中间”，实际是<strong>对dispatch的一个升级。</strong></p>
+<p><strong>2.创建store时（即src-store-index.js）添加中间件：</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createStore, compose, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</span><br><span class="line">import reducer <span class="keyword">from</span> <span class="string">"./reducer"</span>;</span><br><span class="line">import thunk <span class="keyword">from</span> <span class="string">"redux-thunk"</span></span><br><span class="line"></span><br><span class="line">const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;</span><br><span class="line">const store = createStore(reducer, composeEnhancers(</span><br><span class="line">  applyMiddleware(thunk)</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>store;</span><br></pre></td></tr></table></figure>
+
+<p>通过redux提供的applyMiddleware可将redux-thunk中引入的thunk添加进store。</p>
+<h2 id="public下模拟假数据"><a href="#public下模拟假数据" class="headerlink" title="public下模拟假数据"></a>public下模拟假数据</h2><ul>
+<li>AJAX请求的接口下得返回数据给页面，那么返回的数据就需要我们进行模拟。</li>
+<li><strong>注意：</strong>当js页面中向某个接口发出请求获取数据时，项目会先去node中找，<strong>找不到就会去public文件夹中找相应的路径下是否有数据</strong>。</li>
+<li><strong>所以假设接口是<code>/api/headerList.json</code>,那可以在public文件夹下=&gt;新建api文件夹=&gt;新建headerList.json，放置相应假数据</strong></li>
+<li><strong>注意</strong>：这种写法就不能使用mock.js去模拟假数据，因为public下的文件中获取到的内容是被直接显示的，不会进行编译。而且mockjs会帮助拦截请求，写到public下也没办法让使用AJAX的组件引入mockjs。</li>
+</ul>
+<p><strong>public文件夹下=&gt;新建api文件夹=&gt;新建headerList.json：</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"sucess"</span>:<span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"data"</span>:[<span class="string">"简书"</span>,<span class="string">"理财"</span>,<span class="string">"毕业"</span>,<span class="string">"手帐"</span>,<span class="string">"简书交友"</span>,<span class="string">"spring"</span>,<span class="string">"古风"</span>,<span class="string">"故事"</span>,<span class="string">"暖寄归人"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件中发送含有AJAX的action"><a href="#组件中发送含有AJAX的action" class="headerlink" title="组件中发送含有AJAX的action"></a>组件中发送含有AJAX的action</h2><p>当搜索框NavSearch聚焦时会触动handleInputFocus函数，所以我们<strong>将AJAX获取数据的action(即actionCreators.js中的getList())写在handleInputFocus函数中</strong>即可：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const mapDispatchProps =<span class="function"> (<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    handle<span class="constructor">InputFocus()</span> &#123;</span><br><span class="line">      dispatch(actionCreators.get<span class="constructor">List()</span>);</span><br><span class="line">      dispatch(actionCreators.search<span class="constructor">Focus()</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    handle<span class="constructor">InputBlur()</span> &#123;</span><br><span class="line">      dispatch(actionCreators.search<span class="constructor">Blur()</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="action中使用axios库进行AJAX请求"><a href="#action中使用axios库进行AJAX请求" class="headerlink" title="action中使用axios库进行AJAX请求"></a>action中使用axios库进行AJAX请求</h2><ul>
+<li>异步请求需要借助第三方模块axios</li>
+</ul>
+<p><strong>1.安装axios库</strong>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="keyword">add</span><span class="bash"> axios</span></span><br></pre></td></tr></table></figure>
+
+<p>2.<strong>header-store-actionCreators.js中，引入axios并创建getList()用于获取AJAX数据：</strong></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const changeList = <span class="function"><span class="params">(data)</span> =&gt;</span> (&#123;</span><br><span class="line">  type: constants.CHANG_LIST,</span><br><span class="line">  data</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> const getList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (dispatch) =&gt; &#123;</span><br><span class="line">    axios.get(<span class="string">"/api/headerList.json"</span>).<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">      const data = res.data;</span><br><span class="line">      dispatch(changeList(data.data));</span><br><span class="line">    &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>原本<strong>actionCreators中返回的action</strong>都只能是对象，使用redux-thunk后<strong>可返回函数</strong>（该函数接受dispatch方法作为参数）</p>
+<p>3.<strong>注意：fromJS会自动将对象中的数组变成immutable类型的数组</strong>，所以在reducer中使用set()修改数组的时候<strong>要求修改的数据也是immutable类型的</strong>，否则数据类型就乱了。所以我们要在<strong>actionCreators.js中使用fromJS使data也成为immutable类型</strong></p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">"immutable"</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const changeList = (<span class="name">data</span>) =&gt; (&#123;</span><br><span class="line">  type: constants.CHANG_LIST,</span><br><span class="line">  data: fromJS(<span class="name">data</span>)</span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="reducer处理action中AJAX获取到的数据"><a href="#reducer处理action中AJAX获取到的数据" class="headerlink" title="reducer处理action中AJAX获取到的数据"></a>reducer处理action中AJAX获取到的数据</h2><p>action发出以后就要到<strong>reducer.js中处理这个action</strong>，将AJAX获取到的数据放到list中：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (action.type === constants.CHANG_LIST) &#123;</span><br><span class="line">  return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"list"</span>, action.data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取list数据循环显示在页面上"><a href="#获取list数据循环显示在页面上" class="headerlink" title="获取list数据循环显示在页面上"></a>获取list数据循环显示在页面上</h2><p>原本我们把标签数据都写死了，现在我们要在connect方法的参数1 <strong>mapStateToProps函数中将store的list取到</strong>，然后<strong>修改getListArea方法，循环显示list中的数据</strong>。</p>
+<p><strong>header-index.js:</strong><br><strong>1.使用mapStateToProps函数将store的list取到：</strong></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const mapStateToProps = (<span class="keyword">state</span>) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    focused: <span class="keyword">state</span>.getIn([<span class="string">"header"</span>, <span class="string">"focused"</span>]),</span><br><span class="line">    list: <span class="keyword">state</span>.getIn([<span class="string">"header"</span>, <span class="string">"list"</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.修改getListArea方法，循环显示list中的数据：</strong></p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">getListArea() &#123;</span><br><span class="line">  <span class="keyword">if</span> (this.props.focused) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">SearchInfo</span>&gt;</span></span></span><br><span class="line"><span class="xml">        </span><span class="xml"><span class="tag">&lt;<span class="name">SearchInfoTitle</span>&gt;</span></span></span><br><span class="line"><span class="xml">          热门搜索</span></span><br><span class="line"><span class="xml">              </span><span class="xml"><span class="tag">&lt;<span class="name">SearchInfoSwitch</span>&gt;</span>换一批<span class="tag">&lt;/<span class="name">SearchInfoSwitch</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">SearchInfoTitle</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml">        </span><span class="xml"><span class="tag">&lt;<span class="name">SearchItemList</span>&gt;</span></span></span><br><span class="line"><span class="xml">          </span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">            this.props.list.<span class="keyword">map</span>((<span class="type">item</span>) =&gt; &#123;</span></span><br><span class="line"><span class="xquery">            <span class="keyword">return</span> &lt;SearchInfoItem<span class="built_in"> key</span>=&#123;<span class="type">item</span>&#125;</span><span class="xml">&gt;</span><span class="xquery">&#123;<span class="type">item</span>&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml">            &#125;)</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">SearchItemList</span>&gt;</span></span></span><br><span class="line">      &lt;/SearchInfo&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> null;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h1><h2 id="actionCreator-js需要导出的函数放一起"><a href="#actionCreator-js需要导出的函数放一起" class="headerlink" title="actionCreator.js需要导出的函数放一起"></a>actionCreator.js需要导出的函数放一起</h2><ul>
+<li>actionCreator中作为AJAX请求的函数changeList是不需要导出的，<strong>建议将不需要导出的函数统一放在顶部/底部</strong>。</li>
+<li>明确表示哪些函数是自己用的，哪些函数是导出给别人用的。</li>
+</ul>
+<p><strong>actionCreator.js：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; constants &#125; <span class="keyword">from</span> <span class="string">"../store"</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">"immutable"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> changeList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">  <span class="keyword">type</span>: constants.CHANG_LIST,</span><br><span class="line">  data: fromJS(data)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> searchFocus = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">  <span class="keyword">type</span>: constants.SEARCH_FOCUS</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> searchBlur = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">  <span class="keyword">type</span>: constants.SEARCH_BLUR</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">    axios.get(<span class="string">"/api/headerList.json"</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> data = res.data;</span><br><span class="line">      dispatch(changeList(data.data));</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="函数顶部解构赋值一次性获取props上的值"><a href="#函数顶部解构赋值一次性获取props上的值" class="headerlink" title="函数顶部解构赋值一次性获取props上的值"></a>函数顶部解构赋值一次性获取props上的值</h2><p>组件中很多地方会重复使用<code>this.props.xxx</code>来取值，那么我们可以<strong>在函数顶部使用<code>const {xx,xxx,xxx} = this.props;</code>来一次性获取props上的值</strong>，接下来只要使用<code>xx</code>即可。</p>
+<p><strong>header-index.js:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; actionCreators &#125; <span class="keyword">from</span> <span class="string">"./store"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CSSTransition &#125; <span class="keyword">from</span> <span class="string">'react-transition-group'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  HeaderWrapper,</span><br><span class="line">  Logo,</span><br><span class="line">  Nav,</span><br><span class="line">  NavItem,</span><br><span class="line">  NavSearch,</span><br><span class="line">  Addition,</span><br><span class="line">  Button,</span><br><span class="line">  SearchWrapper,</span><br><span class="line">  SearchInfo,</span><br><span class="line">  SearchInfoTitle,</span><br><span class="line">  SearchInfoSwitch,</span><br><span class="line">  SearchInfoItem,</span><br><span class="line">  SearchItemList,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"./style"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  getListArea() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; focused, list &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">if</span> (focused) &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;SearchInfo&gt;</span><br><span class="line">          &lt;SearchInfoTitle&gt;</span><br><span class="line">            热门搜索</span><br><span class="line">                &lt;SearchInfoSwitch&gt;换一批&lt;<span class="regexp">/SearchInfoSwitch&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>SearchInfoTitle&gt;</span><br><span class="line">          &lt;SearchItemList&gt;</span><br><span class="line">            &#123;</span><br><span class="line">              list.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">SearchInfoItem</span> <span class="attr">key</span>=<span class="string">&#123;item&#125;</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">SearchInfoItem</span>&gt;</span></span></span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">          &lt;<span class="regexp">/SearchItemList&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>SearchInfo&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; focused, handleInputFocus, handleInputBlur &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;HeaderWrapper&gt;</span><br><span class="line">        &lt;Logo /&gt;</span><br><span class="line">        &lt;Nav&gt;</span><br><span class="line">          &lt;NavItem className=<span class="string">"left active"</span>&gt;首页&lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;NavItem className="left"&gt;下载App&lt;/</span>NavItem&gt;</span><br><span class="line">          &lt;NavItem className=<span class="string">"right"</span>&gt;登录&lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;NavItem className="right"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span className="iconfont"&gt;&amp;#xe636;&lt;/</span>span&gt;</span><br><span class="line">          &lt;<span class="regexp">/NavItem&gt;</span></span><br><span class="line"><span class="regexp">          &lt;SearchWrapper&gt;</span></span><br><span class="line"><span class="regexp">            &lt;CSSTransition</span></span><br><span class="line"><span class="regexp">              in=&#123;focused&#125;</span></span><br><span class="line"><span class="regexp">              timeout=&#123;200&#125;</span></span><br><span class="line"><span class="regexp">              classNames="slide"</span></span><br><span class="line"><span class="regexp">            &gt;</span></span><br><span class="line"><span class="regexp">              &lt;NavSearch</span></span><br><span class="line"><span class="regexp">                className=&#123;focused ? "focused" : ""&#125;</span></span><br><span class="line"><span class="regexp">                onFocus=&#123;handleInputFocus&#125;</span></span><br><span class="line"><span class="regexp">                onBlur=&#123;handleInputBlur&#125;</span></span><br><span class="line"><span class="regexp">              /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/CSSTransition&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span className=&#123;focused ? "focused iconfont" : "iconfont"&#125;&gt;</span></span><br><span class="line"><span class="regexp">              &amp;#xe62d;</span></span><br><span class="line"><span class="regexp">              &lt;/</span>span&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.getListArea()&#125;</span><br><span class="line">          &lt;<span class="regexp">/SearchWrapper&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Nav&gt;</span><br><span class="line">        &lt;Addition&gt;</span><br><span class="line">          &lt;Button className=<span class="string">"writting"</span>&gt;</span><br><span class="line">            &lt;span className="iconfont"&gt;&amp;#xe6e5;&lt;/span&gt;</span><br><span class="line">            写文章</span><br><span class="line">            &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">          &lt;Button className="reg"&gt;注册&lt;/</span>Button&gt;</span><br><span class="line">        &lt;<span class="regexp">/Addition&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>HeaderWrapper&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    focused: state.getIn([<span class="string">"header"</span>, <span class="string">"focused"</span>]),</span><br><span class="line">    list: state.getIn([<span class="string">"header"</span>, <span class="string">"list"</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    handleInputFocus() &#123;</span><br><span class="line">      dispatch(actionCreators.getList());</span><br><span class="line">      dispatch(actionCreators.searchFocus());</span><br><span class="line">    &#125;,</span><br><span class="line">    handleInputBlur() &#123;</span><br><span class="line">      dispatch(actionCreators.searchBlur());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, mapDispatchProps)(Header);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="用switch替换大量if"><a href="#用switch替换大量if" class="headerlink" title="用switch替换大量if"></a>用switch替换大量if</h2><ul>
+<li>在reducer中我们使用了大量的if语句，使用<a href="https://www.runoob.com/js/js-switch.html" target="_blank" rel="noopener">switch</a>替换会更好。</li>
+<li>一般要使用 break 来阻止代码自动地向下一个 case 运行。但由于我们使用了return，也就不需要break了。</li>
+</ul>
+<p><strong>header-store-reducer.js:</strong></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import * as constants <span class="keyword">from</span> <span class="string">"./constants"</span>;</span><br><span class="line">import &#123; <span class="keyword">from</span>JS &#125; <span class="keyword">from</span> <span class="string">"immutable"</span>;</span><br><span class="line"></span><br><span class="line">// immutable对象 是不可改变的</span><br><span class="line">const <span class="keyword">default</span>State = <span class="keyword">from</span>JS(&#123;</span><br><span class="line">  focused: false,</span><br><span class="line">  list: []</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> (<span class="keyword">state</span> = <span class="keyword">default</span>State, action) =&gt; &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case constants.SEARCH_FOCUS:</span><br><span class="line">      return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"focused"</span>, true);</span><br><span class="line">    case constants.SEARCH_BLUR:</span><br><span class="line">      return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"focused"</span>, false);</span><br><span class="line">    case constants.CHANG_LIST:</span><br><span class="line">      return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"list"</span>, action.data);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      return <span class="keyword">state</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/29/react中模拟假数据的方法总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          react中模拟假数据的方法总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/27/简书Header组件开发（使用immutable.js库、redux-immutable库）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">简书Header组件开发（使用immutable.js库、redux-immutable库）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#热门搜索样式布局"><span class="nav-number">1.</span> <span class="nav-text">热门搜索样式布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#热门搜索框SearchInfo"><span class="nav-number">1.1.</span> <span class="nav-text">热门搜索框SearchInfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“热门搜索”SearchInfoTitle"><span class="nav-number">1.2.</span> <span class="nav-text">“热门搜索”SearchInfoTitle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“换一批”SearchInfoSwitch"><span class="nav-number">1.3.</span> <span class="nav-text">“换一批”SearchInfoSwitch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签-SearchInfoItem"><span class="nav-number">1.4.</span> <span class="nav-text">标签 SearchInfoItem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SearchInfoList-所有标签的外框"><span class="nav-number">1.5.</span> <span class="nav-text">SearchInfoList 所有标签的外框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现点击显示效果"><span class="nav-number">1.6.</span> <span class="nav-text">实现点击显示效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax获取推荐数据"><span class="nav-number">2.</span> <span class="nav-text">Ajax获取推荐数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#将Header改回容器组件"><span class="nav-number">2.1.</span> <span class="nav-text">将Header改回容器组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state中增添一个list数组"><span class="nav-number">2.2.</span> <span class="nav-text">state中增添一个list数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置redux-thunk中间件"><span class="nav-number">2.3.</span> <span class="nav-text">配置redux-thunk中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public下模拟假数据"><span class="nav-number">2.4.</span> <span class="nav-text">public下模拟假数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件中发送含有AJAX的action"><span class="nav-number">2.5.</span> <span class="nav-text">组件中发送含有AJAX的action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#action中使用axios库进行AJAX请求"><span class="nav-number">2.6.</span> <span class="nav-text">action中使用axios库进行AJAX请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reducer处理action中AJAX获取到的数据"><span class="nav-number">2.7.</span> <span class="nav-text">reducer处理action中AJAX获取到的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取list数据循环显示在页面上"><span class="nav-number">2.8.</span> <span class="nav-text">获取list数据循环显示在页面上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码优化"><span class="nav-number">3.</span> <span class="nav-text">代码优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#actionCreator-js需要导出的函数放一起"><span class="nav-number">3.1.</span> <span class="nav-text">actionCreator.js需要导出的函数放一起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数顶部解构赋值一次性获取props上的值"><span class="nav-number">3.2.</span> <span class="nav-text">函数顶部解构赋值一次性获取props上的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用switch替换大量if"><span class="nav-number">3.3.</span> <span class="nav-text">用switch替换大量if</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
