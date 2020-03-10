@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblr6ohnoxj31gh0d7q6e.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gblrad9lpuj30nv0eldi5.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbltsm2nohj30qd0a00u6.jpg">
-<meta property="og:updated_time" content="2020-02-25T14:03:58.313Z">
+<meta property="og:updated_time" content="2020-03-10T03:24:00.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React 高级内容（2）">
 <meta name="twitter:description" content="React中ref的使用（尽量不用）ref-&amp;gt;reference 引用在React中我们可以使用ref来直接完成DOM的引用。">
@@ -187,7 +187,13 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">"inserArea"</span></span><br><span class="line">  className=<span class="string">"input"</span></span><br><span class="line">  value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">  onChange=&#123;this.handleInputChange&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkns6l8q6j312w0f3n1m.jpg" alt="TodoList中"><br><strong>我们可以通过<code>e.target</code>来获取元素对应的DOM，也可以通过ref来获取元素对应的DOM。</strong></p>
-<h2 id="使用ref引用对应的DOM元素"><a href="#使用ref引用对应的DOM元素" class="headerlink" title="使用ref引用对应的DOM元素"></a>使用ref引用对应的DOM元素</h2><p><strong>在react16的语法中，ref等于一个函数，这个函数自动接收一个参数，参数名可以自定义</strong>:<code>ref={(input) =&gt; { this.input = input }}</code></p>
+<h2 id="使用ref引用对应的DOM元素"><a href="#使用ref引用对应的DOM元素" class="headerlink" title="使用ref引用对应的DOM元素"></a>使用ref引用对应的DOM元素</h2><ul>
+<li><strong>在react16的语法中，ref等于一个函数，这个函数自动接收一个参数（即对应的DOM元素），参数名可以自定义</strong></li>
+<li><code>ref={(input) =&gt; { this.input = input }}</code><ul>
+<li>我们给<strong>获取到的对应DOM元素</strong>取名input，将它<strong>赋值给this.input</strong>，则接下来在<strong>组件中可以通过this.input来操作这个DOM元素</strong>。</li>
+</ul>
+</li>
+</ul>
 <p><strong>可改写 TodoList</strong>，render函数中:</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  id=<span class="string">"inserArea"</span></span><br><span class="line">  className=<span class="string">"input"</span></span><br><span class="line">  value=&#123;this<span class="selector-class">.state</span><span class="selector-class">.inputValue</span>&#125;</span><br><span class="line">  onChange=&#123;this.handleInputChange&#125;</span><br><span class="line">  <span class="comment">//`this.input` 指input对应的DOM元素</span></span><br><span class="line">  ref=&#123;(refInput) =&gt; &#123; this<span class="selector-class">.input</span> = refInput &#125;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
 

@@ -19,12 +19,13 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="总结 immutable.js库/redux-immutable库 都可生成不可改变的immutable对象,但使用场景不同。 immutable.js库的fromJS()：接受组件的state对象，返回immutable对象类型的state。 redux-immutable库的combineReducers()：接受各个组件的reducer，返回immutable对象类型的 总state。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gco42t25xmj30l308ewfb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcme41e5szj30th083myb.jpg">
-<meta property="og:updated_time" content="2020-03-08T12:14:27.892Z">
+<meta property="og:updated_time" content="2020-03-09T15:56:56.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简书Header组件开发（使用immutable.js库、redux-immutable库）">
 <meta name="twitter:description" content="总结 immutable.js库/redux-immutable库 都可生成不可改变的immutable对象,但使用场景不同。 immutable.js库的fromJS()：接受组件的state对象，返回immutable对象类型的state。 redux-immutable库的combineReducers()：接受各个组件的reducer，返回immutable对象类型的 总state。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcme41e5szj30th083myb.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gco42t25xmj30l308ewfb.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -240,10 +241,39 @@
 <li><strong>参数2：想要修改的属性值</strong></li>
 </ul>
 </li>
+<li><strong>语法：</strong><code>immutable对象.set(&quot;属性名&quot;,属性值)</code></li>
 <li><strong>注意</strong>：immutable对象 是不可改变的，<strong>set()不会改变 immutable对象</strong>，他会结合 之前的immutable对象的值 和 通过参数修改的值，<strong>返回全新的对象</strong>。</li>
 </ul>
 <p><strong>header-reducer.js中</strong>，需要返回新的state，即新的immutable对象：</p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> (<span class="keyword">state</span> = <span class="keyword">default</span>State, action) =&gt; &#123;</span><br><span class="line">  if (action.type === constants.SEARCH_FOCUS) &#123;</span><br><span class="line">    // <span class="built_in">set</span>()不会改变 immutable对象</span><br><span class="line">    // 他会结合 之前的immutable对象的值 和 通过参数修改的值，返回全新的对象</span><br><span class="line">    return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"focused"</span>, true);</span><br><span class="line">  &#125;</span><br><span class="line">  if (action.type === constants.SEARCH_BLUR) &#123;</span><br><span class="line">    return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">"focused"</span>, false);</span><br><span class="line">  &#125;</span><br><span class="line">  return <span class="keyword">state</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="补充：getIn-代替连续get"><a href="#补充：getIn-代替连续get" class="headerlink" title="补充：getIn()代替连续get()"></a>补充：getIn()代替连续get()</h2><ul>
+<li>想要<strong>获取immutable对象的属性的属性</strong>时可使用getIn()</li>
+<li>详细用法可参考<a href="https://immutable-js.github.io/immutable-js/docs/#/getIn" target="_blank" rel="noopener">immutable.js官方文档</a></li>
+<li>getIn()接受一个<strong>数组作为参数</strong>，<strong>数组元素为字符串类型</strong><ul>
+<li><code>immutable对象.getIn([&quot;参数1&quot;,&quot;参数2&quot;])</code>表示获取immutable对象的参数1下的属性2。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">immutable</span>对象.get(<span class="string">"属性名a"</span>).get(<span class="string">"属性名b"</span>)</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">immutable</span>对象.<span class="keyword">getIn</span>([<span class="string">"属性名a"</span>,<span class="string">"属性名b"</span>])</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="补充：merge-代替连续set"><a href="#补充：merge-代替连续set" class="headerlink" title="补充：merge()代替连续set()"></a>补充：merge()代替连续set()</h2><ul>
+<li>详细用法可参考<a href="https://immutable-js.github.io/immutable-js/docs/#/merge" target="_blank" rel="noopener">官方文档</a></li>
+<li>需要连续修改数据后返回immutable对象时，可使用merge()<strong>合成</strong>多次修改。</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">immutable对象.set(<span class="string">"属性名a"</span>,属性值a).set(<span class="string">"属性名b"</span>,属性值b)</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">merge(&#123;</span><br><span class="line">    属性名<span class="selector-tag">a</span>:属性值<span class="selector-tag">a</span>,</span><br><span class="line">    属性名<span class="selector-tag">b</span>:属性值b</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="补充：ToJS-将immutable对象-gt-JS对象"><a href="#补充：ToJS-将immutable对象-gt-JS对象" class="headerlink" title="补充：ToJS()将immutable对象=&gt;JS对象"></a>补充：ToJS()将immutable对象=&gt;JS对象</h2><ul>
+<li><strong>注意：对象包括数组</strong></li>
+<li><strong>语法:<code>const JS对象 = immutable对象.toJS();</code></strong></li>
+<li>作为state，我们不希望他改变，但是<strong>state中的数组我们是可以允许改变的</strong>，将state生成为immutable对象时<strong>顺便生成的immutable数组</strong>就可<strong>使用ToJS()将其转换为JS数组，以方便修改</strong>。</li>
+</ul>
+<p>在reducer中，我们<strong>将state生成为immutable对象后</strong>，其中的<strong>数组也会成为immutable数组</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gco42t25xmj30l308ewfb.jpg" alt="immutable数组"></p>
+<p>那后续的数组修改就会变得很麻烦，所以<strong>想要修改数组前可使用ToJS()将immutable数组转回JS数组</strong>：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const newList = <span class="built_in">list</span>.<span class="keyword">to</span><span class="constructor">JS()</span>;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h1 id="redux-immutable库-生成不可改变的对象"><a href="#redux-immutable库-生成不可改变的对象" class="headerlink" title="redux-immutable库 生成不可改变的对象"></a>redux-immutable库 生成不可改变的对象</h1><ul>
@@ -276,15 +306,7 @@
 <h3 id="使用immutable对象的get"><a href="#使用immutable对象的get" class="headerlink" title="使用immutable对象的get()"></a>使用immutable对象的get()</h3><p><strong>header-index.js中,</strong>由于最外层state也成为了immutable对象，所以获取state的header时要使用get()：</p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const mapStateToProps = (<span class="keyword">state</span>) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    focused: <span class="keyword">state</span>.get(<span class="string">"header"</span>).get(<span class="string">"focused"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="immutable对象的getIn-获取属性的属性"><a href="#immutable对象的getIn-获取属性的属性" class="headerlink" title="immutable对象的getIn()获取属性的属性"></a>immutable对象的getIn()获取属性的属性</h3><ul>
-<li>想要<strong>获取immutable对象的属性的属性</strong>时可使用getIn()</li>
-<li>详细用法可参考<a href="https://immutable-js.github.io/immutable-js/docs/#/getIn" target="_blank" rel="noopener">immutable.js官方文档</a></li>
-<li>getIn()接受一个<strong>数组作为参数</strong>，<strong>数组元素为字符串类型</strong><ul>
-<li><code>immutable对象.getIn([&quot;参数1&quot;,&quot;参数2&quot;])</code>表示获取immutable对象的参数1下的属性2.</li>
-</ul>
-</li>
-</ul>
-<p><strong>上面header-index.js的代码可改为：</strong></p>
+<h3 id="immutable对象的getIn-获取属性的属性"><a href="#immutable对象的getIn-获取属性的属性" class="headerlink" title="immutable对象的getIn()获取属性的属性"></a>immutable对象的getIn()获取属性的属性</h3><p><strong>上面header-index.js的代码可改为：</strong></p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const mapStateToProps = (<span class="keyword">state</span>) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    focused: <span class="keyword">state</span>.getIn([<span class="string">"header"</span>, <span class="string">"focused"</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
@@ -359,7 +381,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拆分actionCreators与constants"><span class="nav-number">2.</span> <span class="nav-text">拆分actionCreators与constants</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分constants-js"><span class="nav-number">2.1.</span> <span class="nav-text">拆分constants.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分actionCreators-js"><span class="nav-number">2.2.</span> <span class="nav-text">拆分actionCreators.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#immutable-js库-生成不可改变的对象"><span class="nav-number">3.</span> <span class="nav-text">immutable.js库 生成不可改变的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用immutable-js管理store中的数据"><span class="nav-number">3.1.</span> <span class="nav-text">使用immutable.js管理store中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装immutable库"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装immutable库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable库的fromJS-生成immutable对象"><span class="nav-number">3.1.2.</span> <span class="nav-text">immutable库的fromJS()生成immutable对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的get-获取对象属性"><span class="nav-number">3.1.3.</span> <span class="nav-text">immutable对象的get()获取对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的set-返回新对象"><span class="nav-number">3.1.4.</span> <span class="nav-text">immutable对象的set()返回新对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux-immutable库-生成不可改变的对象"><span class="nav-number">4.</span> <span class="nav-text">redux-immutable库 生成不可改变的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用redux-immutable统一数据格式"><span class="nav-number">4.1.</span> <span class="nav-text">使用redux-immutable统一数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装redux-immutable库"><span class="nav-number">4.1.1.</span> <span class="nav-text">安装redux-immutable库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-immutable库的combineReducers-生成immutable对象"><span class="nav-number">4.1.2.</span> <span class="nav-text">redux-immutable库的combineReducers()生成immutable对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用immutable对象的get"><span class="nav-number">4.1.3.</span> <span class="nav-text">使用immutable对象的get()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的getIn-获取属性的属性"><span class="nav-number">4.1.4.</span> <span class="nav-text">immutable对象的getIn()获取属性的属性</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拆分actionCreators与constants"><span class="nav-number">2.</span> <span class="nav-text">拆分actionCreators与constants</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分constants-js"><span class="nav-number">2.1.</span> <span class="nav-text">拆分constants.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分actionCreators-js"><span class="nav-number">2.2.</span> <span class="nav-text">拆分actionCreators.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#immutable-js库-生成不可改变的对象"><span class="nav-number">3.</span> <span class="nav-text">immutable.js库 生成不可改变的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用immutable-js管理store中的数据"><span class="nav-number">3.1.</span> <span class="nav-text">使用immutable.js管理store中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装immutable库"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装immutable库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable库的fromJS-生成immutable对象"><span class="nav-number">3.1.2.</span> <span class="nav-text">immutable库的fromJS()生成immutable对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的get-获取对象属性"><span class="nav-number">3.1.3.</span> <span class="nav-text">immutable对象的get()获取对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的set-返回新对象"><span class="nav-number">3.1.4.</span> <span class="nav-text">immutable对象的set()返回新对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：getIn-代替连续get"><span class="nav-number">3.2.</span> <span class="nav-text">补充：getIn()代替连续get()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：merge-代替连续set"><span class="nav-number">3.3.</span> <span class="nav-text">补充：merge()代替连续set()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：ToJS-将immutable对象-gt-JS对象"><span class="nav-number">3.4.</span> <span class="nav-text">补充：ToJS()将immutable对象=&gt;JS对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux-immutable库-生成不可改变的对象"><span class="nav-number">4.</span> <span class="nav-text">redux-immutable库 生成不可改变的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用redux-immutable统一数据格式"><span class="nav-number">4.1.</span> <span class="nav-text">使用redux-immutable统一数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装redux-immutable库"><span class="nav-number">4.1.1.</span> <span class="nav-text">安装redux-immutable库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-immutable库的combineReducers-生成immutable对象"><span class="nav-number">4.1.2.</span> <span class="nav-text">redux-immutable库的combineReducers()生成immutable对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用immutable对象的get"><span class="nav-number">4.1.3.</span> <span class="nav-text">使用immutable对象的get()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable对象的getIn-获取属性的属性"><span class="nav-number">4.1.4.</span> <span class="nav-text">immutable对象的getIn()获取属性的属性</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

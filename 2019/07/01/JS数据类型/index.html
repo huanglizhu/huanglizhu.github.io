@@ -20,7 +20,7 @@
 <meta property="og:description" content="很好的验证方法：在控制台中打印1console.log(变量名);  打印出的内容需要到网页F12中的console部分查看">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkalaf2jij307m03bwee.jpg">
-<meta property="og:updated_time" content="2020-02-04T05:49:22.356Z">
+<meta property="og:updated_time" content="2020-03-10T04:05:55.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS数据类型">
 <meta name="twitter:description" content="很好的验证方法：在控制台中打印1console.log(变量名);  打印出的内容需要到网页F12中的console部分查看">
@@ -187,16 +187,14 @@
 <td>返回值</td>
 <td>类型，有可能是：string、number、 boolean、 object、undefined、function</td>
 </tr>
-<tr>
-<td><strong>举例</strong>:</td>
-<td></td>
-</tr>
-<tr>
-<td><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> name_01=<span class="string">"marry"</span>,age=<span class="number">18</span>,email=<span class="string">"marry@qq.com"</span>,address;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 在控制台中打印</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="keyword">typeof</span> name_01);</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></td>
-<td></td>
-</tr>
 </tbody></table>
-<p><strong>结果</strong>：在网页F12中看到的就是string</p>
+<p><code>typeof</code>能得到的<strong>6种</strong>类型：<strong>undefined、string、number、object、function。</strong><br><strong>(注意：null 空指针，也是一个对象)</strong></p>
+<p><strong>但是，typeof运算符 只能区分 值类型</strong>：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>;<span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"hlz"</span>;<span class="comment">//string</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">123</span>;<span class="comment">//number</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span>;<span class="comment">//boolean</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>对于 引用类型 ，typeof运算符只能区分出 函数</strong> ：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> &#123;&#125;;<span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> [];<span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>;<span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="built_in">console</span>.log;<span class="comment">//function</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>注意</strong>：<br><strong>typeof来判断数据类型其实并不准确</strong>。比如<strong>数组、正则、日期、对象的typeof返回值都是object</strong>，这就会造成一些误差。<br><strong>准确判断可以从构造函数（instanceof）、原型链（prototype.isPrototypeOf）上下手，具体可以看下面的“如何判断一个对象是不是数组类型”中的例子。</strong></p>
 <hr>
 <h1 id="null空对象指针"><a href="#null空对象指针" class="headerlink" title="null空对象指针"></a>null空对象指针</h1><ol>
@@ -268,24 +266,35 @@
 <li><strong>只有数字开头的字符串可以使用parseInt（）和parseFloat（），非数字开头的只能使用Number（）</strong>【实际上非数字开头用Number（）也没用】</li>
 </ul>
 <hr>
-<h2 id="parseInt（）"><a href="#parseInt（）" class="headerlink" title="parseInt（）"></a>parseInt（）</h2><p>parseInt（） ：<br>会忽略字符串前面的空格，直至找到第一个非空格字符。==也就是说，要想让parseInt（）提取数字，字符串必须是数字开头，比如”18px”，不能是”abc18”。<strong>parseInt(“abc18”)会得到NaN</strong>==</p>
-<ul>
+<h2 id="parseInt（）"><a href="#parseInt（）" class="headerlink" title="parseInt（）"></a>parseInt（）</h2><ul>
+<li>parseInt() 函数可解析一个字符串，并返回一个整数。</li>
+<li><strong>语法</strong>：<code>parseInt(string, radix)</code><ul>
+<li><strong>string:必需</strong>。要被解析的字符串。（<strong>空则返回Nan</strong>）</li>
+<li><strong>radix:可选</strong>。表示要解析的数字的基数<strong>(即多少进制)</strong>。【面试常考】<ul>
+<li>该值<strong>介于 2 ~ 36 之间</strong>。如果<strong>radix小于 2 或者大于 36，则 parseInt() 将返回 NaN。</strong></li>
+<li><strong>省略radix或其值为 0，parseInt() 会根据 string 来判断数字的基数。</strong><ul>
+<li>如果 string 以 1 ~ 9 的数字开头，则数字将以 10 为基础来解析。(即解析为十进制的整数)</li>
+<li>如果<strong>string以 “0x” 或 “0X” 开头</strong>，将以 16 为基数。(即把 string 的其余部分解析为<strong>十六进制的整数</strong>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>parseInt（）会<strong>忽略字符串前面的空格</strong>，直至找到第一个非空格字符。<strong>如果字符串的第一个字符不能被转换为数字，那么 parseFloat() 会返回 NaN。</strong><ul>
+<li>也就是说，要<strong>想让parseInt（）提取数字，字符串必须是数字开头，比如”18px”，不能是”abc18”。<em>parseInt(“abc18”)会得到NaN</em></strong></li>
+</ul>
+</li>
+<li><strong>注意：</strong>转换空字符串返回NaN。</li>
 <li>举例：</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> topval=<span class="built_in">parseInt</span>(<span class="string">"28px"</span>);</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> c=<span class="string">"abc28"</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 在控制台中打印</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(topval);<span class="comment">//得到的是28</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(c));<span class="comment">//得到的是NaN</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">"10"</span>);			<span class="comment">//返回 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"19"</span>,<span class="number">10</span>);		<span class="comment">//返回 19 (10+9)</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"11"</span>,<span class="number">2</span>);		<span class="comment">//返回 3 (2+1)</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"17"</span>,<span class="number">8</span>);		<span class="comment">//返回 15 (8+7)</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"1f"</span>,<span class="number">16</span>);		<span class="comment">//返回 31 (16+15)</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"010"</span>);		<span class="comment">//未定：返回 10 或 8</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>说明：</li>
-</ul>
-<ol>
-<li>parseInt（） ：转换空字符串返回NaN。</li>
-<li>==面试常见== parseInt（）这个函数提供第二个参数：转换时使用的基数（即多少进制）</li>
-</ol>
-<ul>
-<li>针对第2点举例：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0xf"</span>));<span class="comment">//得到的是15，并不是取0，而是把16进制转换过来了.也可以写成console.log(parseInt("0xf",16));</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>针对<strong>参数2举例</strong>：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0xf"</span>));<span class="comment">//得到的是15，并不是取0，而是把16进制转换过来了.也可以写成console.log(parseInt("0xf",16));</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <hr>
 <h2 id="parseFloat（）"><a href="#parseFloat（）" class="headerlink" title="parseFloat（）"></a>parseFloat（）</h2><ul>
 <li>parseFloat ：从第一个字符开始解析每个字符，直至遇见一个无效的浮点数字符为止。</li>
@@ -297,7 +306,7 @@
 <hr>
 <h2 id="Number（）"><a href="#Number（）" class="headerlink" title="Number（）"></a>Number（）</h2><ul>
 <li>返回值：<br>如果参数是 Date 对象，Number() 返回从 1970 年 1 月 1 日至今的<strong>毫秒数</strong>。<br>如果对象的值无法转换为数字，那么 Number() 函数返回 <strong>NaN</strong>。</li>
-<li>==null与空字符==,  number <strong>默认把其转化为0</strong></li>
+<li><strong>null与空字符</strong>,  number <strong>默认把其转化为0</strong></li>
 </ul>
 <hr>
 <h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> x;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(x);<span class="comment">//undefined</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> y = <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(y);<span class="comment">//null</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="number">0</span>);<span class="comment">//false,null值表示一个空对象指针</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="literal">undefined</span> == <span class="number">0</span>);<span class="comment">//false,undefined表示未赋值</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="literal">undefined</span> == <span class="literal">null</span>);<span class="comment">//true,undefined值是派生自null值的</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">""</span>));<span class="comment">//0</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">null</span>));<span class="comment">//0</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">undefined</span>));<span class="comment">//NaN</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"2"</span>));<span class="comment">//2</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"a2"</span>));<span class="comment">//NaN</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"222 333"</span>));<span class="comment">//NaN</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">""</span>));<span class="comment">//NaN</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="literal">null</span>));<span class="comment">//NaN</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="literal">undefined</span>));<span class="comment">//NaN</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"22"</span>));<span class="comment">//22</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"a22"</span>));<span class="comment">//NaN,要想让parseInt（）提取数字，字符串必须是数字开头</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="number">22</span>));<span class="comment">//22</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"   22"</span>));<span class="comment">//22</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"22   33"</span>));<span class="comment">//22</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
