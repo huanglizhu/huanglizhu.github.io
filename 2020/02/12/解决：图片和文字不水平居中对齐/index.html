@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Redux的reducer为什么不能有异步操作 | 珠</title>
+  <title>解决：图片和文字不水平居中对齐 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
@@ -11,18 +11,21 @@
   
   
   
-  <meta name="description" content="回顾Redux设计和使用的三大基本原则可参考笔记Redux入门（2）：  单一数据源，也就是store中的state是唯一的 state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：只有store能改变自己的state) reducer必须是纯函数">
+  <meta name="description" content="问题往父组件中放入图片后，父组件TopicItem中的文字 与 img不能水平居中对齐显示。">
 <meta name="keywords" content="React.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redux的reducer为什么不能有异步操作">
-<meta property="og:url" content="http://yoursite.com/2020/01/17/Redux的reducer为什么不能有异步操作/index.html">
+<meta property="og:title" content="解决：图片和文字不水平居中对齐">
+<meta property="og:url" content="http://yoursite.com/2020/02/12/解决：图片和文字不水平居中对齐/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="回顾Redux设计和使用的三大基本原则可参考笔记Redux入门（2）：  单一数据源，也就是store中的state是唯一的 state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：只有store能改变自己的state) reducer必须是纯函数">
+<meta property="og:description" content="问题往父组件中放入图片后，父组件TopicItem中的文字 与 img不能水平居中对齐显示。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-25T13:53:04.037Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcqae9loj8j304d02d3yg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcqapyvlrpj30670213yg.jpg">
+<meta property="og:updated_time" content="2020-03-11T13:21:37.832Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redux的reducer为什么不能有异步操作">
-<meta name="twitter:description" content="回顾Redux设计和使用的三大基本原则可参考笔记Redux入门（2）：  单一数据源，也就是store中的state是唯一的 state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：只有store能改变自己的state) reducer必须是纯函数">
+<meta name="twitter:title" content="解决：图片和文字不水平居中对齐">
+<meta name="twitter:description" content="问题往父组件中放入图片后，父组件TopicItem中的文字 与 img不能水平居中对齐显示。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcqae9loj8j304d02d3yg.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -129,7 +132,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Redux的reducer为什么不能有异步操作" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-解决：图片和文字不水平居中对齐" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -137,7 +140,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Redux的reducer为什么不能有异步操作
+      解决：图片和文字不水平居中对齐
     </h1>
   
 
@@ -145,13 +148,13 @@
     
     <div class="article-meta">
       
-	<a href="/2020/01/17/Redux的reducer为什么不能有异步操作/" class="article-date">
-	  <time datetime="2020-01-17T03:24:22.000Z" itemprop="datePublished">一月 17, 2020</time>
+	<a href="/2020/02/12/解决：图片和文字不水平居中对齐/" class="article-date">
+	  <time datetime="2020-02-12T13:20:11.000Z" itemprop="datePublished">二月 12, 2020</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
  
       
 	<span id="busuanzi_container_page_pv">
@@ -161,32 +164,34 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="回顾Redux设计和使用的三大基本原则"><a href="#回顾Redux设计和使用的三大基本原则" class="headerlink" title="回顾Redux设计和使用的三大基本原则"></a>回顾Redux设计和使用的三大基本原则</h1><p>可参考笔记<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#Redux设计和使用的三大基本原则" target="_blank" rel="noopener">Redux入门（2）</a>：</p>
-<ol>
-<li><strong>单一数据源</strong>，也就是store中的<strong>state是唯一的</strong></li>
-<li>state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：<strong>只有store能改变自己的state</strong>)</li>
-<li><strong>reducer必须是纯函数</strong></li>
-</ol>
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>往父组件中放入图片后，父组件TopicItem中的文字 与 img不能<strong>水平居中对齐</strong>显示。</p>
 <a id="more"></a>
-<hr>
-<h1 id="Redux的设计初衷"><a href="#Redux的设计初衷" class="headerlink" title="Redux的设计初衷"></a>Redux的设计初衷</h1><p>先从Redux的设计层面来解释为什么Reducer必须是纯函数。</p>
-<p>Redux的设计参考了Flux的模式，作者希望以此来实现时间旅行，<strong>保存应用的历史状态，实现应用状态的可预测</strong>。所以整个Redux都是函数式编程的范式，要求reducer是纯函数也是自然而然的事情，<strong>使用纯函数才能保证相同的输入得到相同的输入，保证状态的可预测</strong>。</p>
-<p>不是纯函数的例子可以参考<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#reducer必须是纯函数" target="_blank" rel="noopener">Redux入门（2）中的例子</a>。</p>
-<hr>
-<h1 id="Redux的源码"><a href="#Redux的源码" class="headerlink" title="Redux的源码"></a>Redux的源码</h1><p>那么reducer到底干了件什么事，在Redux的源码中只用了一行来表示：</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">currentState = current<span class="constructor">Reducer(<span class="params">currentState</span>, <span class="params">action</span>)</span></span><br></pre></td></tr></table></figure>
 
-<p>这一行简单粗暴的在代码层面解释了为什么currentReducer必须是纯函数。currentReducer就是我们的reducer（至于为什么会加个current有兴趣的可以自己去看源码），reducer通过store传入的state和action进行处理后需要返回的是一个新的state，store拿到这个新的state后就会修改自身的state。<br><strong>reducer是用来计算state的，所以它的返回值必须是state，也就是我们整个应用的状态，而不能是promise之类的</strong>。</p>
-<p>要在reducer中加入异步的操作，如果你只是单纯想执行异步操作，不会等待异步的返回，那么在reducer中执行的意义是什么。<strong>如果想把异步操作的结果反应在state中，首先整个应用的状态将变的不可预测，违背Redux的设计原则</strong>，其次，此时的currentState将会是promise之类而不是我们想要的应用状态（state），根本是行不通的。</p>
-<p>其实这个问题应该是Redux中为什么不能有副作用的操作更合适。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TopicItem</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag">    <span class="attr">className</span>=<span class="string">"topic-pic"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">src</span>=<span class="string">"https://upload.jianshu.io/users/upload_avatars/3136195/484e32c3504a.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">alt</span>=<span class="string">"社会热点"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line">  社会热点</span><br><span class="line"><span class="tag">&lt;/<span class="name">TopicItem</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>样式：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export const TopicItem = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> float: left<span class="comment">;</span></span><br><span class="line">  line-height: <span class="number">32</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">  background:</span> <span class="comment">#f7f7f7;</span></span><br><span class="line">  font-size: <span class="number">14</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">  color:</span> <span class="comment">#000;</span></span><br><span class="line"><span class="symbol">  border:</span> <span class="number">1</span>px solid <span class="comment">#dcdcdc;</span></span><br><span class="line">  <span class="keyword">border-radius: </span><span class="number">4</span>px<span class="comment">;</span></span><br><span class="line">  .topic-pic&#123;</span><br><span class="line"><span class="symbol">    width:</span> <span class="number">32</span>px<span class="comment">;</span></span><br><span class="line"><span class="symbol">    height:</span> <span class="number">32</span>px<span class="comment">;</span></span><br><span class="line">  &#125;</span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>可以看到图片和文字不水平居中对齐：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcqae9loj8j304d02d3yg.jpg" alt="图片和文字不水平居中对齐"><br><strong>而没加图片之前文字是居中显示的。</strong></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>默认情况，<strong>图片是置顶对齐，文字置底对齐</strong>，所以通常图片高，文字低，不能水平居中对齐。</p>
+<h1 id="解决-图片使用float"><a href="#解决-图片使用float" class="headerlink" title="解决:图片使用float"></a>解决:图片使用float</h1><ul>
+<li><strong>让图片左浮动，则脱离文档流，不影响父级元素文本布局</strong>。</li>
+<li>注意：想清除浮动可将父元素设置为BFC元素。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.topic-pic</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">32px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcqapyvlrpj30670213yg.jpg" alt="效果"></p>
 <hr>
+<h1 id="补充：让图片和父级元素文字底部对齐"><a href="#补充：让图片和父级元素文字底部对齐" class="headerlink" title="补充：让图片和父级元素文字底部对齐"></a>补充：让图片和父级元素文字底部对齐</h1><h2 id="设置图片的vertical-align属性"><a href="#设置图片的vertical-align属性" class="headerlink" title="设置图片的vertical-align属性"></a>设置图片的vertical-align属性</h2><p>可以<strong>设置图片的vertical-align属性</strong>使图片和父级元素文字<strong>底部对齐</strong>：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vertical-<span class="keyword">align</span>:<span class="keyword">text</span>-bottom</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
 
       
   <span class="ico-tags"></span>
@@ -225,19 +230,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/18/JS笔试题遇到的知识点（3）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/12/首页开发（1）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          JS笔试遇到的知识点（3）
+          首页开发（1）
         
       </div>
     </a>
   
   
-    <a href="/2020/01/16/hexo deploy中报错_Nunjucks Error/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/11/ES6 模板字符串/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">hexo deploy中报错：Nunjucks Error</div>
+      <div class="article-nav-title">ES6 模板字符串</div>
     </a>
   
 </nav>
@@ -251,7 +256,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回顾Redux设计和使用的三大基本原则"><span class="nav-number">1.</span> <span class="nav-text">回顾Redux设计和使用的三大基本原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux的设计初衷"><span class="nav-number">2.</span> <span class="nav-text">Redux的设计初衷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux的源码"><span class="nav-number">3.</span> <span class="nav-text">Redux的源码</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决-图片使用float"><span class="nav-number">3.</span> <span class="nav-text">解决:图片使用float</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：让图片和父级元素文字底部对齐"><span class="nav-number">4.</span> <span class="nav-text">补充：让图片和父级元素文字底部对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置图片的vertical-align属性"><span class="nav-number">4.1.</span> <span class="nav-text">设置图片的vertical-align属性</span></a></li></ol></li></ol>
     
     </div>
   </aside>
