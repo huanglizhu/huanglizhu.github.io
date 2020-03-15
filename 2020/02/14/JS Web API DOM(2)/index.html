@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS Web API DOM(2) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="DOM性能 DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的回流、重绘，reflow和repain过程是非常消耗性能的,要尽量避免频繁的DOM操作。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS Web API DOM(2)">
+<meta property="og:url" content="http://yoursite.com/2020/02/14/JS Web API DOM(2)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="DOM性能 DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的回流、重绘，reflow和repain过程是非常消耗性能的,要尽量避免频繁的DOM操作。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg">
+<meta property="og:updated_time" content="2020-03-15T04:57:34.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS Web API DOM(2)">
+<meta name="twitter:description" content="DOM性能 DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的回流、重绘，reflow和repain过程是非常消耗性能的,要尽量避免频繁的DOM操作。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS Web API DOM(2)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS Web API DOM(2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/14/JS Web API DOM(2)/" class="article-date">
+	  <time datetime="2020-02-14T04:56:45.000Z" itemprop="datePublished">二月 14, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="DOM性能"><a href="#DOM性能" class="headerlink" title="DOM性能"></a>DOM性能</h1><ul>
+<li>DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#浏览器-reflow-回流-和repain-重绘" target="_blank" rel="noopener">回流、重绘</a>，reflow和repain过程是非常消耗性能的,要尽量<strong>避免频繁的DOM操作</strong>。<a id="more"></a></li>
+<li>可以通过以下方法提高DOM性能：<strong>对DOM查询做缓存、将频繁操作改为一次性操作</strong></li>
+</ul>
+<h2 id="对DOM查询做缓存"><a href="#对DOM查询做缓存" class="headerlink" title="对DOM查询做缓存"></a>对DOM查询做缓存</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg" alt="对DOM查询做缓存"><br>如果每次循环都查询一次DOM，会很消耗性能。所以我们可以先查询出p节点的nodeList，将其<strong>缓存</strong>在变量pList中，接下来的操作也就不需要反复查询DOM了。</p>
+<h2 id="将频繁操作改为一次性操作"><a href="#将频繁操作改为一次性操作" class="headerlink" title="将频繁操作改为一次性操作"></a>将频繁操作改为一次性操作</h2><p>假如现在要<strong>往id为list的ul标签中插入10个li标签</strong>，按照以前的操作，我们会<strong>分10次使用appendChild()进行子节点添加</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg" alt="以前的操作"><br>这样频繁操作DOM是很<strong>消耗性能</strong>的。</p>
+<p>我们可以<strong>通过<code>createDocumentFragment()</code>先创建一个文档片段</strong>，这个文档片段是保存在JS中的（不是在DOM树中），然后<strong>将循环10次产生的子节点都添加到文档片段中</strong>，最后再<strong>将 文档片段 添加到DOM树上</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg" alt="将频繁操作改为一次性操作"></p>
+<hr>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><h2 id="DOM是哪种数据结构"><a href="#DOM是哪种数据结构" class="headerlink" title="DOM是哪种数据结构"></a>DOM是哪种数据结构</h2><p><strong>树（DOM树）</strong>，基于树状结构才有了父节点、子节点。</p>
+<hr>
+<h2 id="DOM操作的常用API"><a href="#DOM操作的常用API" class="headerlink" title="DOM操作的常用API"></a>DOM操作的常用API</h2><ul>
+<li><strong>DOM节点操作</strong>：<ul>
+<li><strong>获取1个DOM元素</strong>：getElementByld()/querySelector()</li>
+<li><strong>获取多个DOM元素（nodeList集合）</strong>：getElementsByTagName()/getElementsByClassName()/querySelectorAll()</li>
+</ul>
+</li>
+<li><strong>DOM结构操作</strong>：<ul>
+<li>document.createElement()创建 元素节点</li>
+<li>document.createTextNode() 创建 文本节点</li>
+<li>Node.appendChild() 添加/移动 子节点</li>
+<li>Node.removeChild() 删除 子节点</li>
+</ul>
+</li>
+<li><strong>attribute和property的操作</strong>：<ul>
+<li>getAttribute()获取attribute</li>
+<li>setAttribute()修改attribute</li>
+<li>removeAttribute()删除attribute</li>
+<li>createAttribute()仅建立一个attribute</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="attribute和property的区别"><a href="#attribute和property的区别" class="headerlink" title="attribute和property的区别"></a>attribute和property的区别</h2><ul>
+<li><strong>attribute</strong>：修改<strong>html属性</strong>，<strong>会</strong>改变<strong>html结构</strong><ul>
+<li>attribute 是 DOM元素 在文档中作为 html 标签拥有的属性</li>
+</ul>
+</li>
+<li><strong>property</strong>：修改<strong>JS对象属性</strong>，<strong>不</strong>会体现到<strong>html结构</strong>中<ul>
+<li>property 是 DOM元素 在 js 中作为对象拥有的属性</li>
+</ul>
+</li>
+<li>两者<strong>都有可能引起DOM重新渲染</strong>，但建议尽量使用property</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>HTML attribute(特性)</th>
+<th>DOM property(属性)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>值永远是字符串或 null</td>
+<td>值可以是任意合法 js 类型</td>
+</tr>
+<tr>
+<td>大小写不敏感</td>
+<td>大小写敏感</td>
+</tr>
+<tr>
+<td>不存在时返回 null</td>
+<td>不存在时返回 undefined</td>
+</tr>
+<tr>
+<td>对于 href, 返回 html 设置的值</td>
+<td>对于 href 返回解析后的完整 url</td>
+</tr>
+<tr>
+<td>更新 value, 属性也更新</td>
+<td>更新 value, 特性不更新</td>
+</tr>
+</tbody></table>
+<p>（可参考<a href="https://segmentfault.com/a/1190000019575091" target="_blank" rel="noopener">这篇博客</a>）</p>
+<hr>
+<h2 id="一次性插入多个DOM节点，考虑性能"><a href="#一次性插入多个DOM节点，考虑性能" class="headerlink" title="一次性插入多个DOM节点，考虑性能"></a>一次性插入多个DOM节点，考虑性能</h2><p><strong>将频繁操作改为一次性操作：</strong></p>
+<ol>
+<li><strong>通过<code>createDocumentFragment()</code>先创建一个文档片段</strong>，这个文档片段是保存在JS中的（不是在DOM树中）</li>
+<li><strong>将循环10次产生的子节点都添加到文档片段中</strong></li>
+<li><strong>将 文档片段 添加到DOM树上</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg" alt="将频繁操作改为一次性操作"></li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/14/首页开发（2）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          首页开发（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/13/styled-components的使用方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">styled-components的使用方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM性能"><span class="nav-number">1.</span> <span class="nav-text">DOM性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对DOM查询做缓存"><span class="nav-number">1.1.</span> <span class="nav-text">对DOM查询做缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将频繁操作改为一次性操作"><span class="nav-number">1.2.</span> <span class="nav-text">将频繁操作改为一次性操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关问题"><span class="nav-number">2.</span> <span class="nav-text">相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM是哪种数据结构"><span class="nav-number">2.1.</span> <span class="nav-text">DOM是哪种数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM操作的常用API"><span class="nav-number">2.2.</span> <span class="nav-text">DOM操作的常用API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#attribute和property的区别"><span class="nav-number">2.3.</span> <span class="nav-text">attribute和property的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性插入多个DOM节点，考虑性能"><span class="nav-number">2.4.</span> <span class="nav-text">一次性插入多个DOM节点，考虑性能</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
