@@ -129,6 +129,301 @@
         
           <section id="main">
   
+    <article id="post-JS对象之string"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/08/13/JS对象之string/">JS对象之string</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/08/13/JS对象之string/" class="article-date">
+	  <time datetime="2019-08-13T03:40:52.000Z" itemprop="datePublished">八月 13, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="查找字符（串）的4种方法"><a href="#查找字符（串）的4种方法" class="headerlink" title="查找字符（串）的4种方法"></a>查找字符（串）的4种方法</h1><h2 id="charAt-查找字符"><a href="#charAt-查找字符" class="headerlink" title="charAt()查找字符"></a>charAt()<strong>查找字符</strong></h2><ul>
+<li><p>语法:<br><code>stringObject.charAt(index)</code></p>
+</li>
+<li><p>功能:返回stringObject中index位置的<strong>字符</strong>.</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span>=<span class="string">"hello world"</span>; </span><br><span class="line">console. <span class="built_in">log</span>(<span class="built_in">str</span>. charAt(<span class="number">4</span>));<span class="comment">//o</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ES6中可以直接使用<code>str[index]</code>，与<code>str.charAt(index)</code>效果一样</strong></p>
+</li>
+</ul>
+<h2 id="charCodeAt-查找字符的编码"><a href="#charCodeAt-查找字符的编码" class="headerlink" title="charCodeAt()查找字符的编码"></a>charCodeAt()<strong>查找字符的编码</strong></h2><ul>
+<li>语法:<br><code>stringObject.charCodeAt(index)</code></li>
+<li>功能:<br>返回stringObject中index位置<strong>字符的字符编码</strong>.</li>
+<li>说明：<br>ECMAScript5中可使用“方括号加字符索引”来访问字符串中特定的字符，但是IE7及更早的浏览器会返回undefined。<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span>=<span class="string">"hello world"</span>; </span><br><span class="line">console. <span class="built_in">log</span>(<span class="built_in">str</span>. charCodeAt(<span class="number">4</span>));<span class="comment">//111</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="indexOf-与lastIndexOf（）"><a href="#indexOf-与lastIndexOf（）" class="headerlink" title="indexOf()与lastIndexOf（）"></a>indexOf()与lastIndexOf（）</h2><ol>
+<li>和数组中的indexOf()与lastIndexOf（）类似</li>
+<li>都可以查字符串的位置，不过返回的是第一个字符的位置</li>
+</ol>
+<h3 id="indexOf-返回字符（串）的位置"><a href="#indexOf-返回字符（串）的位置" class="headerlink" title="indexOf()返回字符（串）的位置"></a>indexOf()返回字符（串）的位置</h3><p>和数组中的indexOf()类似</p>
+<ul>
+<li>语法:<br><code>stringObject.indexOf(&quot;o&quot;)</code></li>
+<li>功能:<br>从一个字符串中搜索给定的<strong>子字符串</strong>,返回子字符串的<strong>位置</strong>.</li>
+<li>返回值:数值</li>
+<li>说明:如果没有找到该子字符串,则返回-1.</li>
+</ul>
+<h3 id="lastIndexOf-倒着查，返回字符（串）的位置"><a href="#lastIndexOf-倒着查，返回字符（串）的位置" class="headerlink" title="lastIndexOf()倒着查，返回字符（串）的位置"></a>lastIndexOf()倒着查，返回字符（串）的位置</h3><ul>
+<li>语法:<br><code>stringObject.lastIndexOf(&quot;o&quot;)</code><blockquote>
+<p>o是你想查找的字符</p>
+</blockquote>
+</li>
+<li>功能:<br>倒着查，从一个字符串中搜索给定的<strong>子字符串</strong>,返回子字符串的位置</li>
+<li>返回值:数值</li>
+<li>说明:如果没有找到该子字符串,则返回-1<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> email = <span class="string">"marry.mail@sohu.com"</span>;</span><br><span class="line"><span class="comment">//检测@在emai1中出现的位置</span></span><br><span class="line"><span class="built_in">console</span>.log(email.indexOf(<span class="string">"o"</span>)); <span class="comment">//12</span></span><br><span class="line"><span class="built_in">console</span>.log(email.indexOf(<span class="string">"ar"</span>)); <span class="comment">//1，可以查字符串的位置，不过返回的是第一个字符的位置</span></span><br><span class="line"><span class="built_in">console</span>.log(email.lastIndexOf(<span class="string">"."</span>));<span class="comment">//15</span></span><br><span class="line"><span class="built_in">console</span>.log(email.lastIndexOf(<span class="string">"ma"</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="截取字符串的3种方法"><a href="#截取字符串的3种方法" class="headerlink" title="截取字符串的3种方法"></a>截取字符串的3种方法</h1><h2 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h2><p><strong>和数组的slice()类似</strong></p>
+<ul>
+<li>语法：<code>stringValue.slice(start,end)</code></li>
+<li>功能:<br>截取子字符串.</li>
+<li>参数说明:</li>
+</ul>
+<ol>
+<li>start:<strong>必需</strong>,指定子字符串的开始位置.</li>
+<li>end:<strong>可选</strong>,表示子字符串到哪里结束,<strong>end本身不在截取范围之内</strong>,省略时截取至字符串的未尾.</li>
+<li>当参数为<strong>负数</strong>时 <strong>(注意：两个参数都适用)</strong>,会将传入的负值与字符串的长度相加来得到起始位置 <strong>（参数值=字符串长度+负值）</strong>.<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"hello world"</span>;</span><br><span class="line"><span class="comment">//截取orl </span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.slice(<span class="number">7</span>, <span class="number">10</span>));</span><br><span class="line"><span class="comment">// 11-3=8，相當於str.slice(8)</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.slice(-<span class="number">3</span>));<span class="comment">//rld</span></span><br><span class="line"><span class="comment">// 11-7=4,11-2=9</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.slice(-<span class="number">7</span>,-<span class="number">2</span>));<span class="comment">//o wor</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h2><ul>
+<li><strong>语法及功能同slice()完全一样</strong>.</li>
+<li><strong>区别</strong>:<ol>
+<li>当参数为负数时,自动将参数转换为0.</li>
+<li>substring()会将较小的数作为开始位置,将较大的数作为结束位置.<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"hello world"</span>;<span class="comment">//11位</span></span><br><span class="line"><span class="comment">//自动将参数转换为0.</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.substring(-<span class="number">7</span>,<span class="number">5</span>));<span class="comment">//(0,5),hello</span></span><br><span class="line"><span class="comment">//将较小的数作为开始位置,将较大的数作为结束位置.</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.substring(<span class="number">2</span>,-<span class="number">5</span>));<span class="comment">//(0,2),he</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h2><ul>
+<li>语法:<br><code>stringValue.substr(start,len)</code></li>
+<li>功能:<br>截取子字符串.</li>
+<li>参数说明:</li>
+</ul>
+<ol>
+<li>start:<strong>必需</strong>,指定子字符串的开始位置.</li>
+<li>len:<strong>可选</strong>,表示<strong>截取的字符总数</strong>,省略时截取至字符串的未尾.</li>
+<li>当<strong>start为负数</strong>时,会将传入的负值与字符串的长度相加.<strong>（start参数值=字符串长度+负值）</strong> <strong>【注意这里和以往不一样，不是两个参数了】</strong></li>
+<li>当<strong>len为负数</strong>时,返回<strong>空字符串</strong>.<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"hello world"</span>;<span class="comment">//11位</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.substr(<span class="number">6</span>, <span class="number">3</span>)); <span class="comment">//wor</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.substr(-<span class="number">5</span>, <span class="number">4</span>));<span class="comment">//相當於(6,4),worl</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.substr(<span class="number">3</span>, -<span class="number">4</span>));<span class="comment">//空</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="获取扩展名实例"><a href="#获取扩展名实例" class="headerlink" title="获取扩展名实例"></a>获取扩展名实例</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取扩展名</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFileFormat</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 获取.在url中出现的位置</span></span><br><span class="line">    <span class="keyword">var</span> pos=<span class="built_in">url</span>.lastIndexOf(<span class="string">"."</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">url</span>.substr(pos+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baidu=<span class="string">"http://baidu.com/index.txt"</span>;</span><br><span class="line"><span class="keyword">var</span> formatName=getFileFormat(baidu);</span><br><span class="line"><span class="keyword">var</span> picFormat=getFileFormat(<span class="string">"1231212.jpg"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(formatName,picFormat);<span class="comment">//txt png</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="编程练习"><a href="#编程练习" class="headerlink" title="编程练习"></a>编程练习</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编程练习：用户输入登录的邮箱，对邮箱进行解析，解析出邮箱的用户名和邮箱的域名</span></span><br><span class="line"><span class="keyword">var</span> email=prompt(<span class="string">"请输入登录邮箱"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params">email</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 获取@在email中的位置</span></span><br><span class="line">    <span class="keyword">var</span> at=email.indexOf(<span class="string">"@"</span>);</span><br><span class="line">    <span class="comment">// 截取@前的字符串得到用户名</span></span><br><span class="line">    <span class="keyword">return</span> email.substring(<span class="number">0</span>,at);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDomainName</span>(<span class="params">email</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 获取@在email中的位置</span></span><br><span class="line">    <span class="keyword">var</span> at=email.indexOf(<span class="string">"@"</span>);</span><br><span class="line">    <span class="comment">// 截取@后的字符串得到域名</span></span><br><span class="line">    <span class="keyword">return</span> email.substring(at+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 要注意换行符"&lt;br/&gt;"在双引号里面</span></span><br><span class="line"><span class="built_in">document</span>.write(<span class="string">"邮箱的用户名是："</span>+getName(email)+<span class="string">"&lt;br/&gt;"</span>+<span class="string">"登录的邮箱域名是："</span>+getDomainName(email));</span><br></pre></td></tr></table></figure>
+
+<h1 id="split-字符串转换为数组"><a href="#split-字符串转换为数组" class="headerlink" title="split()字符串转换为数组"></a>split()字符串转换为数组</h1><p><strong>正好相反，数组中的join()方法是将数组转换为字符串</strong></p>
+<ul>
+<li><strong>语法</strong>:<code>stringObject.split(separator)</code>  <ul>
+<li>separator:必需,分隔符。<strong>分隔符可以是字符串</strong></li>
+</ul>
+</li>
+<li><strong>功能</strong>:把一个字符串分割成字符串数组.</li>
+<li><strong>返回值</strong>:Array.</li>
+</ul>
+<h1 id="replace-替换字符串"><a href="#replace-替换字符串" class="headerlink" title="replace()替换字符串"></a>replace()替换字符串</h1><p><strong>注意：它不会影响原来的字符串，它是产生新的字符串。</strong></p>
+<ul>
+<li><strong>语法</strong>:<br><code>stringObject.replace(regexp/substr,replacement)</code><blockquote>
+<p>即：<code>stringObject.replace(替换前字符,替换后字符)</code>  </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>替换字符都不能是字符串</strong></p>
+<ul>
+<li>regexp:必需.规定子字符串或要替换的模式的RegExp对象.  </li>
+<li>replacement:必需.一个字符串值.<ul>
+<li><strong>功能</strong>:在字符串中用一些字符替换另一些字符,或替换一个与正则表达式匹配的子串.</li>
+<li><strong>返回值</strong>:String</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'welcome-to-beijing'</span>;</span><br><span class="line"><span class="comment">//使用split将str转换为数组</span></span><br><span class="line"><span class="keyword">var</span> arr = str.split(<span class="string">"-"</span>);</span><br><span class="line">console.log(arr);<span class="comment">//["welcome", "to", "beijing"]</span></span><br><span class="line"><span class="keyword">var</span> date = <span class="string">'2016/05/05'</span>;</span><br><span class="line"><span class="keyword">var</span> dateArr = date.split(<span class="string">"/"</span>);</span><br><span class="line">console.log(dateArr);<span class="comment">//["2016", "05", "05"]</span></span><br><span class="line"><span class="comment">// 看来分隔符可以是字符串</span></span><br><span class="line"><span class="keyword">var</span> date2 = <span class="string">'2016//05//05'</span>;</span><br><span class="line"><span class="keyword">var</span> dateArr2 = date2.split(<span class="string">"//"</span>);</span><br><span class="line"><span class="comment">//替换</span></span><br><span class="line"><span class="keyword">var</span> tel = <span class="string">'010-62971268,400-100-9098,010-867898891'</span>;</span><br><span class="line"><span class="comment">//newTel:被替换之后的字符串</span></span><br><span class="line"><span class="keyword">var</span> <span class="keyword">new</span><span class="type">Tel</span> = tel.replace(<span class="string">','</span>, <span class="string">" "</span>);</span><br><span class="line">console.log(tel);<span class="comment">//010-62971268,400-100-9098,010-867898891</span></span><br><span class="line">console.log(<span class="keyword">new</span><span class="type">Tel</span>);<span class="comment">//010-62971268 400-100-9098,010-867898891</span></span><br><span class="line"><span class="comment">//newTel2:被替换之后的字符串,看来不能替换字符串</span></span><br><span class="line"><span class="keyword">var</span> tel2 = <span class="string">'010-62971268,,400-100-9098,,010-867898891'</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">new</span><span class="type">Tel2</span> = tel2.replace(<span class="string">',,'</span>, <span class="string">" "</span>);</span><br><span class="line">console.log(<span class="keyword">new</span><span class="type">Tel2</span>);<span class="comment">//010-62971268 400-100-9098,,010-867898891</span></span><br><span class="line"><span class="comment">//newTel3:被替换之后的字符串,看来不能替换字符串</span></span><br><span class="line"><span class="keyword">var</span> tel3 = <span class="string">'010-62971268,400-100-9098,010-867898891'</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">new</span><span class="type">Tel3</span> = tel3.replace(<span class="string">','</span>, <span class="string">"啦啦啦"</span>);</span><br><span class="line">console.log(<span class="keyword">new</span><span class="type">Tel3</span>);<span class="comment">//010-62971268啦啦啦400-100-9098,010-867898891</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串转换大小写"><a href="#字符串转换大小写" class="headerlink" title="字符串转换大小写"></a>字符串转换大小写</h1><h2 id="toUpperCase-转大写"><a href="#toUpperCase-转大写" class="headerlink" title="toUpperCase()转大写"></a>toUpperCase()转大写</h2><ul>
+<li><strong>语法</strong>:<code>stringValue.toUpperCase()</code></li>
+<li><strong>功能</strong>:把字符串转换为<strong>大写</strong>.<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> str=<span class="string">"hello world"</span>;</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">upper</span>=str.charAt(<span class="number">6</span>).toUpperCase();</span><br><span class="line">console.log(<span class="built_in">upper</span>);<span class="comment">//W</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="toLowerCase-转小写"><a href="#toLowerCase-转小写" class="headerlink" title="toLowerCase()转小写"></a>toLowerCase()转小写</h2><ul>
+<li><strong>语法</strong>:<code>stringValue.toLowerCase()</code></li>
+<li><strong>功能</strong>:把字符串转换为<strong>小写</strong>.<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str2=<span class="string">"WELCOME"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str2.toLowerCase());<span class="comment">//welcome</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="案例：将字符串-border-left-color转换成borderLeftColor（驼峰形式）"><a href="#案例：将字符串-border-left-color转换成borderLeftColor（驼峰形式）" class="headerlink" title="案例：将字符串 border-left-color转换成borderLeftColor（驼峰形式）"></a>案例：将字符串 border-left-color转换成borderLeftColor（驼峰形式）</h2><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">camelBack</span></span>(str)&#123;</span><br><span class="line">    <span class="comment">// 通过“-”将字符串str拆分为数组</span></span><br><span class="line">    <span class="keyword">var</span> arr=str.split(<span class="string">"-"</span>),</span><br><span class="line">        <span class="keyword">new</span><span class="type">Str</span>=arr[<span class="number">0</span>];<span class="comment">//数组第一项不用变大写所以一开始就可以指定arr[0]为newStr</span></span><br><span class="line">    <span class="comment">// console.log(arr);// ["border", "left", "color"]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>,len=arr.length;i&lt;len;i++)&#123;<span class="comment">//i从1开始，因为数组第一项不用变大写</span></span><br><span class="line">        <span class="comment">// 遍历数组,改变除第一个单词之外的所有单词的首字母并连接剩余字符</span></span><br><span class="line">        <span class="keyword">new</span><span class="type">Str</span> += arr[i].charAt(<span class="number">0</span>).toUpperCase()+arr[i].substr(<span class="number">1</span>);</span><br><span class="line">    &#125;console.log(<span class="keyword">new</span><span class="type">Str</span>);<span class="comment">//borderLeftColor</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> camelFormat=camelBack(<span class="string">"border-left-color"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="编程练习-1"><a href="#编程练习-1" class="headerlink" title="编程练习"></a>编程练习</h2><p>小伙伴们,我们学习了string的转化大小写的方法,那么接下来任务来了,将字符串”Never deter till tomorrow that which you can do today”的”tomorrow”转化为大写.</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将字符串"Never deter till tomorrow that which you can do today"的"tomorrow"转化为大写</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">"Never deter till tomorrow that which you can do today"</span>;</span><br><span class="line"><span class="comment">// 获取tomorrow位置</span></span><br><span class="line"><span class="keyword">var</span> t=str.indexOf(<span class="string">"tomorrow"</span>);</span><br><span class="line"><span class="comment">// console.log(t,str.indexOf("w"));//17 24</span></span><br><span class="line"><span class="comment">// 截取</span></span><br><span class="line"><span class="keyword">var</span> tm=str.substring(<span class="number">17</span>,<span class="number">25</span>);</span><br><span class="line"><span class="comment">// console.log(tm);</span></span><br><span class="line"><span class="comment">// 改为大写并替换</span></span><br><span class="line"><span class="keyword">var</span> <span class="keyword">new</span><span class="type">Str</span>=str.replace(str.substring(<span class="number">17</span>,<span class="number">25</span>),tm.toUpperCase());</span><br><span class="line">console.log(<span class="keyword">new</span><span class="type">Str</span>);<span class="comment">//Never deter till TOMORROW that which you can do today</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Math 对象"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/08/12/Math 对象/">Math对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/08/12/Math 对象/" class="article-date">
+	  <time datetime="2019-08-12T13:38:57.000Z" itemprop="datePublished">八月 12, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+          
+          <div class="entry-summary">
+          Math 对象
+Math 对象用于执行数学任务。
+
+        
+          <p class="article-more-link">
+            <a href="/2019/08/12/Math 对象/#more">阅读全文</a>
+          </p>
+        </div>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-JS对象之数组（2）"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/08/11/JS对象之数组（2）/">JS对象之数组(2)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/08/11/JS对象之数组（2）/" class="article-date">
+	  <time datetime="2019-08-11T03:40:52.000Z" itemprop="datePublished">八月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+          
+          <div class="entry-summary">
+          ES6增加的方法Array.prototype.filter()数组过滤方法
+filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+原理： filter 为数组中的每个元素调用一次 callback 函数，并利用所有使得 callback 返回 true 或等价于 true 的值的元素创建一个新数组。
+
+        
+          <p class="article-more-link">
+            <a href="/2019/08/11/JS对象之数组（2）/#more">阅读全文</a>
+          </p>
+        </div>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6学习/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-JS对象之数组（1）"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -560,136 +855,11 @@ props是在父组件中指定，而且一经指定，在被指定的组件的生
 <!-- Table of Contents -->
 
   
-    <article id="post-ReactNative入门基础(1)"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/11/ReactNative入门基础(1)/">ReactNative入门基础(1)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2019/03/11/ReactNative入门基础(1)/" class="article-date">
-	  <time datetime="2019-03-11T03:35:11.000Z" itemprop="datePublished">三月 11, 2019</time>
-	</a>
-
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
- 
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-
-          
-          <div class="entry-summary">
-          
-React Native是facebook开源的用于开发移动端跨平台App的技术框架，其代码托管在GitHub上。
-React Native中文文档
-
-        
-          <p class="article-more-link">
-            <a href="/2019/03/11/ReactNative入门基础(1)/#more">阅读全文</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/React-Native学习/">React Native学习</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-HTTP报头Accept与Content-Type的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/10/19/HTTP报头Accept与Content-Type的区别/">HTTP报头Accept与Content-Type的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/10/19/HTTP报头Accept与Content-Type的区别/" class="article-date">
-	  <time datetime="2018-10-19T13:49:38.000Z" itemprop="datePublished">十月 19, 2018</time>
-	</a>
-
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/计算机网络-学习/">计算机网络 学习</a>
- 
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-
-          
-          <div class="entry-summary">
-          对比 请求报文、响应报文
-Accept属于请求头， Content-Type属于实体头
-Accept属于 请求首部字段，只有HTTP请求有。
-Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段。
-
-        
-          <p class="article-more-link">
-            <a href="/2018/10/19/HTTP报头Accept与Content-Type的区别/#more">阅读全文</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/计算机网络-学习/">计算机网络 学习</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
+    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/">下一页</a>
   </nav>
 
 </section>
@@ -751,7 +921,7 @@ Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段�
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">42</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native学习/">React Native学习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">41</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简书项目/">简书项目</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-学习/">计算机网络 学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试题/">面试题</a><span class="category-list-count">6</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AJAX学习/">AJAX学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS学习/">CSS学习</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6学习/">ES6学习</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML学习/">HTML学习</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JS/">JS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSON学习/">JSON学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript学习/">JavaScript学习</a><span class="category-list-count">42</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js学习/">Node.js学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native学习/">React Native学习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-js学习/">React.js学习</a><span class="category-list-count">44</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo中遇到过的问题与解决方案/">hexo中遇到过的问题与解决方案</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery学习/">jQuery学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客网题目/">牛客网题目</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/百度前端技术学院/">百度前端技术学院</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/简书项目/">简书项目</a><span class="category-list-count">39</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络-学习/">计算机网络 学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试题/">面试题</a><span class="category-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -762,7 +932,7 @@ Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段�
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">45</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">45</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -775,6 +945,42 @@ Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段�
     </ul>
     <div class="widget">
       <ul>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2020/02/16/“返回顶部”功能涉及知识点/">“返回顶部”功能涉及知识点</a></h6>
+              <span>二月 16, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2020/02/16/解决router相关报错/">解决router相关报错</a></h6>
+              <span>二月 16, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2020/02/15/首页开发（3）/">首页开发（3）</a></h6>
+              <span>二月 15, 2020</span>
+            </div>
+
+          </li>
         
           <li class="clearfix">
 
@@ -812,42 +1018,6 @@ Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段�
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2020/02/13/JS Web API DOM(1)/">JS Web API DOM(1)</a></h6>
-              <span>二月 13, 2020</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2020/02/12/首页开发（1）/">首页开发（1）</a></h6>
-              <span>二月 12, 2020</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2020/02/12/解决：图片和文字不水平居中对齐/">解决：图片和文字不水平居中对齐</a></h6>
-              <span>二月 12, 2020</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -857,7 +1027,7 @@ Content-Type属于 实体首部字段，HTTP请求和响应 都拥有该字段�
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">40</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-js/">React.js</a><span class="tag-list-count">43</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hipaper/">hipaper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
