@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgqruafkj313r08iwj5.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgvb5heej30sh0ccwg9.jpg">
-<meta property="og:updated_time" content="2020-02-25T14:04:37.495Z">
+<meta property="og:updated_time" content="2020-03-17T03:16:10.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中的虚拟DOM">
 <meta name="twitter:description" content="面试： 虚拟DOM 是什么，有什么用总结：  虚拟DOM 就是一个JS对象，用它来描述 真实的DOM。 使用 虚拟DOM 有助于极大提升性能：React对性能的提升在于减少了 真实DOM对象 的生成与比较，取而代之的是使用 虚拟DOM(JS对象) 来完成数据改变后的生成与比较。而用JS形成一个 JS对象 性能损耗非常小，生成一个 DOM元素 性能损耗大，涉及DOM的操作都很耗性能。（具体可看下面">
@@ -225,21 +225,23 @@
 <h1 id="深入了解-虚拟DOM"><a href="#深入了解-虚拟DOM" class="headerlink" title="深入了解 虚拟DOM"></a>深入了解 虚拟DOM</h1><ol>
 <li><strong>只有页面需要渲染的时候才会生成真实的DOM</strong>。</li>
 <li>在这里我们明白了<strong>render函数中的标签</strong>其实并<strong>不是页面上的DOM元素</strong>，他们<strong>是步骤中的 JSX 模版</strong>。</li>
+<li>render函数第一次执行的时候会将渲染的数据在内存中保存一份，当第二次数据发生了改变后，render会将<strong>这次的虚拟DOM</strong>与<strong>缓存中的虚拟DOM</strong>进行对比 这种对比叫做<strong>DIFF算法</strong></li>
+<li>只要<code>this.state</code>/<code>this.props</code>发生了改变那么render函数就会执行</li>
 </ol>
 <h2 id="第三次优化"><a href="#第三次优化" class="headerlink" title="第三次优化"></a>第三次优化</h2><p><strong>【注意和之前的“真实DOM”“虚拟DOM”顺序相反】</strong></p>
 <ol>
 <li>state 数据</li>
 <li>JSX 模版</li>
-<li>数据 + 模版 结合，<strong>生成 虚拟的DOM</strong><br><code>[&quot;div&quot;,{id:&quot;abc&quot;},[&quot;span&quot;,{},&quot;hello world&quot;]]</code></li>
+<li>数据 + 模版 结合，<strong>生成 虚拟的DOM</strong> （保存在内存中）<br><code>[&quot;div&quot;,{id:&quot;abc&quot;},[&quot;span&quot;,{},&quot;hello world&quot;]]</code></li>
 <li><strong>用 虚拟的DOM 的结构 生成 真实的DOM</strong> ，显示在页面上<br><code>&lt;div id=&quot;abc&gt;&lt;span&gt;hello world&lt;/span&gt;&lt;/div&gt;</code></li>
 <li>state 数据 发生改变</li>
-<li>数据 + 模版 结合，生成 新的 虚拟的DOM <code>[&quot;div&quot;,{id:&quot;abc&quot;},[&quot;span&quot;,{},&quot;bye bye&quot;]]</code></li>
-<li>比较 原始虚拟DOM 和 新的虚拟DOM 的区别，找到区别是 span中的内容 </li>
-<li>直接操作DOM，改变span中的内容</li>
+<li>数据 + 模版 结合，生成 <strong>新的 虚拟的DOM</strong> <code>[&quot;div&quot;,{id:&quot;abc&quot;},[&quot;span&quot;,{},&quot;bye bye&quot;]]</code></li>
+<li><strong>比较 原始虚拟DOM 和 新的虚拟DOM</strong> 的区别，找到区别是 span中的内容 </li>
+<li>直接<strong>操作有区别的DOM</strong>，改变span中的内容</li>
 </ol>
 <p><strong>优点</strong>：</p>
 <ol>
-<li>性能提升了。</li>
+<li>性能提升了，如果<strong>不使用虚拟DOM</strong>，则需要<strong>生成所有的真实DOM</strong>进行<strong>替换</strong>，<strong>使用虚拟DOM</strong>则只需要生成<strong>有区别的真实DOM</strong>进行替换即可。</li>
 <li>有了 虚拟DOM 使得跨端应用（React Native）得以实现。（因为像是Android、ios、React Native这些原生应用里是没有 真实DOM 的 ）</li>
 </ol>
 <h2 id="React真实的操作顺序"><a href="#React真实的操作顺序" class="headerlink" title="React真实的操作顺序"></a>React真实的操作顺序</h2><p><strong>JSX -&gt; createElement -&gt; JS 对象（虚拟DOM） -&gt; 真实DOM</strong><br><strong>帮助理解</strong>：<br>下面两个return返回的内容其实是一样的：</p>
