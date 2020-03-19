@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>react-router-dom的使用 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="参考资料 英文文档">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-router-dom的使用">
+<meta property="og:url" content="http://yoursite.com/2020/02/20/react-router-dom的使用/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="参考资料 英文文档">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcyfspgrqkj30n009z3zy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz25z91hoj30us0qtjwh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcyha37516j31110ju788.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3l1v6jnj30nw0bfac6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3kq19zmj30pr0ir0x0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3k9fsonj30sg080wgr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz4uo83hzj30ha0rl782.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz466oo5oj30hr0lc76c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz4fa5hi9j30f50no765.jpg">
+<meta property="og:updated_time" content="2020-03-19T05:22:12.645Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-router-dom的使用">
+<meta name="twitter:description" content="参考资料 英文文档">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcyfspgrqkj30n009z3zy.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-react-router-dom的使用" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      react-router-dom的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/20/react-router-dom的使用/" class="article-date">
+	  <time datetime="2020-02-20T05:21:04.000Z" itemprop="datePublished">二月 20, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://reacttraining.com/react-router/web/api/BrowserRouter" target="_blank" rel="noopener">英文文档</a><a id="more"></a>
+
+</li>
+</ul>
+<h1 id="React-Router中的组件"><a href="#React-Router中的组件" class="headerlink" title="React Router中的组件"></a>React Router中的组件</h1><ul>
+<li>React Router中的组件<strong>主要分为3类</strong>，他们都从<strong>react-router-dom</strong>中获取到：<ul>
+<li><strong>路由器组件</strong>：<code>&lt;BrowserRouter&gt;</code>和<code>&lt;HashRouter&gt;</code></li>
+<li><strong>路线匹配器组件</strong>：<code>&lt;Route&gt;</code>和<code>&lt;Switch&gt;</code></li>
+<li><strong>导航组件</strong>：<code>&lt;Link&gt;</code>，<code>&lt;NavLink&gt;</code>和<code>&lt;Redirect&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="路由器组件"><a href="#路由器组件" class="headerlink" title="路由器组件"></a>路由器组件</h2><ul>
+<li>每个React Router应用程序的<strong>核心</strong>应该是<strong>路由器组件</strong>。</li>
+<li>对于Web项目，<strong>react-router-dom提供<code>&lt;BrowserRouter&gt;</code>和<code>&lt;HashRouter&gt;</code>路由器</strong>。两者之间的<strong>主要区别</strong>是它们<strong>存储URL和与Web服务器通信的方式</strong>。</li>
+<li><strong><code>&lt;BrowserRouter&gt;</code>使用常规的URL路径</strong>。这些通常是外观最好的URL，但是它们要求<strong>正确配置服务器</strong>。具体来说，您的Web服务器需要在所有由React Router客户端管理的URL上提供相同的页面。Create React App在开发中即开即用地支持此功能，并附带有关如何配置生产服务器的说明。</li>
+<li><strong><code>&lt;HashRouter&gt;</code></strong>将<strong>当前位置</strong>存储在<strong>URL 的hash一部分中</strong>，因此URL看起来像<a href="http://example.com/#/your/page。由于哈希从不发送到服务器，因此这意味着不需要特殊的服务器配置。" target="_blank" rel="noopener">http://example.com/#/your/page。由于哈希从不发送到服务器，因此这意味着不需要特殊的服务器配置。</a></li>
+<li>要使用 路由器组件，只需确保将其呈现在元素层次结构的根目录下即可。</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
+<li>通常会<strong>在src-index.js中将顶级<code>&lt;App&gt;</code>元素包装在路由器组件中</strong>，如下所示：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcyfspgrqkj30n009z3zy.jpg" alt="src-index.js"></li>
+<li>然后<strong>在src-APP.js中</strong>使用<strong>路线匹配器组件</strong></li>
+</ol>
+<h2 id="路线匹配器组件"><a href="#路线匹配器组件" class="headerlink" title="路线匹配器组件"></a>路线匹配器组件</h2><ul>
+<li><strong>路线匹配器组件：<code>&lt;Route&gt;</code>和<code>&lt;Switch&gt;</code></strong></li>
+</ul>
+<h3 id="lt-Route-gt-组件"><a href="#lt-Route-gt-组件" class="headerlink" title="&lt;Route&gt;组件"></a><code>&lt;Route&gt;</code>组件</h3><ul>
+<li><strong><code>&lt;Route&gt;</code>组件</strong>：定义路由组件。<ul>
+<li><strong>path属性</strong>：（字符串）<strong>匹配路径</strong>，没有定义 path 的 <code>&lt;Route&gt;</code> 总是会被匹配。</li>
+<li><strong>exact属性</strong>：（可省略属性值）表示<strong>准确匹配路径</strong>。如不使用该属性，则<strong>默认是模糊匹配path</strong>。如果为 true，则只有在 path 完全匹配 <code>location.pathname</code> 时才匹配。</li>
+<li>渲染方式的属性见下方，一般选<strong>component属性</strong>。其他更多属性可参考<a href="https://reacttraining.com/react-router/web/api/Route/strict-bool" target="_blank" rel="noopener">官网</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="渲染方式-lt-Route-gt-属性"><a href="#渲染方式-lt-Route-gt-属性" class="headerlink" title="渲染方式(&lt;Route&gt;属性)"></a>渲染方式(<code>&lt;Route&gt;</code>属性)</h4><ul>
+<li><code>&lt;Route&gt;</code>组件<strong>渲染方式</strong>（在不同的情况下使用不同的方式，<strong>只使用一种即可</strong>）：<ul>
+<li><strong>component属性：（组件）</strong>路径匹配成功后<strong>渲染的组件</strong>。<strong>【优先使用该属性】</strong><ul>
+<li>指定只有当位置匹配时才会渲染的 React 组件，该组件会接收 route props 作为属性。具体使用方法可见下方。</li>
+</ul>
+</li>
+<li><strong>render属性：（函数）</strong>在该路径下渲染的内容<ul>
+<li>使用 render 可以方便地进行内联渲染和包装，而无需进行上文解释的不必要的组件重装。可以<strong>传入一个函数，以在位置匹配时调用</strong>，而不是使用 component 创建一个新的 React 元素。render 渲染方式接收所有与 component 方式相同的 route props。（使用方法参考<a href="https://reacttraining.com/react-router/web/api/Route/render-func" target="_blank" rel="noopener">官网</a>）</li>
+<li><strong>警告</strong>：<code>&lt;Route component&gt;</code> 优先于 <code>&lt;Route render&gt;</code>，因此不要在同一个 <code>&lt;Route&gt;</code>中同时使用两者。</li>
+</ul>
+</li>
+<li><strong>children属性：（函数）</strong>在该路径下渲染的内容<ul>
+<li>有时候不论 path 是否匹配位置，你都想渲染一些内容。在这种情况下，你可以使用 children 属性。除了<strong>不论是否匹配它都会被调用</strong>以外，它的工作原理与 render 完全一样。</li>
+<li>使用方法可参考<a href="https://reacttraining.com/react-router/web/api/Route/children-func" target="_blank" rel="noopener">官网</a></li>
+<li><strong>警告</strong>：<code>&lt;Route component&gt;</code> 优先于 <code>&lt;Route render&gt;</code>优先于 <code>&lt;Route children&gt;</code>，因此不要在同一个 <route> 中同时使用多个。</route></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三种渲染方式都将提供<strong>相同的三个路由属性：<a href="https://reacttraining.com/react-router/web/api/match" target="_blank" rel="noopener">match</a>、location、history</strong></li>
+</ul>
+<h4 id="使用方法-1"><a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h4><ul>
+<li><code>&lt;Route&gt;</code>组件应在<code>&lt;Switch&gt;</code>内部，他们都应该在<strong>路由器组件</strong>内部作为子元素存在。</li>
+<li><strong>方法1：</strong>如果你已经在src-index.js中使用<strong>路由器组件</strong>包裹App组件，那么可以在src-App.js中使用<code>&lt;Route&gt;</code>组件：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz25z91hoj30us0qtjwh.jpg" alt="src-App.js"><ul>
+<li><strong>注意：路由器组件中始终包含<code>&lt;header/&gt;</code>组件</strong>。</li>
+<li>这意味着如果应用程序的位置是 <code>/</code>，那么 <strong>UI 的层次结构</strong>将会是：<code>&lt;header /&gt;&lt;Home /&gt;</code>。</li>
+<li>或者，如果应用程序的位置是 <code>/detail/1</code>(1可以是任意id值)，那么 UI 的层次结构将会是：<code>&lt;header /&gt;&lt;Detail /&gt;</code></li>
+</ul>
+</li>
+<li><strong>方法2：</strong>页可以直接在src-index.js中的<strong>路由器组件</strong>内部使用<code>&lt;Route&gt;</code>组件。</li>
+</ul>
+<h3 id="lt-Switch-gt-组件"><a href="#lt-Switch-gt-组件" class="headerlink" title="&lt;Switch&gt;组件"></a><code>&lt;Switch&gt;</code>组件</h3><ul>
+<li><code>&lt;Switch&gt;</code>组件用于渲染与路径匹配的<strong>第一个</strong>子 <code>&lt;Route&gt;</code> 或 <code>&lt;Redirect&gt;</code>。</li>
+<li><strong><code>&lt;Switch&gt;</code>组件工作原理:</strong><ul>
+<li>当<strong><code>&lt;Switch&gt;</code>被渲染</strong>时，它会搜索其<strong>子元素<code>&lt;Route&gt;</code>组件</strong>，以查找路径与当前URL匹配的元素。当<strong>它找到一个</strong>时，它将<strong>渲染那个<code>&lt;Route&gt;</code></strong>并且<strong>忽略所有其他的<code>&lt;Route&gt;</code>组件</strong>。</li>
+<li>这意味着应该<strong>将具有更特定(通常更长的)路径的<code>&lt;Route&gt;</code>放在不太特定的路径之前</strong>。</li>
+<li>如果没有<code>&lt;Route&gt;</code>匹配，<code>&lt;Switch&gt;</code>将不呈现任何内容(null)。</li>
+</ul>
+</li>
+<li><strong>总结：</strong><code>&lt;Switch&gt;</code> 路由中的Switch 代表<strong>只匹配一个路由</strong>，如果不使用 <code>&lt;Switch&gt;</code> 嵌套，路由会多次匹配。</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><strong>在src-index.js中：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  BrowserRouter <span class="keyword">as</span> Router,</span><br><span class="line">  Switch,</span><br><span class="line">  Route</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"react-router-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Switch&gt;</span><br><span class="line">        &#123;<span class="comment">/* 如果当前URL是/about，则渲染此路由，而其余的则被忽略 */</span>&#125;</span><br><span class="line">        &lt;Route path=<span class="string">"/about"</span>&gt;</span><br><span class="line">          &lt;About /&gt;</span><br><span class="line">        &lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &#123;/</span>* 注意这两条路由是如何排序的。更具体的路径=<span class="string">"/contact/:id"</span>放在路径=<span class="string">"/contact"</span>的前面 *<span class="regexp">/&#125;</span></span><br><span class="line"><span class="regexp">        &lt;Route path="/</span>contact/:id<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;Contact /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string">        &lt;Route path="</span>/contact<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;AllContacts /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;/* 如果之前的路径都没有匹配渲染任何东西，这条路线是退路。</span></span><br><span class="line"><span class="string">重要提示:带有path="</span>/<span class="string">"的路由将始终能匹配到，因为所有的URL都以/开头。这是</span></span><br><span class="line"><span class="string">为什么我们把这个放在最后 */&#125;</span></span><br><span class="line"><span class="string">        &lt;Route path="</span>/<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;Home /&gt;</span></span><br><span class="line"><span class="string">        &lt;/Route&gt;</span></span><br><span class="line"><span class="string">      &lt;/Switch&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ReactDOM.render(</span></span><br><span class="line"><span class="string">  &lt;Router&gt;</span></span><br><span class="line"><span class="string">    &lt;App /&gt;</span></span><br><span class="line"><span class="string">  &lt;/Router&gt;,</span></span><br><span class="line"><span class="string">  document.getElementById("</span>root<span class="string">")</span></span><br><span class="line"><span class="string">);</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong><br><code>&lt;Route path&gt;</code>匹配的是<strong>URL的开头</strong>，而<strong>不是整个URL</strong>。<br>因此，<code>&lt;Route path=&quot;/&quot;&gt;</code>将始终与URL匹配。<br>因此，我们通常把这个<code>&lt;Route&gt;</code>放在<code>&lt;Switch&gt;</code>的最后。<br>另一种可能的解决方案是<strong>使用<code>&lt;Route exact path=&quot;/&quot;&gt;</code></strong>，它<strong>准确匹配整个URL</strong>。</p>
+<h2 id="导航组件"><a href="#导航组件" class="headerlink" title="导航组件"></a>导航组件</h2><ul>
+<li><strong>导航组件：<code>&lt;Link&gt;</code>，<code>&lt;NavLink&gt;</code>和<code>&lt;Redirect&gt;</code></strong></li>
+</ul>
+<h3 id="lt-Link-gt-组件"><a href="#lt-Link-gt-组件" class="headerlink" title="&lt;Link&gt;组件"></a><code>&lt;Link&gt;</code>组件</h3><p><strong><code>&lt;Link&gt;</code>组件</strong>：类似于 <code>&lt;a&gt;</code> 标签(最终也会被渲染为 a 标签)。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">Link</span> &#125; from <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">Link</span> <span class="keyword">to</span>=<span class="string">"/about"</span>&gt;About&lt;/<span class="keyword">Link</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>to 属性</strong>：可理解为 a 标签的 href属性。</p>
+<ul>
+<li>属性值可以是一个<strong>字符串</strong>形式的<strong>链接地址</strong>，<strong>通过 pathname、search 和 hash 属性创建</strong>：<code>&lt;Link to=&#39;/courses?sort=name&#39; /&gt;</code></li>
+<li>也可以是<strong>对象</strong>形式的链接地址，可以具有以下任何属性：<ul>
+<li>pathname：要链接到的<strong>路径</strong></li>
+<li>search：<strong>查询参数</strong></li>
+<li>hash：URL 中的 <strong>hash</strong>，例如 <code>#the-hash</code></li>
+<li>state：存储到 location 中的额外状态数据<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;Link</span> <span class="string">to=&#123;&#123;</span></span><br><span class="line"><span class="attr">  pathname:</span> <span class="string">'/courses'</span><span class="string">,</span></span><br><span class="line"><span class="attr">  search:</span> <span class="string">'?sort=name'</span><span class="string">,</span></span><br><span class="line"><span class="attr">  hash:</span> <span class="string">'#the-hash'</span><span class="string">,</span></span><br><span class="line"><span class="attr">  state:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    fromDashboard:</span> <span class="literal">true</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;&#125;</span> <span class="string">/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>replace属性</strong>: 布尔值，当设置为 true 时，点击链接后将替换历史堆栈中的当前条目，而不是添加新条目。默认为 false。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">Link</span> <span class="keyword">to</span>=<span class="string">"/courses"</span> replace /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>innerRef属性</strong>: 函数，允许访问组件的底层引用。(类似普通组件的ref属性)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refCallback = <span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// node 指向最终挂载的 DOM 元素，在卸载时为 null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;Link to=<span class="string">"/"</span> innerRef=&#123;refCallback&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="lt-NavLink-gt-组件"><a href="#lt-NavLink-gt-组件" class="headerlink" title="&lt;NavLink&gt;组件"></a><code>&lt;NavLink&gt;</code>组件</h3><p>一个<strong>特殊版本的 <code>&lt;Link&gt;</code></strong>，它会在与当前 URL 匹配时为其呈现元素<strong>添加样式属性</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NavLink &#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line">&lt;NavLink to=<span class="string">"/about"</span>&gt;About&lt;<span class="regexp">/NavLink&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>activeClassName属性</strong>: string，当元素处于<strong>激活状态</strong>时<strong>应用的类</strong>，默认为 active。它将与 className 属性一起使用。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;NavLink <span class="attribute">to</span>=<span class="string">"/faq"</span> <span class="attribute">activeClassName</span>=<span class="string">"selected"</span>&gt;FAQs&lt;/NavLink&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>activeStyle属性</strong>: object，当元素处于<strong>激活状态</strong>时<strong>应用的样式</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> activeStyle = &#123;</span><br><span class="line">  fontWeight: <span class="string">'bold'</span>,</span><br><span class="line">  color: <span class="string">'red'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&lt;NavLink to=<span class="string">"/faq"</span> activeStyle=&#123;activeStyle&#125;&gt;FAQs&lt;<span class="regexp">/NavLink&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>exact属性</strong>: bool，默认为false，如果为 true，则只有在位置<strong>完全匹配</strong>时才<strong>应用激活类/样式</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">NavLink</span> <span class="attr">exact</span> <span class="attr">to</span>=<span class="string">"/profile"</span>&gt;</span>Profile<span class="tag">&lt;/<span class="name">NavLink</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>strict属性</strong>: bool，默认为false，如果为 true，则在确定位置是否与当前 URL 匹配时，将考虑位置的路径名后面的斜杠。有关更多信息，请参阅 <a href="https://reacttraining.com/react-router/core/api/Route/strict-bool" target="_blank" rel="noopener"><route strict> 文档</route></a>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">NavLink</span> <span class="attr">strict</span> <span class="attr">to</span>=<span class="string">"/events/"</span>&gt;</span>Events<span class="tag">&lt;/<span class="name">NavLink</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>isActive属性</strong>: func<br>添加额外逻辑以确定链接是否处于激活状态的函数。如果你要做的不仅仅是验证链接的路径名与当前 URL 的路径名相匹配，那么应该使用它。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只有当事件 id 为奇数时才考虑激活</span></span><br><span class="line">const oddEvent =<span class="function"> (<span class="params">match</span>, <span class="params">location</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">match</span>) &#123;</span><br><span class="line">    return <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  const eventID = parse<span class="constructor">Int(<span class="params">match</span>.<span class="params">params</span>.<span class="params">eventID</span>)</span>;</span><br><span class="line">  return !is<span class="constructor">NaN(<span class="params">eventID</span>)</span><span class="operator"> &amp;&amp; </span>eventID % <span class="number">2</span><span class="operator"> === </span><span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;NavLink <span class="keyword">to</span>=<span class="string">"/events/123"</span> isActive=&#123;oddEvent&#125;&gt;Event <span class="number">123</span>&lt;/NavLink&gt;</span><br><span class="line">location: object</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>isActive 属性</strong>：默认比较当前历史位置（通常是当前的浏览器 URL）。你也可以传递一个不同的位置进行比较。</p>
+</li>
+</ul>
+<h3 id="lt-Redirect-gt-组件-重定向"><a href="#lt-Redirect-gt-组件-重定向" class="headerlink" title="&lt;Redirect&gt;组件 重定向"></a><code>&lt;Redirect&gt;</code>组件 重定向</h3><p>使用 <code>&lt;Redirect&gt;</code>会<strong>导航到一个新的位置</strong>。新的位置将覆盖历史堆栈中的当前条目，例如服务器端重定向（HTTP 3xx）。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcyha37516j31110ju788.jpg" alt="例子"><br>使用<code>&lt;Link&gt;</code>类似<code>&lt;a&gt;</code>,<strong>需要点击</strong>才能跳转，而<strong>使用 <code>&lt;Redirect&gt;</code></strong>会<strong>直接导航到一个新的位置</strong>。</p>
+<ul>
+<li><p><strong>to属性</strong>: string<br>要重定向到的 URL，可以是 path-to-regexp 能够理解的任何有效的 URL 路径。所有要使用的 URL 参数必须由 from 提供。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Redirect <span class="keyword">to</span>=<span class="string">"/somewhere/else"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>to属性</strong>: object<br>要重定向到的位置，其中 pathname 可以是 path-to-regexp 能够理解的任何有效的 URL 路径。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Redirect <span class="keyword">to</span>=&#123;&#123;</span><br><span class="line">  pathname: <span class="string">'/login'</span>,</span><br><span class="line">  search: <span class="string">'?utm=your+face'</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    <span class="keyword">referrer</span>: currentLocation</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上例中的 state 对象可以在重定向到的组件中通过 this.props.location.state 进行访问。而 referrer 键（不是特殊名称）将通过路径名 /login 指向的登录组件中的 this.props.location.state.referrer 进行访问。</p>
+<ul>
+<li>更多属性可参考<a href="https://reacttraining.com/react-router/web/api/Redirect" target="_blank" rel="noopener">官方文档</a>或者<a href="https://segmentfault.com/a/1190000014294604" target="_blank" rel="noopener">这篇笔记</a></li>
+</ul>
+<hr>
+<h1 id="路由传值"><a href="#路由传值" class="headerlink" title="路由传值"></a>路由传值</h1><ul>
+<li>在 react 中 有<strong>两种方式</strong>进行路由传值:<ul>
+<li><strong>方法1：</strong>通过<strong>动态路由</strong>传值(占位符)。类似于<code>/a/:id/:value</code>。在<strong>组件内部</strong>可使用 <code>this.props.match.params.xxxx</code> 来<strong>获取所传参数值</strong>。【推荐使用该方法，因为可以获取所传参数值】<ul>
+<li><strong>例子</strong>：<ul>
+<li>在<strong>src-App.js中</strong>，定义<strong>路由匹配的路径</strong>时使用<strong>动态路由</strong>传值：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3l1v6jnj30nw0bfac6.jpg" alt="src-App.js">符合要求就跳转Detail组件。</li>
+<li><strong>detail-index.js中，使用 <code>this.props.match.params.id</code>获取所传参数值</strong>，并将其传给action：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3kq19zmj30pr0ir0x0.jpg" alt="detail-index.js"></li>
+<li><strong>detail-store-actionCreators.js中，</strong> action根据路径中获取到的id进行不同的AJAX请求，后端接受AJAX请求后根据不同地址返回不同数据给客户端：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz3k9fsonj30sg080wgr.jpg" alt="detail-store-actionCreators.js"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>方法2：</strong>通过 原始的 GET 路径后面，添加 <code>?key=value</code> 的方式。在 组件内部 可使用 <code>this.props.location.search</code>的方式获取键值对(只不过获取过后还是一个字符串，<strong>需要进一步的解析才能获取所传参数值</strong>)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="子路由的嵌套"><a href="#子路由的嵌套" class="headerlink" title="子路由的嵌套"></a>子路由的嵌套</h1><ul>
+<li>这种情况很常见，比如 A 组件内部还有许多其他的子组件。需要路由匹配选择对应的子组件时，就需要使用<strong>路由嵌套</strong></li>
+<li><a href="https://www.jianshu.com/p/fb201f82cf8c" target="_blank" rel="noopener">一个简单案例</a></li>
+<li><a href="https://reacttraining.com/react-router/web/example/nesting" target="_blank" rel="noopener">官方示例</a>是在Topics下又嵌套了3个子路由：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz4uo83hzj30ha0rl782.jpg" alt="官方示例"><ul>
+<li>点击Topics下的Link组件时会<strong>传递对应的参数topicId</strong>（Rendering…React/Components/props-v-state）,<strong>嵌套的子Route组件</strong>识别到有参数就会去渲染Topic组件，而Topic组件中的内容由传递的参数决定。</li>
+<li>关于useRouteMatch()和useParams()的用法可参考下方。<strong>注意：</strong>useRouteMatch()和useParams()都只能在 <strong>函数</strong>组件 的内部调用。</li>
+<li>案例效果<a href="https://reacttraining.com/react-router/web/example/nesting" target="_blank" rel="noopener">可在此查看</a></li>
+<li>path和url的区别<a href="https://segmentfault.com/q/1010000011460328" target="_blank" rel="noopener">可参考这篇文章</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="API-钩子"><a href="#API-钩子" class="headerlink" title="API 钩子"></a>API 钩子</h1><p><strong>注意：以下钩子只能在 函数组件 的内部调用。</strong></p>
+<h2 id="useRouteMatch"><a href="#useRouteMatch" class="headerlink" title="useRouteMatch()"></a>useRouteMatch()</h2><ul>
+<li>useRouteMatch()尝试以与<code>&lt;Route&gt;</code>相同的方式<strong>匹配当前URL</strong>。它主要用于<strong>在不实际呈现<code>&lt;Route&gt;</code>的情况下访问匹配数据</strong>。</li>
+<li>获取的match对象包含的属性见下方补充。</li>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz466oo5oj30hr0lc76c.jpg" alt="使用useRouteMatch()前后对比"></li>
+</ul>
+<h3 id="补充：Route组件的match属性（对象）"><a href="#补充：Route组件的match属性（对象）" class="headerlink" title="补充：Route组件的match属性（对象）"></a>补充：Route组件的match属性（对象）</h3><ul>
+<li>Route组件的<a href="https://reacttraining.com/react-router/web/api/match" target="_blank" rel="noopener">match属性</a></li>
+<li>一个<strong>match对象</strong>包含有关如何信息<code>&lt;Route path&gt;</code>相匹配的URL。<strong>match对象</strong>包含以下属性：<ul>
+<li>params -（对象）从与路径的动态段相对应的URL解析的键/值对</li>
+<li>isExact-（布尔值）true如果整个URL都匹配（没有结尾字符）</li>
+<li>path-（字符串）用于匹配的路径模式。<strong>用于构建嵌套<code>&lt;Route&gt;</code></strong></li>
+<li>url-（字符串）URL的匹配部分。<strong>用于构建嵌套<code>&lt;Link&gt;</code></strong></li>
+</ul>
+</li>
+<li>path和url的区别<a href="https://segmentfault.com/q/1010000011460328" target="_blank" rel="noopener">可参考这篇文章</a></li>
+</ul>
+<h2 id="useParams"><a href="#useParams" class="headerlink" title="useParams()"></a>useParams()</h2><ul>
+<li>useParams将<strong>返回URL参数的键/值对的对象</strong>。使用它来访问当前<code>&lt;Route&gt;</code>的match.params。</li>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcz4fa5hi9j30f50no765.jpg" alt="例子"></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/21/新建文本文档/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          登录页面开发（2）及项目上线流程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/19/登录页面开发（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">登录页面开发（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Router中的组件"><span class="nav-number">2.</span> <span class="nav-text">React Router中的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器组件"><span class="nav-number">2.1.</span> <span class="nav-text">路由器组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路线匹配器组件"><span class="nav-number">2.2.</span> <span class="nav-text">路线匹配器组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-Route-gt-组件"><span class="nav-number">2.2.1.</span> <span class="nav-text">&lt;Route&gt;组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染方式-lt-Route-gt-属性"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">渲染方式(&lt;Route&gt;属性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方法-1"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-Switch-gt-组件"><span class="nav-number">2.2.2.</span> <span class="nav-text">&lt;Switch&gt;组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.2.3.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航组件"><span class="nav-number">2.3.</span> <span class="nav-text">导航组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-Link-gt-组件"><span class="nav-number">2.3.1.</span> <span class="nav-text">&lt;Link&gt;组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-NavLink-gt-组件"><span class="nav-number">2.3.2.</span> <span class="nav-text">&lt;NavLink&gt;组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-Redirect-gt-组件-重定向"><span class="nav-number">2.3.3.</span> <span class="nav-text">&lt;Redirect&gt;组件 重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由传值"><span class="nav-number">3.</span> <span class="nav-text">路由传值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子路由的嵌套"><span class="nav-number">4.</span> <span class="nav-text">子路由的嵌套</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API-钩子"><span class="nav-number">5.</span> <span class="nav-text">API 钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#useRouteMatch"><span class="nav-number">5.1.</span> <span class="nav-text">useRouteMatch()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：Route组件的match属性（对象）"><span class="nav-number">5.1.1.</span> <span class="nav-text">补充：Route组件的match属性（对象）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useParams"><span class="nav-number">5.2.</span> <span class="nav-text">useParams()</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
