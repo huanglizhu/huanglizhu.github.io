@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcrincydquj30gx09kafc.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcriz8kyi6j30jj05678m.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcrizfsvvwj30ov04q0vp.jpg">
-<meta property="og:updated_time" content="2020-03-16T08:59:37.765Z">
+<meta property="og:updated_time" content="2020-03-30T12:20:43.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM基础">
 <meta name="twitter:description" content="DOM元素的获取方法DOM元素可以理解为html文件中的元素（但实际上DOM由HTML解析而来），可以通过DOM查找（获取）方法获取在js文件（script）中对应的html文件中的元素。">
@@ -394,9 +394,13 @@
 <hr>
 <h1 id="addEventListener-添加事件句柄"><a href="#addEventListener-添加事件句柄" class="headerlink" title="addEventListener() 添加事件句柄"></a>addEventListener() 添加事件句柄</h1><ul>
 <li>addEventListener() 方法用于<strong>向指定元素添加事件句柄</strong>。  </li>
-<li><strong>提示</strong>： 使用 <code>removeEventListener()</code> 方法来移除 <code>addEventListener()</code> 方法添加的事件句柄。</li>
+<li><strong>提示</strong>： 使用 <strong><code>removeEventListener()</code> 方法来移除</strong> <code>addEventListener()</code> 方法添加的事件句柄。</li>
 <li>语法：<code>element.addEventListener(event, function, useCapture)</code></li>
 <li><strong>注意：当给window对象绑定事件时，一定要注意用完后移除该绑定事件！</strong></li>
+<li><strong>事件绑定函数</strong>可接受的<strong>第一个参数</strong>是<strong>事件对象</strong>。（<strong><code>事件对象.target</code></strong>就是事件绑定函数对应的事件触发的<strong>DOM元素</strong>）<ul>
+<li><strong>事件对象的preventDefault()可取消事件的默认动作</strong>，比如：如果 type 属性是 “submit”，在事件传播的任意阶段可以调用任意的事件句柄，通过调用该方法，可以阻止提交表单。注意，如果 Event 对象的 cancelable 属性是 fasle，那么就没有默认动作，或者不能阻止默认动作。无论哪种情况，调用该方法都没有作用。</li>
+</ul>
+</li>
 </ul>
 <table>
 <thead>
@@ -411,7 +415,7 @@
 </tr>
 <tr>
 <td>function</td>
-<td>必须。指定要事件触发时执行的函数。 <br>当事件对象会作为第一个参数传入函数。 事件对象的类型取决于特定的事件。例如， “click” 事件属于 MouseEvent(鼠标事件) 对象</td>
+<td>必须。指定要事件触发时执行的函数。 <br><strong>事件绑定函数</strong>可接受的<strong>第一个参数</strong>是<strong>事件对象</strong>。（<strong><code>事件对象.target</code></strong>就是事件绑定函数对应的事件触发的<strong>DOM元素</strong>）<br> 事件对象的类型取决于特定的事件。例如， “click” 事件属于 MouseEvent(鼠标事件) 对象</td>
 </tr>
 <tr>
 <td>useCapture</td>
