@@ -43,10 +43,11 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7gd26ajxj30s704tt95.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7heeb2soj30h80qjjui.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7ibdacdej30jg0ohtc2.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dgwzm3oj30kw026t8r.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8djz1ocwj30pj0sfwmi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdk4nvzc5ij30gn06r74i.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dsgiai3j30hc014weg.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dupezqxj30po0igjut.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dgwzm3oj30kw026t8r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8djz1ocwj30pj0sfwmi.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8ntcbwr0j31030hz401.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8ntvsxxgj30j301ewef.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7nv76ufmj30gj081my2.jpg">
@@ -56,7 +57,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o2eyi6cj30rg0g5ad0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o3oputaj30qj0k1n07.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o6uml15j30rx0j878a.jpg">
-<meta property="og:updated_time" content="2020-03-29T04:16:32.212Z">
+<meta property="og:updated_time" content="2020-04-06T08:36:48.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客项目登录（session、redis）">
 <meta name="twitter:description" content="session 介绍 上一篇笔记中使用cookie存储username是很危险的，会暴露，所有明文的个人信息都最好不要放到cookie中。">
@@ -386,16 +387,22 @@
 <hr>
 <h1 id="session存入redis"><a href="#session存入redis" class="headerlink" title="session存入redis"></a>session存入redis</h1><ul>
 <li>目前我们把session存在js中作为变量，所以每次刷新页面时数据就会丢失，但我们把session存入redis就不会有这个问题。</li>
+<li><strong>cookie是一个对象</strong>，里面<strong>存储的是userId</strong>、path等；<strong>session也是一个对象</strong>，其中<strong>存储的是username和password</strong>等。<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdk4nvzc5ij30gn06r74i.jpg" alt="示意图"></li>
+<li><strong>流程总结</strong>：<ol>
+<li>用户<strong>登录网页</strong>，在登录路由中<strong>将输入的username等数据放入session中</strong>，并使用redis的set方法<strong>将session数据同步存储到redis中</strong></li>
+<li>接下来每次访问网页时，首先执行的app.js就会<strong>根据用户请求中的cookie的userId，使用redis解析（读取）session</strong>得到username等数据，以此判断用户是否登录。</li>
+</ol>
+</li>
 </ul>
-<ol>
-<li><strong>app.js中</strong>，<ul>
-<li>引入使用redis的方法：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dgwzm3oj30kw026t8r.jpg" alt="image.png"></li>
-<li>使用redis解析session，将session存在redis中，处理blog路由：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8djz1ocwj30pj0sfwmi.jpg" alt="image.png"></li>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ol start="2">
+<li><strong>router-user.js中</strong>，<ul>
+<li>引入往redis中设置session的方法：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dsgiai3j30hc014weg.jpg" alt="router-user.js"></li>
+<li>在登录路由中<strong>将输入的username等数据放入session中</strong>，并使用redis的set方法<strong>将session数据同步存储到redis中</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dupezqxj30po0igjut.jpg" alt="router-user.js"></li>
 </ul>
 </li>
-<li><strong>router-user.js中</strong>，<ul>
-<li>引入往redis中设置session的方法：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dsgiai3j30hc014weg.jpg" alt="image.png"></li>
-<li>将session数据同步到redis：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dupezqxj30po0igjut.jpg" alt="image.png"></li>
+<li><strong>app.js中</strong>，<ul>
+<li>引入使用redis的方法：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8dgwzm3oj30kw026t8r.jpg" alt="app.js"></li>
+<li><strong>根据用户请求中的cookie的userId，使用redis解析（读取）session</strong>得到username等数据，以此判断用户是否登录。处理blog路由：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8djz1ocwj30pj0sfwmi.jpg" alt="app.js"></li>
 </ul>
 </li>
 <li><strong>测试</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8ntcbwr0j31030hz401.jpg" alt="postman"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd8ntvsxxgj30j301ewef.jpg" alt="cmd"></li>
@@ -484,7 +491,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#session-介绍"><span class="nav-number">1.</span> <span class="nav-text">session 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-的使用"><span class="nav-number">2.</span> <span class="nav-text">session 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#app-js解析session"><span class="nav-number">2.1.</span> <span class="nav-text">app.js解析session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-user-js处理路由"><span class="nav-number">2.2.</span> <span class="nav-text">router-user.js处理路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.4.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从-session-到-redis"><span class="nav-number">3.</span> <span class="nav-text">从 session 到 redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目前使用session会造成的问题"><span class="nav-number">3.1.</span> <span class="nav-text">目前使用session会造成的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">3.2.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：redis保存session"><span class="nav-number">3.3.</span> <span class="nav-text">解决方案：redis保存session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何使用redis而不是mysql"><span class="nav-number">3.3.1.</span> <span class="nav-text">为何使用redis而不是mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何网站数据不适合用redis"><span class="nav-number">3.3.2.</span> <span class="nav-text">为何网站数据不适合用redis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-介绍"><span class="nav-number">4.</span> <span class="nav-text">redis 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装redis"><span class="nav-number">4.1.</span> <span class="nav-text">安装redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用redis"><span class="nav-number">4.2.</span> <span class="nav-text">使用redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs链接redis的demo"><span class="nav-number">5.</span> <span class="nav-text">nodejs链接redis的demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs连接redis-封装工具函数"><span class="nav-number">6.</span> <span class="nav-text">nodejs连接redis 封装工具函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session存入redis"><span class="nav-number">7.</span> <span class="nav-text">session存入redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完成server端登录的代码"><span class="nav-number">8.</span> <span class="nav-text">完成server端登录的代码</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#session-介绍"><span class="nav-number">1.</span> <span class="nav-text">session 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-的使用"><span class="nav-number">2.</span> <span class="nav-text">session 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#app-js解析session"><span class="nav-number">2.1.</span> <span class="nav-text">app.js解析session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-user-js处理路由"><span class="nav-number">2.2.</span> <span class="nav-text">router-user.js处理路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.4.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从-session-到-redis"><span class="nav-number">3.</span> <span class="nav-text">从 session 到 redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目前使用session会造成的问题"><span class="nav-number">3.1.</span> <span class="nav-text">目前使用session会造成的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">3.2.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：redis保存session"><span class="nav-number">3.3.</span> <span class="nav-text">解决方案：redis保存session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何使用redis而不是mysql"><span class="nav-number">3.3.1.</span> <span class="nav-text">为何使用redis而不是mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何网站数据不适合用redis"><span class="nav-number">3.3.2.</span> <span class="nav-text">为何网站数据不适合用redis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-介绍"><span class="nav-number">4.</span> <span class="nav-text">redis 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装redis"><span class="nav-number">4.1.</span> <span class="nav-text">安装redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用redis"><span class="nav-number">4.2.</span> <span class="nav-text">使用redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs链接redis的demo"><span class="nav-number">5.</span> <span class="nav-text">nodejs链接redis的demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs连接redis-封装工具函数"><span class="nav-number">6.</span> <span class="nav-text">nodejs连接redis 封装工具函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session存入redis"><span class="nav-number">7.</span> <span class="nav-text">session存入redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">7.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完成server端登录的代码"><span class="nav-number">8.</span> <span class="nav-text">完成server端登录的代码</span></a></li></ol>
     
     </div>
   </aside>
