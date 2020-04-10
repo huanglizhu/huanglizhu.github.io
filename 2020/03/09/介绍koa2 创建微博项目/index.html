@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>介绍koa2 创建微博项目 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="可参考博客koa2框架基本使用方法">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="介绍koa2 创建微博项目">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/介绍koa2 创建微博项目/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="可参考博客koa2框架基本使用方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd0gtaih7dj30cb06vdfu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1mxb78h6j30tf061dgt.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1nnpmeevj30un0540tc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n4tqj8hj306q08cq37.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n6nta0pj306r098t92.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n8fvm69j30es019q2v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n7qwpp9j30aa06bq2x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdois1ccfaj30ul0lk78u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoiwd4kguj30sn0ff41g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdojfi35h7j314r085jt6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdorxa8k58j30ze09awgl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdos9vyf4nj30ml071t9g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdosc3fjqkj30qm0j10u5.jpg">
+<meta property="og:updated_time" content="2020-04-10T10:11:14.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="介绍koa2 创建微博项目">
+<meta name="twitter:description" content="可参考博客koa2框架基本使用方法">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd0gtaih7dj30cb06vdfu.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-介绍koa2 创建微博项目" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      介绍koa2 创建微博项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/09/介绍koa2 创建微博项目/" class="article-date">
+	  <time datetime="2020-03-09T02:51:26.000Z" itemprop="datePublished">三月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>可参考博客<a href="https://huanglizhu.github.io/2020/03/06/koa2%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">koa2框架基本使用方法</a><a id="more"></a>
+
+</li>
+</ul>
+<h1 id="使用koa2-创建项目"><a href="#使用koa2-创建项目" class="headerlink" title="使用koa2-创建项目"></a>使用koa2-创建项目</h1><ul>
+<li>借助<strong>脚手架工具<a href="https://www.npmjs.com/package/koa-generator" target="_blank" rel="noopener">koa-generator</a></strong>创建项目</li>
+<li><strong>koa2框架基本使用方法</strong> 可参考<a href="https://huanglizhu.github.io/2020/03/06/koa2%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#介绍路由" target="_blank" rel="noopener">这篇博客</a></li>
+</ul>
+<h2 id="使用koa-generator创建项目"><a href="#使用koa-generator创建项目" class="headerlink" title="使用koa-generator创建项目"></a>使用koa-generator创建项目</h2><p>1.项目文件下，安装<strong>脚手架工具koa-generator</strong>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g koa-generator</span><br></pre></td></tr></table></figure>
+
+<p>2.选择koa2版本，<strong>-e</strong>说明<strong>使用ejs模板</strong>进行开发,<strong>创建项目</strong>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">koa2</span> -e</span><br></pre></td></tr></table></figure>
+
+<p>3.<strong>安装依赖</strong>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><p>4.<strong>启动项目</strong>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure>
+
+<p>5.访问<code>http://localhost:3000/</code>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd0gtaih7dj30cb06vdfu.jpg" alt="`http://localhost:3000/`"></p>
+<h2 id="生成文件"><a href="#生成文件" class="headerlink" title="生成文件"></a>生成文件</h2><ul>
+<li><strong>bin文件夹</strong>：启动文件<ul>
+<li><a href="http://www.js中规定了3000端口，也就是运行起来以后可以通过`http://localhost:3000/`进行访问" target="_blank" rel="noopener">www.js中规定了3000端口，也就是运行起来以后可以通过`http://localhost:3000/`进行访问</a></li>
+</ul>
+</li>
+<li><strong>src-App.js</strong>:项目的主文件，处理业务（他会将项目中写好的文件进行编译执行）</li>
+<li><strong>node_moudles文件夹</strong>：依赖文件</li>
+<li><strong>public文件夹</strong>：<ul>
+<li><strong>images文件夹</strong>：存放图片</li>
+<li><strong>javascipts</strong>：存放js文件</li>
+<li><strong>stylesheets</strong>：存放css文件</li>
+</ul>
+</li>
+<li><strong>routes文件夹</strong>：存放路由</li>
+<li><strong>views文件夹</strong>：ejs文件</li>
+<li><strong>package.json:</strong>基本命令（比如启动项目的<code>npm run dev</code>就是这里定义的）</li>
+</ul>
+<hr>
+<h1 id="借助coding管理项目"><a href="#借助coding管理项目" class="headerlink" title="借助coding管理项目"></a>借助coding管理项目</h1><ul>
+<li>具体步骤在<a href="https://huanglizhu.github.io/2020/02/22/%E5%80%9F%E5%8A%A9coding%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/" target="_blank" rel="noopener">这篇博客中</a>。</li>
+</ul>
+<hr>
+<h1 id="使用cross-env"><a href="#使用cross-env" class="headerlink" title="使用cross-env"></a>使用cross-env</h1><ol>
+<li>安装cross-env:<code>npm i cross-env -D</code></li>
+<li>设置package.json：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1mxb78h6j30tf061dgt.jpg" alt="添加一部分"><ul>
+<li>这里就不用另外安装nodemon进行热更新了，框架中执行的dev命令中自带了</li>
+<li>start基本用不到，可以删除</li>
+<li>test是单元测试用的，此时可先清空：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1nnpmeevj30un0540tc.jpg" alt="清空test"></li>
+</ul>
+</li>
+</ol>
+<h2 id="设置原因"><a href="#设置原因" class="headerlink" title="设置原因"></a>设置原因</h2><ul>
+<li><strong>windows、linux、mac os三个系统中设置环境变量的方式都不同，但使用cross-env可以把他们统一起来，这样代码在3个系统中都能运行。</strong></li>
+<li>在node中，<strong>process对象是全局变量，它提供当前node.js的有关信息，以及控制当前node.js的有关进程</strong>。因为是全局变量，它对于node应用程序是始终可用的，无需require()。</li>
+<li><strong>env是process的一个属性，这个属性返回包含用户环境信息的对象</strong>。在终端输入node后，在输入<code>process.env</code>可以看到打印出来的信息。</li>
+<li><strong>NODE_ENV不是process.env对象上原有的属性，它是我们自己添加上去的一个环境变量，用来确定当前所处的开发阶段。</strong><ul>
+<li>一般我们将 <strong>生产阶段 设为production，开发阶段 设为develop</strong>（在package.json中设置），然后在 脚本 中读取<code>process.env.NODE_ENV</code>即可知道现在是开发阶段还是生产阶段。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="整理代码结构"><a href="#整理代码结构" class="headerlink" title="整理代码结构"></a>整理代码结构</h1><ul>
+<li>目前的代码结构不符合我们所习惯的：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n4tqj8hj306q08cq37.jpg" alt="目前的代码结构"></li>
+<li>稍作调整，<strong>新建src文件夹，将public、routes、views、app.js剪切到src下</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n6nta0pj306r098t92.jpg" alt="调整后的结构"></li>
+<li><strong>修改bin-<a href="http://www.js下app的引用路径" target="_blank" rel="noopener">www.js下app的引用路径</a></strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n8fvm69j30es019q2v.jpg" alt="修改bin-www.js下app的引用路径"></li>
+<li><strong>页面正常显示</strong>即调整成功：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gd1n7qwpp9j30aa06bq2x.jpg" alt="页面正常显示"></li>
+</ul>
+<hr>
+<h2 id="重新提交coding"><a href="#重新提交coding" class="headerlink" title="重新提交coding"></a>重新提交coding</h2><p>项目进行重新提交，具体步骤在<a href="https://huanglizhu.github.io/2020/02/22/%E5%80%9F%E5%8A%A9coding%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/" target="_blank" rel="noopener">这篇博客中</a>。</p>
+<hr>
+<h1 id="路由演示"><a href="#路由演示" class="headerlink" title="路由演示"></a>路由演示</h1><ul>
+<li>自带的routes-index.js:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdois1ccfaj30ul0lk78u.jpg" alt="routes-index.js"></li>
+<li>自带的routes-user.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoiwd4kguj30sn0ff41g.jpg" alt="routes-user.js"></li>
+</ul>
+<h2 id="处理get请求"><a href="#处理get请求" class="headerlink" title="处理get请求"></a>处理get请求</h2><h2 id="动态参数"><a href="#动态参数" class="headerlink" title="动态参数"></a>动态参数</h2><ol>
+<li>访问个人页时，可<strong>通过<code>ctx.params</code>来获取路由中传递的参数</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdojfi35h7j314r085jt6.jpg" alt="index.js"></li>
+<li>点击“加载更多”时，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdorxa8k58j30ze09awgl.jpg" alt="index.js"></li>
+</ol>
+<h2 id="处理post请求"><a href="#处理post请求" class="headerlink" title="处理post请求"></a>处理post请求</h2><h2 id="post请求的数据"><a href="#post请求的数据" class="headerlink" title="post请求的数据"></a>post请求的数据</h2><ol>
+<li>登录时，可<strong>通过<code>ctx.request.body</code>（对象）获取post请求中的数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdos9vyf4nj30ml071t9g.jpg" alt="user.js"></li>
+<li>postman测试：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdosc3fjqkj30qm0j10u5.jpg" alt="postman测试"></li>
+</ol>
+<h2 id="重新提交coding-1"><a href="#重新提交coding-1" class="headerlink" title="重新提交coding"></a>重新提交coding</h2><ol>
+<li><strong>添加文件到本地仓库：<code>git add .</code></strong></li>
+<li><code>git commit -m &quot;feat:演示路由&quot;</code></li>
+<li>将<strong>本地文件推送到coding服务器</strong>:<code>git push origin master</code>（master也可以是其他分支）</li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/08/博客项目上线及配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">博客项目上线及配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用koa2-创建项目"><span class="nav-number">1.</span> <span class="nav-text">使用koa2-创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用koa-generator创建项目"><span class="nav-number">1.1.</span> <span class="nav-text">使用koa-generator创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行项目"><span class="nav-number">1.2.</span> <span class="nav-text">运行项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文件"><span class="nav-number">1.3.</span> <span class="nav-text">生成文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#借助coding管理项目"><span class="nav-number">2.</span> <span class="nav-text">借助coding管理项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cross-env"><span class="nav-number">3.</span> <span class="nav-text">使用cross-env</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置原因"><span class="nav-number">3.1.</span> <span class="nav-text">设置原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整理代码结构"><span class="nav-number">4.</span> <span class="nav-text">整理代码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding"><span class="nav-number">4.1.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由演示"><span class="nav-number">5.</span> <span class="nav-text">路由演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理get请求"><span class="nav-number">5.1.</span> <span class="nav-text">处理get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态参数"><span class="nav-number">5.2.</span> <span class="nav-text">动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理post请求"><span class="nav-number">5.3.</span> <span class="nav-text">处理post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post请求的数据"><span class="nav-number">5.4.</span> <span class="nav-text">post请求的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding-1"><span class="nav-number">5.5.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
