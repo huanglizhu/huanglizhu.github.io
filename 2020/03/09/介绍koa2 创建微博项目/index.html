@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdorxa8k58j30ze09awgl.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdos9vyf4nj30ml071t9g.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdosc3fjqkj30qm0j10u5.jpg">
-<meta property="og:updated_time" content="2020-04-10T10:11:14.697Z">
+<meta property="og:updated_time" content="2020-04-11T01:26:25.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="介绍koa2 创建微博项目">
 <meta name="twitter:description" content="可参考博客koa2框架基本使用方法">
@@ -251,6 +251,11 @@
 <li>自带的routes-index.js:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdois1ccfaj30ul0lk78u.jpg" alt="routes-index.js"></li>
 <li>自带的routes-user.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoiwd4kguj30sn0ff41g.jpg" alt="routes-user.js"></li>
 </ul>
+<h2 id="异步渲染模板"><a href="#异步渲染模板" class="headerlink" title="异步渲染模板"></a>异步渲染模板</h2><ul>
+<li>在routes-index.js中key看到，<strong>ctx.render()是await的，即异步的</strong>，也就是说，<strong>node渲染ejs模板是异步的</strong></li>
+<li><strong>原因：node中所有的IO操作都是异步的，而渲染模板实际上就是读取模板，读取模板是异步的</strong></li>
+<li>我们需要<strong>使用await将模板异步读取出来，然后再将变量返回给模板</strong></li>
+</ul>
 <h2 id="处理get请求"><a href="#处理get请求" class="headerlink" title="处理get请求"></a>处理get请求</h2><h2 id="动态参数"><a href="#动态参数" class="headerlink" title="动态参数"></a>动态参数</h2><ol>
 <li>访问个人页时，可<strong>通过<code>ctx.params</code>来获取路由中传递的参数</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdojfi35h7j314r085jt6.jpg" alt="index.js"></li>
 <li>点击“加载更多”时，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdorxa8k58j30ze09awgl.jpg" alt="index.js"></li>
@@ -310,6 +315,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2020/03/10/ejs基本使用方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ejs基本使用方法
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/03/08/博客项目上线及配置/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -327,7 +341,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用koa2-创建项目"><span class="nav-number">1.</span> <span class="nav-text">使用koa2-创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用koa-generator创建项目"><span class="nav-number">1.1.</span> <span class="nav-text">使用koa-generator创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行项目"><span class="nav-number">1.2.</span> <span class="nav-text">运行项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文件"><span class="nav-number">1.3.</span> <span class="nav-text">生成文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#借助coding管理项目"><span class="nav-number">2.</span> <span class="nav-text">借助coding管理项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cross-env"><span class="nav-number">3.</span> <span class="nav-text">使用cross-env</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置原因"><span class="nav-number">3.1.</span> <span class="nav-text">设置原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整理代码结构"><span class="nav-number">4.</span> <span class="nav-text">整理代码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding"><span class="nav-number">4.1.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由演示"><span class="nav-number">5.</span> <span class="nav-text">路由演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理get请求"><span class="nav-number">5.1.</span> <span class="nav-text">处理get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态参数"><span class="nav-number">5.2.</span> <span class="nav-text">动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理post请求"><span class="nav-number">5.3.</span> <span class="nav-text">处理post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post请求的数据"><span class="nav-number">5.4.</span> <span class="nav-text">post请求的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding-1"><span class="nav-number">5.5.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用koa2-创建项目"><span class="nav-number">1.</span> <span class="nav-text">使用koa2-创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用koa-generator创建项目"><span class="nav-number">1.1.</span> <span class="nav-text">使用koa-generator创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行项目"><span class="nav-number">1.2.</span> <span class="nav-text">运行项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文件"><span class="nav-number">1.3.</span> <span class="nav-text">生成文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#借助coding管理项目"><span class="nav-number">2.</span> <span class="nav-text">借助coding管理项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cross-env"><span class="nav-number">3.</span> <span class="nav-text">使用cross-env</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置原因"><span class="nav-number">3.1.</span> <span class="nav-text">设置原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整理代码结构"><span class="nav-number">4.</span> <span class="nav-text">整理代码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding"><span class="nav-number">4.1.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由演示"><span class="nav-number">5.</span> <span class="nav-text">路由演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步渲染模板"><span class="nav-number">5.1.</span> <span class="nav-text">异步渲染模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理get请求"><span class="nav-number">5.2.</span> <span class="nav-text">处理get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态参数"><span class="nav-number">5.3.</span> <span class="nav-text">动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理post请求"><span class="nav-number">5.4.</span> <span class="nav-text">处理post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post请求的数据"><span class="nav-number">5.5.</span> <span class="nav-text">post请求的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新提交coding-1"><span class="nav-number">5.6.</span> <span class="nav-text">重新提交coding</span></a></li></ol></li></ol>
     
     </div>
   </aside>

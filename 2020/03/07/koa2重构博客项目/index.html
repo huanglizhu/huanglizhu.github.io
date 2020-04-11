@@ -56,6 +56,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdm73nozm1j30sy09zwk8.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdm79kc0b8j312n0m043l.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdm78a7lypj30hq0d5jt5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdp4j5vkgsj310h05i76f.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdme38egg1j31660c1gs9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdme5dhmmjj30fw04t749.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdme8185nrj30ry04naap.jpg">
@@ -63,7 +64,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdmllg0kw1j30hs0g3ai1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdmlqba9pdj30no08gmyo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdmlrmyf78j30iw05i3zk.jpg">
-<meta property="og:updated_time" content="2020-04-09T02:59:19.714Z">
+<meta property="og:updated_time" content="2020-04-10T16:13:34.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="koa2重构博客项目">
 <meta name="twitter:description" content="实现session存储在redis中 基于koa-generic-session和koa-redis koa-redis是基于redis的，所以必须安装redis   在app.js中使用session中间件时，在session中间件内配置redis，则不需手动将session存储在redis内，直接将username等信息存储在session内即会同步到redis内">
@@ -355,8 +356,9 @@
 <li>可参考<a href="https://koa.bootcss.com/" target="_blank" rel="noopener">koa官网</a></li>
 <li>app.use()用于<strong>注册中间件</strong></li>
 <li><strong>next机制</strong>：即上一个中间件通过next()<strong>触发下一个中间件</strong></li>
-<li><strong>注意：koa不涉及路由，没有路由功能，故不涉及method和path的判断</strong></li>
+<li><strong>注意：koa中间件不涉及路由功能，故不涉及method和path的判断！注意区分koa路由和koa中间件</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdp4j5vkgsj310h05i76f.jpg" alt="注意区分koa路由和koa中间件"></li>
 <li>官网的“级联”中有一个中间件示例</li>
+<li><strong>洋葱圈模型</strong>：中间件之间通过next函数联系,当一个中间件调用 next() 后，会将控制权交给下一个中间件, 直到下一个中间件不再执行 next() 后, 将会沿路折返,将控制权依次交换给前一个中间件。</li>
 </ul>
 <h2 id="中间件示例"><a href="#中间件示例" class="headerlink" title="中间件示例"></a>中间件示例</h2><ol>
 <li>新建koa2-test文件夹，<code>npm init -y</code>初始化环境</li>

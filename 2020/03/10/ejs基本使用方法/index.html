@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ejs基本使用方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="EJS是高效的嵌入式 JavaScript 模板引擎 EJS 是一套简单的模板语言，帮你利用普通的 JavaScript 代码生成 HTML 页面。 EJS 没有如何组织内容的教条，也没有再造一套迭代和控制流语法，有的只是普通的 JavaScript 代码而已。">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ejs基本使用方法">
+<meta property="og:url" content="http://yoursite.com/2020/03/10/ejs基本使用方法/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="EJS是高效的嵌入式 JavaScript 模板引擎 EJS 是一套简单的模板语言，帮你利用普通的 JavaScript 代码生成 HTML 页面。 EJS 没有如何组织内容的教条，也没有再造一套迭代和控制流语法，有的只是普通的 JavaScript 代码而已。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotjqows2j30q80e20un.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotqxn4yrj31890e844v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotwh91fcj30hb0a6aab.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdou81z3qqj30zf0c9n0w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoubfv4emj318n0ajtb0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoueu7i1ij30xv0ap0w3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpkasqlm9j30hs0723z5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpk8sbhurj30g906474t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpkbqvlb8j30x10c2wfb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpko19p0wj30g909g759.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpl66zt6lj30qa0hh40g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpl7mttu4j30tr0bgmxx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplfbzxq2j30g70hzq4l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplrkw82yj30p5077gmj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplnxtwncj30iy0fe405.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplshnlkvj30z50drq4a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpndrj6zbj30z50dr41b.jpg">
+<meta property="og:updated_time" content="2020-04-11T03:16:21.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ejs基本使用方法">
+<meta name="twitter:description" content="EJS是高效的嵌入式 JavaScript 模板引擎 EJS 是一套简单的模板语言，帮你利用普通的 JavaScript 代码生成 HTML 页面。 EJS 没有如何组织内容的教条，也没有再造一套迭代和控制流语法，有的只是普通的 JavaScript 代码而已。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotjqows2j30q80e20un.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ejs基本使用方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ejs基本使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/10/ejs基本使用方法/" class="article-date">
+	  <time datetime="2020-03-10T03:12:00.000Z" itemprop="datePublished">三月 10, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>EJS是高效的嵌入式 JavaScript 模板引擎</li>
+<li>EJS 是一套简单的<strong>模板语言</strong>，帮你<strong>利用普通的 JavaScript 代码生成 HTML 页面</strong>。</li>
+<li>EJS 没有如何组织内容的教条，也没有再造一套迭代和控制流语法，有的只是<strong>普通的 JavaScript 代码</strong>而已。<a id="more"></a>
+
+</li>
+</ul>
+<h1 id="ejs语法总结"><a href="#ejs语法总结" class="headerlink" title="ejs语法总结"></a>ejs语法总结</h1><ol>
+<li>ejs中书写js<strong>变量：<code>&lt;%= 变量 %&gt;</code></strong></li>
+<li>ejs中书写js<strong>表达式：<code>&lt;% js表达式 %&gt;</code>，每一行js表达式都要加，html代码则不用</strong><ul>
+<li><strong>注意</strong>：如果js表达式中间插入了html代码，那么js表达式需要<strong>分开包裹</strong>，如下面“ejs循环”中的例子。如果js表达式只是单纯换行则<strong>只需一个尖括号包裹</strong>，如下“ejs引用组件”中的例子。</li>
+<li><strong>区分ejs中书写js变量与表达式：需要输出的变量才有等号！</strong></li>
+</ul>
+</li>
+<li>ejs中<strong>引用ejs组件：<code>&lt;%-  include(&#39;相对路径/组件ejs文件名&#39;,{变量1，变量2，...，变量x}) %&gt;</code></strong><ul>
+<li><strong>组件中需要的变量通过参数2进行传递</strong></li>
+<li>ejs文件中可直接定义组件，<strong>文件名即为组件名</strong></li>
+</ul>
+</li>
+<li><strong>注意：ejs模板最后编译为html代码，所以ejs中也可正常使用script标签来书写js代码</strong></li>
+</ol>
+<h1 id="为何路由可对应不同ejs文件"><a href="#为何路由可对应不同ejs文件" class="headerlink" title="为何路由可对应不同ejs文件"></a>为何路由可对应不同ejs文件</h1><ol>
+<li><strong>koa2框架</strong>中已帮我们<strong>在app.js中注册了ejs</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotjqows2j30q80e20un.jpg" alt="app.js中注册了ejs"></li>
+<li>所以<strong>路由中</strong>只需要写<strong>文件名</strong>并<strong>将变量传过去ejs</strong>即可：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotqxn4yrj31890e844v.jpg" alt="index.ejs与routes-index.js">index.ejs接受到变量后即可显示：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotwh91fcj30hb0a6aab.jpg" alt="显示效果"></li>
+</ol>
+<h1 id="ejs变量"><a href="#ejs变量" class="headerlink" title="ejs变量"></a>ejs变量</h1><ul>
+<li>ejs中的变量<strong>语法</strong>：<code>&lt;%= 变量 %&gt;</code></li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
+<li>传递变量的<strong>路由</strong>、接收并显示变量的<strong>ejs文件</strong>、<strong>显示效果</strong>：<a href="http://ww1.sinaimg.cn/large/005H7IVsgy1gdotyt1d19j31et0a1n36.jpg" target="_blank" rel="noopener">例子</a></li>
+</ul>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><ul>
+<li>当我们在ejs中使用了并未从路由中传递过来的变量时，</li>
+</ul>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>ejs文件和显示页面：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdou81z3qqj30zf0c9n0w.jpg" alt="ejs文件和显示页面"></li>
+<li><strong>原因：app.js中的onerror()处理了错误，显示了一个前端页面</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoubfv4emj318n0ajtb0.jpg" alt="app.js和控制台">此时可<strong>在控制台看到报错原因</strong></li>
+<li><strong>解决方法：变量前加<code>locals.</code></strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdoueu7i1ij30xv0ap0w3.jpg" alt="解决方法">这样即使没有传递该变量就使用了也不会报错，<strong>它相当于传了一个空，即<code>&lt;p&gt; &lt;/p&gt;</code></strong></li>
+<li><strong>总结：在ejs模板中，不确定是否会传值过来的变量使用<code>locals.变量</code>,防止因未传变量而报错</strong></li>
+</ol>
+<h1 id="ejs判断"><a href="#ejs判断" class="headerlink" title="ejs判断"></a>ejs判断</h1><ul>
+<li>ejs中书写js表达式时<strong>语法：<code>&lt;% js表达式 %&gt;</code>，每一行js表达式都要加，html代码则不用</strong><ul>
+<li><strong>注意</strong>：如果js表达式中间插入了html代码，那么js表达式需要<strong>分开包裹</strong>，如下面“ejs循环”中的例子。如果js表达式只是单纯换行则<strong>只需一个尖括号包裹</strong>，如下“ejs引用组件”中的例子。</li>
+</ul>
+</li>
+<li><strong>区分ejs中书写js变量与表达式：需要输出的变量才有等号！</strong></li>
+<li><strong>注意：ejs模板最后编译为html代码，所以ejs中也可正常使用script标签来书写js代码</strong></li>
+</ul>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>routes-index.js中<strong>传入变量isMe</strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpkasqlm9j30hs0723z5.jpg" alt="routes-index.js"></li>
+<li>views-index.ejs中<strong>做判断</strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpk8sbhurj30g906474t.jpg" alt="views-index.ejs"></li>
+<li><strong>测试</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpkbqvlb8j30x10c2wfb.jpg" alt="测试"></li>
+</ol>
+<h1 id="ejs引用组件"><a href="#ejs引用组件" class="headerlink" title="ejs引用组件"></a>ejs引用组件</h1><ul>
+<li>ejs中<strong>引用组件的语法</strong>：<code>&lt;%-  include(&#39;相对路径/组件ejs文件名&#39;,{变量1，变量2，...，变量x}) %&gt;</code><ul>
+<li><strong>组件中需要的变量通过参数2进行传递</strong></li>
+<li>ejs文件中可直接定义组件，<strong>文件名即为组件名</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>views文件夹下<strong>新建widgets文件夹，用于存放组件</strong></li>
+<li>widgets文件夹下<strong>新建user-info.ejs</strong>，将ejs判断例子中添加的逻辑挪过去<strong>创造组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpko19p0wj30g909g759.jpg" alt="user-info.ejs"></li>
+<li>在<strong>views-index.ejs中引用组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpl66zt6lj30qa0hh40g.jpg" alt="views-index.ejs"></li>
+<li><strong>测试：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpl7mttu4j30tr0bgmxx.jpg" alt="测试"></li>
+</ol>
+<h1 id="ejs循环"><a href="#ejs循环" class="headerlink" title="ejs循环"></a>ejs循环</h1><ul>
+<li>和ejs判断类似</li>
+</ul>
+<h2 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>routes-index.js中<strong>传入数组blogList</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplfbzxq2j30g70hzq4l.jpg" alt="routes-index.js"></li>
+<li>widgets文件夹下<strong>新建blog-list.ejs组件，循环渲染blogList</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplrkw82yj30p5077gmj.jpg" alt="blog-list.ejs"><ul>
+<li><strong>注意：html属性值需要引号</strong></li>
+</ul>
+</li>
+<li>在<strong>views-index.ejs中引用组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplnxtwncj30iy0fe405.jpg" alt="views-index.ejs"></li>
+<li>测试：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdplshnlkvj30z50drq4a.jpg" alt="测试"></li>
+</ol>
+<h1 id="提交项目到coding"><a href="#提交项目到coding" class="headerlink" title="提交项目到coding"></a>提交项目到coding</h1><ol>
+<li>提交前最好使用<strong><code>git diff</code></strong>看看自己提交的是否包含什么不需要提交的</li>
+<li><strong>添加文件到本地仓库：<code>git add .</code></strong></li>
+<li><strong>提交文件到本地仓库：<code>git commit -m &quot;feat:演示ejs&quot;</code></strong></li>
+<li>将<strong>本地文件推送到coding服务器</strong>:<code>git push origin master</code>（master也可以是其他分支）</li>
+</ol>
+<h1 id="补充：SSR与SP"><a href="#补充：SSR与SP" class="headerlink" title="补充：SSR与SP"></a>补充：SSR与SP</h1><ul>
+<li><strong>所有的服务端渲染引擎</strong>（比如ejs、vue、react），<strong>本质上都是SSR（server side render）</strong></li>
+<li>通过<strong>服务端的能力</strong>将页面渲染出来的就是SSR<ul>
+<li>比如，在上面“ejs循环”的例子中，blog-list.ejs组件中可以通过判断blogList的长度然后将其每一条都显示出来。<strong>服务端通过模板输入浏览器的是一个静态的结果，这样的形式就是SSR</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpndrj6zbj30z50dr41b.jpg" alt="静态的结果"></li>
+</ul>
+</li>
+<li><strong>与SSR相对的就是SP</strong>(前端渲染),比如AJAX。SP是不会显示一堆html代码的，只会有一个JS代码显示在浏览器上。<strong>通过JS的能力</strong>将页面渲染出来的就是SP</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/09/介绍koa2 创建微博项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">介绍koa2 创建微博项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs语法总结"><span class="nav-number">1.</span> <span class="nav-text">ejs语法总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为何路由可对应不同ejs文件"><span class="nav-number">2.</span> <span class="nav-text">为何路由可对应不同ejs文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs变量"><span class="nav-number">3.</span> <span class="nav-text">ejs变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误处理"><span class="nav-number">4.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs判断"><span class="nav-number">5.</span> <span class="nav-text">ejs判断</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-2"><span class="nav-number">5.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs引用组件"><span class="nav-number">6.</span> <span class="nav-text">ejs引用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-3"><span class="nav-number">6.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ejs循环"><span class="nav-number">7.</span> <span class="nav-text">ejs循环</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-4"><span class="nav-number">7.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交项目到coding"><span class="nav-number">8.</span> <span class="nav-text">提交项目到coding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：SSR与SP"><span class="nav-number">9.</span> <span class="nav-text">补充：SSR与SP</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
