@@ -11,19 +11,19 @@
   
   
   
-  <meta name="description" content="&amp;lt;link&amp;gt;与&amp;lt;script&amp;gt; &amp;lt;link&amp;gt; 和href配合 加载css，hypertext reference超文本引用，页面加载到href时不会停下来。 &amp;lt;script&amp;gt;和src配合 加载script文件，source资源，页面会停下来等待资源加载完毕（并执行完），所以一般js放在body的最下面。">
+  <meta name="description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS笔试遇到的知识点（2）">
 <meta property="og:url" content="http://yoursite.com/2020/01/18/JS笔试遇到的知识点（2）/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="&amp;lt;link&amp;gt;与&amp;lt;script&amp;gt; &amp;lt;link&amp;gt; 和href配合 加载css，hypertext reference超文本引用，页面加载到href时不会停下来。 &amp;lt;script&amp;gt;和src配合 加载script文件，source资源，页面会停下来等待资源加载完毕（并执行完），所以一般js放在body的最下面。">
+<meta property="og:description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg">
-<meta property="og:updated_time" content="2020-02-09T11:24:35.072Z">
+<meta property="og:updated_time" content="2020-04-12T11:50:52.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS笔试遇到的知识点（2）">
-<meta name="twitter:description" content="&amp;lt;link&amp;gt;与&amp;lt;script&amp;gt; &amp;lt;link&amp;gt; 和href配合 加载css，hypertext reference超文本引用，页面加载到href时不会停下来。 &amp;lt;script&amp;gt;和src配合 加载script文件，source资源，页面会停下来等待资源加载完毕（并执行完），所以一般js放在body的最下面。">
+<meta name="twitter:description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -163,27 +163,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="lt-link-gt-与-lt-script-gt"><a href="#lt-link-gt-与-lt-script-gt" class="headerlink" title="&lt;link&gt;与&lt;script&gt;"></a><code>&lt;link&gt;</code>与<code>&lt;script&gt;</code></h1><ul>
-<li><strong><code>&lt;link&gt;</code> 和href配合 加载css</strong>，hypertext reference超文本引用，页面加载到href时<strong>不会停下来</strong>。</li>
-<li><strong><code>&lt;script&gt;</code>和src配合 加载script文件</strong>，source资源，页面会<strong>停下来等待资源加载完毕</strong>（并执行完），所以一般js放在body的最下面。<a id="more"></a>
-
-</li>
-</ul>
-<hr>
-<h1 id="数组长度不包括数组的方法（函数）"><a href="#数组长度不包括数组的方法（函数）" class="headerlink" title="数组长度不包括数组的方法（函数）"></a>数组长度不包括数组的方法（函数）</h1><ol>
-<li>首先要明确：<strong>数组也是对象</strong></li>
-<li><strong>对象不能用length返回其拥有的属性数量</strong></li>
-</ol>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = <span class="number">0</span>; </span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">0</span>; </span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">1</span>; </span><br><span class="line">arr.foo = <span class="string">'C'</span>; </span><br><span class="line">console.loa(arr.lenath);<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
-
-<p>这里要理解所谓‘数组’其实是array类型对象的一个特殊作用，就是：我们可以对它进行一种模式的数据存储，但除此之外，它依然是一个对象</p>
-<ul>
-<li><code>var arr = [‘1’，‘2’]</code> //这本质上是一系列操作：得到一个数组对象；调用了它的数组方法存入了一些数据，<code>arr.length</code>根据存入数据的数目被修改</li>
-<li><code>arr.length</code>，对arr对象的length属性进行一个访问</li>
-<li><code>arr.foo = &#39;hello&#39;</code> 对arr对象创建一个属性，所以<code>.foo</code> 跟<code>.length</code>地位是并列的：就是arr的一个属性**，同时arr的数组方法跟这些属性是毫不相关的。</li>
-</ul>
-<hr>
-<h1 id="js中同名函数后面会覆盖前面的"><a href="#js中同名函数后面会覆盖前面的" class="headerlink" title="js中同名函数后面会覆盖前面的"></a>js中同名函数后面会覆盖前面的</h1><p>js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。</p>
+        <h1 id="js中同名函数后面会覆盖前面的"><a href="#js中同名函数后面会覆盖前面的" class="headerlink" title="js中同名函数后面会覆盖前面的"></a>js中同名函数后面会覆盖前面的</h1><p>js里面没有函数重载的概念，在其他语言中（如java）java中，可以存在同名函数，只要传入的参数数量或者类型不同即可。</p>
+<a id="more"></a>
 <p><strong>在js中，定义了两个同名函数后，后面的函数会覆盖前面定义的函数</strong>。<br>也就是说，前面定义的函数内容会被后面的函数内容覆盖，当你以为自己执行的是前面的函数内容时，其实执行的是后面的函数内容。</p>
 <p><strong>例子</strong>：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> m= <span class="number">1</span>, j = k = <span class="number">0</span>; </span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(n)</span> </span>&#123; </span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> n = n+<span class="number">1</span>; </span></span><br><span class="line">　 &#125; </span><br><span class="line">    y = add(m); </span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(n)</span> </span>&#123; </span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> n = n + <span class="number">3</span>; </span></span><br><span class="line">    &#125; </span><br><span class="line">z = add(m); </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -257,6 +238,20 @@
 <li>数组长度为1，所以只含有的index值为0，<code>1 in [1]</code>返回fasle。</li>
 </ul>
 <hr>
+<h1 id="for…in-和-for…of"><a href="#for…in-和-for…of" class="headerlink" title="for…in 和 for…of"></a>for…in 和 for…of</h1><ul>
+<li>for…in还是for…of语句都是遍历一些东西。它们之间的主要区别在于它们的迭代方式。</li>
+<li><strong>for…in</strong> 语句以<strong>任意顺序</strong>遍历对象的可枚举属性，<strong>更适合用于遍历对象属性</strong>。（但要注意：需要使用hasOwnProperty()筛选是否为继承自原型的属性,数组/对象/字符串都会继承原型属性）<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="noopener">MDN for…in</a></li>
+</ul>
+</li>
+<li><strong>for…of</strong> 语句<strong>按顺序</strong>遍历<strong>可迭代对象</strong>的数据，<strong>更适合用于遍历 数组元素/字符串 等拥有 迭代器 对象的集合</strong>。<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">MDN for…of</a></li>
+<li>但是<strong>for…of不能遍历对象</strong>,因为对象没有迭代器。</li>
+<li>与forEach()不同的是，for…of可以正确响应break、continue和return语句。</li>
+</ul>
+</li>
+<li>以下示例显示了与Array一起使用时<strong>，for…of循环和for…in循环之间的区别</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.objCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;; </span><br><span class="line"><span class="built_in">Array</span>.prototype.arrCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> iterable = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>];</span><br><span class="line">iterable.foo = <span class="string">'hello'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// logs 0, 1, 2, "foo", "arrCustom", "objCustom"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="keyword">if</span> (iterable.hasOwnProperty(i)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// logs 0, 1, 2, "foo"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// logs 3, 5, 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -302,19 +297,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/18/JS笔试题遇到的知识点（3）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/18/Redux进阶(1)UI组件、容器组件、无状态组件/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          JS笔试遇到的知识点（3）
+          Redux进阶(1)UI组件、容器组件、无状态组件
         
       </div>
     </a>
   
   
-    <a href="/2020/01/17/Redux的reducer为什么不能有异步操作/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/01/18/JS笔试题遇到的知识点（3）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Redux的reducer为什么不能有异步操作</div>
+      <div class="article-nav-title">JS笔试遇到的知识点（3）</div>
     </a>
   
 </nav>
@@ -328,7 +323,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lt-link-gt-与-lt-script-gt"><span class="nav-number">1.</span> <span class="nav-text">&lt;link&gt;与&lt;script&gt;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组长度不包括数组的方法（函数）"><span class="nav-number">2.</span> <span class="nav-text">数组长度不包括数组的方法（函数）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js中同名函数后面会覆盖前面的"><span class="nav-number">3.</span> <span class="nav-text">js中同名函数后面会覆盖前面的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void关键词"><span class="nav-number">4.</span> <span class="nav-text">void关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按位与运算-amp"><span class="nav-number">5.</span> <span class="nav-text">按位与运算&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#返回值和输出值不一样"><span class="nav-number">6.</span> <span class="nav-text">返回值和输出值不一样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义函数的三种方法"><span class="nav-number">7.</span> <span class="nav-text">定义函数的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个常见的事件的方法"><span class="nav-number">8.</span> <span class="nav-text">几个常见的事件的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">9.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null与undefined"><span class="nav-number">10.</span> <span class="nav-text">null与undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符instanceof、-、"><span class="nav-number">11.</span> <span class="nav-text">运算符instanceof、===、==</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS继承方式"><span class="nav-number">12.</span> <span class="nav-text">JS继承方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换为布尔值"><span class="nav-number">13.</span> <span class="nav-text">转换为布尔值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">14.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6中promise的三种状态"><span class="nav-number">15.</span> <span class="nav-text">ES6中promise的三种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">16.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分母为0isNaN-1-0"><span class="nav-number">17.</span> <span class="nav-text">分母为0isNaN(1/0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#in操作符"><span class="nav-number">18.</span> <span class="nav-text">in操作符</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js中同名函数后面会覆盖前面的"><span class="nav-number">1.</span> <span class="nav-text">js中同名函数后面会覆盖前面的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void关键词"><span class="nav-number">2.</span> <span class="nav-text">void关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按位与运算-amp"><span class="nav-number">3.</span> <span class="nav-text">按位与运算&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#返回值和输出值不一样"><span class="nav-number">4.</span> <span class="nav-text">返回值和输出值不一样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义函数的三种方法"><span class="nav-number">5.</span> <span class="nav-text">定义函数的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个常见的事件的方法"><span class="nav-number">6.</span> <span class="nav-text">几个常见的事件的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">7.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null与undefined"><span class="nav-number">8.</span> <span class="nav-text">null与undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符instanceof、-、"><span class="nav-number">9.</span> <span class="nav-text">运算符instanceof、===、==</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS继承方式"><span class="nav-number">10.</span> <span class="nav-text">JS继承方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换为布尔值"><span class="nav-number">11.</span> <span class="nav-text">转换为布尔值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">12.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6中promise的三种状态"><span class="nav-number">13.</span> <span class="nav-text">ES6中promise的三种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">14.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分母为0isNaN-1-0"><span class="nav-number">15.</span> <span class="nav-text">分母为0isNaN(1/0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#in操作符"><span class="nav-number">16.</span> <span class="nav-text">in操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for…in-和-for…of"><span class="nav-number">17.</span> <span class="nav-text">for…in 和 for…of</span></a></li></ol>
     
     </div>
   </aside>
