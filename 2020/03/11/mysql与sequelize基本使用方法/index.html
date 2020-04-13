@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>mysql与sequelize基本使用方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="mysql mysql的下载安装等基本用法可参考博客：nodejs链接mysql及项目真实使用方法 操作mysql的客户端我选择的是SQLyog">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql与sequelize基本使用方法">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/mysql与sequelize基本使用方法/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="mysql mysql的下载安装等基本用法可参考博客：nodejs链接mysql及项目真实使用方法 操作mysql的客户端我选择的是SQLyog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpoacob7fj30yk0g2tb9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpp0ga97vj317a0gfgok.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdppb31esuj30xr05lmzf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpun6lqe9j3111059q6g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdq87teb0jj31ev08ntd4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqq7gpal2j30wl05ggo3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqqs0ft32j318p0i37au.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqr5516cej309l06tq3q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqrcq36dkj315309iae0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqrh2g2emj30wv08bae3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxuwbbm9j30vw0bl0yi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxv37oa1j30ye08q77y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxv6vp7kj30xv08gwi3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrwdqitj5j30vm0djwgk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrwklxyghj312409ldjm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdryexeza7j314a0cowj6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrz5iwq7zj316109077i.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrzcrynqzj316s06q75q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrze0bizoj31bc06rtcb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds5bysb3xj30we0d7dkw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds0jrtk1cj317g079dhl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds5e1ba7mj30yq06rdhx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds0wffrdlj30hg0e2q4k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds15m7iqnj308w06k3z9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds1b1b9rpj30q30gtad8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds50j89vvj30qy0f6jtr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds513yld0j315i05k3ze.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds7f89m4nj318g0knk5f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds768khr0j30vn060adf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds8zphv6vj30uv0h7tbd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds91sd3jhj31140b2ac1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds95hs8acj30ui0oa0z3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds9hc6srtj30yf0c0q5q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gds9sb8a1cj30r30p4q7j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsgpu2i8xj319r0bxdju.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsgjztaosj30mi09g3zv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdshvh5djlj31dv090tcr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdshvp9imuj30ob040js6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsi8oqjfej30ri0e640d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsi92x2bpj30te02bmy4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsiai0imgj30qx0eignj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsinwxantj30k60d8jt4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsixbb14cj30qb0apjti.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsiz4kj8hj30u90gd0wq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsj0srziej30vi055taz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsjesg3tpj30uz0csjzy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsj65bwiej30w10d4gns.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsji78hiwj30vd0kdwih.jpg">
+<meta property="og:updated_time" content="2020-04-13T15:09:39.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql与sequelize基本使用方法">
+<meta name="twitter:description" content="mysql mysql的下载安装等基本用法可参考博客：nodejs链接mysql及项目真实使用方法 操作mysql的客户端我选择的是SQLyog">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpoacob7fj30yk0g2tb9.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-mysql与sequelize基本使用方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      mysql与sequelize基本使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/11/mysql与sequelize基本使用方法/" class="article-date">
+	  <time datetime="2020-03-11T15:08:07.000Z" itemprop="datePublished">三月 11, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><ul>
+<li><strong>mysql的下载安装等基本用法</strong>可参考博客：<a href="https://huanglizhu.github.io/2020/02/23/nodejs%E9%93%BE%E6%8E%A5mysql%E5%8F%8A%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">nodejs链接mysql及项目真实使用方法</a></li>
+<li><strong>操作mysql的客户端</strong>我选择的是<strong>SQLyog</strong><a id="more"></a>
+
+</li>
+</ul>
+<h2 id="SQLyog中建库建表"><a href="#SQLyog中建库建表" class="headerlink" title="SQLyog中建库建表"></a>SQLyog中建库建表</h2><ol>
+<li>首先<strong>新建数据库koa2_weibo_db</strong></li>
+<li>然后<strong>建表</strong><ul>
+<li><strong>users表</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpoacob7fj30yk0g2tb9.jpg" alt="users表"></li>
+<li><strong>blogs表</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpp0ga97vj317a0gfgok.jpg" alt="blogs表"></li>
+</ul>
+</li>
+</ol>
+<h2 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h2><h3 id="增删查改"><a href="#增删查改" class="headerlink" title="增删查改"></a>增删查改</h3><ul>
+<li><strong>增删查改的sql语句</strong> 可参考博客：<a href="https://huanglizhu.github.io/2020/02/23/nodejs%E9%93%BE%E6%8E%A5mysql%E5%8F%8A%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#表操作" target="_blank" rel="noopener">nodejs链接mysql及项目真实使用方法</a></li>
+<li>在两个表中分别插入一些数据：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdppb31esuj30xr05lmzf.jpg" alt="两个表"></li>
+</ul>
+<h3 id="查询总数（select-count-from-）"><a href="#查询总数（select-count-from-）" class="headerlink" title="查询总数（select count()...from...）"></a>查询总数（<code>select count()...from...</code>）</h3><ul>
+<li>查询总数和查一样，<strong>如果使用<code>*</code>来查询就很费性能</strong>，所以一般只查一列的总数即可<ul>
+<li>比如：<code>SELECT COUNT(列名) FROM 表名;</code></li>
+<li>或者：<code>SELECT COUNT(列名) AS 重命名 FROM 表名;</code></li>
+</ul>
+</li>
+<li><strong>例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdpun6lqe9j3111059q6g.jpg" alt="例子"></li>
+</ul>
+<h3 id="分页（select-中limit与offset）"><a href="#分页（select-中limit与offset）" class="headerlink" title="分页（select...中limit与offset）"></a>分页（<code>select...</code>中<code>limit</code>与<code>offset</code>）</h3><ul>
+<li><strong><code>limit x</code>：限制只查询x行</strong></li>
+<li><strong><code>offset x</code>：跳过x行再查询</strong></li>
+<li><strong>例子</strong>：假定一页是两行数据：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdq87teb0jj31ev08ntd4.jpg" alt="例子"></li>
+</ul>
+<hr>
+<h2 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h2><ul>
+<li>这个在<a href="https://huanglizhu.github.io/2020/02/23/nodejs%E9%93%BE%E6%8E%A5mysql%E5%8F%8A%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">nodejs链接mysql及项目真实使用方法</a>中没有提到的</li>
+<li>在<strong>sqlyog中创建外键</strong>，创建外键时可<strong>设置 更新/删除是否级联</strong></li>
+</ul>
+<h3 id="创建外键"><a href="#创建外键" class="headerlink" title="创建外键"></a>创建外键</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqq7gpal2j30wl05ggo3.jpg" alt="例子"></p>
+<ol>
+<li>首先<strong>需要保证2列数据的类型和限定长度一致</strong></li>
+<li>然后在sqlyog进行操作，<strong>创建外键、设置更新级联、删除级联</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqqs0ft32j318p0i37au.jpg" alt="sqlyog"></li>
+<li>刷新后，<strong>可看到blogs-indexes下出现了外键userid</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqr5516cej309l06tq3q.jpg" alt="sqlyog"></li>
+</ol>
+<h3 id="更新限制-amp-更新-删除级联"><a href="#更新限制-amp-更新-删除级联" class="headerlink" title="更新限制&amp;更新/删除级联"></a>更新限制&amp;更新/删除级联</h3><ol>
+<li><strong>更新限制</strong>：blogs表中的userid被限制为users表中的id，不能输入其他的内容<ul>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqrcq36dkj315309iae0.jpg" alt="更新限制"></li>
+</ul>
+</li>
+<li><strong>更新级联（update cascade）</strong>：（创建外键时可设置）一旦users表中的id被更新，blogs表中对应的userid的那条数据将被自动更新<ul>
+<li>一般id是不更新的，所以这里只做了解</li>
+</ul>
+</li>
+<li><strong>删除级联（delete cascade）</strong>：（创建外键时可设置）一旦users表中的id被删除，blogs表中对应的userid的那条数据将被自动删除<ul>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqrh2g2emj30wv08bae3.jpg" alt="删除级联"></li>
+</ul>
+</li>
+</ol>
+<h2 id="连表查询（inner-join-on-）"><a href="#连表查询（inner-join-on-）" class="headerlink" title="连表查询（inner join...on...=...）"></a>连表查询（<code>inner join...on...=...</code>）</h2><ul>
+<li><strong>连表查询</strong>：通过一条查询就可拿出两个表中对应的数据，注意有一个匹配条件（<code>on...=...</code>）来判断筛选出查询出来的表中数据</li>
+<li><strong>注意：没有外键也可连表查询</strong>，但一般我们会采取外键来做 匹配条件</li>
+<li><strong>语法：</strong><code>SELECT ... FROM ... INNER JOIN ... ON ...=... WHERE ...;</code><ol>
+<li><strong>INNER JOIN 关键字</strong>在表中存在至少一个匹配时返回行。</li>
+<li><strong>on 条件</strong>是在生成临时表时使用的条件，它不管 on 中的条件是否为真，都会返回左边表中的记录。</li>
+<li><strong>where 条件</strong>是在临时表生成好后，再对临时表进行过滤的条件。</li>
+</ol>
+</li>
+<li><strong>例子：</strong><ol>
+<li>通过 <strong>blogs表中的userid（users表中id的外键） 与 users表中id 匹配</strong> 来 <strong>连表查询所有数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxuwbbm9j30vw0bl0yi.jpg" alt="通过users表中id的外键blogs表中的userid来连表查询所有数据">这样就把两个表中的id都查出来了，显然不行，由于微博内容是我们查询的主体，所以我们<strong>查询的时候可以只在两个表中选自己需要的数据组成临时表</strong></li>
+<li><strong>匹配条件不变，只查需要的数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxv37oa1j30ye08q77y.jpg" alt="匹配条件不变，只查需要的数据"></li>
+<li>在此基础上，<strong>还可通过where来进一步筛选查询内容</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdqxv6vp7kj30xv08gwi3.jpg" alt="通过where来进一步筛选查询内容"></li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="sequelize"><a href="#sequelize" class="headerlink" title="sequelize"></a>sequelize</h1><ul>
+<li><strong>sequelize</strong>是一个<strong>ORM工具</strong>，他封装了很多API，通过sequelize我们可<strong>通过操作一般对象的方式去操作数据库</strong><ul>
+<li>Object Relational Mapping 即 <strong>对象关系映射（映射到数据库中）</strong>，也就是通过对象的关系的形式映射到数据库中，即我们可<strong>通过操作一般对象的方式去操作数据库</strong></li>
+</ul>
+</li>
+<li>sequelize不仅可以操作mysql，还可操作其他数据库</li>
+<li><strong>Sequelize返回的对象是Promise实例</strong>，也就是说从数据库中获取的数据是存在then()中的，此时使用async和await来获取数据库数据就很方便。而<strong>koa的处理函数都是async函数</strong>，所以我们实际上<strong>在koa的async函数中直接写await访问数据库就可以了</strong></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1101571555324224" target="_blank" rel="noopener">sequelize使用方法</a></li>
+</ul>
+<h2 id="sequelize与mysql"><a href="#sequelize与mysql" class="headerlink" title="sequelize与mysql"></a>sequelize与mysql</h2><table>
+<thead>
+<tr>
+<th>mysql</th>
+<th>sequelize</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据表</td>
+<td>用JS中的模型（class或对象）代替</td>
+</tr>
+<tr>
+<td>一条或多条数据</td>
+<td>用JS中一个对象或数组代替</td>
+</tr>
+<tr>
+<td>sql语句</td>
+<td>用对象方法代替</td>
+</tr>
+</tbody></table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>我们现在<strong>使用sequelize</strong>来<strong>完成</strong>之前我们使用<strong>mysql与sqlyog共同完成的事情</strong>：</p>
+<ol>
+<li>创建 sequelize实例：<strong>连接mysql数据库</strong></li>
+<li><strong>创建模型（表）</strong>：使用<code>sequelize实例.define()</code><strong>创建表并定义表中各列数据的名字、类型、长度、自动递增、主键、备注 等</strong></li>
+<li><strong>将模型（表）同步到数据库</strong>：使用<code>sequelize实例.sync()</code>进行同步。注意要引入创建的模型（表），否则都不知道同步谁</li>
+<li><strong>创建外键关联</strong>：使Blog模型中的userId成为User模型中id的外键，有2种方法，如果想要方便后期查询，则<strong>可同时使用2种方法</strong><ol>
+<li><strong>方法1：<code>Blog.belongsTo(User,{foreignKey: &#39;userId&#39;})</code></strong>，使用该方法创建的外键，在<strong>连表查询时以blogs表为主，带出users表</strong></li>
+<li><strong>方法2：<code>User.hasMany(Blog,{foreignKey: &#39;userId&#39;})</code></strong>，使用该方法创建的外键，在<strong>连表查询时以users表为主，带出blogs表</strong></li>
+</ol>
+</li>
+<li><strong>插入数据</strong>：往User和Blog模型（users表和blogs表）中插入数据<ul>
+<li>比如<code>User.create()</code><ul>
+<li><strong>参数</strong>：插入的数据对象</li>
+<li><strong>返回值</strong>：Promise实例=》<strong>对象</strong>，所以建议使用<code>await User.create()</code>可直接得到返回值，其中包含的<strong>dataValues是插入的数据对象</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查询数据</strong>：<ol>
+<li><strong>查询一条数据：<code>模型名.findOne()</code></strong><ul>
+<li><strong>参数：对象</strong>，该对象包含众多属性<ul>
+<li><strong>where</strong>：对象，筛选行</li>
+<li><strong>attributes</strong>：数组，筛选列</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>对象</strong>，返回值的dataValues属性为对象，其中包含id等内容</li>
+</ul>
+</li>
+<li>查询<strong>多条</strong>数据（组成一个<strong>列表</strong>）：<strong><code>模型名.findAll()</code></strong><ul>
+<li><strong>参数：对象</strong>，该对象包含众多属性<ul>
+<li><strong>where</strong>：对象，筛选行</li>
+<li><strong>order</strong>：数组（其中数组元素也是数组），每个数组元素都是<strong>排序规则</strong>（比如：<code>order:[[&#39;id&#39;,&#39;desc&#39;]]</code>就是根据id反向排序）</li>
+<li><strong>limit</strong>：数字，限制本次查询条数</li>
+<li><strong>offset</strong>：数字，跳过多少条再进行查询</li>
+</ul>
+</li>
+<li><strong>返回值：</strong>Promise对象=》<strong>数组</strong>，数组元素为数据对象。<ul>
+<li>每个数据对象都有自己的dataValues，需要获取则通过需map()遍历数组。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查询总数：<code>模型名.findAndCountAll()</code></strong><ul>
+<li><strong>参数</strong>：和findAll()的参数一样</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>对象</strong>，其中<strong><code>返回值.count</code></strong>为所有数据的<strong>总数</strong>，<strong><code>返回值.rows</code></strong>则是<strong>分页的数组（多行数据）</strong></li>
+</ul>
+</li>
+<li><strong>连表查询</strong>：使用<code>模型名.findAndCountAll()</code>的<strong><code>include</code>属性</strong>，属性值是对象数组，对象中的model属性决定了连的表<ul>
+<li><strong>返回值</strong>：Promise对象=》<strong>对象</strong>，其中<strong><code>返回值.count</code></strong>为所有数据的<strong>总数</strong>，<strong><code>返回值.rows</code></strong>则是<strong>所以行数据组成的数组</strong>，其中每个数据对象的dataValues中都包含一个连表查询出的数据对象，不过该对象也需要通过对象的dataValues来获取</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>修改数据：<code>模型名.update()</code></strong><ul>
+<li><strong>参数1</strong>：对象，需要修改的数据</li>
+<li><strong>参数2</strong>：对象，where属性筛选需要修改的数据</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>数组</strong>，表示被修改的行数，<code>返回值[0]=0</code>则修改失败，<code>返回值[0]&gt;0</code>则修改成功。</li>
+</ul>
+</li>
+<li><strong>删除数据：<code>模型名.destroy()</code></strong><ul>
+<li><strong>参数</strong>：对象，筛选条件</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>数字</strong>，表示被删除的行数（注意不是数组，是数字！）</li>
+<li>如果<strong>被删除的数据</strong>中有<strong>在别的表中当外键</strong>，则<strong>必须保证delete中设置的是“层叠/级联”才可正常删除</strong>，严格模式下会报错。<strong>注意：</strong>使用sequelize创建的外键关系是严格模式，需要手动去sqlyog中将delete改为“层叠/级联”。</li>
+</ul>
+</li>
+</ol>
+<h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><ol>
+<li>新建sequelize-test文件夹，初始化环境<code>npm init -y</code></li>
+<li><strong>安装2个库：mysql2、sequelize</strong>：<code>npm i mysql2 sequelize -d</code><ul>
+<li>在这使用mysql2库代替我们原本使用的mysql库，效率更高（<a href="https://www.npmjs.com/package/mysql#introduction" target="_blank" rel="noopener">mysql的使用方法</a>和<a href="https://www.npmjs.com/package/mysql2#first-query" target="_blank" rel="noopener">mysql2的使用方法</a>大体上差不多）</li>
+<li>我们将<strong>通过sequelize操作mysql2</strong></li>
+</ul>
+</li>
+<li><strong>创建sequelize实例 用于连接mysql中的某个数据库</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrwdqitj5j30vm0djwgk.jpg" alt="src-seq.js"></li>
+<li><strong>测试是否连接成功</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrwklxyghj312409ldjm.jpg" alt="src-seq.js"></li>
+</ol>
+<h3 id="创建模型-amp-同步到数据库"><a href="#创建模型-amp-同步到数据库" class="headerlink" title="创建模型&amp;同步到数据库"></a>创建模型&amp;同步到数据库</h3><ol>
+<li>src下<strong>新建model.js</strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdryexeza7j314a0cowj6.jpg" alt="model.js">暂时只创建User模型，同步到数据库看看是否成功<ul>
+<li><strong>Sequelize实例.define()创建表</strong>：<ul>
+<li><strong>参数1</strong>：表名（会<strong>自动变成复数后成为表名</strong>），比如设置user那么最后表名将是users</li>
+<li><strong>参数2</strong>：对象，即表中各项数据的 类型、是否允许为空 等<ul>
+<li>其中，<strong>id会自动创建，并设为主键、自增,不需我们手动创建</strong></li>
+<li><strong><code>Sequelize.STRING</code>即数据库中varchar(255)</strong>。数据库中varchar长度是可变的，也就是说虽然最长是255，但如果你只输入了2个字符，数据库也就会进行计算，最终将只占用2个字符的空间，所以直接使用sequelize默认的长度即可</li>
+<li><strong><code>allowNull: false</code></strong>即设置 <strong>不允许为空</strong></li>
+<li><strong><code>comment：&#39;备注内容&#39;</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>删除</strong>原本我们在sqlyog中定义的<strong>users表和blogs表</strong></li>
+<li>src下<strong>新建sync.js</strong>将创建的<strong>模型同步到数据库</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrz5iwq7zj316109077i.jpg" alt="src-sync.js"><ol>
+<li>所有需要连接数据库的地方都要<strong>引入sequelize实例</strong></li>
+<li>同步数据库就要<strong>引入需要同步的模型（表）</strong></li>
+<li><strong>Sequelize实例.sync()同步数据库内容</strong>：<ul>
+<li><strong>参数：<code>{ force: true }</code></strong>即强制，如数据库中已有该表，则删掉重新创建一个新的</li>
+<li><strong>注意：同步成功后需手动结束进程</strong>。即使用<code>process.exit()</code>退出程序，否则sequelize会一直占用进程</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>执行同步：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrzcrynqzj316s06q75q.jpg" alt="执行同步"></li>
+<li><strong>sqlyog中查看同步结果</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdrze0bizoj31bc06rtcb.jpg" alt="sqlyog中查看同步结果"></li>
+</ol>
+<h3 id="创建关联（外键）"><a href="#创建关联（外键）" class="headerlink" title="创建关联（外键）"></a>创建关联（外键）</h3><ol>
+<li>回到<strong>src-model.js中创建Blog模型（blogs表）</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds5bysb3xj30we0d7dkw.jpg" alt="src-model.js"></li>
+<li>同步到数据库：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds0jrtk1cj317g079dhl.jpg" alt="同步到数据库"></li>
+<li>sqlyog中查看同步结果：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds5e1ba7mj30yq06rdhx.jpg" alt="sqlyog中查看同步结果"></li>
+<li><strong>设置关联外键</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds0wffrdlj30hg0e2q4k.jpg" alt="src-model.js">在这我们<strong>同时采取2种方法设置外键</strong>，是<strong>为了搜索时2种主次关系都可行</strong>。<ol>
+<li><strong>方法1（推荐）<code>Blog.belongsTo(User,{foreignKey: &#39;xxx&#39;})</code></strong>：即 将Blog模型（blogs表）中的xxx列作为User模型（users表）中id（<strong>默认为id</strong>）的外键<ul>
+<li>使用该方法创建的外键，在<strong>连表查询时以blogs表为主，带出users表</strong></li>
+<li><strong>语义化：</strong>Blog属于User，这是<strong>多对一</strong>的关系，多个Blog是属于一个User的</li>
+</ul>
+</li>
+<li><strong>方法2（不推荐）<code>Blog.belongsTo(User)</code></strong>：使用该方法则我们自己定义Blog模型时就不需要创建外键，Sequelize会自动创建userId并关联到users表中的id上</li>
+<li><strong>方法3（推荐）<code>User.hasMany(Blog,{foreignKey: &#39;xxx&#39;})</code></strong>：与方法1创建的外键一致，只是 连表查询 是主次关系不同<ul>
+<li>使用该方法创建的外键，在<strong>连表查询时以users表为主，带出blogs表</strong></li>
+<li><strong>语义化：</strong>User有很多Blog，这是<strong>一对多</strong>的关系，一个User可拥有多个Blog</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>同步到数据库</li>
+<li>sqlyog中查看同步结果：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds15m7iqnj308w06k3z9.jpg" alt="sqlyog">（如果使用workbench则可同时看到外键的关系）</li>
+<li>sqlyog中<strong>自动绘制ER图</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds1b1b9rpj30q30gtad8.jpg" alt="sqlyog">可以看到<strong>多对一的关系：1个users.id可拥有多个blogs.userid</strong></li>
+</ol>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><ol>
+<li>src下<strong>新建create.js,创建表中数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds50j89vvj30qy0f6jtr.jpg" alt="create.js"><strong>插入数据属于IO操作，在node中IO操作都是异步的</strong>，而异步最好使用async和await<ul>
+<li><strong>语法：<code>模型.create({需要插入的数据对象})</code></strong><ul>
+<li><strong>异步插入的结果</strong>：对象，其中<strong><code>dataValues</code>对象为插入的数据</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看创建的数据：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds513yld0j315i05k3ze.jpg" alt="查看创建的数据"></li>
+<li>为避免重复插入数据，我们<strong>先删掉之前的数据，将所有数据写好后一起插入数据库</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds7f89m4nj318g0knk5f.jpg" alt="create.js">（或者<strong>可以先执行同步，再插入数据</strong>，因为同步后能表中内容为空）<br><code>!</code>在这是<strong>逻辑非运算</strong>，可能是运算符优先级的原因？</li>
+<li>sqlyog查看结果：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds768khr0j30vn060adf.jpg" alt="sqlyog"></li>
+</ol>
+<h3 id="查询数据（1条-多条-分页-总数）"><a href="#查询数据（1条-多条-分页-总数）" class="headerlink" title="查询数据（1条/多条/分页/总数）"></a>查询数据（1条/多条/分页/总数）</h3><ol>
+<li>src下，<strong>新建select.js</strong></li>
+<li><strong>查询一条数据：<code>模型名.findOne()</code></strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds8zphv6vj30uv0h7tbd.jpg" alt="查询一条数据"></li>
+<li><strong>查询一条数据中特定的列：<code>attributes</code>属性</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds91sd3jhj31140b2ac1.jpg" alt="查询一条数据中特定的列"></li>
+<li><strong>查询多条数据（组成一个列表）：<code>模型名.findAll()</code></strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds95hs8acj30ui0oa0z3.jpg" alt="查询多条数据"><ul>
+<li><strong>注意：数组中每条数据都是一个对象，每个对象都有自己的dataValues，需要使用map()来遍历获取<code>对象.dataValues</code></strong></li>
+</ul>
+</li>
+<li><strong>实现分页：<code>limit</code>和<code>offset</code>属性</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds9hc6srtj30yf0c0q5q.jpg" alt="实现分页"></li>
+<li><strong>查询总数：<code>模型名.findAndCountAll()</code></strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gds9sb8a1cj30r30p4q7j.jpg" alt="查询总数"><ul>
+<li><strong>参数</strong>：和findAll()的参数一样</li>
+<li><strong>返回值</strong>：对象，其中<strong><code>返回值.count</code></strong>为所有数据的<strong>总数</strong>，<strong><code>返回值.rows</code></strong>则是<strong>（各行）分页的数组</strong></li>
+</ul>
+</li>
+</ol>
+<h4 id="连表查询（include属性）"><a href="#连表查询（include属性）" class="headerlink" title="连表查询（include属性）"></a>连表查询（<code>include</code>属性）</h4><ol>
+<li><strong>方法1</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsgpu2i8xj319r0bxdju.jpg" alt="select.js"><strong>前提：使用<code>Blog.belongsTo(User,{foreignKey: &#39;userId&#39;})</code>建立的外键关系</strong>才可使用该方法进行连表查询<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsgjztaosj30mi09g3zv.jpg" alt="数据"></li>
+<li><strong>方法2</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdshvh5djlj31dv090tcr.jpg" alt="select.js"><strong>前提：使用<code>User.hasMany(Blog,{foreignKey: &#39;userId&#39;})</code>建立的外键关系</strong>才可使用该方法进行连表查询<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdshvp9imuj30ob040js6.jpg" alt="数据"></li>
+</ol>
+<h3 id="更新和删除"><a href="#更新和删除" class="headerlink" title="更新和删除"></a>更新和删除</h3><ol>
+<li><strong>更新数据</strong>：src下<strong>新建update.js</strong>，更新数据采用<code>模型名.update()</code>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsi8oqjfej30ri0e640d.jpg" alt="update.js"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsi92x2bpj30te02bmy4.jpg" alt="修改结果"><ul>
+<li><strong>参数1</strong>：对象，需要修改的数据</li>
+<li><strong>参数2</strong>：对象，where属性筛选需要修改的数据</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>数组</strong>，表示被修改的行数，<code>返回值[0]=0</code>则修改失败，<strong><code>返回值[0]&gt;0</code>则修改成功</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsiai0imgj30qx0eignj.jpg" alt="update.js"></li>
+</ul>
+</li>
+<li><strong>删除数据</strong>：src下<strong>新建delete.js</strong>，删除数据采用<code>模型名.destroy()</code>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsinwxantj30k60d8jt4.jpg" alt="delete.js"><ul>
+<li><strong>参数</strong>：对象，筛选条件</li>
+<li><strong>返回值</strong>：Promise对象=》<strong>数字</strong>，表示被删除的行数（注意不是数组，是数字！）</li>
+<li>如果<strong>被删除的数据</strong>中有<strong>在别的表中当外键</strong>，则<strong>必须保证delete中设置的是“层叠/级联”才可正常删除</strong>，严格模式下会报错。<strong>注意：</strong>使用sequelize创建的外键关系是严格模式，需要手动去sqlyog中将delete改为“层叠/级联”：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsixbb14cj30qb0apjti.jpg" alt="delete.js"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsiz4kj8hj30u90gd0wq.jpg" alt="sqlyog操作"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsj0srziej30vi055taz.jpg" alt="删除成功"></li>
+</ul>
+</li>
+</ol>
+<h3 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsjesg3tpj30uz0csjzy.jpg" alt="连接池"></p>
+<ul>
+<li><strong>线下开发</strong>：我们<strong>在seq.js中使用的连接方法就属于上图左边的</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsj65bwiej30w10d4gns.jpg" alt="seq.js">这种方式<strong>不适合线上使用</strong>，但是<strong>适合线下开发</strong>，因为机制没那么复杂，有问题找起来比较快</li>
+<li><strong>线上建议使用连接池</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdsji78hiwj30vd0kdwih.jpg" alt="连接池的配置"></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/10/ejs基本使用方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ejs基本使用方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">1.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQLyog中建库建表"><span class="nav-number">1.1.</span> <span class="nav-text">SQLyog中建库建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql语句"><span class="nav-number">1.2.</span> <span class="nav-text">sql语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增删查改"><span class="nav-number">1.2.1.</span> <span class="nav-text">增删查改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询总数（select-count-from-）"><span class="nav-number">1.2.2.</span> <span class="nav-text">查询总数（select count()...from...）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页（select-中limit与offset）"><span class="nav-number">1.2.3.</span> <span class="nav-text">分页（select...中limit与offset）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外键"><span class="nav-number">1.3.</span> <span class="nav-text">外键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建外键"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新限制-amp-更新-删除级联"><span class="nav-number">1.3.2.</span> <span class="nav-text">更新限制&amp;更新/删除级联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连表查询（inner-join-on-）"><span class="nav-number">1.4.</span> <span class="nav-text">连表查询（inner join...on...=...）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sequelize"><span class="nav-number">2.</span> <span class="nav-text">sequelize</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sequelize与mysql"><span class="nav-number">2.1.</span> <span class="nav-text">sequelize与mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">2.2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建连接"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建模型-amp-同步到数据库"><span class="nav-number">2.2.2.</span> <span class="nav-text">创建模型&amp;同步到数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建关联（外键）"><span class="nav-number">2.2.3.</span> <span class="nav-text">创建关联（外键）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">2.2.4.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询数据（1条-多条-分页-总数）"><span class="nav-number">2.2.5.</span> <span class="nav-text">查询数据（1条/多条/分页/总数）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连表查询（include属性）"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">连表查询（include属性）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新和删除"><span class="nav-number">2.2.6.</span> <span class="nav-text">更新和删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接池"><span class="nav-number">2.2.7.</span> <span class="nav-text">连接池</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
