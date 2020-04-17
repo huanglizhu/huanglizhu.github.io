@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>完善koa2开发环境 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="完善koa2开发环境 配置eslint以及pre-commit  inspect调试 404页和错误页">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="完善koa2开发环境">
+<meta property="og:url" content="http://yoursite.com/2020/03/14/完善koa2开发环境/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="完善koa2开发环境 配置eslint以及pre-commit  inspect调试 404页和错误页">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcajmnxrj309403xdfu.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcfgfrvnj30u30mtdik.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtci66pv5j30w9063wft.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcn3oc49j30q30a9mz8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcw6yigzj30my0313yt.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtolgfntwj30ek0ayq3v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtoz7vw75j30zf05v3zm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp31fgmwj30om081q43.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp778p9yj314k0fomzy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp8kxofmj315q0d1413.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpfwrhz6j30jq08zwfr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpi4dq73j30tt0p2q68.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpk0thhuj30tt0p2gp6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdua06y7egj30wb07hdht.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdudub6412j312g0awdi3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvglq8cbjj30ua09cwgo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgnn7fgpj30hb0a7q3i.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgueazahj30ty05ymzh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgweowtpj30ka022wen.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgwve85wj30ja0axwf6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvh0plz8ij30nu093jsd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvh2c97hcj30fv08uwem.jpg">
+<meta property="og:updated_time" content="2020-04-16T04:03:19.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="完善koa2开发环境">
+<meta name="twitter:description" content="完善koa2开发环境 配置eslint以及pre-commit  inspect调试 404页和错误页">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcajmnxrj309403xdfu.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-完善koa2开发环境" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      完善koa2开发环境
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/14/完善koa2开发环境/" class="article-date">
+	  <time datetime="2020-03-14T04:02:53.000Z" itemprop="datePublished">三月 14, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="完善koa2开发环境"><a href="#完善koa2开发环境" class="headerlink" title="完善koa2开发环境"></a>完善koa2开发环境</h1><ul>
+<li>配置eslint以及pre-commit </li>
+<li>inspect调试</li>
+<li>404页和错误页<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="配置eslint"><a href="#配置eslint" class="headerlink" title="配置eslint"></a>配置eslint</h2><p>配置eslint主要为了<strong>统一代码风格</strong>，只要遇到和我们自己在<code>.eslintrc.json</code>里的配置不同的情况就会报错。</p>
+<ol>
+<li><strong>根目录下新建<code>.eslintignore</code>，存放跳过的文件</strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcajmnxrj309403xdfu.jpg" alt=".eslintignore"></li>
+<li><strong>根目录下新建<code>.eslintrc.json</code>，根据个人习惯 规定代码风格</strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcfgfrvnj30u30mtdik.jpg" alt=".eslintrc.json"></li>
+<li>项目文件下<strong>安装eslint和babel-eslint</strong>：<code>npm i eslint babel-eslint --save-dev</code></li>
+<li>在package.json中<strong>新建lint命令</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtci66pv5j30w9063wft.jpg" alt="package.json"></li>
+<li><strong>运行lint命令</strong>，使用vscode直接到相关文件中<strong>重新保存即可解决问题</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcn3oc49j30q30a9mz8.jpg" alt="运行lint命令"></li>
+<li>再次运行lint命令：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtcw6yigzj30my0313yt.jpg" alt="再次运行lint命令"></li>
+</ol>
+<h2 id="配置pre-commit"><a href="#配置pre-commit" class="headerlink" title="配置pre-commit"></a>配置pre-commit</h2><ul>
+<li>配置eslint只是<strong>统一代码风格</strong>，就算输入有误也可正确提交。</li>
+<li>但pre-commit不同，他是“在提交（commit）之前”硬性做。<ul>
+<li><strong>代码提交到coding是需要commit到本地仓库后再push到coding服务器的</strong></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>项目文件下<strong>安装pre-commit</strong>：<code>npm i pre-commit --save-dev</code></li>
+<li>在package.json中<strong>配置pre-commit</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtolgfntwj30ek0ayq3v.jpg" alt="package.json"><strong>规定在commit之前需要运行lint命令来检查代码</strong></li>
+<li>测试，<strong>提交代码到coding</strong>：<ol>
+<li>添加文件到本地仓库：<code>git add .</code></li>
+<li>提交文件到本地仓库：<code>git commit -m &quot;feat:增加eslint&quot;</code><strong>执行这一步时pre-commit就会强制执行lint命令，如果报错就无法提交</strong></li>
+<li>没报错就可以继续将本地文件推送到coding服务器:<code>git push origin master</code></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="inspect调试"><a href="#inspect调试" class="headerlink" title="inspect调试"></a>inspect调试</h2><ul>
+<li>8.0以上的node就支持inspect调试，无需另外安装包。</li>
+<li>inspect是借助<strong>node和chrome浏览器</strong>进行调试的。<ul>
+<li>访问chrome://inspect/#devices后点击Open dedicated DevTools for Node=》点击inspect进入调试页面</li>
+</ul>
+</li>
+<li><strong>重点：打断点</strong>，在i<strong>nspect调试页面中将自动运行到断点处停止运行</strong>，接下来可通过按钮手动运行下一部分的代码</li>
+</ul>
+<ol>
+<li>在package.json中，<strong>dev命令</strong>中（调试都是在线下）<strong>添加inspect调试的端口号</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtoz7vw75j30zf05v3zm.jpg" alt="package.json"><strong>默认的调试端口就是9229</strong>，如果两个node程序同时运行，并且都需要使用inspect调试，那么其中一个inspect就需要更改端口。</li>
+<li><strong>运行<code>npm run dev</code></strong>:<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp31fgmwj30om081q43.jpg" alt="控制台"></li>
+<li>chrome浏览器中<strong>访问chrome://inspect/#devices</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp778p9yj314k0fomzy.jpg" alt="访问chrome://inspect/#devices">点击得到调试页面</li>
+<li><strong>测试</strong>：访问项目首页，调试工具中可看到：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtp8kxofmj315q0d1413.jpg" alt="测试">这个和程序控制台是一样的，光这样不够</li>
+<li><strong>停止运行，在路由中给项目加断点</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpfwrhz6j30jq08zwfr.jpg" alt="在路由中给项目加断点"></li>
+<li><strong>重新运行程序，重新点击inspect进入调试页面，访问项目首页</strong>：<ol>
+<li>此时可看到<strong>调试页面卡在debugger的断点位置</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpi4dq73j30tt0p2q68.jpg" alt="调试页面"><strong>控制台目前只输出before debugger</strong></li>
+<li><strong>点击按钮</strong>继续往下运行下一部分：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtpk0thhuj30tt0p2gp6.jpg" alt="调试页面"><strong>点击2次后打印after debugger</strong></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="404页和错误页"><a href="#404页和错误页" class="headerlink" title="404页和错误页"></a>404页和错误页</h2><ul>
+<li>回顾：<strong>public文件夹下存放的都是静态文件</strong>，在<strong>app.js中</strong>我们<strong>注册</strong>了public作为静态资源的目录：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdua06y7egj30wb07hdht.jpg" alt="回顾"></li>
+<li>css存放在public/css下，js存放在public/javascripts下，头部和底部组件存放在views/layout下，<strong>404和错误页存放在views/widgets下</strong>。</li>
+</ul>
+<hr>
+<h1 id="开发路由"><a href="#开发路由" class="headerlink" title="开发路由"></a>开发路由</h1><ol>
+<li>routes文件夹下<strong>新建api文件夹：存放用于输出接口的路由；新建view文件夹 存放用于输出页面的路由</strong></li>
+</ol>
+<h2 id="404路由"><a href="#404路由" class="headerlink" title="404路由"></a>404路由</h2><ol>
+<li><strong>view下新建error.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdudub6412j312g0awdi3.jpg" alt="error.js"></li>
+<li><strong>app.js中，引入并注册路由</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvglq8cbjj30ua09cwgo.jpg" alt="app.js"><strong>404路由必须在所有路由的最下面注册</strong>，否则匹配路由时<code>*</code>就把所有路由都匹配了</li>
+<li><strong>测试</strong>：访问其他页面可正常访问，但访问不存在的路由：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgnn7fgpj30hb0a7q3i.jpg" alt="测试"></li>
+</ol>
+<h2 id="错误页路由"><a href="#错误页路由" class="headerlink" title="错误页路由"></a>错误页路由</h2><ol>
+<li><strong>app.js</strong>中本身就自带了错误页路由，<strong>修改错误页路由配置</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgueazahj30ty05ymzh.jpg" alt="app.js"></li>
+<li><strong>测试</strong>：在json路由中<strong>抛出一个错</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgweowtpj30ka022wen.jpg" alt="抛出一个错"><strong>再访问json路由：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvgwve85wj30ja0axwf6.jpg" alt="再访问json路由"></li>
+<li>但<strong>在开发环境下我们希望不要跳转错误路由，直接暴露错误信息，所以需要一个全局环境参数来判断</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvh0plz8ij30nu093jsd.jpg" alt="app.js"></li>
+<li>此时<strong>在开发环境下访问错误的json路由</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvh2c97hcj30fv08uwem.jpg" alt="开发环境下访问错误的json路由">此时直接<strong>在控制台看错误</strong>并进行修改即可</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/15/微博用户管理（注册）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          微博用户管理（注册）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/13/微博项目使用sequelize/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">微博项目使用sequelize</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#完善koa2开发环境"><span class="nav-number">1.</span> <span class="nav-text">完善koa2开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置eslint"><span class="nav-number">1.1.</span> <span class="nav-text">配置eslint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置pre-commit"><span class="nav-number">1.2.</span> <span class="nav-text">配置pre-commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inspect调试"><span class="nav-number">1.3.</span> <span class="nav-text">inspect调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#404页和错误页"><span class="nav-number">1.4.</span> <span class="nav-text">404页和错误页</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发路由"><span class="nav-number">2.</span> <span class="nav-text">开发路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#404路由"><span class="nav-number">2.1.</span> <span class="nav-text">404路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误页路由"><span class="nav-number">2.2.</span> <span class="nav-text">错误页路由</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

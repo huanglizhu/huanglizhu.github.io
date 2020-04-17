@@ -57,7 +57,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o2eyi6cj30rg0g5ad0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o3oputaj30qj0k1n07.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd7o6uml15j30rx0j878a.jpg">
-<meta property="og:updated_time" content="2020-04-07T08:10:46.530Z">
+<meta property="og:updated_time" content="2020-04-15T14:58:30.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客项目登录（session、redis）">
 <meta name="twitter:description" content="session 介绍 上一篇笔记中使用cookie存储username是很危险的，会暴露，所有明文的个人信息都最好不要放到cookie中。">
@@ -382,8 +382,8 @@
 <li><strong>注意：</strong></li>
 </ul>
 <ol>
-<li><strong>set()的参数都是字符串格式的</strong>，所以使用set()时需要判断参数是否为引用类型，<strong>如果参数是引用类型就要先使用<code>JSON.stringify()</code>将其转换为字符串类型的数组/对象</strong>，否则会自动使用<code>toString()</code>方法进行转换，那结果会很麻烦。</li>
-<li><strong>get()是异步的，所以需要使用Promise对象进行封装</strong>。由于之前我们将对象转为JSON字符串了，所以<strong>输出数据时要先尝试将JSON字符串转回为JSON对象，而非JSON字符串则直接输出即可。同时要注意获取的值不存在时就返回空对象。</strong></li>
+<li><strong>set()的参数1、2都是字符串格式的</strong>，所以使用set()时需要判断参数是否为引用类型，<strong>如果参数2是引用类型就要先使用<code>JSON.stringify()</code>将其转换为字符串类型的数组/对象</strong>，否则会自动使用<code>toString()</code>方法进行转换，那结果会很麻烦。</li>
+<li><strong>get()是异步的，所以需要使用Promise对象进行封装</strong>。（<strong>get请求</strong>需要node向redis请求后获取一个redis返回的值，这是IO操作，而在node中IO操作是<strong>异步</strong>的。）由于之前我们将对象转为JSON字符串了，所以<strong>输出数据时要先尝试将JSON字符串转回为JSON对象，而非JSON字符串则直接输出即可。同时要注意获取的值不存在时就返回空对象。</strong></li>
 <li>一样的，“结束”在这不能用，因为我们只连接一次但要使用多次，如果结束就无法使用多次。</li>
 </ol>
 </li>

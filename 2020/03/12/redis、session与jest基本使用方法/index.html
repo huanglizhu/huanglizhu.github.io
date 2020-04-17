@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>redis、session与jest基本使用方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="redis 内存数据库（mysql是硬盘数据库） redis相关基础知识（安装、使用、node链接redis）可参考这篇博客">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis、session与jest基本使用方法">
+<meta property="og:url" content="http://yoursite.com/2020/03/12/redis、session与jest基本使用方法/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="redis 内存数据库（mysql是硬盘数据库） redis相关基础知识（安装、使用、node链接redis）可参考这篇博客">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdutlm3iroj30wk07uq4k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdutop63a9j30ta0afgnj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gduu3zw8foj30lz09caci.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvd1y6cgaj30yr0fvtkd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvdtmznuvj30s80i2q67.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdveexgkskj30kf0by75o.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvehbl8fxj311v0bmgn4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvekpnrbqj314004k0u7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdve7tklzpj30gn06raan.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdveykcnypj30z5062ta6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvf7922f9j30vz0abgo0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfqwl7otj30z20b6q64.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfrbs155j30bo077mxv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfyxk7anj30m00940u3.jpg">
+<meta property="og:updated_time" content="2020-04-16T03:32:22.812Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis、session与jest基本使用方法">
+<meta name="twitter:description" content="redis 内存数据库（mysql是硬盘数据库） redis相关基础知识（安装、使用、node链接redis）可参考这篇博客">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdutlm3iroj30wk07uq4k.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-redis、session与jest基本使用方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      redis、session与jest基本使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/12/redis、session与jest基本使用方法/" class="article-date">
+	  <time datetime="2020-03-12T03:31:06.000Z" itemprop="datePublished">三月 12, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><ul>
+<li>内存数据库（mysql是硬盘数据库）</li>
+<li><strong>redis相关基础知识</strong>（安装、使用、node链接redis）可参考<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#redis" target="_blank" rel="noopener">这篇博客</a><a id="more"></a>
+
+</li>
+</ul>
+<h2 id="nodejs操作redis"><a href="#nodejs操作redis" class="headerlink" title="nodejs操作redis"></a>nodejs操作redis</h2><ol>
+<li>进入weibo项目中，<strong>安装redis</strong>：<code>npm i redis --save --registry=https://registry.npm.taobao.org</code></li>
+<li><strong>获取全局环境参数</strong>，src下<strong>新建utils-env.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdutlm3iroj30wk07uq4k.jpg" alt="utils-env.js"></li>
+<li><strong>配置数据库（包括redis、mysql）的连接信息</strong>：在src下<strong>新建conf-db.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdutop63a9j30ta0afgnj.jpg" alt="conf-db.js">根据全局环境参数来配置线上和线下的链接信息（现在先都用线下的来模拟）</li>
+<li><strong>连接redis并提供对redis中数据的读取方法（get/set）</strong>，在src下<strong>新建cache-_redis.js</strong>（<code>_</code>的意思：该文件是内部文件，不对外公开）：<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @description 链接redis，提供读取redis数据的方法（get set）</span></span><br><span class="line"><span class="comment"> * @author hlz</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> redis = <span class="built_in">require</span>(<span class="string">'redis'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; REDIS_CONF &#125; = <span class="built_in">require</span>(<span class="string">'../conf/db'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建客户端</span></span><br><span class="line"><span class="keyword">const</span> redisClient = redis.createClient(REDIS_CONF.port, REDIS_CONF.host)</span><br><span class="line">redisClient.on(<span class="string">'error'</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'redis error'</span>, err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis set方法</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; key 键</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; val 值</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; timeout 过期时间，单位s</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">key, val, timeout = 60 * 60</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> val === <span class="string">'object'</span>) &#123;</span><br><span class="line">    val = <span class="built_in">JSON</span>.stringify(val)</span><br><span class="line">  &#125;</span><br><span class="line">  redisClient.set(key, val)</span><br><span class="line">  redisClient.expire(key, timeout)  <span class="comment">// 处理过期数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis get方法</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; key 键</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    redisClient.get(key, <span class="function">(<span class="params">err, val</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (val === <span class="literal">null</span>) &#123;</span><br><span class="line">        resolve(<span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        resolve(<span class="built_in">JSON</span>.parse(val))</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">        resolve(val)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="keyword">set</span>,</span><br><span class="line">  <span class="keyword">get</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><strong>注意</strong>：<ol>
+<li><strong>set()</strong>的<strong>参数3</strong>是<strong>数据有效时间（秒）</strong>，过时即数据无效，到达指定时间后redis将自动清除数据</li>
+<li><strong>定义函数后</strong>在函数顶部输入<strong>jsDoc注释</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gduu3zw8foj30lz09caci.jpg" alt="函数的jsDoc注释">写上注释的函数在<strong>被调用时鼠标移上去就会出现提示</strong></li>
+<li><strong>set()的参数1、2</strong>都是<strong>字符串</strong>格式的，所以<strong>使用set()时需要判断参数2是否为引用类型</strong>，如果参数是引用类型就<strong>要先使用<code>JSON.stringify()</code>将其转换为字符串类型的数组/对象</strong>，否则会自动使用<code>toString()</code>方法进行转换，那结果会很麻烦。</li>
+<li>redis客户端的<strong>expire()</strong>用于<strong>处理过期数据</strong></li>
+<li><strong>get请求</strong>需要node向redis请求后获取一个redis返回的值，这是IO操作，而在node中IO操作是<strong>异步</strong>的。<strong>所以需要使用Promise对象对获取数据的过程进行封装</strong>。</li>
+<li>由于之前<strong>存储数据时我们将对象转为JSON字符串</strong>了，所以<strong>输出数据时要先尝试将JSON字符串转回为JSON对象，而非JSON字符串则直接输出即可</strong>。同时要注意获取的值不存在时就返回空对象。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="登录-cookie和session"><a href="#登录-cookie和session" class="headerlink" title="登录-cookie和session"></a>登录-cookie和session</h1><ul>
+<li><strong>cookie和session的基础知识</strong> 可参考笔记<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/" target="_blank" rel="noopener">博客项目登录（cookie）</a>、<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/" target="_blank" rel="noopener">博客项目登录（session、redis）</a></li>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvd1y6cgaj30yr0fvtkd.jpg" alt="cookie和session图示"><strong>cookie</strong>通过<strong>http请求头部</strong>传递到server端，<strong>server端根据cookie中的userId取出session中对应的信息</strong>用来判断用于是否登录</li>
+<li><strong>session需要存储到redis中</strong>：<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#从-session-到-redis" target="_blank" rel="noopener">从 session 到 redis</a></li>
+</ul>
+<h2 id="koa2使用session"><a href="#koa2使用session" class="headerlink" title="koa2使用session"></a>koa2使用session</h2><ul>
+<li>可参考<a href="https://huanglizhu.github.io/2020/03/07/koa2%E9%87%8D%E6%9E%84%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/" target="_blank" rel="noopener">koa2重构博客项目</a></li>
+</ul>
+<ol>
+<li>安装插件<strong>koa-generic-session和koa-redis</strong>（koa-redis是基于redis的，所以必须安装redis）：<code>npm i koa-generic-session koa-redis redis --save</code><ul>
+<li><strong>koa-redis</strong>是<strong>koa连接redis的一种方式</strong>，<strong>koa-generic-session</strong>是<strong>koa生成session的一个工具</strong></li>
+</ul>
+</li>
+<li><strong>app.js中，引入2个插件并配置</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvdtmznuvj30s80i2q67.jpg" alt="app.js"><ul>
+<li>在<strong>注册路由之前</strong>就需要<strong>配置session</strong></li>
+<li><strong>注册session中间件时</strong>进行<strong>配置session</strong>并<strong>利用koa-redis将session存储到redis中</strong><ul>
+<li>使用<strong>koa-redis</strong>时进行<strong>配置的信息</strong>从<strong>conf-db.js中获取</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>测试</strong>：在routes-index.js中获取并使用session来统计访问次数，在redis的cmd中看是否存储成功：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdveexgkskj30kf0by75o.jpg" alt="routes-index.js"><strong>注意：不使用session的情况下光是注册session则不会自动生成cookie/往redis中存储session</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvehbl8fxj311v0bmgn4.jpg" alt="访问8次后"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvekpnrbqj314004k0u7.jpg" alt="查看redis"><ul>
+<li><strong>流程：用户每次访问网页时就会创建一个 ‘weibo.sid’前缀的cookie，值是’weibo:sess:’前缀的session名</strong><ul>
+<li><strong>cookie对象的属性值</strong>是存储在redis中的<strong>session对象的对象名</strong></li>
+</ul>
+</li>
+<li>然后服务端会有一系列操作往session中存储用户名和密码等，那么下次用户再访问网页时，服务端就可通过用户请求中的cookie值到redis中去获取session对象，进行判断：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdve7tklzpj30gn06raan.jpg" alt="示意图"></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="jest-单元测试"><a href="#jest-单元测试" class="headerlink" title="jest 单元测试"></a>jest 单元测试</h1><ul>
+<li>单个功能或接口，给定输入，得到输出。看输出是否符合要求</li>
+<li>需手动编写用例代码，然后统一执行</li>
+<li><strong>执行意义</strong>：能一次性执行所有单测，短时间内验证所有功能是否正常</li>
+<li><strong>注意：必须是<code>.text.js</code>后缀的文件</strong></li>
+</ul>
+<h2 id="jest的基本使用"><a href="#jest的基本使用" class="headerlink" title="jest的基本使用"></a>jest的基本使用</h2><ol>
+<li>weibo项目下,(开发环境下）<strong>安装jest</strong>：<code>npm i jest --save-dev</code></li>
+<li>在package.json中，<strong>设置test命令</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdveykcnypj30z5062ta6.jpg" alt="package.json"></li>
+<li>根目录下<strong>新建test文件夹，存放测试用例，新建demo.test.js</strong>：  <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvf7922f9j30vz0abgo0.jpg" alt="demo.test.js"> <strong>注意：必须是<code>.text.js</code>后缀的文件</strong></li>
+</ol>
+<h2 id="常用的断言"><a href="#常用的断言" class="headerlink" title="常用的断言"></a>常用的断言</h2><ol>
+<li><strong>判断数字/字符串：a是b</strong>：<code>expect(数字/字符串a).toBe(数字/字符串b)</code></li>
+<li><strong>判断数字/字符串：a不是b</strong><code>expect(数字/字符串a).not.toBe(数字/字符串b)</code></li>
+<li><strong>判断对象：a是b</strong>：<code>expect(对象a).toEqual(对象b)</code></li>
+</ol>
+<h3 id="测试http请求"><a href="#测试http请求" class="headerlink" title="测试http请求"></a>测试http请求</h3><ol>
+<li><strong>安装supertest插件</strong>：<code>npm i supertest --save-dev</code>supertest插件用于<strong>模拟http请求</strong></li>
+<li><strong>测试get请求：</strong>test文件夹下<strong>新建server.js来模拟http请求，新建json.test.js用于测试http请求</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfqwl7otj30z20b6q64.jpg" alt="server.js、json.test.js"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfrbs155j30bo077mxv.jpg" alt="测试的json路由"></li>
+<li><strong>运行dev再运行test</strong>：</li>
+<li><strong>测试post请求：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdvfyxk7anj30m00940u3.jpg" alt="json.test.js"></li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/12/单行 多行 文档注释 vscode快捷键/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          redis与jest基本使用方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/11/mysql与sequelize基本使用方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">mysql与sequelize基本使用方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis"><span class="nav-number">1.</span> <span class="nav-text">redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs操作redis"><span class="nav-number">1.1.</span> <span class="nav-text">nodejs操作redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录-cookie和session"><span class="nav-number">2.</span> <span class="nav-text">登录-cookie和session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#koa2使用session"><span class="nav-number">2.1.</span> <span class="nav-text">koa2使用session</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jest-单元测试"><span class="nav-number">3.</span> <span class="nav-text">jest 单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jest的基本使用"><span class="nav-number">3.1.</span> <span class="nav-text">jest的基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的断言"><span class="nav-number">3.2.</span> <span class="nav-text">常用的断言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试http请求"><span class="nav-number">3.2.1.</span> <span class="nav-text">测试http请求</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

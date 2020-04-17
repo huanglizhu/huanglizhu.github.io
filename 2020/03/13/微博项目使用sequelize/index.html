@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>微博项目使用sequelize | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="安装mysql2、sequelize保持redis开启状态，weibo项目下安装mysql2、sequelize：npm i mysql2 sequelize --save">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微博项目使用sequelize">
+<meta property="og:url" content="http://yoursite.com/2020/03/13/微博项目使用sequelize/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="安装mysql2、sequelize保持redis开启状态，weibo项目下安装mysql2、sequelize：npm i mysql2 sequelize --save">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6w3u83mj30xe07wq4k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6jrjvz0j30zh0lwjvv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6tq2920j31ds0dyq7u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt76qg0vyj31g50cwdkf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtbfdozy4j31780d0gpt.jpg">
+<meta property="og:updated_time" content="2020-04-16T03:36:01.016Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微博项目使用sequelize">
+<meta name="twitter:description" content="安装mysql2、sequelize保持redis开启状态，weibo项目下安装mysql2、sequelize：npm i mysql2 sequelize --save">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6w3u83mj30xe07wq4k.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-微博项目使用sequelize" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      微博项目使用sequelize
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/13/微博项目使用sequelize/" class="article-date">
+	  <time datetime="2020-03-13T15:08:07.000Z" itemprop="datePublished">三月 13, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装mysql2、sequelize"><a href="#安装mysql2、sequelize" class="headerlink" title="安装mysql2、sequelize"></a>安装mysql2、sequelize</h1><p><strong>保持redis开启状态</strong>，weibo项目下<strong>安装mysql2、sequelize</strong>：<code>npm i mysql2 sequelize --save</code></p>
+<a id="more"></a>
+
+<h1 id="环境参数判断当前环境"><a href="#环境参数判断当前环境" class="headerlink" title="环境参数判断当前环境"></a>环境参数判断当前环境</h1><p><strong>utils文件夹-env.js文件 管理全局环境参数</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6w3u83mj30xe07wq4k.jpg" alt="env.js">接下来就可以通过它来<strong>判断当前是否处于 线上/开发/测试环境</strong></p>
+<h1 id="配置mysql的连接信息"><a href="#配置mysql的连接信息" class="headerlink" title="配置mysql的连接信息"></a>配置mysql的连接信息</h1><p><strong>conf文件夹-db.js文件 存储redis和mysql的配置信息</strong>，分为<strong>线上和线下</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6jrjvz0j30zh0lwjvv.jpg" alt="db.js">其实线上和线下应该是连接不同的数据库，目前先都连接线下的</p>
+<h1 id="创建sequelize实例"><a href="#创建sequelize实例" class="headerlink" title="创建sequelize实例"></a>创建sequelize实例</h1><p><strong>新建db文件夹-seq.js文件 创建sequelize实例</strong>，引入conf-db中的配置信息替换掉原本写死的配置信息：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt6tq2920j31ds0dyq7u.jpg" alt="seq.js"></p>
+<h1 id="测试环境下避免打印sql语句"><a href="#测试环境下避免打印sql语句" class="headerlink" title="测试环境下避免打印sql语句"></a>测试环境下避免打印sql语句</h1><p>使用sequelize时控制台会打印出对应的sql语句，但<strong>测试环境下需要避免打印出sql语句</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdt76qg0vyj31g50cwdkf.jpg" alt="seq.js">在<strong>创建Sequelize实例时，在测试环境下给参数4设置logging属性为空函数</strong>即可</p>
+<h1 id="执行sequelize同步到数据库"><a href="#执行sequelize同步到数据库" class="headerlink" title="执行sequelize同步到数据库"></a>执行sequelize同步到数据库</h1><p>db文件夹下<strong>新建sync.js</strong>，用于<strong>执行sequelize同步到数据库</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdtbfdozy4j31780d0gpt.jpg" alt="sync.js"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/14/完善koa2开发环境/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          完善koa2开发环境
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/12/单行 多行 文档注释 vscode快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">redis与jest基本使用方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装mysql2、sequelize"><span class="nav-number">1.</span> <span class="nav-text">安装mysql2、sequelize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境参数判断当前环境"><span class="nav-number">2.</span> <span class="nav-text">环境参数判断当前环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置mysql的连接信息"><span class="nav-number">3.</span> <span class="nav-text">配置mysql的连接信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建sequelize实例"><span class="nav-number">4.</span> <span class="nav-text">创建sequelize实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试环境下避免打印sql语句"><span class="nav-number">5.</span> <span class="nav-text">测试环境下避免打印sql语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行sequelize同步到数据库"><span class="nav-number">6.</span> <span class="nav-text">执行sequelize同步到数据库</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
