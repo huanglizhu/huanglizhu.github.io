@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>关注和取消关注 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="创建数据模型：用户关系回顾数据模型设计通过用户关系表存储用户之间的关系">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关注和取消关注">
+<meta property="og:url" content="http://yoursite.com/2020/03/23/关注和取消关注/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="创建数据模型：用户关系回顾数据模型设计通过用户关系表存储用户之间的关系">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzev6b0taj315d0cx1ak.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzf2r3q5wj30mb0lrq5d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzfbrq8svj30lq0kpmzq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzg8l88l3j312a0htgqi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzh81kmcxj30yw0gbgvh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhdjxwlqj30m40j040p.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhfmp0d9j30z80e276m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhibfytuj30jk075gm8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk6cy1e9j30ly0g577y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk5vw5ysj30k50iwq6i.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzjytlb9nj30q40dhmyp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk0kv5h1j30nt0outcw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkeob074j30zn0gqajm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkh1yuq6j31180fymzv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkisf9zbj30kq0g9jti.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkktf904j30kz0bg3zr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzksq6e8qj30js0n5aby.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkwzfb8lj30l5096my7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzl6ybwpgj30ki0pmq6y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlhfz98lj30oe066my6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlgq40v7j30k50e3wge.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzll06dhjj30kx0cbabi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlrukv2cj30xo064dhz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzltu5i5yj307s0b2t98.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlwhqqjpj30pv066jsg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlxex20xj30ok0ceq4t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlylv9slj30lb0e8myp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm4qqztlj30jt0590t7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm76rc27j30z50dqacd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmewajqvj30ta03oq3l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmc9cm1fj30cs0mzgn3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmg3jkg1j30qp0c7gmz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmk5azsdj30i60rb77j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmxk0a9rj30je0cstaa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzev6b0taj315d0cx1ak.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzf2r3q5wj30mb0lrq5d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzfbrq8svj30lq0kpmzq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzg8l88l3j312a0htgqi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzh81kmcxj30yw0gbgvh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhdjxwlqj30m40j040p.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhfmp0d9j30z80e276m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhibfytuj30jk075gm8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk6cy1e9j30ly0g577y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk5vw5ysj30k50iwq6i.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzjytlb9nj30q40dhmyp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk0kv5h1j30nt0outcw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkeob074j30zn0gqajm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkh1yuq6j31180fymzv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkisf9zbj30kq0g9jti.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkktf904j30kz0bg3zr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzksq6e8qj30js0n5aby.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkwzfb8lj30l5096my7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzl6ybwpgj30ki0pmq6y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlhfz98lj30oe066my6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlgq40v7j30k50e3wge.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzll06dhjj30kx0cbabi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlrukv2cj30xo064dhz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzltu5i5yj307s0b2t98.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlwhqqjpj30pv066jsg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlxex20xj30ok0ceq4t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlylv9slj30lb0e8myp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm4qqztlj30jt0590t7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm76rc27j30z50dqacd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmewajqvj30ta03oq3l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmc9cm1fj30cs0mzgn3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmg3jkg1j30qp0c7gmz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmk5azsdj30i60rb77j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmxk0a9rj30je0cstaa.jpg">
+<meta property="og:updated_time" content="2020-04-19T18:30:59.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关注和取消关注">
+<meta name="twitter:description" content="创建数据模型：用户关系回顾数据模型设计通过用户关系表存储用户之间的关系">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzev6b0taj315d0cx1ak.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-关注和取消关注" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      关注和取消关注
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/23/关注和取消关注/" class="article-date">
+	  <time datetime="2020-03-23T13:27:41.000Z" itemprop="datePublished">三月 23, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="创建数据模型：用户关系"><a href="#创建数据模型：用户关系" class="headerlink" title="创建数据模型：用户关系"></a>创建数据模型：用户关系</h1><h2 id="回顾数据模型设计"><a href="#回顾数据模型设计" class="headerlink" title="回顾数据模型设计"></a>回顾数据模型设计</h2><p>通过<strong>用户关系表</strong>存储用户之间的关系<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzev6b0taj315d0cx1ak.jpg" alt="回顾数据模型设计"></p>
+<a id="more"></a>
+
+<h3 id="回顾：关系型数据库的三大范式"><a href="#回顾：关系型数据库的三大范式" class="headerlink" title="回顾：关系型数据库的三大范式"></a>回顾：关系型数据库的三大范式</h3><ul>
+<li><strong>属性的原子性</strong>：每一列都不可再拆解（比如userName和password）</li>
+<li><strong>记录的唯一性</strong>：有唯一标识（主键），其他属性都依赖于主键（比如userId）</li>
+<li><strong>字段的冗余性</strong>：避免<strong>数据冗余</strong>和<strong>传递依赖</strong>（也就是使用外键=》做到 数据引用 而不是 重复数据）</li>
+</ul>
+<hr>
+<h2 id="开发数据模型-amp-同步到数据库"><a href="#开发数据模型-amp-同步到数据库" class="headerlink" title="开发数据模型&amp;同步到数据库"></a>开发数据模型&amp;同步到数据库</h2><ol>
+<li><strong>【创建模型（表）】：</strong> db-model下<strong>新建USerRelation.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzf2r3q5wj30mb0lrq5d.jpg" alt="USerRelation.js"></li>
+<li><strong>【创建外键关系、统一输出模型（表）】方便后面同步到数据库：</strong> db-model-index.js，特别<strong>注意两个外键的关系创建（可结合设计表理解）</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzfbrq8svj30lq0kpmzq.jpg" alt="db-model-index.js"></li>
+<li><strong>同步到数据库:</strong>执行<code>node src/db/sync.js</code>，查看数据库：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzg8l88l3j312a0htgqi.jpg" alt="数据库"><strong>windows下mysql表名是大小写不敏感的</strong>，所以sequalize建的表也是大小写不敏感的</li>
+</ol>
+<hr>
+<h1 id="开发-粉丝列表"><a href="#开发-粉丝列表" class="headerlink" title="开发 粉丝列表"></a>开发 粉丝列表</h1><h2 id="回顾技术方案设计"><a href="#回顾技术方案设计" class="headerlink" title="回顾技术方案设计"></a>回顾技术方案设计</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzh81kmcxj30yw0gbgvh.jpg" alt="回顾技术方案设计"></p>
+<h2 id="查看模板代码（个人主页模本中）"><a href="#查看模板代码（个人主页模本中）" class="headerlink" title="查看模板代码（个人主页模本中）"></a>查看模板代码（个人主页模本中）</h2><ol>
+<li>views-profile.ejs中，在个人信息下方：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhdjxwlqj30m40j040p.jpg" alt="views-profile.ejs"></li>
+<li>views-widgets下<strong>新建fans.js组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhfmp0d9j30z80e276m.jpg" alt="fans.js"></li>
+<li>给个假数据<strong>查看效果</strong>（注意ejs中的<strong>注释符号</strong>）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhibfytuj30jk075gm8.jpg" alt="假数据"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg" alt="查看效果"></li>
+</ol>
+<h2 id="开发路由：粉丝列表（个人主页路由中）"><a href="#开发路由：粉丝列表（个人主页路由中）" class="headerlink" title="开发路由：粉丝列表（个人主页路由中）"></a>开发路由：粉丝列表（个人主页路由中）</h2><ol>
+<li><strong>【路由层】调用controller层函数获取并返回前端所需数据：</strong> src-routes-view-blog.js中，到<strong>个人主页的/profile路由中</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk6cy1e9j30ly0g577y.jpg" alt="src-routes-view-blog.js（1）"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk5vw5ysj30k50iwq6i.jpg" alt="src-routes-view-blog.js（2）"></li>
+<li><strong>【controller层】创建getFans函数=》根据 userid 调用service层函数 =》获取粉丝列表：</strong> controller下<strong>新建user-relation.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzjytlb9nj30q40dhmyp.jpg" alt="controller层"></li>
+<li><strong>【service层】创建getUsersByFollower函数 连表查询数据库：</strong> service下<strong>新建user-relation.js</strong>（service层的文件基本和数据表是一一对应的）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk0kv5h1j30nt0outcw.jpg" alt="service层"></li>
+<li><strong>测试：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg" alt="查看效果"></li>
+</ol>
+<hr>
+<h1 id="开发-关注接口-判断关注状态"><a href="#开发-关注接口-判断关注状态" class="headerlink" title="开发 关注接口-判断关注状态"></a>开发 关注接口-判断关注状态</h1><h2 id="回顾架构设计"><a href="#回顾架构设计" class="headerlink" title="回顾架构设计"></a>回顾架构设计</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkeob074j30zn0gqajm.jpg" alt="回顾架构设计"></p>
+<h2 id="查看前端代码"><a href="#查看前端代码" class="headerlink" title="查看前端代码"></a>查看前端代码</h2><ul>
+<li>widgets下user-info.js：<ul>
+<li>关注&amp;取消关注 <strong>按钮</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkh1yuq6j31180fymzv.jpg" alt="user-info.js"></li>
+<li>通过amIFollowed <strong>判断显示哪个按钮</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkisf9zbj30kq0g9jti.jpg" alt="user-info.js"></li>
+<li>user-info.js是在profile.js中使用的，<strong>amIFollowed也由profile.js传入</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkktf904j30kz0bg3zr.jpg" alt="profile.js">profile.js中的数据是<strong>由routes-view-blog.js中个人主页的路由返回的</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="开发路由（关注-amp-取消关注）"><a href="#开发路由（关注-amp-取消关注）" class="headerlink" title="开发路由（关注&amp;取消关注）"></a>开发路由（关注&amp;取消关注）</h2><h3 id="页面路由"><a href="#页面路由" class="headerlink" title="页面路由"></a>页面路由</h3><ol>
+<li><strong>【路由层】返回前端amIFollowed：</strong> user-info.js中需要的数据是由<strong>routes-view-blog.js中个人主页的路由</strong>返回给profile.js再传给user-info.js的。通过<strong>判断当前用户的粉丝列表中是否有我</strong>即可知道我是否关注该用户（即amIFollowed）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzksq6e8qj30js0n5aby.jpg" alt="routes-view-blog.js &#39;/profile/:userName&#39;路由"><ul>
+<li><a href="https://www.runoob.com/jsref/jsref-some.html" target="_blank" rel="noopener">JavaScript Array some() 方法</a></li>
+</ul>
+</li>
+<li><strong>测试：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkwzfb8lj30l5096my7.jpg" alt="测试">说明<strong>登录状态的判断生效，接下来需要实现：点击关注后改变关系且按钮变为“取消关注”</strong></li>
+</ol>
+<hr>
+<h3 id="关注接口路由（关注）"><a href="#关注接口路由（关注）" class="headerlink" title="关注接口路由（关注）"></a>关注接口路由（关注）</h3><ol>
+<li>在<strong>前端user-info.ejs中处理按钮的显示/隐藏</strong>，关注的api是’/api/profile/follow’，取消关注的api是’/api/profile/unFollow’：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzl6ybwpgj30ki0pmq6y.jpg" alt="user-info.ejs"><strong>前端将当前用户的id传递给路由层</strong></li>
+<li><strong>【路由层】传递 当前用户的id、我的id 并调用controller层follow函数：</strong>在routes-api-blog-profile.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlhfz98lj30oe066my6.jpg" alt="routes-api-blog-profile.js"></li>
+<li><strong>【controller层】创建follow函数，调用service层addFollower函数添加关注关系：</strong>在controller下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlgq40v7j30k50e3wge.jpg" alt="user-relation.js"></li>
+<li><strong>【service层】创建addFollower函数，往数据库添加关注关系：</strong>在service下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzll06dhjj30kx0cbabi.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>点击关注后<strong>按钮变化</strong>且<strong>数据库中增添数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlrukv2cj30xo064dhz.jpg" alt="点击关注后">此时刷新页面，<strong>zhangsan将出现在lisi的粉丝列表中</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzltu5i5yj307s0b2t98.jpg" alt="刷新"></li>
+</ol>
+<h3 id="关注接口路由（取消关注）"><a href="#关注接口路由（取消关注）" class="headerlink" title="关注接口路由（取消关注）"></a>关注接口路由（取消关注）</h3><ol>
+<li><strong>【路由层】传递 当前用户的id、我的id 并调用controller层unfollow函数：</strong>在routes-api-blog-profile.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlwhqqjpj30pv066jsg.jpg" alt="routes-api-blog-profile.js"></li>
+<li><strong>【controller层】创建follow函数，调用service层deleteFollower函数添加关注关系：</strong>在controller下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlxex20xj30ok0ceq4t.jpg" alt="controller下user-relation.js">这里和关注的区别就是<strong>删除可通过返回结果直接判断成功与否</strong></li>
+<li><strong>【service层】创建deleteFollower函数，在数据库中删除关注关系：</strong>在service下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlylv9slj30lb0e8myp.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>点击“取消关注”后，按钮变化，且刷新页面后粉丝列表清空</li>
+</ol>
+<hr>
+<h1 id="开发-关注人列表"><a href="#开发-关注人列表" class="headerlink" title="开发 关注人列表"></a>开发 关注人列表</h1><h2 id="查看前端代码-1"><a href="#查看前端代码-1" class="headerlink" title="查看前端代码"></a>查看前端代码</h2><ol>
+<li><strong>views-profile.ejs中</strong>，出现在右侧粉丝列表下方：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm4qqztlj30jt0590t7.jpg" alt="关注人列表"></li>
+<li>widgets中<strong>新建follower.ejs</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm76rc27j30z50dqacd.jpg" alt="follower.ejs">获取<strong>关注总数</strong>后<strong>对用户列表遍历渲染</strong></li>
+</ol>
+<h2 id="开发路由"><a href="#开发路由" class="headerlink" title="开发路由"></a>开发路由</h2><ol>
+<li><strong>【路由层】调用controller层getFollowers函数，返回数据给前端：</strong> routes下view-blog.js中<strong>个人主页的路由</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmewajqvj30ta03oq3l.jpg" alt="routes下view-blog.js"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmc9cm1fj30cs0mzgn3.jpg" alt="前端需要的数据"></li>
+<li><strong>【controller层】创建getFollowers函数，调用service层getFollowersByUser函数 获取关注人列表：</strong> controller下user-relation.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmg3jkg1j30qp0c7gmz.jpg" alt="controller下user-relation.js"></li>
+<li><strong>【service层】创建getFollowersByUser函数，：</strong> service下user-relation.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmk5azsdj30i60rb77j.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>使用zhangsan的账号关注lisi后：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmxk0a9rj30je0cstaa.jpg" alt="测试">进入lisi页面后可取消关注# 关注和取消关注</li>
+</ol>
+<p>标签（空格分隔）： Node.js</p>
+<hr>
+<hr>
+<p>title: 关注和取消关注<br>date: 2020-03-23 21:27:41<br>tags: </p>
+<ul>
+<li>Node.js<br>categories:</li>
+<li>[Node.js学习]</li>
+<li>[微博项目]</li>
+</ul>
+<hr>
+<h1 id="创建数据模型：用户关系-1"><a href="#创建数据模型：用户关系-1" class="headerlink" title="创建数据模型：用户关系"></a>创建数据模型：用户关系</h1><h2 id="回顾数据模型设计-1"><a href="#回顾数据模型设计-1" class="headerlink" title="回顾数据模型设计"></a>回顾数据模型设计</h2><p>通过<strong>用户关系表</strong>存储用户之间的关系<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzev6b0taj315d0cx1ak.jpg" alt="回顾数据模型设计"></p>
+<!-- more -->
+
+<h3 id="回顾：关系型数据库的三大范式-1"><a href="#回顾：关系型数据库的三大范式-1" class="headerlink" title="回顾：关系型数据库的三大范式"></a>回顾：关系型数据库的三大范式</h3><ul>
+<li><strong>属性的原子性</strong>：每一列都不可再拆解（比如userName和password）</li>
+<li><strong>记录的唯一性</strong>：有唯一标识（主键），其他属性都依赖于主键（比如userId）</li>
+<li><strong>字段的冗余性</strong>：避免<strong>数据冗余</strong>和<strong>传递依赖</strong>（也就是使用外键=》做到 数据引用 而不是 重复数据）</li>
+</ul>
+<hr>
+<h2 id="开发数据模型-amp-同步到数据库-1"><a href="#开发数据模型-amp-同步到数据库-1" class="headerlink" title="开发数据模型&amp;同步到数据库"></a>开发数据模型&amp;同步到数据库</h2><ol>
+<li><strong>【创建模型（表）】：</strong> db-model下<strong>新建USerRelation.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzf2r3q5wj30mb0lrq5d.jpg" alt="USerRelation.js"></li>
+<li><strong>【创建外键关系、统一输出模型（表）】方便后面同步到数据库：</strong> db-model-index.js，特别<strong>注意两个外键的关系创建（可结合设计表理解）</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzfbrq8svj30lq0kpmzq.jpg" alt="db-model-index.js"></li>
+<li><strong>同步到数据库:</strong>执行<code>node src/db/sync.js</code>，查看数据库：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzg8l88l3j312a0htgqi.jpg" alt="数据库"><strong>windows下mysql表名是大小写不敏感的</strong>，所以sequalize建的表也是大小写不敏感的</li>
+</ol>
+<hr>
+<h1 id="开发-粉丝列表-1"><a href="#开发-粉丝列表-1" class="headerlink" title="开发 粉丝列表"></a>开发 粉丝列表</h1><h2 id="回顾技术方案设计-1"><a href="#回顾技术方案设计-1" class="headerlink" title="回顾技术方案设计"></a>回顾技术方案设计</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzh81kmcxj30yw0gbgvh.jpg" alt="回顾技术方案设计"></p>
+<h2 id="查看模板代码（个人主页模本中）-1"><a href="#查看模板代码（个人主页模本中）-1" class="headerlink" title="查看模板代码（个人主页模本中）"></a>查看模板代码（个人主页模本中）</h2><ol>
+<li>views-profile.ejs中，在个人信息下方：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhdjxwlqj30m40j040p.jpg" alt="views-profile.ejs"></li>
+<li>views-widgets下<strong>新建fans.js组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhfmp0d9j30z80e276m.jpg" alt="fans.js"></li>
+<li>给个假数据<strong>查看效果</strong>（注意ejs中的<strong>注释符号</strong>）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhibfytuj30jk075gm8.jpg" alt="假数据"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg" alt="查看效果"></li>
+</ol>
+<h2 id="开发路由：粉丝列表（个人主页路由中）-1"><a href="#开发路由：粉丝列表（个人主页路由中）-1" class="headerlink" title="开发路由：粉丝列表（个人主页路由中）"></a>开发路由：粉丝列表（个人主页路由中）</h2><ol>
+<li><strong>【路由层】调用controller层函数获取并返回前端所需数据：</strong> src-routes-view-blog.js中，到<strong>个人主页的/profile路由中</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk6cy1e9j30ly0g577y.jpg" alt="src-routes-view-blog.js（1）"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk5vw5ysj30k50iwq6i.jpg" alt="src-routes-view-blog.js（2）"></li>
+<li><strong>【controller层】创建getFans函数=》根据 userid 调用service层函数 =》获取粉丝列表：</strong> controller下<strong>新建user-relation.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzjytlb9nj30q40dhmyp.jpg" alt="controller层"></li>
+<li><strong>【service层】创建getUsersByFollower函数 连表查询数据库：</strong> service下<strong>新建user-relation.js</strong>（service层的文件基本和数据表是一一对应的）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzk0kv5h1j30nt0outcw.jpg" alt="service层"></li>
+<li><strong>测试：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzhjo2fexj316809ygna.jpg" alt="查看效果"></li>
+</ol>
+<hr>
+<h1 id="开发-关注接口-判断关注状态-1"><a href="#开发-关注接口-判断关注状态-1" class="headerlink" title="开发 关注接口-判断关注状态"></a>开发 关注接口-判断关注状态</h1><h2 id="回顾架构设计-1"><a href="#回顾架构设计-1" class="headerlink" title="回顾架构设计"></a>回顾架构设计</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkeob074j30zn0gqajm.jpg" alt="回顾架构设计"></p>
+<h2 id="查看前端代码-2"><a href="#查看前端代码-2" class="headerlink" title="查看前端代码"></a>查看前端代码</h2><ul>
+<li>widgets下user-info.js：<ul>
+<li>关注&amp;取消关注 <strong>按钮</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkh1yuq6j31180fymzv.jpg" alt="user-info.js"></li>
+<li>通过amIFollowed <strong>判断显示哪个按钮</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkisf9zbj30kq0g9jti.jpg" alt="user-info.js"></li>
+<li>user-info.js是在profile.js中使用的，<strong>amIFollowed也由profile.js传入</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkktf904j30kz0bg3zr.jpg" alt="profile.js">profile.js中的数据是<strong>由routes-view-blog.js中个人主页的路由返回的</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="开发路由（关注-amp-取消关注）-1"><a href="#开发路由（关注-amp-取消关注）-1" class="headerlink" title="开发路由（关注&amp;取消关注）"></a>开发路由（关注&amp;取消关注）</h2><h3 id="页面路由-1"><a href="#页面路由-1" class="headerlink" title="页面路由"></a>页面路由</h3><ol>
+<li><strong>【路由层】返回前端amIFollowed：</strong> user-info.js中需要的数据是由<strong>routes-view-blog.js中个人主页的路由</strong>返回给profile.js再传给user-info.js的。通过<strong>判断当前用户的粉丝列表中是否有我</strong>即可知道我是否关注该用户（即amIFollowed）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzksq6e8qj30js0n5aby.jpg" alt="routes-view-blog.js &#39;/profile/:userName&#39;路由"><ul>
+<li><a href="https://www.runoob.com/jsref/jsref-some.html" target="_blank" rel="noopener">JavaScript Array some() 方法</a></li>
+</ul>
+</li>
+<li><strong>测试：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzkwzfb8lj30l5096my7.jpg" alt="测试">说明<strong>登录状态的判断生效，接下来需要实现：点击关注后改变关系且按钮变为“取消关注”</strong></li>
+</ol>
+<hr>
+<h3 id="关注接口路由（关注）-1"><a href="#关注接口路由（关注）-1" class="headerlink" title="关注接口路由（关注）"></a>关注接口路由（关注）</h3><ol>
+<li>在<strong>前端user-info.ejs中处理按钮的显示/隐藏</strong>，关注的api是’/api/profile/follow’，取消关注的api是’/api/profile/unFollow’：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzl6ybwpgj30ki0pmq6y.jpg" alt="user-info.ejs"><strong>前端将当前用户的id传递给路由层</strong></li>
+<li><strong>【路由层】传递 当前用户的id、我的id 并调用controller层follow函数：</strong>在routes-api-blog-profile.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlhfz98lj30oe066my6.jpg" alt="routes-api-blog-profile.js"></li>
+<li><strong>【controller层】创建follow函数，调用service层addFollower函数添加关注关系：</strong>在controller下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlgq40v7j30k50e3wge.jpg" alt="user-relation.js"></li>
+<li><strong>【service层】创建addFollower函数，往数据库添加关注关系：</strong>在service下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzll06dhjj30kx0cbabi.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>点击关注后<strong>按钮变化</strong>且<strong>数据库中增添数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlrukv2cj30xo064dhz.jpg" alt="点击关注后">此时刷新页面，<strong>zhangsan将出现在lisi的粉丝列表中</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzltu5i5yj307s0b2t98.jpg" alt="刷新"></li>
+</ol>
+<h3 id="关注接口路由（取消关注）-1"><a href="#关注接口路由（取消关注）-1" class="headerlink" title="关注接口路由（取消关注）"></a>关注接口路由（取消关注）</h3><ol>
+<li><strong>【路由层】传递 当前用户的id、我的id 并调用controller层unfollow函数：</strong>在routes-api-blog-profile.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlwhqqjpj30pv066jsg.jpg" alt="routes-api-blog-profile.js"></li>
+<li><strong>【controller层】创建follow函数，调用service层deleteFollower函数添加关注关系：</strong>在controller下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlxex20xj30ok0ceq4t.jpg" alt="controller下user-relation.js">这里和关注的区别就是<strong>删除可通过返回结果直接判断成功与否</strong></li>
+<li><strong>【service层】创建deleteFollower函数，在数据库中删除关注关系：</strong> 在service下user-relation.js中，<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzlylv9slj30lb0e8myp.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>点击“取消关注”后，按钮变化，且刷新页面后粉丝列表清空</li>
+</ol>
+<hr>
+<h1 id="开发-关注人列表-1"><a href="#开发-关注人列表-1" class="headerlink" title="开发 关注人列表"></a>开发 关注人列表</h1><h2 id="查看前端代码-3"><a href="#查看前端代码-3" class="headerlink" title="查看前端代码"></a>查看前端代码</h2><ol>
+<li><strong>views-profile.ejs中</strong>，出现在右侧粉丝列表下方：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm4qqztlj30jt0590t7.jpg" alt="关注人列表"></li>
+<li>widgets中<strong>新建follower.ejs</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzm76rc27j30z50dqacd.jpg" alt="follower.ejs">获取<strong>关注总数</strong>后<strong>对用户列表遍历渲染</strong></li>
+</ol>
+<h2 id="开发路由-1"><a href="#开发路由-1" class="headerlink" title="开发路由"></a>开发路由</h2><ol>
+<li><strong>【路由层】调用controller层getFollowers函数，返回数据给前端：</strong> routes下view-blog.js中<strong>个人主页的路由</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmewajqvj30ta03oq3l.jpg" alt="routes下view-blog.js"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmc9cm1fj30cs0mzgn3.jpg" alt="前端需要的数据"></li>
+<li><strong>【controller层】创建getFollowers函数，调用service层getFollowersByUser函数 获取关注人列表：</strong> controller下user-relation.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmg3jkg1j30qp0c7gmz.jpg" alt="controller下user-relation.js"></li>
+<li><strong>【service层】创建getFollowersByUser函数，：</strong> service下user-relation.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmk5azsdj30i60rb77j.jpg" alt="service下user-relation.js"></li>
+<li><strong>测试：</strong>使用zhangsan的账号关注lisi后：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzmxk0a9rj30je0cstaa.jpg" alt="测试">进入lisi页面后可取消关注</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/24/首页功能（三表查询）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          首页功能（三表查询）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/22/广场页/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">广场页</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数据模型：用户关系"><span class="nav-number">1.</span> <span class="nav-text">创建数据模型：用户关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾数据模型设计"><span class="nav-number">1.1.</span> <span class="nav-text">回顾数据模型设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾：关系型数据库的三大范式"><span class="nav-number">1.1.1.</span> <span class="nav-text">回顾：关系型数据库的三大范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发数据模型-amp-同步到数据库"><span class="nav-number">1.2.</span> <span class="nav-text">开发数据模型&amp;同步到数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-粉丝列表"><span class="nav-number">2.</span> <span class="nav-text">开发 粉丝列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾技术方案设计"><span class="nav-number">2.1.</span> <span class="nav-text">回顾技术方案设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看模板代码（个人主页模本中）"><span class="nav-number">2.2.</span> <span class="nav-text">查看模板代码（个人主页模本中）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由：粉丝列表（个人主页路由中）"><span class="nav-number">2.3.</span> <span class="nav-text">开发路由：粉丝列表（个人主页路由中）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-关注接口-判断关注状态"><span class="nav-number">3.</span> <span class="nav-text">开发 关注接口-判断关注状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾架构设计"><span class="nav-number">3.1.</span> <span class="nav-text">回顾架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看前端代码"><span class="nav-number">3.2.</span> <span class="nav-text">查看前端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由（关注-amp-取消关注）"><span class="nav-number">3.3.</span> <span class="nav-text">开发路由（关注&amp;取消关注）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面路由"><span class="nav-number">3.3.1.</span> <span class="nav-text">页面路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注接口路由（关注）"><span class="nav-number">3.3.2.</span> <span class="nav-text">关注接口路由（关注）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注接口路由（取消关注）"><span class="nav-number">3.3.3.</span> <span class="nav-text">关注接口路由（取消关注）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-关注人列表"><span class="nav-number">4.</span> <span class="nav-text">开发 关注人列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看前端代码-1"><span class="nav-number">4.1.</span> <span class="nav-text">查看前端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由"><span class="nav-number">4.2.</span> <span class="nav-text">开发路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数据模型：用户关系-1"><span class="nav-number">5.</span> <span class="nav-text">创建数据模型：用户关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾数据模型设计-1"><span class="nav-number">5.1.</span> <span class="nav-text">回顾数据模型设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾：关系型数据库的三大范式-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">回顾：关系型数据库的三大范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发数据模型-amp-同步到数据库-1"><span class="nav-number">5.2.</span> <span class="nav-text">开发数据模型&amp;同步到数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-粉丝列表-1"><span class="nav-number">6.</span> <span class="nav-text">开发 粉丝列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾技术方案设计-1"><span class="nav-number">6.1.</span> <span class="nav-text">回顾技术方案设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看模板代码（个人主页模本中）-1"><span class="nav-number">6.2.</span> <span class="nav-text">查看模板代码（个人主页模本中）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由：粉丝列表（个人主页路由中）-1"><span class="nav-number">6.3.</span> <span class="nav-text">开发路由：粉丝列表（个人主页路由中）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-关注接口-判断关注状态-1"><span class="nav-number">7.</span> <span class="nav-text">开发 关注接口-判断关注状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾架构设计-1"><span class="nav-number">7.1.</span> <span class="nav-text">回顾架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看前端代码-2"><span class="nav-number">7.2.</span> <span class="nav-text">查看前端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由（关注-amp-取消关注）-1"><span class="nav-number">7.3.</span> <span class="nav-text">开发路由（关注&amp;取消关注）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面路由-1"><span class="nav-number">7.3.1.</span> <span class="nav-text">页面路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注接口路由（关注）-1"><span class="nav-number">7.3.2.</span> <span class="nav-text">关注接口路由（关注）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注接口路由（取消关注）-1"><span class="nav-number">7.3.3.</span> <span class="nav-text">关注接口路由（取消关注）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发-关注人列表-1"><span class="nav-number">8.</span> <span class="nav-text">开发 关注人列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看前端代码-3"><span class="nav-number">8.1.</span> <span class="nav-text">查看前端代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发路由-1"><span class="nav-number">8.2.</span> <span class="nav-text">开发路由</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>广场页 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="页面和模板（后端渲染 缓存）回顾模板技术方案 广场页是每个人都能进行访问的，而且访问到的内容都一样，所以可以通过redis缓存微博列表数据来减少请求，优化代码，路由不再通过controller层去找service层获取数据库数据，而是通过cache层去看缓存中有无数据，没有再去找service层获取数据库数据">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广场页">
+<meta property="og:url" content="http://yoursite.com/2020/03/22/广场页/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="页面和模板（后端渲染 缓存）回顾模板技术方案 广场页是每个人都能进行访问的，而且访问到的内容都一样，所以可以通过redis缓存微博列表数据来减少请求，优化代码，路由不再通过controller层去找service层获取数据库数据，而是通过cache层去看缓存中有无数据，没有再去找service层获取数据库数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzcxyrcp5j30rf0hg0yz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzcz87rx8j314s0dvgwj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzd52dewpj30wh0g6gno.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdze4s423bj30ke0phtdl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzdxvze3kj30xl0qxq7g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzejpe8ahj3140035mxn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzde6do3xj30sy0a6gnk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzddrlydmj30up04emxw.jpg">
+<meta property="og:updated_time" content="2020-04-19T13:38:29.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="广场页">
+<meta name="twitter:description" content="页面和模板（后端渲染 缓存）回顾模板技术方案 广场页是每个人都能进行访问的，而且访问到的内容都一样，所以可以通过redis缓存微博列表数据来减少请求，优化代码，路由不再通过controller层去找service层获取数据库数据，而是通过cache层去看缓存中有无数据，没有再去找service层获取数据库数据">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzcxyrcp5j30rf0hg0yz.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-广场页" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      广场页
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/22/广场页/" class="article-date">
+	  <time datetime="2020-03-22T13:37:45.000Z" itemprop="datePublished">三月 22, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="页面和模板（后端渲染-缓存）"><a href="#页面和模板（后端渲染-缓存）" class="headerlink" title="页面和模板（后端渲染 缓存）"></a>页面和模板（后端渲染 缓存）</h1><h2 id="回顾模板技术方案"><a href="#回顾模板技术方案" class="headerlink" title="回顾模板技术方案"></a>回顾模板技术方案</h2><ul>
+<li>广场页是每个人都能进行访问的，而且访问到的内容都一样，所以可以<strong>通过redis缓存微博列表数据来减少请求，优化代码</strong>，路由不再通过controller层去找service层获取数据库数据，而是<strong>通过cache层去看缓存中有无数据，没有再去找service层获取数据库数据</strong><a id="more"></a></li>
+<li>广场页的前端和个人主页的前端<strong>区别在于广场页没有右侧</strong>，且<strong>广场页加载更多的路由是api/square下的</strong></li>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzcxyrcp5j30rf0hg0yz.jpg" alt="回顾模板方案"></li>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzcz87rx8j314s0dvgwj.jpg" alt="回顾技术方案"></li>
+</ul>
+<h2 id="查看模板代码"><a href="#查看模板代码" class="headerlink" title="查看模板代码"></a>查看模板代码</h2><ol>
+<li>views下<strong>新建square.ejs</strong></li>
+</ol>
+<h1 id="开发路由-amp-渲染数据"><a href="#开发路由-amp-渲染数据" class="headerlink" title="开发路由&amp;渲染数据"></a>开发路由&amp;渲染数据</h1><h2 id="页面路由"><a href="#页面路由" class="headerlink" title="页面路由"></a>页面路由</h2><ol>
+<li><strong>【路由层】创建页面路由，调用controller层getSquareBlogList函数：</strong> src-routes-view-blog.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzd52dewpj30wh0g6gno.jpg" alt="创建页面路由"></li>
+<li><strong>【controller层】创建getSquareBlogList函数，调用cache层getSquareCacheList函数读取微博列表数据：</strong> controller下<strong>新建blog-square.js</strong>，这里和个人主页不同时因为<strong>controller层会访问cache层（redis）将缓存拿到并返回</strong>：</li>
+<li><strong>【cache层】使用redis的get读取数据，有则返回，无（即数据过期）则到service层getBlogListByUser函数去读取数据库数据，并使用set缓存到redis中：</strong> cache下<strong>新建blog.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdze4s423bj30ke0phtdl.jpg" alt="cache层"></li>
+<li><strong>【service层】getBlogListByUser函数中做了兼容，可以不传userName来查询数据库：</strong>service-blog.js：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzdxvze3kj30xl0qxq7g.jpg" alt="service-blog.js"></li>
+<li><strong>测试：redis是每一页都缓存在了相应的key值中（key的命名是：前缀【weibo:square:】+当前页码+一页最多的条数）：</strong>进入广场页，点击“加载更多”加载第二页，查看redis缓存的所有键名：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzejpe8ahj3140035mxn.jpg" alt="redis"></li>
+</ol>
+<h2 id="接口路由（加载更多）"><a href="#接口路由（加载更多）" class="headerlink" title="接口路由（加载更多）"></a>接口路由（加载更多）</h2><ol>
+<li><strong>【路由层】创建 加载更多路由，和个人主页的加载更多逻辑基本一致：</strong>src-routes-api下<strong>新建blog-square.js</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzde6do3xj30sy0a6gnk.jpg" alt="src-routes-api-blog-square.js"></li>
+<li><strong>【app.js注册路由】：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdzddrlydmj30up04emxw.jpg" alt="app.js注册路由"></li>
+<li>【controller层】还是和页面路由一样的getSquareBlogList函数</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/23/关注和取消关注/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          关注和取消关注
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/21/个人主页/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">个人主页</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面和模板（后端渲染-缓存）"><span class="nav-number">1.</span> <span class="nav-text">页面和模板（后端渲染 缓存）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾模板技术方案"><span class="nav-number">1.1.</span> <span class="nav-text">回顾模板技术方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看模板代码"><span class="nav-number">1.2.</span> <span class="nav-text">查看模板代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发路由-amp-渲染数据"><span class="nav-number">2.</span> <span class="nav-text">开发路由&amp;渲染数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#页面路由"><span class="nav-number">2.1.</span> <span class="nav-text">页面路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口路由（加载更多）"><span class="nav-number">2.2.</span> <span class="nav-text">接口路由（加载更多）</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
