@@ -129,102 +129,6 @@
         
           <section id="main">
   
-    <article id="post-@提到我的"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-    <div class="article-meta">
-      
-	<a href="/2020/04/23/@提到我的/" class="article-date">
-	  <time datetime="2020-04-23T12:01:42.181Z" itemprop="datePublished">四月 23, 2020</time>
-	</a>
-
-       
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title <code>@</code>提到我的<br>date 2020-03-26 195501<br>tags </p>
-<ul>
-<li>Node.js<br>categories</li>
-<li>[Node.js学习]</li>
-<li>[微博项目]</li>
-</ul>
-<hr>
-<h1 id="提到我的"><a href="#提到我的" class="headerlink" title="@提到我的"></a>@提到我的</h1><p>实现功能：有人@我之后，会在首页个人主页右侧给出@总数，点击进入@我的消息页，展示所有@我的内容<br>!– more –</p>
-<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="回顾数据模型设计"><a href="#回顾数据模型设计" class="headerlink" title="回顾数据模型设计"></a>回顾数据模型设计</h2><p><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge01zcbxk3j315o0d9h0j.jpg" alt="回顾数据模型设计"></p>
-<h2 id="创建数据模型：AtRelation-amp-同步到数据库"><a href="#创建数据模型：AtRelation-amp-同步到数据库" class="headerlink" title="创建数据模型：AtRelation&amp;同步到数据库"></a>创建数据模型：AtRelation&amp;同步到数据库</h2><ol>
-<li>新建AtRelation.js，db-model-AtRelation.js下：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge03f6xw1gj30ht0mktc7.jpg" alt="db-model-AtRelation.js"></li>
-<li>创建外键关系、统一输出，方便同步，db-model-index.js中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge025whhu0j30k50bf0tu.jpg" alt="db-model-index.js">AtRelation中blogId是Blog中id的外键</li>
-<li>同步到数据库：<code>node srcdbsync.js</code></li>
-<li>查看数据库：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge02atn17ij30r00jfae6.jpg" alt="查看数据库"><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge02cmq1gdj316k05cmzm.jpg" alt="查看数据库">注意：sequelize中我们使用boolean保存的isRead到数据库中是tinyint，用很小的数字表示boolean，不影响功能使用</li>
-</ol>
-<hr>
-<h1 id="关系【重点理解Promise-all-发送多个请求】"><a href="#关系【重点理解Promise-all-发送多个请求】" class="headerlink" title="@关系【重点理解Promise.all()发送多个请求】"></a>@关系【重点理解Promise.all()发送多个请求】</h1><ol>
-<li>收集分析@的用户</li>
-<li>建立AtRelation关系</li>
-<li>获取@的数量显示在页面</li>
-</ol>
-<h2 id="收集分析-的用户-amp-建立AtRelation关系"><a href="#收集分析-的用户-amp-建立AtRelation关系" class="headerlink" title="收集分析@的用户&amp;建立AtRelation关系"></a>收集分析@的用户&amp;建立AtRelation关系</h2><ol>
-<li>【controller层】在创建微博之后，调用service层createAtRelation函数创建 @ 关系：在输入框中创建微博是通过controller下blog-home.js中的create方法完成的，所以我们需要在调用service层createBlog函数之前先收集分析@的用户：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge02rbqlxnj30hi0qwdkt.jpg" alt="controller下blog-home.js"><ul>
-<li>我们让 替换不生效：REG_FOR_AT_WHO匹配的就是matchStr，返回matchStr则替换不生效。我们只是通过replace获取所有被@用户的userName列表</li>
-<li><a href="httpshuanglizhu.github.io20191207ES6%20Promise%EF%BC%882%EF%BC%89#Promise-all-获取多个Promise实例的参数">Promise.all()获取多个Promise实例的参数</a>，用于发送多个请求</li>
-</ul>
-</li>
-<li>【service层】创建createAtRelation函数： service下新建atRelation.js，创建一个“创建微博 @ 用户的关系”的createAtRelation函数：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge037qektqj30lu0c0ta6.jpg" alt="service下atRelation.js"></li>
-<li>测试：成功添加进数据库：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge03cviln7j30re04edgp.jpg" alt="测试1"><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge03k31fj8j30q4065jsu.jpg" alt="测试2"></li>
-</ol>
-<h2 id="获取-的数量显示在页面"><a href="#获取-的数量显示在页面" class="headerlink" title="获取@的数量显示在页面"></a>获取@的数量显示在页面</h2><h3 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h3><ol>
-<li>user-info.ejs，通过从后端获取atCount来显示@的数量：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge0483vidfj30il06y752.jpg" alt="user-info.ejs"></li>
-<li>调用user-info.ejs的ejs模板需要获取并传递atCount，比如index.ejs：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04ppsae1j30h1093wfb.jpg" alt="index.ejs">个人主页也是一样的</li>
-</ol>
-<h3 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h3><ol>
-<li>【controller层】创建getAtMeCount函数=》调用service层getAtRelationCount函数=》获取 @ 我的微博数量： controller下新建blog-at.js：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04l0q3wzj30ky0a6q43.jpg" alt="blog-at.js"></li>
-<li>【service层】创建getAtRelationCount函数=》连表查询 获取 @ 用户的微博数量（未读的）： service下at-relation.js中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04jjde4ej30lv0e6abo.jpg" alt="service下at-relation.js"></li>
-<li>【路由层】调用controller层getAtMeCount函数获取 @ 我的微博数量=》返回atCount给前端： routes-view-blog.js 首页路由中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04omkp9rj30j70pm78n.jpg" alt="routes-view-blog.js"></li>
-<li>测试首页：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04udi17aj312i0gpq56.jpg" alt="测试"></li>
-<li>搞定个人主页：也是一样的，在routes-view-blog.js 个人主页路由中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04zcf7cij30j50dq0vi.jpg" alt="routes-view-blog.js"><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge04zonqj6j30ja0rzq7w.jpg" alt="routes-view-blog.js"></li>
-<li>测试个人主页：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge050q00hej312w0cy0up.jpg" alt="测试个人主页"></li>
-</ol>
-<hr>
-<h1 id="开发页面和路由"><a href="#开发页面和路由" class="headerlink" title="开发页面和路由"></a>开发页面和路由</h1><p>实现功能点击提到我的以后要跳转页面<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge07figh2uj30rd0hmwlr.jpg" alt="原型图"></p>
-<h2 id="开发页面路由（三表查询-获取第一页列表）"><a href="#开发页面路由（三表查询-获取第一页列表）" class="headerlink" title="开发页面路由（三表查询 获取第一页列表）"></a>开发页面路由（三表查询 获取第一页列表）</h2><ol>
-<li>views下新建atMe.ejs</li>
-<li>【路由层】创建页面路由，调用controller层getAtMeBlogList函数=》获取第一页列表 和 列表总行数=》返回给前端： routes-view-blog.js中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge07l1q1u3j30jg0heq5r.jpg" alt="view-blog.js"></li>
-<li>【controller层】创建getAtMeBlogList函数=》调用service层getAtUserBlogList函数=》获取 @我的微博列表第一页数据 和 列表总行数： controller下blog-at.js中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge07qmkainj30pp0lz77g.jpg" alt="controller下blog-at.js"></li>
-<li>【service层】创建getAtUserBlogList函数=》三表查询 获取第一页列表 和 列表总行数： service下at-relation.js中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge07t7k1isj30jf0ohn0q.jpg" alt="service下at-relation.js"></li>
-<li>测试：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3qpkicrxj30y90k8whh.jpg" alt="点击以后"></li>
-</ol>
-<h2 id="开发接口路由（加载更多）"><a href="#开发接口路由（加载更多）" class="headerlink" title="开发接口路由（加载更多）"></a>开发接口路由（加载更多）</h2><ol>
-<li>【路由层】创建路由，返回数据给前端： routes-api下新建blog-at.js，逻辑基本和个人主页的加载更多一样，除了 路由地址 以及 调用的controller层的函数获取的微博列表 不同<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3rmnwhqyj30uo0p7q7z.jpg" alt="blog-at.js"></li>
-<li>app.js注册路由：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3rsky1yej30ve048mxu.jpg" alt="app.js"></li>
-<li>测试：进入@我的消息页，下滑出现“加载更多”，点击后加载下一页<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3ru7jr38j30rc05zdgd.jpg" alt="测试"></li>
-</ol>
-<h2 id="标记为已读"><a href="#标记为已读" class="headerlink" title="标记为已读"></a>标记为已读</h2><ol>
-<li>【前端】读完at-me页后，首页右侧需显示“提到我的（0）”： user-info.js中，前端需要获取atCount来显示当前提到我的总数，如果读完就要使其显示回0：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3sm4nt16j30ji069aat.jpg" alt="user-info.js"></li>
-<li>【路由层】渲染页面后=》调用controller层的markAsRead函数=》将atRelations表中所有和当前userId（被@用户）相关的isRead都改为false： ，routes-view-blog.js的 atMe 路由 中：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3xo93w4vj30gl0h2q4h.jpg" alt="blog.js"></li>
-<li>【controller层】调用service层updateAtRelation函数=》将isRead改为false： controller下blog-at.js，不需要返回SuccessModel 或者 ErrorModel是因为 markAsRead是在渲染页面后调用的，SuccessModel 或者 ErrorModel是为了把数据返回给前端才使用的，而已读与否是不需要返回给前端的：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3xncblmpj30m80g5q4v.jpg" alt="blog-at.js"></li>
-<li>【service层】创建updateAtRelation函数=》更新 AtRelation表中isRead： service下at-relation.js：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3xkabbv5j30hs0lptcg.jpg" alt="at-relation.js"></li>
-<li>测试：一开始进入是13条未读，退出@页面后显示0条未读：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3xrcgyddj308j0euq4j.jpg" alt="测试"></li>
-<li>注意： sequelize中isRead使用的true和false在数据库中实际是使用0和1来表示的（1是false），可看atRelations表：<br><img src="httpww1.sinaimg.cnlarge005H7IVsgy1ge3xw6ep3xj30d20eddht.jpg" alt="atRelations表"></li>
-</ol>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-首页功能（三表查询）"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -771,6 +675,75 @@ post:向服务器端提交数据，请求数据在报文body里
 <!-- Table of Contents -->
 
   
+    <article id="post-微博用户管理（注册）"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2020/03/15/微博用户管理（注册）/">微博用户管理（注册）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/15/微博用户管理（注册）/" class="article-date">
+	  <time datetime="2020-03-15T01:33:20.000Z" itemprop="datePublished">三月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+          
+          <div class="entry-summary">
+          功能列表
+用户管理（登录和注册）
+用户设置（修改基本信息，修改密码，退出登录）
+创建微博，暂不显示微博列表
+个人主页，显示个人微博列表和个人信息，暂不做关注功能
+广场页（使用缓存）
+关注和取消关注，显示粉丝和关注人
+首页，显示我的微博和我关注的人的微博
+@和回复
+@提到我的
+
+        
+          <p class="article-more-link">
+            <a href="/2020/03/15/微博用户管理（注册）/#more">阅读全文</a>
+          </p>
+        </div>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js学习/">Node.js学习</a>, <a class="article-category-link" href="/categories/微博项目/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
 
 
   <nav id="page-nav">
@@ -848,7 +821,7 @@ post:向服务器端提交数据，请求数据在报文body里
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">41</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -861,18 +834,6 @@ post:向服务器端提交数据，请求数据在报文body里
     </ul>
     <div class="widget">
       <ul>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2020/04/23/@提到我的/">(no title)</a></h6>
-              <span>四月 23, 2020</span>
-            </div>
-
-          </li>
         
           <li class="clearfix">
 
@@ -930,6 +891,18 @@ post:向服务器端提交数据，请求数据在报文body里
 
               <h6 style="margin: 0;"><a href="/2020/03/20/创建微博/">创建微博</a></h6>
               <span>三月 20, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2020/03/19/文件上传（input files FileList）/">文件上传（input files FileList）</a></h6>
+              <span>三月 19, 2020</span>
             </div>
 
           </li>
