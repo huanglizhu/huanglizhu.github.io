@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS Web API AJAX | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="XMLHttpRequest（ajax核心API） XMLHttpRequest():用于创建 XMLHttpRequest 对象，XMLHttpRequest 对象用于和服务器交换数据">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS Web API AJAX">
+<meta property="og:url" content="http://yoursite.com/2020/03/01/JS Web API AJAX/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="XMLHttpRequest（ajax核心API） XMLHttpRequest():用于创建 XMLHttpRequest 对象，XMLHttpRequest 对象用于和服务器交换数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gddj0xzl6bj30uh0i7n9f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gddj1nvnwcj30pu0knk6j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrqnsftjj315w0ckgvl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrsgunyrj30fr0680v5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrxm03z6j30tw0cc48a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjs50f1slj30vh0af0zc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjsm5jbkbj310o0f34bw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjssc20eyj315u08x17h.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjxz7drqij30q60q07p0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjxzssq0fj30mb04dtb6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy15nw4mj30h6045gol.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy1ufwyxj30mp07odmx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy85d78fj30uc0r9kcn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjybfltm6j30v2099gtc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjyey2qo7j30sl0kuwlu.jpg">
+<meta property="og:updated_time" content="2020-06-08T04:16:28.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS Web API AJAX">
+<meta name="twitter:description" content="XMLHttpRequest（ajax核心API） XMLHttpRequest():用于创建 XMLHttpRequest 对象，XMLHttpRequest 对象用于和服务器交换数据">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gddj0xzl6bj30uh0i7n9f.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS Web API AJAX" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS Web API AJAX
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/01/JS Web API AJAX/" class="article-date">
+	  <time datetime="2020-03-01T04:56:45.000Z" itemprop="datePublished">三月 1, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="XMLHttpRequest（ajax核心API）"><a href="#XMLHttpRequest（ajax核心API）" class="headerlink" title="XMLHttpRequest（ajax核心API）"></a>XMLHttpRequest（ajax核心API）</h1><ul>
+<li><strong>XMLHttpRequest()</strong>:用于<strong>创建 XMLHttpRequest 对象</strong>，XMLHttpRequest 对象用于和服务器交换数据<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="onreadystatechange事件"><a href="#onreadystatechange事件" class="headerlink" title="onreadystatechange事件"></a>onreadystatechange事件</h2><ul>
+<li><strong>onreadystatechange事件</strong>：和image对象的onload/onerror类似，都是<strong>对象状态发生改变时触发</strong>。</li>
+</ul>
+<h2 id="open"><a href="#open" class="headerlink" title="open()"></a>open()</h2><ul>
+<li><strong>open():初始化一个请求</strong>，规定请求的类型、URL 以及是否异步处理请求。<ul>
+<li>参数1：请求的类型，”GET”或者”POST”</li>
+<li>参数2：url，文件在服务器上的位置</li>
+<li><strong>参数3默认为true</strong>，表示服务器请求是<strong>异步</strong>进行的，也就是脚本<strong>执行send（）方法后不等待服务器的执行结果</strong>，而是继续执行脚本代码；当参数3为false时，服务器请求是同步进行的，也就是脚本执行send（）方法后等待服务器的执行结果的返回，若在等待过程中超时，则不再等待，继续执行后面的脚本代码！</li>
+</ul>
+</li>
+</ul>
+<h2 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h2><ul>
+<li><strong>send():将请求发送到服务器</strong>。如果请求是异步的（默认），那么该方法将在请求发送后立即返回。<ul>
+<li><strong>参数string</strong>：仅用于 POST 请求</li>
+</ul>
+</li>
+</ul>
+<h2 id="readyState属性"><a href="#readyState属性" class="headerlink" title="readyState属性"></a>readyState属性</h2><ul>
+<li>XMLHttpRequest对象的readyState属性<strong>存有 XMLHttpRequest对象 的状态</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>（请求未初始化）还没有调用send（）方法</td>
+</tr>
+<tr>
+<td>1</td>
+<td>（载入，服务器连接已建立）已调用send（）方法，正在发送请求</td>
+</tr>
+<tr>
+<td>2</td>
+<td>（载入完成，请求已接收）send（）方法执行完成，已经接收到全部响应内容</td>
+</tr>
+<tr>
+<td>3</td>
+<td>（交互，请求处理中）正在解析响应内容</td>
+</tr>
+<tr>
+<td>4</td>
+<td>（完成，请求已完成，且响应已就绪）<strong>响应内容解析完成</strong>，可以在客户端调用</td>
+</tr>
+</tbody></table>
+<h2 id="status属性"><a href="#status属性" class="headerlink" title="status属性"></a>status属性</h2><ul>
+<li>XMLHttpRequest对象的status属性，其实就是http响应的状态码</li>
+<li><strong>必须在readyState属性值为4时才能去判断status属性</strong>，否则拿不到status属性值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2xx</td>
+<td>表示成功处理请求，如200</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td>需要重定向，浏览器直接跳转，如301 302 304</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td>客户端请求错误，如404 403</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>服务器端错误</td>
+</tr>
+</tbody></table>
+<h2 id="responseText-与-responseXML-属性"><a href="#responseText-与-responseXML-属性" class="headerlink" title="responseText 与 responseXML 属性"></a>responseText 与 responseXML 属性</h2><ul>
+<li>使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性 可获得来自服务器的响应数据。<ul>
+<li>responseText    获得<strong>字符串形式</strong>的<strong>响应数据</strong>(如果请求未成功或尚未发送，则返回 null)</li>
+<li>responseXML    获得 <strong>XML 形式</strong>的<strong>响应数据</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="AJAX例子"><a href="#AJAX例子" class="headerlink" title="AJAX例子"></a>AJAX例子</h1><ol>
+<li><strong>创建XMLHttpRequest对象</strong>：使用XMLHttpRequest()来new一个XMLHttpRequest对象</li>
+<li><strong>判断对象状态</strong>：通过XMLHttpRequest对象的<strong>onreadystatechange事件（readyState还有status属性）</strong>判断对象状态（请求是否初始化、服务器连接是否建立、请求是否接收、请求是否处理中、请求是否已完成且响应已就绪）。</li>
+<li><strong>获取响应数据</strong>：判断到“请求已完成且响应已就绪”时可使用XMLHttpRequest 对象的 <strong>responseText 或 responseXML 属性</strong>来<strong>获得响应数据</strong>。</li>
+<li><strong>向服务器发送请求</strong>：使用XMLHttpRequest 对象的 <strong>open() 和 send()</strong> 方法向服务器发送请求。<br><a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#步骤" target="_blank" rel="noopener">可参考这篇博客</a></li>
+</ol>
+<h2 id="get请求"><a href="#get请求" class="headerlink" title="get请求"></a>get请求</h2><ul>
+<li>一般将open()和send()都放到onreadystatechange事件之后来写。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gddj0xzl6bj30uh0i7n9f.jpg" alt="例子"></li>
+</ul>
+<h2 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gddj1nvnwcj30pu0knk6j.jpg" alt="例子"></p>
+<hr>
+<h1 id="浏览器的同源策略"><a href="#浏览器的同源策略" class="headerlink" title="浏览器的同源策略"></a>浏览器的同源策略</h1><ul>
+<li><strong>同源策略</strong>：ajax请求时，<strong>浏览器</strong>要求当前网页和server必须同源（为了安全）<ul>
+<li><strong>注意：</strong>同源是浏览器规定的，<strong>在服务端是可以发起跨域攻击的</strong>，比如爬虫，因为<strong>server端并无同源策略</strong></li>
+<li><strong>同源</strong>：协议、域名、端口，三者必须一致<ul>
+<li>比如：前端<code>http://a.com：8080/</code>；server：<code>https://b.com/api/xxx</code>（默认443端口）<strong>那么这前后端是三者都不一致</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="加载图片-CSS-js可无视同源策略"><a href="#加载图片-CSS-js可无视同源策略" class="headerlink" title="加载图片 CSS js可无视同源策略"></a>加载图片 CSS js可无视同源策略</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">跨域的图片地址/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">跨域的css地址/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">跨域的js地址</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>比如我们经常引用的js/CSS的库，<code>&lt;link/&gt;</code>、<code>&lt;script&gt;</code>直接使用cdn地址就是<strong>跨域</strong>的。</li>
+<li><code>&lt;script&gt;</code>可实现<strong>JSONP</strong></li>
+<li>而图片比较特殊，如果该图片做了<strong>防盗链</strong>，则无法显示（比如百度）</li>
+<li><strong><code>&lt;img/&gt;</code>可用于使用第三方统计服务来统计打点（比如统计访问次数）</strong>，也就是把需要的参数放入img，在地址处使用第三方统计服务，这样就<strong>可以避免跨域问题</strong></li>
+</ul>
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><ul>
+<li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
+<li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
+<li>可通过jsonp、cors实现跨域</li>
+</ul>
+<h2 id="实现跨域的常见方式"><a href="#实现跨域的常见方式" class="headerlink" title="实现跨域的常见方式"></a>实现跨域的常见方式</h2><h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><ul>
+<li>访问<a href="https://imooc.com/，服务端一定返回一个html文件吗？" target="_blank" rel="noopener">https://imooc.com/，服务端一定返回一个html文件吗？</a><br>并不是，<strong>服务器可以任意动态拼接数据返回，只要符合html格式要求</strong><br>同理，<code>&lt;script src=&quot;https://imooc.com/getData.js&quot;&gt;</code>,也不一定返回一个js文件，<strong>服务器可以任意动态拼接数据返回，只要符合js格式要求即可</strong>【详细见例子】</li>
+<li><strong>jsonp原理</strong>：</li>
+</ul>
+<p><strong><code>&lt;script&gt;</code></strong>可<strong>绕过跨域限制</strong>，所以script中src地址可以是跨域地址<br><strong>服务器</strong>可以<strong>任意动态拼接数据返回</strong><br>所以，<strong><code>&lt;script&gt;</code>就可以获得跨域的数据，只要服务端愿意返回</strong></p>
+<h4 id="例子（原理）"><a href="#例子（原理）" class="headerlink" title="例子（原理）"></a>例子（原理）</h4><ul>
+<li>在这用一<strong>简单例子讲解jsonp原理，真实使用可用jquery</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrqnsftjj315w0ckgvl.jpg" alt="简单例子">先定义一个<strong>全局函数callback</strong>用于打印跨域返回的内容，此函数已定义，可随时调用<br>然后<strong>在引入的script中设置src为跨域地址</strong>，该地址将<strong>返回一个执行callback函数</strong><br>那么<strong>返回的代码会立即执行callback函数，并将相应内容打印</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrsgunyrj30fr0680v5.jpg" alt="结果"></li>
+<li><strong>【扩展例子】：</strong><ul>
+<li><strong>跨域动态传递数据</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrxm03z6j30tw0cc48a.jpg" alt="跨域动态传递数据"></li>
+<li><strong>函数名可两域不同</strong>：我们可将callback定义为abc后传给跨域文件<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjs50f1slj30vh0af0zc.jpg" alt="函数名可两域不同"></li>
+<li><strong>动态插入script标签</strong>：现在是静态插入的，也可以和其他标签一样动态插入</li>
+</ul>
+</li>
+</ul>
+<h4 id="jquery实现jsonp"><a href="#jquery实现jsonp" class="headerlink" title="jquery实现jsonp"></a>jquery实现jsonp</h4><p>和发ajax非常类似<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjsm5jbkbj310o0f34bw.jpg" alt="jquery实现jsonp"></p>
+<h3 id="cors（纯服务端）"><a href="#cors（纯服务端）" class="headerlink" title="cors（纯服务端）"></a>cors（纯服务端）</h3><ul>
+<li>cors是<strong>纯服务端</strong>的操作，通过服务端设置http header可实现允许跨域。<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjssc20eyj315u08x17h.jpg" alt="image.png"></li>
+<li><strong>如果使用cors允许跨域，则跨域请求和发送ajax请求时完全一样的，不需要再考虑跨域问题</strong></li>
+</ul>
+<hr>
+<h1 id="ajax相关面试题"><a href="#ajax相关面试题" class="headerlink" title="ajax相关面试题"></a>ajax相关面试题</h1><h2 id="手写简易ajax"><a href="#手写简易ajax" class="headerlink" title="手写简易ajax"></a>手写简易ajax</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjxz7drqij30q60q07p0.jpg" alt="手写简易ajax"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjxzssq0fj30mb04dtb6.jpg" alt="运行结果"></p>
+<p>模拟404情况，换成不存在的地址：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy15nw4mj30h6045gol.jpg" alt="模拟404情况"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy1ufwyxj30mp07odmx.jpg" alt="运行结果"></p>
+<h2 id="跨域的实现方式"><a href="#跨域的实现方式" class="headerlink" title="跨域的实现方式"></a>跨域的实现方式</h2><ol>
+<li><strong>jsonp原理</strong></li>
+<li><strong>cors（纯服务端）</strong></li>
+</ol>
+<hr>
+<h1 id="实际项目中-ajax-的常用插件"><a href="#实际项目中-ajax-的常用插件" class="headerlink" title="实际项目中 ajax 的常用插件"></a>实际项目中 ajax 的常用插件</h1><ul>
+<li><strong>jquery</strong>：老旧，未使用Promise，容易回调地狱<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy85d78fj30uc0r9kcn.jpg" alt="jquery"></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener"><strong>fetch</strong></a>：比XMLHttpRequest更加简洁，但兼容性不好<ul>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjybfltm6j30v2099gtc.jpg" alt="简单的fetch请求"></li>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjyey2qo7j30sl0kuwlu.jpg" alt="使用fetch发送POST请求"></li>
+<li><strong>注意：</strong>从 fetch() 返回的 Promise <strong>不会被标记为 reject</strong>， 即使响应的 HTTP 状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ），<strong>仅当网络故障时或请求被阻止时，才会标记为 reject。</strong></li>
+<li>不用了解太细，知道大概和去哪查就行</li>
+</ul>
+</li>
+<li><a href="http://www.axios-js.com/" target="_blank" rel="noopener"><strong>axios库</strong></a>：框架中使用较多，<strong>支持浏览器端、nodejs</strong>。在浏览器中axios使用的api就是XMLHttpRequest，是对他的一个封装。<ul>
+<li>安装/引入axios库后，直接使用axios.get(<code>请求地址</code>)即可发送get请求（<a href="http://www.axios-js.com/docs/" target="_blank" rel="noopener">完整例子</a>）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/02/博客项目日志/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          博客项目日志
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/29/JS Web API 事件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS Web API 事件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XMLHttpRequest（ajax核心API）"><span class="nav-number">1.</span> <span class="nav-text">XMLHttpRequest（ajax核心API）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#onreadystatechange事件"><span class="nav-number">1.1.</span> <span class="nav-text">onreadystatechange事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open"><span class="nav-number">1.2.</span> <span class="nav-text">open()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#send"><span class="nav-number">1.3.</span> <span class="nav-text">send()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readyState属性"><span class="nav-number">1.4.</span> <span class="nav-text">readyState属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status属性"><span class="nav-number">1.5.</span> <span class="nav-text">status属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#responseText-与-responseXML-属性"><span class="nav-number">1.6.</span> <span class="nav-text">responseText 与 responseXML 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX例子"><span class="nav-number">2.</span> <span class="nav-text">AJAX例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get请求"><span class="nav-number">2.1.</span> <span class="nav-text">get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post请求"><span class="nav-number">2.2.</span> <span class="nav-text">post请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器的同源策略"><span class="nav-number">3.</span> <span class="nav-text">浏览器的同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载图片-CSS-js可无视同源策略"><span class="nav-number">3.1.</span> <span class="nav-text">加载图片 CSS js可无视同源策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨域"><span class="nav-number">4.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现跨域的常见方式"><span class="nav-number">4.1.</span> <span class="nav-text">实现跨域的常见方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">4.1.1.</span> <span class="nav-text">jsonp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子（原理）"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">例子（原理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jquery实现jsonp"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">jquery实现jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cors（纯服务端）"><span class="nav-number">4.1.2.</span> <span class="nav-text">cors（纯服务端）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax相关面试题"><span class="nav-number">5.</span> <span class="nav-text">ajax相关面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#手写简易ajax"><span class="nav-number">5.1.</span> <span class="nav-text">手写简易ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域的实现方式"><span class="nav-number">5.2.</span> <span class="nav-text">跨域的实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实际项目中-ajax-的常用插件"><span class="nav-number">6.</span> <span class="nav-text">实际项目中 ajax 的常用插件</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
