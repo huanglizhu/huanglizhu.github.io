@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w1vs056j30gp056dgz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w4ijarcj30hr05qwgo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w5f25kjj30hq03z3zm.jpg">
-<meta property="og:updated_time" content="2020-06-05T04:23:18.792Z">
+<meta property="og:updated_time" content="2020-06-12T02:58:23.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从输入url到页面显示都经历了什么">
 <meta name="twitter:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）  客户端（浏览器）：     DNS解析：通过输入的域名解析到一个IP地址；   建立TCP连接（三次握手）；   发送http请求。   服务端：    server接收到http请求（Request），处理，并返回HTTP报文（Response）。（具体处理过程在“开发博客项目之接口(1)”中的“nodejs处理HTTP请求”中）（res">
@@ -210,19 +210,23 @@
 <ol start="2">
 <li><strong>服务端</strong><br>服务器解析这个请求来作出响应，<strong>返回相应的html</strong>给浏览器。</li>
 <li><strong>客户端</strong>：<ol>
-<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
-</ol>
-<ul>
-<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的解析（同步、异步）" target="_blank" rel="noopener">事件循环</a></li>
+<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong></li>
+<li><strong>构建CSS对象模型CSSOM：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建CSS对象模型CSSOM</strong><ul>
+<li><strong>建议CSS写在head中</strong>：页面<strong>边解析边渲染</strong>，如果把CSS写在HTML后，则先解析DOM树渲染在页面上，再生成CSSOM合成渲染树重新渲染在页面上，这样会有一个过程，用户可能会看到一个过程变化。<strong>所以在DOM树生成之前就先生成CSSOM会更好</strong>，这样当DOM树生成时就可<strong>直接和所有CSSOM进行合并，一步渲染完成</strong>。</li>
 </ul>
-<ol start="2">
-<li><strong>构建CSS对象模型树CSSOM树：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建一个CSS对象模型树CSSOM树</strong></li>
+</li>
 <li><strong>合并为渲染树：</strong> CSSOM树构建完成后<strong>CSSOM树和DOM树合并为渲染树</strong>，这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点。</li>
 <li>最后浏览器<strong>将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。</li>
 </ol>
 <ul>
 <li><strong>回流：</strong>浏览器去计算各个元素（盒模型）的位置和大小等</li>
 <li><strong>重绘：</strong>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容</li>
+</ul>
+<ol start="5">
+<li><strong>注意:</strong>在渲染树的<strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+</ol>
+<ul>
+<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的解析（同步、异步）" target="_blank" rel="noopener">事件循环</a></li>
 </ul>
 <ol start="5">
 <li><strong>另外的HTTP请求：</strong> html文件中会含有 图片、视频、音频、js、jquery、css等其他资源，这些又是另外的HTTP请求。在解析DOM的过程中，遇到这些都会进行并行下载，浏览器对每个域的并行下载数量有一定的限制，一般是4-6个，可能会通过一个网页产生很多的HTTP请求，<strong>请求越少性能越好</strong>。</li>
@@ -358,7 +362,8 @@
 <li>首先浏览器<strong>解析HTML文件构建DOM树</strong></li>
 <li>然后<strong>解析CSS文件构建 CSS对象模型</strong>：解析提取的CSS文件，并根据选择器类型分到不同的“存储桶”，例如元素，类，ID等。根据找到的选择器，它确定应将哪些 <strong>CSS规则</strong> 应用于<strong>DOM中的哪些节点</strong>，并根据需要<strong>向其附加样式</strong>。<br>（<strong>CSS 规则</strong>由两个主要的部分构成：选择器，以及一条或多条声明。）</li>
 <li>等到渲染树构建完成后，浏览器开始根据DOM树<strong>合成渲染树（将 渲染树 放在合适的HTML元素中）</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbtzwhq7txj30pj0bd0zh.jpg" alt="图解"></li>
-<li>最后<strong>浏览器将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbu1boh32dj30rk0ap0tv.jpg" alt="图解全过程"></li>
+<li>最后<strong>浏览器将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。</li>
+<li><strong>渲染过程中遇到<code>&lt;script&gt;</code>则暂停渲染</strong>（因为JS有可能修改DOM结构），优先加载并执行JS代码，完成再继续渲染<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbu1boh32dj30rk0ap0tv.jpg" alt="图解全过程"></li>
 </ol>
 <h4 id="浏览器-reflow-回流-和repain-重绘"><a href="#浏览器-reflow-回流-和repain-重绘" class="headerlink" title="浏览器 reflow(回流)和repain(重绘)"></a>浏览器 reflow(回流)和repain(重绘)</h4><ul>
 <li>DOM节点中的各个元素都是以盒模型的形式存在，这些都需要浏览器去计算其位置和大小等，这个过程称为<strong>relow(回流)</strong>;</li>

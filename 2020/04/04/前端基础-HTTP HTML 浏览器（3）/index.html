@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>前端基础-HTTP/HTML/浏览器（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（3）">
+<meta property="og:url" content="http://yoursite.com/2020/04/04/前端基础-HTTP HTML 浏览器（3）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
+<meta property="og:updated_time" content="2020-06-12T06:32:54.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（3）">
+<meta name="twitter:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端基础-HTTP HTML 浏览器（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      前端基础-HTTP/HTML/浏览器（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/04/前端基础-HTTP HTML 浏览器（3）/" class="article-date">
+	  <time datetime="2020-04-04T06:30:27.000Z" itemprop="datePublished">四月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h1><h2 id="几个很实用的BOM属性对象方法"><a href="#几个很实用的BOM属性对象方法" class="headerlink" title="几个很实用的BOM属性对象方法"></a>几个很实用的BOM属性对象方法</h2><p>什么是Bom? Bom是<strong>浏览器对象</strong>。</p>
+<a id="more"></a>
+<p>有哪些常用的Bom属性呢？<br>(1)<strong>location对象</strong>（地址的信息）<br>location.href– <strong>返回或设置</strong>当前文档的URL<br>location.search – 返回URL中的查询字符串部分。例如 <a href="http://www.dreamdu.com/dreamdu.php?id=5&amp;name=dreamdu" target="_blank" rel="noopener">http://www.dreamdu.com/dreamdu.php?id=5&amp;name=dreamdu</a> 返回包括(?)后面的内容?id=5&amp;name=dreamdu<br>location.hash – 返回URL#后面的内容，如果没有#，返回空<br>location.host – 返回URL中的域名部分，例如<a href="http://www.dreamdu.com" target="_blank" rel="noopener">www.dreamdu.com</a><br>location.hostname – 返回URL中的主域名部分，例如dreamdu.com<br>location.pathname – 返回URL的域名后的部分。例如 <a href="http://www.dreamdu.com/xhtml/" target="_blank" rel="noopener">http://www.dreamdu.com/xhtml/</a> 返回/xhtml/<br>location.port – 返回URL中的端口部分。例如 <a href="http://www.dreamdu.com:8080/xhtml/" target="_blank" rel="noopener">http://www.dreamdu.com:8080/xhtml/</a> 返回8080<br>location.protocol – 返回URL中的<strong>协议部分</strong>。例如 <a href="http://www.dreamdu.com:8080/xhtml/" target="_blank" rel="noopener">http://www.dreamdu.com:8080/xhtml/</a> 返回(//)前面的内容http:<br>location.assign – <strong>设置</strong>当前文档的URL<br>location.replace() – <strong>设置</strong>当前文档的URL，<strong>并且在history对象的地址列表中移除这个URL</strong> location.replace(url);<br>location.reload() – 重载当前页面</p>
+<p>(2)<strong>history对象</strong>（前移、后退的信息）<br>history.go() – 前进或后退<strong>指定的页面数</strong> history.go(num);<br>history.back() – 后退一页<br>history.forward() – 前进一页</p>
+<p>(3)<strong>Navigator对象</strong>（浏览器的信息）<br>navigator.userAgent – 返回用户代理头的字符串表示(就是包括<strong>浏览器版本信息</strong>等的字符串)<br>navigator.cookieEnabled – 返回浏览器<strong>是否支持(启用)cookie</strong></p>
+<hr>
+<h1 id="说一下web-Quality（无障碍）"><a href="#说一下web-Quality（无障碍）" class="headerlink" title="说一下web Quality（无障碍）"></a>说一下web Quality（无障碍）</h1><p>能够被残障人士使用的网站才能称得上一个易用的（易访问的）网站。<br>残障人士指的是那些带有残疾或者身体不健康的用户。</p>
+<p>我们可以使用<strong>alt属性</strong>：<code>&lt;img src=&quot;person.jpg&quot;  alt=&quot;this is a person&quot;/&gt;</code><br>有时候浏览器会无法显示图像。具体的原因有：</p>
+<ol>
+<li>用户关闭了图像显示</li>
+<li>浏览器是不支持图形显示的迷你浏览器</li>
+<li>浏览器是<strong>语音浏览器</strong>（供盲人和弱视人群使用）</li>
+</ol>
+<p>如果<strong>使用了alt 属性，那么浏览器至少可以显示或读出有关图像的描述</strong>。</p>
+<hr>
+<h1 id="fetch发送2次请求的原因【过】"><a href="#fetch发送2次请求的原因【过】" class="headerlink" title="fetch发送2次请求的原因【过】"></a>fetch发送2次请求的原因【过】</h1><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN fetch API</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener">使用fetch</a><br>fetch发送post请求的时候，总是发送2次，第一次状态码是204，第二次才成功？<br>原因很简单，因为你用fetch的post请求的时候，导致fetch 第一次发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</p>
+<hr>
+<h1 id="iframe是什么？有什么缺点？"><a href="#iframe是什么？有什么缺点？" class="headerlink" title="iframe是什么？有什么缺点？"></a>iframe是什么？有什么缺点？</h1><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener">参考</a></li>
+<li><strong>定义</strong>：iframe元素会创建包含另一个文档的内联框架（将另一个HTML页面嵌入到当前页面中）</li>
+<li><strong>提示</strong>：可以将提示文字放在<code>&lt;iframe&gt;&lt;/iframe&gt;</code>之间，来提示某些不支持iframe的浏览器。</li>
+<li><strong>无障碍环境：</strong>使用 <strong>iframe 的 title 属性</strong>来标识框架的主要内容，这样可以极大方便使用辅助技术（例如屏幕阅读器）浏览网页的人。</li>
+<li><strong>缺点</strong>：<br>会<strong>阻塞主页面的onload事件</strong></li>
+</ul>
+<p><strong>搜索引擎无法解读</strong>这种页面，不利于SEO<br>iframe和主页面共享连接池，而浏览器对相同区域有限制所以会<strong>影响性能</strong>。</p>
+<hr>
+<h1 id="Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><a href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义" class="headerlink" title="Doctype作用?严格模式与混杂模式如何区分？它们有何意义?"></a>Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</h1><ul>
+<li><a href="https://blog.csdn.net/qq_38128179/article/details/80758192" target="_blank" rel="noopener">参考</a></li>
+<li>Doctype声明于文档最前面，主要作用是告诉<strong>浏览器的解析器</strong>使用<strong>哪种HTML规范或者XHTML规范（方式）</strong>来解析页面。这里有两种模式，<strong>严格模式和混杂模式</strong>。</li>
+<li><strong>严格模式</strong>：又称标准模式，是指浏览器按照W3C标准，以<strong>该浏览器支持</strong>的<strong>最高标准</strong>来解析代码，呈现页面</li>
+<li><strong>混杂模式</strong>：又称为怪异模式或者兼容模式，是指<strong>浏览器按照自己的方式来解析代码</strong>，使用一种比较宽松的<strong>向后兼容</strong>的方式来显示页面，防止浏览器无法兼容页面。</li>
+</ul>
+<hr>
+<h1 id="viewport和移动端布局"><a href="#viewport和移动端布局" class="headerlink" title="viewport和移动端布局"></a>viewport和移动端布局</h1><ul>
+<li><p><a href="https://github.com/forthealllight/blog/issues/13" target="_blank" rel="noopener">响应式布局的常用解决方案对比(媒体查询、百分比、rem和vw/vh）</a></p>
+</li>
+<li><p>总的来说，<strong>viewport</strong>即<strong>视口</strong>。广义的视口，是指<strong>浏览器显示内容的屏幕区域</strong>，狭义的视口包括了<strong>布局视口、视觉视口和理想视口</strong>。</p>
+<ul>
+<li><strong>理想视口</strong>或者应该全称为“理想的布局视口”，在移动设备中就是指设备的分辨率。换句话说，理想视口或者说分辨率就是给定设备物理像素的情况下，最佳的“布局视口”。</li>
+<li><strong>设置理想视口：</strong>在移动端布局时，在<strong>meta标签</strong>中我们会<strong>将width设置称为device-width</strong>，device-width一般是表示分辨率的宽，通过width=device-width的设置我们就<strong>将布局视口设置成了理想的视口</strong>:<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="attribute">id</span>=<span class="string">"viewport"</span> <span class="attribute">name</span>=<span class="string">"viewport"</span> <span class="attribute">content</span>=<span class="string">"width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>移动端布局响应式布局</strong>:</p>
+<ul>
+<li><strong>通过rem</strong>:<ul>
+<li><strong>rem单位</strong>无论嵌套层级如何，都只<strong>相对于浏览器的根元素（HTML元素）的font-size</strong>，默认1 rem = 16px。</li>
+<li>如果通过rem来实现响应式的布局，只需要<strong>根据视图容器的大小，动态的改变font-size即可</strong>。</li>
+<li><strong>缺点</strong>：在响应式布局中，<strong>必须通过js来动态控制根元素font-size的大小</strong>。也就是说css样式和js代码有一定的耦合性。且必须将改变font-size的代码放在css样式之前。</li>
+</ul>
+</li>
+<li><strong>通过vw/vh来实现自适应</strong>，这样就不需要使用js来动态控制根元素大小了:<ul>
+<li><strong>css3中引入了新的单位vw/vh</strong>，与<strong>视图窗口</strong>有关，vw表示相对于视图窗口的宽度（视窗宽度是100vw），vh表示相对于视图窗口高度（视窗高度是100vh）。</li>
+<li><strong>px换算成vw单位方法：</strong><ul>
+<li>很简单，只要确定视图的窗口大小（布局视口），比如移动端的分辨率宽度是375px，则375px=100vw，1px=100/375vw。</li>
+<li>或者使用postcss的相应插件<a href="https://github.com/evrone/postcss-px-to-viewport" target="_blank" rel="noopener">postcss-px-to-viewport</a>预处理css做一个自动的转换，可以自动将px转化成vw。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="click在ios上有300ms延迟，原因及如何解决？"><a href="#click在ios上有300ms延迟，原因及如何解决？" class="headerlink" title="click在ios上有300ms延迟，原因及如何解决？"></a>click在ios上有300ms延迟，原因及如何解决？</h1><ul>
+<li><a href="https://www.cnblogs.com/chaojidan/p/4517895.html" target="_blank" rel="noopener">参考</a></li>
+<li><strong>原因</strong>：苹果公司在发布首款 iPhone 时的网站都是<strong>为大屏幕设备所设计</strong>的。于是苹果的工程师们做了一些约定，应对 iPhone 这种<strong>小屏幕浏览桌面端站点的问题</strong>。当用户一次点击屏幕之后，<strong>浏览器并不能立刻判断用户是要进行双击缩放，还是想要进行单击操作</strong>。因此，iOS Safari 就<strong>等待 300 毫秒，以判断用户是否再次点击了屏幕</strong>。</li>
+<li><strong>解决</strong>：<br>(1)<strong>粗暴型</strong>，禁用缩放<br><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no&quot;&gt;</code><br>(2)<strong>利用FastClick</strong>，其原理是：<br>检测到touchend事件后，<strong>立刻触发模拟click事件</strong>，并且把浏览器300毫秒之后真正触发的事件给阻断掉</li>
+</ul>
+<hr>
+<h1 id="addEventListener参数"><a href="#addEventListener参数" class="headerlink" title="addEventListener参数"></a>addEventListener参数</h1><ul>
+<li><a href="https://www.runoob.com/jsref/met-element-addeventlistener.html" target="_blank" rel="noopener">参考</a></li>
+<li><code>DOM元素.addEventListener(event, function, useCapture)</code><br>event指定<strong>事件名</strong>；function指定要<strong>事件触发时执行的函数</strong>；useCapture指定<strong>事件是否在捕获或冒泡阶段执行</strong>。<ul>
+<li>true - 事件句柄在<strong>捕获</strong>阶段执行。false- 默认。事件句柄在<strong>冒泡</strong>阶段执行</li>
+<li><a href="https://huanglizhu.github.io/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/#事件流" target="_blank" rel="noopener">捕获与冒泡</a>总得来说，<strong>冒泡：</strong>当事件发生后，这个事件就要开始冒泡(<strong>从里到外</strong>)。<strong>捕获</strong>事件则是<strong>从外往里</strong>（只有特殊需要再使用事件捕获即可）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="HTML5新增的元素"><a href="#HTML5新增的元素" class="headerlink" title="HTML5新增的元素"></a>HTML5新增的元素</h1><ul>
+<li>首先html5为了更好的实践web语义化，增加了header，footer，nav,aside,section等语义化标签</li>
+<li>在<strong>表单方面</strong>，为了增强表单，为input增加了color，emial,data ,range等类型</li>
+<li>在<strong>存储方面</strong>，提供了sessionStorage，localStorage,和离线存储，通过这些存储方式方便数据在客户端的存储和获取</li>
+<li>在<strong>多媒体方面</strong>规定了音频和视频元素audio和vedio</li>
+<li>另外还有地理定位，canvas画布，拖放，多线程编程的web worker和websocket协议</li>
+</ul>
+<hr>
+<h2 id="对HTML语义化标签的理解"><a href="#对HTML语义化标签的理解" class="headerlink" title="对HTML语义化标签的理解"></a>对HTML语义化标签的理解</h2><ul>
+<li>HTML5语义化标签是指正确的标签包含了正确的内容，结构良好，便于阅读，<strong>比如nav表示导航条，类似的还有article、header、footer等等标签</strong>。</li>
+<li>语义化简单说来就是<strong>让机器可以读懂内容</strong>。在发布内容的时候，就用机器可读的、被广泛认可的语义信息来描述内容，来降低机器处理 Web 内容的难度。<br>我们在提供内容的时候，首先要做的就是将内容本身进行合理的描述，暂时不用考虑它的最终呈现会是什么样子。</li>
+<li><strong>作用：</strong>为了解决机器难以读懂web上发布的各种内容的问题。</li>
+</ul>
+<hr>
+<h2 id="说一下web-worker"><a href="#说一下web-worker" class="headerlink" title="说一下web worker"></a>说一下web worker</h2><ul>
+<li><a href="https://www.toutiao.com/i6745682418058920456/?in_ogs=1&traffic_source=CS1112&utm_source=CZ&source=search_tab&utm_medium=wap_search&original_source=1&in_tfs=CZ&channel=" target="_blank" rel="noopener">参考</a></li>
+<li><strong>出现理由：</strong> JS是单线程没有多线程，当JS在页面中运行长耗时同步任务的时候就会导致页面假死影响用户体验，从而需要设置把任务放在任务队列中；执行任务队列中的任务也并非多线程进行的，然而现在<strong>HTML5提供了Web Workers API，可以让浏览器作为宿主环境提供给JS一个多线程运行的环境。</strong></li>
+<li>Web Workers 使得一个Web应用程序可以在与主执行线程分离的后台线程中运行一个脚本操作。这样做的好处是可以在一个单独的线程中执行费时的处理任务，从而允许主（通常是UI）线程运行而不被阻塞。</li>
+<li><strong>作用</strong>：就是<strong>给JS创造多线程运行环境</strong>，允许主线程创建worker线程，分配任务给后者，主线程运行的同时worker线程也在运行，相互不干扰，在worker线程运行结束后把结果返回给主线程。这样做的<strong>好处是主线程可以把计算密集型或高延迟的任务交给worker线程执行，这样主线程就会变得轻松，不会被阻塞或拖慢</strong>。</li>
+<li><strong>注意：</strong>这并<strong>不意味着JS语言本身支持了多线程</strong>能力，而是浏览器作为宿主环境提供了JS一个多线程运行的环境。</li>
+<li><strong>缺点：</strong>因为worker一旦新建，就会一直运行，不会被主线程的活动打断，这样有利于随时响应主线程的通性，但是也会<strong>造成资源的浪费</strong>，所以不应过度使用，用完注意关闭。或者说：如果worker无实例引用，该worker空闲后立即会被关闭；如果worker实列引用不为0，该worker空闲也不会被关闭。</li>
+</ul>
+<hr>
+<h2 id="说一下HTML5-drag-api"><a href="#说一下HTML5-drag-api" class="headerlink" title="说一下HTML5 drag api"></a>说一下HTML5 drag api</h2><p><a href="https://www.w3school.com.cn/html5/html_5_draganddrop.asp" target="_blank" rel="noopener">例子</a><br>draggable属性：<strong>使元素可拖动</strong>，把 draggable 属性设置为 true<br>dragstart：事件主体是<strong>被拖放元素</strong>，在<strong>开始拖放</strong>被拖放元素时触发。<br>darg：事件主体是被拖放元素，在<strong>正在拖放</strong>被拖放元素时触发。<br>dragenter：事件主体是<strong>目标元素</strong>，在<strong>被拖放元素进入某元素时</strong>触发。<br>dragover：事件主体是目标元素，在<strong>被拖放元素在某元素内移动时</strong>触发。<br>dragleave：事件主体是目标元素，在被拖放元素<strong>移出目标元素</strong>时触发。<br>drop：事件主体是<strong>目标元素</strong>，在目标元素<strong>完全接受</strong>被拖放元素时触发。<br>dragend：事件主体是<strong>被拖放元素</strong>，在整个拖放操作结束时触发</p>
+<p><strong>dragstart与ondragstart</strong><a href="https://www.runoob.com/jsref/event-ondragstart.html" target="_blank" rel="noopener">参考这</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg" alt="dragstart与ondragstart"></p>
+<hr>
+<h2 id="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】"><a href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】" class="headerlink" title="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】"></a>HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】</h2><ul>
+<li><strong>html5</strong>：<ol>
+<li>标签增删</li>
+</ol>
+<ul>
+<li>8个语义元素 header section footer aside nav main article figure</li>
+<li>内容元素mark高亮 progress进度</li>
+<li>新的表单控件calander date time email url search</li>
+<li>新的input类型 color date datetime datetime-local email</li>
+<li>移除过时标签big font frame frameset</li>
+</ul>
+<ol start="2">
+<li>canvas绘图，支持内联SVG。支持MathML</li>
+<li>多媒体audio video source embed track</li>
+<li>本地离线存储，把需要离线存储在本地的文件列在一个manifest配置文件</li>
+<li>web存储。localStorage、SessionStorage</li>
+</ol>
+</li>
+<li><strong>css3</strong>：<ul>
+<li>CSS3边框如border-radius，box-shadow等；</li>
+<li>CSS3背景如background-size，background-origin等；</li>
+<li>CSS3 2D，3D转换如transform等；</li>
+<li>CSS3动画如animation等。 </li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/xkweb/p/5862612.html" target="_blank" rel="noopener">参考</a></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/03/前端基础-HTTP HTML 浏览器（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端基础-HTTP/HTML/浏览器（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个很实用的BOM属性对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下web-Quality（无障碍）"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fetch发送2次请求的原因【过】"><span class="nav-number">3.</span> <span class="nav-text">fetch发送2次请求的原因【过】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe是什么？有什么缺点？"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport和移动端布局"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click在ios上有300ms延迟，原因及如何解决？"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener参数"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5新增的元素"><span class="nav-number">9.</span> <span class="nav-text">HTML5新增的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对HTML语义化标签的理解"><span class="nav-number">9.1.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下web-worker"><span class="nav-number">9.2.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下HTML5-drag-api"><span class="nav-number">9.3.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】"><span class="nav-number">9.4.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？【待补充】</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

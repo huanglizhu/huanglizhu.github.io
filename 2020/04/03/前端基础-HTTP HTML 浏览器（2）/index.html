@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>前端基础-HTTP/HTML/浏览器（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="流程tcp三次握手，一句话概括">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
+<meta property="og:url" content="http://yoursite.com/2020/04/03/前端基础-HTTP HTML 浏览器（2）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="流程tcp三次握手，一句话概括">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfcmhhk3a2j30r20suacc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfijoy3cg6j30k005s436.jpg">
+<meta property="og:image" content="http://www.xxx.com/transfer.do?accountNum=l000l&money=10000">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg">
+<meta property="og:updated_time" content="2020-06-12T06:31:02.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
+<meta name="twitter:description" content="流程tcp三次握手，一句话概括">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfcmhhk3a2j30r20suacc.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-前端基础-HTTP HTML 浏览器（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      前端基础-HTTP/HTML/浏览器（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/03/前端基础-HTTP HTML 浏览器（2）/" class="article-date">
+	  <time datetime="2020-04-03T04:29:23.000Z" itemprop="datePublished">四月 3, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="tcp三次握手，一句话概括"><a href="#tcp三次握手，一句话概括" class="headerlink" title="tcp三次握手，一句话概括"></a>tcp三次握手，一句话概括</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfcmhhk3a2j30r20suacc.jpg" alt="tcp三次握手"></p>
+<a id="more"></a>
+
+<ul>
+<li>三次握手可以简化为：<strong>C发起 请求连接，S确认 发送给确认响应，C确认并发送HTTP请求</strong></li>
+<li>看每次握手的作用：</li>
+</ul>
+<ol>
+<li>第一次握手：S只可以确认自己可以接受C发送的报文段</li>
+<li>第二次握手：C可以确认S收到了自己发送的报文段，并且可以确认自己可以接受S发送的报文段</li>
+<li>第三次握手：S可以确认C收到了自己发送的报文段</li>
+</ol>
+<hr>
+<h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><p>（1）<strong>TCP是面向连接</strong>（三次握手）的，udp是无连接的即发送数据前不需要先建立链接。<br>（2）<strong>TCP提供可靠的服务</strong>。也就是说，通过TCP连接传送的数据，<strong>无差错，不丢失，不重复，且按序到达</strong>;UDP尽最大努力交付，即不保证可靠交付。 并且因为tcp可靠，面向连接，不会丢失数据因此<strong>适合大数据量的交换</strong>。<br>（3）TCP是面向字节流，<strong>UDP</strong>面向报文，并且<strong>网络出现拥塞不会使得发送速率降低</strong>（因此会出现丢包，对<strong>实时的应用比如IP电话和视频会议</strong>等）。<br>（4）<strong>TCP只能是1对1</strong>的，UDP支持1对1,1对多。<br>（5）TCP的首部较大为20字节，而UDP只有8字节。<br>（6）TCP是面向连接的可靠性传输，而UDP是不可靠的。</p>
+<hr>
+<h2 id="一个图片url访问后直接下载怎样实现？"><a href="#一个图片url访问后直接下载怎样实现？" class="headerlink" title="一个图片url访问后直接下载怎样实现？"></a>一个图片url访问后直接下载怎样实现？</h2><p><strong>请求的返回头</strong>里面，用于<strong>浏览器解析</strong>的重要参数就是OSS的API文档里面的返回http头，决定用户下载行为的参数。</p>
+<hr>
+<h2 id="在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？"><a href="#在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？" class="headerlink" title="在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？"></a>在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？</h2><p>这是一个必考的面试问题，输入url后，</p>
+<ol>
+<li><strong>客户端</strong>：</li>
+</ol>
+<ul>
+<li><strong>DNS解析：</strong><br>首先需要<strong>找到这个url域名的服务器ip</strong>,为了寻找这个ip，先搜索<strong>浏览器自身的DNS缓存</strong>,如果存在，则域名解析到此完成。<br>如果浏览器自身的缓存里面没有找到对应的条目，那么会尝试<strong>读取操作系统的hosts文件</strong>看是否存在对应的映射关系,如果存在，则域名解析到此完成。<br>如果本地hosts文件不存在映射关系，则查找<strong>本地DNS服务器</strong>(ISP服务器,或者自己手动设置的DNS服务器),如果存在,域名到此解析完成。<br>如果本地DNS服务器还没找到的话,它就会<strong>向根服务器发出请求,进行递归查询</strong>。</li>
+<li><strong>建立TCP连接</strong>（三次握手）：<br>客户机发送一个<strong>TCP连接请求报文</strong>-》服务器回送一个<strong>TCP确认响应报文</strong>-》客户机向服务器发送一个<strong>包含“HTTP请求”与“TCP确认”的报文</strong></li>
+<li><strong>发送http请求</strong>：<br>浏览器根据这个ip以及相应的端口号，<strong>构造一个http请求</strong>，这个请求报文会包括这次请求的信息，主要是请求方法，请求说明和请求附带的数据，并<strong>将这个http请求封装在一个tcp包中</strong>，这个tcp包会依次经过<strong>传输层，网络层，数据链路层，物理层</strong>到达服务器。</li>
+</ul>
+<ol start="2">
+<li><strong>服务端</strong><br>服务器解析这个请求来作出响应，<strong>返回相应的html</strong>给浏览器。</li>
+<li><strong>客户端</strong>：<ol>
+<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+</ol>
+<ul>
+<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的解析（同步、异步）" target="_blank" rel="noopener">事件循环</a></li>
+</ul>
+<ol start="2">
+<li><strong>构建CSS对象模型树CSSOM树：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建一个CSS对象模型树CSSOM树</strong></li>
+<li><strong>合并为渲染树：</strong> CSSOM树构建完成后<strong>CSSOM树和DOM树合并为渲染树</strong>，这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点。</li>
+<li>最后浏览器<strong>将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。</li>
+</ol>
+<ul>
+<li><strong>回流：</strong>浏览器去计算各个元素（盒模型）的位置和大小等</li>
+<li><strong>重绘：</strong>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容</li>
+</ul>
+<ol start="5">
+<li><strong>另外的HTTP请求：</strong> html文件中会含有 图片、视频、音频、js、jquery、css等其他资源，这些又是另外的HTTP请求。在解析DOM的过程中，遇到这些都会进行并行下载，浏览器对每个域的并行下载数量有一定的限制，一般是4-6个，可能会通过一个网页产生很多的HTTP请求，<strong>请求越少性能越好</strong>。</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>为提高性能要关注<strong>缓存</strong>（强缓存和协商缓存），缓存一般通过Cache-Control、Last-Modify、Expires等首部字段控制。 <ul>
+<li>Cache-Control和Expires的区别在于Cache-Control使用<strong>相对时间</strong>，Expires使用的是基于服务器 端的<strong>绝对时间</strong>，因为存在时差问题，一般采用Cache-Control。</li>
+<li>在请求这些有设置了缓存的数据时，如是<strong>强缓存，则不发送请求，直接从缓存中获取数据</strong>。</li>
+<li>如是<strong>协商缓存</strong>，则会<strong>发送请求到服务器</strong>，如果上一次 响应设置了ETag值，则会在这次请求的时候作为If-None-Match的值交给服务器<strong>校验</strong>，如果一致，继续校验客户端发送的IF-Modified-Since与服务端的 Last-Modified是否一致，没有设置ETag则直接验证Last-Modified，<strong>都一致则返回304（Not Changed）告知浏览器可以直接从缓存获取，否则返回最新的资源内容</strong>。</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li><strong>连接结束：</strong><br>主机向服务器发送一个断开连接的请求（不早了，我该走了）；<br>服务器接到请求后发送确认收到请求的信号（知道了）；<br>服务器向主机发送断开通知（我也该走了）；<br>主机接到断开通知后断开连接并反馈一个确认信号（嗯，好的），服务器收到确认信号后断开连接；</li>
+</ol>
+<hr>
+<h1 id="cookie相关"><a href="#cookie相关" class="headerlink" title="cookie相关"></a>cookie相关</h1><p><strong>补充说明一下cookie的作用</strong>：<br>保存用户登录状态。例如将用户id存储于一个cookie内，这样当用户下次访问该页面时就不需要重新登录了，现在很多论坛和社区都提供这样的功能。 cookie还可以设置过期时间，当超过时间期限后，cookie就会自动消失。因此，系统往往可以提示用户保持登录状态的时间：常见选项有一个月、三个 月、一年等。<br>跟踪用户行为。例如一个天气预报网站，能够根据用户选择的地区显示当地的天气情况。如果每次都需要选择所在地是烦琐的，当利用了cookie后就会显得很人性化了，系统能够记住上一次访问的地区，当下次再打开该页面时，它就会自动显示上次用户所在地区的天气情况。因为一切都是在后 台完成，所以这样的页面就像为某个用户所定制的一样，使用起来非常方便定制页面。如果网站提供了换肤或更换布局的功能，那么可以使用cookie来记录用户的选项，例如：背景色、分辨率等。当用户下次访问时，仍然可以保存上一次访问的界面风格。</p>
+<hr>
+<h2 id="cookie有哪些编码方式"><a href="#cookie有哪些编码方式" class="headerlink" title="cookie有哪些编码方式"></a>cookie有哪些编码方式</h2><p>encodeURI（）</p>
+<hr>
+<h2 id="cookie有哪些字段可以设置"><a href="#cookie有哪些字段可以设置" class="headerlink" title="cookie有哪些字段可以设置"></a>cookie有哪些字段可以设置</h2><ul>
+<li><strong>name字段</strong>：一个<strong>cookie的名称</strong>。</li>
+<li><strong>value字段</strong>：一个<strong>cookie的值</strong>。</li>
+<li><strong>Size字段</strong>：此<strong>cookie大小</strong>。</li>
+<li><strong>domain字段</strong>：可以访问此cookie的<strong>域名</strong>。<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfijoy3cg6j30k005s436.jpg" alt="域名图示"><ul>
+<li><strong>非顶级域名</strong>，如二级域名或者三级域名，设置的cookie的domain <strong>只能为顶级域名或者二级域名或者三级域名本身，不能设置其他二级域名的cookie</strong>，否则cookie无法生成。<ul>
+<li><strong>二级域名能读取设置了domain为顶级域名或者自身的cookie，不能读取其他二级域名domain的cookie</strong>。所以要想cookie在多个二级域名中共享，需要<strong>设置domain为顶级域名，这样就可以在所有二级域名里面或者到这个cookie的值</strong>了。</li>
+</ul>
+</li>
+<li><strong>顶级域名：只能设置domain为顶级域名</strong>，不能设置为二级域名或者三级域名，否则cookie无法生成。<ul>
+<li><strong>顶级域名只能获取到domain设置为顶级域名的cookie</strong>，其他domain设置为二级域名的无法获取。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>path字段</strong>：可以访问此cookie的<strong>页面路径</strong>。比如domain是abc.com,path是/test，那么只有/test路径下的页面可以读取此cookie。</li>
+<li><strong>expires/Max-Age 字段</strong>：此<strong>cookie超时时间</strong>。若设置其值为一个时间，那么当到达此时间后，此cookie失效。<strong>不设置的话默认值是Session，意思是cookie会和session一起失效</strong>。当浏览器关闭(不是浏览器标签页，而是整个浏览器) 后，此cookie失效。<ul>
+<li><strong>注意：</strong>其实在浏览器关闭后，session并没有失效，正常来说一个session的存活时间是30分钟，也就是在不操作这个session的情况下，30分钟自动清除。可是实际中浏览器关闭，设置的session也会随之消失，<strong>这里的消失是指你找不到这个session</strong>，不是他没有了，因为<strong>在浏览器重新打开时，浏览器总会自动给你创建一个的新的session</strong>。session并不是唯一的，<strong>每个session都有自己的一个专属sessionId，这个sessionId在浏览器打开时创建，保存在浏览器的cookie中，浏览器关闭，cookie自动清除，sessionId丢失，之前的session找寻不到</strong>！</li>
+</ul>
+</li>
+<li><strong>http字段</strong>：cookie的<strong>httponly属性</strong>。若此属性为true，则只有在http请求头中会带有此cookie的信息，而不能通过document.cookie来访问此cookie。（即禁止javascript脚本来访问cookie）</li>
+<li><strong>secure 字段</strong>：设置是否<strong>仅在请求为https的时候传递此条cookie</strong></li>
+</ul>
+<hr>
+<h2 id="Cookie如何防范XSS攻击"><a href="#Cookie如何防范XSS攻击" class="headerlink" title="Cookie如何防范XSS攻击"></a>Cookie如何防范XSS攻击</h2><ul>
+<li>XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本，为了减轻这些攻击，需要<strong>在HTTP头部配上<code>set-cookie：
+httponly</code></strong>,这个属性可以防止XSS,它会 <strong>禁止javascript脚本来访问cookie</strong>。</li>
+<li><strong><code>secure:true</code></strong>告诉浏览器<strong>仅在请求为https的时候发送cookie</strong>。</li>
+</ul>
+<hr>
+<h3 id="XSS和csrf网络攻击及防范"><a href="#XSS和csrf网络攻击及防范" class="headerlink" title="XSS和csrf网络攻击及防范"></a>XSS和csrf网络攻击及防范</h3><ul>
+<li><strong>区别：</strong>XSS是利用用户对指定网站的信任，CSRF是利用网站对用户的信任。</li>
+<li><strong>XSS</strong>：<strong>跨站脚本攻击</strong>，攻击者通过注入恶意的脚本，在用户浏览网页的时候进行攻击，比如获取cookie，或者其他用户身份信息。<ul>
+<li><strong>存储性</strong>（持久型）：用户输入的带有恶意脚本的数据存储在<strong>服务器端</strong>。当浏览器请求数据时，服务器返回脚本并执行。主要是通过html标签注入，篡改网页，插入恶意的脚本，<strong>前端可能没有经过严格的校验直接就进到数据库</strong>，数据库又通过前端程序又回显到浏览器。<ul>
+<li>比如：攻击者在社区或论坛上写下一篇包含恶意 Js代码的文章或评论，文章或评论发表后，所有访问该文章或评论的用户，都会在他们的浏览器中执行这段恶意的 JavaScript 代码。</li>
+</ul>
+</li>
+<li><strong>反射型</strong>（非持久型）：把用户输入的数据”反射”给<strong>浏览器</strong>。通常是，用户点击链接或提交表单时，攻击者向用户访问的网站注入恶意脚本。<ul>
+<li>比如：在正常页面上添加一个恶意链接。恶意链接的地址指向localhost:8080。然后攻击者有一个node服务来处理对localhost:8080的请求:当用户点击恶意链接时，页面跳转到攻击者预先准备的localhost:8080页面，执行了 恶意的js 脚本，产生攻击。</li>
+</ul>
+</li>
+<li><strong>防御</strong>：</li>
+</ul>
+<ol>
+<li><strong>在HTTP头部配上<code>set-cookie：
+httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊字符过滤</strong>，禁止javascript脚本来访问cookie。（严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击）</li>
+<li><strong><code>secure:true</code></strong>告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
+</ol>
+</li>
+<li><strong>CSRF</strong>：<strong>跨站请求伪造</strong>，攻击者借助用户的 Cookie 骗取服务器的信任，以用户名义伪造请求发送给服务器。如：在请求的url后加入一些恶意的参数。换句话说，<strong>CSRF就是利用用户的登录态发起恶意请求</strong>。<ul>
+<li>比如：你登录网站，并在本地存下了，如果在没退出该网站的时候不小心访问了恶意网站，而且这个网站需要你发一些请求等，此时，你是携带cookie进行访问的，那么你的存在cookie里的信息就会被恶意网站捕捉到，那么你的信息就被盗用，导致一些不法分子做一些事情。<ul>
+<li>假设某银行网站A以GET请求来发起转账操作，转账的地址为<a href="http://www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：" target="_blank" rel="noopener">www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：</a><img src="http://www.xxx.com/transfer.do?accountNum=l000l&money=10000"><br>当你登录网站A后，没有及时登出，这时你访问了论坛B，不幸的事情发生了，你会发现你的账号里面少了10000块…（上述只是举例，转账怎么可能是get请求，为了保险，肯定是post请求，更何况银行的交易付款会有登录密码和支付密码等一系列屏障，流程复杂得多，安全系数也高得多）</li>
+</ul>
+</li>
+<li><strong>防御</strong>：</li>
+</ul>
+<ol>
+<li><strong>使用token验证</strong>：在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，若请求无 token 或者 token 不正确，则认为可能是 CSRF 攻击而拒绝该请求。</li>
+<li><strong>检查https头部的Referer</strong>：在HTTP头中有一个字段叫做Referer,它记录了该HTTP请求的来源地址。通过Referer Check,可以检查是否来自合法的”源”。<ul>
+<li>例如：从<a href="http://www.user.com发起的删帖请求，那么Referer值是http://www.user.com" target="_blank" rel="noopener">www.user.com发起的删帖请求，那么Referer值是http://www.user.com</a>, 删帖请求应该被允许；而如果是从CSRF攻击者构造的页面<a href="http://www.attack.com发起删帖请求，" target="_blank" rel="noopener">www.attack.com发起删帖请求，</a> 那么Referer值是<a href="http://www.attack.com" target="_blank" rel="noopener">http://www.attack.com</a>, 删帖请求应该被阻止。</li>
+</ul>
+</li>
+<li><strong>验证码</strong>：验证码会强制用户必须与应用进行交互，才能完成最终请求，但是也不能给网站所有的操作都加上验证码，所以只能作为防御 CSRF 的一种辅助手段，而不能作为最终的解决方案。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="除了cookie，还有什么存储方式"><a href="#除了cookie，还有什么存储方式" class="headerlink" title="除了cookie，还有什么存储方式"></a>除了cookie，还有什么存储方式</h2><p>还有localStorage，sessionStorage，indexdDB等</p>
+<hr>
+<h2 id="cookie、sessionStorage、localStorage的区别"><a href="#cookie、sessionStorage、localStorage的区别" class="headerlink" title="cookie、sessionStorage、localStorage的区别"></a>cookie、sessionStorage、localStorage的区别</h2><ul>
+<li><strong>共同点</strong>：都<strong>保存在浏览器端</strong>。</li>
+<li><strong>区别：</strong></li>
+</ul>
+<ol>
+<li><strong>生命周期</strong>：<ul>
+<li>Cookie：<strong>设置的cookie过期时间之前一直有效</strong>，即使窗口或浏览器关闭。未设置则<strong>默认为关闭浏览器后失效</strong>。(<strong>不是浏览器标签页</strong>，而是整个浏览器)</li>
+<li>Localstorage:除非被手动清除，否则<strong>永久保存</strong>，窗口或浏览器关闭也一直保存，因此<strong>用作持久数据</strong>。</li>
+<li>Sessionstorage：<strong>仅在当前网页会话下有效</strong>，关闭<strong>页面或浏览器</strong>后就会被清除（刷新页面不会被清除），自然也就不可能持久保持。</li>
+</ul>
+</li>
+<li><strong>存放数据</strong>：<ul>
+<li>Cookie：4k左右（cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下）</li>
+<li>Localstorage和sessionstorage：可以保存5M的信息</li>
+</ul>
+</li>
+<li><strong>是否跟随http请求发送出去</strong>：<ul>
+<li>Cookie：<strong>每次都会携带在http头中</strong>，如果使用cookie保存过多数据会带来性能问题</li>
+<li>其他两个：<strong>不会自动把数据发给服务器，仅在客户端即浏览器中保存</strong>，不参与和服务器的通信</li>
+</ul>
+</li>
+<li><strong>API易用性</strong>：<ul>
+<li>Cookie：需要程序员自己封装，原生的cookie接口不友好（document.cookie）</li>
+<li>其他两个：即可采用原生接口（getItem和setItem），亦可再次封装</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：<ul>
+<li>从安全性来说，因为每次http请求都回携带cookie信息，这样子浪费了带宽，<strong>所以cookie应该尽可能的少用</strong>，此外cookie还需要指定作用域，<strong>不可以跨域调用</strong>，限制很多，但是<strong>对于用户识别用户登陆来说，cookie还是比storage好用</strong></li>
+<li>其他情况下可以用storage，<strong>localstorage可以用来在页面传递参数</strong></li>
+<li><strong>sessionstorage可以用来保存一些临时的数据</strong>，防止用户刷新页面后丢失了一些参数。</li>
+</ul>
+</li>
+<li><strong>作用域：</strong><ul>
+<li>cookie和localStorage：在所有同源窗口中都是共享的</li>
+<li>sessionStorage：在同一个浏览器窗口是共享的（不同浏览器、同一个页面也是不共享的）</li>
+<li>关于同源可参考<a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">阮一峰</a>，简单来说就是A网页设置的 Cookie，B网页不能打开</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Cookie和session的区别"><a href="#Cookie和session的区别" class="headerlink" title="Cookie和session的区别"></a>Cookie和session的区别</h2><ol>
+<li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，<strong>session</strong>数据放在<strong>服务器</strong>上。（session可以存放于文件，数据库，内存中）</li>
+<li><strong>cookie不是很安全</strong>，server端可以修改cookie并返回给浏览器，浏览器中也可以通过javascript修改cookie（有限制）。别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，<strong>考虑到安全应当使用session</strong>。server端放置信息不会被前端获取到，<strong>更安全</strong>。且server端空间大，<strong>可存储更多信息</strong>。</li>
+<li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用redis。</li>
+<li><strong>单个cookie</strong>保存的数据<strong>不能超过4K</strong>，很多浏览器都限制一个站点最多保存20个cookie。</li>
+<li>Cookie的最大的作用就是存储sessionId用来唯一标识用户。也可存放不敏感的信息，比如用户设置的网站主题。</li>
+</ol>
+<hr>
+<h1 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h1><h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><p>检测页面加载时间一般有两种方式</p>
+<ol>
+<li>一种是<strong>被动去测</strong>：就是在被检测的页面置入脚本或探针，当用户访问网页时，探针自动采集数据并传回数据库进行分析</li>
+<li>另一种<strong>主动监测</strong>的方式，即<strong>主动的搭建分布式受控环境</strong>，模拟用户发起页面访问请求，主动采集性能数据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说<strong>性能极客</strong></li>
+</ol>
+<hr>
+<h2 id="前端优化【待补充】"><a href="#前端优化【待补充】" class="headerlink" title="前端优化【待补充】"></a>前端优化【待补充】</h2><p><strong>降低请求量</strong>：合并资源，减少HTTP请求数，minify / gzip 压缩，webP，lazyLoad。<br><strong>加快请求速度</strong>：预解析DNS，减少域名数，并行加载，CDN 分发。<br><strong>缓存</strong>：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。<br><strong>渲染</strong>：JS/CSS优化，加载顺序，服务端渲染，pipeline。</p>
+<hr>
+<h2 id="说一下浏览器缓存"><a href="#说一下浏览器缓存" class="headerlink" title="说一下浏览器缓存"></a>说一下浏览器缓存</h2><p><a href="https://www.cnblogs.com/Aaron1Tall/p/11041884.html" target="_blank" rel="noopener">前端缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg" alt="image.png"></p>
+<hr>
+<h2 id="强缓存和协商缓存（web性能优化）"><a href="#强缓存和协商缓存（web性能优化）" class="headerlink" title="强缓存和协商缓存（web性能优化）"></a>强缓存和协商缓存（web性能优化）</h2><ul>
+<li><a href="http://caibaojian.com/browser-cache.html" target="_blank" rel="noopener">参考</a>、<a href="https://segmentfault.com/a/1190000008956069" target="_blank" rel="noopener">参考1</a>/<a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">参考2</a>、<a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>、<a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a></li>
+<li>缓存是<strong>Web性能优化的重要方式</strong>。</li>
+<li>缓存分为两种：强缓存和协商缓存，根据响应的header内容来决定。</li>
+<li><strong>区别：</strong>如果浏览器命中<strong>强缓存</strong>，则<strong>不需要给服务器发请求</strong>；而<strong>协商缓存</strong>最终<strong>由服务器来决定是否使用缓存</strong>，即客户端与服务器之间<strong>存在一次通信</strong>。</li>
+<li>总之，<strong>强缓存就是强制从缓存中读取，不管是否更新。而协商缓存就是和 服务器协商是否从缓存取，如有更新则返回新数据。</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg" alt="image.png"></li>
+<li><strong>强缓存</strong>是利用<strong>http的返回头中的Expires或者Cache-Control两个字段</strong>来控制的，用来<strong>表示资源的缓存时间</strong>。如果cache-control与expires同时存在的话，cache-control的优先级高于expires。<ul>
+<li><strong>Expires</strong>是http1.0时的规范，它的值为一个绝对时间的GMT格式的时间字符串。缺点：由于<strong>失效时间是一个绝对时间</strong>，所以当服务器与客户端时间偏差较大时，就会导致缓存混乱。</li>
+<li><strong>Cache-Control</strong>是http1.1时出现的header信息，主要是利用该字段的<strong>max-age值</strong>来进行判断，它是一个<strong>相对时间</strong>，例如<strong>Cache-Control:max-age=3600</strong>，代表着资源的有效期是3600秒。<ul>
+<li>Cache-Control除了max-age还有以下<strong>常用字段</strong>：<ul>
+<li><strong>no-cache：不使用本地缓存</strong>。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>no-store：直接禁止浏览器缓存数据</strong>，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。<br><strong>public：可以被所有的用户缓存</strong>，包括终端用户和CDN等中间代理服务器。<br><strong>private（默认）：只能被终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。<br>        - <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg" alt="Cache-Control"></p>
+<ul>
+<li><strong>协商缓存</strong>相关字段有Last-Modified/If-Modified-Since，Etag/If-None-Match（<a href="https://blog.csdn.net/lhl1124281072/article/details/80067764" target="_blank" rel="noopener">具体参考</a>）</li>
+<li><strong>浏览器在第一次请求发生后，再次请求时</strong>：<br>浏览器会先获取该资源缓存的header信息，<strong>根据其中的expires和cahe-control</strong>判断<strong>是否命中强缓存</strong>，若命中则直接从缓存中获取资源，包括缓存的header信息，本次请求不会与服务器进行通信；</li>
+</ul>
+<p><strong>如果没有命中强缓存</strong>，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（Last-Modified/IF-Modified-Since、Etag/IF-None-Match）,由服务器根据请求中的相关header信息来对比结果是否命中协商缓存，若命中，则服务器返回新的响应header信息更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存获取；否则返回最新的资源内容</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>：缓存的意义就在于减少请求，更多地使用本地的资源，给用户更好的体验的同时，也减轻服务器压力。所以，<strong>最佳实践，就应该是尽可能命中强缓存，同时，能在更新版本的时候让客户端的缓存失效</strong>。<ul>
+<li><strong>更新版本的时候，顺便把静态资源的路径改了，这样，就相当于第一次访问这些资源，就不会存在问题了</strong>（webpack打包时会把静态资源的路径加上hash值）</li>
+<li>较为合理的缓存方案：</li>
+</ul>
+</li>
+</ul>
+<p><strong>HTML：使用协商缓存。</strong><br><strong>CSS&amp;JS&amp;图片：使用强缓存，文件命名带上hash值。</strong></p>
+<ul>
+<li>在做前端缓存时，我们<strong>尽可能设置长时间的强缓存</strong>，通过文件名加hash的方式来做版本更新。在代码分包的时候，应该将一些不常变的公共库独立打包出来，使其能够更持久的缓存。</li>
+<li><strong>访问缓存优先级</strong><br>先在<strong>内存</strong>中查找,如果有,直接加载。<br>如果内存中不存在,则在硬盘中查找,如果有直接加载。<br>如果<strong>硬盘</strong>中也没有,那么就进行<strong>网络请求</strong>。<br>请求获取的资源缓存到硬盘和内存。</li>
+<li><a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg" alt="image.png"></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/04/前端基础-HTTP HTML 浏览器（3）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端基础-HTTP/HTML/浏览器（3）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/02/前端基础-HTTP HTML 浏览器（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端基础-HTTP/HTML/浏览器（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp三次握手，一句话概括"><span class="nav-number">1.1.</span> <span class="nav-text">tcp三次握手，一句话概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP的区别"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个图片url访问后直接下载怎样实现？"><span class="nav-number">1.3.</span> <span class="nav-text">一个图片url访问后直接下载怎样实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？"><span class="nav-number">1.4.</span> <span class="nav-text">在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie相关"><span class="nav-number">2.</span> <span class="nav-text">cookie相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些编码方式"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些编码方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些字段可以设置"><span class="nav-number">2.2.</span> <span class="nav-text">cookie有哪些字段可以设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie如何防范XSS攻击"><span class="nav-number">2.3.</span> <span class="nav-text">Cookie如何防范XSS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS和csrf网络攻击及防范"><span class="nav-number">2.3.1.</span> <span class="nav-text">XSS和csrf网络攻击及防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除了cookie，还有什么存储方式"><span class="nav-number">2.4.</span> <span class="nav-text">除了cookie，还有什么存储方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie、sessionStorage、localStorage的区别"><span class="nav-number">2.5.</span> <span class="nav-text">cookie、sessionStorage、localStorage的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie和session的区别"><span class="nav-number">2.6.</span> <span class="nav-text">Cookie和session的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端性能优化"><span class="nav-number">3.</span> <span class="nav-text">前端性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么看网站的性能如何"><span class="nav-number">3.1.</span> <span class="nav-text">怎么看网站的性能如何</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化【待补充】"><span class="nav-number">3.2.</span> <span class="nav-text">前端优化【待补充】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下浏览器缓存"><span class="nav-number">3.3.</span> <span class="nav-text">说一下浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强缓存和协商缓存（web性能优化）"><span class="nav-number">3.4.</span> <span class="nav-text">强缓存和协商缓存（web性能优化）</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
