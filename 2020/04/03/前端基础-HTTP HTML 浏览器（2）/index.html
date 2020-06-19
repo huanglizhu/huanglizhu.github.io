@@ -21,12 +21,11 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfcmhhk3a2j30r20suacc.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfijoy3cg6j30k005s436.jpg">
-<meta property="og:image" content="http://www.xxx.com/transfer.do?accountNum=l000l&money=10000">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg">
-<meta property="og:updated_time" content="2020-06-12T06:31:02.686Z">
+<meta property="og:updated_time" content="2020-06-17T06:30:51.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
 <meta name="twitter:description" content="流程tcp三次握手，一句话概括">
@@ -284,7 +283,7 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 </li>
 <li><strong>CSRF</strong>：<strong>跨站请求伪造</strong>，攻击者借助用户的 Cookie 骗取服务器的信任，以用户名义伪造请求发送给服务器。如：在请求的url后加入一些恶意的参数。换句话说，<strong>CSRF就是利用用户的登录态发起恶意请求</strong>。<ul>
 <li>比如：你登录网站，并在本地存下了，如果在没退出该网站的时候不小心访问了恶意网站，而且这个网站需要你发一些请求等，此时，你是携带cookie进行访问的，那么你的存在cookie里的信息就会被恶意网站捕捉到，那么你的信息就被盗用，导致一些不法分子做一些事情。<ul>
-<li>假设某银行网站A以GET请求来发起转账操作，转账的地址为<a href="http://www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：" target="_blank" rel="noopener">www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：</a><img src="http://www.xxx.com/transfer.do?accountNum=l000l&money=10000"><br>当你登录网站A后，没有及时登出，这时你访问了论坛B，不幸的事情发生了，你会发现你的账号里面少了10000块…（上述只是举例，转账怎么可能是get请求，为了保险，肯定是post请求，更何况银行的交易付款会有登录密码和支付密码等一系列屏障，流程复杂得多，安全系数也高得多）</li>
+<li>假设某银行网站A以GET请求来发起转账操作，转账的地址为<code>www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000</code>，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：<code>&lt;img src=&quot;http://www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000&quot;&gt;</code><br>当你登录网站A后，没有及时登出，这时你访问了论坛B，不幸的事情发生了，你会发现你的账号里面少了10000块…（上述只是举例，转账怎么可能是get请求，为了保险，肯定是post请求，更何况银行的交易付款会有登录密码和支付密码等一系列屏障，流程复杂得多，安全系数也高得多）</li>
 </ul>
 </li>
 <li><strong>防御</strong>：</li>
@@ -393,7 +392,7 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 </ul>
 <p><strong>HTML：使用协商缓存。</strong><br><strong>CSS&amp;JS&amp;图片：使用强缓存，文件命名带上hash值。</strong></p>
 <ul>
-<li>在做前端缓存时，我们<strong>尽可能设置长时间的强缓存</strong>，通过文件名加hash的方式来做版本更新。在代码分包的时候，应该将一些不常变的公共库独立打包出来，使其能够更持久的缓存。</li>
+<li>在做前端缓存时，我们<strong>尽可能设置长时间的强缓存</strong>，通过<strong>文件名加hash</strong>的方式来做版本更新。在代码分包的时候，应该将一些不常变的公共库独立打包出来，使其能够更持久的缓存。</li>
 <li><strong>访问缓存优先级</strong><br>先在<strong>内存</strong>中查找,如果有,直接加载。<br>如果内存中不存在,则在硬盘中查找,如果有直接加载。<br>如果<strong>硬盘</strong>中也没有,那么就进行<strong>网络请求</strong>。<br>请求获取的资源缓存到硬盘和内存。</li>
 <li><a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg" alt="image.png"></li>
 </ul>
@@ -443,11 +442,11 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
     
 <nav id="article-nav">
   
-    <a href="/2020/04/04/前端基础-HTTP HTML 浏览器（3）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/04/JS 运行环境/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          前端基础-HTTP/HTML/浏览器（3）
+          JS 运行环境
         
       </div>
     </a>

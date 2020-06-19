@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JS 运行环境 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="运行环境介绍 运行环境即浏览器（server端有nodejs，移动端在app/微信上） 下载网页代码，渲染出页面，期间会执行若干JS 要保证代码在浏览器中：稳定且高效 网页加载过程 性能优化 安全">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 运行环境">
+<meta property="og:url" content="http://yoursite.com/2020/04/04/JS 运行环境/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="运行环境介绍 运行环境即浏览器（server端有nodejs，移动端在app/微信上） 下载网页代码，渲染出页面，期间会执行若干JS 要保证代码在浏览器中：稳定且高效 网页加载过程 性能优化 安全">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpbptqwimj30gf0cujxc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpl3ao4twj30rl0hn150.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpldyd6vgj30ui0g07kf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqryxq6aj30tl05z10m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqxobq9dj30xi0dzam1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqy8fuzyj30lw0fwtk9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqr43b8v6j30tf06gahc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlo7sp71j30mu09c7b5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlpsejmhj30g5070jtv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrm3daxhvj30nk0fstjf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlsfhqmsj30hx06wdii.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrmxt1jitj30l00snara.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrsad7t4j30om0db11u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrtsx9nuj30hx0d179w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss3neuf3j30ni0fck0c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss23y3lyj30hw0clgqy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfssnxov6mj30p90jjgy2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsspky7dej30mm05o79q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfssre1hloj30pr02tjut.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsui01pa3j30p90nltpp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfv55egm0xj30ql05yn01.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfv57hfkgyj30oz067ju3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg">
+<meta property="og:updated_time" content="2020-06-18T04:46:23.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 运行环境">
+<meta name="twitter:description" content="运行环境介绍 运行环境即浏览器（server端有nodejs，移动端在app/微信上） 下载网页代码，渲染出页面，期间会执行若干JS 要保证代码在浏览器中：稳定且高效 网页加载过程 性能优化 安全">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpbptqwimj30gf0cujxc.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS 运行环境" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS 运行环境
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/04/JS 运行环境/" class="article-date">
+	  <time datetime="2020-04-04T04:41:32.000Z" itemprop="datePublished">四月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="运行环境介绍"><a href="#运行环境介绍" class="headerlink" title="运行环境介绍"></a>运行环境介绍</h1><ul>
+<li>运行环境即<strong>浏览器</strong>（server端有<strong>nodejs</strong>，移动端在app/微信上）</li>
+<li>下载网页代码，渲染出页面，期间会执行若干JS</li>
+<li>要<strong>保证代码在浏览器中：稳定且高效</strong></li>
+<li>网页加载过程</li>
+<li>性能优化</li>
+<li>安全<a id="more"></a>
+
+</li>
+</ul>
+<h1 id="页面加载和渲染过程"><a href="#页面加载和渲染过程" class="headerlink" title="页面加载和渲染过程"></a>页面加载和渲染过程</h1><ul>
+<li><strong>资源的形式</strong><ul>
+<li>html代码</li>
+<li>媒体文件，如图片、视频等</li>
+<li>javascript CSS</li>
+</ul>
+</li>
+<li><strong>加载过程</strong>：<ol>
+<li><strong>DNS解析</strong>（Domain Name Server）：<strong>域名-&gt;IP地址</strong>（不直接使用IP是因为不同区域IP地址不同，域名更好记）</li>
+<li><strong>建立TCP连接</strong>，浏览器根据IP地址向服务器发起<strong>http请求</strong></li>
+<li>服务器处理http请求，并<strong>返回html</strong>给浏览器</li>
+</ol>
+</li>
+<li><strong>渲染过程</strong>：<ol>
+<li>根据HTML代码生成<strong>DOM Tree</strong>（Document Object Model）</li>
+<li>根据CSS代码生成<strong>CSSOM</strong>（CSS Object Model，CSS对象模型）</li>
+<li>将DOM Tree和CSSOM<strong>整合形成Render Tree</strong>（渲染树）</li>
+<li>根据Render Tree<strong>渲染页面</strong></li>
+<li><strong>遇到<code>&lt;script&gt;</code>则暂停渲染</strong>（因为JS有可能修改DOM结构），优先加载并执行JS代码，完成再继续</li>
+<li>直至把Render Tree<strong>渲染完成</strong></li>
+</ol>
+</li>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpbptqwimj30gf0cujxc.jpg" alt="例子"><strong>渲染到img时如果太大还未加载完成也不会阻塞DOM树的渲染</strong>，直接往下渲染，等图片加载完成再插入</li>
+</ul>
+<hr>
+<h1 id="window-onload和DOMContentLoaded"><a href="#window-onload和DOMContentLoaded" class="headerlink" title="window.onload和DOMContentLoaded"></a>window.onload和DOMContentLoaded</h1><ul>
+<li><strong>window.onload</strong>：页面的<strong>全部资源加载完才会执行</strong>，包括图片、视频等</li>
+<li><strong>DOMContentLoaded</strong>：<strong>DOM渲染完即可执行</strong>，此时图片、视频还可能没有加载完</li>
+<li><strong>注意：使用DOMContentLoaded来触发JS比window.onload更好</strong>，不需要等图片、视频都加载完成才触发JS的加载，这样页面渲染会更快。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg" alt="window.onload和DOMContentLoaded"></li>
+</ul>
+<hr>
+<h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><ul>
+<li>是一个综合性问题，没有标准答案，但要求<strong>尽量全面</strong></li>
+<li>某些细节问题可能会单独提问：手写<strong>防抖、节流</strong></li>
+<li>这里只关注核心点，针对面试</li>
+<li><strong>原则</strong>:<ul>
+<li>多使用<strong>内存、缓存</strong>或其他方法</li>
+<li><strong>减少CPU计算量</strong>，减少网络加载耗时</li>
+<li>（适用于所有编程的性能优化一<strong>空间换时间</strong>）</li>
+</ul>
+</li>
+<li><strong>从何入手</strong>:<ul>
+<li>让<strong>加载</strong>更快</li>
+<li>让<strong>渲染</strong>更快</li>
+</ul>
+</li>
+</ul>
+<h2 id="让加载更快"><a href="#让加载更快" class="headerlink" title="让加载更快"></a>让加载更快</h2><ol>
+<li><strong>减少资源体积：压缩代码</strong><ul>
+<li>比如使用<strong>webpack在production环境下</strong>进行打包时，就会<strong>自动压缩代码</strong>至1/3的大小，在浏览器上进行反解析再进行渲染。</li>
+</ul>
+</li>
+<li><strong>减少访问次数</strong>：<ul>
+<li><strong>合并代码</strong>：比如webpack中，在index.js中引入a.js、b.js，打包后只生成一个bundle.js，这就是合并代码。（加载3次3kb的文件不如加载1次9kb快，这<strong>和网络请求有关系</strong>）</li>
+<li><strong>SSR服务器端渲染</strong>：不需要通过ajax发送请求。</li>
+<li><strong>缓存</strong>：原本需要发送多个请求的数据直接在缓存中获取即可减少访问次数。</li>
+</ul>
+</li>
+<li><strong>使用更快的网络：CDN</strong><ul>
+<li>CDN是<strong>分区域</strong>的，也就是使用CDN的时候上海和北京对同一个网站的IP地址是不同的。<strong>CDN会选择一个离用户最近的CDN边缘节点来响应用户的请求</strong>，这样海南移动用户的请求就不会千里迢迢跑到北京电信机房的服务器（假设源站部署在北京电信机房）上了</li>
+<li><strong>图片、js等静态资源</strong>采用CDN是很快的，我们经常使用的<strong>bootstrap就是使用的CDN</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
+<li>静态资源加<strong>hash后缀</strong>，<strong>根据文件内容计算hash</strong></li>
+<li>文件内容不变，则hash不变，则<strong>url不变</strong></li>
+<li>url和文件不变，则会<strong>自动触发http缓存机制，返回304</strong>（提示用户资源未更新，到缓存中获取）【大部分web服务器都默认开启协商缓存】</li>
+<li><strong>例子</strong>：在使用webpack的例子webpack-demo中，<strong>配置webpack的输出文件名时采用的内容哈希值<code>[contenthash]</code>就会根据文件内容来生成哈希值</strong>（每一次生成的文件不会覆盖之前的文件，且只要内容变化名字就会发生改变）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpl3ao4twj30rl0hn150.jpg" alt="webpack-demo中配置文件"></li>
+<li>可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#强缓存和协商缓存（web性能优化）" target="_blank" rel="noopener">强缓存与协商缓存</a></li>
+</ul>
+<h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><ul>
+<li>CDN，Content Delivery Network，即内容分发网络。是<strong>根据地域做静态服务</strong>的，我们经常使用的<strong>bootstrap就是使用的CDN</strong>，他会<strong>加快加载速度</strong>。（<a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">CDN缓存</a>）</li>
+<li>CDN不变且文件不变时，也会自动触发http缓存机制，返回304。</li>
+<li>而百度这里用的bdstatic就不是CDN：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpldyd6vgj30ui0g07kf.jpg" alt="CDN"></li>
+</ul>
+<h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><ul>
+<li><strong>SSR（服务器端渲染）</strong>：server side render，将网页和数据一起加载，一起渲染</li>
+<li><strong>非SSR</strong>：先加载网页，再加载数据，再渲染数据</li>
+<li><strong>早先的JSP ASP PHP 都是SSR，现在的 vue 和 react 默认下不是ssr，但可以在配置下成为ssr</strong></li>
+<li>如果右键查看源码看不到input等元素标签，则为非ssr。</li>
+<li><a href="https://www.jianshu.com/p/10b6074d772c" target="_blank" rel="noopener">SSR与非SSR</a></li>
+</ul>
+<hr>
+<h2 id="让渲染更快"><a href="#让渲染更快" class="headerlink" title="让渲染更快"></a>让渲染更快</h2><ul>
+<li><strong>CSS放在head中，JS放在body最下面</strong></li>
+<li><strong>尽早开始执行JS</strong>，用DOMContentLoaded触发</li>
+<li><strong>懒加载</strong>（图片懒加载，上滑加载更多）</li>
+<li>对<strong>DOM查询进行缓存</strong>（DOM操作很耗性能）</li>
+<li><strong>频繁DOM操作，合并</strong>到一起插入DOM结构</li>
+<li>让渲染更流畅：<strong>节流throttle防抖debounce</strong></li>
+</ul>
+<h3 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h3><ul>
+<li><strong>懒加载：常见图片懒加载</strong>，也就是我们希望先加载第一张图片，后面的图片没显示在屏幕上的就先不加载，等到滑动到图片位置时再进行该图片的加载。</li>
+<li><strong>例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqryxq6aj30tl05z10m.jpg" alt="例子">一开始加载src地址下的图片，等到滑动到下一图片位置时将data-realsrc的属性值赋给src，此时即为加载图片abc（本例子中不进行图片位置的判断，实际根据DOM元素距离顶部的值来计算）</li>
+</ul>
+<h3 id="缓存DOM的查询"><a href="#缓存DOM的查询" class="headerlink" title="缓存DOM的查询"></a>缓存DOM的查询</h3><p>js的操作和DOM的操作完全不是一个数量级的，尽量避免多次操作DOM：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqxobq9dj30xi0dzam1.jpg" alt="缓存DOM的查询"></p>
+<h3 id="多个DOM操作合并"><a href="#多个DOM操作合并" class="headerlink" title="多个DOM操作合并"></a>多个DOM操作合并</h3><p><a href="https://huanglizhu.github.io/2020/02/14/JS%20Web%20API%20DOM(2)/#将频繁操作改为一次性操作" target="_blank" rel="noopener">多个DOM操作一起插入到DOM结构</a>时注意可通过<strong>createDocumentFragment()先创建一个文档片段</strong>，这个文档片段是<strong>保存在JS中的（不是在DOM树中）</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqqy8fuzyj30lw0fwtk9.jpg" alt="多个DOM操作合并"></p>
+<h3 id="尽早开始执行JS"><a href="#尽早开始执行JS" class="headerlink" title="尽早开始执行JS"></a>尽早开始执行JS</h3><p><strong>使用DOMContentLoaded来触发JS比window.onload更好</strong>，不需要等图片、视频都加载完成才触发JS的加载，这样页面渲染会更快。<br><strong>DOMContentLoaded是当DOM树渲染完即可执行</strong>，此时图片、视频还可能没有加载完（注意是DOM渲染完成而不是页面渲染完成）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqr43b8v6j30tf06gahc.jpg" alt="尽早开始执行JS"></p>
+<hr>
+<h1 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖 debounce"></a>防抖 debounce</h1><ul>
+<li><strong>防抖</strong>：比如，监听一个输入框的文字变化后触发change事件，直接用keyup事件，则会频发触发change事件。如果使用<strong>防抖</strong>，则用户<strong>输入结束或暂停时</strong>，才会触发change事件。（防抖不仅限于change事件）</li>
+<li>防抖实际上是对<strong>定时器<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/#setTimeout" target="_blank" rel="noopener">setTimeout</a></strong>的使用，但我们通常将其<strong>封装为debounce函数</strong>来使用</li>
+<li><strong>例子</strong>：<ul>
+<li>原本设定是输入框中<strong>每输入一个字符就触发一个打印</strong>，将输入框中的值打印出来<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlo7sp71j30mu09c7b5.jpg" alt="原本的代码"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlpsejmhj30g5070jtv.jpg" alt="原本的效果"></li>
+<li>采用<strong>防抖</strong>后，每次<strong>输入结束的半秒后</strong>才会触发事件进行打印（半秒是自己设置的）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrm3daxhvj30nk0fstjf.jpg" alt="防抖后的代码"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlsfhqmsj30hx06wdii.jpg" alt="防抖后的效果"><strong>逻辑梳理：</strong></li>
+</ul>
+<ol>
+<li>timer用于存储定时器id，<strong>输入a时</strong>，通过<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/#setTimeout" target="_blank" rel="noopener">setTimeout</a>给timer赋值，准备500毫秒后触发打印</li>
+<li><strong>紧接着输入s时</strong>,由于此时timer不为空，所以<strong>执行clearTimerout将之前的定时器清除，重新创建setTimeout</strong>给timer赋值，准备500毫秒后触发打印</li>
+<li><strong>依旧紧接着输入d时</strong>，一直到s都重复上一步逻辑</li>
+<li><strong>直到输入最后一个f时</strong>，清除了上一个timer后创建了新的timer，且500毫秒后未被清除，故<strong>打印asdfasdfasf</strong>，并将timer清空</li>
+</ol>
+<ul>
+<li><strong>封装为debounce函数</strong>，避免每次使用都要创建setTimeout：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrmxt1jitj30l00snara.jpg" alt="封装为debounce函数"><strong>27行直接使用fn()也可以</strong>，使用<strong><a href="https://huanglizhu.github.io/2019/10/08/call()%E4%B8%8Eapply()/#JavaScript-函数-Apply" target="_blank" rel="noopener">apply</a></strong>是为了防止fn有this或者参数（<strong><a href="https://huanglizhu.github.io/2019/12/07/%E7%B1%BB%E6%95%B0%E7%BB%84/#arguments对象" target="_blank" rel="noopener">arguments对象</a></strong>）需要传入debounce函数（如果要传入this，则需注意传入的fn，即例子中的箭头函数不能是箭头函数）<strong>【可参考下面“节流”中的apply解释】</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="节流-throttle"><a href="#节流-throttle" class="headerlink" title="节流 throttle"></a>节流 throttle</h1><ul>
+<li>比如：拖拽一个元素时，要随时拿到该元素被拖拽的位置。这里直接用drag事件则会频发触发，很容易导致卡顿。而使用<strong>节流</strong>，则<strong>无论拖拽速度多快，都会每隔100ms触发一次（时间自定义）</strong></li>
+<li><strong>例子：</strong><ul>
+<li>设置一个可拖拽元素并<strong>直接用drag事件</strong>，拖拽时实时打印元素位置：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrsad7t4j30om0db11u.jpg" alt="例子"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrtsx9nuj30hx0d179w.jpg" alt="效果"></li>
+<li>采取<strong>节流</strong>后：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss3neuf3j30ni0fck0c.jpg" alt="采取节流代码"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss23y3lyj30hw0clgqy.jpg" alt="效果"><strong>逻辑梳理：</strong><ol>
+<li>和节流相似，都设置一个定时器，初始为空</li>
+<li>元素开始拖拽时触发事件，根据setTimeout返回的id赋给timer，此时需要等待100毫秒才打印位置</li>
+<li>由于快速拖动元素，100毫秒内再次出发drag事件，但此时<strong>timer有值，直接退出drag事件，直到100毫秒位置打印后timer清空才会再走第二步</strong>。以此实现无论拖拽速度多快，都会每隔100ms触发一次drag事件</li>
+</ol>
+</li>
+<li><strong>封装为throttle函数</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfssnxov6mj30p90jjgy2.jpg" alt="封装为throttle函数">这样的封装没问题，但是使用时会报错：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsspky7dej30mm05o79q.jpg" alt="报错"><strong>解决报错，添加e</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfssre1hloj30pr02tjut.jpg" alt="解决报错"><ul>
+<li><strong><a href="https://huanglizhu.github.io/2019/10/08/call()%E4%B8%8Eapply()/#JavaScript-函数-Apply" target="_blank" rel="noopener">apply</a>的作用：参数1绑定this指向，参数2绑定调用该函数时传入的参数（即：将参数传入fn）</strong>(<a href="https://huanglizhu.github.io/2019/12/07/%E7%B1%BB%E6%95%B0%E7%BB%84/#arguments对象" target="_blank" rel="noopener">arguments对象</a>)。比如这里的<code>e</code>就必须是使用apply传入了参数e，则调用throttle函数时传入的fn函数才能找到e。<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsui01pa3j30p90nltpp.jpg" alt="apply的作用"><strong>注意：父级作用域是在 函数定义时 规定的，不需要管执行顺序。</strong>所以如果24行使用fn()则31行找e时的父级作用域<strong>（这里的父级作用域是全局作用域，不是函数throttle）</strong>里没有e，30行的e是提供给throttle函数的返回函数的（19-27）。而24使用apply则将e传入了fn，31也就可以获取到e了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h1><ul>
+<li><strong>CSRF又称XSRF</strong>，前端Cookie如何防范XSS攻击可参考博客<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#XSS和csrf网络攻击及防范" target="_blank" rel="noopener">XSS和XSRF网络攻击及防范</a></li>
+</ul>
+<h2 id="XSS跨站请求攻击"><a href="#XSS跨站请求攻击" class="headerlink" title="XSS跨站请求攻击"></a>XSS跨站请求攻击</h2><ul>
+<li><strong>XSS</strong>：一个博客网站，我发表一篇博客，其中<strong>嵌入<code>&lt;script&gt;</code>脚本，脚本内容用以获取cookie，发送到我的服务器</strong>（只要我将自己的服务器设置好配合<a href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#跨域" target="_blank" rel="noopener">跨域</a>，那么点击我的链接我就可以解决cookie跨域的问题）。那么只要我发布这篇博客，有人查看它，我就能轻松收割访问者的cookie。</li>
+<li><strong>例子</strong>：攻击者在博客中嵌入<code>&lt;script&gt;</code>脚本来获取访问者的cookie（cookie只要获取到，那么script中还可加入ajax等跨域方式（比如jsonp）将cookie发送出去，此时只要攻击者的服务器设置为支持跨域，那攻击者就能轻松获取数据）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfv55egm0xj30ql05yn01.jpg" alt="XSS例子">!其他用户访问该博客时，cookie被带出：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfv57hfkgyj30oz067ju3.jpg" alt="用户访问该博客">假设script中还有ajax等跨域方式（比如jsonp）将cookie发送出去，此时只要攻击者的服务器设置为支持跨域，则敏感信息也会被送出。</li>
+<li><strong>XSS预防</strong> : <strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie如何防范XSS攻击" target="_blank" rel="noopener">XSS网络攻击及防范</a>)<ol>
+<li><strong>替换特殊字符</strong>，如<code>&lt;</code>变为<code>&amp;lt；</code> <code>&gt;</code>变为<code>&amp;gt</code>,<code>&lt;script&gt;</code>变为<code>&amp;lt；script&amp;gt；</code>直接显示，而<strong>不会作为脚本执行</strong>(实际工作中可使用<a href="https://www.npmjs.com/package/xss" target="_blank" rel="noopener">XSS工具</a>)<ul>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg" alt="前端在显示时替换特殊字符"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg" alt="显示效果">特殊字符在html中会<strong>被浏览器解析</strong>显示为相应的符号，<strong>故script以字符串形式显示，不会作为脚本执行</strong></li>
+</ul>
+</li>
+<li>在<strong>HTTP头部配上<code>set-cookie:httponly</code></strong>,禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#给cookie做限制" target="_blank" rel="noopener">博客项目登录（cookie）</a>）</li>
+<li><strong>设置cookie的secure属性为<code>secure:true</code></strong>,告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
+</ol>
+</li>
+<li><strong>XSS工具</strong>：替换特殊字符可使用<a href="https://www.npmjs.com/package/xss" target="_blank" rel="noopener">XSS工具</a><ul>
+<li><strong>node使用XSS</strong>的方法可参考博客：<a href="https://huanglizhu.github.io/2020/03/03/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8/#xss攻击（xss库（函数）））" target="_blank" rel="noopener">博客项目安全</a></li>
+<li><strong>前端使用XSS</strong>的方法可参考官方例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg" alt="参考官方例子"></li>
+</ul>
+</li>
+</ul>
+<h2 id="XSRF跨站请求伪造"><a href="#XSRF跨站请求伪造" class="headerlink" title="XSRF跨站请求伪造"></a>XSRF跨站请求伪造</h2><ul>
+<li><strong>XSRF（CSRF）例子：</strong><ol>
+<li>你正在购物，看中了某个商品，商品id是100，付费接口是<code>xxx.com/pay？id=100</code>，但没有任何验证（此时你已经登录了该网站）。</li>
+<li>我是攻击者，我看中了一个商品，id是200（我现在想让你来帮我买单）</li>
+<li>此时我向你发送一封电子邮件，邮件标题很吸引人但邮件正文隐藏着<code>&lt;img src=xxx.com/pay？id=200/&gt;</code>你一查看邮件，就帮我购买了id是200的商品。（注意img是支持跨域的，此时你的cookie会被带着）</li>
+</ol>
+</li>
+<li><strong>预防XSRF：</strong>（更多防御方式可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#XSS和csrf网络攻击及防范" target="_blank" rel="noopener">csrf网络攻击及防范</a>）<ol>
+<li><strong>使用post接口</strong>，img这些跨域只能接收get请求，设计post请求的需要server端的允许</li>
+<li><strong>增加验证</strong>，例如密码、短信验证码、指纹等。验证码会强制用户必须与应用进行交互，才能完成最终请求，但是也不能给网站所有的操作都加上验证码，所以只能作为防御 CSRF 的一种辅助手段，而不能作为最终的解决方案。</li>
+<li><strong>使用token验证</strong>：在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，若请求无 token 或者 token 不正确，则认为可能是 CSRF 攻击而拒绝该请求。</li>
+<li><strong>检查https头部的Referer</strong>：在HTTP头中有一个字段叫做Referer,它记录了该HTTP请求的来源地址。通过Referer Check,可以检查是否来自合法的”源”。<br>例如：从<code>www.user.com</code>发起的删帖请求，那么Referer值是<code>http://www.user.com</code>, 删帖请求应该被允许；而如果是从CSRF攻击者构造的页面<code>www.attack.com</code>发起删帖请求， 那么Referer值是<code>http://www.attack.com</code>, 删帖请求应该被阻止。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="为什么建议CSS写在head中"><a href="#为什么建议CSS写在head中" class="headerlink" title="为什么建议CSS写在head中"></a>为什么建议CSS写在head中</h2><p>因为页面是<strong>边解析边渲染的</strong>，如果把CSS写在HTML后，则先解析DOM树渲染在页面上，再生成CSSOM合成渲染树重新渲染在页面上，这样会有一个过程，用户可能会看到一个过程变化。<br><strong>所以在DOM树生成之前就先生成CSSOM会更好</strong>，这样当DOM树生成时就可<strong>直接和所有CSSOM进行合并，一步渲染完成</strong>。</p>
+<hr>
+<h2 id="为什么建议JS写在body最后"><a href="#为什么建议JS写在body最后" class="headerlink" title="为什么建议JS写在body最后"></a>为什么建议JS写在body最后</h2><p>因为页面是<strong>边解析边渲染的</strong>，如果把JS写在body中间，虽然JS有异步的处理机制，但极端情况会出现前面已经渲染了一半就卡住的情况。<strong>渲染时间会拖长</strong>。</p>
+<hr>
+<h2 id="从输入url到页面显示都经历了什么"><a href="#从输入url到页面显示都经历了什么" class="headerlink" title="从输入url到页面显示都经历了什么"></a>从输入url到页面显示都经历了什么</h2><ul>
+<li><strong>下载资源</strong>：各个资源类型，下载过程</li>
+<li><strong>渲染页面</strong>：结合html Css javascript图片等</li>
+<li>详细过程可参考博客<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/" target="_blank" rel="noopener">从输入url到页面显示都经历了什么</a></li>
+</ul>
+<hr>
+<h2 id="window-onload和DOMContentLoaded的区别"><a href="#window-onload和DOMContentLoaded的区别" class="headerlink" title="window.onload和DOMContentLoaded的区别"></a>window.onload和DOMContentLoaded的区别</h2><ul>
+<li><strong>window.onload</strong>：页面的<strong>全部资源加载完才会执行</strong>，包括图片、视频等</li>
+<li><strong>DOMContentLoaded</strong>：<strong>DOM渲染完即可执行</strong>，此时图片、视频还可能没有加载完</li>
+<li><strong>注意：使用DOMContentLoaded来触发JS比window.onload更好</strong>，不需要等图片、视频都加载完成才触发JS的加载，这样页面渲染会更快。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg" alt="window.onload和DOMContentLoaded"></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript学习/">JavaScript学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/04/前端基础-HTTP HTML 浏览器（3）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端基础-HTTP/HTML/浏览器（3）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/03/前端基础-HTTP HTML 浏览器（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端基础-HTTP/HTML/浏览器（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运行环境介绍"><span class="nav-number">1.</span> <span class="nav-text">运行环境介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面加载和渲染过程"><span class="nav-number">2.</span> <span class="nav-text">页面加载和渲染过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#window-onload和DOMContentLoaded"><span class="nav-number">3.</span> <span class="nav-text">window.onload和DOMContentLoaded</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能优化"><span class="nav-number">4.</span> <span class="nav-text">性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#让加载更快"><span class="nav-number">4.1.</span> <span class="nav-text">让加载更快</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存"><span class="nav-number">4.1.1.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN"><span class="nav-number">4.1.2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR"><span class="nav-number">4.1.3.</span> <span class="nav-text">SSR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让渲染更快"><span class="nav-number">4.2.</span> <span class="nav-text">让渲染更快</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#懒加载"><span class="nav-number">4.2.1.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存DOM的查询"><span class="nav-number">4.2.2.</span> <span class="nav-text">缓存DOM的查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个DOM操作合并"><span class="nav-number">4.2.3.</span> <span class="nav-text">多个DOM操作合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽早开始执行JS"><span class="nav-number">4.2.4.</span> <span class="nav-text">尽早开始执行JS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防抖-debounce"><span class="nav-number">5.</span> <span class="nav-text">防抖 debounce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#节流-throttle"><span class="nav-number">6.</span> <span class="nav-text">节流 throttle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全"><span class="nav-number">7.</span> <span class="nav-text">安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS跨站请求攻击"><span class="nav-number">7.1.</span> <span class="nav-text">XSS跨站请求攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSRF跨站请求伪造"><span class="nav-number">7.2.</span> <span class="nav-text">XSRF跨站请求伪造</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关题目"><span class="nav-number">8.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么建议CSS写在head中"><span class="nav-number">8.1.</span> <span class="nav-text">为什么建议CSS写在head中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么建议JS写在body最后"><span class="nav-number">8.2.</span> <span class="nav-text">为什么建议JS写在body最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从输入url到页面显示都经历了什么"><span class="nav-number">8.3.</span> <span class="nav-text">从输入url到页面显示都经历了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-onload和DOMContentLoaded的区别"><span class="nav-number">8.4.</span> <span class="nav-text">window.onload和DOMContentLoaded的区别</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
