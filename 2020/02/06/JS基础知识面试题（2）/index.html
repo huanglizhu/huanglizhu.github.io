@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gccjkp8s26j30be0ctwew.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gccfqr3rqkj30e20comxq.jpg">
-<meta property="og:updated_time" content="2020-03-01T05:03:10.121Z">
+<meta property="og:updated_time" content="2020-06-28T02:17:13.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS基础知识面试题（2）">
 <meta name="twitter:description" content="异步与单线程同步和异步的区别，分别举例子 同步任务会阻塞代码执行，而异步不会 alert是同步，setTimeout是异步">
@@ -186,7 +186,7 @@
 <p><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#事件循环例子（面试题）" target="_blank" rel="noopener">补充一个微任务、宏任务的题目</a></p>
 <hr>
 <h2 id="前端使用异步的场景有哪些"><a href="#前端使用异步的场景有哪些" class="headerlink" title="前端使用异步的场景有哪些"></a>前端使用异步的场景有哪些</h2><ul>
-<li><strong>定时任务</strong>：setTimeout，setInverval(可参考<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/" target="_blank" rel="noopener">笔记“setTimeout()与setInterval()”</a>）</li>
+<li><strong>定时任务</strong>：setTimeout，setInterval(可参考<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/" target="_blank" rel="noopener">笔记“setTimeout()与setInterval()”</a>）</li>
 <li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载</li>
 <li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
 </ul>
@@ -199,13 +199,13 @@
 <h2 id="异步编程的方法"><a href="#异步编程的方法" class="headerlink" title="异步编程的方法"></a>异步编程的方法</h2><ul>
 <li><p><strong>回调函数</strong>，这是异步编程最基本的方法。</p>
 <ul>
-<li>例：假定有两个函数f1和f2，后者等待前者的执行结果，如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。【此时f2是异步的，她耗费的时间并不影响同步任务的执行】<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f1"</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">f1(f2);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br><span class="line"><span class="comment">// start f1 end f2</span></span><br></pre></td></tr></table></figure>
+<li>例：假设有两个函数f1 和 f2，f1 是一个需要一定时间的函数。因为 f1 需要一定时间，所以可<strong>将 f2 写成 f1 的回调函数</strong>，将同步操作变成异步操作，这样f1 不会阻塞程序的运行，f2 也无需空空等待，例如 JQuery 的 ajax。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设有两个函数f1 和 f2，f1 是一个需要一定时间的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'先执行 f1'</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'再执行 f2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将 f2 写成 f1 的回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">f2</span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'先执行 f1'</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">    f2()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'再执行 f2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印：“再执行 f2” “先执行 f1”</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
 <ul>
-<li>例：为f1绑定一个事件，当f1发生done事件，就执行f2。</li>
+<li>例：为f1绑定一个事件，当f1发生click事件，就执行f2。</li>
 </ul>
 </li>
 <li><p><strong>发布/订阅</strong>，与”事件监听”类似。</p>
@@ -216,20 +216,24 @@
 </li>
 <li><p><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。</p>
 <ul>
-<li>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</li>
-<li>例：f1的回调函数f2，f1().then(f2);</li>
+<li>简单说，它的思想是，<strong>每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。</strong>回调函数变成了<strong>链式写法</strong>，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</li>
+<li>例：f1的回调函数f2，<code>f1().then(f2);</code></li>
 </ul>
+</li>
+<li><p><a href="https://huanglizhu.github.io/2020/03/05/ES6%20async%E5%87%BD%E6%95%B0%E4%B8%8Eawait%E5%85%B3%E9%94%AE%E8%AF%8D/" target="_blank" rel="noopener"><strong>async</strong></a>,async函数返回的是一个 Promise 对象，可以使用 then 方法添加回调函数，async 函数内部 return 语句返回的值，会成为 then 方法回调函数的参数。当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">demo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// something</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">demo().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)  <span class="comment">// </span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <hr>
 <h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><p>可参考笔记<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的执行步骤（事件循环）" target="_blank" rel="noopener">从输入url到页面显示都经历了什么</a><br><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</p>
 <hr>
-<h1 id="Date、Math、数组API、对象API"><a href="#Date、Math、数组API、对象API" class="headerlink" title="Date、Math、数组API、对象API"></a>Date、Math、数组API、对象API</h1><p>Date、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
+<h1 id="Date、Math、数组API、对象API"><a href="#Date、Math、数组API、对象API" class="headerlink" title="Date、Math、数组API、对象API"></a>Date、Math、数组API、对象API</h1><p><a href="https://huanglizhu.github.io/2020/01/20/JS_Date%E5%AF%B9%E8%B1%A1/#其他方法" target="_blank" rel="noopener">Date</a>、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
 <h2 id="获取2017-06-10格式的日期"><a href="#获取2017-06-10格式的日期" class="headerlink" title="获取2017-06-10格式的日期"></a>获取2017-06-10格式的日期</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcc4fkx371j30h80hgqbh.jpg" alt="获取2017-06-10格式的日期"></p>
 <ul>
 <li>1-18 函数 formatDate <strong>接受一个Date对象，返回一个格式化后的日期</strong><ul>
 <li>2-4 为防止报错，如果没有传入参数，就新建一个Date对象作为参数dt</li>
-<li>5 <code>getFullYear()</code>getFullYear()<code>获取年份</code>获取年份</li>
+<li>5 <code>getFullYear()</code>获取年份</li>
 <li>6 <code>getMonth()</code>获取月份，由于<strong>获取到的是0-11</strong>，所以需要+1</li>
 <li>7 <code>getDate()</code>获取日期</li>
 <li>8-15 由于我们<strong>需要格式化的日期是两位数</strong>的，所以当<code>month&lt;10</code>的时候我们需要在前面添加0。日期也是同理。<ul>
@@ -289,7 +293,7 @@
 
 <p>变量i是let声明的，<strong>当前的i只在本轮循环有效</strong>，所以<strong>每一次循环的i其实都是一个新的变量</strong>。</p>
 <p><strong>方法2：使用闭包(即局部变量)</strong></p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  ((<span class="name">j</span>) =&gt; &#123;</span><br><span class="line">    setTimeout(<span class="name">function</span> () &#123;</span><br><span class="line">      console.log(<span class="name">j</span>)//0-9</span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(<span class="name">i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  ((<span class="name">i</span>) =&gt; &#123;</span><br><span class="line">    setTimeout(<span class="name">function</span> () &#123;</span><br><span class="line">      console.log(<span class="name">i</span>)//0-9</span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(<span class="name">i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>【将i传进函数中作为 函数作用域 的变量】</strong></p>
 <ol>

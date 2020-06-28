@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型6种，number、undefined、string、boolean、object、function可以准确判断4种 值类型 ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
+  <meta name="description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型 6种，number、undefined、string、boolean、object、function 可以准确判断4种 值类型(值类型中不能判断null) ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS基础知识面试题（1）">
 <meta property="og:url" content="http://yoursite.com/2020/02/05/JS基础知识面试题（1）/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型6种，number、undefined、string、boolean、object、function可以准确判断4种 值类型 ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
+<meta property="og:description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型 6种，number、undefined、string、boolean、object、function 可以准确判断4种 值类型(值类型中不能判断null) ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2qqapwpj30hr0b9jvg.jpg">
@@ -28,7 +28,6 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8kkyt95j31hb0k778b.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8rm3hsfj31fo0lttbi.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7e0k737j30xx0bb45g.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqdn02vhgj30jn0g1n2x.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqdsbn0w9j30lv0elq8x.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqdyxyumij30nc0aowjt.jpg">
@@ -36,10 +35,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqjkil3k0j30ov0dgqf9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
-<meta property="og:updated_time" content="2020-02-28T13:54:48.174Z">
+<meta property="og:updated_time" content="2020-06-27T09:40:05.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS基础知识面试题（1）">
-<meta name="twitter:description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型6种，number、undefined、string、boolean、object、function可以准确判断4种 值类型 ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
+<meta name="twitter:description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型 6种，number、undefined、string、boolean、object、function 可以准确判断4种 值类型(值类型中不能判断null) ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -179,32 +178,60 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JS变量类型和计算"><a href="#JS变量类型和计算" class="headerlink" title="JS变量类型和计算"></a>JS变量类型和计算</h1><h2 id="JS中使用typeof能得到的哪些类型"><a href="#JS中使用typeof能得到的哪些类型" class="headerlink" title="JS中使用typeof能得到的哪些类型"></a>JS中使用<code>typeof</code>能得到的哪些类型</h2><p>6种，<strong>number、undefined、string、boolean、object、function</strong><br>可以<strong>准确判断4种 值类型</strong> ，但是 <strong>引用类型 中只能判断函数</strong>，其余的 <strong>数组、对象、正则、日期 都被识别为object</strong>。</p>
-<a id="more"></a>
-<p><strong>注意：null（空指针）也被识别为object！</strong></p>
+        <h1 id="JS变量类型和计算"><a href="#JS变量类型和计算" class="headerlink" title="JS变量类型和计算"></a>JS变量类型和计算</h1><h2 id="JS中使用typeof能得到的哪些类型"><a href="#JS中使用typeof能得到的哪些类型" class="headerlink" title="JS中使用typeof能得到的哪些类型"></a>JS中使用<code>typeof</code>能得到的哪些类型</h2><ul>
+<li>6种，<strong>number、undefined、string、boolean、object、function</strong></li>
+<li>可以<strong>准确判断4种 值类型</strong>(值类型中不能判断null) ，但是 <strong>引用类型 中只能判断函数</strong>，其余的 <strong>数组、对象、正则、日期 都被识别为object</strong>。<a id="more"></a></li>
+<li><strong>注意：null（空指针）也被识别为object！</strong></li>
+<li><a href="https://huanglizhu.github.io/2020/01/16/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%881%EF%BC%89/#基本（原始）、复杂与全局数据类型" target="_blank" rel="noopener">基本（原始）、复杂与全局数据类型</a></li>
+</ul>
 <hr>
-<h2 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用===何时使用=="></a>何时使用<code>===</code>何时使用<code>==</code></h2><p>【null与undefined，简写】</p>
-<p><strong>只有一种情况使用双等号<code>==</code>，其他时候全部使用三等号<code>===</code></strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg" alt="何时使用`==`"><br>此时第三行代码相当于第四行代码的<strong>简写</strong>，这是<strong>jquery的源码推荐写法</strong>。</p>
+<h2 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用===何时使用=="></a>何时使用<code>===</code>何时使用<code>==</code></h2><ul>
+<li>【需要值为null或者undefined时使用<code>==</code>简写，因为<code>null==undefined</code>】</li>
+</ul>
+<p><strong>只有一种情况使用双等号<code>==</code>，其他时候全部使用三等号<code>===</code></strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg" alt="何时使用`==`">此时第三行代码相当于第四行代码的<strong>简写</strong>，这是<strong>jquery的源码推荐写法</strong>。</p>
+<ul>
+<li>双等号<code>==</code>是<strong>值相等</strong>，而三等号<code>===</code>是<strong>严格相等</strong>（值及类型是否完全相等），<strong>双等号<code>==</code>在运算的时候会进行 类型转换</strong>，而三等号<code>===</code>则不会。<ol>
+<li>对于string,number等<strong>基础类型</strong>，<code>==</code>和<code>===</code>是有区别的<ol>
+<li><strong>不同类型间比较</strong>，<code>==</code>会先“<strong>转化成同一类型后的值</strong>”看“值”是否相等，<code>===</code>如果类型不同，其结果就是不等<ul>
+<li><code>==</code>统一先转换为<strong>数字</strong>比较（其中Boolean只有两个值：true==1，false==0；null与undefined相等；字符串数字等于数字值，空字符串<code>&quot;&quot;</code>==0</li>
+</ul>
+</li>
+<li>同类型比较，直接进行“值”比较，两者结果一样</li>
+</ol>
+</li>
+<li>对于Array,Object等<strong>引用类型</strong>，<code>==</code>和<code>===</code>是没有区别的，都是进行“指针地址”比较</li>
+<li>基础类型与高级类型之间进行比较，<code>==</code>和<code>===</code>是有区别的<ol>
+<li>对于<code>==</code>，<strong>将引用类型转化为基础类型</strong>，进行“值”比较</li>
+<li>因为类型不同，<code>===</code>结果为false</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
 <hr>
-<h2 id="JS中有哪些内置函数"><a href="#JS中有哪些内置函数" class="headerlink" title="JS中有哪些内置函数"></a>JS中有哪些内置函数</h2><p>【记忆】</p>
-<p>内置函数（数据封装类对象）：<br><code>Object</code>、<code>Array</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>、<code>Function</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code></p>
+<h2 id="JS中有哪些内置函数"><a href="#JS中有哪些内置函数" class="headerlink" title="JS中有哪些内置函数"></a>JS中有哪些内置函数</h2><p>内置函数（数据封装类对象）：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" rel="noopener">Object</a>、<a href="https://www.w3school.com.cn/jsref/jsref_obj_array.asp" target="_blank" rel="noopener">Array</a>、<a href="https://www.w3school.com.cn/jsref/jsref_obj_boolean.asp" target="_blank" rel="noopener">Boolean</a>、<a href="https://www.w3school.com.cn/jsref/jsref_obj_string.asp" target="_blank" rel="noopener">String</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" rel="noopener">Function</a>、<a href="https://www.w3school.com.cn/jsref/jsref_obj_date.asp" target="_blank" rel="noopener">Date</a>、<a href="https://huanglizhu.github.io/2020/01/02/JS%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank" rel="noopener">RegExp</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Error" target="_blank" rel="noopener">Error</a>、<a href="https://www.w3school.com.cn/jsref/jsref_number.asp" target="_blank" rel="noopener">Number</a></p>
 <hr>
-<h2 id="JS变量-按-存储方式-分为哪些类型，有何特点"><a href="#JS变量-按-存储方式-分为哪些类型，有何特点" class="headerlink" title="JS变量 按 存储方式 分为哪些类型，有何特点"></a>JS变量 按 存储方式 分为哪些类型，有何特点</h2><p>【值类型、引用类型】</p>
-<p>按照<strong>存储方式</strong>区分为：<strong>值类型、引用类型</strong><br><strong>特点</strong>：值类型相当于复制，<strong>引用类型</strong>则是 <strong>指针复制</strong> 并不是真正的拷贝，两个变量会<strong>共用同一个属性</strong>，他们的值的修改是相互干预的。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2qqapwpj30hr0b9jvg.jpg" alt="按存储方式区分JS变量"></p>
+<h2 id="JS变量-按-存储方式-分为哪些类型，有何特点"><a href="#JS变量-按-存储方式-分为哪些类型，有何特点" class="headerlink" title="JS变量 按 存储方式 分为哪些类型，有何特点"></a>JS变量 按 存储方式 分为哪些类型，有何特点</h2><ul>
+<li>【值类型、引用类型】</li>
+<li>按照<strong>存储方式</strong>区分为：<strong>值类型、引用类型</strong></li>
+<li><strong>特点</strong>：值类型相当于复制，<strong>引用类型</strong>则是 <strong>指针复制</strong> 并不是真正的拷贝，两个变量会<strong>共用同一个属性</strong>，他们的值的修改是相互干预的。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2qqapwpj30hr0b9jvg.jpg" alt="按存储方式区分JS变量"></li>
+</ul>
 <hr>
-<h2 id="如何理解JSON"><a href="#如何理解JSON" class="headerlink" title="如何理解JSON"></a>如何理解JSON</h2><p>【JS对象】</p>
-<p>JSON是一种<strong>数据格式</strong>，<strong>但从JS来看JSON就是一个JS内置对象，他有两个方法</strong>，“JavaScript Object Notation” 即 “JavaScript 对象表示法”，它是<strong>存储和交换文本信息的语法</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2uzf6c2j30fo05fwh2.jpg" alt="JSON"><br><strong>stringify（）</strong>把对象变成字符串<br><strong>parse（）</strong>把字符串变成对象</p>
+<h2 id="如何理解JSON"><a href="#如何理解JSON" class="headerlink" title="如何理解JSON"></a>如何理解JSON</h2><ul>
+<li>【JS对象】</li>
+<li>JSON是一种<strong>数据格式</strong>，<strong>但从JS来看JSON就是一个JS内置对象，他有两个方法</strong>，“JavaScript Object Notation” 即 “JavaScript 对象表示法”，它是<strong>存储和交换文本信息的语法</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2uzf6c2j30fo05fwh2.jpg" alt="JSON"></li>
+</ul>
+<p><strong>stringify（）</strong>把对象变成字符串<br><strong>parse（）</strong>把字符串变成对象</p>
 <hr>
-<h1 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h1><h2 id="如何准确判断一个变量是数组类型（typeof肯定不行）"><a href="#如何准确判断一个变量是数组类型（typeof肯定不行）" class="headerlink" title="如何准确判断一个变量是数组类型（typeof肯定不行）"></a>如何准确判断一个变量是<strong>数组类型</strong>（typeof肯定不行）</h2><p>【instanceof】</p>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"></p>
+<h1 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h1><h2 id="如何准确判断一个变量是数组类型（typeof肯定不行）"><a href="#如何准确判断一个变量是数组类型（typeof肯定不行）" class="headerlink" title="如何准确判断一个变量是数组类型（typeof肯定不行）"></a>如何准确判断一个变量是数组类型（typeof肯定不行）</h2><p><a href="https://huanglizhu.github.io/2020/02/04/JS%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/#instanceof运算符" target="_blank" rel="noopener">instanceof</a>判断<strong>引用类型</strong>（对象、数组、函数）属于哪个构造函数（Object()、Array()、Funtion()）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"></p>
 <hr>
 <h2 id="写一个原型链继承的例子"><a href="#写一个原型链继承的例子" class="headerlink" title="写一个原型链继承的例子"></a>写一个原型链继承的例子</h2><p>【原型扩展属性（函数）】</p>
 <p><strong>基础例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7555wotj30jh0eags2.jpg" alt="基础例子"><br>1-12：创建<strong>两个构造函数Animal()、Dog()</strong>:<br>13：将<strong>Dog的显示类型<code>prototype</code>更改为Animal()的一个对象</strong>:<br>15：new一个Dog()的对象hashiqi，此时<strong>hashiqi不仅有Dog()的属性bark，还有一个继承自<code>Dog.prototype</code>(即Animal()的一个对象)的eat属性</strong>。<br><strong>【eat属性 就来自原型链继承。】</strong></p>
-<p><strong>【面试千万别写这么简单，写下面的例子】</strong></p>
+<p><strong>【面试千万别写这么简单，写下面封装DOM查询的例子】</strong></p>
 <h3 id="封装DOM查询的例子"><a href="#封装DOM查询的例子" class="headerlink" title="封装DOM查询的例子"></a>封装DOM查询的例子</h3><ul>
 <li><strong>功能：获取DOM节点的内容并给节点绑定一个事件。</strong></li>
-<li><strong>原理</strong>：通过<strong>扩展原型</strong>的方式来：根据id获取一个DOM节点，扩展Elem的显式原型方法 html(),调用html()可改变/返回节点的innerHTML。再扩展一个原型方法on()，调用on()可绑定一个事件函数。</li>
-<li><strong>测试方法</strong>：先通过不传参的html()测试是否能成功获取该id的DOM节点的innerHTML，可以则传参改变该innerHTML，并使用on()绑定click函数用于点击节点后弹出警示框。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据传入的id获取DOM元素elem</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Elem</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//this.elem是获取到的对象</span></span><br><span class="line">    <span class="keyword">this</span>.elem = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改Elem的显式原型,调用html()可改/返innerHTML</span></span><br><span class="line">Elem.prototype.html = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;<span class="comment">//绑定elem</span></span><br><span class="line">    <span class="comment">//如果有传参就用参数替换掉获取到的DOM元素的innerHTML</span></span><br><span class="line">    <span class="keyword">if</span> (val) &#123;</span><br><span class="line">        elem.innerHTML = val;</span><br><span class="line">        <span class="comment">// 可不反回this，返回是为了实现链式操作</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> elem.innerHTML;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用on()可绑定事件函数,type是函数名，fn是函数</span></span><br><span class="line">Elem.prototype.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;</span><br><span class="line">    elem.addEventListener(type, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> div1 = <span class="keyword">new</span> Elem(<span class="string">"main-navigation"</span>);</span><br><span class="line"><span class="comment">// console.log(div1.html());说明能够获取innerHTML</span></span><br><span class="line">div1.html(<span class="string">"&lt;p&gt;你好呀&lt;/p&gt;"</span>);</span><br><span class="line">div1.on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"你点击了我！"</span>) ;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<li><strong>原理</strong>：通过<strong>扩展原型</strong>的方式来：根据id获取一个DOM节点，<strong>扩展Elem的显式原型方法html()</strong>,调用html()可<strong>改变/返回节点的innerHTML</strong>。<strong>再扩展一个原型方法on()</strong>，调用on()可<strong>绑定一个事件函数</strong>。（调用html()或者on()时都是到对象的隐式原型（即构造函数的显式原型）中找到的，这就是<strong>原型链继承</strong>）</li>
+<li><strong>测试方法</strong>：先通过不传参的html()测试是否能成功获取该id的DOM节点的innerHTML，可以则传参改变该innerHTML，并使用on()绑定click函数用于点击节点后弹出警示框。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据传入的id获取DOM元素elem</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Elem</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//获取DOM元素并赋予elem</span></span><br><span class="line">    <span class="keyword">this</span>.elem = <span class="built_in">document</span>.getElementById(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改Elem的显式原型，增加html()，使得调用html()可改/返innerHTML</span></span><br><span class="line">Elem.prototype.html = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;<span class="comment">//绑定elem</span></span><br><span class="line">    <span class="comment">//如果有传参就用参数替换掉获取到的DOM元素的innerHTML</span></span><br><span class="line">    <span class="keyword">if</span> (val) &#123;</span><br><span class="line">        elem.innerHTML = val;</span><br><span class="line">        <span class="comment">// 可不反回this，返回是为了实现链式操作</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> elem.innerHTML;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上增on()，使调用on()可绑定事件函数,type是函数名，fn是函数</span></span><br><span class="line">Elem.prototype.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem = <span class="keyword">this</span>.elem;</span><br><span class="line">    elem.addEventListener(type, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> div1 = <span class="keyword">new</span> Elem(<span class="string">"main-navigation"</span>);</span><br><span class="line"><span class="comment">// console.log(div1.html());说明能够获取innerHTML</span></span><br><span class="line">div1.html(<span class="string">"&lt;p&gt;你好呀&lt;/p&gt;"</span>);</span><br><span class="line">div1.on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"你点击了我！"</span>) ;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -231,16 +258,17 @@
 <hr>
 <h1 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h1><h2 id="说一下对变量提升的理解"><a href="#说一下对变量提升的理解" class="headerlink" title="说一下对变量提升的理解"></a>说一下对<strong>变量提升</strong>的理解</h2><p>【变量定义、函数声明（注意和函数表达式的区别）】</p>
 <ul>
-<li>首先要明确，<strong>变量是声明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
+<li>首先要明确，<strong>变量是声明被提升，使用函数声明方式声明的函数在ES5中是整个函数被提升，在ES6中只提升函数的声明。使用函数表达式声明的函数不存在函数提升，和ES6一样只提升函数的声明</strong>（具体见<a href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#函数提升" target="_blank" rel="noopener">例子</a>），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
 <li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
 <li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
 <li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。（变量的提升只会对<code>var</code>命令声明的变量有效，其他不是用var命令声明的变量，不会发生变量的提升。）</li>
 <li><strong>注意</strong>：变量的提升只存在全局/函数作用域中，<strong><code>if(){}</code>或<code>for(){}</code></strong>都不是函数作用域，他们<strong>里面的变量会提升到包裹他们的全局/函数作用域的顶部</strong>。</li>
-<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在块级，使用<strong>let声明的变量不存在变量提升</strong>。</li>
+<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在<strong>块级</strong>，使用<strong>let声明的变量不存在变量提升</strong>。</li>
 <li><strong>函数和变量相比，会被优先提升</strong>。这意味着函数会被提升到更靠前的位置。</li>
-<li>ES5中说，在全局和函数作用域中定义的<strong>函数的声明和定义都将会被提前</strong>到当前作用域的顶部。</li>
 <li><strong>补充</strong>：当出现多个同名变量与同名函数时，<strong>调用该变量名时的优先级为：变量声明&lt; 函数声明 &lt; 变量赋值</strong>（具体参考牛客网20191215第7题）</li>
-<li>通过函数声明方式创建的函数会被提升，<strong>通过表达式方法创建的函数不会被提升</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="帮助理解"></li>
+<li>通过函数声明方式创建的函数会被提升，<strong>通过表达式方法创建的函数不会被函数提升</strong>（他会类似于<strong>变量提升</strong>）：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// f a() &#123; console.log(a) &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数声明，整个函数提升</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数表达式，只提升b的声明，即var b=undefined</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 <hr>
 <h2 id="说明this的几种不同的使用场景"><a href="#说明this的几种不同的使用场景" class="headerlink" title="说明this的几种不同的使用场景"></a>说明this的几种不同的使用场景</h2><ul>
