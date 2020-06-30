@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby2pdvwxgj30q10ksgzd.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby2xhr8g2j30r70i0ws2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gby5qy35hpj30ur0k9wv6.jpg">
-<meta property="og:updated_time" content="2020-03-01T04:42:53.711Z">
+<meta property="og:updated_time" content="2020-06-28T13:25:19.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 Promise（1）">
 <meta name="twitter:description" content="复习：同步与异步  同步任务会阻塞程序执行（alert、for、…） 异步任务不会阻塞程序执行（setTimeout、fs.readFile、…） 可参考笔记[异步和单线程]中的例子来帮助理解。">
@@ -286,6 +286,9 @@
 <li><p><strong><code>then</code>方法的参数（回调函数）将在当前脚本所有同步任务执行完才会执行</strong></p>
 </li>
 <li><p><code>then</code>方法<strong>返回</strong>的是<strong>一个新的Promise实例</strong>（注意，不是原来那个Promise实例）。因此可以采用<strong>链式写法</strong>，即<strong>then方法后面再调用另一个then方法</strong>。</p>
+<ul>
+<li><strong>注意：</strong> then确实会返回一个promise，但是<strong>如果不手动return Promise，那么默认返回的promise状态就是resolved</strong>，值看你return的是啥了，<strong>不写return的话，值是undefined</strong>。return非promise则值就是这个非promise。而<strong>手动return Promise，那返回的promise状态就不一定是resolved了，因此就可以改变下一个then/catch调用的结果</strong>了。</li>
+</ul>
 </li>
 <li><p>采用链式的<code>then</code>，可以指定一组按照次序调用的回调函数。这时，前一个回调函数，有可能返回的还是一个<code>Promise</code>对象（即有异步操作），这时后一个回调函数，就会等待该<code>Promise</code>对象的状态发生变化，才会被调用。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getJSON(<span class="string">"/post/1.json"</span>).<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(post)</span></span> &#123;</span><br><span class="line">  <span class="keyword">return</span> getJSON(post.commentURL);</span><br><span class="line">&#125;).<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span> <span class="params">(comments)</span></span> &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">"resolved: "</span>, comments);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span></span>&#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">"rejected: "</span>, err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>

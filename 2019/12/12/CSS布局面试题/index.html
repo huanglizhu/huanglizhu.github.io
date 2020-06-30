@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>CSS布局面试题 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="实现两栏（三栏）布局的方法 表格布局 float+margin布局（目前主流，注意清除浮动） inline-block布局（注意间隙） flexbox布局（兼容性不好）">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS布局面试题">
+<meta property="og:url" content="http://yoursite.com/2019/12/12/CSS布局面试题/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="实现两栏（三栏）布局的方法 表格布局 float+margin布局（目前主流，注意清除浮动） inline-block布局（注意间隙） flexbox布局（兼容性不好）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznf286gcj30es0iywkj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznfv6p9tj30n106974l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznpd6h9sj30dq0ksq91.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznpp6dbqj30na06bjrl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzo9rh05lj30cz09tjuj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzoa2rgkrj30mv05i0su.jpg">
+<meta property="og:updated_time" content="2020-06-30T03:19:01.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS布局面试题">
+<meta name="twitter:description" content="实现两栏（三栏）布局的方法 表格布局 float+margin布局（目前主流，注意清除浮动） inline-block布局（注意间隙） flexbox布局（兼容性不好）">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS布局面试题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS布局面试题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/12/12/CSS布局面试题/" class="article-date">
+	  <time datetime="2019-12-12T08:17:53.000Z" itemprop="datePublished">十二月 12, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS学习/">CSS学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="实现两栏（三栏）布局的方法"><a href="#实现两栏（三栏）布局的方法" class="headerlink" title="实现两栏（三栏）布局的方法"></a>实现两栏（三栏）布局的方法</h1><ol>
+<li>表格布局</li>
+<li>float+margin布局（目前主流，注意清除浮动）</li>
+<li>inline-block布局（注意间隙）</li>
+<li>flexbox布局（兼容性不好）<a id="more"></a>
+
+</li>
+</ol>
+<hr>
+<h1 id="float布局"><a href="#float布局" class="headerlink" title="float布局"></a>float布局</h1><h2 id="如何使用浮动和margin实现两栏-三栏布局"><a href="#如何使用浮动和margin实现两栏-三栏布局" class="headerlink" title="如何使用浮动和margin实现两栏/三栏布局"></a>如何使用浮动和margin实现两栏/三栏布局</h2><h3 id="两列布局"><a href="#两列布局" class="headerlink" title="两列布局"></a>两列布局</h3><h4 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h4><ul>
+<li><strong>设置左左浮动，或设置左右浮动</strong>（需要设置父元素的宽度）<br>如果父级元素没有设置高度，则需要设置<code>overflow:hidden</code>避免父元素“高度坍塌”。</li>
+<li>可参考笔记<a href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B8%83%E5%B1%80%EF%BC%89/#两列布局（常用float）" target="_blank" rel="noopener">CSS布局</a></li>
+</ul>
+<h4 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h4><p><strong>只设置一个左浮动元素</strong>（红色），然后给<strong>右边蓝色列</strong>设置与红色浮动<strong>等宽的<code>margin-left</code>使得两列不重合</strong>。</p>
+<p><strong>如果右边蓝色列不设置与红色浮动等宽的<code>margin-left</code></strong>，那么红蓝有一部分是重叠的，虽然不影响蓝色列文字的显示，但是后续文字<code>padding</code>的设置会很麻烦：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg" alt="红色浮动元素，蓝色普通元素"></p>
+<p><strong>例子：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznf286gcj30es0iywkj.jpg" alt="例子代码"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznfv6p9tj30n106974l.jpg" alt="效果"></p>
+<hr>
+<h3 id="浮动：三列布局（3种方法）"><a href="#浮动：三列布局（3种方法）" class="headerlink" title="浮动：三列布局（3种方法）"></a>浮动：三列布局（3种方法）</h3><p><strong>方法1 【3个浮动元素】：（可参考笔记<a href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B8%83%E5%B1%80%EF%BC%89/#三列布局（浮动或子绝父相）" target="_blank" rel="noopener">三列布局（浮动或子绝父相）</a>）</strong><br>首先设置父级元素的宽度（<code>width: 100%;overflow: hidden;</code>）</p>
+<ol>
+<li>可以<strong>左左右设置浮动</strong>,然后<strong>中间设置margin调整间距</strong>。</li>
+<li>也可以<strong>都设置成左浮动</strong>，设置margin，调整间距。同样<strong>注意清除浮动</strong>！</li>
+</ol>
+<p>由于都是浮动元素，所以可以控制自己的宽高，也不用担心没脱离普通元素的文本流所引发的问题。（方法2就要注意这个问题）</p>
+<p><strong>方法2 【1、3列浮动，中间margin留位置】：</strong><br><strong>设置第1、3列为浮动，中间使用margin将空间留出来给普通元素。</strong><br>为<strong>防止第三列浮动元素受到中间普通元素文本的影响</strong>，需要在HTML中将最左和最右两个浮动写在一起，<strong>中间的普通元素放在最后</strong>。</p>
+<p><strong>方法3 【1、3列绝对定位，中间margin留位置】：</strong><br>使用<strong>子绝父相</strong>，将父元素设置为相对定位（<code>position：relative</code>），<strong>使用<code>position：absolute</code>将第1、3列设置为绝对定位</strong>，中间使用margin将空间留出来给普通元素。<br>（但我们很少这么做，因为绝对定位是完全脱离文档流的，缺少适应性方面的特性）</p>
+<h4 id="方法2-错误示范"><a href="#方法2-错误示范" class="headerlink" title="方法2 错误示范"></a>方法2 错误示范</h4><p>左列左浮动，中间使用<code>margin-left</code>和<code>margin-right</code>预留出左右两列的宽度，第三列右浮动：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznpd6h9sj30dq0ksq91.jpg" alt="错误代码"><br>可以看到<strong>蓝色列顶部是在中间列下面的，三列并未对齐</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbznpp6dbqj30na06bjrl.jpg" alt="错误效果"><br><strong>原因：</strong>第三列是浮动，<strong>不会脱离文本流</strong>，所以他会给中间的普通元素的文本留出位置。</p>
+<h4 id="方法2-正确示范"><a href="#方法2-正确示范" class="headerlink" title="方法2 正确示范"></a>方法2 正确示范</h4><p>在HTML中将最左和最右两个浮动写在一起，中间的普通元素放在最后。那么浮动元素：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzo9rh05lj30cz09tjuj.jpg" alt="正确代码"><br>此时，<strong>左边浮动尽量往上靠，右边浮动尽量往上靠，最后中间元素再进去看有没有空间</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzoa2rgkrj30mv05i0su.jpg" alt="效果"></p>
+<hr>
+<h1 id="inline-block布局"><a href="#inline-block布局" class="headerlink" title="inline-block布局"></a>inline-block布局</h1><ul>
+<li><strong>思路：</strong> 像文本一样排block元素</li>
+<li><strong>优点：</strong> 不需要处理清除浮动等问题</li>
+<li><strong>缺点：</strong> 需要处理两个<code>inline-block</code>元素之间的<strong>间隙</strong></li>
+</ul>
+<h2 id="inline-block元素中间隙处理方法"><a href="#inline-block元素中间隙处理方法" class="headerlink" title="inline-block元素中间隙处理方法"></a><code>inline-block</code>元素中间隙处理方法</h2><ul>
+<li>因为inline-block元素就像文字一样，两个文字中间一定是有间隙的，所以可以通过<strong>设置父元素<code>font-size</code>为0来消除文字间隙</strong>。</li>
+<li>但此时他的子元素（inline-block元素）中的文字也会消失，所以我们可以<strong>分别设置<code>inline-block</code>子元素的<code>font-size</code>使子元素中文字可以显示出来。</strong></li>
+</ul>
+<hr>
+<h2 id="什么时候使用浮动-inline-block布局"><a href="#什么时候使用浮动-inline-block布局" class="headerlink" title="什么时候使用浮动/inline-block布局"></a>什么时候使用浮动/inline-block布局</h2><ul>
+<li>使用inline-block布局比浮动布局要简单，但是处理一些<strong>自适应</strong>会比较麻烦，<strong>浮动布局会更加方便</strong>。</li>
+<li>处理<strong>定宽的问题</strong>时使用<strong>inline-block布局</strong>。</li>
+</ul>
+<hr>
+<h1 id="position-absolute-fixed有什么区别？"><a href="#position-absolute-fixed有什么区别？" class="headerlink" title="position:absolute/fixed有什么区别？"></a>position:absolute/fixed有什么区别？</h1><ul>
+<li>前者相对<strong>最近的absolute/relative</strong></li>
+<li>后者相对<strong>屏幕（对于移动端就是viewport）</strong>，但是近几年在移动端fixed才能正常使用，所以要兼容比较老的版本则最好在移动端别是一fixed</li>
+</ul>
+<hr>
+<h1 id="display-inline-block的间隙"><a href="#display-inline-block的间隙" class="headerlink" title="display:inline-block的间隙"></a>display:inline-block的间隙</h1><ul>
+<li><strong>原因</strong>：空白字符会产生字符间距</li>
+<li><strong>解决</strong>：消灭字符或者消灭间距</li>
+</ul>
+<hr>
+<h1 id="float父元素高度塌陷"><a href="#float父元素高度塌陷" class="headerlink" title="float父元素高度塌陷"></a>float父元素高度塌陷</h1><ul>
+<li><strong>父级元素高度塌陷</strong>：假设一个float元素是100px的高度，那么他会希望父级元素能撑开100px的高度，但是因为float元素脱硫文档流，所以如果父级里没有其他元素能撑起100px的高度，那么父级高度就会变成0。</li>
+<li><ul>
+<li><strong>为什么</strong>需要清除浮动/<strong>为什么会存在高度塌陷</strong>：<strong>浮动元素不会占据父元素布局空间，所以父元素布局时不会管浮动元素，所以浮动元素有可能超出父元素从而对其他元素产生影响</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="解决父级元素高度塌陷（清除浮动）"><a href="#解决父级元素高度塌陷（清除浮动）" class="headerlink" title="解决父级元素高度塌陷（清除浮动）"></a>解决父级元素高度塌陷（清除浮动）</h2><h3 id="方法1：通过overflow属性控制父元素宽高"><a href="#方法1：通过overflow属性控制父元素宽高" class="headerlink" title="方法1：通过overflow属性控制父元素宽高"></a>方法1：通过<code>overflow</code>属性控制父元素宽高</h3><p>我们可以让父元素能控制自己的宽高（<strong>规定浮动元素超出父元素时的管理规则</strong>）。给父级元素设置<code>overflow:auto</code>，则父级元素会关注内部的元素，当内部元素超出时进行滚动。（当然<code>overflow:hidden</code>也可以）</p>
+<h3 id="方法2：在float元素后清除浮动"><a href="#方法2：在float元素后清除浮动" class="headerlink" title="方法2：在float元素后清除浮动"></a>方法2：在float元素后清除浮动</h3><p>可参考笔记<a href="https://huanglizhu.github.io/2019/10/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E6%B5%AE%E5%8A%A8%EF%BC%89/#清除浮动-clear-属性" target="_blank" rel="noopener">清除浮动( clear 属性)</a></p>
+<p>通过给float元素使用<strong><code>::after</code> 伪元素</strong>来清除浮动：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span>::after &#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">"."</span>; </span><br><span class="line">    <span class="attribute">display</span>:block; </span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>; </span><br><span class="line">    <span class="attribute">visibility</span>:hidden; </span><br><span class="line">    <span class="attribute">clear</span>:both; </span><br><span class="line">    &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>::after</code>的意思是在<code>.clearfix</code>内部的最后加入伪元素<code>::after</code></li>
+<li>首先要显示伪元素，所以<code>display:block</code>(display默认inline)</li>
+<li>然后为伪元素加入空内容，以便伪元素中不会有内容显示在页面中，所以， <code>content:&quot;&quot;</code>；(<code>.</code>也可以，只要加上<code>visibility:hidden</code>;)</li>
+<li>其次，为使伪元素不影响页面布局，将伪元素高度设置为0，所以， <code>height:0</code></li>
+<li>最后，要清除浮动，所以，<code>clear:both</code>。</li>
+</ul>
+<p>after伪元素其实是通过 content 在元素的后面生成了内容为一个点的块级元素。这样一来只要设置这两个非浮动元素之间的距离就行了。</p>
+<hr>
+<h1 id="如何适配移动端页面"><a href="#如何适配移动端页面" class="headerlink" title="如何适配移动端页面"></a>如何适配移动端页面</h1><ul>
+<li>viewport </li>
+<li>rem/viewport/media query</li>
+<li>设计上：隐藏 折行 自适应</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS学习/">CSS学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/15/JS_Number/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Number类及其方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/11/CSS布局（2）浮动 inline-block 响应式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS布局（2）浮动 inline-block 响应式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现两栏（三栏）布局的方法"><span class="nav-number">1.</span> <span class="nav-text">实现两栏（三栏）布局的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#float布局"><span class="nav-number">2.</span> <span class="nav-text">float布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用浮动和margin实现两栏-三栏布局"><span class="nav-number">2.1.</span> <span class="nav-text">如何使用浮动和margin实现两栏/三栏布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两列布局"><span class="nav-number">2.1.1.</span> <span class="nav-text">两列布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法1"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法2"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">方法2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮动：三列布局（3种方法）"><span class="nav-number">2.1.2.</span> <span class="nav-text">浮动：三列布局（3种方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法2-错误示范"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">方法2 错误示范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法2-正确示范"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">方法2 正确示范</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#inline-block布局"><span class="nav-number">3.</span> <span class="nav-text">inline-block布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block元素中间隙处理方法"><span class="nav-number">3.1.</span> <span class="nav-text">inline-block元素中间隙处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候使用浮动-inline-block布局"><span class="nav-number">3.2.</span> <span class="nav-text">什么时候使用浮动/inline-block布局</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#position-absolute-fixed有什么区别？"><span class="nav-number">4.</span> <span class="nav-text">position:absolute/fixed有什么区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display-inline-block的间隙"><span class="nav-number">5.</span> <span class="nav-text">display:inline-block的间隙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#float父元素高度塌陷"><span class="nav-number">6.</span> <span class="nav-text">float父元素高度塌陷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决父级元素高度塌陷（清除浮动）"><span class="nav-number">6.1.</span> <span class="nav-text">解决父级元素高度塌陷（清除浮动）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1：通过overflow属性控制父元素宽高"><span class="nav-number">6.1.1.</span> <span class="nav-text">方法1：通过overflow属性控制父元素宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2：在float元素后清除浮动"><span class="nav-number">6.1.2.</span> <span class="nav-text">方法2：在float元素后清除浮动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何适配移动端页面"><span class="nav-number">7.</span> <span class="nav-text">如何适配移动端页面</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
