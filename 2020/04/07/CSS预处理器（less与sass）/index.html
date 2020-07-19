@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>CSS预处理器（less与sass） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="CSS预处理器 CSS预处理器是基于CSS的另一种语言 通过工具编译成CSS 添加了很多CSS不具备的特性 能提升CSS文件的组织方式">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS预处理器（less与sass）">
+<meta property="og:url" content="http://yoursite.com/2020/04/07/CSS预处理器（less与sass）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="CSS预处理器 CSS预处理器是基于CSS的另一种语言 通过工具编译成CSS 添加了很多CSS不具备的特性 能提升CSS文件的组织方式">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggriz20qokj30np0evthn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjacgpmxj30mp0efaj8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjrpz62qj30pb0dqqe9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjw66q4xj30ik0353z8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrknbs6h8j30so0iydvc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrosfyhajj30f60gfn4l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrpv01zzmj30r60epan2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrq5id98tj30tq0g6k3q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggswfwbuxwj30q70hmtj2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggttbu4c5xj30al044jsv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggtt7tbke5j30dn08ijuo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4osxm2rj30rl0cn7fa.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4x3m8yrj30fd0d2n2y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4tj3bgoj3084054gnw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw56u6abwj30sr0ch7f6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7z276hjj30lp0smh01.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7s5xm4tj30nk0f47h2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7x8weuhj314809e400.jpg">
+<meta property="og:updated_time" content="2020-07-19T05:44:35.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS预处理器（less与sass）">
+<meta name="twitter:description" content="CSS预处理器 CSS预处理器是基于CSS的另一种语言 通过工具编译成CSS 添加了很多CSS不具备的特性 能提升CSS文件的组织方式">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggriz20qokj30np0evthn.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS预处理器（less与sass）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS预处理器（less与sass）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/07/CSS预处理器（less与sass）/" class="article-date">
+	  <time datetime="2020-04-07T05:32:52.000Z" itemprop="datePublished">四月 7, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS学习/">CSS学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS预处理器"><a href="#CSS预处理器" class="headerlink" title="CSS预处理器"></a>CSS预处理器</h1><ul>
+<li>CSS预处理器是<strong>基于CSS的另一种语言</strong></li>
+<li>通过工具编译成CSS</li>
+<li>添加了很多CSS不具备的特性</li>
+<li>能提升CSS文件的组织方式<a id="more"></a></li>
+<li><strong>作用：</strong><ul>
+<li><strong>嵌套</strong>：反映层级，约束选择器范围</li>
+<li><strong>变量和计算</strong>：减少重复代码，方便维护</li>
+<li><strong>Extend和Mixin</strong>：复用代码片段（公共样式的class/清除浮动，将以前在html中的工作放到预处理器中完成）</li>
+<li><strong>循环</strong>：适用于复杂有规律的样式（比如表格、动画）</li>
+<li><strong>import</strong>：CSS文件模块化（可以按照模块的方式组织css文件，不再受限于http加载的问题）</li>
+</ul>
+</li>
+</ul>
+<h1 id="less与sass-对比"><a href="#less与sass-对比" class="headerlink" title="less与sass 对比"></a>less与sass 对比</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><strong>less：</strong> less是基于node的<ul>
+<li><strong>非全局安装（安装到项目下）：</strong><code>npm i less</code>则<strong>调用时</strong>使用<code>./node_module/.bin/lessc 其他参数</code><ul>
+<li><strong>其他参数：</strong><code>xxx.less&gt;yyy.css</code>即<strong>将less文件编译后放入css文件</strong></li>
+</ul>
+</li>
+<li><strong>全局安装：</strong><code>npm i less -g</code>则<strong>调用时</strong>使用<code>lessc 其他参数</code></li>
+</ul>
+</li>
+<li><strong>sass：</strong><ul>
+<li><strong>非全局安装（安装到项目下）：</strong><code>npm i node-sass</code>则<strong>调用时</strong>使用<code>./node_module/.bin/node-sass 其他参数</code><ul>
+<li><strong>其他参数：</strong><code>xxx.scss&gt;yyy.css</code>即<strong>将sass文件（后缀为scss）编译后放入css文件</strong></li>
+</ul>
+</li>
+<li><strong>全局安装：</strong><code>npm i node-sass -g</code>则<strong>调用时</strong>使用<code>node-sass 其他参数</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h2><ul>
+<li><strong>less嵌套：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggriz20qokj30np0evthn.jpg" alt="less嵌套"></li>
+<li><strong>sass嵌套：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjacgpmxj30mp0efaj8.jpg" alt="sass嵌套">sass语法和less类似。除了换行，其他和less编译的css没有区别</li>
+</ul>
+<hr>
+<h2 id="变量和计算"><a href="#变量和计算" class="headerlink" title="变量和计算"></a>变量和计算</h2><ul>
+<li><strong>less中变量语法：</strong><code>@变量名:变量值(带单位);</code></li>
+<li><strong>sass中变量语法：</strong><code>$变量名:变量值(带单位);</code></li>
+<li><strong>语法不同的原因：</strong><ul>
+<li>less是<strong>尽量接近CSS语法</strong></li>
+<li>sass是觉得自己和CSS既然不兼容，就要<strong>避免产生混淆</strong>，因为<code>@</code>在CSS中是有意义的</li>
+</ul>
+</li>
+<li><strong>less的例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjrpz62qj30pb0dqqe9.jpg" alt="less变量和计算"></li>
+<li><strong>sass</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrjw66q4xj30ik0353z8.jpg" alt="sass变量和计算">语法不同，例子和结果除了空行上的区别，其他是没有区别的（background的函数也是相同的）</li>
+</ul>
+<hr>
+<h2 id="mixin-复用CSS代码"><a href="#mixin-复用CSS代码" class="headerlink" title="mixin 复用CSS代码"></a>mixin 复用CSS代码</h2><ul>
+<li><strong>mixin：</strong>实现一大段CSS代码的复用（以前只能在HTML中实现），相当于将一段CSS代码<strong>复制</strong>到调用mixin的地方。</li>
+<li><strong>less：</strong><ul>
+<li><strong>语法：</strong><ul>
+<li><strong>定义mixin：</strong><code>选择器(可传参){CSS规则}</code>和普通class的语法基本没区别</li>
+<li><strong>调用mixin：</strong><code>选择器(可传参)</code>和普通调用class一样</li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
+<li>有括号的mixin <strong>不会被编译到CSS文件中</strong></li>
+<li>mixin <strong>可以不加括号</strong>，但是不加括号的mixin <strong>会被编译到CSS文件中</strong></li>
+</ul>
+</li>
+<li><strong>例子：</strong> <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrknbs6h8j30so0iydvc.jpg" alt="less使用mixin"></li>
+</ul>
+</li>
+<li><strong>sass：</strong><ul>
+<li><strong>语法：</strong><ul>
+<li><strong>定义mixin：</strong><code>@mixin 名称(可传参){CSS规则}</code></li>
+<li><strong>调用mixin：</strong><code>@include 名称(可传参)</code></li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
+<li>定义时<strong>不是选择器名称！是自定义的mixin名称</strong></li>
+</ul>
+</li>
+<li><strong>例子：</strong> <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrosfyhajj30f60gfn4l.jpg" alt="sass使用mixin"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="extend-复用CSS代码"><a href="#extend-复用CSS代码" class="headerlink" title="extend 复用CSS代码"></a>extend 复用CSS代码</h2><ul>
+<li>当我们频繁使用mixin时，就会导致编译产生的CSS文件中出现大量选择器中有一部分都是相同的代码。此时若是手写的CSS，我们会将同样的代码提出来写在公共class中，以此减小CSS文件体积。<strong>extend也可以做到这样的效果</strong></li>
+<li><strong>作用：</strong><ul>
+<li>将mixin代码提取出来作为<strong>公共样式</strong>（如果直接使用mixin则是疯狂复制），比起直接使用mixin <strong>产生的css代码量会更少</strong>，但是十分复杂的情况下直接使用mixin会更好。</li>
+<li>使用extend增加了代码的可维护性。</li>
+</ul>
+</li>
+<li><strong>less：</strong><ul>
+<li><strong>语法：</strong><ul>
+<li><strong>方法1</strong>：<code>当前选择器:extend(mixin的选择器名){当前选择器匹配的CSS规则}</code></li>
+<li><strong>方法2</strong>：<code>当前选择器{CSS规则;&amp;:extend(mixin的选择器名);其他CSS规则}</code></li>
+</ul>
+</li>
+<li><strong>例子：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrpv01zzmj30r60epan2.jpg" alt="less使用extend"></li>
+</ul>
+</li>
+<li><strong>sass：</strong><ul>
+<li><strong>语法：</strong><code>当前选择器{CSS规则;@extend mixin的选择器名;当前选择器匹配的CSS规则}</code></li>
+<li><strong>例子：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrq5id98tj30tq0g6k3q.jpg" alt="sass使用extend"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="loop-循环"><a href="#loop-循环" class="headerlink" title="loop 循环"></a>loop 循环</h2><ul>
+<li><strong>less：</strong><ul>
+<li>less中<strong>没有循环</strong>，但是mixin可以<strong>自己调用自己</strong>，所以可以通过mixin递归实现循环的效果。</li>
+<li><strong>例子：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggswfwbuxwj30q70hmtj2.jpg" alt="loop 循环例子">](<a href="http://ww1.sinaimg.cn/large/005H7IVsgy1ggswfwbuxwj30q70hmtj2.jpg" target="_blank" rel="noopener">http://ww1.sinaimg.cn/large/005H7IVsgy1ggswfwbuxwj30q70hmtj2.jpg</a>)</li>
+</ul>
+</li>
+<li><strong>sass：</strong><ul>
+<li>sass的循环实现更加简单，因为<strong>sass支持for循环</strong>。<strong>但也可以像less那样实现，只是要注意less是外部使用when，而sass是内部使用if</strong></li>
+<li><strong>例子：</strong><ul>
+<li>sass支持的<strong>for来实现循环</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggttbu4c5xj30al044jsv.jpg" alt="sass支持的for来实现循环">生成的css文件和less例子生成的一样（只是多了空格）</li>
+<li><strong>【不推荐】</strong>像less的实现方式：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggtt7tbke5j30dn08ijuo.jpg" alt="sass 循环例子"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="import-CSS模块化"><a href="#import-CSS模块化" class="headerlink" title="import CSS模块化"></a>import CSS模块化</h2><ul>
+<li>在CSS中是可以使用import语句的，但是引入的css样式表并不会进行合并，加载的时候也不会复用，他只会在加载的时候去链接一个个的css样式表，即发出的http请求数并不会因为import而减少。<strong>而预处理器的import会在编译时将css样式表编译到一起，最后产生的是一整个css样式表，可减少发出的http请求数</strong>，提高加载性能。</li>
+<li>预处理器中的<strong>变量可以跨文件使用</strong>， 有了import以后css文件就可以<strong>按照结构划分</strong>，而不用为了性能而将所有css写到一个文件中，<strong>这样有利于维护</strong>。</li>
+<li><strong>语法：</strong><code>@import &quot;相对路径的less或者sass文件名&quot;</code>（可忽略文件名后缀）</li>
+<li><strong>less：</strong><ul>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4osxm2rj30rl0cn7fa.jpg" alt="less中使用import">在实际项目中module1和module2不会那么一致，这里只是演示<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4x3m8yrj30fd0d2n2y.jpg" alt="less中使用import的编译结果"></li>
+<li>在实际项目中就可以把不同的区域样式独立在不同less文件中再最后import在一起编译出一个整体：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw4tj3bgoj3084054gnw.jpg" alt="实际演示"></li>
+</ul>
+</li>
+<li><strong>sass：</strong><br>sass的import语法和less是一样的，唯独需要注意sass的变量定义方法和less不同：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw56u6abwj30sr0ch7f6.jpg" alt="sass中使用import">编译结果和使用less是一样的</li>
+</ul>
+<hr>
+<h1 id="预处理器框架"><a href="#预处理器框架" class="headerlink" title="预处理器框架"></a>预处理器框架</h1><ul>
+<li>使用预处理器框架可<strong>按需使用别人的css代码</strong></li>
+<li>目前流行的预处理器框架：<ul>
+<li>SASS中有<a href="http://compass-style.org/" target="_blank" rel="noopener"><strong>Compass</strong></a>(<a href="http://compass-style.org/examples/compass/css3/flexbox/" target="_blank" rel="noopener">例子</a>)</li>
+<li>Less中有<strong>Lesshat/<a href="http://ecomfe.github.io/est/" target="_blank" rel="noopener">EST</a></strong></li>
+</ul>
+</li>
+<li><strong>作用：</strong><ul>
+<li>提供现成的mixin</li>
+<li>类似JS类库，封装常用功能</li>
+</ul>
+</li>
+</ul>
+<h2 id="EST"><a href="#EST" class="headerlink" title="EST"></a>EST</h2><ul>
+<li><a href="http://ecomfe.github.io/est/" target="_blank" rel="noopener">EST</a>是由百度工程师写的</li>
+<li><strong>基本特性</strong>：<ul>
+<li><a href="http://ecomfe.github.io/est/#variables" target="_blank" rel="noopener">variables</a>是规定好的全局变量，比如使用<code>@support-html5</code>来添加支持 HTML5 新元素相关的代码（默认不支持，需要额外添加的css代码）</li>
+<li><a href="http://ecomfe.github.io/est/#normalize" target="_blank" rel="noopener">normalize</a><strong>用来归一化不同浏览器下的页面样式</strong>，相当于之前讲过的<a href="https://huanglizhu.github.io/2019/12/02/HTML%E5%9F%BA%E7%A1%80%E5%BC%BA%E5%8C%96%EF%BC%882%EF%BC%89/#CSS-Reset重置样式" target="_blank" rel="noopener">CSS Reset重置样式</a>，使用EST时只需<code>.global-normalize();</code>就相当于一大段CSS代码了</li>
+<li><a href="http://ecomfe.github.io/est/#reset" target="_blank" rel="noopener">reset</a>功能同上，也是相当于之前讲过的<a href="https://huanglizhu.github.io/2019/12/02/HTML%E5%9F%BA%E7%A1%80%E5%BC%BA%E5%8C%96%EF%BC%882%EF%BC%89/#CSS-Reset重置样式" target="_blank" rel="noopener">CSS Reset重置样式</a></li>
+<li><a href="http://ecomfe.github.io/est/#compatibility" target="_blank" rel="noopener">compatibility</a>提供基础的<strong>兼容性封装</strong>。</li>
+<li><a href="http://ecomfe.github.io/est/#grid" target="_blank" rel="noopener">grid</a>帮助生成自定义的<strong>栅格布局</strong>（网格布局），实际编译后是采用浮动来实现的。<ul>
+<li><code>.make-row()</code>让元素变为<strong>行</strong>（栅格外部容器）</li>
+<li><code>.make-column()</code>让元素变为<strong>列</strong>（栅格单列容器）</li>
+<li><strong>例子：</strong><ul>
+<li><strong>less文件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7z276hjj30lp0smh01.jpg" alt="grid例子less文件"></li>
+<li><strong>html文件</strong>：引用编译后的less文件<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7s5xm4tj30nk0f47h2.jpg" alt="grid例子html文件"></li>
+<li><strong>效果：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggw7x8weuhj314809e400.jpg" alt="grid例子效果"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="http://ecomfe.github.io/est/#shapes" target="_blank" rel="noopener">shapes</a>绘制基本形状的功能（比如：三角形），例子在上面grid例子最底部</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h2 id="常见的CSS预处理器"><a href="#常见的CSS预处理器" class="headerlink" title="常见的CSS预处理器"></a>常见的CSS预处理器</h2><ul>
+<li><strong>Less</strong>：原生使用Node.js编写</li>
+<li><strong>Sass</strong>：原生使Ruby编写，官方有提供Node版本，但该版本是由c++编写，安装可能比较麻烦</li>
+</ul>
+<h2 id="预处理器的作用"><a href="#预处理器的作用" class="headerlink" title="预处理器的作用"></a>预处理器的作用</h2><ul>
+<li>帮助更好地组织CSS代码</li>
+<li>提高代码复用率</li>
+<li>提升可维护性</li>
+</ul>
+<h2 id="预处理器的能力"><a href="#预处理器的能力" class="headerlink" title="预处理器的能力"></a>预处理器的能力</h2><ul>
+<li><strong>嵌套</strong>：反映层级，约束选择器范围</li>
+<li><strong>变量和计算</strong>：减少重复代码，方便维护</li>
+<li><strong>Extend和Mixin</strong>：复用代码片段（公共样式的class/清除浮动，将以前在html中的工作放到预处理器中完成）</li>
+<li><strong>循环</strong>：适用于复杂有规律的样式（比如表格、动画）</li>
+<li><strong>import</strong>：CSS文件模块化（可以按照模块的方式组织css文件，不再受限于http加载的问题）</li>
+</ul>
+<h2 id="预处理器的优缺点"><a href="#预处理器的优缺点" class="headerlink" title="预处理器的优缺点"></a>预处理器的优缺点</h2><ul>
+<li><strong>优点</strong>：提高代码复用率和可维护性</li>
+<li><strong>缺点</strong>：<ul>
+<li>（开发/发布都）需要引入编译过程</li>
+<li>有学习成本（虽然看起来像css语法，但是less和sass都有自己独立的语法）</li>
+</ul>
+</li>
+</ul>
+<h2 id="推荐使用预处理器吗"><a href="#推荐使用预处理器吗" class="headerlink" title="推荐使用预处理器吗"></a>推荐使用预处理器吗</h2><p>不一定，随着前端工程化的发展，对于css方面的提升有了更多的手段，预处理器不再是唯一的手段，所以还可能有别的方式来处理css所面临的问题。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS学习/">CSS学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/06/前端基础-CSS（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端基础-CSS（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS预处理器"><span class="nav-number">1.</span> <span class="nav-text">CSS预处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less与sass-对比"><span class="nav-number">2.</span> <span class="nav-text">less与sass 对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套"><span class="nav-number">2.2.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量和计算"><span class="nav-number">2.3.</span> <span class="nav-text">变量和计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixin-复用CSS代码"><span class="nav-number">2.4.</span> <span class="nav-text">mixin 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend-复用CSS代码"><span class="nav-number">2.5.</span> <span class="nav-text">extend 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-循环"><span class="nav-number">2.6.</span> <span class="nav-text">loop 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import-CSS模块化"><span class="nav-number">2.7.</span> <span class="nav-text">import CSS模块化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预处理器框架"><span class="nav-number">3.</span> <span class="nav-text">预处理器框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EST"><span class="nav-number">3.1.</span> <span class="nav-text">EST</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">4.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的CSS预处理器"><span class="nav-number">4.1.</span> <span class="nav-text">常见的CSS预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器的作用"><span class="nav-number">4.2.</span> <span class="nav-text">预处理器的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器的能力"><span class="nav-number">4.3.</span> <span class="nav-text">预处理器的能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器的优缺点"><span class="nav-number">4.4.</span> <span class="nav-text">预处理器的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐使用预处理器吗"><span class="nav-number">4.5.</span> <span class="nav-text">推荐使用预处理器吗</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
