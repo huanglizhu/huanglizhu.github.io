@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpzkwu7mhj30e0043glh.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbq02bg0tfj305u04ldfo.jpg">
-<meta property="og:updated_time" content="2020-02-25T13:58:33.744Z">
+<meta property="og:updated_time" content="2020-07-21T15:09:59.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-transition-group实现多元素之间的动画">
 <meta name="twitter:description" content="TransitionGroup配合CSSTransition 回到文档中,我们可以看到有react-transition-group有四个组件：Transition、CSSTransition、SwitchTransition、TransitionGroup。 上一篇笔记我们学习了使用CSSTransition实现单个元素的动画效果。 如果我们想实现多个元素之间的动画效果，就要使用Transiti">
@@ -190,7 +190,7 @@
 <p><strong>在按钮的事件绑定函数<code>handleAddItem</code>中</strong>，每次点击后都使用setState()把新的item存到list数组中（记住setState有一个参数prevState表示上一次的state数据），<strong>使用return返回一个对象</strong>：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handleAddItem</span><span class="params">()</span></span> &#123;</span><br><span class="line">  this.setState((prevState) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      list: [..<span class="selector-class">.prevState</span><span class="selector-class">.list</span>, <span class="string">"item"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在render函数的return中，<strong>使用map()循环展示list中的每一项item,并将其放到div标签中返回</strong>（注意：JS变量/表达式 写在 JSX语法中，需要使用<code>{}</code>包裹）：</p>
+<p>在render函数的return中，<strong>使用map()循环展示list中的每一项item,并将其放到div标签中返回</strong>（注意：JS变量/表达式 写在 JSX语法中，需要使用<code>{}</code>包裹）：<br>【<strong>注意：这里返回的是使用map产生的数组，不能用forEach。<a href="https://www.cnblogs.com/Shyno/p/11084017.html" target="_blank" rel="noopener">在jsx渲染中,如果这个变量是一个数组，则会展开这个数组的所有成员</a></strong>】</p>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  this.state.list.map((<span class="name">item</span>,index) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div key=&#123;index&#125;&gt;&#123;item&#125;&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此时每点击一次按钮就能在页面上添加一个“item”，但还没有动画效果：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbpzkwu7mhj30e0043glh.jpg" alt="点击两次按钮后"></p>
