@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>React知识点汇总（项目） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React知识点汇总（项目）">
+<meta property="og:url" content="http://yoursite.com/2020/04/10/React知识点汇总（项目）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg">
+<meta property="og:updated_time" content="2020-07-27T07:56:11.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React知识点汇总（项目）">
+<meta name="twitter:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React知识点汇总（项目）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React知识点汇总（项目）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/10/React知识点汇总（项目）/" class="article-date">
+	  <time datetime="2020-04-10T02:55:36.000Z" itemprop="datePublished">四月 10, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="总结遇到过的性能优化"><a href="#总结遇到过的性能优化" class="headerlink" title="总结遇到过的性能优化"></a>总结遇到过的性能优化</h1><ul>
+<li><strong>【构造函数内绑定事件函数this指向】</strong>：在constructor函数里<strong>绑定 事件函数 的 this指向（bind）</strong>，而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。<a id="more"></a></li>
+<li><strong>【异步setState】</strong>：React的<strong>底层内置的setState是异步</strong>的，可以把多次的数据改变结合成一次来做，<strong>降低了 虚拟DOM 的比对频率</strong>。</li>
+<li><strong>【虚拟DOM】</strong>：React的底层用了<strong>虚拟DOM</strong>的概念，替代了之前的 真实的DOM（JS对象）。</li>
+<li><strong>【diff算法】</strong>：React的 <strong>diff算法： 同层比对、key值的运用</strong> 来提升 虚拟DOM 比对的速度。</li>
+<li><strong>【shouldComponentUpdate/PureComponent避免不必要的子组件render函数的渲染更新】</strong>：<ul>
+<li>借助<strong><a href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-的-生命周期函数" target="_blank" rel="noopener">生命周期函数</a>shouldComponentUpdate</strong>来提高组件性能，<strong>避免不必要的子组件render函数的渲染更新</strong>。（<a href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#利用它做性能优化" target="_blank" rel="noopener">例子在“React高级内容（3）”</a>）<ul>
+<li>更为简单的方法可参考下面的“PureComponent”</li>
+</ul>
+</li>
+<li><strong>让组件继承</strong> react提供的<strong><a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#首页性能优化（PureComponent）" target="_blank" rel="noopener">PureComponent</a></strong>（<strong>替代手写shouldComponentUpdate</strong>）判断<strong>只有和本组件有关的数据更新</strong>时，<strong>本组件的render函数才执行</strong>，否则return false不让组件重新渲染。通过<strong>避免虚拟DOM的比对</strong>来提高性能。</li>
+</ul>
+</li>
+<li><strong>【使用react-router-dom库进行路由跳转】</strong>：使用<strong>react-router-dom的Link组件</strong>进行<strong>页面跳转</strong>，跳转时<strong>不会发送HTTP请求</strong>，因此加载速度会快很多，借此也可提高性能。</li>
+</ul>
+<h1 id="React中的CSS"><a href="#React中的CSS" class="headerlink" title="React中的CSS"></a>React中的CSS</h1><ul>
+<li>比较麻烦，因为<strong>官方没有集成方案</strong>，也没有推荐具体的方案</li>
+<li>但<strong>社区方案众多</strong>，可以根据需求进行选择<ul>
+<li><strong>css modules</strong></li>
+<li><strong>（babel）react-css-modules</strong></li>
+<li><a href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#styled-components管理CSS样式" target="_blank" rel="noopener"><strong>styled components</strong></a>：直接在单独的js文件中<strong>将样式写在组件里</strong>（也可以修饰现有的组件），然后<strong>直接使用带有样式的组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg" alt="styled components例子">从Div组件可以明确：<strong>styled components不仅可生成带样式组件，还可获取组件属性设置特殊样式</strong>，例子中就规定了big属性的Div组件字体大小为72px（涉及ES6的模板字符串和变量的使用方法）</li>
+<li><strong>styled jsx</strong>：简单粗暴，在jsx中允许直接写入css</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用antd时用styled-Components修改部分样式"><a href="#使用antd时用styled-Components修改部分样式" class="headerlink" title="使用antd时用styled-Components修改部分样式"></a>使用antd时用styled-Components修改部分样式</h1><ul>
+<li><a href="https://blog.csdn.net/nico2333/article/details/104217852" target="_blank" rel="noopener">参考方法1</a>：新建一个 styled-components 组件 Test 包裹在想要修改的antd组件外，然后通过从 Test 中操作其子代CSS样式对目标antd组件进行样式修改。</li>
+<li><a href="https://www.cnblogs.com/jack-zhou21235/p/11326364.html" target="_blank" rel="noopener">参考方法2</a></li>
+</ul>
+<h1 id="路由跳转（react-router-dom的Link组件）"><a href="#路由跳转（react-router-dom的Link组件）" class="headerlink" title="路由跳转（react-router-dom的Link组件）"></a>路由跳转（react-router-dom的Link组件）</h1><ul>
+<li><strong>注意</strong>：react是 <strong>单页应用的跳转</strong>，也就是说，不管怎么进行页面跳转，<strong>整个网站只会加载一次html文件</strong>，这也就决定了<strong>不能使用<code>&lt;a&gt;</code>标签进行页面跳转</strong>。<ul>
+<li>如果使用<code>&lt;a&gt;</code>标签进行页面跳转，跳转时会发送HTTP请求。<br>而借助<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">react-router-dom</a>的Link组件实现跳转则不会，<strong>因此加载速度会快很多，借此也可提高性能。</strong></li>
+</ul>
+</li>
+<li><a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#路由跳转（react-router-dom的Link组件）" target="_blank" rel="noopener">react-router-dom的Link组件 例子</a></li>
+</ul>
+<h2 id="路由传值"><a href="#路由传值" class="headerlink" title="路由传值"></a>路由传值</h2><ul>
+<li>可参考<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#路由传值" target="_blank" rel="noopener">react-router-dom的使用</a></li>
+<li>个人觉得，【react的url中传递参数值】<strong>组件的跳转路径</strong>上最好<strong>使用<code>/:参数值</code></strong>的方法传值，这样<strong>组件中可以直接使用<code>this.props.match.params.参数名</code>获取所传参数值</strong>。【react将参数值传递给node】在react的组件的action中通过<strong>ajax请求的路径中使用<code>?key=value</code>来传值</strong>，这样<a href="https://huanglizhu.github.io/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/#app-js解析公共参数" target="_blank" rel="noopener"><strong>在node中通过queryString.parse</strong></a>可直接<strong>得到JSON对象</strong></li>
+</ul>
+<h1 id="遇到过的问题"><a href="#遇到过的问题" class="headerlink" title="遇到过的问题"></a>遇到过的问题</h1><ol>
+<li>模拟接口数据（Charles抓包/mockjs/public下新建api文件夹）</li>
+<li>路由跳转时 Link组件 必须在router的内部（<a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#详情页到首页" target="_blank" rel="noopener">例子</a>、<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">react-router-dom</a>、<a href="https://huanglizhu.github.io/2020/02/12/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/#路由" target="_blank" rel="noopener">react中路由相关知识点</a>）</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/面试题/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/11/React知识点汇总（基础使用1）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React知识点汇总（基础使用1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/09/ES6 Map和Set/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6 Map和Set</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结遇到过的性能优化"><span class="nav-number">1.</span> <span class="nav-text">总结遇到过的性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React中的CSS"><span class="nav-number">2.</span> <span class="nav-text">React中的CSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用antd时用styled-Components修改部分样式"><span class="nav-number">3.</span> <span class="nav-text">使用antd时用styled-Components修改部分样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由跳转（react-router-dom的Link组件）"><span class="nav-number">4.</span> <span class="nav-text">路由跳转（react-router-dom的Link组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由传值"><span class="nav-number">4.1.</span> <span class="nav-text">路由传值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到过的问题"><span class="nav-number">5.</span> <span class="nav-text">遇到过的问题</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
