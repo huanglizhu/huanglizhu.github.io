@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gga4zb4ofgj30mx09976v.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gga50uh01qj30ds0c543v.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gga4p4pyomj30an0jr10o.jpg">
-<meta property="og:updated_time" content="2020-08-08T14:18:15.512Z">
+<meta property="og:updated_time" content="2020-08-10T03:47:15.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS布局（2）浮动 inline-block 响应式">
 <meta name="twitter:description" content="浮动：两列布局方法1 设置左左浮动，或设置左右浮动（需要设置父元素的宽度）如果父级元素没有设置高度，则需要设置overflow:hidden避免父元素“高度坍塌”。">
@@ -215,26 +215,33 @@
 <li>处理<strong>定宽的问题</strong>时使用<strong>inline-block布局</strong>。</li>
 </ul>
 <hr>
-<h1 id="响应式设计和布局"><a href="#响应式设计和布局" class="headerlink" title="响应式设计和布局"></a>响应式设计和布局</h1><p><strong>响应式设计：</strong> 在不同设备上正常使用，一般主要处理屏幕大小问题。</p>
-<p><strong>主要方法：</strong></p>
-<ol>
+<h1 id="响应式设计和布局"><a href="#响应式设计和布局" class="headerlink" title="响应式设计和布局"></a>响应式设计和布局</h1><ul>
+<li><strong>响应式设计：</strong> 在不同设备上正常使用，一般主要处理屏幕大小问题。</li>
+<li><strong>主要方法：</strong><ol>
 <li>隐藏+折行+自适应空间</li>
-<li>rem/viewport/media query</li>
-</ol>
-<ul>
-<li><p><strong>rem代替px</strong>：1rem 等于 HTML 中的根元素的字体大小，可参考笔记<a href="https://huanglizhu.github.io/2019/09/24/百度前端技术学院%20第三天学习笔记（CSS文本）/#rem" target="_blank" rel="noopener">CSS文本</a></p>
-</li>
-<li><p><strong>viewport</strong>：使网页<strong>适配移动端</strong><br><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;</code><br><code>width=device-width</code>: </p>
-<ul>
-<li><strong>content：</strong>将<strong>页面宽度<code>width</code>设为 屏幕区域大小<code>device-width</code>（注意区分 页面 和 屏幕 ，<code>device-width</code>只和设备有关系）</strong>,使页面和屏幕的宽度进行匹配。（如果不加这个，那么很多手机上网页的默认宽度使980px，然而手机只有这么大却要显示980个像素，看起来页面就被缩小了很多。）</li>
+<li>rem/viewport/media query<ul>
+<li><strong>rem代替px</strong>：1rem 等于 HTML 中的根元素的字体大小，可参考笔记<a href="https://huanglizhu.github.io/2019/09/24/百度前端技术学院%20第三天学习笔记（CSS文本）/#rem" target="_blank" rel="noopener">CSS文本</a></li>
+<li><strong>viewport</strong>：使网页<strong>页面的宽度</strong>和<strong>设备屏幕的宽度</strong>进<strong>行匹配</strong><br><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;</code><ul>
+<li><strong>width=device-width：</strong>将<strong>页面宽度<code>width</code>设为 屏幕区域大小<code>device-width</code>（注意区分 页面 和 屏幕 ，<code>device-width</code>只和设备有关系）</strong>,使页面和屏幕的宽度进行匹配。（如果不加这个，那么很多手机上网页的默认宽度使980px，然而手机只有这么大却要显示980个像素，看起来页面就被缩小了很多。）</li>
 <li><strong>initial-scale：</strong>表示初始的缩放比例</li>
 </ul>
 </li>
-<li><p><strong>media query：</strong> 根据不同设备的特性匹配不同样式。</p>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>media query：</strong> 根据不同设备的特性匹配不同样式。</li>
+</ul>
+<h2 id="viewport案例（适配移动端）"><a href="#viewport案例（适配移动端）" class="headerlink" title="viewport案例（适配移动端）"></a>viewport案例（适配移动端）</h2><ul>
+<li><strong>viewport</strong> 是用户网页的<strong>可视区域</strong>。</li>
+<li>viewport 翻译为中文可以叫做”视区”。</li>
+<li>手机浏览器是把页面放在一个虚拟的”窗口”（viewport）中，通常这个虚拟的”窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过<strong>平移和缩放</strong>来看网页的不同部分。</li>
+<li><strong>没有使用viewport的效果</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqqjip7tj314n06xjx2.jpg" alt="没有使用viewport的效果"></li>
+<li><strong>加上viewport</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqq76038j30hi0ji7ao.jpg" alt="代码"><ul>
+<li><strong>加上viewport之后的效果</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqx2v8rvj31480amdii.jpg" alt="加上viewport之后的效果"></li>
+</ul>
 </li>
 </ul>
-<h2 id="viewport案例（适配移动端）"><a href="#viewport案例（适配移动端）" class="headerlink" title="viewport案例（适配移动端）"></a>viewport案例（适配移动端）</h2><p>没有使用viewport的效果：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqqjip7tj314n06xjx2.jpg" alt="没有使用viewport的效果"></p>
-<p>加上viewport：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqq76038j30hi0ji7ao.jpg" alt="代码"><br>加上viewport之后的效果：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqx2v8rvj31480amdii.jpg" alt="加上viewport之后的效果"></p>
 <h2 id="media-query案例"><a href="#media-query案例" class="headerlink" title="media query案例"></a>media query案例</h2><h3 id="隐藏"><a href="#隐藏" class="headerlink" title="隐藏"></a>隐藏</h3><p>给上一个例子加上media query，<strong>规定左边红色列只有在屏幕宽度大于640px的情况下显示</strong>，小于时隐藏左边红色列：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzqyk4ljyj30b503xq3s.jpg" alt="代码"><br>一般移动端都是小于640px的，所以移动端就会隐藏左边红色列：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbzr08i4sjj31420aoafh.jpg" alt="效果"></p>
 <hr>
 <h3 id="适配移动端"><a href="#适配移动端" class="headerlink" title="适配移动端"></a>适配移动端</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gga4zb4ofgj30mx09976v.jpg" alt="效果对比"></p>
