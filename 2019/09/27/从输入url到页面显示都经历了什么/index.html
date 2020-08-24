@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w1vs056j30gp056dgz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w4ijarcj30hr05qwgo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gd4w5f25kjj30hq03z3zm.jpg">
-<meta property="og:updated_time" content="2020-06-12T02:58:23.730Z">
+<meta property="og:updated_time" content="2020-08-24T01:44:38.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从输入url到页面显示都经历了什么">
 <meta name="twitter:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）  客户端（浏览器）：     DNS解析：通过输入的域名解析到一个IP地址；   建立TCP连接（三次握手）；   发送http请求。   服务端：    server接收到http请求（Request），处理，并返回HTTP报文（Response）。（具体处理过程在“开发博客项目之接口(1)”中的“nodejs处理HTTP请求”中）（res">
@@ -380,24 +380,19 @@
 <h5 id="JS的执行步骤（事件循环）"><a href="#JS的执行步骤（事件循环）" class="headerlink" title="JS的执行步骤（事件循环）"></a>JS的执行步骤（事件循环）</h5><ul>
 <li><strong>事件循环是解决javaScript单线程运行阻塞的一种机制</strong>。</li>
 <li>所有的<strong>同步任务</strong>在主线程上执行，形成一个<strong>执行栈</strong>。<strong>异步任务</strong>有了<strong>运行结果</strong>就会在<strong>任务队列</strong>中放置一个<strong>事件</strong>。<strong>脚本运行时先依次运行执行栈中的所有同步任务，然后会从任务队列里提取事件，选择需要首先执行的异步任务然后执行。</strong><ul>
-<li><strong>任务队列 分为 宏任务队列 和 微任务队列</strong>。</li>
+<li><strong>任务队列 分为（但不包含） 宏任务队列 和 微任务队列（因为script中的同步任务也属于宏任务）</strong>。</li>
 <li><strong>宏任务先于微任务执行（第一个执行的宏任务是script中的同步任务）</strong></li>
 </ul>
 </li>
 <li>在此过程中，主线程要做的就是从任务队列中去执行事件，执行完毕，再取事件，再执行事件…这样不断取事件，执行事件的循环机制就叫做<strong>事件循环机制</strong>。</li>
 </ul>
 <p><strong>注意：</strong>异步任务被挂起时会由<strong>浏览器的引擎</strong>去执行他们，而同步任务则是由JS的引擎去执行。</p>
-<p><strong>总结事件循环：</strong><br><strong>执行栈 全部执行完毕后 –&gt;清空 微任务 –&gt;会取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 无线循环</strong></p>
+<p><strong>总结事件循环：</strong><br><strong>执行栈（第一个宏任务） 全部执行完毕后 –&gt;清空 微任务 –&gt;会取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 无线循环</strong></p>
 <h5 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h5><ul>
-<li><p><strong>异步任务分为宏任务（macrotask ）和微任务（microtask ）</strong> 两种。</p>
-</li>
-<li><p><strong>宏任务先于微任务执行</strong>。</p>
-</li>
-<li><p><strong>MacroTask（宏任务）</strong>：</p>
-<ul>
-<li>script(整体代码)</li>
-<li>setTimeout</li>
-<li>setInterval</li>
+<li><strong>宏任务先于微任务执行</strong>。</li>
+<li><strong>MacroTask（宏任务）</strong>：<ul>
+<li><strong>script(整体代码)</strong>：第一个宏任务队列中只有一个任务： <strong>执行主线程的js代码</strong></li>
+<li><strong>定时器：</strong> setTimeout、setInterval</li>
 <li>I/O</li>
 <li>UI交互事件</li>
 <li>postMessage</li>
@@ -405,8 +400,7 @@
 <li>setImmediate(浏览器暂时不支持，只有IE10支持，具体可见MDN)</li>
 </ul>
 </li>
-<li><p><strong>MicroTask（微任务）</strong>：</p>
-<ul>
+<li><strong>MicroTask（微任务）</strong>：<ul>
 <li>Process.nextTick（Node独有）</li>
 <li>Promise</li>
 <li>MutationObserver（具体使用方式查看这里）</li>
