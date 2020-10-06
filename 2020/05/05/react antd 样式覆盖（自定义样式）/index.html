@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>react antd 样式覆盖（自定义样式） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
+  
+  
+  
+  
+  <meta name="description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+<meta name="keywords" content="React.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react antd 样式覆盖（自定义样式）">
+<meta property="og:url" content="http://yoursite.com/2020/05/05/react antd 样式覆盖（自定义样式）/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-06T07:17:06.425Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react antd 样式覆盖（自定义样式）">
+<meta name="twitter:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-react antd 样式覆盖（自定义样式）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      react antd 样式覆盖（自定义样式）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/05/05/react antd 样式覆盖（自定义样式）/" class="article-date">
+	  <time datetime="2020-05-05T10:49:52.000Z" itemprop="datePublished">五月 5, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现<strong>固定位置</strong>，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算<strong>在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层</strong></p>
+<a id="more"></a>
+
+<h1 id="原本的自定义组件的样式"><a href="#原本的自定义组件的样式" class="headerlink" title="原本的自定义组件的样式"></a>原本的自定义组件的样式</h1><p>header/style.js：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import styled from <span class="string">"styled-components"</span><span class="comment">;</span></span><br><span class="line">import LogoPic from <span class="string">"../../statics/logo.png"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">export const HeaderWrapper = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> z-index: <span class="number">1</span><span class="comment">;</span></span><br><span class="line"><span class="symbol">  position:</span>relative<span class="comment">;</span></span><br><span class="line"><span class="symbol">  height:</span><span class="number">56</span>px<span class="comment">;</span></span><br><span class="line">  <span class="keyword">border-bottom:1px </span>solid <span class="comment">#f0f0f0;</span></span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="使用antd后给Row单独定义部分样式（行内样式）"><a href="#使用antd后给Row单独定义部分样式（行内样式）" class="headerlink" title="使用antd后给Row单独定义部分样式（行内样式）"></a>使用antd后给Row单独定义部分样式（行内样式）</h1><p>header/index.js：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Row style=&#123; &#123; <span class="string">position:</span><span class="string">"relative"</span>,<span class="string">zIndex:</span> <span class="number">1</span>,<span class="string">height:</span><span class="string">"56px"</span>,<span class="string">borderBottom:</span><span class="string">"1px solid #f0f0f0"</span> &#125; &#125;&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><a href="https://blog.csdn.net/weixin_37620905/article/details/86567861" target="_blank" rel="noopener">参考</a></li>
+</ul>
+<h2 id="行内样式"><a href="#行内样式" class="headerlink" title="行内样式"></a>行内样式</h2><ul>
+<li>如上所示，在antd提供的组件中可使用<code>style={ {...} }</code>来自定义样式，** 最外层<code>{}</code>表示是一个js表达式，里面的<code>{}</code>表示是一个js对象**</li>
+<li>注意： <strong><code>;</code>与<code>,</code>的转变</strong>、react中css样式名采用<strong>驼峰命名法</strong> 、值 <strong>需要引号</strong></li>
+</ul>
+<h2 id="声明样式"><a href="#声明样式" class="headerlink" title="声明样式"></a>声明样式</h2><p>声明样式其实是行内样式的一种改进写法，在<strong>render函数外部创建style对象</strong>，然后<strong>传递给组件</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">const</span> style1=&#123;    </span><br><span class="line">      background:<span class="string">'#eee'</span>,</span><br><span class="line">      width:<span class="string">'200px'</span>,</span><br><span class="line">      height:<span class="string">'200px'</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> style2=&#123;    </span><br><span class="line">      color:<span class="string">'red'</span>,</span><br><span class="line">      fontSize:<span class="string">'40px'</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div style=&#123;style1&#125;&gt;</span><br><span class="line">        &lt;p style= &#123;style2&#125;&gt;行内样式&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS-Modules"><a href="#CSS-Modules" class="headerlink" title="CSS Modules"></a>CSS Modules</h2><p>可参考阮一峰的<a href="http://www.ruanyifeng.com/blog/2016/06/css_modules.html" target="_blank" rel="noopener">CSS Modules</a></p>
+<h2 id="Styled-Components"><a href="#Styled-Components" class="headerlink" title="Styled Components"></a>Styled Components</h2><p>Styled Component是<strong>react的一个第三方库</strong>，是<strong>CSS in JS 的优秀实践和代表</strong>，将CSS写在JS中，可以实现常规CSS所不好处理的逻辑复杂、函数方法、复用、避免干扰。样式书写将直接依附在JSX上面，HTML、CSS、JS三者再次内聚，同时也实现H5的语义化标签表现形式。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js学习/">React.js学习</a>, <a class="article-category-link" href="/categories/简书项目/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/15/antd 定制主题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          antd 定制主题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/01/react start报错 Can't resolve/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">react start报错 Can&#39;t resolve &#39;@babel/runtime/helpers/esm/createSuper&#39;</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原本的自定义组件的样式"><span class="nav-number">2.</span> <span class="nav-text">原本的自定义组件的样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用antd后给Row单独定义部分样式（行内样式）"><span class="nav-number">3.</span> <span class="nav-text">使用antd后给Row单独定义部分样式（行内样式）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行内样式"><span class="nav-number">4.1.</span> <span class="nav-text">行内样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明样式"><span class="nav-number">4.2.</span> <span class="nav-text">声明样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Modules"><span class="nav-number">4.3.</span> <span class="nav-text">CSS Modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Styled-Components"><span class="nav-number">4.4.</span> <span class="nav-text">Styled Components</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2020
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
