@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-10-06T07:17:06.425Z">
+<meta property="og:updated_time" content="2020-10-06T07:50:31.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react antd 样式覆盖（自定义样式）">
 <meta name="twitter:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
@@ -168,13 +168,13 @@
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import styled from <span class="string">"styled-components"</span><span class="comment">;</span></span><br><span class="line">import LogoPic from <span class="string">"../../statics/logo.png"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">export const HeaderWrapper = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> z-index: <span class="number">1</span><span class="comment">;</span></span><br><span class="line"><span class="symbol">  position:</span>relative<span class="comment">;</span></span><br><span class="line"><span class="symbol">  height:</span><span class="number">56</span>px<span class="comment">;</span></span><br><span class="line">  <span class="keyword">border-bottom:1px </span>solid <span class="comment">#f0f0f0;</span></span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="使用antd后给Row单独定义部分样式（行内样式）"><a href="#使用antd后给Row单独定义部分样式（行内样式）" class="headerlink" title="使用antd后给Row单独定义部分样式（行内样式）"></a>使用antd后给Row单独定义部分样式（行内样式）</h1><p>header/index.js：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Row style=&#123; &#123; <span class="string">position:</span><span class="string">"relative"</span>,<span class="string">zIndex:</span> <span class="number">1</span>,<span class="string">height:</span><span class="string">"56px"</span>,<span class="string">borderBottom:</span><span class="string">"1px solid #f0f0f0"</span> &#125; &#125;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Row style=&#123;&#123; <span class="string">position:</span><span class="string">"relative"</span>,<span class="string">zIndex:</span> <span class="number">1</span>,<span class="string">height:</span><span class="string">"56px"</span>,<span class="string">borderBottom:</span><span class="string">"1px solid #f0f0f0"</span> &#125;&#125;&gt;</span><br></pre></td></tr></table></figure>
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li><a href="https://blog.csdn.net/weixin_37620905/article/details/86567861" target="_blank" rel="noopener">参考</a></li>
 </ul>
 <h2 id="行内样式"><a href="#行内样式" class="headerlink" title="行内样式"></a>行内样式</h2><ul>
-<li>如上所示，在antd提供的组件中可使用<code>style={ {...} }</code>来自定义样式，** 最外层<code>{}</code>表示是一个js表达式，里面的<code>{}</code>表示是一个js对象**</li>
+<li>如上所示，在antd提供的组件中可使用<code>style={{ ...}}</code>来自定义样式，** 最外层<code>{}</code>表示是一个js表达式，里面的<code>{}</code>表示是一个js对象**</li>
 <li>注意： <strong><code>;</code>与<code>,</code>的转变</strong>、react中css样式名采用<strong>驼峰命名法</strong> 、值 <strong>需要引号</strong></li>
 </ul>
 <h2 id="声明样式"><a href="#声明样式" class="headerlink" title="声明样式"></a>声明样式</h2><p>声明样式其实是行内样式的一种改进写法，在<strong>render函数外部创建style对象</strong>，然后<strong>传递给组件</strong>：</p>
