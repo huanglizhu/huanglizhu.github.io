@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+  <meta name="description" content="自定义antd组件部分样式有几种方式可以自定义antd组件部分样式，使用Styled Components定义样式的项目可以参考方法1或者方法2，使用css文件定义样式的项目可以参考方法3。">
 <meta name="keywords" content="React.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react antd 样式覆盖（自定义样式）">
-<meta property="og:url" content="http://yoursite.com/2020/05/05/react antd 样式覆盖（自定义样式）/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/08/04/react antd 样式覆盖（自定义样式）/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+<meta property="og:description" content="自定义antd组件部分样式有几种方式可以自定义antd组件部分样式，使用Styled Components定义样式的项目可以参考方法1或者方法2，使用css文件定义样式的项目可以参考方法3。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-10-06T07:55:39.686Z">
+<meta property="og:updated_time" content="2020-10-24T08:48:42.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react antd 样式覆盖（自定义样式）">
-<meta name="twitter:description" content="原因原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现固定位置，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层">
+<meta name="twitter:description" content="自定义antd组件部分样式有几种方式可以自定义antd组件部分样式，使用Styled Components定义样式的项目可以参考方法1或者方法2，使用css文件定义样式的项目可以参考方法3。">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -145,8 +145,8 @@
     
     <div class="article-meta">
       
-	<a href="/2020/05/05/react antd 样式覆盖（自定义样式）/" class="article-date">
-	  <time datetime="2020-05-05T10:49:52.000Z" itemprop="datePublished">五月 5, 2020</time>
+	<a href="/2020/08/04/react antd 样式覆盖（自定义样式）/" class="article-date">
+	  <time datetime="2020-08-04T07:56:04.000Z" itemprop="datePublished">八月 4, 2020</time>
 	</a>
 
       
@@ -161,16 +161,30 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现<strong>固定位置</strong>，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算<strong>在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层</strong></p>
+        <h1 id="自定义antd组件部分样式"><a href="#自定义antd组件部分样式" class="headerlink" title="自定义antd组件部分样式"></a>自定义antd组件部分样式</h1><p>有几种方式可以自定义antd组件部分样式，<strong>使用Styled Components定义样式的项目可以参考方法1或者方法2</strong>，<strong>使用css文件定义样式的项目可以参考方法3</strong>。</p>
 <a id="more"></a>
 
-<h1 id="原本的自定义组件的样式"><a href="#原本的自定义组件的样式" class="headerlink" title="原本的自定义组件的样式"></a>原本的自定义组件的样式</h1><p>header/style.js：</p>
+<h2 id="方法1：自定义组件包裹antd组件（Styled-Components）"><a href="#方法1：自定义组件包裹antd组件（Styled-Components）" class="headerlink" title="方法1：自定义组件包裹antd组件（Styled Components）"></a>方法1：自定义组件包裹antd组件（Styled Components）</h2><ul>
+<li><a href="https://blog.csdn.net/nico2333/article/details/104217852" target="_blank" rel="noopener">参考方法1</a>：新建一个 styled-components 组件 Test 包裹在想要修改的antd组件外，然后通过从 Test 中<strong>操作其子代CSS样式对目标antd组件进行样式修改</strong>（给作为子组件的antd组件添加className）。<ul>
+<li>操作其子代CSS样式的方法可参考博客<a href="https://huanglizhu.github.io/2020/02/13/styled-components%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#amp-伪元素-伪类选择器，组合选择器和嵌套" target="_blank" rel="noopener">“styled-components的使用方法”中<code>&amp;</code>的使用方法</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="方法2：antd组件引用css-js中输出的自定义样式（声明样式）"><a href="#方法2：antd组件引用css-js中输出的自定义样式（声明样式）" class="headerlink" title="方法2：antd组件引用css.js中输出的自定义样式（声明样式）"></a>方法2：antd组件引用css.js中输出的自定义样式（声明样式）</h2><p><a href="https://www.cnblogs.com/jack-zhou21235/p/11326364.html" target="_blank" rel="noopener">参考方法2</a>：直接<strong>在存放css样式的js文件中输出样式,再在js文件中引入样式并使用即可</strong>：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//css.js</span></span><br><span class="line"><span class="keyword">import</span>  styled  from <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> btnStyle = &#123;</span><br><span class="line">　　<span class="built_in">background</span>:<span class="string">'pink'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'antd'</span>; </span><br><span class="line"><span class="keyword">import</span> &#123; btnStyle &#125; <span class="keyword">from</span> <span class="string">'./style'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TodoListUI = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">            &lt;Button style=&#123;btnStyle&#125;type=<span class="string">"danger"</span> onClick=&#123;props.handleBtnClick&#125;&gt;提交&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">export default TodoListUI;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法3：antd组件内联css样式（行内样式）"><a href="#方法3：antd组件内联css样式（行内样式）" class="headerlink" title="方法3：antd组件内联css样式（行内样式）"></a>方法3：antd组件内联css样式（行内样式）</h2><p>如下方例子展示</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>原本的项目中，我是自定义组件Header的，后来想用antd来做响应式，Header的外层组件HeaderWrapper就被改成了antd提供的Row，虽然antd提供的Header组件可以实现<strong>固定位置</strong>，但它自带默认样式，而我想继续沿用自己的Header组件的样式，所以就打算<strong>在header/index.js中单独给Row一个自定义样式实现固定位置并显示在最上层</strong></p>
+<h3 id="原本的自定义组件的样式"><a href="#原本的自定义组件的样式" class="headerlink" title="原本的自定义组件的样式"></a>原本的自定义组件的样式</h3><p>header/style.js：</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import styled from <span class="string">"styled-components"</span><span class="comment">;</span></span><br><span class="line">import LogoPic from <span class="string">"../../statics/logo.png"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">export const HeaderWrapper = styled.<span class="keyword">div`</span></span><br><span class="line"><span class="keyword"> </span> z-index: <span class="number">1</span><span class="comment">;</span></span><br><span class="line"><span class="symbol">  position:</span>relative<span class="comment">;</span></span><br><span class="line"><span class="symbol">  height:</span><span class="number">56</span>px<span class="comment">;</span></span><br><span class="line">  <span class="keyword">border-bottom:1px </span>solid <span class="comment">#f0f0f0;</span></span><br><span class="line">`<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="使用antd后给Row单独定义部分样式（行内样式）"><a href="#使用antd后给Row单独定义部分样式（行内样式）" class="headerlink" title="使用antd后给Row单独定义部分样式（行内样式）"></a>使用antd后给Row单独定义部分样式（行内样式）</h1><p>header/index.js：</p>
+<h3 id="使用antd后给Row单独定义部分样式（行内样式）"><a href="#使用antd后给Row单独定义部分样式（行内样式）" class="headerlink" title="使用antd后给Row单独定义部分样式（行内样式）"></a>使用antd后给Row单独定义部分样式（行内样式）</h3><p>header/index.js：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Row style=&#123;&#123; <span class="string">position:</span><span class="string">"relative"</span>,<span class="string">zIndex:</span> <span class="number">1</span>,<span class="string">height:</span><span class="string">"56px"</span>,<span class="string">borderBottom:</span><span class="string">"1px solid #f0f0f0"</span> &#125;&#125;&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<h1 id="补充：react中css的定义方法"><a href="#补充：react中css的定义方法" class="headerlink" title="补充：react中css的定义方法"></a>补充：react中css的定义方法</h1><ul>
+<li><strong>注意：行内样式和声明样式中，样式名都是驼峰命名法，值需要引号。而Styled Components的模板字符串内使用的与原生CSS是一样的。</strong></li>
 <li><a href="https://blog.csdn.net/weixin_37620905/article/details/86567861" target="_blank" rel="noopener">参考</a></li>
 </ul>
 <h2 id="行内样式"><a href="#行内样式" class="headerlink" title="行内样式"></a>行内样式</h2><ul>
@@ -227,19 +241,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/05/15/antd 定制主题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          antd 定制主题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/01/react start报错 Can't resolve/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/07/21/警醒！慎用`+`与字符串和对象/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">react start报错 Can&#39;t resolve &#39;@babel/runtime/helpers/esm/createSuper&#39;</div>
+      <div class="article-nav-title">警醒！慎用`+`与字符串和对象</div>
     </a>
   
 </nav>
@@ -253,7 +258,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原本的自定义组件的样式"><span class="nav-number">2.</span> <span class="nav-text">原本的自定义组件的样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用antd后给Row单独定义部分样式（行内样式）"><span class="nav-number">3.</span> <span class="nav-text">使用antd后给Row单独定义部分样式（行内样式）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行内样式"><span class="nav-number">4.1.</span> <span class="nav-text">行内样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明样式"><span class="nav-number">4.2.</span> <span class="nav-text">声明样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Modules"><span class="nav-number">4.3.</span> <span class="nav-text">CSS Modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Styled-Components"><span class="nav-number">4.4.</span> <span class="nav-text">Styled Components</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义antd组件部分样式"><span class="nav-number">1.</span> <span class="nav-text">自定义antd组件部分样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法1：自定义组件包裹antd组件（Styled-Components）"><span class="nav-number">1.1.</span> <span class="nav-text">方法1：自定义组件包裹antd组件（Styled Components）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2：antd组件引用css-js中输出的自定义样式（声明样式）"><span class="nav-number">1.2.</span> <span class="nav-text">方法2：antd组件引用css.js中输出的自定义样式（声明样式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法3：antd组件内联css样式（行内样式）"><span class="nav-number">1.3.</span> <span class="nav-text">方法3：antd组件内联css样式（行内样式）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因"><span class="nav-number">1.3.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原本的自定义组件的样式"><span class="nav-number">1.3.2.</span> <span class="nav-text">原本的自定义组件的样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用antd后给Row单独定义部分样式（行内样式）"><span class="nav-number">1.3.3.</span> <span class="nav-text">使用antd后给Row单独定义部分样式（行内样式）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：react中css的定义方法"><span class="nav-number">2.</span> <span class="nav-text">补充：react中css的定义方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行内样式"><span class="nav-number">2.1.</span> <span class="nav-text">行内样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明样式"><span class="nav-number">2.2.</span> <span class="nav-text">声明样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Modules"><span class="nav-number">2.3.</span> <span class="nav-text">CSS Modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Styled-Components"><span class="nav-number">2.4.</span> <span class="nav-text">Styled Components</span></a></li></ol></li></ol>
     
     </div>
   </aside>

@@ -20,7 +20,7 @@
 <meta property="og:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg">
-<meta property="og:updated_time" content="2020-10-24T07:18:23.778Z">
+<meta property="og:updated_time" content="2020-10-24T08:08:25.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React知识点汇总（项目）">
 <meta name="twitter:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
@@ -192,9 +192,16 @@
 </li>
 </ul>
 <h1 id="使用antd时用styled-Components修改部分样式"><a href="#使用antd时用styled-Components修改部分样式" class="headerlink" title="使用antd时用styled-Components修改部分样式"></a>使用antd时用styled-Components修改部分样式</h1><ul>
-<li><a href="https://blog.csdn.net/nico2333/article/details/104217852" target="_blank" rel="noopener">参考方法1</a>：新建一个 styled-components 组件 Test 包裹在想要修改的antd组件外，然后通过从 Test 中操作其子代CSS样式对目标antd组件进行样式修改。</li>
-<li><a href="https://www.cnblogs.com/jack-zhou21235/p/11326364.html" target="_blank" rel="noopener">参考方法2</a></li>
+<li><a href="https://blog.csdn.net/nico2333/article/details/104217852" target="_blank" rel="noopener">参考方法1</a>：新建一个 styled-components 组件 Test 包裹在想要修改的antd组件外，然后通过从 Test 中操作其子代CSS样式对目标antd组件进行样式修改（给作为子组件的antd组件添加className）。<ul>
+<li>操作其子代CSS样式的方法可参考博客<a href="https://huanglizhu.github.io/2020/02/13/styled-components%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#amp-伪元素-伪类选择器，组合选择器和嵌套" target="_blank" rel="noopener">“styled-components的使用方法”中<code>&amp;</code>的使用方法</a></li>
 </ul>
+</li>
+<li><a href="https://www.cnblogs.com/jack-zhou21235/p/11326364.html" target="_blank" rel="noopener">参考方法2</a>：直接<strong>在存放css样式的js文件中输出样式,再在js文件中引入样式并使用即可</strong>：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//css.js</span></span><br><span class="line"><span class="keyword">import</span>  styled  from <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> btnStyle = &#123;</span><br><span class="line">　　<span class="built_in">background</span>:<span class="string">'pink'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'antd'</span>; </span><br><span class="line"><span class="keyword">import</span> &#123; btnStyle &#125; <span class="keyword">from</span> <span class="string">'./style'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TodoListUI = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">            &lt;Button style=&#123;btnStyle&#125;type=<span class="string">"danger"</span> onClick=&#123;props.handleBtnClick&#125;&gt;提交&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">export default TodoListUI;</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="路由跳转（react-router-dom的Link组件）"><a href="#路由跳转（react-router-dom的Link组件）" class="headerlink" title="路由跳转（react-router-dom的Link组件）"></a>路由跳转（react-router-dom的Link组件）</h1><ul>
 <li><strong>注意</strong>：react是 <strong>单页应用的跳转</strong>，也就是说，不管怎么进行页面跳转，<strong>整个网站只会加载一次html文件</strong>，这也就决定了<strong>不能使用<code>&lt;a&gt;</code>标签进行页面跳转</strong>。<ul>
 <li>如果使用<code>&lt;a&gt;</code>标签进行页面跳转，跳转时会发送HTTP请求。<br>而借助<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">react-router-dom</a>的Link组件实现跳转则不会，<strong>因此加载速度会快很多，借此也可提高性能。</strong></li>
