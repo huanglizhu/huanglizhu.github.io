@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ao6i107zj30kt09ljs1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8anyxu9cfj30hz09gaay.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g94kvj0o9gj30so0czn4o.jpg">
-<meta property="og:updated_time" content="2020-08-03T03:30:07.602Z">
+<meta property="og:updated_time" content="2020-10-29T03:54:45.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端技术学院 第七天学习笔记（CSS flexbox）">
 <meta name="twitter:description" content="flexbox弹性盒子 MDN flexbox例子 想要flex生效必须定义其父元素的display属性为flex或inline-flex flex容器flex container（父级容器） flex子项flex item">
@@ -421,7 +421,7 @@
 <li><strong>建议使用该简写属性！</strong></li>
 <li>这是flex-grow、flex-shrink和flex-basis组合的简写。</li>
 <li>第二和第三个参数(flex-shrink和flex-basis)是<strong>可选</strong>的（<strong>省略部分属性值时注意有顺序要求</strong>）。</li>
-<li><strong>默认值</strong>是<code>0 1 auto</code>。</li>
+<li><strong>默认值</strong>是<code>0 1 auto</code>。（即<strong>0：如果存在剩余空间，也不放大。1：如果空间不足，则该子项格局1的比例缩小。auto：子项初始大小参照我的width和height属性</strong>）</li>
 <li>大多数情况下，开发者只需要将 flex 设置为 auto，initial，none，或一个无单位正数 即可。</li>
 <li>如果一个子项a给定<code>flex:200px</code>而另一个子项b给定<code>flex:1</code>,那么将会先给a 200px，然后<strong>b自适应</strong>。</li>
 <li><strong>例子</strong>：表示“每个flex 子项将首先给出200px的可用空间，然后将剩余的可用空间将根据flex-grow属性值（2）分配的比例共享”</li>
@@ -484,27 +484,28 @@
 <li>第三个值<strong>必须</strong>为一个有效的宽度值， 并且它会被当作 <code>&lt;flex-basis&gt;</code>的值。</li>
 </ul>
 <hr>
-<h3 id="flex-grow定义子项元素空间占比"><a href="#flex-grow定义子项元素空间占比" class="headerlink" title="flex-grow定义子项元素空间占比"></a>flex-grow定义子项元素空间占比</h3><ul>
-<li>flex-grow属性值是一个<strong>无单位的比例值</strong>，表示每个 flex 项沿主轴的可用空间大小，它<strong>决定了子项在父级容器（flex container）内部占用多少可用空间</strong>，占用的空间是在设置 padding 和 margin 之后剩余的空间。</li>
-<li><strong>属性值</strong>：默认为0，不能为负数。</li>
+<h3 id="flex-grow子项空间占比（放大比例）"><a href="#flex-grow子项空间占比（放大比例）" class="headerlink" title="flex-grow子项空间占比（放大比例）"></a>flex-grow子项空间占比（放大比例）</h3><ul>
+<li>flex-grow属性值是一个<strong>无单位的比例值</strong>，规定 flex 项相对于其他flex 项沿主轴的进行扩展的量，它<strong>决定了子项在父级容器（flex container）内部占用多少可用空间</strong>，占用的空间是在设置 padding 和 margin 之后剩余的空间。</li>
+<li><strong>属性值</strong>：<strong>默认为0</strong>(即<strong>如果存在剩余空间，也不放大</strong>)，不能为负数。</li>
 <li>如果所有项目flex-grow都设置为1，则容器中的剩余空间将平均分配给所有子项。如果其中一个孩子的值为2，则剩余空间将占其他孩子的两倍（或者至少会尝试）。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8an4ipdhcj30hy07pdgn.jpg" alt="flex-grow"><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">3</span>; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <h4 id="固定子项大小"><a href="#固定子项大小" class="headerlink" title="固定子项大小"></a>固定子项大小</h4><p>想让<strong>子项固定大小</strong>可设置<strong>flex为none</strong>然后<strong>给定width</strong></p>
-<h3 id="flex-shrink弹性收缩"><a href="#flex-shrink弹性收缩" class="headerlink" title="flex-shrink弹性收缩"></a>flex-shrink弹性收缩</h3><ul>
-<li><p>flex-shrink 属性指定了 flex 元素的收缩规则。flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。</p>
+<h3 id="flex-shrink弹性收缩（缩小比例）"><a href="#flex-shrink弹性收缩（缩小比例）" class="headerlink" title="flex-shrink弹性收缩（缩小比例）"></a>flex-shrink弹性收缩（缩小比例）</h3><ul>
+<li><p>flex-shrink 属性指定了 flex 元素的收缩规则。flex 元素<strong>仅在默认宽度之和大于容器的时候才会发生收缩</strong>，其收缩的大小是依据 flex-shrink 的值。</p>
 </li>
 <li><p>一般用于溢出容器的 flex 子项。这指定了从每个 flex 项中取出多少溢出量，以阻止它们溢出它们的容器。 这是一个相当高级的弹性盒子功能.</p>
 </li>
-<li><p><strong>属性值</strong>:默认为1，不能为负数。</p>
+<li><p><strong>属性值</strong>:<strong>默认为1</strong>（即<strong>如果空间不足，该项目将缩小</strong>），不能为负数。<strong>如果是0，则空间不足子项也不缩小</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">2</span>; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink" target="_blank" rel="noopener">MDN flex-shrink</a></p>
 </li>
 </ul>
-<h3 id="flex-basis定义子项元素初始大小（最小值）"><a href="#flex-basis定义子项元素初始大小（最小值）" class="headerlink" title="flex-basis定义子项元素初始大小（最小值）"></a>flex-basis定义子项元素初始大小（最小值）</h3><ul>
-<li>flex-basis 指定了 flex 元素在主轴方向上的<strong>初始大小</strong>。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。</li>
+<h3 id="flex-basis子项初始大小（最小值）"><a href="#flex-basis子项初始大小（最小值）" class="headerlink" title="flex-basis子项初始大小（最小值）"></a>flex-basis子项初始大小（最小值）</h3><ul>
+<li>flex-basis 指定了 flex 元素在<strong>主轴方向</strong>上的<strong>初始大小</strong>。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。</li>
+<li>即：flex-basis 指定<strong>在分配多余空间之前</strong>，项目占据的主轴空间（main size）</li>
 </ul>
 <table>
 <thead>
@@ -536,6 +537,7 @@
 <h2 id="align-self调整单个子项在交叉轴上的对齐方式"><a href="#align-self调整单个子项在交叉轴上的对齐方式" class="headerlink" title="align-self调整单个子项在交叉轴上的对齐方式"></a>align-self调整单个子项在交叉轴上的对齐方式</h2><ul>
 <li>align-self 会<strong>对齐当前 flex 行中的 flex 元素</strong>，并<strong>覆盖已有的align-items 的值</strong>，<strong>按照cross axis方向进行排列</strong>.</li>
 <li>注意：<code>float</code>（浮动）, <code>clear</code>（清除浮动） 和 <code>vertical-align</code>对flex子项没有影响。</li>
+<li><strong>默认值为auto</strong>，表示<strong>继承父元素的align-items属性</strong>，如果没有父元素，则等同于stretch。</li>
 </ul>
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8anyxu9cfj30hz09gaay.jpg" alt="align-self"></p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  align-self: <span class="built_in">auto</span> | <span class="type">flex</span>-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">baseline</span> | <span class="type">stretch</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -649,7 +651,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flexbox弹性盒子"><span class="nav-number">1.</span> <span class="nav-text">flexbox弹性盒子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#父级container的属性"><span class="nav-number">2.</span> <span class="nav-text">父级container的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#display定义flex父容器"><span class="nav-number">2.1.</span> <span class="nav-text">display定义flex父容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-flow简写flex-direction和flex-wrap属性"><span class="nav-number">2.2.</span> <span class="nav-text">flex-flow简写flex-direction和flex-wrap属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-direction规定子项排列方式及方向"><span class="nav-number">2.2.1.</span> <span class="nav-text">flex-direction规定子项排列方式及方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-wraps使溢出子项换行"><span class="nav-number">2.2.2.</span> <span class="nav-text">flex-wraps使溢出子项换行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#justify-content定义子项沿主轴的对齐方式"><span class="nav-number">2.3.</span> <span class="nav-text">justify-content定义子项沿主轴的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-items定义子项在交叉轴上的对齐方式"><span class="nav-number">2.4.</span> <span class="nav-text">align-items定义子项在交叉轴上的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-content定义行沿交叉轴的对齐方式"><span class="nav-number">2.5.</span> <span class="nav-text">align-content定义行沿交叉轴的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别justify-content与align-content还有align-items"><span class="nav-number">2.6.</span> <span class="nav-text">区别justify-content与align-content还有align-items</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子项item的属性"><span class="nav-number">3.</span> <span class="nav-text">子项item的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order顺序"><span class="nav-number">3.1.</span> <span class="nav-text">order顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex简写flex-grow、flex-shrink和flex-basis"><span class="nav-number">3.2.</span> <span class="nav-text">flex简写flex-grow、flex-shrink和flex-basis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-属性值顺序要求"><span class="nav-number">3.2.1.</span> <span class="nav-text">flex 属性值顺序要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-grow定义子项元素空间占比"><span class="nav-number">3.2.2.</span> <span class="nav-text">flex-grow定义子项元素空间占比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#固定子项大小"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">固定子项大小</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-shrink弹性收缩"><span class="nav-number">3.2.3.</span> <span class="nav-text">flex-shrink弹性收缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-basis定义子项元素初始大小（最小值）"><span class="nav-number">3.2.4.</span> <span class="nav-text">flex-basis定义子项元素初始大小（最小值）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-self调整单个子项在交叉轴上的对齐方式"><span class="nav-number">3.3.</span> <span class="nav-text">align-self调整单个子项在交叉轴上的对齐方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-嵌套"><span class="nav-number">4.</span> <span class="nav-text">flex 嵌套</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flexbox弹性盒子"><span class="nav-number">1.</span> <span class="nav-text">flexbox弹性盒子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#父级container的属性"><span class="nav-number">2.</span> <span class="nav-text">父级container的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#display定义flex父容器"><span class="nav-number">2.1.</span> <span class="nav-text">display定义flex父容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-flow简写flex-direction和flex-wrap属性"><span class="nav-number">2.2.</span> <span class="nav-text">flex-flow简写flex-direction和flex-wrap属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-direction规定子项排列方式及方向"><span class="nav-number">2.2.1.</span> <span class="nav-text">flex-direction规定子项排列方式及方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-wraps使溢出子项换行"><span class="nav-number">2.2.2.</span> <span class="nav-text">flex-wraps使溢出子项换行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#justify-content定义子项沿主轴的对齐方式"><span class="nav-number">2.3.</span> <span class="nav-text">justify-content定义子项沿主轴的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-items定义子项在交叉轴上的对齐方式"><span class="nav-number">2.4.</span> <span class="nav-text">align-items定义子项在交叉轴上的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-content定义行沿交叉轴的对齐方式"><span class="nav-number">2.5.</span> <span class="nav-text">align-content定义行沿交叉轴的对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别justify-content与align-content还有align-items"><span class="nav-number">2.6.</span> <span class="nav-text">区别justify-content与align-content还有align-items</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子项item的属性"><span class="nav-number">3.</span> <span class="nav-text">子项item的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order顺序"><span class="nav-number">3.1.</span> <span class="nav-text">order顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex简写flex-grow、flex-shrink和flex-basis"><span class="nav-number">3.2.</span> <span class="nav-text">flex简写flex-grow、flex-shrink和flex-basis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-属性值顺序要求"><span class="nav-number">3.2.1.</span> <span class="nav-text">flex 属性值顺序要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-grow子项空间占比（放大比例）"><span class="nav-number">3.2.2.</span> <span class="nav-text">flex-grow子项空间占比（放大比例）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#固定子项大小"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">固定子项大小</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-shrink弹性收缩（缩小比例）"><span class="nav-number">3.2.3.</span> <span class="nav-text">flex-shrink弹性收缩（缩小比例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-basis子项初始大小（最小值）"><span class="nav-number">3.2.4.</span> <span class="nav-text">flex-basis子项初始大小（最小值）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-self调整单个子项在交叉轴上的对齐方式"><span class="nav-number">3.3.</span> <span class="nav-text">align-self调整单个子项在交叉轴上的对齐方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-嵌套"><span class="nav-number">4.</span> <span class="nav-text">flex 嵌套</span></a></li></ol>
     
     </div>
   </aside>

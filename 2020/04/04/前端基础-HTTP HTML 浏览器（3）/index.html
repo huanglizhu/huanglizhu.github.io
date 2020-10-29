@@ -20,7 +20,7 @@
 <meta property="og:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
-<meta property="og:updated_time" content="2020-10-28T06:13:06.227Z">
+<meta property="og:updated_time" content="2020-10-28T06:18:07.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（3）">
 <meta name="twitter:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
@@ -180,7 +180,7 @@
 <hr>
 <h1 id="ajax-fetch发送2次请求的原因"><a href="#ajax-fetch发送2次请求的原因" class="headerlink" title="ajax/fetch发送2次请求的原因"></a>ajax/fetch发送2次请求的原因</h1><ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN fetch API</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener">使用fetch</a></li>
-<li><strong>问题：</strong>fetch发送post请求的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
+<li><strong>问题：</strong> fetch发送post请求的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
 <li><strong>原因：</strong>很简单，因为你用fetch的post请求的时候，导致fetch 第一次发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</li>
 <li>浏览器对复杂跨域请求的处理，<strong>在发送真正的请求前, 会先发送一个方法为OPTIONS的预请求(preflight request), 用于试探服务端是否能接受真正的请求</strong>，如果options获得的回应是拒绝性质的，比如404\403\500等http状态，就会停止post、put等请求的发出。</li>
 </ul>
@@ -191,9 +191,13 @@
 <li><strong>定义</strong>：iframe元素会创建包含另一个文档的内联框架（将另一个HTML页面嵌入到当前页面中）</li>
 <li><strong>提示</strong>：可以将提示文字放在<code>&lt;iframe&gt;&lt;/iframe&gt;</code>之间，来提示某些不支持iframe的浏览器。</li>
 <li><strong>无障碍环境：</strong>使用 <strong>iframe 的 title 属性</strong>来标识框架的主要内容，这样可以极大方便使用辅助技术（例如屏幕阅读器）浏览网页的人。</li>
-<li><strong>缺点</strong>：<br>会<strong>阻塞主页面的onload事件</strong></li>
+<li><strong>缺点</strong>：<ol>
+<li>会<strong>阻塞主页面的<a href="https://huanglizhu.github.io/2019/09/11/JS_DOM%E4%BA%8B%E4%BB%B6/#onload-事件" target="_blank" rel="noopener">onload事件</a></strong></li>
+<li><strong>搜索引擎无法解读</strong>这种页面，不利于SEO</li>
+<li>iframe和主页面共享<a href="https://huanglizhu.github.io/2020/03/11/mysql%E4%B8%8Esequelize%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#连接池" target="_blank" rel="noopener">连接池</a>，而浏览器对相同区域有限制所以会<strong>影响性能</strong>。</li>
+</ol>
+</li>
 </ul>
-<p><strong>搜索引擎无法解读</strong>这种页面，不利于SEO<br>iframe和主页面共享连接池，而浏览器对相同区域有限制所以会<strong>影响性能</strong>。</p>
 <hr>
 <h1 id="Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><a href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义" class="headerlink" title="Doctype作用?严格模式与混杂模式如何区分？它们有何意义?"></a>Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</h1><ul>
 <li><a href="https://blog.csdn.net/qq_38128179/article/details/80758192" target="_blank" rel="noopener">参考</a></li>
