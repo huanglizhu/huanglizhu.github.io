@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjy85d78fj30uc0r9kcn.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjybfltm6j30v2099gtc.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjyey2qo7j30sl0kuwlu.jpg">
-<meta property="og:updated_time" content="2020-10-29T08:47:51.627Z">
+<meta property="og:updated_time" content="2020-10-29T09:21:35.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Web API AJAX">
 <meta name="twitter:description" content="XMLHttpRequest（ajax核心API） XMLHttpRequest():用于创建 XMLHttpRequest 对象，XMLHttpRequest 对象用于和服务器交换数据">
@@ -285,10 +285,10 @@
 </li>
 </ul>
 </li>
-<li>同源策略<strong>限制</strong>了以下行为：<ul>
-<li>Cookie、LocalStorage 和 IndexDB 无法读取</li>
-<li>DOM 和 JS 对象无法获取</li>
-<li>Ajax请求发送不出去</li>
+<li>同源策略<strong>限制</strong>了跨域时的以下行为：<ul>
+<li>Cookie、LocalStorage 和 IndexDB 跨域无法读取，只有同源才能获取他们</li>
+<li>DOM 和 JS 对象跨域无法获取</li>
+<li>Ajax请求跨域时无效，可发送，但浏览器会拒绝接受响应</li>
 </ul>
 </li>
 </ul>
@@ -301,18 +301,19 @@
 <li><strong><code>&lt;img/&gt;</code>可用于使用第三方统计服务来统计打点（比如统计访问次数）</strong>，也就是把需要的参数放入img，在地址处使用第三方统计服务，这样就<strong>可以避免跨域问题</strong></li>
 </ul>
 <h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><ul>
-<li>跨域，是指<strong>浏览器不能执行其他网站的脚本</strong>。它是由<strong>浏览器的同源策略</strong>造成的，是<strong>浏览器对JavaScript实施的安全限制</strong>。</li>
+<li>跨域，是指<strong>浏览器不能执行其他网站的脚本</strong>，即，<strong>跨域名，跨端口，跨协议</strong>。它是由<strong>浏览器的同源策略</strong>造成的，是<strong>浏览器对JavaScript实施的安全限制</strong>。</li>
 <li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
 <li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
 <li>可通过<strong>jsonp、nginx反向代理、CORS</strong>实现跨域</li>
 <li>关于<strong>为什么会有跨域问题</strong>可参考<a href="https://www.jianshu.com/p/98d4bc7565b2" target="_blank" rel="noopener">这里</a>，跨域问题 是<strong>浏览器对于ajax请求的一种安全限制</strong>：一个页面发起的ajax请求，只能是于当前页同域名的路径，这能<strong>有效的阻止跨站攻击</strong>。</li>
 </ul>
-<h2 id="实现跨域的常见方式"><a href="#实现跨域的常见方式" class="headerlink" title="实现跨域的常见方式"></a>实现跨域的常见方式</h2><h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><ul>
+<h2 id="实现跨域的常见方式"><a href="#实现跨域的常见方式" class="headerlink" title="实现跨域的常见方式"></a>实现跨域的常见方式</h2><p><strong>注意：如果是协议和端口造成的跨域问题，“前端”无法解决。</strong></p>
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><ul>
 <li>访问<a href="https://imooc.com/，服务端一定返回一个html文件吗？" target="_blank" rel="noopener">https://imooc.com/，服务端一定返回一个html文件吗？</a><br>并不是，<strong>服务器可以任意动态拼接数据返回，只要符合html格式要求</strong><br>同理，<code>&lt;script src=&quot;https://imooc.com/getData.js&quot;&gt;</code>,也不一定返回一个js文件，<strong>服务器可以任意动态拼接数据返回，只要符合js格式要求即可</strong>【详细见例子】</li>
-<li><strong>jsonp原理</strong>：</li>
+<li><strong>jsonp原理</strong>：<ul>
+<li><strong><code>&lt;script&gt;</code></strong>可<strong>绕过跨域限制</strong>，所以script中src地址可以是跨域地址<strong>服务器</strong>可以<strong>任意动态拼接数据返回</strong>。所以，<strong><code>&lt;script&gt;</code>就可以获得跨域的数据，只要服务端愿意返回</strong>。</li>
 </ul>
-<p><strong><code>&lt;script&gt;</code></strong>可<strong>绕过跨域限制</strong>，所以script中src地址可以是跨域地址<br><strong>服务器</strong>可以<strong>任意动态拼接数据返回</strong><br>所以，<strong><code>&lt;script&gt;</code>就可以获得跨域的数据，只要服务端愿意返回</strong></p>
-<ul>
+</li>
 <li><strong>例子（原理）</strong>：<ul>
 <li>在这用一<strong>简单例子讲解jsonp原理，真实使用可用jquery</strong>：</li>
 <li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfjrqnsftjj315w0ckgvl.jpg" alt="简单例子"></li>

@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfw2o6n8pj30ha0530sz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvymekycj30k70ammyk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg">
-<meta property="og:updated_time" content="2020-10-29T08:23:59.700Z">
+<meta property="og:updated_time" content="2020-10-29T10:14:05.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-CSS（1）">
 <meta name="twitter:description" content="说一下css盒模型 可参考百度前端技术学院 第五天学习笔记（CSS盒模型） CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。 标准盒模型：一个块的总宽度=width+margin(左右)+padding(左右)+border(左右) 怪异盒模型：一个块的总宽度=width+margin（左右）（既width已经包含了padding和border值） 在C">
@@ -238,7 +238,7 @@
 <h1 id="水平、垂直居中的方法"><a href="#水平、垂直居中的方法" class="headerlink" title="水平、垂直居中的方法"></a>水平、垂直居中的方法</h1><ul>
 <li>可参考<a href="https://huanglizhu.github.io/2019/11/22/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B1%85%E4%B8%AD%EF%BC%89/" target="_blank" rel="noopener">百度前端技术学院 第七天学习笔记（CSS 居中）</a></li>
 <li><strong>水平居中：</strong><ul>
-<li><strong><code>text-align: center;</code></strong>：<strong>行内文本/图片/块内文本</strong></li>
+<li><strong><code>text-align: center;</code></strong>：<strong>行内文本/图片（给父元素设置text-align）/块内文本</strong></li>
 <li><strong>定宽块级元素：<code>margin: auto;</code>或<code>margin: 0 auto;</code></strong></li>
 <li><strong><code>text-align: center;</code></strong>：直接给<strong>不定宽的块级元素</strong>设置/给父元素加</li>
 <li><code>position:absolute +left:50%+ transform:translateX(-50%)</code></li>
@@ -275,9 +275,8 @@
 </ul>
 <h2 id="如何实现图片在某个容器中居中的？"><a href="#如何实现图片在某个容器中居中的？" class="headerlink" title="如何实现图片在某个容器中居中的？"></a>如何实现图片在某个容器中居中的？</h2><ul>
 <li><strong>父元素不定宽高</strong>：<ul>
-<li><strong>子元素（图片）设置为单元格 <code>display: table-cell</code>、设置<code>text-align:center</code>实现水平居中、设置<code>vertical-align:middle</code>实现垂直居中</strong>。</li>
-<li><strong>弹性布局</strong> <code>display: flex</code>。设置<strong><code>align-items: center; justify-content: center</code></strong></li>
-<li><strong>父元素设置<code>text-align:center</code>实现水平居中、设置<code>vertical-align:middle</code>实现垂直居中</strong></li>
+<li><strong>弹性布局</strong> 父元素设置<code>display: flex</code>、<strong><code>align-items: center; justify-content: center</code></strong></li>
+<li><strong>【vertical-align单独用行不通，必须联合字体大小为0】父元素设置为单元格 <code>display: table-cell</code>、设置<code>text-align:center</code>实现水平居中、设置<code>vertical-align:middle</code>实现垂直居中</strong>。（vertical-align:middle可能会造成基线的问题导致垂直不太居中，可参考<a href="http://www.yzktw.com.cn/post/313.html" target="_blank" rel="noopener">这篇文章</a>，如果<strong>想解决这个偏差就需要设置字体大小为0</strong>）</li>
 </ul>
 </li>
 <li><strong>父元素固定宽高</strong>，子元素设置<code>position: absolute</code>，<code>margin：auto</code>平均分配margin</li>
