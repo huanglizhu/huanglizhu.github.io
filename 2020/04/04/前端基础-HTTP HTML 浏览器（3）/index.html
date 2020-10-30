@@ -20,7 +20,7 @@
 <meta property="og:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
-<meta property="og:updated_time" content="2020-10-28T06:18:07.075Z">
+<meta property="og:updated_time" content="2020-10-30T03:58:28.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（3）">
 <meta name="twitter:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
@@ -182,7 +182,7 @@
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN fetch API</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener">使用fetch</a></li>
 <li><strong>问题：</strong> fetch发送post请求的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
 <li><strong>原因：</strong>很简单，因为你用fetch的post请求的时候，导致fetch 第一次发送了一个Options请求，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</li>
-<li>浏览器对复杂跨域请求的处理，<strong>在发送真正的请求前, 会先发送一个方法为OPTIONS的预请求(preflight request), 用于试探服务端是否能接受真正的请求</strong>，如果options获得的回应是拒绝性质的，比如404\403\500等http状态，就会停止post、put等请求的发出。</li>
+<li>浏览器对复杂<a href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#跨域" target="_blank" rel="noopener">跨域</a>请求的处理，<strong>在发送真正的请求前, 会先发送一个方法为OPTIONS的预请求(preflight request), 用于试探服务端是否能接受真正的请求</strong>，如果options获得的回应是拒绝性质的，比如404\403\500等http状态，就会停止post、put等请求的发出。</li>
 </ul>
 <h2 id="不会发送2次请求的情况"><a href="#不会发送2次请求的情况" class="headerlink" title="不会发送2次请求的情况"></a>不会发送2次请求的情况</h2><p>有三种方式会导致这种现象：<br>1、请求方法不是GET/HEAD/POST<br>2、POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain<br>3、请求设置了自定义的header字段</p>
 <hr>
@@ -204,6 +204,7 @@
 <li>Doctype声明于文档最前面，主要作用是告诉<strong>浏览器的解析器</strong>使用<strong>哪种HTML规范或者XHTML规范（方式）</strong>来解析页面。这里有两种模式，<strong>严格模式和混杂模式</strong>。</li>
 <li><strong>严格模式</strong>：又称标准模式，是指浏览器按照W3C标准，以<strong>该浏览器支持</strong>的<strong>最高标准</strong>来解析代码，呈现页面</li>
 <li><strong>混杂模式</strong>：又称为怪异模式或者兼容模式，是指<strong>浏览器按照自己的方式来解析代码</strong>，使用一种比较宽松的<strong>向后兼容</strong>的方式来显示页面，防止浏览器无法兼容页面。</li>
+<li><strong>HTML5 没有严格和混杂之分：</strong>对于HTML5文档，HTML5 没有 DTD ，因此也就没有严格模式与混杂模式的区别，HTML5 有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。</li>
 </ul>
 <hr>
 <h1 id="viewport和移动端布局"><a href="#viewport和移动端布局" class="headerlink" title="viewport和移动端布局"></a>viewport和移动端布局</h1><ul>
@@ -281,31 +282,27 @@
 <h2 id="说一下HTML5-drag-api"><a href="#说一下HTML5-drag-api" class="headerlink" title="说一下HTML5 drag api"></a>说一下HTML5 drag api</h2><p><a href="https://www.w3school.com.cn/html5/html_5_draganddrop.asp" target="_blank" rel="noopener">例子</a><br>draggable属性：<strong>使元素可拖动</strong>，把 draggable 属性设置为 true<br>dragstart：事件主体是<strong>被拖放元素</strong>，在<strong>开始拖放</strong>被拖放元素时触发。<br>darg：事件主体是被拖放元素，在<strong>正在拖放</strong>被拖放元素时触发。<br>dragenter：事件主体是<strong>目标元素</strong>，在<strong>被拖放元素进入某元素时</strong>触发。<br>dragover：事件主体是目标元素，在<strong>被拖放元素在某元素内移动时</strong>触发。<br>dragleave：事件主体是目标元素，在被拖放元素<strong>移出目标元素</strong>时触发。<br>drop：事件主体是<strong>目标元素</strong>，在目标元素<strong>完全接受</strong>被拖放元素时触发。<br>dragend：事件主体是<strong>被拖放元素</strong>，在整个拖放操作结束时触发</p>
 <p><strong>dragstart与ondragstart</strong><a href="https://www.runoob.com/jsref/event-ondragstart.html" target="_blank" rel="noopener">参考这</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg" alt="dragstart与ondragstart"></p>
 <hr>
-<h2 id="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h2><ul>
-<li><strong>html5</strong>：<ol>
-<li><strong>标签增删</strong></li>
-</ol>
-<ul>
+<h2 id="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h2><h3 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h3><ol>
+<li><strong>标签增删</strong><ul>
 <li>8个语义元素 header section footer aside nav main article figure</li>
 <li>内容元素<a href="https://www.runoob.com/tags/tag-mark.html" target="_blank" rel="noopener">mark</a>高亮 <a href="https://www.runoob.com/tags/tag-progress.html" target="_blank" rel="noopener">progress</a>进度</li>
 <li><strong>新的<a href="http://caibaojian.com/html5/form.html" target="_blank" rel="noopener">input类型</a>(增强表单验证)</strong> color date datetime datetime-local email time url search，（<strong>表单验证</strong>在这之前只能通过js来完成）【<a href="https://www.runoob.com/html/html5-form-input-types.html" target="_blank" rel="noopener">更多验证可参考</a>】</li>
 <li>移除过时标签big font frame frameset</li>
 </ul>
-<ol start="2">
+</li>
 <li><strong>canvas绘图</strong>，支持内联SVG。支持MathML</li>
 <li><strong>多媒体audio video</strong> source embed track</li>
 <li><strong>本地离线存储</strong>，把需要离线存储在本地的文件列在一个manifest配置文件</li>
 <li><strong>web存储</strong>。<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#描述cookie-localStorage-sessionStorage区别" target="_blank" rel="noopener">localStorage、SessionStorage</a>【JS层面的】</li>
 </ol>
-</li>
-<li><strong>css3</strong>：<ul>
-<li>CSS3边框如border-radius，box-shadow等；</li>
-<li>CSS3背景如<a href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-size属性设置背景图片大小" target="_blank" rel="noopener">background-size</a>，background-origin等；</li>
-<li>CSS3 2D，3D转换如transform等；</li>
-<li>CSS3动画如<a href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#transition和animation的区别" target="_blank" rel="noopener">transition和animation</a>等。 </li>
-</ul>
-</li>
-</ul>
+<h3 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h3><ol>
+<li><strong>CSS3边框</strong>如border-radius（可做<a href="https://huanglizhu.github.io/2019/12/08/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#如何使用CSS做三角形-扇形" target="_blank" rel="noopener">扇形</a>），box-shadow等；</li>
+<li><strong>CSS3背景</strong>如<a href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-size属性设置背景图片大小" target="_blank" rel="noopener">background-size</a>，background-origin等；</li>
+<li><strong>CSS3 2D，3D转换</strong>如transform等（我多用于<a href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#水平、垂直居中的方法" target="_blank" rel="noopener">搭配子绝父相实现元素居中</a>）；</li>
+<li><strong>CSS3动画</strong>如<a href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#transition和animation的区别" target="_blank" rel="noopener">transition和animation</a>等。 </li>
+<li><strong>新增单位：<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport和移动端布局" target="_blank" rel="noopener">vh、vw</a></strong></li>
+<li><strong>新增属性：<a href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#说一下css盒模型" target="_blank" rel="noopener">box-sizing</a>替代盒模型</strong></li>
+</ol>
 <p><a href="https://www.cnblogs.com/xkweb/p/5862612.html" target="_blank" rel="noopener">参考</a></p>
 <hr>
 
@@ -379,7 +376,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个很实用的BOM属性对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下web-Quality（无障碍）"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-fetch发送2次请求的原因"><span class="nav-number">3.</span> <span class="nav-text">ajax/fetch发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不会发送2次请求的情况"><span class="nav-number">3.1.</span> <span class="nav-text">不会发送2次请求的情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe是什么？有什么缺点？"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport和移动端布局"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click在ios上有300ms延迟，原因及如何解决？"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener参数"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5新增的元素"><span class="nav-number">9.</span> <span class="nav-text">HTML5新增的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对HTML语义化标签的理解"><span class="nav-number">9.1.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下web-worker"><span class="nav-number">9.2.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下HTML5-drag-api"><span class="nav-number">9.3.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><span class="nav-number">9.4.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个很实用的BOM属性对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下web-Quality（无障碍）"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-fetch发送2次请求的原因"><span class="nav-number">3.</span> <span class="nav-text">ajax/fetch发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不会发送2次请求的情况"><span class="nav-number">3.1.</span> <span class="nav-text">不会发送2次请求的情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe是什么？有什么缺点？"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport和移动端布局"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click在ios上有300ms延迟，原因及如何解决？"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener参数"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5新增的元素"><span class="nav-number">9.</span> <span class="nav-text">HTML5新增的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对HTML语义化标签的理解"><span class="nav-number">9.1.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下web-worker"><span class="nav-number">9.2.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下HTML5-drag-api"><span class="nav-number">9.3.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><span class="nav-number">9.4.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">9.4.1.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS3"><span class="nav-number">9.4.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

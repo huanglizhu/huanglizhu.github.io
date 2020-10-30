@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfw2o6n8pj30ha0530sz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvymekycj30k70ammyk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg">
-<meta property="og:updated_time" content="2020-10-29T10:14:05.698Z">
+<meta property="og:updated_time" content="2020-10-30T02:34:22.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-CSS（1）">
 <meta name="twitter:description" content="说一下css盒模型 可参考百度前端技术学院 第五天学习笔记（CSS盒模型） CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。 标准盒模型：一个块的总宽度=width+margin(左右)+padding(左右)+border(左右) 怪异盒模型：一个块的总宽度=width+margin（左右）（既width已经包含了padding和border值） 在C">
@@ -268,8 +268,8 @@
 <li><strong>text-align+ line-height</strong>:块/行内元素<strong>单行文本</strong>双向居中</li>
 <li><strong>text-align + vertical-align</strong>:实现行内元素<strong>（图片）</strong>双向垂直</li>
 <li><strong>利用flex</strong>：将父元素设置为<code>display:flex</code>，并且设置<code>align-items:center;justify-content:center;</code></li>
-<li><strong>margin:auto</strong>：定位为上下左右为0，margin：auto可以实现<strong>脱离文档流的居中</strong>（子绝父相的情况）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg" alt="margin:auto"></li>
-<li>position：absolute +left:50%+top:50%+ transform:translate(-50%,-50%)</li>
+<li><strong>子绝父相+top、bottom、left、right设为0+margin:auto</strong>：定位为上下左右为0，margin：auto可以实现<strong>脱离文档流的居中</strong>（子绝父相的情况）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg" alt="margin:auto"><strong>原理</strong>是当top,bottom为0时，margin-top&amp;bottom设置auto的话会<strong>无限延伸沾满空间并平分</strong>，当left，right为0时,margin-left&amp;right设置auto会<strong>无限延伸占满空间并平分</strong></li>
+<li><strong>子绝父相+top、left设为50%+transform</strong>position：absolute +left:50%+top:50%+ transform:translate(-50%,-50%)</li>
 </ul>
 </li>
 </ul>
@@ -300,9 +300,9 @@
 </ul>
 <h2 id="width300，height300在屏幕上垂直水平居中"><a href="#width300，height300在屏幕上垂直水平居中" class="headerlink" title="width300，height300在屏幕上垂直水平居中"></a>width300，height300在屏幕上垂直水平居中</h2><p>对于行内块级元素:</p>
 <ol start="2">
-<li><strong>【父单元格+vertical-align，子margin】**</strong>父级元素<strong>设置display:table-cell，vertical-align:middle达到</strong>垂直居中<strong>,</strong>子元素<strong>设置margin:auto实现</strong>水平居中**</li>
+<li><strong>【父单元格+vertical-align，子margin】</strong> <strong>父级元素</strong>设置display:table-cell，vertical-align:middle达到<strong>垂直居中</strong>,<strong>子元素</strong>设置margin:auto实现<strong>水平居中</strong></li>
 <li><strong>【子绝父相+top+left+transform/margin】</strong>采用绝对定位，原理是子绝父相，父元素设置position：relative，子元素设置position：absolute，然后通过transform或margin组合使用达到居中效果，设置top：50%，left：50%，transform：translate（-50%，-50%）</li>
-<li>绝对居中，原理是当top,bottom为0时，margin-top&amp;bottom设置auto的话会无限延伸沾满空间并平分，当left，right为0时,margin-left&amp;right设置auto会无限延伸占满空间并平分</li>
+<li><strong>【子绝父相+top、bottom、left、right设为0+margin设为auto】</strong>绝对居中，原理是当top,bottom为0时，margin-top&amp;bottom设置auto的话会<strong>无限延伸沾满空间并平分</strong>，当left，right为0时,margin-left&amp;right设置auto会<strong>无限延伸占满空间并平分</strong></li>
 <li><strong>【flex+margin/align-items+justify-content】</strong>采用flex，父元素设置display:flex，子元素设置 margin:auto。或者设置父元素align-items:center;justify-content:center;</li>
 <li><strong>【margin（vh）+transform】</strong> <strong>视窗居中</strong>，vh为视口单位，50vh即是视口高度的50/100，设置margin：50vh auto 0，transform：translateY(-50%)</li>
 </ol>
