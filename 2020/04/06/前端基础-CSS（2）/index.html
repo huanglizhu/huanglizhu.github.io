@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrexs2edcj30xc06n0xf.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggrez428kqj30xc06n45a.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfxyrxjhqj31hc0g3wfd.jpg">
-<meta property="og:updated_time" content="2020-10-30T09:22:40.325Z">
+<meta property="og:updated_time" content="2020-10-31T08:02:46.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-CSS（2）">
 <meta name="twitter:description" content="CSS3新特性 可参考博客">
@@ -211,7 +211,7 @@
 <h2 id="用-CSS-实现多行文本的省略号显示"><a href="#用-CSS-实现多行文本的省略号显示" class="headerlink" title="用 CSS 实现多行文本的省略号显示"></a>用 CSS 实现多行文本的省略号显示</h2><p>可参考博客<a href="https://huanglizhu.github.io/2020/04/05/CSS%20%E5%AE%9E%E7%8E%B0%E5%8D%95%20%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%98%BE%E7%A4%BA/" target="_blank" rel="noopener">CSS 实现单/多行文本的省略号显示</a></p>
 <h1 id="CSS选择器，优先级"><a href="#CSS选择器，优先级" class="headerlink" title="CSS选择器，优先级"></a>CSS选择器，优先级</h1><ul>
 <li>可参考<a href="https://huanglizhu.github.io/2019/09/25/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/" target="_blank" rel="noopener">百度前端技术学院 第三天学习总结（CSS文本、选择器）（1）</a>、<a href="https://huanglizhu.github.io/2019/10/13/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89/" target="_blank" rel="noopener">百度前端技术学院 第四天学习笔记（选择器的优先级、了解级联、!important）（4）</a></li>
-<li><strong>id 选择器，class 选择器，标签选择器，属性选择器，伪元素选择器，伪类选择器</strong>等</li>
+<li><strong>id 选择器，class 选择器，标签选择器，属性选择器，<a href="https://huanglizhu.github.io/2019/10/11/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/" target="_blank" rel="noopener">伪元素选择器，伪类选择器</a></strong>等</li>
 <li>同一元素引用了多个样式时，<strong>排在后面的样式属性的优先级高</strong>；</li>
 <li>样式选择器的类型不同时，优先级顺序为：<strong>内联样式 &gt; id 选择器 &gt; class 选择器/属性选择器或伪类 &gt; 标签选择器/伪元素</strong>；</li>
 <li>标签之间存在层级包含关系时，<strong>后代元素会继承祖先元素的样式</strong>。如果后代元素定义了与祖先元素相同的样式，则祖先元素的相同的样式属性会被覆盖。<strong>继承的样式的优先级比较低，至少比标签选择器的优先级低</strong>；</li>
@@ -259,16 +259,42 @@
 <li><strong>实现思路</strong>：先把最重要的身体部分放好，然后再将翅膀移动到适当的地方</li>
 <li>三列布局又分为两种，<strong>两列定宽一列自适应</strong>，以及<strong>两侧定宽中间自适应</strong>，可参考<a href="https://huanglizhu.github.io/2019/12/12/CSS%E5%B8%83%E5%B1%80%E9%9D%A2%E8%AF%95%E9%A2%98/#三列布局（float-margin-子绝父相）" target="_blank" rel="noopener">CSS布局面试题</a>、<a href="https://www.cnblogs.com/imwtr/p/4441741.html" target="_blank" rel="noopener">圣杯布局和双飞翼布局的例子</a><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggigvmjee5j30bv062q2v.jpg" alt="三列布局"><ul>
 <li><strong>两列定宽一列自适应</strong>：<ol>
-<li>使用<strong>float+margin</strong>：左左右设置浮动/都设置成左浮动</li>
-<li>使用<strong>float+overflow</strong>：<br>给div设置float：left，再给right的div设置overflow:hidden。这样子两个盒子浮动，另一个盒子触发bfc达到自适应</li>
-<li>使用<strong>position(子绝父相)</strong>：<br>父级div设置position：relative，三个子级div设置position：absolute，这个要计算好盒子的宽度和间隔去设置位置，兼容性比较好，</li>
-<li>使用<strong>table</strong>实现：</li>
+<li>使用<strong>float+margin</strong>：<ul>
+<li>左左右设置浮动/都设置成左浮动</li>
+</ul>
+</li>
+<li>使用<strong>float+overflow</strong>：<ul>
+<li>给div设置<code>float：left</code>，再给right的div设置<code>overflow:hidden</code>。</li>
+<li>这样子两个盒子浮动，另一个盒子触发bfc达到自适应&gt;</li>
+</ul>
+</li>
+<li>使用<strong>position(子绝父相)</strong>：<ul>
+<li>父级div设置<code>position：relative</code>，三个子级div设置<code>position：absolute</code></li>
+<li>这个要计算好盒子的宽度和间隔去设置位置，兼容性比较好。</li>
+</ul>
+</li>
+<li>使用<strong>table</strong>实现：<ul>
+<li><strong>父级div设置display：table</strong>，设置<a href="https://www.runoob.com/cssref/pr-border-spacing.html" target="_blank" rel="noopener">border-spacing：10px</a>//设置相邻单元格的边框间的距离，取值随意。</li>
+<li><strong>子级div设置display:table-cell</strong></li>
+<li>这种方法兼容性好，适用于高度宽度未知的情况，但是<strong>margin失效</strong>，设计间隔比较麻烦</li>
+</ul>
+</li>
+<li><strong>flex</strong>实现：<ul>
+<li>parent的div设置<code>display：flex；</code></li>
+<li>left和center的div设置<code>margin-right；</code>然后right 的div设置<code>flex：1；</code></li>
+<li>这样子<strong>right自适应</strong>，但是<strong>flex的兼容性不好</strong></li>
+</ul>
+</li>
+<li><strong>grid</strong>实现：<ul>
+<li>parent的div设置<code>display：grid</code>，设置<code>grid-template-columns</code>属性，固定第一列第二列宽度，第三列auto</li>
+</ul>
+</li>
 </ol>
 </li>
+<li>对于<strong>两侧定宽中间自适应</strong>的布局，对于这种布局<strong>需要把center放在前面</strong>，可以采用 双飞翼布局、圣杯布局 来实现，也可以使用上述方法中的grid，table，flex，position实现。</li>
 </ul>
 </li>
 </ul>
-<p><strong>父级div设置display：table</strong>，设置<a href="https://www.runoob.com/cssref/pr-border-spacing.html" target="_blank" rel="noopener">border-spacing：10px</a>//设置相邻单元格的边框间的距离，取值随意,<strong>子级div设置display:table-cell</strong>，这种方法兼容性好，适用于高度宽度未知的情况，但是<strong>margin失效</strong>，设计间隔比较麻烦<br>        5. <strong>flex</strong>实现：<br>parent的div设置display：flex；left和center的div设置margin-right；然后right 的div设置flex：1；这样子<strong>right自适应</strong>，但是<strong>flex的兼容性不好</strong><br>        6. <strong>grid</strong>实现：<br>parent的div设置display：grid，设置grid-template-columns属性，固定第一列第二列宽度，第三列auto<br>    - 对于<strong>两侧定宽中间自适应</strong>的布局，对于这种布局<strong>需要把center放在前面</strong>，可以采用 双飞翼布局、圣杯布局 来实现，也可以使用上述方法中的grid，table，flex，position实现</p>
 <h3 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h3><p>点击查看<a href="https://www.jianshu.com/p/f9bcddb0e8b4" target="_blank" rel="noopener">圣杯布局代码+效果</a>，重点就是 <strong>三栏浮动中间100%宽度+负边距同行+三栏父元素padding向中靠+左右两栏相对定位去左右</strong></p>
 <ol>
 <li>html代码中  <strong>middle部分首先要放在container的最前部分。然后是left,right</strong></li>
