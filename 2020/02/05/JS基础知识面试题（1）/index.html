@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbqjkil3k0j30ov0dgqf9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
-<meta property="og:updated_time" content="2020-06-27T09:40:05.528Z">
+<meta property="og:updated_time" content="2020-11-05T07:24:50.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS基础知识面试题（1）">
 <meta name="twitter:description" content="JS变量类型和计算JS中使用typeof能得到的哪些类型 6种，number、undefined、string、boolean、object、function 可以准确判断4种 值类型(值类型中不能判断null) ，但是 引用类型 中只能判断函数，其余的 数组、对象、正则、日期 都被识别为object。">
@@ -186,6 +186,7 @@
 </ul>
 <hr>
 <h2 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用===何时使用=="></a>何时使用<code>===</code>何时使用<code>==</code></h2><ul>
+<li><strong>注意：不要混淆，只有NaN和自己不相等，null和undefined都和自己是相等的。</strong></li>
 <li>【需要值为null或者undefined时使用<code>==</code>简写，因为<code>null==undefined</code>】</li>
 </ul>
 <p><strong>只有一种情况使用双等号<code>==</code>，其他时候全部使用三等号<code>===</code></strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg" alt="何时使用`==`">此时第三行代码相当于第四行代码的<strong>简写</strong>，这是<strong>jquery的源码推荐写法</strong>。</p>
@@ -300,9 +301,17 @@
 </ol>
 <hr>
 <h2 id="如何理解作用域"><a href="#如何理解作用域" class="headerlink" title="如何理解作用域"></a>如何理解作用域</h2><ul>
-<li>自由变量，即当前作用域还没有定义的变量</li>
-<li>作用域链，即自由变量的层层查找</li>
-<li><strong>闭包的使用场景</strong>（也和作用域有关）</li>
+<li><strong>自由变量</strong>，即当前作用域还没有定义的变量</li>
+<li><strong>父级作用域</strong>：在<strong>函数定义时规定的</strong>，不需要管执行顺序。<ul>
+<li>补充：this指向时函数执行时确定的，箭头函数没有自己的this，它则指向自己的父级作用域的this。</li>
+</ul>
+</li>
+<li><strong>作用域链</strong>：即<strong>自由变量的层层查找</strong>，函数中找不到 自由变量 的值时一层层向上面的 父级作用域 进行查找的链式流程。</li>
+<li><strong>闭包的使用场景</strong>（也和作用域有关）：<ul>
+<li>本质就是<strong>在一个函数内部定义另一个函数</strong></li>
+<li><strong>作用</strong>：让一个函数有权访问另一个函数作用域中变量。（即<strong>让函数访问自己的父级作用域这个函数中的变量</strong>）</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><p><strong>判断用户是不是第一次校验</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg" alt="实际应用1"><br><strong>好处</strong>：将存储用户id的 变量<code>_list</code> 封装起来,那么闭包外面就拿不到 变量<code>_list</code>，减少用户数据泄露的危险。</p>
