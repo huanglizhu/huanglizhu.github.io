@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="目前接触到的模拟假数据的方法 使用charles（不推荐，因为抓包很麻烦） 使用Charles抓包，让Charles代理Chrome，然后将相应的接口通过Map Local Settings设置到本地文件上。  在本地文件上存储模拟数据。 但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。">
+  <meta name="description" content="初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便/全能的模拟假数据方式，几经周折后有了这篇文章。">
 <meta name="keywords" content="React.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react中模拟假数据的方法总结">
 <meta property="og:url" content="http://yoursite.com/2020/01/29/react中模拟假数据的方法总结/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="目前接触到的模拟假数据的方法 使用charles（不推荐，因为抓包很麻烦） 使用Charles抓包，让Charles代理Chrome，然后将相应的接口通过Map Local Settings设置到本地文件上。  在本地文件上存储模拟数据。 但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。">
+<meta property="og:description" content="初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便/全能的模拟假数据方式，几经周折后有了这篇文章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-13T05:04:25.758Z">
+<meta property="og:updated_time" content="2020-11-12T11:47:01.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react中模拟假数据的方法总结">
-<meta name="twitter:description" content="目前接触到的模拟假数据的方法 使用charles（不推荐，因为抓包很麻烦） 使用Charles抓包，让Charles代理Chrome，然后将相应的接口通过Map Local Settings设置到本地文件上。  在本地文件上存储模拟数据。 但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。">
+<meta name="twitter:description" content="初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便/全能的模拟假数据方式，几经周折后有了这篇文章。">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -161,30 +161,43 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="目前接触到的模拟假数据的方法"><a href="#目前接触到的模拟假数据的方法" class="headerlink" title="目前接触到的模拟假数据的方法"></a>目前接触到的模拟假数据的方法</h1><ol>
-<li><strong>使用charles</strong>（不推荐，<a href="https://huanglizhu.github.io/2020/01/09/Charles%E4%BB%A3%E7%90%86Chrome%E6%8A%93%E5%8F%96localhost%E7%9A%84%E5%8C%85/" target="_blank" rel="noopener">因为抓包很麻烦</a>）<ol>
+        <p>初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便/全能的模拟假数据方式，几经周折后有了这篇文章。</p>
+<a id="more"></a>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>方法1 使用charles</strong>：<strong>不推荐使用</strong></li>
+<li><strong>方法2 使用mock.js</strong>：适合于<strong>模拟数据较多</strong>的情况</li>
+<li>方法3 ：适合于<strong>模拟数据较少</strong>的情况使用</li>
+</ul>
+<hr>
+<h1 id="使用charles"><a href="#使用charles" class="headerlink" title="使用charles"></a>使用charles</h1><ul>
+<li><strong>不推荐</strong>，<a href="https://huanglizhu.github.io/2020/01/09/Charles%E4%BB%A3%E7%90%86Chrome%E6%8A%93%E5%8F%96localhost%E7%9A%84%E5%8C%85/" target="_blank" rel="noopener">因为抓包很麻烦，使用Charles抓取localhost包需要注意更换url</a></li>
+<li><strong>步骤：</strong><ol>
 <li>使用Charles抓包，让Charles代理Chrome，然后将相应的接口通过Map Local Settings设置到本地文件上。 </li>
 <li>在本地文件上存储模拟数据。</li>
-<li>但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。<a id="more"></a></li>
+<li>但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。</li>
 </ol>
 </li>
-<li><strong><a href="https://huanglizhu.github.io/2020/01/20/react%E4%B8%AD%E4%BD%BF%E7%94%A8mock.js%E6%A8%A1%E6%8B%9F%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/#使用mock-js后的流程" target="_blank" rel="noopener">使用mockjs</a></strong><ol>
+<li>具体案例可参考<a href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#使用Charles实现本地接口数据mock" target="_blank" rel="noopener">“React高级内容（3）”中的”使用Charles实现本地接口数据mock”</a></li>
+</ul>
+<hr>
+<h1 id="使用mock-js"><a href="#使用mock-js" class="headerlink" title="使用mock.js"></a>使用mock.js</h1><ul>
+<li>可参考<a href="https://huanglizhu.github.io/2020/01/19/Mock.js%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">“Mock.js的使用方法”</a>、<a href="https://huanglizhu.github.io/2020/01/20/react%E4%B8%AD%E4%BD%BF%E7%94%A8mock.js%E6%A8%A1%E6%8B%9F%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/#使用mock-js后的流程" target="_blank" rel="noopener">“react中使用mock.js模拟接口数据”</a></li>
+<li><strong>步骤：</strong><ol>
 <li>在 <strong>src目录下新建 mock文件夹</strong> 用于存放我们 mock数据 的js文件。</li>
 <li>在mock数据的js文件中<strong>引入mock并输出模拟数据的组件</strong></li>
 <li>在发出AJAX请求的js文件中，<strong>引入的mock组件</strong>，接下来只要<strong>正常书写AJAX请求</strong>即可，<strong>一旦对应的请求发出，Mock就会拦截并返回数据</strong>。</li>
 </ol>
 </li>
-<li>在项目的<a href="https://huanglizhu.github.io/2020/01/28/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%A0%B7%E5%BC%8F%E5%B8%83%E5%B1%80%E3%80%81Ajax%E8%8E%B7%E5%8F%96%E6%8E%A8%E8%8D%90%E6%95%B0%E6%8D%AE%E3%80%81%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%89/#public下模拟假数据" target="_blank" rel="noopener"><strong>public文件夹下新建json文件=&gt;新建json文件，将假数据写在json文件中</strong></a>。<ul>
+</ul>
+<hr>
+<h1 id="直接放在项目public文件夹下"><a href="#直接放在项目public文件夹下" class="headerlink" title="直接放在项目public文件夹下"></a>直接放在项目public文件夹下</h1><ul>
+<li>在项目的<a href="https://huanglizhu.github.io/2020/01/28/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%A0%B7%E5%BC%8F%E5%B8%83%E5%B1%80%E3%80%81Ajax%E8%8E%B7%E5%8F%96%E6%8E%A8%E8%8D%90%E6%95%B0%E6%8D%AE%E3%80%81%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%89/#public下模拟假数据" target="_blank" rel="noopener"><strong>按照 请求地址 在public文件夹下 新建json文件=&gt;将假数据写在json文件中</strong></a>。<ul>
 <li>当js页面中向某个接口发出AJAX请求获取数据时，项目会先去node中找，<strong>找不到就会去public文件夹中找相应的路径下是否有数据</strong>。</li>
 <li><strong>比如</strong>：接口是<code>/api/headerList.json</code>,那可以在public文件夹下=&gt;新建api文件夹=&gt;新建headerList.json，放置相应假数据</li>
-<li><strong>注意：public下的文件夹内不能放js文件，因为他是直接读取数据的，不会进行任何操作！</strong></li>
 </ul>
 </li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>方法1 <strong>不推荐使用</strong></li>
-<li>方法2适合于<strong>模拟数据较多</strong>的情况</li>
-<li>方法3适合于<strong>模拟数据较少</strong>的情况使用</li>
+<li><strong>注意：public下的文件夹内不能放js文件，因为他是直接读取数据的，不会进行任何操作！</strong></li>
 </ul>
 
       
@@ -257,7 +270,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目前接触到的模拟假数据的方法"><span class="nav-number">1.</span> <span class="nav-text">目前接触到的模拟假数据的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用charles"><span class="nav-number">2.</span> <span class="nav-text">使用charles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用mock-js"><span class="nav-number">3.</span> <span class="nav-text">使用mock.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直接放在项目public文件夹下"><span class="nav-number">4.</span> <span class="nav-text">直接放在项目public文件夹下</span></a></li></ol>
     
     </div>
   </aside>
