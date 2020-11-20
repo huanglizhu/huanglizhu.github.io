@@ -24,8 +24,9 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg">
-<meta property="og:updated_time" content="2020-11-04T02:46:31.409Z">
+<meta property="og:updated_time" content="2020-11-19T12:54:32.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
 <meta name="twitter:description" content="流程tcp三次握手，一句话概括">
@@ -215,7 +216,7 @@
 <li>HTML5提供的<a href="https://www.runoob.com/html/html5-canvas.html" target="_blank" rel="noopener">Canvas</a>以</li>
 <li><a href="https://www.runoob.com/tags/att-a-download.html" target="_blank" rel="noopener"><code>&lt;a&gt;</code>的download 属性</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/MouseEvent" target="_blank" rel="noopener">MouseEvent()构造器</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent" target="_blank" rel="noopener">MouseEvent事件</a></li>
-<li><strong>注意：如希望 自动触发事件 应使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/dispatchEvent" target="_blank" rel="noopener">dispatchEvent(event)</a>，比<code>xxx.onclick();</code>或<code>xxx.click();</code>好</strong></li>
+<li><strong>注意：如希望 自动触发事件 应使用<a href="https://www.jianshu.com/p/5f9027722204" target="_blank" rel="noopener">dispatchEvent(event)</a>，比<code>xxx.onclick();</code>或<code>xxx.click();</code>好</strong></li>
 </ul>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">download<span class="constructor">Iamge(<span class="params">imgsrc</span>, <span class="params">name</span>)</span> &#123;<span class="comment">//下载图片地址和图片名  </span></span><br><span class="line">  <span class="keyword">let</span> image = <span class="keyword">new</span> <span class="constructor">Image()</span>;  </span><br><span class="line">  <span class="comment">// 解决跨域 Canvas 污染问题（允许跨域）  </span></span><br><span class="line">  image.set<span class="constructor">Attribute(<span class="string">"crossOrigin"</span>, <span class="string">"anonymous"</span>)</span>;  </span><br><span class="line">  <span class="comment">// onload 事件在图片加载完成后立即执行</span></span><br><span class="line">  image.onload = <span class="keyword">function</span><span class="literal">()</span> &#123;  </span><br><span class="line">    <span class="keyword">let</span> canvas = document.create<span class="constructor">Element(<span class="string">"canvas"</span>)</span>;  </span><br><span class="line">    canvas.width = image.width;  </span><br><span class="line">    canvas.height = image.height;  </span><br><span class="line">    <span class="keyword">let</span> context = canvas.get<span class="constructor">Context(<span class="string">"2d"</span>)</span>;  <span class="comment">//创建canvas对象</span></span><br><span class="line">    context.draw<span class="constructor">Image(<span class="params">image</span>, 0, 0, <span class="params">image</span>.<span class="params">width</span>, <span class="params">image</span>.<span class="params">height</span>)</span>;  </span><br><span class="line">    <span class="keyword">let</span> url = canvas.<span class="keyword">to</span><span class="constructor">DataURL(<span class="string">"image/png"</span>)</span>; <span class="comment">//得到图片的base64编码数据  </span></span><br><span class="line">    <span class="keyword">let</span> a = document.create<span class="constructor">Element(<span class="string">"a"</span>)</span>; <span class="comment">// 生成一个a元素  </span></span><br><span class="line">    <span class="keyword">let</span> event = <span class="keyword">new</span> <span class="constructor">MouseEvent(<span class="string">"click"</span>)</span>; <span class="comment">// 创建一个单击事件  </span></span><br><span class="line">    a.download = name<span class="operator"> || </span><span class="string">"photo"</span>; <span class="comment">// 设置图片名称  </span></span><br><span class="line">    a.href = url; <span class="comment">// 将生成的URL设置为a.href属性  </span></span><br><span class="line">    a.dispatch<span class="constructor">Event(<span class="params">event</span>)</span>; <span class="comment">// 触发a的单击事件  </span></span><br><span class="line">  &#125;;  </span><br><span class="line">  image.src = imgsrc;  </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
@@ -437,30 +438,39 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 <h2 id="说一下浏览器缓存"><a href="#说一下浏览器缓存" class="headerlink" title="说一下浏览器缓存"></a>说一下浏览器缓存</h2><p><a href="https://www.cnblogs.com/Aaron1Tall/p/11041884.html" target="_blank" rel="noopener">前端缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg" alt="image.png"></p>
 <hr>
 <h2 id="强缓存和协商缓存（web性能优化）"><a href="#强缓存和协商缓存（web性能优化）" class="headerlink" title="强缓存和协商缓存（web性能优化）"></a>强缓存和协商缓存（web性能优化）</h2><ul>
-<li><a href="http://caibaojian.com/browser-cache.html" target="_blank" rel="noopener">参考</a>、<a href="https://segmentfault.com/a/1190000008956069" target="_blank" rel="noopener">参考1</a>/<a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">参考2</a>、<a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>、<a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/111190645" target="_blank" rel="noopener">图解流程详解</a>、<a href="http://caibaojian.com/browser-cache.html" target="_blank" rel="noopener">参考</a>、<a href="https://segmentfault.com/a/1190000008956069" target="_blank" rel="noopener">参考1</a>/<a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">参考2</a>、<a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>、<a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a></li>
 <li>缓存是<strong>Web性能优化的重要方式</strong>。</li>
-<li>缓存分为两种：强缓存和协商缓存，根据响应的header内容来决定。</li>
-<li><strong>区别：</strong>如果浏览器命中<strong>强缓存</strong>，则<strong>不需要给服务器发请求</strong>；而<strong>协商缓存</strong>最终<strong>由服务器来决定是否使用缓存</strong>，即客户端与服务器之间<strong>存在一次通信</strong>。</li>
+<li>缓存分为两种：强缓存和协商缓存，<strong>根据响应的header内容来决定</strong>。</li>
+<li><strong>注意：强缓存也会有状态码，是200</strong></li>
+<li><strong>区别：</strong>如果浏览器命中<strong>强缓存</strong>，则<strong>在设置好的失效时间内不需要给服务器发请求</strong>；而<strong>协商缓存</strong>最终<strong>由服务器来决定是否使用缓存</strong>，即客户端与服务器之间<strong>存在一次通信</strong>。</li>
 <li>总之，<strong>强缓存就是强制从缓存中读取，不管是否更新。而协商缓存就是和 服务器协商是否从缓存取，如有更新则返回新数据。</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg" alt="image.png"></li>
-<li><strong>强缓存</strong>是利用<strong>http的返回头中的Expires或者Cache-Control两个字段</strong>来控制的，用来<strong>表示资源的缓存时间</strong>。如果cache-control与expires同时存在的话，cache-control的优先级高于expires。<ul>
+<li><strong>强缓存</strong>是利用<strong>http的返回（响应）头中的Expires或者Cache-Control两个字段</strong>来控制的，用来<strong>表示资源的缓存时间</strong>。如果cache-control与expires同时存在的话，cache-control的优先级高于expires。<ul>
 <li><strong>Expires</strong>是http1.0时的规范，它的值为一个绝对时间的GMT格式的时间字符串。缺点：由于<strong>失效时间是一个绝对时间</strong>，所以当服务器与客户端时间偏差较大时，就会导致缓存混乱。</li>
 <li><strong>Cache-Control</strong>是http1.1时出现的header信息，主要是利用该字段的<strong>max-age值</strong>来进行判断，它是一个<strong>相对时间</strong>，例如<strong>Cache-Control:max-age=3600</strong>，代表着资源的有效期是3600秒。<ul>
 <li>Cache-Control除了max-age还有以下<strong>常用字段</strong>：<ul>
 <li><strong>no-cache：不使用本地缓存</strong>。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li>
+<li><strong>no-store：直接禁止浏览器缓存数据</strong>，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</li>
+<li><strong>public：可以被所有的用户缓存</strong>，包括终端用户和CDN等中间代理服务器。</li>
+<li><strong>private（默认）：只能被终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。</li>
+<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg" alt="Cache-Control"><a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">图解参考</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li><strong>协商缓存</strong>相关字段有 <strong>http响应头中的Last-Modified/请求头中的If-Modified-Since，http响应头中的Etag/请求头中的If-None-Match</strong>（<a href="https://blog.csdn.net/lhl1124281072/article/details/80067764" target="_blank" rel="noopener">具体参考</a>）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg" alt="协商缓存"><ul>
+<li><strong>通过响应头的2个字段 设置协商缓存：</strong><ul>
+<li><strong>etag</strong>：每个文件有一个，改动文件了就变了，就是个文件hash，每个文件唯一，就像用webpack打包的时候，每个资源都会有这个东西，如： app.js打包后变为 app.c20abbde.js，加个唯一hash，也是为了解决缓存问题。</li>
+<li><strong>last-modified</strong>：文件的修改时间，精确到秒</li>
 </ul>
-<p><strong>no-store：直接禁止浏览器缓存数据</strong>，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。<br><strong>public：可以被所有的用户缓存</strong>，包括终端用户和CDN等中间代理服务器。<br><strong>private（默认）：只能被终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。<br>        - <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg" alt="Cache-Control"></p>
-<ul>
-<li><strong>协商缓存</strong>相关字段有Last-Modified/If-Modified-Since，Etag/If-None-Match（<a href="https://blog.csdn.net/lhl1124281072/article/details/80067764" target="_blank" rel="noopener">具体参考</a>）</li>
+</li>
+</ul>
+</li>
 <li><strong>浏览器在第一次请求发生后，再次请求时</strong>：<ul>
 <li>浏览器会先获取该资源缓存的header信息，<strong>根据其中的expires和cahe-control</strong>判断<strong>是否命中强缓存</strong>，若命中则直接从缓存中获取资源，包括缓存的header信息，本次请求不会与服务器进行通信；</li>
-<li><strong>如果没有命中强缓存</strong>，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（Last-Modified/IF-Modified-Since、Etag/IF-None-Match）,由服务器根据请求中的相关header信息来<strong>对比结果是否命中协商缓存</strong>。</li>
-<li><strong>若命中协商缓存</strong>，则服务器返回新的响应header信息更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存获取；否则返回最新的资源内容</li>
+<li><strong>如果没有命中强缓存</strong>，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（IF-Modified-Since、IF-None-Match，这2个字段值是上次响应头中的Last-Modified和Etag保存而来）,由服务器根据请求中的相关header信息来<strong>对比结果是否命中协商缓存</strong>。</li>
+<li><strong>若命中协商缓存</strong>，则服务器返回新的响应header信息（Last-Modified和Etag）更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存获取（304）；否则返回最新的资源内容（Last-Modified和Etag以及200状态码）</li>
 </ul>
 </li>
 <li><strong>访问缓存优先级</strong><ul>
