@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>JS原型和原型链 | 珠</title>
+  <title>JS class和继承 原型和原型链 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
@@ -11,15 +11,20 @@
   
   
   
-  <meta name="description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+  <meta name="description" content="更新：慕课 快速解决前端技术一面 第五章">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS原型和原型链">
-<meta property="og:url" content="http://yoursite.com/2020/02/04/JS原型和原型链/index.html">
+<meta property="og:title" content="JS class和继承 原型和原型链">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/JS class和继承 原型和原型链/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+<meta property="og:description" content="更新：慕课 快速解决前端技术一面 第五章">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxvrnh7n3j30r90j5q54.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwej5e2cj319k0h34g9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwmjec7pj31350i178u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwxr7i9ej31hc061tic.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxxq0s1l4j316y0lgwjt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo3vz5n6tj30md0bodmx.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo40wpy9qj30m60bsn42.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo450tq6cj30mt0c845m.jpg">
@@ -34,10 +39,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8kkyt95j31hb0k778b.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp8rm3hsfj31fo0lttbi.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7e0k737j30xx0bb45g.jpg">
-<meta property="og:updated_time" content="2020-02-28T13:53:05.549Z">
+<meta property="og:updated_time" content="2020-11-23T03:11:14.803Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS原型和原型链">
-<meta name="twitter:description" content="题目 如何准确判断一个变量是数组类型（typeof肯定不行）【instanceof】 写一个原型链继承的例子【原型扩展属性（函数）】 描述new一个对象的过程【考察 构造函数】 zepto（或其他框架）源码中如何使用原型链  【解答在最下面】">
+<meta name="twitter:title" content="JS class和继承 原型和原型链">
+<meta name="twitter:description" content="更新：慕课 快速解决前端技术一面 第五章">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -145,7 +150,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-JS原型和原型链" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-JS class和继承 原型和原型链" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -153,7 +158,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      JS原型和原型链
+      JS class和继承 原型和原型链
     </h1>
   
 
@@ -161,7 +166,7 @@
     
     <div class="article-meta">
       
-	<a href="/2020/02/04/JS原型和原型链/" class="article-date">
+	<a href="/2020/02/04/JS class和继承 原型和原型链/" class="article-date">
 	  <time datetime="2020-02-04T13:26:39.000Z" itemprop="datePublished">二月 4, 2020</time>
 	</a>
 
@@ -177,41 +182,80 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
-<li>如何准确判断一个变量是<strong>数组类型</strong>（typeof肯定不行）【instanceof】</li>
-<li>写一个<strong>原型链继承</strong>的例子【原型扩展属性（函数）】</li>
-<li>描述<strong>new一个对象</strong>的过程【考察 构造函数】</li>
-<li>zepto（或其他框架）源码中如何使用原型链</li>
-</ul>
-<p><strong>【解答在最下面】</strong></p>
+        <p>更新：慕课 快速解决前端技术一面 第五章</p>
 <a id="more"></a>
 
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><ul>
 <li>构造函数命名使用<strong>大写字母开头</strong>。</li>
-<li>所有的<strong>引用类型都有构造函数</strong>（对象、数组、函数）<br>（所以<strong>精确判断 引用类型 时</strong>我们无法使用typeof，但<strong>可以通过 <code>instanceof</code> 判断她们的构造函数</strong>）</li>
+<li>所有的<strong>引用类型都有构造函数</strong>（对象、数组、函数）<ul>
+<li>所以<strong>精确判断 引用类型 时</strong>我们无法使用typeof，但<strong>可以通过 <code>instanceof</code> 判断她们的构造函数</strong>）</li>
 </ul>
-<p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg" alt="例子"></p>
-<p><strong>解析</strong>：<br><strong>构造函数Foo</strong>，第五行代码屏蔽与都不影响，因为<strong>默认就是把this这个对象返回给调用这个构造函数的对象</strong>。<br>当我们执行第7行代码时，实际<strong>先把Foo函数内的this变成了一个空对象</strong>，this再指向f，然后往Foo函数中传入两个参数赋值在this上，<strong>在Foo函数中完成绑定后再把this对象返回给f</strong>，可以得到f.name=’zhangsan’,f.age=20。</p>
-<p><strong>过程</strong>：</p>
-<ol>
+</li>
+<li><strong>例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo2wfc03ej30rx0ad44t.jpg" alt="例子"></li>
+<li><strong>解析</strong>：<ul>
+<li><strong>构造函数Foo</strong>，第五行代码屏蔽与都不影响，因为<strong>默认就是把this这个对象返回给调用这个构造函数的对象</strong>。<br>当我们执行第7行代码时，实际<strong>先把Foo函数内的this变成了一个空对象</strong>，this再指向f，然后往Foo函数中传入两个参数赋值在this上，<strong>在Foo函数中完成绑定后再把this对象返回给f</strong>，可以得到f.name=’zhangsan’,f.age=20。</li>
+</ul>
+</li>
+<li><strong>过程</strong>：<ol>
 <li>创建一个新对象f</li>
 <li>构造函数Foo()的this指向这个新对象f（这里的this是个空对象）</li>
 <li>执行Foo()函数代码（即降属性绑定在this上）</li>
 <li>返回this对象给f（屏蔽第5行代码也是一样的效果，默认返回，此时this已经不是空对象了）</li>
 </ol>
+</li>
+</ul>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
 <li><code>vara ={}</code>其实是<code>var a = new Object（）</code>的语法糖</li>
 <li><code>vara=[]</code>其实是<code>var a = new Array（）</code>的语法糖</li>
 <li><code>function Foo(){...}</code>其实是<code>var Foo = new Function(){...}</code>的语法糖</li>
 <li>可以使用<code>instanceof</code>判断 引用类型（数组、对象、函数） 属于哪个 构造函数。</li>
 </ul>
-<p><strong>判断一个变量是否为“数组”</strong>：<br><code>变量 instanceof Array</code></p>
+<p><strong>判断一个变量是否为“数组”</strong>：<code>变量 instanceof Array</code></p>
+<hr>
+<h1 id="class和继承"><a href="#class和继承" class="headerlink" title="class和继承"></a>class和继承</h1><ul>
+<li><a href="https://huanglizhu.github.io/2020/02/10/ES6%20class%E4%B8%8Ebabel%EF%BC%882%EF%BC%89/#ES6中class的继承" target="_blank" rel="noopener">ES6 class</a></li>
+<li><strong>class：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxvrnh7n3j30r90j5q54.jpg" alt="class的例子"></li>
+<li><strong>class的本质是函数（通过typeOf可判断），他是语法糖</strong></li>
+<li><strong>继承：</strong>（例子见下）<ul>
+<li><strong>extends</strong>：子类继承父类，让<strong>子类获得父类的方法、属性</strong></li>
+<li><strong>super</strong>：子类extends父类后，<strong>需要在子类的构造函数中使用<code>super();</code>(可传参，相当于执行父类的构造函数)</strong></li>
+<li><strong>子类中扩展或重写方法</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">class</span> People &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    eat() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> eat something`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="keyword">class</span> Student <span class="keyword">extends</span> People &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name, <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">        <span class="keyword">this</span>.number = <span class="built_in">number</span></span><br><span class="line">    &#125;</span><br><span class="line">    sayHi() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`姓名 <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> 学号 <span class="subst">$&#123;<span class="keyword">this</span>.<span class="built_in">number</span>&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    eat() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> 爱吃油炸食品`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="keyword">class</span> Teacher <span class="keyword">extends</span> People &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name, major</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">        <span class="keyword">this</span>.major = major</span><br><span class="line">    &#125;</span><br><span class="line">    teach() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> 教授 <span class="subst">$&#123;<span class="keyword">this</span>.major&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="keyword">const</span> xialuo = <span class="keyword">new</span> Student(<span class="string">'夏洛'</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.name)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.number)</span><br><span class="line">xialuo.sayHi()</span><br><span class="line">xialuo.eat()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="keyword">const</span> wanglaoshi = <span class="keyword">new</span> Teacher(<span class="string">'王老师'</span>, <span class="string">'语文'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(wanglaoshi.name)</span><br><span class="line"><span class="built_in">console</span>.log(wanglaoshi.major)</span><br><span class="line">wanglaoshi.teach()</span><br><span class="line">wanglaoshi.eat()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="class与原型关系"><a href="#class与原型关系" class="headerlink" title="class与原型关系"></a>class与原型关系</h2><ul>
+<li><strong>原型关系</strong>：<ul>
+<li>每个class（<strong>本质是函数</strong>）都有显式原型<code>prototype</code></li>
+<li>每个实例都有隐式原型<code>__proto__</code></li>
+<li>实例的<code>__proto__</code>指向对应class的<code>prototype</code></li>
+<li>子类的显示原型（<code>prototype</code>属性值为一个对象）的隐式原型 指向 父类的显式原型</li>
+<li>父类的显示原型（<code>prototype</code>属性值为一个对象）的隐式原型 指向 Object（构造函数 ）的显式原型</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwej5e2cj319k0h34g9.jpg" alt="class的本质是函数"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwmjec7pj31350i178u.jpg" alt="原型与原型链的图示（代码结合上面的例子）"></p>
+<h2 id="class与原型链"><a href="#class与原型链" class="headerlink" title="class与原型链"></a>class与原型链</h2><ul>
+<li><strong>class实际上是函数</strong></li>
+<li><strong>class的显式原型</strong>可以理解为<strong>一个对象</strong></li>
+<li><strong>class与原型链图示：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxwxr7i9ej31hc061tic.jpg" alt="class与原型链">Student是子类，People是父类，<strong>子类的显式原型的隐式原型全等于父类的显式原型</strong></li>
+<li>子类的显式原型的隐式原型全等于父类的显式原型 图解：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxxq0s1l4j316y0lgwjt.jpg" alt="子类的显式原型的隐式原型全等于父类的显式原型 图解"></li>
+<li><strong>例子</strong>：（代码在上面的“class和继承中”）<ul>
+<li><strong>假设要访问xialuo.eat()</strong>，则先在xialuo实例里找，找不到就到xialuo的隐式原型<code>__proto__</code>中找，即子类Stuent的显式原型中找，而里面只有sayHi()没有eat()，所以会继续到<code>子类的Student的显式原型</code>的隐式原型<code>__proto__</code>里找，即父类People的显式原型，成功找到eat()<ul>
+<li><strong>图示：</strong><a href="http://ww1.sinaimg.cn/large/005H7IVsgy1gkxxz7z4jdj318u0m3jwq.jpg" target="_blank" rel="noopener">class的显式原型 对象</a><strong>class的显式原型</strong>可以理解为<strong>一个对象</strong>，所以<strong><code>class的显式原型</code>的隐式原型 指向 Object的显式原型</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h1 id="原型规则（5条）"><a href="#原型规则（5条）" class="headerlink" title="原型规则（5条）"></a>原型规则（5条）</h1><p><strong>原型规则</strong>是学习<strong>原型链</strong>的基础</p>
-<h2 id="引用类型的自由扩展属性"><a href="#引用类型的自由扩展属性" class="headerlink" title="引用类型的自由扩展属性"></a>引用类型的自由扩展属性</h2><p>所有的<strong>引用类型（数组、对象、函数</strong>），都<strong>具有对象特性，即可自由扩展属性</strong>。（除了”null”）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo3vz5n6tj30md0bodmx.jpg" alt="例子"></p>
-<h2 id="引用类型的-proto-属性（隐式原型）"><a href="#引用类型的-proto-属性（隐式原型）" class="headerlink" title="引用类型的__proto__属性（隐式原型）"></a>引用类型的<code>__proto__</code>属性（隐式原型）</h2><p>所有的<strong>引用类型（数组、对象、函数），都有一个<code>__proto__</code>属性(隐式原型)，属性值是一个普通的对象</strong>。（除了”null”）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo40wpy9qj30m60bsn42.jpg" alt="例子"></p>
+<h2 id="引用类型的自由扩展属性"><a href="#引用类型的自由扩展属性" class="headerlink" title="引用类型的自由扩展属性"></a>引用类型的自由扩展属性</h2><p>所有的<strong>引用类型（数组、对象、函数</strong>），都<strong>具有对象特性，即可自由扩展属性</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo3vz5n6tj30md0bodmx.jpg" alt="例子"></p>
+<h2 id="引用类型的-proto-属性（隐式原型）"><a href="#引用类型的-proto-属性（隐式原型）" class="headerlink" title="引用类型的__proto__属性（隐式原型）"></a>引用类型的<code>__proto__</code>属性（隐式原型）</h2><p>所有的<strong>引用类型（数组、对象、函数），都有一个<code>__proto__</code>属性(隐式原型)，属性值是一个普通的对象</strong>。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo40wpy9qj30m60bsn42.jpg" alt="例子"></p>
 <h2 id="函数的prototype属性（显式原型）"><a href="#函数的prototype属性（显式原型）" class="headerlink" title="函数的prototype属性（显式原型）"></a>函数的<code>prototype</code>属性（显式原型）</h2><p><strong>所有的函数都有一个<code>prototype</code>属性（显式原型），属性值也是一个普通的对象。</strong><br><strong>【注意：数组、对象没有<code>prototype</code>属性】</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo450tq6cj30mt0c845m.jpg" alt="例子"></p>
-<h2 id="proto-与prototype属性值"><a href="#proto-与prototype属性值" class="headerlink" title="__proto__与prototype属性值"></a><code>__proto__</code>与<code>prototype</code>属性值</h2><p>所有的<strong>引用类型（数组、对象、函数）的<code>__proto__</code>属性值 都指向它的 构造函数的<code>prototype</code>属性值。</strong>（除了”null”）<br>【<strong>“指向”即“全等”</strong>，<code>__proto__</code>属性值<code>===</code>它的构造函数的<code>prototype</code>属性值】<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo48sbc76j30o00c9ahj.jpg" alt="例子"></p>
+<h2 id="proto-与prototype属性值"><a href="#proto-与prototype属性值" class="headerlink" title="__proto__与prototype属性值"></a><code>__proto__</code>与<code>prototype</code>属性值</h2><p>所有的<strong>引用类型（数组、对象、函数）的<code>__proto__</code>属性值 都指向它的 构造函数的<code>prototype</code>属性值。</strong><br>【<strong>“指向”即“全等”</strong>，<code>__proto__</code>属性值<code>===</code>它的构造函数的<code>prototype</code>属性值】<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo48sbc76j30o00c9ahj.jpg" alt="例子"></p>
 <h2 id="第五条原型规则"><a href="#第五条原型规则" class="headerlink" title="第五条原型规则"></a>第五条原型规则</h2><p>当试图得到一个对象的某个属性时，<strong>如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>属性（即它的构造函数的<code>prototype</code>属性）中寻找</strong>。</p>
 <p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4n6amavj30km0drwla.jpg" alt="例子"></p>
 <p><strong>解析</strong>：<br><strong>看第15行代码</strong>，f是通过构造函数Foo创建的对象，f只有第10行添加的printName属性，<strong>没有alertName属性</strong>，根据第五条原则，<strong>f会去它的<code>__proto__</code>属性（即它的构造函数Foo函数的<code>prototype</code>属性）中寻找</strong>，找到第5行的<code>alert（this.name)</code>，<strong>弹出’zhangsan’</strong>。</p>
@@ -219,30 +263,42 @@
 <hr>
 <h2 id="hasOwnProperty-判断原型属性"><a href="#hasOwnProperty-判断原型属性" class="headerlink" title="hasOwnProperty()判断原型属性"></a><code>hasOwnProperty()</code>判断原型属性</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo4y7apgfj30n307rdk6.jpg" alt="例子"><br>在<strong>使用<code>for in</code>循环对象属性时</strong>，我们希望<strong>避开他来自原型的属性</strong>，虽然现在高级浏览器上已经回屏蔽，但为了保证 程序健壮性 还是<strong>建议大家加上这个判断</strong>，能在第6行打印的就是来自原型的属性。</p>
 <hr>
-<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo58g8ra2j30kh0dlwlb.jpg" alt="例子"></p>
-<p><strong>解析</strong>：<br><strong>f中找不到toString()</strong>，根据第五条规则，去f的<code>__proto__</code>属性（即f的构造函数Foo()的<code>prototype</code>属性）中寻找,也没找到。<br><strong>注意</strong>：原型规则中提到<strong><code>__proto__</code>属性值是一个普通的对象</strong>，又因为<strong>每个对象都有一个<code>__proto__</code>属性</strong>，所以我们去<code>f.__proto__</code>（一个对象）的<code>__proto__</code>中查找。<br>根据第四条原则，我们知道 <strong>对象的<code>__proto__</code> 全等于 它的构造函数（Object）的<code>prototype</code>属性值</strong>，也就是说要去Object的<code>prototype</code>属性值 中找toString()，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="noopener">Object.prototype.toString()</a>是存在的。</p>
-<p><strong>注意</strong>：</p>
-<ol>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><ul>
+<li><strong>例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo58g8ra2j30kh0dlwlb.jpg" alt="例子"></li>
+<li><strong>解析</strong>：<ul>
+<li><strong>f中找不到toString()</strong>，根据第五条规则，去f的<code>__proto__</code>属性（即f的构造函数Foo()的<code>prototype</code>属性）中寻找,也没找到。</li>
+<li><strong>注意</strong>：原型规则中提到<strong><code>__proto__</code>属性值是一个普通的对象</strong>，又因为<strong>每个对象都有一个<code>__proto__</code>属性</strong>，所以我们去<code>f.__proto__</code>（一个对象）的<code>__proto__</code>中查找。</li>
+<li>根据第四条原则，我们知道 <strong>对象的<code>__proto__</code> 全等于 它的构造函数（Object）的<code>prototype</code>属性值</strong>，也就是说要去Object的<code>prototype</code>属性值 中找toString()，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="noopener">Object.prototype.toString()</a>是存在的。</li>
+</ul>
+</li>
+<li><strong>注意</strong>：<ol>
 <li><strong>Object是构造函数，不是对象！</strong></li>
-<li><strong>JS为了防止死循环，到<code>Object.prototype</code>（构造函数的显示类型）如果找不到再继续往下的话就是到null了</strong>】</li>
+<li><strong>JS为了防止死循环，到<code>Object.prototype</code>（构造函数的显示类型）如果找不到再继续往下的话就是到null了</strong></li>
 </ol>
-<p><strong>示意图</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo5xg6djfj30v70dsjvd.jpg" alt="示意图"></p>
+</li>
+<li><strong>示意图</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo5xg6djfj30v70dsjvd.jpg" alt="示意图"></li>
+</ul>
 <hr>
 <h2 id="instanceof运算符"><a href="#instanceof运算符" class="headerlink" title="instanceof运算符"></a><code>instanceof</code>运算符</h2><ul>
-<li>作用：判断<strong>引用类型</strong>（对象、数组、函数）属于哪个<strong>构造函数</strong>（Object()、Array()、Funtion()）。【也就是让我们去<strong>找这个 引用类型 里有没有 构造函数的显示原型</strong>】</li>
-<li>语法：<code>object instanceof constructor</code></li>
-<li>参数：object（要检测的引用类型）；constructor（某个构造函数）</li>
-<li>返回值：测试它 <strong>左边的引用类型</strong> 是否是它 <strong>右边的构造函数的实例</strong>，返回 boolean 的数据类型。<strong>是则返回true，否则返回false</strong>。</li>
-<li><strong>注意</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> === <span class="string">'object'</span> <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-
+<li><p>作用：判断<strong>引用类型</strong>（对象、数组、函数）属于哪个<strong>构造函数</strong>（Object()、Array()、Funtion()）。【也就是让我们去<strong>找这个 引用类型 里有没有 构造函数的显示原型</strong>】</p>
 </li>
-</ul>
-<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><p>结合上一个例子，<code>f instanceof Foo</code>的<strong>判断逻辑</strong>是：</p>
+<li><p>语法：<code>object instanceof constructor</code></p>
+</li>
+<li><p>参数：object（要检测的引用类型）；constructor（某个构造函数）</p>
+</li>
+<li><p>返回值：测试它 <strong>左边的引用类型</strong> 是否是它 <strong>右边的构造函数的实例</strong>，返回 boolean 的数据类型。<strong>是则返回true，否则返回false</strong>。</p>
+</li>
+<li><p><strong>注意</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> === <span class="string">'object'</span> <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>例子</strong>：结合上一个例子，<strong><code>f instanceof Foo</code>的判断逻辑</strong>是：</p>
 <ol>
-<li>判断f是否是Foo函数的实例，即判断f中是否能找到Foo函数的显示原型prototype。</li>
+<li>判断f是否是Foo函数的实例，即判断f中是否能找到<strong>Foo函数的显示原型prototype</strong>。</li>
 <li>根据原则，f中找不到该属性时，顺着f的<code>__proto__</code>一层一层往上，看看能否对应到<code>Foo.prototype</code></li>
 <li>找到了，返回true</li>
 </ol>
+</li>
+</ul>
 <hr>
 <h1 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h1><h2 id="如何准确判断一个变量是数组类型（typeof肯定不行）"><a href="#如何准确判断一个变量是数组类型（typeof肯定不行）" class="headerlink" title="如何准确判断一个变量是数组类型（typeof肯定不行）"></a>如何准确判断一个变量是<strong>数组类型</strong>（typeof肯定不行）</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"></p>
 <hr>
@@ -346,7 +402,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">2.1.</span> <span class="nav-text">扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型规则（5条）"><span class="nav-number">3.</span> <span class="nav-text">原型规则（5条）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的自由扩展属性"><span class="nav-number">3.1.</span> <span class="nav-text">引用类型的自由扩展属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的-proto-属性（隐式原型）"><span class="nav-number">3.2.</span> <span class="nav-text">引用类型的__proto__属性（隐式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的prototype属性（显式原型）"><span class="nav-number">3.3.</span> <span class="nav-text">函数的prototype属性（显式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-与prototype属性值"><span class="nav-number">3.4.</span> <span class="nav-text">__proto__与prototype属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五条原型规则"><span class="nav-number">3.5.</span> <span class="nav-text">第五条原型规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hasOwnProperty-判断原型属性"><span class="nav-number">3.6.</span> <span class="nav-text">hasOwnProperty()判断原型属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">4.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceof运算符"><span class="nav-number">4.2.</span> <span class="nav-text">instanceof运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目解答"><span class="nav-number">5.</span> <span class="nav-text">题目解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何准确判断一个变量是数组类型（typeof肯定不行）"><span class="nav-number">5.1.</span> <span class="nav-text">如何准确判断一个变量是数组类型（typeof肯定不行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写一个原型链继承的例子"><span class="nav-number">5.2.</span> <span class="nav-text">写一个原型链继承的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装DOM查询的例子"><span class="nav-number">5.2.1.</span> <span class="nav-text">封装DOM查询的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：链式操作"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">补充：链式操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述new一个对象的过程"><span class="nav-number">5.3.</span> <span class="nav-text">描述new一个对象的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zepto（或其他框架）源码中如何使用原型链"><span class="nav-number">5.4.</span> <span class="nav-text">zepto（或其他框架）源码中如何使用原型链</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">1.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">1.1.</span> <span class="nav-text">扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#class和继承"><span class="nav-number">2.</span> <span class="nav-text">class和继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class与原型关系"><span class="nav-number">2.1.</span> <span class="nav-text">class与原型关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class与原型链"><span class="nav-number">2.2.</span> <span class="nav-text">class与原型链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型规则（5条）"><span class="nav-number">3.</span> <span class="nav-text">原型规则（5条）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的自由扩展属性"><span class="nav-number">3.1.</span> <span class="nav-text">引用类型的自由扩展属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型的-proto-属性（隐式原型）"><span class="nav-number">3.2.</span> <span class="nav-text">引用类型的__proto__属性（隐式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的prototype属性（显式原型）"><span class="nav-number">3.3.</span> <span class="nav-text">函数的prototype属性（显式原型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-与prototype属性值"><span class="nav-number">3.4.</span> <span class="nav-text">__proto__与prototype属性值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五条原型规则"><span class="nav-number">3.5.</span> <span class="nav-text">第五条原型规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hasOwnProperty-判断原型属性"><span class="nav-number">3.6.</span> <span class="nav-text">hasOwnProperty()判断原型属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">4.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceof运算符"><span class="nav-number">4.1.</span> <span class="nav-text">instanceof运算符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目解答"><span class="nav-number">5.</span> <span class="nav-text">题目解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何准确判断一个变量是数组类型（typeof肯定不行）"><span class="nav-number">5.1.</span> <span class="nav-text">如何准确判断一个变量是数组类型（typeof肯定不行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写一个原型链继承的例子"><span class="nav-number">5.2.</span> <span class="nav-text">写一个原型链继承的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装DOM查询的例子"><span class="nav-number">5.2.1.</span> <span class="nav-text">封装DOM查询的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：链式操作"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">补充：链式操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述new一个对象的过程"><span class="nav-number">5.3.</span> <span class="nav-text">描述new一个对象的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zepto（或其他框架）源码中如何使用原型链"><span class="nav-number">5.4.</span> <span class="nav-text">zepto（或其他框架）源码中如何使用原型链</span></a></li></ol></li></ol>
     
     </div>
   </aside>
