@@ -24,6 +24,8 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_ajax_example.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_dynamic_loading_example.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_callback_hell.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png">
@@ -33,7 +35,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg">
-<meta property="og:updated_time" content="2021-02-21T06:14:41.038Z">
+<meta property="og:updated_time" content="2021-02-21T07:54:50.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS异步与单线程、Date、Math">
 <meta name="twitter:description" content="单线程和异步 单线程：一次只能做一件事情，js就是单线程的。 异步：为了让单线程不阻塞，就出现了异步。 js是单线程的，但是遇到等待（网络请求/定时任务）的时候不能卡住，此时就需要异步。 异步通常是基于回调函数的形式，当然还有其他的方法实现异步，比如Promise   JS是单线程语言，只能同时做一件事。 浏览器和nodejs已支持JS启动进程，如Web Worker JS和DOM渲染共用同一个线">
@@ -234,8 +236,12 @@
 </li>
 <li><p><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。</p>
 <ul>
-<li>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</li>
-<li>例：f1的回调函数f2，f1().then(f2);</li>
+<li>简单说，它的思想是，<strong>每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。</strong>回调函数（回调地狱）变成了<strong>链式写法</strong>，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png" alt="Promise的例子" title="Promise的例子"></li>
+</ul>
+</li>
+<li><p><a href="https://huanglizhu.github.io/2020/03/05/ES6%20async%E5%87%BD%E6%95%B0%E4%B8%8Eawait%E5%85%B3%E9%94%AE%E8%AF%8D/" target="_blank" rel="noopener"><strong>async</strong></a>,async函数返回的是一个 Promise 对象，可以使用 then 方法添加回调函数，async 函数内部 return 语句返回的值，会成为 then 方法回调函数的参数。当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。</p>
+<ul>
+<li>比起Promise，await则不需要then，<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png" alt="Promise与async对比的例子" title="Promise与async对比的例子"></li>
 </ul>
 </li>
 <li><p><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>

@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_have_await.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_promise.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_try-catch.jpg">
-<meta property="og:updated_time" content="2021-02-21T07:28:48.539Z">
+<meta property="og:updated_time" content="2021-02-21T07:39:38.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 async函数与await关键词">
 <meta name="twitter:description" content="async函数与await关键词 async函数与await关键词其实都是Promise的语法糖（只是换了写法，背后还是Promise的运作原理）">
@@ -178,6 +178,7 @@
 <li>await必须包裹在async 函数里面使用</li>
 <li>执行 async 函数返回的也是一个promise 对象</li>
 <li>可使用 try-catch 截获promise 中reject 的值</li>
+<li>await的存在决定了async函数中的执行顺序（包括同步与异步的顺序）</li>
 </ol>
 <h1 id="async函数与普通函数的区别"><a href="#async函数与普通函数的区别" class="headerlink" title="async函数与普通函数的区别"></a>async函数与普通函数的区别</h1><ul>
 <li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_diff_func_.jpg" alt="async函数与普通函数的区别" title="async函数与普通函数的区别"></li>
@@ -190,7 +191,9 @@
 </ul>
 </li>
 <li><strong><code>await Promise实例</code>得到的值</strong> 也就是<strong>Promise实例在resolve状态下所返回的值</strong>（即then()的参数1所接受到的参数/resolve()所传递的参数）</li>
-<li><strong>执行顺序：</strong>当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。</li>
+</ul>
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><ul>
+<li><strong>当函数执行的时候，</strong>一旦遇到await就会先执行await的相关异步操作<strong>，等到异步操作完成，再接着执行函数体内后面的语句（</strong>包括同步任务也先等着await执行**）。</li>
 <li>在async函数中想要使用Promise实例，且<strong>希望表现出单线程（从上到下）执行</strong>，则<strong>可使用await关键词来返回Promise实例的值（同步任务也会被排在await后执行）</strong></li>
 <li><strong>例子</strong>：<ul>
 <li>未使用await关键词：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_not_await.jpg" alt="未使用await关键词" title="未使用await关键词"></li>
@@ -280,7 +283,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#async函数与await关键词"><span class="nav-number">1.</span> <span class="nav-text">async函数与await关键词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识要点"><span class="nav-number">1.1.</span> <span class="nav-text">知识要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async函数与普通函数的区别"><span class="nav-number">2.</span> <span class="nav-text">async函数与普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#await关键词"><span class="nav-number">3.</span> <span class="nav-text">await关键词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#await后必须是Promise实例"><span class="nav-number">3.1.</span> <span class="nav-text">await后必须是Promise实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#await只能在async内使用"><span class="nav-number">3.2.</span> <span class="nav-text">await只能在async内使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-try-catch-截获promise-中reject-的值"><span class="nav-number">4.</span> <span class="nav-text">使用 try-catch 截获promise 中reject 的值</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#async函数与await关键词"><span class="nav-number">1.</span> <span class="nav-text">async函数与await关键词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识要点"><span class="nav-number">1.1.</span> <span class="nav-text">知识要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async函数与普通函数的区别"><span class="nav-number">2.</span> <span class="nav-text">async函数与普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#await关键词"><span class="nav-number">3.</span> <span class="nav-text">await关键词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#执行顺序"><span class="nav-number">3.1.</span> <span class="nav-text">执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#await后必须是Promise实例"><span class="nav-number">3.2.</span> <span class="nav-text">await后必须是Promise实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#await只能在async内使用"><span class="nav-number">3.3.</span> <span class="nav-text">await只能在async内使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-try-catch-截获promise-中reject-的值"><span class="nav-number">4.</span> <span class="nav-text">使用 try-catch 截获promise 中reject 的值</span></a></li></ol>
     
     </div>
   </aside>
