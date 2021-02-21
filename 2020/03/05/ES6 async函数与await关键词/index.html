@@ -19,17 +19,17 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="async函数与await关键词 async函数与await关键词其实都是Promise的语法糖（只是换了写法，背后还是Promise的运作原理）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfi5fkokqj315205j0z8.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdficz35fhj30vh0767a4.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfjqhkhh8j30wv09jwl6.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfjqtcsxvj30y208wahq.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfk4hc9r3j30u10hegzb.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfsc83ifcj30nx0f4aeu.jpg">
-<meta property="og:updated_time" content="2020-06-27T11:58:17.114Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_diff_func_.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_example_.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_not_await.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_have_await.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_promise.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_try-catch.jpg">
+<meta property="og:updated_time" content="2021-02-21T07:28:48.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 async函数与await关键词">
 <meta name="twitter:description" content="async函数与await关键词 async函数与await关键词其实都是Promise的语法糖（只是换了写法，背后还是Promise的运作原理）">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfi5fkokqj315205j0z8.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_diff_func_.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -180,9 +180,9 @@
 <li>可使用 try-catch 截获promise 中reject 的值</li>
 </ol>
 <h1 id="async函数与普通函数的区别"><a href="#async函数与普通函数的区别" class="headerlink" title="async函数与普通函数的区别"></a>async函数与普通函数的区别</h1><ul>
-<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfi5fkokqj315205j0z8.jpg" alt="async函数与普通函数的区别"></li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_diff_func_.jpg" alt="async函数与普通函数的区别" title="async函数与普通函数的区别"></li>
 <li>之前我们是在普通函数中使用new Promise创建Promise对象来返回，<strong>使用async函数不需手动返回Promise对象，async会自动将函数的返回值变成状态为resolved的Promise实例</strong></li>
-<li>如果使用<code>async function(){...}</code>，则return之后引擎会去<strong>判断返回的是否为Promise实例</strong>，如果<strong>不是</strong>则引擎会进行处理，<strong>使之成为状态为resolved的Promise实例</strong>，返回的数据可通过then()获取：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdficz35fhj30vh0767a4.jpg" alt="例子"></li>
+<li>如果使用<code>async function(){...}</code>，则return之后引擎会去<strong>判断返回的是否为Promise实例</strong>，如果<strong>不是</strong>则引擎会进行处理，<strong>使之成为状态为resolved的Promise实例</strong>，返回的数据可通过then()获取：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_example_.jpg" alt="例子" title="例子"></li>
 </ul>
 <h1 id="await关键词"><a href="#await关键词" class="headerlink" title="await关键词"></a>await关键词</h1><ul>
 <li><strong><code>await Promise实例</code>是一个表达式</strong><ul>
@@ -190,24 +190,24 @@
 </ul>
 </li>
 <li><strong><code>await Promise实例</code>得到的值</strong> 也就是<strong>Promise实例在resolve状态下所返回的值</strong>（即then()的参数1所接受到的参数/resolve()所传递的参数）</li>
-<li>当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。</li>
-<li>在async函数中想要使用Promise实例，且<strong>希望表现出单线程（从上到下）执行</strong>，则<strong>可使用await关键词来返回Promise实例的值</strong></li>
+<li><strong>执行顺序：</strong>当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。</li>
+<li>在async函数中想要使用Promise实例，且<strong>希望表现出单线程（从上到下）执行</strong>，则<strong>可使用await关键词来返回Promise实例的值（同步任务也会被排在await后执行）</strong></li>
 <li><strong>例子</strong>：<ul>
-<li>未使用await关键词：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfjqhkhh8j30wv09jwl6.jpg" alt="未使用await关键词"></li>
-<li>使用await关键词：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfjqtcsxvj30y208wahq.jpg" alt="使用await关键词"></li>
+<li>未使用await关键词：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_not_await.jpg" alt="未使用await关键词" title="未使用await关键词"></li>
+<li>使用await关键词：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_have_await.jpg" alt="使用await关键词" title="使用await关键词"></li>
 </ul>
 </li>
 </ul>
 <h2 id="await后必须是Promise实例"><a href="#await后必须是Promise实例" class="headerlink" title="await后必须是Promise实例"></a>await后必须是Promise实例</h2><ul>
 <li>await后必须是Promise实例，<strong>如果不是也不会报错，会自动处理为Promise对象</strong></li>
-<li><strong>例子</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfk4hc9r3j30u10hegzb.jpg" alt="例子"></li>
+<li><strong>例子</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_promise.jpg" alt="例子" title="例子"></li>
 </ul>
 <h2 id="await只能在async内使用"><a href="#await只能在async内使用" class="headerlink" title="await只能在async内使用"></a>await只能在async内使用</h2><ul>
 <li>await不能单独使用，他只能在async内使用</li>
 </ul>
 <h1 id="使用-try-catch-截获promise-中reject-的值"><a href="#使用-try-catch-截获promise-中reject-的值" class="headerlink" title="使用 try-catch 截获promise 中reject 的值"></a>使用 try-catch 截获promise 中reject 的值</h1><ul>
 <li>在async函数中，使用await我们可以获取到Promise对象成功时通过resolve()传递的数据，<strong>错误信息则可通过try-catch包裹await表达式来捕捉reject()中传递的值</strong></li>
-<li>例子可参考笔记“koa2重构博客项目”中：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gdfsc83ifcj30nx0f4aeu.jpg" alt="例子"></li>
+<li>例子可参考笔记“koa2重构博客项目”中：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_await_try-catch.jpg" alt="例子" title="例子"></li>
 </ul>
 
       
