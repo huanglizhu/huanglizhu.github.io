@@ -22,7 +22,14 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/HTML_302_example.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/HTML_302_location.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_headers.png">
-<meta property="og:updated_time" content="2021-03-27T13:44:08.075Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_Cache-Control.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_Cache-Control_example.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_Last-Modified.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_Etag.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_example.png">
+<meta property="og:updated_time" content="2021-03-28T06:23:32.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http 面试题">
 <meta name="twitter:description" content="慕课 快速搞定前端技术一面 第14章 笔记">
@@ -268,12 +275,83 @@
 <li>Etag</li>
 <li>If-None-Match</li>
 </ul>
-<p>具体在下面缓存中补充</p>
+<p>具体内容在下面“http 缓存”中</p>
 <h1 id="http-缓存"><a href="#http-缓存" class="headerlink" title="http 缓存"></a>http 缓存</h1><ul>
+<li><strong>http缓存 流程图：</strong><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png" alt="http缓存 综述" title="http缓存 综述"></li>
 <li><strong>缓存：</strong> 将不需要再次加载的东西存起来</li>
 <li><strong>为什么需要缓存：</strong>为了网页加载速度更快一些，其中网络请求时大头，<strong>缓存可以优化网络请求</strong>的加载速度和次数</li>
+<li><strong>哪些资源可以被缓存：</strong>静态资源（js css img）<ul>
+<li><strong>webpack打包</strong>的时候给静态资源<strong>根据内容在命名中生成一个哈希</strong>，然后<strong>静态资源不会被修改，可以被缓存</strong>，一旦静态资源内容有所改变，命名就会发生变化，此时重新加载缓存。（<strong>引用带hash文件的方法</strong>可参考<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E7%BC%93%E5%AD%98" target="_blank" rel="noopener">JS 运行环境 中“缓存”</a>）</li>
+<li><strong>注意：html 以及 后端数据库中的业务数据 随时有可能被修改，所以不能被缓存，她要随时更新</strong></li>
 </ul>
-<p>14-6 4:33</p>
+</li>
+</ul>
+<h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><ul>
+<li>初次请求后，<strong>服务端对于可以被缓存的就会加一个Cache-Control</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_Cache-Control.png" alt="强制缓存图示Cache-Control" title="强制缓存图示Cache-Control"></li>
+<li>由于是服务端操作添加的，所以<strong>Cache-Control存在Response Headers中，负责控制强制缓存的逻辑</strong></li>
+<li>列如：<code>Cache-Control：max-age=31536000</code>（单位是秒，最大是1年）<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_Cache-Control_example.png" alt="Cache-Control的例子" title="Cache-Control的例子"></li>
+<li><strong>Cache-Control的值：</strong>（重点在前三以及no-cache和no-store的区别）<ul>
+<li><strong>max-age=xxx:</strong>最大缓存时间（单位是秒，最大是1年）</li>
+<li><strong>no-cache:</strong>不用<strong>本地强制缓存</strong>，正常向服务端请求，是否<strong>协商缓存</strong>就看服务端怎么处理</li>
+<li><strong>no-store:</strong>不用本地强制缓存，也<strong>不用服务端的缓存措施（协商缓存）</strong></li>
+<li><strong>private：</strong>只允许<strong>最终用户</strong>做缓存，比如电脑、浏览器、手机</li>
+<li><strong>public：</strong>允许<strong>中间的路由/代理</strong>做缓存</li>
+</ul>
+</li>
+</ul>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><ul>
+<li>同<strong>在Response Headers中</strong>，负责控制强制缓存的逻辑，与Cache-Control作用相同</li>
+<li>现<strong>已被Cache-Control代替</strong>，但是浏览器同时兼容两者，<strong>同时存在时以Cache-Control为主</strong></li>
+<li><strong>Cache-Control和Expires的区别：</strong><ul>
+<li>Cache-Control使用<strong>相对时间</strong></li>
+<li>Expires使用的是<strong>基于服务器端的绝对时间</strong></li>
+<li>如<code>Expires:Fri, 20 Oct 2018 09:45:13 GMT</code></li>
+<li>因为存在时差问题，一般采用Cache-Control</li>
+</ul>
+</li>
+</ul>
+<h2 id="协商缓存（对比缓存）"><a href="#协商缓存（对比缓存）" class="headerlink" title="协商缓存（对比缓存）"></a>协商缓存（对比缓存）</h2><ul>
+<li>协商缓存 就是上面 强制缓存Cache-Control图示 中 <strong>服务器端的缓存策略</strong>，通过<strong>服务器来判断客户端资源是否和服务端资源一样，一致则返回304，否则返回200和最新的资源。</strong></li>
+</ul>
+<h3 id="资源标识"><a href="#资源标识" class="headerlink" title="资源标识"></a>资源标识</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache.png" alt="资源标识图示" title="资源标识图示"></p>
+<ul>
+<li>在<strong>Response Headers中，有两种资源标识：</strong><ul>
+<li><strong>Last-Modified：</strong>资源的最后修改时间</li>
+<li><strong>Etag：</strong>资源的唯一标识（一个字符串，类似指纹）</li>
+</ul>
+</li>
+<li>在<strong>Request Headers中，有两个与上面对应的资源标识：</strong><ul>
+<li><strong>If-Modified-Since:与接收到的Last-Modified值相同</strong>，只是在请求时把上次接收到的Last-Modified的值放到If-Modified-Since中传给服务端做验证，看看内容是否被修改</li>
+<li><strong>If-None-Match：与接收到的Etag值相同</strong>，一样只是在请求时把上次接收到的Etag的值放到If-None-Match中传给服务端做验证，看看内容是否被修改</li>
+</ul>
+</li>
+</ul>
+<h4 id="Last-Modified和If-Modified-Since"><a href="#Last-Modified和If-Modified-Since" class="headerlink" title="Last-Modified和If-Modified-Since"></a>Last-Modified和If-Modified-Since</h4><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_Last-Modified.png" alt="Last-Modified和If-Modified-Since图示" title="Last-Modified和If-Modified-Since图示"></p>
+<h4 id="Etag和If-None-Match"><a href="#Etag和If-None-Match" class="headerlink" title="Etag和If-None-Match"></a>Etag和If-None-Match</h4><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_Etag.png" alt="Etag和If-None-Match图示" title="Etag和If-None-Match图示"></p>
+<h4 id="Last-Modified和Etag"><a href="#Last-Modified和Etag" class="headerlink" title="Last-Modified和Etag"></a>Last-Modified和Etag</h4><ul>
+<li>Last-Modified和Etag以及If-Modified-Since和If-None-Match<strong>可以同时存在</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_example.png" alt="四个资源标识例子" title="四个资源标识例子"></li>
+<li>但同时存在时<strong>会优先使用Etag</strong>，因为<strong>Last-Modified只能精确到秒级，如果资源被重复生成，而内容不变，则Etag更精确。</strong></li>
+</ul>
+<h1 id="刷新页面对http缓存的影响"><a href="#刷新页面对http缓存的影响" class="headerlink" title="刷新页面对http缓存的影响"></a>刷新页面对http缓存的影响</h1><ul>
+<li><strong>三种刷新操作：</strong><ul>
+<li><strong>正常操作：</strong>地址栏输入url，跳转链接，前进后退等</li>
+<li><strong>手动刷新：</strong>F5，点击刷新按钮，右击菜单刷新</li>
+<li><strong>强制刷新：</strong>ctrl+F5</li>
+</ul>
+</li>
+<li><strong>不同刷新操作，不同缓存策略：</strong><ul>
+<li><strong>正常操作：</strong>强制缓存有效，协商缓存有效</li>
+<li><strong>手动刷新：</strong>强制缓存失效，协商缓存有效</li>
+<li><strong>强制刷新：</strong>强制缓存失效，协商缓存失效</li>
+</ul>
+</li>
+</ul>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
+<li>http常见的状态码有哪些？</li>
+<li>http常见的header有哪些？</li>
+<li>什么是Restful API？</li>
+<li>描述一下http的缓存机制（重要）</li>
+</ol>
 
       
     </div>
@@ -345,7 +423,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http状态码"><span class="nav-number">1.</span> <span class="nav-text">http状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见状态码"><span class="nav-number">1.1.</span> <span class="nav-text">常见状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-methods"><span class="nav-number">2.</span> <span class="nav-text">http methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统的methods"><span class="nav-number">2.1.</span> <span class="nav-text">传统的methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现在的methods"><span class="nav-number">2.2.</span> <span class="nav-text">现在的methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">2.3.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设计Restful-API"><span class="nav-number">2.3.1.</span> <span class="nav-text">如何设计Restful API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-headers"><span class="nav-number">3.</span> <span class="nav-text">http headers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的Request-Headers"><span class="nav-number">3.1.</span> <span class="nav-text">常见的Request Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的Response-Headers"><span class="nav-number">3.2.</span> <span class="nav-text">常见的Response Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Headers"><span class="nav-number">3.3.</span> <span class="nav-text">自定义Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存相关的Headers"><span class="nav-number">3.4.</span> <span class="nav-text">缓存相关的Headers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-缓存"><span class="nav-number">4.</span> <span class="nav-text">http 缓存</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http状态码"><span class="nav-number">1.</span> <span class="nav-text">http状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见状态码"><span class="nav-number">1.1.</span> <span class="nav-text">常见状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-methods"><span class="nav-number">2.</span> <span class="nav-text">http methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统的methods"><span class="nav-number">2.1.</span> <span class="nav-text">传统的methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现在的methods"><span class="nav-number">2.2.</span> <span class="nav-text">现在的methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">2.3.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设计Restful-API"><span class="nav-number">2.3.1.</span> <span class="nav-text">如何设计Restful API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-headers"><span class="nav-number">3.</span> <span class="nav-text">http headers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的Request-Headers"><span class="nav-number">3.1.</span> <span class="nav-text">常见的Request Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的Response-Headers"><span class="nav-number">3.2.</span> <span class="nav-text">常见的Response Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Headers"><span class="nav-number">3.3.</span> <span class="nav-text">自定义Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存相关的Headers"><span class="nav-number">3.4.</span> <span class="nav-text">缓存相关的Headers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-缓存"><span class="nav-number">4.</span> <span class="nav-text">http 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#强制缓存"><span class="nav-number">4.1.</span> <span class="nav-text">强制缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control"><span class="nav-number">4.1.1.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">4.1.2.</span> <span class="nav-text">Expires</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协商缓存（对比缓存）"><span class="nav-number">4.2.</span> <span class="nav-text">协商缓存（对比缓存）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源标识"><span class="nav-number">4.2.1.</span> <span class="nav-text">资源标识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-Modified和If-Modified-Since"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Last-Modified和If-Modified-Since</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Etag和If-None-Match"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">Etag和If-None-Match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-Modified和Etag"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">Last-Modified和Etag</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刷新页面对http缓存的影响"><span class="nav-number">5.</span> <span class="nav-text">刷新页面对http缓存的影响</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">6.</span> <span class="nav-text">面试题</span></a></li></ol>
     
     </div>
   </aside>
