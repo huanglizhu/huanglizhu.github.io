@@ -27,13 +27,14 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base_auto-increment_array.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone2.jpg">
-<meta property="og:updated_time" content="2021-02-21T08:00:47.798Z">
+<meta property="og:updated_time" content="2021-03-30T07:56:36.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS基础知识面试题（2）">
 <meta name="twitter:description" content="补充：慕课 前端技术面 第七章 笔记总结">
@@ -233,7 +234,36 @@
 </li>
 </ul>
 <hr>
-<h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><p>可参考笔记<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的执行步骤（事件循环）" target="_blank" rel="noopener">从输入url到页面显示都经历了什么</a><br><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</p>
+<h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><ul>
+<li><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</li>
+<li>可参考笔记<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS的执行步骤（事件循环）" target="_blank" rel="noopener">从输入url到页面显示都经历了什么</a>:<ol>
+<li>用户输入url</li>
+<li>浏览器进行<strong>DNS解析</strong>，将域名解析为IP地址，查找顺序：<strong>浏览器自身的DNS缓存中查找=》操作系统hosts文件=》本地DNS服务器=》向根服务器发出请求进行递归查询</strong></li>
+<li><strong>TCP连接，三次握手</strong>（请求头中Connection：keep-alive可以使一次TCP连接重复使用）：<strong>TCP连接请求报文=》TCP连接响应报文=》HTTP请求+TCP确认 报文</strong></li>
+<li><strong>根据服务端返回的响应报文判断是否有 强缓存</strong>（响应头中有Expires或有不为no-cache/no-store的Cache-Control）且在有效期(max-age)内，如有则直接读取缓存，如无则<strong>通过服务端返回的响应报文判断是否有 协商缓存</strong>（Last-Modified/Etag)，如有则<strong>带上If-Modified-Since/If-None-Match发出http请求</strong>，服务器比对后判断缓存是否可用，如可用则返回304状态码并读取客户端缓存；如<strong>比对失败则返回状态码200</strong>并向服务端请求资源。如无Last-Modified/Etag则直接向服务端请求资源，最后返回给客户端。【提高性能就要看缓存】<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png" alt="http缓存 综述" title="http缓存 综述"></li>
+<li><strong>浏览器边解析html文档边构建DOM树=》遇到css则同时解析css与html，根据css构建CSSOM（css对象模型）=》合并为渲染树=》回流</strong>（浏览器计算元素大小、位置）和<strong>重绘</strong>（元素的大小、颜色等属性确定后浏览器的绘制过程） 显示在屏幕上。<ul>
+<li>所以<strong>css建议放在head中</strong>，在DOM树生成之前生成CSSOM，这样DOM树生成时可直接和CSSOM合并成渲染树，不会有存在用户看到状态变化的过程。</li>
+<li><strong>回流和重绘</strong>非常<strong>耗性能</strong>，尽量减少。</li>
+</ul>
+</li>
+<li>解析/渲染过程中<strong>如遇JS脚本/连接，则停止渲染</strong>（因为JS有可能修改DOM结构）来执行和下载相应的代码，这会造成阻塞，故<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+<li><strong>js解析【事件循环】</strong>：同步任务放在<strong>执行栈</strong>中，异步任务有了结果后放在<strong>任务队列</strong>中，其中<strong>宏任务会先于微任务，script也属于宏任务</strong>，脚本运行时<strong>先清空执行栈</strong>，再从任务队列中提取事件依次执行。<ul>
+<li>事件循环：解决JS单线程运行阻塞</li>
+<li><strong>同步任务和微任务是由js引擎执行，script外的宏任务挂起时是浏览器引擎执行的</strong>，因为<strong>js引擎处理速度比浏览器引擎快</strong>，所以宏任务比微任务执行的更早</li>
+<li><strong>宏任务：script(整体代码)、setTimeout、setInterval、ajax、DOM 事件</strong><ul>
+<li>除script，其他都是<strong>浏览器引擎</strong>来执行，因为宏任务都是Web API，不属于ES语法</li>
+</ul>
+</li>
+<li><strong>微任务：</strong><ul>
+<li><strong>Promise.then()</strong>。（注意：<strong>Promise的函数体是定义时就立即执行的</strong>，then()是微任务）</li>
+<li>async是同步的，调用就立马执行，await这行代码也同步，但<strong>其后的代码会被放入 微任务队列 中</strong>。（<a href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#async-await%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F" target="_blank" rel="noopener">例子</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 <hr>
 <h1 id="Date、Math、数组API、对象API"><a href="#Date、Math、数组API、对象API" class="headerlink" title="Date、Math、数组API、对象API"></a>Date、Math、数组API、对象API</h1><p><a href="https://huanglizhu.github.io/2020/01/20/JS_Date%E5%AF%B9%E8%B1%A1/#其他方法" target="_blank" rel="noopener">Date</a>、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
 <h2 id="获取2017-06-10格式的日期"><a href="#获取2017-06-10格式的日期" class="headerlink" title="获取2017-06-10格式的日期"></a>获取2017-06-10格式的日期</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg" alt="获取2017-06-10格式的日期" title="获取2017-06-10格式的日期"></p>
