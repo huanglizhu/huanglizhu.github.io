@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_result.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg">
-<meta property="og:updated_time" content="2021-03-27T08:22:19.859Z">
+<meta property="og:updated_time" content="2021-04-12T00:44:40.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Web API 面试题">
 <meta name="twitter:description" content="DOMDOM是哪种数据结构树（DOM树），基于树状结构才有了父节点、子节点。">
@@ -187,11 +187,35 @@
 <li>Node.removeChild() 删除 子节点</li>
 </ul>
 </li>
-<li><strong>attribute和property的操作</strong>：<ul>
+<li><strong>property的操作：</strong><ul>
+<li><strong>取值：</strong>用“.”就可以，<code>var id = div1.id; var className = div1.className;</code></li>
+<li><strong>赋值：</strong>和基本的js对象属性赋值一样，用“.”即可，<code>div1.className = &#39;a&#39;; div1.align = &#39;center&#39;; div1.AAAAA = true; div1.BBBBB = [1, 2, 3];</code><ul>
+<li>对属性<strong>Property可以赋任何类型的值</strong>，而对特性<strong>Attribute只能赋值字符串</strong>！</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>attribute操作</strong>：<ul>
 <li>getAttribute()获取attribute</li>
 <li>setAttribute()修改attribute</li>
 <li>removeAttribute()删除attribute</li>
 <li>createAttribute()仅建立一个attribute</li>
+</ul>
+</li>
+<li><strong>直接获取属性值 和 使用getAttribute()获取 的区别：</strong>直接获取的方式<strong>只能获取节点本来具有的属性</strong>，而<strong>getAttribute（）可以获取自定义的属性</strong>，例如<code>data-xxx</code>;<ul>
+<li><strong>补充：html5允许自定义属性</strong>，可以通过<code>data-xxx</code>来设置我们需要的自定义属性，进行数据存放。</li>
+<li><strong>jquery中获取自定义属性的方法：</strong> 1是<code>.attr(&#39;data-xxx&#39;)</code>，2是<code>.data(&#39;xxx&#39;)</code></li>
+<li><strong>js中获取自定义属性的方法：</strong> <ul>
+<li><strong>通过attribute：</strong> <code>getAttribute(&#39;data-xxx&#39;)</code></li>
+<li><strong>通过dataset（html5属性）：</strong>以下例子假设自定义属性data-xxx<ul>
+<li><strong>取值：</strong><code>objName.dataset.xxx</code></li>
+<li><strong>赋值：</strong><code>objName.dataset.xxx = &quot;3m666&quot;;</code></li>
+<li><strong>新增data-age属性：</strong><code>objName.dataset.age = &quot;100&quot;;</code></li>
+<li><strong>删除：设置成null，或者delete</strong><code>objName.dataset.xxx = null; delete objName.dataset.age;</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -203,9 +227,11 @@
 </li>
 <li><strong>property</strong>：修改<strong>JS对象属性</strong>，<strong>不</strong>会体现到<strong>html结构</strong>中<ul>
 <li>property 是 DOM元素 在 js 中作为对象拥有的属性</li>
+<li>“class”在Property中叫做“className”，因为“class”是ECMA的关键字。</li>
 </ul>
 </li>
-<li>两者<strong>都有可能引起DOM重新渲染</strong>，但建议尽量使用property</li>
+<li>attributes是属于property的一个<strong>子集</strong></li>
+<li>两者<strong>都有可能引起DOM重新渲染</strong>，但<strong>建议尽量使用property</strong>(但是使用property无法获取自定义属性)</li>
 </ul>
 <table>
 <thead>
@@ -215,8 +241,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>值永远是字符串或 null</td>
-<td>值可以是任意合法 js 类型</td>
+<td>值永远是<strong>字符串或 null</strong></td>
+<td>值可以是<strong>任意合法 js 类型</strong></td>
 </tr>
 <tr>
 <td>大小写不敏感</td>
@@ -231,8 +257,8 @@
 <td>对于 href 返回解析后的完整 url</td>
 </tr>
 <tr>
-<td>更新 value, 属性也更新</td>
-<td>更新 value, 特性不更新</td>
+<td>更新 value, <strong>属性property也更新</strong></td>
+<td>更新 value, <strong>特性attribute不更新</strong></td>
 </tr>
 </tbody></table>
 <p>（可参考<a href="https://segmentfault.com/a/1190000019575091" target="_blank" rel="noopener">这篇博客</a>）</p>
