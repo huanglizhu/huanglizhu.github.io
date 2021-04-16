@@ -24,12 +24,12 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4hb3puhxj30y60b7dik.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4hwe76d1j30t1064q4q.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qi4y7tnj31570fcjyy.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qlxjfi5j311x0cldle.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qsx09oyj30xc0kxahq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qlxjfi5j311x0cldle.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5f4o7anuj30sk0d8jt2.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5j1qz7z8j30mi0g6tah.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5kvucjtnj31b10kodjk.jpg">
-<meta property="og:updated_time" content="2020-11-24T15:34:02.375Z">
+<meta property="og:updated_time" content="2021-04-16T06:51:21.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React知识点汇总（基础使用2）">
 <meta name="twitter:description" content="【重点】setState 不可变值 可能是异步更新 可能会被合并">
@@ -192,17 +192,32 @@
 <li><strong>【数组】state中存放 数组时</strong>，需要注意<strong>不能直接对 <code>this.state.list</code> 进行 push pop splice 等会直接改变原数组（state中数据）的操作</strong>，这样违反不可变值。需要做复杂操作时，可先拷贝出来再进行操作。<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4hb3puhxj30y60b7dik.jpg" alt="修改state中存放的数组">（<a href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#Array-prototype-filter-数组过滤方法" target="_blank" rel="noopener">ES6 filter-数组过滤方法</a>）</li>
 <li><strong>【对象】</strong>巧用<a href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#Object-assign" target="_blank" rel="noopener">assign方法</a><strong>将state中对象放在参数2，则可不改变state中原对象。</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4hwe76d1j30t1064q4q.jpg" alt="修改state中存放的对象"></li>
 </ul>
-<h2 id="setState-可能是异步-同步更新"><a href="#setState-可能是异步-同步更新" class="headerlink" title="setState 可能是异步/同步更新"></a>setState 可能是异步/同步更新</h2><ul>
-<li><strong>直接在JSX中使用 setState 是异步的（即 合成事件 中setState是异步的）：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qi4y7tnj31570fcjyy.jpg" alt="setState 异步更新的例子"></li>
-<li><strong>setTimeout 中 setState 是同步的：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qlxjfi5j311x0cldle.jpg" alt="setTimeout 中 setState 是同步的"></li>
+<h2 id="setState-可能是异步-同步更新"><a href="#setState-可能是异步-同步更新" class="headerlink" title="setState 可能是异步/同步更新"></a>setState 可能是异步/同步更新</h2><h3 id="JSX-中使用-setState-是异步"><a href="#JSX-中使用-setState-是异步" class="headerlink" title="JSX 中使用 setState 是异步"></a>JSX 中使用 setState 是异步</h3><ul>
+<li><strong>直接在JSX中使用 setState 是异步的：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qi4y7tnj31570fcjyy.jpg" alt="setState 异步更新的例子"></li>
+<li>但是<strong>setState的参数2（回调函数）中可获取到最新state</strong></li>
+</ul>
+<h3 id="JSX合成事件-中使用-setState-是异步"><a href="#JSX合成事件-中使用-setState-是异步" class="headerlink" title="JSX合成事件 中使用 setState 是异步"></a>JSX合成事件 中使用 setState 是异步</h3><ul>
+<li>此处无例子</li>
+<li><strong>注意：onclick是DOM事件，通过addEventListener绑定的click事件是“自定义的 DOM 事件”，JSX中的onClick是 合成事件</strong></li>
+</ul>
+<h3 id="原生DOM事件-中使用-setState-是同步"><a href="#原生DOM事件-中使用-setState-是同步" class="headerlink" title="原生DOM事件 中使用 setState 是同步"></a>原生DOM事件 中使用 setState 是同步</h3><ul>
 <li><strong>自定义的 DOM 事件中 setState 是同步的（即原生DOM事件中是同步的，只要html中能正常跑起来的绑定方法就是原生DOM事件）：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qsx09oyj30xc0kxahq.jpg" alt="自己定义的 DOM 事件中 setState 是同步的">在body上绑定自定义的click事件，在该DOM事件中setState 是同步的<ul>
 <li><strong>注意：“自定义的 DOM 事件”的概念，onclick是DOM事件，通过addEventListener绑定的click事件是“自定义的 DOM 事件”，JSX中的onClick是 合成事件</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="setState异步更新前合并-不合并"><a href="#setState异步更新前合并-不合并" class="headerlink" title="setState异步更新前合并/不合并"></a>setState异步更新前合并/不合并</h2><ul>
-<li>state <strong>异步更新</strong>时，<strong>setState中传入对象，会被合并，执行结果只一次，点击一次“累加”按钮的执行结果是 +1</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5f4o7anuj30sk0d8jt2.jpg" alt="传入对象，更新前会被合并，执行结果只一次">一样用点击按钮累加数字作为例子，点击事件的事件函数increase中设置3次setState，由于这里是异步的setState，所以点击按钮时，系统会发现setState3次都是一样的修改，最后会被合并为1次<strong>（即每次点击都只+1不会+3 ）</strong></li>
-<li>state <strong>异步更新</strong>时，<strong>setState中传入函数，不会被合并。点击一次“累加”按钮的执行结果是 +3</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5j1qz7z8j30mi0g6tah.jpg" alt="传入函数，不会被合并。点击一次“累加”按钮的执行结果是 +3">函数是无法合并的，所以三个函数都会生效</li>
+<h3 id="setTimeout-中使用-setState-是同步"><a href="#setTimeout-中使用-setState-是同步" class="headerlink" title="setTimeout 中使用 setState 是同步"></a>setTimeout 中使用 setState 是同步</h3><p><strong>setTimeout 中 setState 是同步的：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh4qlxjfi5j311x0cldle.jpg" alt="setTimeout 中 setState 是同步的"></p>
+<h2 id="setState异步更新前合并-不合并"><a href="#setState异步更新前合并-不合并" class="headerlink" title="setState异步更新前合并/不合并"></a>setState异步更新前合并/不合并</h2><h3 id="setState中传入-对象-会被合并"><a href="#setState中传入-对象-会被合并" class="headerlink" title="setState中传入 对象 会被合并"></a>setState中传入 对象 会被合并</h3><p>state <strong>异步更新</strong>时，<strong>setState中传入对象，会被合并，执行结果只一次，点击一次“累加”按钮的执行结果是 +1</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5f4o7anuj30sk0d8jt2.jpg" alt="传入对象，更新前会被合并，执行结果只一次">一样用点击按钮累加数字作为例子，点击事件的事件函数increase中设置3次setState，由于这里是异步的setState，所以点击按钮时，系统会发现setState3次都是一样的修改，最后会被合并为1次<strong>（即每次点击都只+1不会+3 ）</strong></p>
+<h3 id="setState中传入-函数-不合并"><a href="#setState中传入-函数-不合并" class="headerlink" title="setState中传入 函数 不合并"></a>setState中传入 函数 不合并</h3><ul>
+<li>state <strong>异步更新</strong>时，<strong>setState中传入函数，不会被合并。点击一次“累加”按钮的执行结果是 +3</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5j1qz7z8j30mi0g6tah.jpg" alt="传入函数，不会被合并。点击一次“累加”按钮的执行结果是 +3"><ul>
+<li><strong>函数是无法合并的，所以三个函数都会生效</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="补充：setState-的两个参数"><a href="#补充：setState-的两个参数" class="headerlink" title="补充：setState()的两个参数"></a>补充：setState()的两个参数</h4><ul>
+<li><strong>注意</strong>：setState中<strong>推荐传入函数</strong></li>
+<li><strong>setState()的参数1（回调函数）</strong>可以<strong>接受两个参数：prevState, props（）</strong>,第一个参数是原始state，等同于<code>this.state</code>，第二个参数是<strong>父组件传递的属性</strong>。(<a href="https://huanglizhu.github.io/2020/01/11/%E5%85%B3%E4%BA%8EsetState()/#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8setState-%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">参考</a>)</li>
+<li><strong>setState()的参数2（回调函数）内可获取state的最新值</strong>，在这个函数内<strong>可解决由于setState是<a href="https://huanglizhu.github.io/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/#setState-%E5%8F%AF%E8%83%BD%E6%98%AF%E5%BC%82%E6%AD%A5-%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0" target="_blank" rel="noopener">异步</a>的，有些事件我们需要等setState更新完才触发的问题</strong>(<a href="https://huanglizhu.github.io/2020/01/11/%E5%85%B3%E4%BA%8EsetState()/#setState-%E7%9A%84%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0%EF%BC%88%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%89" target="_blank" rel="noopener">参考</a>)</li>
 </ul>
 <hr>
 <h1 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h1><ul>
@@ -281,7 +296,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【重点】setState"><span class="nav-number">1.</span> <span class="nav-text">【重点】setState</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#state-要在构造函数中定义"><span class="nav-number">1.1.</span> <span class="nav-text">state 要在构造函数中定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不能直接修改-state-，使用-不可变值"><span class="nav-number">1.2.</span> <span class="nav-text">不能直接修改 state ，使用 不可变值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改state中的引用类型"><span class="nav-number">1.2.1.</span> <span class="nav-text">修改state中的引用类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setState-可能是异步-同步更新"><span class="nav-number">1.3.</span> <span class="nav-text">setState 可能是异步/同步更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setState异步更新前合并-不合并"><span class="nav-number">1.4.</span> <span class="nav-text">setState异步更新前合并/不合并</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">2.</span> <span class="nav-text">组件生命周期</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【重点】setState"><span class="nav-number">1.</span> <span class="nav-text">【重点】setState</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#state-要在构造函数中定义"><span class="nav-number">1.1.</span> <span class="nav-text">state 要在构造函数中定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不能直接修改-state-，使用-不可变值"><span class="nav-number">1.2.</span> <span class="nav-text">不能直接修改 state ，使用 不可变值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改state中的引用类型"><span class="nav-number">1.2.1.</span> <span class="nav-text">修改state中的引用类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setState-可能是异步-同步更新"><span class="nav-number">1.3.</span> <span class="nav-text">setState 可能是异步/同步更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX-中使用-setState-是异步"><span class="nav-number">1.3.1.</span> <span class="nav-text">JSX 中使用 setState 是异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX合成事件-中使用-setState-是异步"><span class="nav-number">1.3.2.</span> <span class="nav-text">JSX合成事件 中使用 setState 是异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生DOM事件-中使用-setState-是同步"><span class="nav-number">1.3.3.</span> <span class="nav-text">原生DOM事件 中使用 setState 是同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout-中使用-setState-是同步"><span class="nav-number">1.3.4.</span> <span class="nav-text">setTimeout 中使用 setState 是同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setState异步更新前合并-不合并"><span class="nav-number">1.4.</span> <span class="nav-text">setState异步更新前合并/不合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setState中传入-对象-会被合并"><span class="nav-number">1.4.1.</span> <span class="nav-text">setState中传入 对象 会被合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setState中传入-函数-不合并"><span class="nav-number">1.4.2.</span> <span class="nav-text">setState中传入 函数 不合并</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充：setState-的两个参数"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">补充：setState()的两个参数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">2.</span> <span class="nav-text">组件生命周期</span></a></li></ol>
     
     </div>
   </aside>
