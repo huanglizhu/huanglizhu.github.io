@@ -48,7 +48,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh8uros2dpj30kx067q4l.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh957vxc3pj30zk0ri7as.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh9a4x6g29j30zp0g3jxf.jpg">
-<meta property="og:updated_time" content="2021-04-18T11:46:41.200Z">
+<meta property="og:updated_time" content="2021-04-19T14:06:58.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React知识点汇总（高级特性）">
 <meta name="twitter:description" content="不是每个都很常用，但用到的时候必须要知道 考察候选人对React的掌握是否全面，且有深度 考察做过的项目是否有深度和复杂度（至少能用到高级特性）">
@@ -340,8 +340,15 @@
 <h1 id="组件公共逻辑的抽离"><a href="#组件公共逻辑的抽离" class="headerlink" title="组件公共逻辑的抽离"></a>组件公共逻辑的抽离</h1><ul>
 <li>mixin已被React弃用</li>
 <li>高阶组件HOC Vs Render Props <strong>按需使用即可</strong><ul>
-<li><strong>高阶组件HOC</strong>：模式简单，<strong>但会增加组件层级</strong>（需要考虑透传props以及是否会被覆盖的问题）</li>
-<li><strong>Render Props</strong>：<strong>代码简洁</strong>，学习成本较高</li>
+<li><strong>高阶组件HOC</strong>：模式简单，<strong>但会增加组件层级</strong>（需要考虑透传props以及是否会被覆盖的问题）<ul>
+<li><strong>总结</strong>：在<strong>高阶组件函数内</strong>自定义公共逻辑（<strong>包含逻辑的class组件B 包含 负责渲染的原函数组件A</strong>），高阶组件函数 <strong>接受</strong> 负责渲染的<strong>原</strong>组件A（一般是函数组件），<strong>返回</strong> 涵盖逻辑的新组件B（class组件）</li>
+<li><strong>注意</strong>：在高阶组件函数内引用原组件A时需要<a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#%E4%BE%8B%E5%AD%90" target="_blank" rel="noopener"><strong>透传所有props</strong></a>，以此保证别的组件调用新的高阶组件B时传给B的属性/方法 可被原组件A调用</li>
+</ul>
+</li>
+<li><strong>Render Props</strong>：<strong>代码简洁</strong>，学习成本较高<ul>
+<li><strong>总结</strong>：<strong>（原组件A 包含 负责逻辑的class组件B 包含 负责渲染的函数组件C。）</strong>可复用的是自定义的class组件B，它返回函数组件C。原组件A（一般是函数组件）通过<strong>调用 class组件B 并向 子组件B 传递 属性（函数组件） 的方式定义需要渲染的 函数组件C</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
