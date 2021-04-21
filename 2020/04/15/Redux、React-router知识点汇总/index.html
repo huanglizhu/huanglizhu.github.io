@@ -20,13 +20,14 @@
 <meta property="og:description" content="Redux基本概念 redux中文官网 可参考博客“Redux入门（1）”、“Redux入门（2）”、Redux进阶(1)UI组件、容器组件、无状态组件 store state（注意state不可变值，可用immutable.js） action（redux-thunk中间件可使action为函数） reducer是一个纯函数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha1wtqy2hj30um0h87bl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha1hxzt43j30zs0dnqgz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha26khrtgj30zc0hltol.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha28zwm8wj315q0gyqjg.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha40ossjpj315q0gyh2k.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha42lk3v9j30zv0gy4bp.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gha4azlgnaj30w80h94ch.jpg">
-<meta property="og:updated_time" content="2020-07-31T06:30:26.612Z">
+<meta property="og:updated_time" content="2021-04-21T14:07:28.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux、React-router知识点汇总">
 <meta name="twitter:description" content="Redux基本概念 redux中文官网 可参考博客“Redux入门（1）”、“Redux入门（2）”、Redux进阶(1)UI组件、容器组件、无状态组件 store state（注意state不可变值，可用immutable.js） action（redux-thunk中间件可使action为函数） reducer是一个纯函数">
@@ -184,12 +185,28 @@
 <li>reducer-&gt; newState</li>
 <li>subscribe触发通知</li>
 </ul>
+<p>在组件中调用<a href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#actionCreator%E7%BB%9F%E4%B8%80%E5%88%9B%E5%BB%BAaction" target="_blank" rel="noopener"><code>actionCreator</code></a>创建<code>action</code>方法，然后使用<code>store.dispatch(action)</code>将<code>action</code>传给<code>store</code><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg" alt="示意图"></p>
+<ul>
+<li><a href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#%E8%8E%B7%E5%8F%96store%E4%B8%AD%E6%95%B0%E6%8D%AE" target="_blank" rel="noopener"><strong>获取<code>store</code>中数据：</strong></a>创建<code>store</code>=&gt;创建<code>reducers</code>，设置state默认值=》<code>store</code>连接<code>reducers</code>=》组件<code>TodoList</code>连接<code>store</code>获取数据</li>
+<li><a href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#%E6%94%B9%E5%8F%98store%E4%B8%AD%E6%95%B0%E6%8D%AE" target="_blank" rel="noopener"><strong>改变<code>store</code>中数据：</strong></a>：<ol>
+<li>在<strong>actionTypes.js</strong>中创建type属性值由<strong>字符串转为常量</strong></li>
+<li>通过<code>actionCreator</code>创建 获取<code>action</code>对象的方法</li>
+<li>组件中调用<code>actionCreator</code>的方法<strong>获取<code>action</code>对象</strong>并传给<code>store</code></li>
+<li><code>store</code>自动将收到的<code>action</code>和自己的<code>state</code>数据<strong>打包传送给<code>reducer</code></strong></li>
+<li><code>reducer</code><strong>处理<code>action</code>和<code>state</code>并返回<code>newState</code>值</strong>给<code>store</code></li>
+<li><strong><code>store</code>获取到<code>newState</code>后自动替换<code>state</code></strong></li>
+<li><strong>组件中<code>state</code>由于监听函数，更新后页面重新渲染</strong></li>
+</ol>
+</li>
+</ul>
 <h2 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h2><ul>
 <li>可参考<a href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">Redux进阶(3)React-Redux的使用</a></li>
 <li><strong>&lt; Provider&gt;</strong> 一般放在App.js中包裹组件最外层，<strong>使得被包含在该组件下的所有组件都有能力连接store</strong></li>
-<li><strong>connect()</strong>高阶组件，<strong>规定组件连接store的规则</strong></li>
-<li><strong>mapStateToProps()，获取state的值放到组件的props上</strong>。</li>
-<li><strong>mapDispatchToProps()，接受store的dispatch()为参数，函数中可自定义函数放到组件的props上,使props中的函数可以调用dispatch()派发action</strong>。</li>
+<li><strong>connect()</strong>高阶组件，<strong>规定组件连接store的规则</strong><ul>
+<li><strong><a href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/#使输入框内实时显示输入的内容" target="_blank" rel="noopener">mapStateToProps()</a>，获取state的值放到组件的props上</strong>。(<code>const mapStateToPrps = (state) =&gt; { return { xxx:state.xxx }}</code>获取<code>this.props.xxx</code>)</li>
+<li><strong><a href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/#使输入框内实时显示输入的内容" target="_blank" rel="noopener">mapDispatchToProps()</a>，接受store的dispatch()为参数，函数中可自定义函数放到组件的props上,使props中的函数可以调用dispatch()派发action</strong>。(<code>const mapDispatchToProps = (dispatch) =&gt; { return { ... }}</code>)</li>
+</ul>
+</li>
 </ul>
 <h2 id="异步action"><a href="#异步action" class="headerlink" title="异步action"></a>异步action</h2><ul>
 <li>前端想要请求后端的数据时就需要用到ajax请求，而想要修改store中数据就要用到action，想在action中异步请求数据需要 异步action： <img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gha1hxzt43j30zs0dnqgz.jpg" alt="异步action例子">当然不能直接这么写，<strong>action默认只能是对象</strong>，需要<strong>Redux-thunk中间件使得action可为函数</strong></li>
@@ -206,19 +223,25 @@
 </ul>
 <h1 id="React-router使用"><a href="#React-router使用" class="headerlink" title="React-router使用"></a>React-router使用</h1><ul>
 <li>面试考点并不多（前提是熟悉React）</li>
+<li>每个React Router应用程序的<strong>核心应该是路由器组件</strong>。<ul>
+<li>对于Web项目，react-router-dom提供<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener"><strong><code>&lt;BrowserRouter&gt;</code>和<code>&lt;HashRouter&gt;</code>路由器</strong></a>。<a href="https://huanglizhu.github.io/2020/05/06/React%E5%8E%9F%E7%90%86/#前端路由" target="_blank" rel="noopener">两者之间的主要区别</a>是它们存储URL和与Web服务器通信的方式。</li>
+</ul>
+</li>
 <li><strong>路由模式（hash、H5 history）</strong>，同vue-router</li>
 <li><strong>路由配置（动态路由、懒加载）</strong>，同vue-router</li>
 </ul>
 <h2 id="路由模式（hash、H5-history）"><a href="#路由模式（hash、H5-history）" class="headerlink" title="路由模式（hash、H5 history）"></a>路由模式（hash、H5 history）</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gha26khrtgj30zc0hltol.jpg" alt="React-router路由模式"></p>
 <ul>
-<li><strong>hash模式（默认）</strong>，如<a href="http://abc.com/#/user/10" target="_blank" rel="noopener">http://abc.com/#/user/10</a></li>
-<li><strong>H5 history模式</strong>，如<a href="http://abc.com/user/20" target="_blank" rel="noopener">http://abc.com/user/20</a></li>
+<li><strong>hash模式（默认）</strong>(HashRouter)<strong>使用的是url的hash部分，等于：window.location.hash</strong>，如<a href="http://abc.com/#/user/10" target="_blank" rel="noopener">http://abc.com/#/user/10</a></li>
+<li><strong>H5 history模式</strong>(BrowserRouter)，<strong>使得页面和浏览器的history保持一致，等于：window.location</strong>，如<a href="http://abc.com/user/20" target="_blank" rel="noopener">http://abc.com/user/20</a></li>
 <li><strong>后者需要server端支持</strong>，因此无特殊需求可选择前者</li>
 <li>对客户端的可用H5 history模式，对后台的可用hash模式</li>
+<li>如果你使用的是一个<strong>非静态</strong>的站点、要处理各种不同的url那么你就需要使用<strong>BrowserRouter</strong>。</li>
+<li>相反的如果你的server<strong>只处理静态的url，那么就使用HashRouter</strong>。</li>
 </ul>
 <h2 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h2><h3 id="动态传参"><a href="#动态传参" class="headerlink" title="动态传参"></a>动态传参</h3><ul>
 <li><strong>例子：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gha28zwm8wj315q0gyqjg.jpg" alt="动态路由"></li>
-<li><strong>补充</strong>：<ul>
+<li><strong>补充（<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#路由传值" target="_blank" rel="noopener">前后端传值的例子</a>）</strong>：<ul>
 <li><strong>【react的url中传递参数值】</strong>组件的<strong>跳转路径上最好使用<code>/:参数值</code>的方法传值</strong>，这样组件中可以直接使用<code>this.props.match.params.参数名</code>获取所传参数值。</li>
 <li><strong>【react将参数值传递给node】</strong>在react的组件<strong>的action中通过ajax请求的路径中使用<code>?key=value</code>来传值</strong>，这样在node中通过<code>queryString.parse</code>可直接得到<strong>JSON对象</strong></li>
 </ul>
