@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1onnhglgj30s808g0uw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1n1g7gtfj30ps0cm0xb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1tfy5tw0j31fy0mgdz6.jpg">
-<meta property="og:updated_time" content="2020-11-25T23:47:08.324Z">
+<meta property="og:updated_time" content="2021-04-22T14:17:17.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React面试题">
 <meta name="twitter:description" content="自己搜集的面试题以及 慕课 前端框架及项目面试 聚焦VueReactWebpack 第九章 React 面试题">
@@ -204,28 +204,11 @@
 <li><a href="https://huanglizhu.github.io/2020/05/06/React%E5%8E%9F%E7%90%86/#虚拟dom和diff算法" target="_blank" rel="noopener">React原理“虚拟dom和diff算法”</a></li>
 </ul>
 <hr>
-<h1 id="组件之间如何通讯"><a href="#组件之间如何通讯" class="headerlink" title="组件之间如何通讯"></a>组件之间如何通讯</h1><ul>
-<li><strong>父子组件props</strong>：<ul>
-<li><strong>父组件向子组件传值/函数</strong>：在父组件中<strong>调用子组件</strong>的同时通过<strong>给子组件添加属性的方式</strong>向子组件<strong>传值/函数</strong>，注意如要传递函数，则需在父组件构造函数中使用bind绑定该函数this指向</li>
-<li><strong>子组件使用父组件传递的值/函数</strong>：通过<code>{this.props.属性名/函数名}</code>来调用</li>
-<li><strong>子组件修改父组件中数据的方法</strong>：子组件通过调用父组件传递过来的函数间接的操作父组件的数据</li>
-</ul>
-</li>
-<li><strong>非嵌套组件间</strong>:<ul>
-<li><strong>兄弟组件通信</strong>:找到这两个兄弟节点共同的父节点,结合上面两种方式由父节点转发信息进行通信</li>
-<li><strong>自定义事件（event模块)</strong>：发布者（组件1）<strong>发布自定义事件</strong>，订阅者（组件2）<strong>监听事件并做出反应</strong>,我们可以通过引入<strong>event模块</strong>进行通信(<a href="https://www.jianshu.com/p/fb915d9c99c4" target="_blank" rel="noopener">例子</a>)</li>
-</ul>
-</li>
-<li><strong>redux</strong>:利用redux等全局状态（数据）管理工具进行通信,这种工具会维护一个<strong>全局状态（数据）中心Store</strong>,并根据不同的事件产生新的状态（数据）</li>
-<li><a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#context（传递公共信息）" target="_blank" rel="noopener"><strong>context</strong></a>：用props太繁琐，用redux小题大做时可使用，context <strong>相当于一个全局变量</strong>，是一个大容器，我们可以把要通信的内容放在这个容器中，这样一来，不管嵌套有多深，都可以随意取用。（复杂的公共信息还是要使用redux）<ul>
-<li><strong>父组件</strong>做context生产方，<strong>创建context对象</strong>，并<strong>使用context对象的Provider包裹子组件给子组件获取context的能力</strong></li>
-<li>子组件做context消费方，可以获取到父组件中传递的context。<ul>
-<li><strong>class子组件</strong> 直接使用<code>this.context</code>可获取最近的父组件设置的context</li>
-<li><strong>函数子组件</strong> 由于没有实例导致<strong>没有this</strong>，所以可以通过<strong>context对象的Consumer标签包裹的函数获取context</strong></li>
-</ul>
-</li>
-</ul>
-</li>
+<h1 id="渲染列表为何使用key"><a href="#渲染列表为何使用key" class="headerlink" title="渲染列表为何使用key"></a>渲染列表为何使用key</h1><ul>
+<li>必须使用key，<strong>且不能是index/random</strong>，必须是稳定的。（数组下标index是会因为列表的变化而发生改变的，他是不稳定的）</li>
+<li>因为<strong>diff算法中通过tag和key来判断是否是同一个虚拟DOM</strong></li>
+<li>使用key可以帮助<strong>减少渲染次数，提升渲染性能</strong></li>
+<li>大多数情况下，<strong>使用唯一id作为子组件的key</strong>是不会有任何问题的</li>
 </ul>
 <hr>
 <h1 id="JSX的本质"><a href="#JSX的本质" class="headerlink" title="JSX的本质"></a>JSX的本质</h1><ul>
@@ -282,11 +265,28 @@
 </ul>
 <h2 id="react发起ajax的位置"><a href="#react发起ajax的位置" class="headerlink" title="react发起ajax的位置"></a>react发起ajax的位置</h2><p><strong>放在componentDidMount上</strong>，要在DOM元素渲染结束才发起ajax</p>
 <hr>
-<h1 id="渲染列表为何使用key"><a href="#渲染列表为何使用key" class="headerlink" title="渲染列表为何使用key"></a>渲染列表为何使用key</h1><ul>
-<li>必须使用key，<strong>且不能是index/random</strong>，必须是稳定的。（数组下标index是会因为列表的变化而发生改变的，他是不稳定的）</li>
-<li>因为<strong>diff算法中通过tag和key来判断是否是同一个虚拟DOM</strong></li>
-<li>使用key可以帮助<strong>减少渲染次数，提升渲染性能</strong></li>
-<li>大多数情况下，<strong>使用唯一id作为子组件的key</strong>是不会有任何问题的</li>
+<h1 id="组件之间如何通讯"><a href="#组件之间如何通讯" class="headerlink" title="组件之间如何通讯"></a>组件之间如何通讯</h1><ul>
+<li><strong>父子组件props</strong>：<ul>
+<li><strong>父组件向子组件传值/函数</strong>：在父组件中<strong>调用子组件</strong>的同时通过<strong>给子组件添加属性的方式</strong>向子组件<strong>传值/函数</strong>，注意如要传递函数，则需在父组件构造函数中使用bind绑定该函数this指向</li>
+<li><strong>子组件使用父组件传递的值/函数</strong>：通过<code>{this.props.属性名/函数名}</code>来调用</li>
+<li><strong>子组件修改父组件中数据的方法</strong>：子组件通过调用父组件传递过来的函数间接的操作父组件的数据</li>
+</ul>
+</li>
+<li><strong>非嵌套组件间</strong>:<ul>
+<li><strong>兄弟组件通信</strong>:找到这两个兄弟节点共同的父节点,结合上面两种方式由父节点转发信息进行通信</li>
+<li><strong>自定义事件（event模块)</strong>：发布者（组件1）<strong>发布自定义事件</strong>，订阅者（组件2）<strong>监听事件并做出反应</strong>,我们可以通过引入<strong>event模块</strong>进行通信(<a href="https://www.jianshu.com/p/fb915d9c99c4" target="_blank" rel="noopener">例子</a>)</li>
+</ul>
+</li>
+<li><strong>redux</strong>:利用redux等全局状态（数据）管理工具进行通信,这种工具会维护一个<strong>全局状态（数据）中心Store</strong>,并根据不同的事件产生新的状态（数据）</li>
+<li><a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#context（传递公共信息）" target="_blank" rel="noopener"><strong>context</strong></a>：用props太繁琐，用redux小题大做时可使用，context <strong>相当于一个全局变量</strong>，是一个大容器，我们可以把要通信的内容放在这个容器中，这样一来，不管嵌套有多深，都可以随意取用。（复杂的公共信息还是要使用redux）<ul>
+<li><strong>父组件</strong>做context生产方，<strong>创建context对象</strong>，并<strong>使用context对象的Provider包裹子组件给子组件获取context的能力</strong></li>
+<li>子组件做context消费方，可以获取到父组件中传递的context。<ul>
+<li><strong>class子组件</strong> 直接使用<code>this.context</code>可获取最近的父组件设置的context</li>
+<li><strong>函数子组件</strong> 由于没有实例导致<strong>没有this</strong>，所以可以通过<strong>context对象的Consumer标签包裹的函数获取context</strong></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="函数组件和class组件"><a href="#函数组件和class组件" class="headerlink" title="函数组件和class组件"></a>函数组件和class组件</h1><ul>
@@ -503,6 +503,7 @@
 </ul>
 <hr>
 <h1 id="对-Time-Slice的理解"><a href="#对-Time-Slice的理解" class="headerlink" title="对 Time Slice的理解"></a>对 Time Slice的理解</h1><ul>
+<li>可参考<a href="https://huanglizhu.github.io/2020/05/06/React%E5%8E%9F%E7%90%86/#React-fiber%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD" target="_blank" rel="noopener">React原理”React-fiber如何优化性能”</a></li>
 <li><strong>时间分片（这是React背后在做的事情）</strong>：时间分片<strong>是基于可随时打断、重启的Fiber架构</strong>,可打断当前任务,优先处理紧急且重要的任务,<strong>保证页面的流畅运行</strong><ul>
 <li>React 在渲染（render）的时候，不会阻塞现在的线程</li>
 <li>如果你的设备足够快，你会感觉渲染是同步的</li>
@@ -603,7 +604,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是react"><span class="nav-number">1.</span> <span class="nav-text">什么是react</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明式编程-vs-命令式编程"><span class="nav-number">2.</span> <span class="nav-text">声明式编程 vs 命令式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">2.1.</span> <span class="nav-text">函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是纯函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">什么是纯函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟DOM及其工作原理"><span class="nav-number">3.</span> <span class="nav-text">虚拟DOM及其工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件之间如何通讯"><span class="nav-number">4.</span> <span class="nav-text">组件之间如何通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX的本质"><span class="nav-number">5.</span> <span class="nav-text">JSX的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#props，state与render函数的关系"><span class="nav-number">6.</span> <span class="nav-text">props，state与render函数的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setState场景题（同步与异步，合并）"><span class="nav-number">7.</span> <span class="nav-text">setState场景题（同步与异步，合并）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">8.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldComponentUpdate用途"><span class="nav-number">8.1.</span> <span class="nav-text">shouldComponentUpdate用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PureComponent"><span class="nav-number">8.2.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react发起ajax的位置"><span class="nav-number">8.3.</span> <span class="nav-text">react发起ajax的位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染列表为何使用key"><span class="nav-number">9.</span> <span class="nav-text">渲染列表为何使用key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数组件和class组件"><span class="nav-number">10.</span> <span class="nav-text">函数组件和class组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受控组件与非受控组件"><span class="nav-number">11.</span> <span class="nav-text">受控组件与非受控组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步组件（懒加载）"><span class="nav-number">12.</span> <span class="nav-text">异步组件（懒加载）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器组件和高阶组件"><span class="nav-number">13.</span> <span class="nav-text">容器组件和高阶组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropTypes与DefaultProps"><span class="nav-number">14.</span> <span class="nav-text">PropTypes与DefaultProps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux单向数据流"><span class="nav-number">15.</span> <span class="nav-text">redux单向数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux如何进行异步请求"><span class="nav-number">16.</span> <span class="nav-text">redux如何进行异步请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React事件和DOM事件的区别"><span class="nav-number">17.</span> <span class="nav-text">React事件和DOM事件的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react性能优化"><span class="nav-number">18.</span> <span class="nav-text">react性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超越继承的组合"><span class="nav-number">19.</span> <span class="nav-text">超越继承的组合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个组件的公共逻辑，如何抽离"><span class="nav-number">20.</span> <span class="nav-text">多个组件的公共逻辑，如何抽离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HOC、render-props、react-hooks的优劣如何"><span class="nav-number">21.</span> <span class="nav-text">HOC、render props、react-hooks的优劣如何</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对-Time-Slice的理解"><span class="nav-number">22.</span> <span class="nav-text">对 Time Slice的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hooks产生的背景？hooks的优点"><span class="nav-number">23.</span> <span class="nav-text">hooks产生的背景？hooks的优点</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是react"><span class="nav-number">1.</span> <span class="nav-text">什么是react</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明式编程-vs-命令式编程"><span class="nav-number">2.</span> <span class="nav-text">声明式编程 vs 命令式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">2.1.</span> <span class="nav-text">函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是纯函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">什么是纯函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟DOM及其工作原理"><span class="nav-number">3.</span> <span class="nav-text">虚拟DOM及其工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染列表为何使用key"><span class="nav-number">4.</span> <span class="nav-text">渲染列表为何使用key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX的本质"><span class="nav-number">5.</span> <span class="nav-text">JSX的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#props，state与render函数的关系"><span class="nav-number">6.</span> <span class="nav-text">props，state与render函数的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setState场景题（同步与异步，合并）"><span class="nav-number">7.</span> <span class="nav-text">setState场景题（同步与异步，合并）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">8.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldComponentUpdate用途"><span class="nav-number">8.1.</span> <span class="nav-text">shouldComponentUpdate用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PureComponent"><span class="nav-number">8.2.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react发起ajax的位置"><span class="nav-number">8.3.</span> <span class="nav-text">react发起ajax的位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件之间如何通讯"><span class="nav-number">9.</span> <span class="nav-text">组件之间如何通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数组件和class组件"><span class="nav-number">10.</span> <span class="nav-text">函数组件和class组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受控组件与非受控组件"><span class="nav-number">11.</span> <span class="nav-text">受控组件与非受控组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步组件（懒加载）"><span class="nav-number">12.</span> <span class="nav-text">异步组件（懒加载）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器组件和高阶组件"><span class="nav-number">13.</span> <span class="nav-text">容器组件和高阶组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropTypes与DefaultProps"><span class="nav-number">14.</span> <span class="nav-text">PropTypes与DefaultProps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux单向数据流"><span class="nav-number">15.</span> <span class="nav-text">redux单向数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux如何进行异步请求"><span class="nav-number">16.</span> <span class="nav-text">redux如何进行异步请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React事件和DOM事件的区别"><span class="nav-number">17.</span> <span class="nav-text">React事件和DOM事件的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react性能优化"><span class="nav-number">18.</span> <span class="nav-text">react性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超越继承的组合"><span class="nav-number">19.</span> <span class="nav-text">超越继承的组合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个组件的公共逻辑，如何抽离"><span class="nav-number">20.</span> <span class="nav-text">多个组件的公共逻辑，如何抽离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HOC、render-props、react-hooks的优劣如何"><span class="nav-number">21.</span> <span class="nav-text">HOC、render props、react-hooks的优劣如何</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对-Time-Slice的理解"><span class="nav-number">22.</span> <span class="nav-text">对 Time Slice的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hooks产生的背景？hooks的优点"><span class="nav-number">23.</span> <span class="nav-text">hooks产生的背景？hooks的优点</span></a></li></ol>
     
     </div>
   </aside>
