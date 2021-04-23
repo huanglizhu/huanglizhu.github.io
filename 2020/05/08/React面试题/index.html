@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1onnhglgj30s808g0uw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1n1g7gtfj30ps0cm0xb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1tfy5tw0j31fy0mgdz6.jpg">
-<meta property="og:updated_time" content="2021-04-22T14:17:17.638Z">
+<meta property="og:updated_time" content="2021-04-23T12:21:43.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React面试题">
 <meta name="twitter:description" content="自己搜集的面试题以及 慕课 前端框架及项目面试 聚焦VueReactWebpack 第九章 React 面试题">
@@ -492,7 +492,10 @@
 <li><strong>劣势：</strong><ul>
 <li><strong>额外的学习成本</strong>（Functional Component 与 Class Component 之间的困惑）</li>
 <li><strong>写法上有限制</strong>（不能出现在条件、循环中），并且写法限制增加了重构成本</li>
-<li><strong>破坏了PureComponent、React.memo浅比较的性能优化效果</strong>（为了取最新的props和state，每次render()都要重新创建事件处函数）</li>
+<li><strong>破坏了PureComponent、React.memo浅比较的性能优化效果</strong>（为了取最新的props和state，每次render()都要重新创建事件处函数）<ul>
+<li><a href="https://zh-hans.reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects" target="_blank" rel="noopener"><strong>useEffect()参数2 避免不必要的“生命周期函数”effect的执行</strong></a></li>
+</ul>
+</li>
 <li>在闭包场景<strong>可能会引用到旧的state、props值</strong></li>
 <li><strong>内部实现上不直观</strong>（依赖一份可变的全局状态，不再那么“纯”）</li>
 <li><strong>React.memo并不能完全替代shouldComponentUpdate</strong>（因为拿不到 state change，只针对 props change）</li>
@@ -514,24 +517,49 @@
 </li>
 </ul>
 <hr>
+<h1 id="什么是hook"><a href="#什么是hook" class="headerlink" title="什么是hook"></a>什么是hook</h1><ul>
+<li><strong>Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。</strong></li>
+<li><strong><a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#rules-of-hooks" target="_blank" rel="noopener">Hook 使用规则</a>：</strong> Hook 就是 <strong>JavaScript 函数</strong>，但是使用它们会有两个额外的规则：<ul>
+<li>只能在<strong>函数最外层</strong>调用 Hook。不要在循环、条件判断或者子函数中调用。</li>
+<li>只能在 <strong>React 的函数组件中</strong>调用 Hook。不要在其他 JavaScript 函数中调用。（还有一个地方可以调用 Hook —— 就是自定义的 Hook 中，我们稍后会学习到。）</li>
+</ul>
+</li>
+</ul>
 <h1 id="hooks产生的背景？hooks的优点"><a href="#hooks产生的背景？hooks的优点" class="headerlink" title="hooks产生的背景？hooks的优点"></a>hooks产生的背景？hooks的优点</h1><ul>
 <li>hooks是<strong>针对在使用react时存在以下问题而产生</strong>的：<ul>
-<li>组件之间<strong>复用状态逻辑很难</strong>，在hooks之前，实现组件复用，一般采用高阶组件和 Render Props，它们本质是将复用逻辑提升到父组件中，很容易产生很多包装组件，带来嵌套地域。</li>
-<li><strong>组件逻辑变得越来越复杂</strong>，尤其是生命周期函数中常常包含一些不相关的逻辑，完全不相关的代码却在同一个方法中组合在一起。如此很容易产生 bug，并且导致逻辑不一致。</li>
-<li><strong>复杂的class组件</strong>，使用class组件，需要理解 JavaScript 中 this 的工作方式，<strong>不能忘记绑定事件处理器等操作</strong>，代码复杂且冗余。除此之外，class组件也会让一些react优化措施失效。</li>
+<li>组件之间<strong><a href="https://zh-hans.reactjs.org/docs/hooks-intro.html#its-hard-to-reuse-stateful-logic-between-components" target="_blank" rel="noopener">复用状态(state)和公共逻辑很难</a></strong>，在hooks之前，实现组件复用，一般采用<strong>高阶组件和 Render Props</strong>，它们本质是将复用逻辑提升到父组件中，很容易产生很多包装组件，带来<strong>嵌套地域</strong>。<ul>
+<li>可以使用 Hook 从组件中提取状态逻辑，使得这些逻辑可以单独测试并复用。<strong>Hook 使你在无需修改组件结构的情况下复用状态逻辑</strong>。(<a href="https://zh-hans.reactjs.org/docs/hooks-custom.html" target="_blank" rel="noopener">自定义Hook</a>)</li>
+</ul>
+</li>
+<li><strong><a href="https://zh-hans.reactjs.org/docs/hooks-intro.html#complex-components-become-hard-to-understand" target="_blank" rel="noopener">组件逻辑变得越来越复杂，复杂组件变得难以理解</a></strong>，尤其是 class 中生命周期函数经常包含不相关的逻辑，但又把相关逻辑分离到了几个不同方法中的问题<strong>（比如添加和删除订阅分离在componentDidMount 和 componentWillUnmount中）</strong>。如此很容易产生 bug，并且导致逻辑不一致。<ul>
+<li>为了解决这个问题，<strong>Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）</strong>，Hook 允许我们<strong>按照代码的用途分离他们</strong>， 而并非强制按照生命周期划分。React 将按照 effect 声明的顺序依次调用组件中的<a href="而并非强制按照生命周期划分">每一个 effect</a>。你还可以使用 reducer 来管理组件的内部状态，使其更加可预测。（<a href="https://zh-hans.reactjs.org/docs/hooks-effect.html#tip-use-multiple-effects-to-separate-concerns" target="_blank" rel="noopener">Effect Hook</a>）</li>
+<li>通过使用 <a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener">Effect Hook/useEffect ()</a>，你可以<strong>把组件内相关的副作用组织在一起</strong>（例如创建订阅及取消订阅），而不是把它们拆分到不同的生命周期函数里。</li>
+</ul>
+</li>
+<li><strong><a href="https://zh-hans.reactjs.org/docs/hooks-intro.html#classes-confuse-both-people-and-machines" target="_blank" rel="noopener">复杂的class组件</a></strong>，使用class组件，需要理解 JavaScript 中 this 的工作方式，<strong>不能忘记绑定事件处理器等操作</strong>，代码复杂且冗余。除此之外，class组件也会让一些react优化措施失效。class 不能很好的压缩，并且会使热重载出现不稳定的情况。<ul>
+<li>为了解决这些问题，<strong>Hook 使你在非 class 的情况下可以使用更多的 React 特性。</strong></li>
+<li>可以避免使用this，比如<a href="https://zh-hans.reactjs.org/docs/hooks-state.html" target="_blank" rel="noopener">State Hook</a>中对state的使用（<a href="https://zh-hans.reactjs.org/docs/hooks-state.html#updating-state" target="_blank" rel="noopener">例子</a>）</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>hooks作用</strong>：<ul>
-<li>用于<strong>在函数组件中引入状态管理和生命周期方法</strong></li>
-<li><strong>取代高阶组件和render props</strong>来实现抽象和可重用性</li>
+<li>用于<strong>在函数组件中引入状态(state)管理（<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#state-hook" target="_blank" rel="noopener">State Hook/useState()</a>）和生命周期方法(<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener">Effect Hook/useEffect</a>)</strong></li>
+<li><strong>取代高阶组件和render props(<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#building-your-own-hooks" target="_blank" rel="noopener">自定义 Hook/useXXX()</a>)</strong>来实现抽象和可重用性<ul>
+<li>公共逻辑放在<strong>自定义函数useXXX()中</strong>，需要复用的函数组件中直接用函数useXXX()即可，多个不同的组件中useXXX()中的state是<strong>相互独立</strong>的。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>hooks优点：</strong><ul>
-<li>避免在被广泛使用的函数组件在后期迭代过程中，需要承担一些副作用，而必须重构成类组件，它<strong>帮助函数组件引入状态管理和生命周期方法</strong>。</li>
-<li>Hooks 出现之后，我们将复用逻辑提取到组件顶层，而不是强行提升到父组件中。这样就能够<strong>避免 HOC 和 Render Props 带来的「嵌套地域」</strong></li>
-<li>避免上面陈述的class组件带来的那些问题</li>
+<li>避免在被广泛使用的函数组件在后期迭代过程中，需要承担一些副作用，而必须重构成类组件，它<strong>帮助函数组件引入状态(state)管理和生命周期方法</strong>。</li>
+<li>Hooks 出现之后，我们将复用逻辑提取到组件顶层，而不是强行提升到父组件中。这样就能够<strong>避免 HOC 和 Render Props 带来的「嵌套地域」，在无需修改组件结构的情况下复用状态逻辑</strong></li>
+<li><strong>在非 class 的情况下可以使用更多的 React 特性</strong>，避免上面陈述的class组件带来的那些问题，比如：忘记绑定事件处理器、class组件让一些react优化措施失效、class 不能很好的压缩，并且会使热重载出现不稳定的情况</li>
 </ul>
 </li>
+</ul>
+<h1 id="使用hook后的性能优化"><a href="#使用hook后的性能优化" class="headerlink" title="使用hook后的性能优化"></a>使用hook后的性能优化</h1><ul>
+<li><a href="https://zh-hans.reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects" target="_blank" rel="noopener"><strong>useEffect()参数2 避免不必要的“生命周期函数”effect的执行</strong></a></li>
 </ul>
 
       
@@ -604,7 +632,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是react"><span class="nav-number">1.</span> <span class="nav-text">什么是react</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明式编程-vs-命令式编程"><span class="nav-number">2.</span> <span class="nav-text">声明式编程 vs 命令式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">2.1.</span> <span class="nav-text">函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是纯函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">什么是纯函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟DOM及其工作原理"><span class="nav-number">3.</span> <span class="nav-text">虚拟DOM及其工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染列表为何使用key"><span class="nav-number">4.</span> <span class="nav-text">渲染列表为何使用key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX的本质"><span class="nav-number">5.</span> <span class="nav-text">JSX的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#props，state与render函数的关系"><span class="nav-number">6.</span> <span class="nav-text">props，state与render函数的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setState场景题（同步与异步，合并）"><span class="nav-number">7.</span> <span class="nav-text">setState场景题（同步与异步，合并）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">8.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldComponentUpdate用途"><span class="nav-number">8.1.</span> <span class="nav-text">shouldComponentUpdate用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PureComponent"><span class="nav-number">8.2.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react发起ajax的位置"><span class="nav-number">8.3.</span> <span class="nav-text">react发起ajax的位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件之间如何通讯"><span class="nav-number">9.</span> <span class="nav-text">组件之间如何通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数组件和class组件"><span class="nav-number">10.</span> <span class="nav-text">函数组件和class组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受控组件与非受控组件"><span class="nav-number">11.</span> <span class="nav-text">受控组件与非受控组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步组件（懒加载）"><span class="nav-number">12.</span> <span class="nav-text">异步组件（懒加载）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器组件和高阶组件"><span class="nav-number">13.</span> <span class="nav-text">容器组件和高阶组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropTypes与DefaultProps"><span class="nav-number">14.</span> <span class="nav-text">PropTypes与DefaultProps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux单向数据流"><span class="nav-number">15.</span> <span class="nav-text">redux单向数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux如何进行异步请求"><span class="nav-number">16.</span> <span class="nav-text">redux如何进行异步请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React事件和DOM事件的区别"><span class="nav-number">17.</span> <span class="nav-text">React事件和DOM事件的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react性能优化"><span class="nav-number">18.</span> <span class="nav-text">react性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超越继承的组合"><span class="nav-number">19.</span> <span class="nav-text">超越继承的组合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个组件的公共逻辑，如何抽离"><span class="nav-number">20.</span> <span class="nav-text">多个组件的公共逻辑，如何抽离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HOC、render-props、react-hooks的优劣如何"><span class="nav-number">21.</span> <span class="nav-text">HOC、render props、react-hooks的优劣如何</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对-Time-Slice的理解"><span class="nav-number">22.</span> <span class="nav-text">对 Time Slice的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hooks产生的背景？hooks的优点"><span class="nav-number">23.</span> <span class="nav-text">hooks产生的背景？hooks的优点</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是react"><span class="nav-number">1.</span> <span class="nav-text">什么是react</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明式编程-vs-命令式编程"><span class="nav-number">2.</span> <span class="nav-text">声明式编程 vs 命令式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">2.1.</span> <span class="nav-text">函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是纯函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">什么是纯函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟DOM及其工作原理"><span class="nav-number">3.</span> <span class="nav-text">虚拟DOM及其工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染列表为何使用key"><span class="nav-number">4.</span> <span class="nav-text">渲染列表为何使用key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX的本质"><span class="nav-number">5.</span> <span class="nav-text">JSX的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#props，state与render函数的关系"><span class="nav-number">6.</span> <span class="nav-text">props，state与render函数的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setState场景题（同步与异步，合并）"><span class="nav-number">7.</span> <span class="nav-text">setState场景题（同步与异步，合并）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件生命周期"><span class="nav-number">8.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldComponentUpdate用途"><span class="nav-number">8.1.</span> <span class="nav-text">shouldComponentUpdate用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PureComponent"><span class="nav-number">8.2.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react发起ajax的位置"><span class="nav-number">8.3.</span> <span class="nav-text">react发起ajax的位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件之间如何通讯"><span class="nav-number">9.</span> <span class="nav-text">组件之间如何通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数组件和class组件"><span class="nav-number">10.</span> <span class="nav-text">函数组件和class组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受控组件与非受控组件"><span class="nav-number">11.</span> <span class="nav-text">受控组件与非受控组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步组件（懒加载）"><span class="nav-number">12.</span> <span class="nav-text">异步组件（懒加载）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器组件和高阶组件"><span class="nav-number">13.</span> <span class="nav-text">容器组件和高阶组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropTypes与DefaultProps"><span class="nav-number">14.</span> <span class="nav-text">PropTypes与DefaultProps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux单向数据流"><span class="nav-number">15.</span> <span class="nav-text">redux单向数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux如何进行异步请求"><span class="nav-number">16.</span> <span class="nav-text">redux如何进行异步请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React事件和DOM事件的区别"><span class="nav-number">17.</span> <span class="nav-text">React事件和DOM事件的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react性能优化"><span class="nav-number">18.</span> <span class="nav-text">react性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超越继承的组合"><span class="nav-number">19.</span> <span class="nav-text">超越继承的组合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个组件的公共逻辑，如何抽离"><span class="nav-number">20.</span> <span class="nav-text">多个组件的公共逻辑，如何抽离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HOC、render-props、react-hooks的优劣如何"><span class="nav-number">21.</span> <span class="nav-text">HOC、render props、react-hooks的优劣如何</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对-Time-Slice的理解"><span class="nav-number">22.</span> <span class="nav-text">对 Time Slice的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是hook"><span class="nav-number">23.</span> <span class="nav-text">什么是hook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hooks产生的背景？hooks的优点"><span class="nav-number">24.</span> <span class="nav-text">hooks产生的背景？hooks的优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用hook后的性能优化"><span class="nav-number">25.</span> <span class="nav-text">使用hook后的性能优化</span></a></li></ol>
     
     </div>
   </aside>
