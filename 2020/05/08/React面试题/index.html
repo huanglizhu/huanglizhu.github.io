@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1onnhglgj30s808g0uw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1n1g7gtfj30ps0cm0xb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl1tfy5tw0j31fy0mgdz6.jpg">
-<meta property="og:updated_time" content="2021-04-23T12:21:43.159Z">
+<meta property="og:updated_time" content="2021-04-23T12:52:44.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React面试题">
 <meta name="twitter:description" content="自己搜集的面试题以及 慕课 前端框架及项目面试 聚焦VueReactWebpack 第九章 React 面试题">
@@ -415,19 +415,21 @@
 </ul>
 <hr>
 <h1 id="react性能优化"><a href="#react性能优化" class="headerlink" title="react性能优化"></a>react性能优化</h1><ul>
-<li><strong>渲染列表时加key</strong>（diff算法加快比对速度）</li>
-<li><strong>自定义事件、DOM事件及时销毁</strong>（ComponentwillUnmount）<ul>
+<li><strong>【异步setSTate】</strong>把多次的数据改变结合成一次来做，<strong>降低 虚拟DOM 的比对频率</strong>。</li>
+<li><strong>【渲染列表时加key】</strong>（diff算法加快虚拟DOM比对速度）</li>
+<li><strong>【自定义DOM事件及时销毁】</strong>（ComponentwillUnmount）<ul>
 <li>react事件是挂载在document上的，所以不需要我们进行手动销毁</li>
 </ul>
 </li>
-<li><strong>合理使用异步组件</strong>(<strong><a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）" target="_blank" rel="noopener">React.lazy+React.Suspense</a></strong>或者<strong><a href="https://huanglizhu.github.io/2020/02/21/%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89%E3%80%81%E6%87%92%E5%8A%A0%E8%BD%BD%E3%80%81%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E6%B5%81%E7%A8%8B/#异步组件（懒加载）及withRouter路由方法" target="_blank" rel="noopener">react-loadable模块</a></strong>)</li>
-<li>使用<strong>react提供的<a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#首页性能优化（PureComponent）" target="_blank" rel="noopener">PureComponent</a></strong>来规定只有和本组件有关的数据更新时，本组件的render函数才执行，<strong>避免不必要的更新渲染</strong><ul>
+<li><strong>【合理使用异步组件】</strong>：<strong><a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）" target="_blank" rel="noopener">React.lazy+React.Suspense</a></strong>或者<strong><a href="https://huanglizhu.github.io/2020/02/21/%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89%E3%80%81%E6%87%92%E5%8A%A0%E8%BD%BD%E3%80%81%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E6%B5%81%E7%A8%8B/#异步组件（懒加载）及withRouter路由方法" target="_blank" rel="noopener">react-loadable模块</a></strong>，解决首屏加载慢的问题</li>
+<li><strong>【避免不必要的子组件render函数的渲染更新】</strong>使用<strong>react提供的<a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#首页性能优化（PureComponent）" target="_blank" rel="noopener">PureComponent</a></strong>来规定只有和本组件有关的数据更新时，本组件的render函数才执行，<strong>避免不必要的更新渲染</strong><ul>
 <li>函数组件使用 <strong>React.memo</strong></li>
 <li>记得<strong>搭配immutable.js不可变值</strong></li>
 </ul>
 </li>
-<li><strong>constructor中绑定事件函数this</strong>，减少bind次数</li>
-<li><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#性能优化" target="_blank" rel="noopener">前端通用的性能优化</a>，如<strong>图片懒加载</strong></li>
+<li><strong>【constructor中绑定事件函数this】</strong>，减少bind次数</li>
+<li><strong>【使用react-router-dom库进行路由跳转】</strong>：使用react-router-dom的Link组件进行页面跳转，<strong>跳转时不会发送HTTP请求</strong>，因此<strong>加载速度会快很多</strong>，借此也可提高性能。</li>
+<li><strong>【<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#性能优化" target="_blank" rel="noopener">前端通用的性能优化</a>】</strong>，如<strong>图片懒加载</strong></li>
 <li>webpack层面的优化（<strong>webpack在production环境下进行打包时，就会自动压缩代码至1/3的大小</strong>，在浏览器上进行反解析再进行渲染。）</li>
 <li>使用<strong>SSR服务器端渲染</strong>，不需要通过ajax发送请求，减少请求次数达到性能优化，这个需要额外设置。</li>
 </ul>

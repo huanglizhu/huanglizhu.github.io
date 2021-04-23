@@ -20,7 +20,7 @@
 <meta property="og:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg">
-<meta property="og:updated_time" content="2020-10-24T08:08:25.826Z">
+<meta property="og:updated_time" content="2021-04-23T14:07:44.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React知识点汇总（项目）">
 <meta name="twitter:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
@@ -165,6 +165,11 @@
       
         <h1 id="总结遇到过的性能优化"><a href="#总结遇到过的性能优化" class="headerlink" title="总结遇到过的性能优化"></a>总结遇到过的性能优化</h1><ul>
 <li><strong>【构造函数内绑定事件函数this指向】</strong>：在constructor函数里<strong>绑定 事件函数 的 this指向（bind）</strong>，而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。<a id="more"></a></li>
+<li><strong>【渲染列表时加key】</strong>（diff算法加快虚拟DOM比对速度）</li>
+<li><strong>【自定义DOM事件及时销毁】</strong>（ComponentwillUnmount）<ul>
+<li>react事件是挂载在document上的，所以不需要我们进行手动销毁</li>
+</ul>
+</li>
 <li><strong>【异步setState】</strong>：React的<strong>底层内置的setState是异步</strong>的，可以把多次的数据改变结合成一次来做，<strong>降低了 虚拟DOM 的比对频率</strong>。</li>
 <li><strong>【虚拟DOM】</strong>：React的底层用了<strong>虚拟DOM</strong>的概念，替代了之前的 真实的DOM（JS对象）。</li>
 <li><strong>【diff算法】</strong>：React的 <strong>diff算法： 同层比对、key值的运用</strong> 来提升 虚拟DOM 比对的速度。</li>
@@ -174,12 +179,15 @@
 </ul>
 </li>
 <li><strong>让组件继承</strong> react提供的<strong><a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#首页性能优化（PureComponent）" target="_blank" rel="noopener">PureComponent</a></strong>（<strong>替代手写shouldComponentUpdate</strong>）判断<strong>只有和本组件有关的数据更新</strong>时，<strong>本组件的render函数才执行</strong>，否则return false不让组件重新渲染。通过<strong>避免虚拟DOM的比对</strong>来提高性能。</li>
+<li>函数组件使用 <strong>React.memo</strong></li>
+<li>记得<strong>搭配immutable.js不可变值</strong></li>
 </ul>
 </li>
-<li><strong>【使用react-router-dom库进行路由跳转】</strong>：使用<strong>react-router-dom的Link组件</strong>进行<strong>页面跳转</strong>，跳转时<strong>不会发送HTTP请求</strong>，因此加载速度会快很多，借此也可提高性能。<ul>
+<li><strong>【使用react-router-dom库进行路由跳转】</strong>：使用<strong>react-router-dom的Link组件</strong>进行<strong>页面跳转</strong>，跳转时<strong>不会发送HTTP请求</strong>，因此加载速度会快很多，借此也可提高性能。</li>
 <li><strong>【异步加载组件】</strong>：可使用react-loadable模块实现异步加载组件<strong>解决首屏加载慢</strong>的问题。</li>
-</ul>
-</li>
+<li><strong>【<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#性能优化" target="_blank" rel="noopener">前端通用的性能优化</a>】</strong>，如<strong>图片懒加载</strong></li>
+<li>webpack层面的优化（<strong>webpack在production环境下进行打包时，就会自动压缩代码至1/3的大小</strong>，在浏览器上进行反解析再进行渲染。）</li>
+<li>使用<strong>SSR服务器端渲染</strong>，不需要通过ajax发送请求，减少请求次数达到性能优化，这个需要额外设置。</li>
 </ul>
 <h1 id="React中的CSS"><a href="#React中的CSS" class="headerlink" title="React中的CSS"></a>React中的CSS</h1><ul>
 <li>比较麻烦，因为<strong>官方没有集成方案</strong>，也没有推荐具体的方案</li>
@@ -188,6 +196,7 @@
 <li><strong>（babel）react-css-modules</strong></li>
 <li><a href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#styled-components管理CSS样式" target="_blank" rel="noopener"><strong>styled components</strong></a>：直接在单独的js文件中<strong>将样式写在组件里</strong>（也可以修饰现有的组件），然后<strong>直接使用带有样式的组件</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg" alt="styled components例子">从Div组件可以明确：<strong>styled components不仅可生成带样式组件，还可获取组件属性设置特殊样式</strong>，例子中就规定了big属性的Div组件字体大小为72px（涉及ES6的模板字符串和变量的使用方法）</li>
 <li><strong>styled jsx</strong>：简单粗暴，在jsx中允许直接写入css</li>
+<li><strong>css文件+className（不推荐）</strong>：可参考<a href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%EF%BC%89%E4%BD%BF%E7%94%A8index-css%E7%9A%84%E6%95%88%E6%9E%9C" target="_blank" rel="noopener">简书Header组件开发（styled-components管理样式）</a></li>
 </ul>
 </li>
 </ul>
