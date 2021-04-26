@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp4fghyehj30hv02emxt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp4v9cdd8j316l0fytfx.jpg">
-<meta property="og:updated_time" content="2020-10-27T03:47:28.674Z">
+<meta property="og:updated_time" content="2021-04-26T03:22:26.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML知识点汇总">
 <meta name="twitter:description" content="DOCTYPE 的意义是什么 让浏览器以标准模式渲染比如：我们都知道 标准盒模型和替代盒模型 ，很久以前IE有很多渲染模式，当我们带上DOCTYPE时，IE就知道要以标准模式渲染，也可以体现在 标准盒模型 上。（不只是IE，很多浏览器都有，也不一定是表现在盒子模型上，很多元素都有） 让浏览器知道元素的合法性比如：直接使用&amp;lt;!DOCTYPE html&amp;gt;浏览器就知道要根据html5的标准来">
@@ -178,18 +178,47 @@
 </ul>
 <hr>
 <h1 id="HTML5有什么变化"><a href="#HTML5有什么变化" class="headerlink" title="HTML5有什么变化"></a>HTML5有什么变化</h1><ul>
-<li><strong>新的语义化元素</strong>（新增语义更加明确的标签，不建议使用一些语义不强的元素：b、i、font等），方便写出更加语义化的结构。</li>
-<li><strong>表单增强</strong>（表单验证（在这之前只能通过js来完成））</li>
-<li><strong>新的API</strong>（离线、音视频、图形、实时通信、本地存储、设备能力）【JS层面的】</li>
+<li><strong>标签增删</strong><ul>
+<li><strong>新的<a href="https://www.w3school.com.cn/html/html5_semantic_elements.asp" target="_blank" rel="noopener">语义元素</a></strong>，header section footer aside nav main article figure，（新增语义更加明确的标签，不建议使用一些语义不强的元素：b、i、font等），方便写出更加语义化的结构</li>
+<li>内容元素<a href="https://www.runoob.com/tags/tag-mark.html" target="_blank" rel="noopener">mark</a>高亮 <a href="https://www.runoob.com/tags/tag-progress.html" target="_blank" rel="noopener">progress</a>进度</li>
+<li><strong>自定义属性<code>data-xxx</code></strong>(用于<a href="https://huanglizhu.github.io/2020/04/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%881%EF%BC%89/#%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E5%B0%8F%E5%9C%86%E7%82%B9" target="_blank" rel="noopener">帮助实现手写轮播图</a>、<a href="https://blog.csdn.net/w1418899532/article/details/90515969" target="_blank" rel="noopener">帮助实现原生JS的图片懒加载</a>)<ul>
+<li><strong>jquery中获取自定义属性的方法：</strong> 1是<code>.attr(&#39;data-xxx&#39;)</code>，2是<code>.data(&#39;xxx&#39;)</code></li>
+<li><strong>js中获取自定义属性的方法：</strong> <ul>
+<li><strong>通过attribute：</strong> <code>getAttribute(&#39;data-xxx&#39;)</code></li>
+<li><strong>通过dataset（html5属性）：</strong>以下例子假设自定义属性data-xxx<ul>
+<li><strong>取值：</strong><code>objName.dataset.xxx</code></li>
+<li><strong>赋值：</strong><code>objName.dataset.xxx = &quot;3m666&quot;;</code></li>
+<li><strong>新增data-age属性：</strong><code>objName.dataset.age = &quot;100&quot;;</code></li>
+<li><strong>删除：设置成null，或者delete</strong><code>objName.dataset.xxx = null; delete objName.dataset.age;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>表单增强</strong><ul>
+<li><strong>新的<a href="http://caibaojian.com/html5/form.html" target="_blank" rel="noopener">input类型</a>(增强表单验证)</strong> color date datetime datetime-local email time url search，（<strong>表单验证</strong>在这之前只能通过js来完成）【<a href="https://www.runoob.com/html/html5-form-input-types.html" target="_blank" rel="noopener">更多验证可参考</a>】</li>
+<li>移除过时标签big font frame frameset</li>
+</ul>
+</li>
+<li><strong>新的API</strong>（离线、音视频、图形、实时通信、本地存储、设备能力）【JS层面的】<ul>
+<li><strong>web存储（浏览器存储）</strong>：<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#描述cookie-localStorage-sessionStorage区别" target="_blank" rel="noopener">localStorage、SessionStorage</a>，原本只能借用cookie。（<a href="https://huanglizhu.github.io/2020/03/30/JS%20Web%20API%20%E5%AD%98%E5%82%A8/#localStorage和sessionStorage" target="_blank" rel="noopener">使用方法</a>）</li>
+</ul>
+</li>
 <li><strong>分类和嵌套变更</strong>（变成<strong>按照内容分类</strong>，分类和推理过程的改变导致嵌套规则的改变，<strong>在html5中将a标签视作“透明”</strong>再来判断嵌套合法性）</li>
-<li>可参考博客<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#HTML5新增的元素" target="_blank" rel="noopener">“前端基础-HTTP/HTML/浏览器”中“HTML5新增的元素”</a></li>
+<li>可参考博客<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#HTML5新增的元素" target="_blank" rel="noopener">“前端基础-HTTP/HTML/浏览器（3）”中“HTML5新增的元素”</a></li>
 </ul>
 <hr>
-<h1 id="lt-em-gt-和-lt-i-gt-的区别"><a href="#lt-em-gt-和-lt-i-gt-的区别" class="headerlink" title="&lt;em&gt;和&lt;i&gt;的区别"></a><code>&lt;em&gt;</code>和<code>&lt;i&gt;</code>的区别</h1><p><strong>主要是语义化上的区别，i的语义不明确</strong>，也可用来写小图标icon。</p>
-<ul>
-<li><code>&lt;em&gt;</code>是语义化的标签，不仅表斜体，还<strong>表强调</strong></li>
+<h1 id="lt-em-gt-和-lt-i-gt-的区别"><a href="#lt-em-gt-和-lt-i-gt-的区别" class="headerlink" title="&lt;em&gt;和&lt;i&gt;的区别"></a><code>&lt;em&gt;</code>和<code>&lt;i&gt;</code>的区别</h1><ul>
+<li><strong>主要是<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/em#%3Ci%3E_vs._%3Cem%3E" target="_blank" rel="noopener">语义化上的区别</a>，i的语义不明确</strong>，也可用来写小图标icon，<strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/em" target="_blank" rel="noopener"><code>&lt;em&gt;</code></a>表强调</strong>，具体使用什么标签<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/em#%3Ci%3E_vs._%3Cem%3E" target="_blank" rel="noopener">根据内容而定</a>。<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/cite" target="_blank" rel="noopener"><code>&lt;cite&gt; 元素</code></a>也是斜体，常用于<strong>标记作品的标题（书籍，戏剧，歌曲等）</strong></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/em" target="_blank" rel="noopener"><code>&lt;em&gt;</code></a>是语义化的标签，不仅表斜体，还<strong>表强调</strong>。但如仅仅用于应用斜体样式，请使用CSS样式。</li>
 <li><code>&lt;i&gt;</code>是纯样式的标签，表斜体</li>
 <li>HTML5中<code>&lt;i&gt;</code>不推荐使用来表示斜体，一般用作图标（icon）的表示。</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="HTML语义化"><a href="#HTML语义化" class="headerlink" title="HTML语义化"></a>HTML语义化</h1><p><strong>语义化</strong>简单说来就是<strong>用正确的标签做正确的事情，让机器可以读懂页面内容</strong>。</p>
@@ -199,41 +228,51 @@
 <li><strong>有助于SEO</strong>（SEO：搜索引擎优化），页面越是符合语义化就越有利于搜索引擎优化。</li>
 <li>semantic microdata（另一个规范），她会在html中添加一些新的标记，标注这个东西是什么。【对元素做进一步的语义化标记，方便搜索】</li>
 </ol>
-<h2 id="怎么把网页写的符合语义化"><a href="#怎么把网页写的符合语义化" class="headerlink" title="怎么把网页写的符合语义化"></a>怎么把网页写的符合语义化</h2><p><strong>先对网页功能做一个划分</strong>，根据不同功能特点<strong>选择合适的标签</strong>（机器可读的、被广泛认可的）来创建一个 <strong>结构大纲 清晰的网页</strong>。</p>
-<ul>
+<h2 id="怎么把网页写的符合语义化"><a href="#怎么把网页写的符合语义化" class="headerlink" title="怎么把网页写的符合语义化"></a>怎么把网页写的符合语义化</h2><ul>
+<li><strong>先对网页功能做一个划分</strong>，根据不同功能特点<strong>选择合适的标签</strong>（机器可读的、被广泛认可的）来创建一个 <strong>结构大纲 清晰的网页</strong>。</li>
 <li>尽可能<strong>少使用无语义的标签div和span</strong>；</li>
 <li>在语义不明显，既<strong>可以使用div或者p时，尽量用p</strong>, 因为p在默认情况下有上下间距，对兼容特殊终端有利；</li>
-<li><strong>不要使用纯样式标签</strong>，如：b、font、i等，<strong>改用css设置</strong>。<br>需要强调的文本，可以包含在strong或者em标签中（浏览器预设样式，能用CSS指定就不用他们），strong默认样式是加粗（不要用b），em是斜体（不用i）；</li>
-<li>使用<strong>表格</strong>时，<strong>标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围</strong>。表头和一般单元格要区分开，<strong>表头用th，单元格用td</strong>；</li>
-<li>表单域要用fieldset标签包起来，并用legend标签说明表单的用途；</li>
-<li>每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性，在lable标签中设置<code>for=someld</code>来让说明文本和相对应的input关联起来。</li>
+<li><strong>不要使用纯样式标签</strong>，如：b、font、i等，<strong>改用css设置</strong>。<ul>
+<li>需要强调的文本，可以包含在strong或者em标签中（浏览器预设样式，能用CSS指定就不用他们），<strong>strong</strong>默认样式是加粗<strong>（不要用b）</strong>，<strong>em是斜体（不用i）</strong></li>
 </ul>
-<p><strong>注意：HTML5 并非 Web 语义唯一倚仗的规范</strong>，除了 W3C 和 WHATWG 外，还有其它的组织在为扩展、标准化 Web 语义做着贡献。只要有浏览器厂商、搜索引擎原意支持，它们的规范一样可以成为通用的基础设施。</p>
+</li>
+<li>使用<strong>表格</strong>时，<strong>标题要用<a href="https://www.runoob.com/tags/tag-caption.html" target="_blank" rel="noopener">caption</a>，表头用<a href="https://www.runoob.com/tags/tag-thead.html" target="_blank" rel="noopener">thead</a>，主体部分用tbody包围，尾部用tfoot包围</strong>。表头和一般单元格要区分开，<strong>行都是tr，但表头单元格用th，其他单元格用td</strong>。(<a href="https://www.runoob.com/try/try.php?filename=tryhtml_tbody" target="_blank" rel="noopener">例子</a>，记忆方法：tr=》table row，td=》tabele date cell)</li>
+<li>表单域要用<a href="http://it028.com/tag-fieldset.html" target="_blank" rel="noopener">fieldset标签</a>包起来，并用<a href="http://it028.com/tag-legend.html" target="_blank" rel="noopener">legend标签</a>说明表单的用途；</li>
+<li>每个<strong>input标签</strong>对应的<strong>说明文本</strong>都需要使用<a href="https://www.runoob.com/tags/tag-label.html" target="_blank" rel="noopener"><strong>label标签</strong></a>，并且通过<strong>为input设置id属性</strong>，在lable标签中设置<code>for=someld</code>来<strong>让说明文本和相对应的input关联</strong>起来。</li>
+<li><strong>注意：HTML5 并非 Web 语义唯一倚仗的规范</strong>，除了 W3C 和 WHATWG 外，还有其它的组织在为扩展、标准化 Web 语义做着贡献。只要有浏览器厂商、搜索引擎原意支持，它们的规范一样可以成为通用的基础设施。</li>
+</ul>
 <h2 id="html与SEO优化"><a href="#html与SEO优化" class="headerlink" title="html与SEO优化"></a>html与SEO优化</h2><ul>
-<li><code>&lt;head&gt;</code>标签放网页的标题，各个页面不同。</li>
-<li><code>&lt;meta keywords&gt;</code>列举出几个重要的关键词。</li>
-<li><code>&lt;meta description&gt;</code>网页内容的高度概括。</li>
+<li><code>&lt;head&gt;&lt;/head&gt;</code>标签内（<a href="https://www.runoob.com/try/try.php?filename=tryhtml_meta" target="_blank" rel="noopener">例子</a>）:<ul>
+<li><code>&lt;title&gt;标题&lt;/title&gt;</code>放网页的<strong>标题</strong>，各个页面不同。</li>
+<li><code>&lt;meta name=&quot;keywords&quot; content=&quot;关键词1,关键词2&quot;&gt;</code>列举出几个重要的<strong>关键词</strong>。</li>
+<li><code>&lt;meta name=&quot;description&quot; content=&quot;概括内容&quot;&gt;</code>网页内容的<strong>高度概括</strong>。</li>
+</ul>
+</li>
 <li>每个页面<strong>尽量只出现一次H1标签，H2标签可以多次：H1权重很高，普遍认为仅次于title</strong>，一般资讯详情页的标题、商品详情页的标题，都放在H1里。</li>
 <li><strong>图片一定要添加alt属性</strong>，title属性可选：搜索引擎不认识图片上的内容，只能通过alt属性来判断，如果是商品列表页，所有商品都加了alt和title的话，容易造成堆砌关键词，所以我一般是只加alt属性。</li>
 <li><strong>换行标签<code>&lt;br/&gt;</code>只用来在文本间进行换行</strong>，标签间的换行通过margin或者<code>&lt;p&gt;&lt;br&gt;&lt;/p&gt;</code>。</li>
 <li>搜索引擎抓取seo内容是从上到下，重要内容html代码放在最前面。</li>
 <li>搜索引擎看不懂js， <strong>重要内容不要用js输出</strong>。</li>
 <li>尽量<strong>少使用iframe框架</strong></li>
-<li>谨慎使用<code>display：none</code>，搜索引擎会过滤掉这里面的内容。</li>
+<li>谨慎使用<code>display：none</code>，搜索引擎会过滤掉这里面的内容，可用<code>visibility:hidden</code>。(让元素消失的3种方法可看<a href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#%E6%80%8E%E4%B9%88%E6%A0%B7%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B6%88%E5%A4%B1" target="_blank" rel="noopener">前端基础-CSS（1）</a>)</li>
 </ul>
 <hr>
 <h1 id="哪些元素可以自闭合"><a href="#哪些元素可以自闭合" class="headerlink" title="哪些元素可以自闭合"></a>哪些元素可以自闭合</h1><ul>
 <li>表单元素input（注意： 区分表格元素和表单元素）</li>
 <li>图片img</li>
 <li>换行br 水平线hr</li>
-<li>源信息meta link</li>
+<li>源信息meta <a href="https://www.runoob.com/tags/tag-link.html" target="_blank" rel="noopener">link</a></li>
+<li><strong>注意：在html5中自闭合的标签结束不要求加<code>/</code>,但html和html4中是要求的。</strong></li>
 </ul>
-<p><strong>在html5中自闭合的标签结束不要求加<code>/</code>,但html和html4中是要求的。</strong></p>
 <h2 id="补充：表单元素"><a href="#补充：表单元素" class="headerlink" title="补充：表单元素"></a>补充：表单元素</h2><ul>
-<li><code>&lt;form&gt;</code>标签 用于为用户输入创建 HTML 表单。</li>
+<li><a href="https://www.runoob.com/tags/tag-form.html" target="_blank" rel="noopener"><code>&lt;form&gt;</code>标签</a> 用于为用户输入创建 HTML 表单。</li>
 <li><strong><code>&lt;input&gt;</code> 元素是最重要的表单元素</strong>，根据不同的 type 属性可变化为多种形态。</li>
-<li>表单能够包含 input 元素、select下拉框、textarea文本域、复选框、单选框、button按钮等等。</li>
-<li>html5新增表单元素：datalist、keygen、output。</li>
+<li>表单能够包含 input 元素、<a href="https://www.runoob.com/tags/tag-select.html" target="_blank" rel="noopener">select+option</a>下拉框、textarea文本域、<a href="https://c.runoob.com/codedemo/1533" target="_blank" rel="noopener">checkbox</a>复选框、radio单选框、button按钮等等。</li>
+<li><strong>html5新增表单元素</strong>：<ul>
+<li><a href="https://www.runoob.com/tags/tag-datalist.html" target="_blank" rel="noopener">datalist</a>规定了 <code>&lt;input&gt;</code> 元素可能的选项列表</li>
+<li><a href="https://www.runoob.com/tags/tag-output.html" target="_blank" rel="noopener">output</a>作为计算结果输出显示(比如执行脚本的输出)</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="HTML和DOM的关系"><a href="#HTML和DOM的关系" class="headerlink" title="HTML和DOM的关系"></a>HTML和DOM的关系</h1><ul>
@@ -243,13 +282,19 @@
 </ul>
 <hr>
 <h1 id="property（特性）-和-attribute（属性）-的区别"><a href="#property（特性）-和-attribute（属性）-的区别" class="headerlink" title="property（特性） 和 attribute（属性） 的区别"></a>property（特性） 和 attribute（属性） 的区别</h1><ul>
+<li>property和attribute的<strong>使用方法</strong>可参考<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#DOM%E6%93%8D%E4%BD%9C%E7%9A%84%E5%B8%B8%E7%94%A8API" target="_blank" rel="noopener">JS Web API 面试题</a><ul>
+<li><strong>property</strong>：<code>.</code>，和基本的js对象属性操作方法一样</li>
+<li><strong>attribute</strong>：<a href="https://www.runoob.com/jsref/met-element-getattribute.html" target="_blank" rel="noopener">getAttribute()</a>/<a href="https://www.runoob.com/jsref/met-element-setattribute.html" target="_blank" rel="noopener">setAttribute()</a>/removeAttribute()/createAttribute()</li>
+</ul>
+</li>
 <li>property和attribute在中文中都是 属性 的意思，但在DOM中是不同的两个东西。一般我们认为<strong>property是特性，attribute是属性</strong>。</li>
 <li>attribute 是“死”的，<strong>写在html上的</strong>就是attribute</li>
 <li>property 是“活”的，<strong>经过浏览器解析后</strong>，每个元素会有自己的property（特性）。</li>
-<li>attribute 的改变不会影响 property ，property的改变也不会影响 attribute。</li>
+<li>attribute 的改变大概率会影响 property ，property的改变也不会影响 attribute。</li>
 <li>property是对DOM元素的<strong>JS变量的属性</strong>进行修改，<strong>不会修改HTML结构</strong>。</li>
 <li>attribute是直接对<strong>DOM元素的属性</strong>进行修改，<strong>会改变HTML结构</strong>。</li>
-<li><strong>建议使用property</strong>，以减少不必要的DOM重新渲染。</li>
+<li><strong>建议使用property</strong>，以减少不必要的DOM重新渲染，<strong>但是使用property无法获取<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#DOM%E6%93%8D%E4%BD%9C%E7%9A%84%E5%B8%B8%E7%94%A8API" target="_blank" rel="noopener">自定义属性</a></strong>。</li>
+<li>更多区别可参考<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#attribute%E5%92%8Cproperty%E7%9A%84%E5%8C%BA%E5%88%AB" target="_blank" rel="noopener">JS Web API 面试题</a></li>
 </ul>
 <p><strong>例子</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbp4fghyehj30hv02emxt.jpg" alt="attribute"></p>
 <ol>
@@ -270,25 +315,25 @@
 <h2 id="补充：不使用submit按钮提交表单的方法"><a href="#补充：不使用submit按钮提交表单的方法" class="headerlink" title="补充：不使用submit按钮提交表单的方法"></a>补充：不使用submit按钮提交表单的方法</h2><ul>
 <li>提交表单一般使用Form对象中的submit按钮，但是在很多场合用其他方法提交却显得更为简捷，如选中单选项，选择下拉列表元素等。</li>
 <li>下面这两条语句<strong>调用了表单对象的submit()方法，等效于按submit按钮</strong>。</li>
+<li><strong>方法1</strong>：<code>document.formName.submit();</code><ul>
+<li><strong>意思</strong>：执行到此句时，立即将本文件中名为formName的表单中的所有信息提交给指定的程序。</li>
 </ul>
-<p><strong>方法1</strong>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">document</span><span class="selector-class">.formName</span><span class="selector-class">.submit</span>();</span><br></pre></td></tr></table></figure>
-
-<p><strong>意思</strong>：执行到此句时，立即将本文件中名为formName的表单中的所有信息提交给指定的程序。</p>
-<p><strong>方法2</strong>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">document</span><span class="selector-class">.forms</span><span class="selector-attr">[index]</span><span class="selector-class">.submit</span>();</span><br></pre></td></tr></table></figure>
-
-<p><strong>意思</strong>：</p>
-<ul>
+</li>
+<li><strong>方法2</strong>：<code>document.forms[index].submit();</code><ul>
+<li><strong>意思</strong>：</li>
 <li><code>document.forms</code>：表示获取当前页面的所有表单 </li>
 <li><code>document.forms[0]</code>：表示获取当前页面的第一个表单 </li>
 <li><code>document.forms[&#39;exportServlet&#39;]</code>：表示获取当前页面的<code>name=&quot;exportServlet&quot;</code>的表单 </li>
 <li><code>submit()</code>表示提交表单，相当于按submit按钮</li>
 </ul>
-<h2 id="通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗"><a href="#通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗" class="headerlink" title="通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗"></a>通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗</h2><p><strong>从技术上讲不一定需要，但仍然建议使用form元素</strong>。</p>
+</li>
+</ul>
+<h2 id="通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗"><a href="#通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗" class="headerlink" title="通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗"></a>通过AJAX请求而不通过form的submit按钮提交，还需要form元素吗</h2><ul>
+<li><strong>从技术上讲不一定需要，但仍然建议使用form元素</strong>。</li>
+</ul>
 <ol>
 <li>因为有submit和reset这样的特性在里面，<strong>没有form的情况下submit（提交表单内容）和reset（重置表单内容）是不能用的</strong>。</li>
-<li>因为<strong>有form的情况下</strong>我们可以通过一些方式去<strong>批量获取表单的所有数据</strong>，比如说<strong>jquery中的<code>serialize</code>方法</strong>，当你使用<code>serialize</code>方法时可以获取到整个表单的数据。</li>
+<li>因为<strong>有form的情况下</strong>我们可以通过一些方式去<strong>批量获取表单的所有数据</strong>，比如说<strong>jquery中的<a href="https://www.w3school.com.cn/jquery/ajax_serialize.asp" target="_blank" rel="noopener"><code>serialize</code>方法</a></strong>，当你使用<code>serialize</code>方法时可以获取到整个表单的数据。</li>
 <li>有form的时候我们可以<strong>和一些框架结合去做表单验证</strong>。</li>
 <li>对用户来说，有form的时候<strong>便于浏览器保存表单</strong>，也就是说浏览器比较容易去记住用户名、密码等。</li>
 </ol>

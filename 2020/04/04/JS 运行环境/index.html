@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg">
-<meta property="og:updated_time" content="2021-03-28T03:06:19.100Z">
+<meta property="og:updated_time" content="2021-04-26T15:05:18.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 运行环境">
 <meta name="twitter:description" content="运行环境介绍 运行环境即浏览器（server端有nodejs，移动端在app/微信上） 下载网页代码，渲染出页面，期间会执行若干JS 要保证代码在浏览器中：稳定且高效 网页加载过程 性能优化 安全">
@@ -240,6 +240,12 @@
 <li><strong>从何入手</strong>:<ul>
 <li>让<strong>加载</strong>更快</li>
 <li>让<strong>渲染</strong>更快</li>
+<li><strong>减少回流、重绘：</strong><ul>
+<li><strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">合并DOM操作</a></strong>：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
+<li><strong>避免频繁读取会引发回流/重绘的属性(见上)</strong>，如果确实需要多次使用，就用一个<strong>变量缓存</strong>起来。</li>
+<li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

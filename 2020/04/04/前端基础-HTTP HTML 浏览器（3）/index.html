@@ -20,7 +20,7 @@
 <meta property="og:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
-<meta property="og:updated_time" content="2021-04-25T04:48:47.191Z">
+<meta property="og:updated_time" content="2021-04-26T14:33:28.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（3）">
 <meta name="twitter:description" content="浏览器几个很实用的BOM属性对象方法什么是Bom? Bom是浏览器对象。">
@@ -179,15 +179,33 @@
 <p>如果<strong>使用了alt 属性，那么浏览器至少可以显示或读出有关图像的描述</strong>。</p>
 <hr>
 <h1 id="ajax-fetch发送2次请求的原因"><a href="#ajax-fetch发送2次请求的原因" class="headerlink" title="ajax/fetch发送2次请求的原因"></a>ajax/fetch发送2次请求的原因</h1><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN fetch API</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener">使用fetch</a></li>
-<li><strong>问题：</strong> fetch发送post请求的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
-<li><strong>原因：</strong>很简单，因为你用fetch的post请求的时候，导致fetch 第一次发送了一个<strong>Options请求</strong>，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN fetch API</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener">使用fetch</a>，详细可参考<a href="https://zhuanlan.zhihu.com/p/35404847" target="_blank" rel="noopener">知乎 Ajax跨域问题总结</a></li>
+<li><strong>问题：</strong> fetch发送<strong>非简单请求</strong>的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
+<li><strong>原因：</strong>很简单，因为你用fetch的<strong>非简单请求</strong>的时候，导致fetch 第一次发送了一个<strong>Options请求</strong>，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</li>
 <li>浏览器对复杂<a href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#跨域" target="_blank" rel="noopener">跨域</a>请求的处理，<strong>在发送真正的请求前, 会先发送一个方法为OPTIONS的预请求(preflight request), 用于试探服务端是否能接受真正的请求</strong>，如果options获得的回应是拒绝性质的，比如404\403\500等http状态，就会停止post、put等请求的发出。</li>
 </ul>
-<h2 id="发送2次请求的前提条件"><a href="#发送2次请求的前提条件" class="headerlink" title="发送2次请求的前提条件"></a>发送2次请求的前提条件</h2><ol>
-<li><strong>跨域</strong></li>
-<li>请求方法<strong>不是GET/HEAD/POST</strong> ，且<strong>POST请求的Content-Type不是application/x-www-form-urlencoded, multipart/form-data, 或text/plain</strong> </li>
-</ol>
+<h2 id="发送2次请求的前提条件"><a href="#发送2次请求的前提条件" class="headerlink" title="发送2次请求的前提条件"></a>发送2次请求的前提条件</h2><ul>
+<li><strong>发送2次请求的前提条件：<a href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5" target="_blank" rel="noopener">跨域</a>+非简单请求</strong></li>
+<li>常见的<strong>非简单请求：</strong><ul>
+<li>put、delete方法的ajax请求</li>
+<li>发送json格式的ajax请求</li>
+<li>带自定义头的ajax请求</li>
+</ul>
+</li>
+<li><strong>补充了解：简单请求：</strong><ul>
+<li>方法为：GET/HEAD/POST</li>
+<li>请求header里：<ul>
+<li>无自定义头</li>
+<li>Content-Type为以下几种：application/x-www-form-urlencoded, multipart/form-data, 或text/plain</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="补充：POST请求也会发送2次请求"><a href="#补充：POST请求也会发送2次请求" class="headerlink" title="补充：POST请求也会发送2次请求"></a>补充：POST请求也会发送2次请求</h2><ul>
+<li>GET请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）</li>
+<li>而<strong>POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）</strong>。</li>
+</ul>
 <hr>
 <h1 id="iframe是什么？有什么缺点？"><a href="#iframe是什么？有什么缺点？" class="headerlink" title="iframe是什么？有什么缺点？"></a>iframe是什么？有什么缺点？</h1><ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener">参考</a></li>
@@ -302,7 +320,7 @@
 </ul>
 </li>
 <li><strong>标签增删</strong><ul>
-<li>8个语义元素 header section footer aside nav main article figure</li>
+<li>8个<a href="https://www.w3school.com.cn/html/html5_semantic_elements.asp" target="_blank" rel="noopener">语义元素</a> header section footer aside nav main article figure</li>
 <li>内容元素<a href="https://www.runoob.com/tags/tag-mark.html" target="_blank" rel="noopener">mark</a>高亮 <a href="https://www.runoob.com/tags/tag-progress.html" target="_blank" rel="noopener">progress</a>进度</li>
 <li><strong>新的<a href="http://caibaojian.com/html5/form.html" target="_blank" rel="noopener">input类型</a>(增强表单验证)</strong> color date datetime datetime-local email time url search，（<strong>表单验证</strong>在这之前只能通过js来完成）【<a href="https://www.runoob.com/html/html5-form-input-types.html" target="_blank" rel="noopener">更多验证可参考</a>】</li>
 <li>移除过时标签big font frame frameset</li>
@@ -394,7 +412,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个很实用的BOM属性对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下web-Quality（无障碍）"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-fetch发送2次请求的原因"><span class="nav-number">3.</span> <span class="nav-text">ajax/fetch发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发送2次请求的前提条件"><span class="nav-number">3.1.</span> <span class="nav-text">发送2次请求的前提条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe是什么？有什么缺点？"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport和移动端布局"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click在ios上有300ms延迟，原因及如何解决？"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener参数"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5新增的元素"><span class="nav-number">9.</span> <span class="nav-text">HTML5新增的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对HTML语义化标签的理解"><span class="nav-number">9.1.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下web-worker"><span class="nav-number">9.2.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下HTML5-drag-api"><span class="nav-number">9.3.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><span class="nav-number">9.4.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">9.4.1.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS3"><span class="nav-number">9.4.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个很实用的BOM属性对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下web-Quality（无障碍）"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-fetch发送2次请求的原因"><span class="nav-number">3.</span> <span class="nav-text">ajax/fetch发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发送2次请求的前提条件"><span class="nav-number">3.1.</span> <span class="nav-text">发送2次请求的前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：POST请求也会发送2次请求"><span class="nav-number">3.2.</span> <span class="nav-text">补充：POST请求也会发送2次请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe是什么？有什么缺点？"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype作用-严格模式与混杂模式如何区分？它们有何意义"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport和移动端布局"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click在ios上有300ms延迟，原因及如何解决？"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener参数"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5新增的元素"><span class="nav-number">9.</span> <span class="nav-text">HTML5新增的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对HTML语义化标签的理解"><span class="nav-number">9.1.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下web-worker"><span class="nav-number">9.2.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下HTML5-drag-api"><span class="nav-number">9.3.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><span class="nav-number">9.4.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">9.4.1.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS3"><span class="nav-number">9.4.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

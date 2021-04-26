@@ -21,12 +21,15 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfcmhhk3a2j30r20suacc.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfijoy3cg6j30k005s436.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg">
-<meta property="og:updated_time" content="2020-11-19T12:54:32.569Z">
+<meta property="og:updated_time" content="2021-04-26T15:06:06.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
 <meta name="twitter:description" content="流程tcp三次握手，一句话概括">
@@ -211,17 +214,20 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="一个图片url访问后直接下载怎样实现？"><a href="#一个图片url访问后直接下载怎样实现？" class="headerlink" title="一个图片url访问后直接下载怎样实现？"></a>一个图片url访问后直接下载怎样实现？</h2><p>设置<strong>请求的返回头（HTTP响应报文首部的content-type）</strong>，用于<strong>浏览器解析</strong>的重要参数就是OSS的API文档里面的返回http头，决定用户下载行为的参数。</p>
+<h2 id="一个图片url访问后直接下载怎样实现"><a href="#一个图片url访问后直接下载怎样实现" class="headerlink" title="一个图片url访问后直接下载怎样实现"></a>一个图片url访问后直接下载怎样实现</h2><ul>
+<li><strong>重点：<a href="https://www.runoob.com/tags/att-a-download.html" target="_blank" rel="noopener"><code>&lt;a&gt;</code>的download 属性</a>定义了下载链接的地址</strong></li>
+<li>设置<strong>请求的返回头（HTTP响应报文首部的content-type）</strong>，用于<strong>浏览器解析</strong>的重要参数就是OSS的API文档里面的返回http头，决定用户下载行为的参数。</li>
+</ul>
 <h3 id="使用HTML5实现"><a href="#使用HTML5实现" class="headerlink" title="使用HTML5实现"></a>使用HTML5实现</h3><ul>
 <li>HTML5提供的<a href="https://www.runoob.com/html/html5-canvas.html" target="_blank" rel="noopener">Canvas</a>以</li>
-<li><a href="https://www.runoob.com/tags/att-a-download.html" target="_blank" rel="noopener"><code>&lt;a&gt;</code>的download 属性</a></li>
+<li><a href="https://www.runoob.com/tags/att-a-download.html" target="_blank" rel="noopener"><code>&lt;a&gt;</code>的download 属性</a>定义了下载链接的地址</li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/MouseEvent" target="_blank" rel="noopener">MouseEvent()构造器</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent" target="_blank" rel="noopener">MouseEvent事件</a></li>
 <li><strong>注意：如希望 自动触发事件 应使用<a href="https://www.jianshu.com/p/5f9027722204" target="_blank" rel="noopener">dispatchEvent(event)</a>，比<code>xxx.onclick();</code>或<code>xxx.click();</code>好</strong></li>
 </ul>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">download<span class="constructor">Iamge(<span class="params">imgsrc</span>, <span class="params">name</span>)</span> &#123;<span class="comment">//下载图片地址和图片名  </span></span><br><span class="line">  <span class="keyword">let</span> image = <span class="keyword">new</span> <span class="constructor">Image()</span>;  </span><br><span class="line">  <span class="comment">// 解决跨域 Canvas 污染问题（允许跨域）  </span></span><br><span class="line">  image.set<span class="constructor">Attribute(<span class="string">"crossOrigin"</span>, <span class="string">"anonymous"</span>)</span>;  </span><br><span class="line">  <span class="comment">// onload 事件在图片加载完成后立即执行</span></span><br><span class="line">  image.onload = <span class="keyword">function</span><span class="literal">()</span> &#123;  </span><br><span class="line">    <span class="keyword">let</span> canvas = document.create<span class="constructor">Element(<span class="string">"canvas"</span>)</span>;  </span><br><span class="line">    canvas.width = image.width;  </span><br><span class="line">    canvas.height = image.height;  </span><br><span class="line">    <span class="keyword">let</span> context = canvas.get<span class="constructor">Context(<span class="string">"2d"</span>)</span>;  <span class="comment">//创建canvas对象</span></span><br><span class="line">    context.draw<span class="constructor">Image(<span class="params">image</span>, 0, 0, <span class="params">image</span>.<span class="params">width</span>, <span class="params">image</span>.<span class="params">height</span>)</span>;  </span><br><span class="line">    <span class="keyword">let</span> url = canvas.<span class="keyword">to</span><span class="constructor">DataURL(<span class="string">"image/png"</span>)</span>; <span class="comment">//得到图片的base64编码数据  </span></span><br><span class="line">    <span class="keyword">let</span> a = document.create<span class="constructor">Element(<span class="string">"a"</span>)</span>; <span class="comment">// 生成一个a元素  </span></span><br><span class="line">    <span class="keyword">let</span> event = <span class="keyword">new</span> <span class="constructor">MouseEvent(<span class="string">"click"</span>)</span>; <span class="comment">// 创建一个单击事件  </span></span><br><span class="line">    a.download = name<span class="operator"> || </span><span class="string">"photo"</span>; <span class="comment">// 设置图片名称  </span></span><br><span class="line">    a.href = url; <span class="comment">// 将生成的URL设置为a.href属性  </span></span><br><span class="line">    a.dispatch<span class="constructor">Event(<span class="params">event</span>)</span>; <span class="comment">// 触发a的单击事件  </span></span><br><span class="line">  &#125;;  </span><br><span class="line">  image.src = imgsrc;  </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？"><a href="#在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？" class="headerlink" title="在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？"></a>在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？</h2><p>这是一个必考的面试问题，输入url后，</p>
+<h2 id="地址栏输入URL到页面呈现的过程"><a href="#地址栏输入URL到页面呈现的过程" class="headerlink" title="地址栏输入URL到页面呈现的过程"></a>地址栏输入URL到页面呈现的过程</h2><p>这是一个必考的面试问题，输入url后，</p>
 <ol>
 <li><strong>客户端</strong>：<ul>
 <li><strong>DNS解析：</strong><ul>
@@ -254,11 +260,11 @@
 <ol start="2">
 <li><strong>构建CSS对象模型树CSSOM树：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建一个CSS对象模型树CSSOM树</strong></li>
 <li><strong>合并为渲染树：</strong> CSSOM树构建完成后<strong>CSSOM树和DOM树合并为渲染树</strong>，这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点。</li>
-<li>最后浏览器<strong>将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。</li>
+<li>最后浏览器<strong>回流后将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong>。</li>
 </ol>
 <ul>
-<li><strong>回流：</strong>浏览器去计算各个元素（盒模型）的位置和大小等</li>
-<li><strong>重绘：</strong>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容</li>
+<li><strong><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98" target="_blank" rel="noopener">回流</a>：</strong>会引起<strong>元素位置/内容变化、布局、隐藏</strong>的就会<strong>reflow(回流)</strong>，如：窗口大小改变、字体大小改变、以及元素位置改变，都会引起周围的元素改变他们以前的位置。</li>
+<li><strong><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98" target="_blank" rel="noopener">重绘</a>：不会引起位置、布局变化，只是影响元素的外观的</strong>，比如改变背景颜色等，只会<strong>repaint(重绘)</strong>。</li>
 </ul>
 </li>
 <li><strong>另外的HTTP请求：</strong> html文件中会含有 图片、视频、音频、js、jquery、css等其他资源，这些又是另外的HTTP请求。在解析DOM的过程中，遇到这些都会进行并行下载，浏览器对每个域的并行下载数量有一定的限制，一般是4-6个，可能会通过一个网页产生很多的HTTP请求，<strong>请求越少性能越好</strong>。</li>
@@ -290,6 +296,7 @@
 <h2 id="cookie有哪些编码方式"><a href="#cookie有哪些编码方式" class="headerlink" title="cookie有哪些编码方式"></a>cookie有哪些编码方式</h2><p>encodeURI（）</p>
 <hr>
 <h2 id="cookie有哪些字段可以设置"><a href="#cookie有哪些字段可以设置" class="headerlink" title="cookie有哪些字段可以设置"></a>cookie有哪些字段可以设置</h2><ul>
+<li><a href="https://www.runoob.com/js/js-cookies.html" target="_blank" rel="noopener">例子</a></li>
 <li><strong>name字段</strong>：一个<strong>cookie的名称</strong>。</li>
 <li><strong>value字段</strong>：一个<strong>cookie的值</strong>。</li>
 <li><strong>Size字段</strong>：此<strong>cookie大小</strong>。</li>
@@ -305,7 +312,7 @@
 </ul>
 </li>
 <li><strong>path字段</strong>：可以访问此cookie的<strong>页面路径</strong>。比如domain是abc.com,path是/test，那么只有/test路径下的页面可以读取此cookie。</li>
-<li><strong>expires/Max-Age 字段</strong>：此<strong>cookie超时时间</strong>。若设置其值为一个时间，那么当到达此时间后，此cookie失效。<strong>不设置的话默认值是Session，意思是cookie会和session一起失效</strong>。当浏览器关闭(不是浏览器标签页，而是整个浏览器) 后，此cookie失效。<ul>
+<li><strong><a href="https://www.runoob.com/js/js-cookies.html" target="_blank" rel="noopener">expires</a>/Max-Age 字段</strong>：此<strong>cookie超时时间</strong>。若设置其值为一个时间，那么当到达此时间后，此cookie失效。<strong>不设置的话默认值是Session，意思是cookie会和session一起失效</strong>。当浏览器关闭(不是浏览器标签页，而是整个浏览器) 后，此cookie失效。<ul>
 <li><strong>注意：</strong>其实在浏览器关闭后，session并没有失效，正常来说一个session的存活时间是30分钟，也就是在不操作这个session的情况下，30分钟自动清除。可是实际中浏览器关闭，设置的session也会随之消失，<strong>这里的消失是指你找不到这个session</strong>，不是他没有了，因为<strong>在浏览器重新打开时，浏览器总会自动给你创建一个的新的session</strong>。session并不是唯一的，<strong>每个session都有自己的一个专属sessionId，这个sessionId在浏览器打开时创建，保存在浏览器的cookie中，浏览器关闭，cookie自动清除，sessionId丢失，之前的session找寻不到</strong>！</li>
 </ul>
 </li>
@@ -313,14 +320,16 @@
 <li><strong>secure 字段</strong>：设置是否<strong>仅在请求为https的时候传递此条cookie</strong></li>
 </ul>
 <hr>
-<h2 id="Cookie如何防范XSS攻击"><a href="#Cookie如何防范XSS攻击" class="headerlink" title="Cookie如何防范XSS攻击"></a>Cookie如何防范XSS攻击</h2><ul>
-<li>XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本，为了减轻这些攻击，需要<strong>在HTTP头部配上<code>set-cookie：
-httponly</code></strong>,这个属性可以防止XSS,它会 <strong>禁止javascript脚本来访问cookie</strong>。</li>
-<li><strong>在请求为https的时候可以设置<code>secure:true</code></strong>告诉浏览器<strong>对cookie进行加密。</strong>。</li>
+<h2 id="cookie如何防范XSS攻击"><a href="#cookie如何防范XSS攻击" class="headerlink" title="cookie如何防范XSS攻击"></a>cookie如何防范XSS攻击</h2><ul>
+<li>XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本</li>
+<li>在<strong>HTTP头部配上<code>set-cookie:httponly</code></strong>,禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#给cookie做限制" target="_blank" rel="noopener">博客项目登录（cookie）</a>）</li>
+<li><strong>设置cookie的secure属性为<code>secure:true</code></strong>,告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
 </ul>
 <hr>
-<h3 id="XSS和csrf网络攻击及防范"><a href="#XSS和csrf网络攻击及防范" class="headerlink" title="XSS和csrf网络攻击及防范"></a>XSS和csrf网络攻击及防范</h3><ul>
+<h3 id="XSS和csrf网络攻击"><a href="#XSS和csrf网络攻击" class="headerlink" title="XSS和csrf网络攻击"></a>XSS和csrf网络攻击</h3><ul>
 <li><strong>区别：</strong> XSS是利用用户对指定网站的信任，CSRF是利用网站对用户的信任。</li>
+</ul>
+<h4 id="XSS与防范"><a href="#XSS与防范" class="headerlink" title="XSS与防范"></a>XSS与防范</h4><ul>
 <li><strong>XSS</strong>：<strong>跨站脚本攻击</strong>，攻击者通过注入恶意的脚本，在用户浏览网页的时候进行攻击，比如获取cookie，或者其他用户身份信息。<ul>
 <li><strong>存储性</strong>（持久型）：用户输入的带有恶意脚本的数据存储在<strong>服务器端</strong>。当浏览器请求数据时，服务器返回脚本并执行。主要是通过html标签注入，篡改网页，插入恶意的脚本，<strong>前端可能没有经过严格的校验直接就进到数据库</strong>，数据库又通过前端程序又回显到浏览器。<ul>
 <li>比如：攻击者在社区或论坛上写下一篇包含恶意 Js代码的文章或评论，文章或评论发表后，所有访问该文章或评论的用户，都会在他们的浏览器中执行这段恶意的 JavaScript 代码。</li>
@@ -330,14 +339,24 @@ httponly</code></strong>,这个属性可以防止XSS,它会 <strong>禁止javasc
 <li>比如：在正常页面上添加一个恶意链接。恶意链接的地址指向localhost:8080。然后攻击者有一个node服务来处理对localhost:8080的请求:当用户点击恶意链接时，页面跳转到攻击者预先准备的localhost:8080页面，执行了 恶意的js 脚本，产生攻击。</li>
 </ul>
 </li>
-<li><strong>防御</strong>：</li>
 </ul>
-<ol>
-<li><strong>在HTTP头部配上<code>set-cookie：
-httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊字符过滤</strong>，禁止javascript脚本来访问cookie。（严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击）</li>
-<li><strong>在请求为https的时候可以设置<code>secure:true</code></strong>告诉浏览器<strong>对cookie进行加密。</strong></li>
+</li>
+<li><strong>XSS预防</strong> : <strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie如何防范XSS攻击" target="_blank" rel="noopener">XSS网络攻击及防范</a>)<ol>
+<li><strong>替换特殊字符</strong>，如<code>&lt;</code>变为<code>&amp;lt；</code> <code>&gt;</code>变为<code>&amp;gt</code>,<code>&lt;script&gt;</code>变为<code>&amp;lt；script&amp;gt；</code>直接显示，而<strong>不会作为脚本执行</strong>(实际工作中可使用<a href="https://www.npmjs.com/package/xss" target="_blank" rel="noopener">XSS工具</a>)<ul>
+<li>例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg" alt="前端在显示时替换特殊字符"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg" alt="显示效果">特殊字符在html中会<strong>被浏览器解析</strong>显示为相应的符号，<strong>故script以字符串形式显示，不会作为脚本执行</strong></li>
+</ul>
+</li>
+<li>在<strong>HTTP头部配上<code>set-cookie:httponly</code></strong>,禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#给cookie做限制" target="_blank" rel="noopener">博客项目登录（cookie）</a>）</li>
+<li><strong>设置cookie的secure属性为<code>secure:true</code></strong>,告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
 </ol>
 </li>
+<li><strong>XSS工具</strong>：替换特殊字符可使用<a href="https://www.npmjs.com/package/xss" target="_blank" rel="noopener">XSS工具</a><ul>
+<li><strong>node使用XSS</strong>的方法可参考博客：<a href="https://huanglizhu.github.io/2020/03/03/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8/#xss攻击（xss库（函数）））" target="_blank" rel="noopener">博客项目安全</a></li>
+<li><strong>前端使用XSS</strong>的方法可参考官方例子：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg" alt="参考官方例子"></li>
+</ul>
+</li>
+</ul>
+<h4 id="CSRF与防范"><a href="#CSRF与防范" class="headerlink" title="CSRF与防范"></a>CSRF与防范</h4><ul>
 <li><strong>CSRF</strong>：<strong>跨站请求伪造</strong>，攻击者借助用户的 Cookie 骗取服务器的信任，以用户名义伪造请求发送给服务器。如：在请求的url后加入一些恶意的参数。换句话说，<strong>CSRF就是利用用户的登录态发起恶意请求</strong>。<ul>
 <li>比如：你登录网站，并在本地存下了，如果在没退出该网站的时候不小心访问了恶意网站，而且这个网站需要你发一些请求等，此时，你是携带cookie进行访问的，那么你的存在cookie里的信息就会被恶意网站捕捉到，那么你的信息就被盗用，导致一些不法分子做一些事情。<ul>
 <li>假设某银行网站A以GET请求来发起转账操作，转账的地址为<code>www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000</code>，参数accountNum表示转账的账户，参数money表示转账金额。而某大型论坛B上，一个恶意用户上传了一张图片，而图片的地址栏中填的并不是图片的地址，而是前而所说的砖账地址：<code>&lt;img src=&quot;http://www.xxx.com/transfer.do?accountNum=l000l&amp;money=10000&quot;&gt;</code><br>当你登录网站A后，没有及时登出，这时你访问了论坛B，不幸的事情发生了，你会发现你的账号里面少了10000块…（上述只是举例，转账怎么可能是get请求，为了保险，肯定是post请求，更何况银行的交易付款会有登录密码和支付密码等一系列屏障，流程复杂得多，安全系数也高得多）</li>
@@ -361,6 +380,7 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 </ul>
 </li>
 <li><strong>验证码</strong>：验证码会强制用户必须与应用进行交互，才能完成最终请求，但是也不能给网站所有的操作都加上验证码，所以只能作为防御 CSRF 的一种辅助手段，而不能作为最终的解决方案。</li>
+<li><strong>使用post接口</strong>，img这些跨域只能接收get请求，设计post请求的需要server端的允许</li>
 </ol>
 </li>
 </ul>
@@ -389,8 +409,8 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 </ul>
 </li>
 <li><strong>API易用性</strong>：<ul>
-<li>Cookie：需要程序员自己封装，原生的cookie接口不友好（document.cookie）</li>
-<li>其他两个：即可采用原生接口（getItem和setItem），亦可再次封装</li>
+<li>Cookie：需要程序员自己封装，原生的cookie接口不友好（<a href="https://www.runoob.com/js/js-cookies.html" target="_blank" rel="noopener">document.cookie</a>）</li>
+<li>其他两个：即可采用原生接口（<a href="https://www.runoob.com/jsref/prop-win-sessionstorage.html" target="_blank" rel="noopener">getItem、setItem、removeItem、clear</a>），亦可再次封装</li>
 </ul>
 </li>
 <li><strong>应用场景</strong>：<ul>
@@ -424,7 +444,7 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 <li><strong>cookie不是很安全</strong>，server端可以修改cookie并返回给浏览器，浏览器中也可以通过javascript修改cookie（有限制）。别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，<strong>考虑到安全应当使用session</strong>。server端放置信息不会被前端获取到，<strong>更安全</strong>。且server端空间大，<strong>可存储更多信息</strong>。</li>
 <li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用redis。</li>
 <li><strong>单个cookie</strong>保存的数据<strong>不能超过4K</strong>，很多浏览器都限制一个站点最多保存20个cookie。</li>
-<li>Cookie的最大的作用就是存储sessionId用来唯一标识用户。也可存放不敏感的信息，比如用户设置的网站主题。</li>
+<li>Cookie的最大的作用就是存储sessionId用来唯一标识用户。也可存放不敏感的信息，比如用户设置的<strong>网站主题、地区</strong>。</li>
 </ol>
 <hr>
 <h1 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h1><h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><p>检测页面加载时间一般有两种方式</p>
@@ -433,7 +453,47 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
 <li>另一种<strong>主动监测</strong>的方式，即<strong>主动的搭建分布式受控环境</strong>，模拟用户发起页面访问请求，主动采集性能数据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说<strong>性能极客</strong></li>
 </ol>
 <hr>
-<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><p><strong>降低请求量</strong>：合并资源，减少HTTP请求数，minify / gzip 压缩，webP，lazyLoad。<a href="https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#雪碧图" target="_blank" rel="noopener">雪碧图</a><br><strong>加快请求速度</strong>：预解析DNS，减少域名数，并行加载，CDN 分发。<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#说一下web-worker" target="_blank" rel="noopener">web worker多线程</a>，react中<a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）" target="_blank" rel="noopener">异步组件（懒加载）</a><br><strong>缓存</strong>：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。尽量命中强缓存，减少http请求。（具体见下方“前端缓存最佳实践”）<br><strong>渲染</strong>：JS/CSS优化，<strong>加载顺序</strong>（js放最后防止阻塞js、css的解析，css放在html前防止出现html渲染完成才开始合并CSSOM树），服务端渲染，pipeline。</p>
+<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
+<li>可参考<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" target="_blank" rel="noopener">JS 运行环境</a></li>
+<li><strong>加快请求速度</strong>：<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#说一下web-worker" target="_blank" rel="noopener">web worker多线程</a>，react中<a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）" target="_blank" rel="noopener">异步组件（懒加载）</a> <ol>
+<li><strong>减少资源体积：压缩代码</strong><ul>
+<li>比如使用<strong>webpack在production环境下</strong>进行打包时，就会<strong>自动压缩代码</strong>至1/3的大小，在浏览器上进行反解析再进行渲染。</li>
+</ul>
+</li>
+<li><strong>减少访问次数</strong>：<ul>
+<li><a href="https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#雪碧图" target="_blank" rel="noopener">雪碧图</a></li>
+<li><strong>合并代码</strong>：比如webpack中，在index.js中引入a.js、b.js，打包后只生成一个bundle.js，这就是合并代码。（加载3次3kb的文件不如加载1次9kb快，这<strong>和网络请求有关系</strong>）</li>
+<li><strong>SSR服务器端渲染</strong>：不需要通过ajax发送请求。</li>
+<li><strong>缓存</strong>：原本需要发送多个请求的数据直接在缓存中获取即可减少访问次数。<ul>
+<li>离线数据缓存localStorage。</li>
+<li><strong>尽量命中强缓存</strong>，结合<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#缓存" target="_blank" rel="noopener">webpack的内容哈希值输出文件名</a>，减少http请求。（具体见下方<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#前端缓存最佳实践" target="_blank" rel="noopener">“前端缓存最佳实践”</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>使用更快的网络：CDN</strong><ul>
+<li>CDN是<strong>分区域</strong>的，也就是使用CDN的时候上海和北京对同一个网站的IP地址是不同的。<strong>CDN会选择一个离用户最近的CDN边缘节点来响应用户的请求</strong>，这样海南移动用户的请求就不会千里迢迢跑到北京电信机房的服务器（假设源站部署在北京电信机房）上了</li>
+<li><strong>图片、js等静态资源</strong>采用CDN是很快的，我们经常使用的<strong>bootstrap就是使用的CDN</strong></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>渲染</strong>：<ul>
+<li><strong>CSS放在head中，JS放在body最下面</strong></li>
+<li><strong>尽早开始执行JS</strong>，用<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#window-onload%E5%92%8CDOMContentLoaded" target="_blank" rel="noopener">DOMContentLoaded</a>触发</li>
+<li><strong><a href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD" target="_blank" rel="noopener">懒加载</a></strong>（图片懒加载，上滑加载更多）</li>
+<li>对<strong>DOM查询进行缓存</strong>（DOM操作很耗性能）</li>
+<li><strong>频繁DOM操作，<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">合并</a></strong>到一起插入DOM结构</li>
+<li>让渲染更流畅：<strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle" target="_blank" rel="noopener">节流throttle</a> <a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce" target="_blank" rel="noopener">防抖debounce</a></strong></li>
+</ul>
+</li>
+<li><strong>减少回流、重绘：</strong><ul>
+<li><strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">合并DOM操作</a></strong>：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
+<li><strong>避免频繁读取会引发回流/重绘的属性(见上)</strong>，如果确实需要多次使用，就用一个<strong>变量缓存</strong>起来。</li>
+<li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h2 id="说一下浏览器缓存"><a href="#说一下浏览器缓存" class="headerlink" title="说一下浏览器缓存"></a>说一下浏览器缓存</h2><p><a href="https://www.cnblogs.com/Aaron1Tall/p/11041884.html" target="_blank" rel="noopener">前端缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg" alt="image.png"></p>
 <hr>
@@ -566,7 +626,7 @@ httponly</code></strong>，对用户的输入进行检查，<strong>进行特殊
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp三次握手，一句话概括"><span class="nav-number">1.1.</span> <span class="nav-text">tcp三次握手，一句话概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP的区别"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个图片url访问后直接下载怎样实现？"><span class="nav-number">1.3.</span> <span class="nav-text">一个图片url访问后直接下载怎样实现？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTML5实现"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用HTML5实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在地址栏里输入一个URL-到这个页面呈现出来，中间会发生什么？"><span class="nav-number">1.4.</span> <span class="nav-text">在地址栏里输入一个URL,到这个页面呈现出来，中间会发生什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie相关"><span class="nav-number">2.</span> <span class="nav-text">cookie相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些编码方式"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些编码方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些字段可以设置"><span class="nav-number">2.2.</span> <span class="nav-text">cookie有哪些字段可以设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie如何防范XSS攻击"><span class="nav-number">2.3.</span> <span class="nav-text">Cookie如何防范XSS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS和csrf网络攻击及防范"><span class="nav-number">2.3.1.</span> <span class="nav-text">XSS和csrf网络攻击及防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除了cookie，还有什么存储方式"><span class="nav-number">2.4.</span> <span class="nav-text">除了cookie，还有什么存储方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie、sessionStorage、localStorage的区别"><span class="nav-number">2.4.1.</span> <span class="nav-text">cookie、sessionStorage、localStorage的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie和session的区别"><span class="nav-number">2.5.</span> <span class="nav-text">Cookie和session的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端性能优化"><span class="nav-number">3.</span> <span class="nav-text">前端性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么看网站的性能如何"><span class="nav-number">3.1.</span> <span class="nav-text">怎么看网站的性能如何</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化"><span class="nav-number">3.2.</span> <span class="nav-text">前端优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下浏览器缓存"><span class="nav-number">3.3.</span> <span class="nav-text">说一下浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强缓存和协商缓存（web性能优化）"><span class="nav-number">3.4.</span> <span class="nav-text">强缓存和协商缓存（web性能优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端缓存最佳实践"><span class="nav-number">3.4.1.</span> <span class="nav-text">前端缓存最佳实践</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp三次握手，一句话概括"><span class="nav-number">1.1.</span> <span class="nav-text">tcp三次握手，一句话概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP的区别"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个图片url访问后直接下载怎样实现"><span class="nav-number">1.3.</span> <span class="nav-text">一个图片url访问后直接下载怎样实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTML5实现"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用HTML5实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址栏输入URL到页面呈现的过程"><span class="nav-number">1.4.</span> <span class="nav-text">地址栏输入URL到页面呈现的过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie相关"><span class="nav-number">2.</span> <span class="nav-text">cookie相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些编码方式"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些编码方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些字段可以设置"><span class="nav-number">2.2.</span> <span class="nav-text">cookie有哪些字段可以设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie如何防范XSS攻击"><span class="nav-number">2.3.</span> <span class="nav-text">cookie如何防范XSS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS和csrf网络攻击"><span class="nav-number">2.3.1.</span> <span class="nav-text">XSS和csrf网络攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS与防范"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">XSS与防范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF与防范"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">CSRF与防范</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除了cookie，还有什么存储方式"><span class="nav-number">2.4.</span> <span class="nav-text">除了cookie，还有什么存储方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie、sessionStorage、localStorage的区别"><span class="nav-number">2.4.1.</span> <span class="nav-text">cookie、sessionStorage、localStorage的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie和session的区别"><span class="nav-number">2.5.</span> <span class="nav-text">Cookie和session的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端性能优化"><span class="nav-number">3.</span> <span class="nav-text">前端性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么看网站的性能如何"><span class="nav-number">3.1.</span> <span class="nav-text">怎么看网站的性能如何</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化"><span class="nav-number">3.2.</span> <span class="nav-text">前端优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下浏览器缓存"><span class="nav-number">3.3.</span> <span class="nav-text">说一下浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强缓存和协商缓存（web性能优化）"><span class="nav-number">3.4.</span> <span class="nav-text">强缓存和协商缓存（web性能优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端缓存最佳实践"><span class="nav-number">3.4.1.</span> <span class="nav-text">前端缓存最佳实践</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
