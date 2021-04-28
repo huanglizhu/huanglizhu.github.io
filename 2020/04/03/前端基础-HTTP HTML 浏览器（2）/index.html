@@ -24,12 +24,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg">
-<meta property="og:updated_time" content="2021-04-26T15:06:06.030Z">
+<meta property="og:updated_time" content="2021-04-27T07:00:20.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
 <meta name="twitter:description" content="流程tcp三次握手，一句话概括">
@@ -284,6 +279,7 @@
 </ol>
 <hr>
 <h1 id="cookie相关"><a href="#cookie相关" class="headerlink" title="cookie相关"></a>cookie相关</h1><ul>
+<li>cookie有哪些编码方式：encodeURI（）</li>
 <li><strong>补充说明一下cookie的作用</strong>：<ul>
 <li><strong>保存用户登录状态</strong>。例如将<strong>用户id</strong>存储于一个cookie内，这样当用户下次访问该页面时就不需要重新登录了，现在很多论坛和社区都提供这样的功能。</li>
 <li>cookie还可以<strong>设置过期时间</strong>，当超过时间期限后，cookie就会自动消失。因此，系统往往可以提示用户<strong>保持登录状态的时间</strong>：常见选项有一个月、三个 月、一年等。</li>
@@ -292,8 +288,6 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="cookie有哪些编码方式"><a href="#cookie有哪些编码方式" class="headerlink" title="cookie有哪些编码方式"></a>cookie有哪些编码方式</h2><p>encodeURI（）</p>
 <hr>
 <h2 id="cookie有哪些字段可以设置"><a href="#cookie有哪些字段可以设置" class="headerlink" title="cookie有哪些字段可以设置"></a>cookie有哪些字段可以设置</h2><ul>
 <li><a href="https://www.runoob.com/js/js-cookies.html" target="_blank" rel="noopener">例子</a></li>
@@ -385,9 +379,9 @@
 </li>
 </ul>
 <hr>
-<h2 id="除了cookie，还有什么存储方式"><a href="#除了cookie，还有什么存储方式" class="headerlink" title="除了cookie，还有什么存储方式"></a>除了cookie，还有什么存储方式</h2><p>还有localStorage，sessionStorage，indexdDB等</p>
+<h2 id="cookie之外的存储方式"><a href="#cookie之外的存储方式" class="headerlink" title="cookie之外的存储方式"></a>cookie之外的存储方式</h2><p>还有localStorage，sessionStorage，indexdDB等</p>
 <hr>
-<h3 id="cookie、sessionStorage、localStorage的区别"><a href="#cookie、sessionStorage、localStorage的区别" class="headerlink" title="cookie、sessionStorage、localStorage的区别"></a>cookie、sessionStorage、localStorage的区别</h3><ul>
+<h3 id="cookie、sessionStorage、localStorage区别"><a href="#cookie、sessionStorage、localStorage区别" class="headerlink" title="cookie、sessionStorage、localStorage区别"></a>cookie、sessionStorage、localStorage区别</h3><ul>
 <li><strong>共同点</strong>：都<strong>保存在浏览器端</strong>。</li>
 <li><strong>区别：</strong></li>
 </ul>
@@ -439,123 +433,49 @@
 </li>
 </ol>
 <hr>
-<h2 id="Cookie和session的区别"><a href="#Cookie和session的区别" class="headerlink" title="Cookie和session的区别"></a>Cookie和session的区别</h2><ol>
-<li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，<strong>session</strong>数据放在<strong>服务器</strong>上。（session可以存放于文件，数据库，内存中）</li>
+<h2 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h2><ol>
+<li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，<strong><a href="https://huanglizhu.github.io/2020/02/26/博客项目登录（session、redis）/#session-介绍" target="_blank" rel="noopener">session</a></strong>数据放在<strong>服务器</strong>上。（session可以存放于文件，数据库，内存中）</li>
 <li><strong>cookie不是很安全</strong>，server端可以修改cookie并返回给浏览器，浏览器中也可以通过javascript修改cookie（有限制）。别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，<strong>考虑到安全应当使用session</strong>。server端放置信息不会被前端获取到，<strong>更安全</strong>。且server端空间大，<strong>可存储更多信息</strong>。</li>
 <li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用redis。</li>
 <li><strong>单个cookie</strong>保存的数据<strong>不能超过4K</strong>，很多浏览器都限制一个站点最多保存20个cookie。</li>
 <li>Cookie的最大的作用就是存储sessionId用来唯一标识用户。也可存放不敏感的信息，比如用户设置的<strong>网站主题、地区</strong>。</li>
 </ol>
-<hr>
-<h1 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h1><h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><p>检测页面加载时间一般有两种方式</p>
+<h3 id="node操作cookie、session"><a href="#node操作cookie、session" class="headerlink" title="node操作cookie、session"></a>node操作cookie、session</h3><ul>
+<li><p><strong>node操作cookie</strong>:</p>
+<ul>
+<li><p>可参考<a href="https://huanglizhu.github.io/2020/02/25/博客项目登录（cookie）/#获取cookie" target="_blank" rel="noopener">博客项目登录（cookie）</a></p>
+</li>
+<li><p><strong>获取cookie：</strong>可通过<code>req.headers.cookie</code>获取到cookie <strong>（req是http请求）</strong></p>
+</li>
+<li><p><strong>操作cookie：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **[设置httponly预防XSS攻击](https://huanglizhu.github.io/2020/02/25/博客项目登录（cookie）/#给cookie做限制)：**```res.setHeader(`Set-Cookie`,`httpOnly`);</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p><strong><a href="https://huanglizhu.github.io/2020/02/25/博客项目登录（cookie）/#设置cookie过期时间（expires）" target="_blank" rel="noopener">设置cookie过期时间</a>：</strong>完整代码在“博客项目登录（cookie）”中</p>
 <ol>
-<li>一种是<strong>被动去测</strong>：就是在被检测的页面置入脚本或探针，当用户访问网页时，探针自动采集数据并传回数据库进行分析</li>
-<li>另一种<strong>主动监测</strong>的方式，即<strong>主动的搭建分布式受控环境</strong>，模拟用户发起页面访问请求，主动采集性能数据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说<strong>性能极客</strong></li>
-</ol>
-<hr>
-<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
-<li>可参考<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" target="_blank" rel="noopener">JS 运行环境</a></li>
-<li><strong>加快请求速度</strong>：<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#说一下web-worker" target="_blank" rel="noopener">web worker多线程</a>，react中<a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）" target="_blank" rel="noopener">异步组件（懒加载）</a> <ol>
-<li><strong>减少资源体积：压缩代码</strong><ul>
-<li>比如使用<strong>webpack在production环境下</strong>进行打包时，就会<strong>自动压缩代码</strong>至1/3的大小，在浏览器上进行反解析再进行渲染。</li>
-</ul>
-</li>
-<li><strong>减少访问次数</strong>：<ul>
-<li><a href="https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#雪碧图" target="_blank" rel="noopener">雪碧图</a></li>
-<li><strong>合并代码</strong>：比如webpack中，在index.js中引入a.js、b.js，打包后只生成一个bundle.js，这就是合并代码。（加载3次3kb的文件不如加载1次9kb快，这<strong>和网络请求有关系</strong>）</li>
-<li><strong>SSR服务器端渲染</strong>：不需要通过ajax发送请求。</li>
-<li><strong>缓存</strong>：原本需要发送多个请求的数据直接在缓存中获取即可减少访问次数。<ul>
-<li>离线数据缓存localStorage。</li>
-<li><strong>尽量命中强缓存</strong>，结合<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#缓存" target="_blank" rel="noopener">webpack的内容哈希值输出文件名</a>，减少http请求。（具体见下方<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#前端缓存最佳实践" target="_blank" rel="noopener">“前端缓存最佳实践”</a>）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>使用更快的网络：CDN</strong><ul>
-<li>CDN是<strong>分区域</strong>的，也就是使用CDN的时候上海和北京对同一个网站的IP地址是不同的。<strong>CDN会选择一个离用户最近的CDN边缘节点来响应用户的请求</strong>，这样海南移动用户的请求就不会千里迢迢跑到北京电信机房的服务器（假设源站部署在北京电信机房）上了</li>
-<li><strong>图片、js等静态资源</strong>采用CDN是很快的，我们经常使用的<strong>bootstrap就是使用的CDN</strong></li>
-</ul>
-</li>
-</ol>
-</li>
-<li><strong>渲染</strong>：<ul>
-<li><strong>CSS放在head中，JS放在body最下面</strong></li>
-<li><strong>尽早开始执行JS</strong>，用<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#window-onload%E5%92%8CDOMContentLoaded" target="_blank" rel="noopener">DOMContentLoaded</a>触发</li>
-<li><strong><a href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD" target="_blank" rel="noopener">懒加载</a></strong>（图片懒加载，上滑加载更多）</li>
-<li>对<strong>DOM查询进行缓存</strong>（DOM操作很耗性能）</li>
-<li><strong>频繁DOM操作，<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">合并</a></strong>到一起插入DOM结构</li>
-<li>让渲染更流畅：<strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle" target="_blank" rel="noopener">节流throttle</a> <a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce" target="_blank" rel="noopener">防抖debounce</a></strong></li>
-</ul>
-</li>
-<li><strong>减少回流、重绘：</strong><ul>
-<li><strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">合并DOM操作</a></strong>：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
-<li><strong>避免频繁读取会引发回流/重绘的属性(见上)</strong>，如果确实需要多次使用，就用一个<strong>变量缓存</strong>起来。</li>
-<li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="说一下浏览器缓存"><a href="#说一下浏览器缓存" class="headerlink" title="说一下浏览器缓存"></a>说一下浏览器缓存</h2><p><a href="https://www.cnblogs.com/Aaron1Tall/p/11041884.html" target="_blank" rel="noopener">前端缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg" alt="image.png"></p>
-<hr>
-<h2 id="强缓存和协商缓存（web性能优化）"><a href="#强缓存和协商缓存（web性能优化）" class="headerlink" title="强缓存和协商缓存（web性能优化）"></a>强缓存和协商缓存（web性能优化）</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/111190645" target="_blank" rel="noopener">图解流程详解</a>、<a href="http://caibaojian.com/browser-cache.html" target="_blank" rel="noopener">参考</a>、<a href="https://segmentfault.com/a/1190000008956069" target="_blank" rel="noopener">参考1</a>/<a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">参考2</a>、<a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>、<a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a></li>
-<li>缓存是<strong>Web性能优化的重要方式</strong>。</li>
-<li>缓存分为两种：强缓存和协商缓存，<strong>根据响应的header内容来决定</strong>。</li>
-<li><strong>注意：强缓存也会有状态码，是200</strong></li>
-<li><strong>区别：</strong>如果浏览器命中<strong>强缓存</strong>，则<strong>在设置好的失效时间内不需要给服务器发请求</strong>；而<strong>协商缓存</strong>最终<strong>由服务器来决定是否使用缓存</strong>，即客户端与服务器之间<strong>存在一次通信</strong>。</li>
-<li>总之，<strong>强缓存就是强制从缓存中读取，不管是否更新。而协商缓存就是和 服务器协商是否从缓存取，如有更新则返回新数据。</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg" alt="image.png"></li>
-<li><strong>强缓存</strong>是利用<strong>http的返回（响应）头中的Expires或者Cache-Control两个字段</strong>来控制的，用来<strong>表示资源的缓存时间</strong>。如果cache-control与expires同时存在的话，cache-control的优先级高于expires。<ul>
-<li><strong>Expires</strong>是http1.0时的规范，它的值为一个绝对时间的GMT格式的时间字符串。缺点：由于<strong>失效时间是一个绝对时间</strong>，所以当服务器与客户端时间偏差较大时，就会导致缓存混乱。</li>
-<li><strong>Cache-Control</strong>是http1.1时出现的header信息，主要是利用该字段的<strong>max-age值</strong>来进行判断，它是一个<strong>相对时间</strong>，例如<strong>Cache-Control:max-age=3600</strong>，代表着资源的有效期是3600秒。<ul>
-<li>Cache-Control除了max-age还有以下<strong>常用字段</strong>：<ul>
-<li><strong>no-cache：不使用本地缓存</strong>。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li>
-<li><strong>no-store：直接禁止浏览器缓存数据</strong>，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</li>
-<li><strong>public：可以被所有的用户缓存</strong>，包括终端用户和CDN等中间代理服务器。</li>
-<li><strong>private（默认）：只能被终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。</li>
-<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg" alt="Cache-Control"><a href="https://www.jianshu.com/p/9c95db596df5" target="_blank" rel="noopener">图解参考</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>协商缓存</strong>相关字段有 <strong>http响应头中的Last-Modified/请求头中的If-Modified-Since，http响应头中的Etag/请求头中的If-None-Match</strong>（<a href="https://blog.csdn.net/lhl1124281072/article/details/80067764" target="_blank" rel="noopener">具体参考</a>）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg" alt="协商缓存"><ul>
-<li><strong>通过响应头的2个字段 设置协商缓存：</strong><ul>
-<li><strong>etag</strong>：每个文件有一个，改动文件了就变了，就是个文件hash，每个文件唯一，就像用webpack打包的时候，每个资源都会有这个东西，如： app.js打包后变为 app.c20abbde.js，加个唯一hash，也是为了解决缓存问题。</li>
-<li><strong>last-modified</strong>：文件的修改时间，精确到秒</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>浏览器在第一次请求发生后，再次请求时</strong>：<ul>
-<li>浏览器会先获取该资源缓存的header信息，<strong>根据其中的expires和cahe-control</strong>判断<strong>是否命中强缓存</strong>，若命中则直接从缓存中获取资源，包括缓存的header信息，本次请求不会与服务器进行通信；</li>
-<li><strong>如果没有命中强缓存</strong>，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（IF-Modified-Since、IF-None-Match，这2个字段值是上次响应头中的Last-Modified和Etag保存而来）,由服务器根据请求中的相关header信息来<strong>对比结果是否命中协商缓存</strong>。</li>
-<li><strong>若命中协商缓存</strong>，则服务器返回新的响应header信息（Last-Modified和Etag）更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存获取（304）；否则返回最新的资源内容（Last-Modified和Etag以及200状态码）</li>
-</ul>
-</li>
-<li><strong>访问缓存优先级</strong><ul>
-<li>先在<strong>内存</strong>中查找,如果有,直接加载。</li>
-<li>如果内存中不存在,则在硬盘中查找,如果有直接加载。</li>
-<li>如果<strong>硬盘</strong>中也没有,那么就进行<strong>网络请求</strong>。</li>
-<li>请求获取的资源缓存到硬盘和内存。</li>
-</ul>
-</li>
-<li><a href="https://zhuanlan.zhihu.com/p/73345909" target="_blank" rel="noopener">DNS缓存、CDN缓存、浏览器缓存</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfgn77f2wkj30sf0hggof.jpg" alt="image.png"></li>
-</ul>
-<hr>
-<h3 id="前端缓存最佳实践"><a href="#前端缓存最佳实践" class="headerlink" title="前端缓存最佳实践"></a>前端缓存最佳实践</h3><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/52916788" target="_blank" rel="noopener">前端缓存最佳实践</a>：缓存的意义就在于减少请求，更多地使用本地的资源，给用户更好的体验的同时，也减轻服务器压力。所以，<strong>最佳实践，就应该是尽可能命中强缓存，同时，能在更新版本的时候让客户端的缓存失效</strong>。<ul>
-<li><strong>更新版本的时候，顺便把静态资源的路径改了，这样，就相当于第一次访问这些资源，就不会存在问题了</strong>（webpack打包时会把静态资源的路径加上hash值）</li>
-<li>较为合理的缓存方案：<ul>
-<li><strong>HTML：使用协商缓存。</strong></li>
-<li><strong>CSS&amp;JS&amp;图片：使用强缓存，文件命名带上hash值。</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在做前端缓存时，我们<strong>尽可能设置长时间的强缓存</strong>，通过<strong>文件名加hash</strong>的方式来做版本更新。在代码分包的时候，应该将一些不常变的公共库独立打包出来，使其能够更持久的缓存。</li>
-</ul>
+<li><code>const d = new Date();</code></li>
+<li><code>d.setTime(d.getTime()+(24*60*60*1000));</code>（<a href="https://www.w3school.com.cn/js/jsref_getTime.asp" target="_blank" rel="noopener">getTime()</a>、<a href="https://www.w3school.com.cn/js/jsref_setTime.asp" target="_blank" rel="noopener">setTime()</a>）</li>
+<li><code>d.toUTCString()</code>根据格林威治时间 (GMT) 把 Date 对象转换为字符串</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">- **node操作session：**</span><br><span class="line">    - 可参考[博客项目登录（session、redis）](https://huanglizhu.github.io/2020/02/26/博客项目登录（session、redis）/#session-介绍)</span><br><span class="line">    - 总的来说，从`req.headers.cookie`获取cookie后放入`req.cookie`，如无userId则按日期的毫秒数(`Date.now()`）和随机数(`Math.random()`)组成的userId放入cookie(注意Set-Cookie回给客户端)，创建全局变量SESSION_DATA，创建空对象`SESSION_DATA[userId]=&#123;&#125;`，最后把`req.session=SESSION_DATA[userId]`。接下来登录后把username等信息放入`req.session`中即存储成功。</span><br><span class="line">- **koa2操作session：**</span><br><span class="line">    - 完整例子可参考[redis、session与jest基本使用方法](https://huanglizhu.github.io/2020/03/12/redis、session与jest基本使用方法/#koa2使用session)</span><br><span class="line">    - **与node的区别：**使用插件后就**不需要自己去创建cookie和session以及设置他们之间的联系**了，插件配置好session和cookie相关信息后，**每次发送http请求时会自动创建符合要求的cookie给服务端**，服务端**直接设置`ctx.session`来存储存储用户名和密码等信息**即可。下次用户再访问网页时，服务端就可通过用户请求中的cookie值去获取session对象，进行判断**（服务端不用自己管理cookie，直接用session即可）**。</span><br><span class="line">    - 安装**koa-generic-session插件**：koa **生成session**的一个工具</span><br><span class="line">        - [session配置中](https://huanglizhu.github.io/2020/03/07/koa2重构博客项目/#app-js使用插件-配置session和redis)可以**设置cookie相关字段**，配置好后，每次用户发送http请求时，都会创建一个符合配置关键词前缀的cookie，根据用户请求中的cookie获取session数据</span><br><span class="line">    - 使用插件完成session配置后，可以从**`ctx.session`获取session**</span><br><span class="line">    - **流程：**用户每次访问网页时就会创建一个 符合[session配置中](https://huanglizhu.github.io/2020/03/12/redis、session与jest基本使用方法/#koa2使用session)前缀的cookie(cookie对象的属性值是session对象的对象名)，然后服务端会有一系列操作往session中存储用户名和密码等，那么下次用户再访问网页时，服务端就可通过用户请求中的cookie值去获取session对象，进行判断</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 前端性能优化</span><br><span class="line">## 怎么看网站的性能如何</span><br><span class="line">检测页面加载时间一般有两种方式</span><br><span class="line">1. 一种是**被动去测**：就是在被检测的页面置入脚本或探针，当用户访问网页时，探针自动采集数据并传回数据库进行分析</span><br><span class="line">2. 另一种**主动监测**的方式，即**主动的搭建分布式受控环境**，模拟用户发起页面访问请求，主动采集性能数据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说**性能极客**</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">## 前端优化</span><br><span class="line">- 可参考[JS 运行环境](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96)</span><br><span class="line">- **加快请求速度**：[web worker多线程](https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#说一下web-worker)，react中[异步组件（懒加载）](https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#异步组件（懒加载）) </span><br><span class="line">    1. **减少资源体积：压缩代码**</span><br><span class="line">        - 比如使用**webpack在production环境下**进行打包时，就会**自动压缩代码**至1/3的大小，在浏览器上进行反解析再进行渲染。</span><br><span class="line">    1. **减少访问次数**：</span><br><span class="line">        - [雪碧图](https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#雪碧图)</span><br><span class="line">        - **合并代码**：比如webpack中，在index.js中引入a.js、b.js，打包后只生成一个bundle.js，这就是合并代码。（加载3次3kb的文件不如加载1次9kb快，这**和网络请求有关系**）</span><br><span class="line">        - **SSR服务器端渲染**：不需要通过ajax发送请求。</span><br><span class="line">        - **缓存**：原本需要发送多个请求的数据直接在缓存中获取即可减少访问次数。</span><br><span class="line">            - 离线数据缓存localStorage。</span><br><span class="line">            - **尽量命中强缓存**，结合[webpack的内容哈希值输出文件名](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#缓存)，减少http请求。（具体见下方[“前端缓存最佳实践”](https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#前端缓存最佳实践)）</span><br><span class="line">    1. **使用更快的网络：CDN**</span><br><span class="line">        - CDN是**分区域**的，也就是使用CDN的时候上海和北京对同一个网站的IP地址是不同的。**CDN会选择一个离用户最近的CDN边缘节点来响应用户的请求**，这样海南移动用户的请求就不会千里迢迢跑到北京电信机房的服务器（假设源站部署在北京电信机房）上了</span><br><span class="line">        - **图片、js等静态资源**采用CDN是很快的，我们经常使用的**bootstrap就是使用的CDN**</span><br><span class="line">- **渲染**：</span><br><span class="line">    - **CSS放在head中，JS放在body最下面**</span><br><span class="line">    - **尽早开始执行JS**，用[DOMContentLoaded](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#window-onload%E5%92%8CDOMContentLoaded)触发</span><br><span class="line">    - **[懒加载](https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD)**（图片懒加载，上滑加载更多）</span><br><span class="line">    - 对**DOM查询进行缓存**（DOM操作很耗性能）</span><br><span class="line">    - **频繁DOM操作，[合并](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6)**到一起插入DOM结构</span><br><span class="line">    - 让渲染更流畅：**[节流throttle](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle) [防抖debounce](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce)**</span><br><span class="line">- **减少回流、重绘：**</span><br><span class="line">    - **[合并DOM操作](https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6)**：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用`document.createDocumentFragment()`将多个img合并到Fragment中再统一加入。</span><br><span class="line">    - **避免频繁读取会引发回流/重绘的属性(见上)**，如果确实需要多次使用，就用一个**变量缓存**起来。</span><br><span class="line">    - 将动画效果应用到position属性为absolute或fixed的元素上，对具有**复杂动画的元素**使用**绝对定位**，使它**脱离文档流**，否则会引起父元素及后续元素频繁回流。</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">## 说一下浏览器缓存</span><br><span class="line">[前端缓存](https://www.cnblogs.com/Aaron1Tall/p/11041884.html)</span><br><span class="line">![image.png](http://ww1.sinaimg.cn/large/005H7IVsgy1gfgcemkhr3j30m80h1q73.jpg)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">## 强缓存和协商缓存（web性能优化）</span><br><span class="line">- [nodejs实现强缓存和协商缓存](https://blog.csdn.net/yehuozhili/article/details/103268433)、[图解流程详解](https://zhuanlan.zhihu.com/p/111190645)、[参考](http://caibaojian.com/browser-cache.html)、[参考1](https://segmentfault.com/a/1190000008956069)/[参考2](https://www.jianshu.com/p/9c95db596df5)、[前端缓存最佳实践](https://zhuanlan.zhihu.com/p/52916788)、[DNS缓存、CDN缓存、浏览器缓存](https://zhuanlan.zhihu.com/p/73345909)</span><br><span class="line">- 缓存是**Web性能优化的重要方式**。</span><br><span class="line">- 缓存分为两种：强缓存和协商缓存，**根据响应的header内容来决定**。</span><br><span class="line">- **注意：强缓存也会有状态码，是200**</span><br><span class="line">- **区别：**如果浏览器命中**强缓存**，则**在设置好的失效时间内不需要给服务器发请求**；而**协商缓存**最终**由服务器来决定是否使用缓存**，即客户端与服务器之间**存在一次通信**。</span><br><span class="line">- 总之，**强缓存就是强制从缓存中读取，不管是否更新。而协商缓存就是和 服务器协商是否从缓存取，如有更新则返回新数据。**</span><br><span class="line">![image.png](http://ww1.sinaimg.cn/large/005H7IVsgy1gfg5rybbgxj30q108paaj.jpg)</span><br><span class="line">- **强缓存**是利用**http的返回（响应）头中的Expires或者Cache-Control两个字段**来控制的，用来**表示资源的缓存时间**。如果cache-control与expires同时存在的话，cache-control的优先级高于expires。</span><br><span class="line">    - **Expires**是http1.0时的规范，它的值为一个绝对时间的GMT格式的时间字符串。缺点：由于**失效时间是一个绝对时间**，所以当服务器与客户端时间偏差较大时，就会导致缓存混乱。</span><br><span class="line">    - **Cache-Control**是http1.1时出现的header信息，主要是利用该字段的**max-age值**来进行判断，它是一个**相对时间**，例如**Cache-Control:max-age=3600**，代表着资源的有效期是3600秒。</span><br><span class="line">        - Cache-Control除了max-age还有以下**常用字段**：</span><br><span class="line">            - **no-cache：不使用本地缓存**。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</span><br><span class="line">            - **no-store：直接禁止浏览器缓存数据**，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</span><br><span class="line">            - **public：可以被所有的用户缓存**，包括终端用户和CDN等中间代理服务器。</span><br><span class="line">            - **private（默认）：只能被终端用户的浏览器缓存**，不允许CDN等中继缓存服务器对其缓存。</span><br><span class="line">            - ![Cache-Control](http://ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg)[图解参考](https://www.jianshu.com/p/9c95db596df5)</span><br><span class="line">- **协商缓存**相关字段有 **http响应头中的Last-Modified/请求头中的If-Modified-Since，http响应头中的Etag/请求头中的If-None-Match**（[具体参考](https://blog.csdn.net/lhl1124281072/article/details/80067764)）![协商缓存](http://ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg)</span><br><span class="line">    - **通过响应头的2个字段 设置协商缓存：**</span><br><span class="line">        - **etag**：每个文件有一个，改动文件了就变了，就是个文件hash，每个文件唯一，就像用webpack打包的时候，每个资源都会有这个东西，如： app.js打包后变为 app.c20abbde.js，加个唯一hash，也是为了解决缓存问题。</span><br><span class="line">        - **last-modified**：文件的修改时间，精确到秒</span><br><span class="line">- **浏览器在第一次请求发生后，再次请求时**：</span><br><span class="line">    - 浏览器会先获取该资源缓存的header信息，**根据其中的expires和cahe-control**判断**是否命中强缓存**，若命中则直接从缓存中获取资源，包括缓存的header信息，本次请求不会与服务器进行通信；</span><br><span class="line">    - **如果没有命中强缓存**，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（IF-Modified-Since、IF-None-Match，这2个字段值是上次响应头中的Last-Modified和Etag保存而来）,由服务器根据请求中的相关header信息来**对比结果是否命中协商缓存**。</span><br><span class="line">    - **若命中协商缓存**，则服务器返回新的响应header信息（Last-Modified和Etag）更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存获取（304）；否则返回最新的资源内容（Last-Modified和Etag以及200状态码）</span><br><span class="line">- **访问缓存优先级**</span><br><span class="line">    - 先在**内存**中查找,如果有,直接加载。</span><br><span class="line">    - 如果内存中不存在,则在硬盘中查找,如果有直接加载。</span><br><span class="line">    - 如果**硬盘**中也没有,那么就进行**网络请求**。</span><br><span class="line">    - 请求获取的资源缓存到硬盘和内存。</span><br><span class="line">- [DNS缓存、CDN缓存、浏览器缓存](https://zhuanlan.zhihu.com/p/73345909)</span><br><span class="line">- **补充：后端设置强缓存与协商缓存的方法（[node为例](https://blog.csdn.net/yehuozhili/article/details/103268433)）**</span><br><span class="line">    - **强缓存(10秒有效期）：**</span><br><span class="line">        - `res.setHeader(&apos;Expires&apos;,new Date(Date.now()+10*1000).toGMTString())`</span><br><span class="line">        - `res.setHeader(&apos;Cache-Control&apos;,&apos;max-age=10&apos;)`</span><br><span class="line">    - **协商缓存：**</span><br><span class="line">        - **Last-Modified相关设置：**</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>// 服务端设置Last-Modified后，浏览器请求同一个资源会带if-modified-since的请求头<br>// 所以服务端还要获取这个请求头的时间进行对比，相等返回304提前关闭请求即可，浏览器会自己去缓存里拿<br>let ctime = 最后一次修改的时间Date对象.toGMTString()<br>res.setHeader(‘Last-Modified’,ctime)//设置<br>let ifModifiedSince =req.headers[‘if-modified-since’]//获取<br>if(ifModifiedSince===ctime){<br>    res.statusCode=304<br>    return res.end()//直接返回<br>}</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>*<span class="strong">*etag设置：*</span><span class="strong">*</span></span><br></pre></td></tr></table></figure>
+
+<p>// 要稍微复杂点，主要看摘要算法，一般的摘要算法是用md5，由于md5会暴力破解，所以也可以采用sha1或者sha256等加盐算法，其中盐值就是相当于自己的一个密码本，要暴力破解必须知道盐值才行。<br>// 这些算法在nodejs自带的crypto里都有<br>let content = await fs.readFile(currentpath,’utf8’)<br>let hash = crypto.createHash(‘md5’).update(content).digest(‘base64’)<br>res.setHeader(‘Etag’,hash)<br>let ifNoneMatch =req.headers[‘if-none-match’]<br>if(ifNoneMatch===hash){<br>    res.statusCode=304<br>    return res.end()<br>}</p>
+<pre><code>
+---
+
+### 前端缓存最佳实践
+- [前端缓存最佳实践](https://zhuanlan.zhihu.com/p/52916788)：缓存的意义就在于减少请求，更多地使用本地的资源，给用户更好的体验的同时，也减轻服务器压力。所以，**最佳实践，就应该是尽可能命中强缓存，同时，能在更新版本的时候让客户端的缓存失效**。
+    - **更新版本的时候，顺便把静态资源的路径改了，这样，就相当于第一次访问这些资源，就不会存在问题了**（webpack打包时会把静态资源的路径加上hash值）
+    - 较为合理的缓存方案：
+        - **HTML：使用协商缓存。**
+        - **CSS&amp;JS&amp;图片：使用强缓存，文件命名带上hash值。**
+- 在做前端缓存时，我们**尽可能设置长时间的强缓存**，通过**文件名加hash**的方式来做版本更新。在代码分包的时候，应该将一些不常变的公共库独立打包出来，使其能够更持久的缓存。</code></pre>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -626,7 +546,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp三次握手，一句话概括"><span class="nav-number">1.1.</span> <span class="nav-text">tcp三次握手，一句话概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP的区别"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个图片url访问后直接下载怎样实现"><span class="nav-number">1.3.</span> <span class="nav-text">一个图片url访问后直接下载怎样实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTML5实现"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用HTML5实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址栏输入URL到页面呈现的过程"><span class="nav-number">1.4.</span> <span class="nav-text">地址栏输入URL到页面呈现的过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie相关"><span class="nav-number">2.</span> <span class="nav-text">cookie相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些编码方式"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些编码方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些字段可以设置"><span class="nav-number">2.2.</span> <span class="nav-text">cookie有哪些字段可以设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie如何防范XSS攻击"><span class="nav-number">2.3.</span> <span class="nav-text">cookie如何防范XSS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS和csrf网络攻击"><span class="nav-number">2.3.1.</span> <span class="nav-text">XSS和csrf网络攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS与防范"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">XSS与防范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF与防范"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">CSRF与防范</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除了cookie，还有什么存储方式"><span class="nav-number">2.4.</span> <span class="nav-text">除了cookie，还有什么存储方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie、sessionStorage、localStorage的区别"><span class="nav-number">2.4.1.</span> <span class="nav-text">cookie、sessionStorage、localStorage的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie和session的区别"><span class="nav-number">2.5.</span> <span class="nav-text">Cookie和session的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端性能优化"><span class="nav-number">3.</span> <span class="nav-text">前端性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么看网站的性能如何"><span class="nav-number">3.1.</span> <span class="nav-text">怎么看网站的性能如何</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化"><span class="nav-number">3.2.</span> <span class="nav-text">前端优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一下浏览器缓存"><span class="nav-number">3.3.</span> <span class="nav-text">说一下浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强缓存和协商缓存（web性能优化）"><span class="nav-number">3.4.</span> <span class="nav-text">强缓存和协商缓存（web性能优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端缓存最佳实践"><span class="nav-number">3.4.1.</span> <span class="nav-text">前端缓存最佳实践</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp三次握手，一句话概括"><span class="nav-number">1.1.</span> <span class="nav-text">tcp三次握手，一句话概括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP的区别"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个图片url访问后直接下载怎样实现"><span class="nav-number">1.3.</span> <span class="nav-text">一个图片url访问后直接下载怎样实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTML5实现"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用HTML5实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址栏输入URL到页面呈现的过程"><span class="nav-number">1.4.</span> <span class="nav-text">地址栏输入URL到页面呈现的过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie相关"><span class="nav-number">2.</span> <span class="nav-text">cookie相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie有哪些字段可以设置"><span class="nav-number">2.1.</span> <span class="nav-text">cookie有哪些字段可以设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie如何防范XSS攻击"><span class="nav-number">2.2.</span> <span class="nav-text">cookie如何防范XSS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS和csrf网络攻击"><span class="nav-number">2.2.1.</span> <span class="nav-text">XSS和csrf网络攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS与防范"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">XSS与防范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF与防范"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">CSRF与防范</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie之外的存储方式"><span class="nav-number">2.3.</span> <span class="nav-text">cookie之外的存储方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie、sessionStorage、localStorage区别"><span class="nav-number">2.3.1.</span> <span class="nav-text">cookie、sessionStorage、localStorage区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie和session的区别"><span class="nav-number">2.4.</span> <span class="nav-text">cookie和session的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#node操作cookie、session"><span class="nav-number">2.4.1.</span> <span class="nav-text">node操作cookie、session</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
