@@ -21,12 +21,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggeq21kvmdj30u00893zu.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggkqyh6qryj30bu0bm3yw.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfv3ywamyj30ic079q3l.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvfc8g4ej30mp0e4gmy.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfw2o6n8pj30ha0530sz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvymekycj30k70ammyk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg">
-<meta property="og:updated_time" content="2021-04-28T14:17:15.672Z">
+<meta property="og:updated_time" content="2021-05-02T06:36:08.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端基础-CSS（1）">
 <meta name="twitter:description" content="说一下css盒模型 可参考百度前端技术学院 第五天学习笔记（CSS盒模型） CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。 标准盒模型：一个块的总宽度=width+margin(左右)+padding(左右)+border(左右) 怪异盒模型：一个块的总宽度=width+margin（左右）（既width已经包含了padding和border值） 在C">
@@ -211,118 +207,168 @@
 </li>
 </ul>
 <h1 id="【看】CSS画三角形-正方体"><a href="#【看】CSS画三角形-正方体" class="headerlink" title="【看】CSS画三角形/正方体"></a>【看】CSS画三角形/正方体</h1><ul>
-<li><a href="https://huanglizhu.github.io/2019/12/07/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%BE%B9%E6%A1%86%E3%80%81%E6%BB%9A%E5%8A%A8%E3%80%81%E6%96%87%E6%9C%AC%E6%8A%98%E8%A1%8C%E3%80%81%E8%A3%85%E9%A5%B0%E6%80%A7%E5%B1%9E%E6%80%A7/#如何使用CSS实现-三角形-扇形" target="_blank" rel="noopener">三角形/扇形</a>可利用<strong>border+transparent</strong>实现</li>
-<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggkqyh6qryj30bu0bm3yw.jpg" alt="CSS画正方体"><ul>
-<li><a href="https://www.runoob.com/cssref/css3-pr-transform.html" target="_blank" rel="noopener">CSS3 transform 属性</a>应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等<ul>
+<li><p><a href="https://huanglizhu.github.io/2019/12/07/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%BE%B9%E6%A1%86%E3%80%81%E6%BB%9A%E5%8A%A8%E3%80%81%E6%96%87%E6%9C%AC%E6%8A%98%E8%A1%8C%E3%80%81%E8%A3%85%E9%A5%B0%E6%80%A7%E5%B1%9E%E6%80%A7/#如何使用CSS实现-三角形-扇形" target="_blank" rel="noopener">三角形/扇形</a>可利用<strong>border+transparent</strong>实现</p>
+</li>
+<li><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggkqyh6qryj30bu0bm3yw.jpg" alt="CSS画正方体"></p>
+<ul>
+<li><strong>重点：</strong><ul>
+<li><code>transform-style: preserve-3d;</code>定义<strong>所有子元素在3D空间中呈现</strong></li>
+<li><code>transform: rotateX(-35deg) rotateY(30deg);</code><strong>整体旋转</strong>，这样各个面就不用单独转到歪斜<ul>
+<li>元素中心为原点，x轴朝右，y轴朝下，z轴屏幕朝外</li>
+</ul>
+</li>
+<li><code>position: absolute;</code><strong>所有面绝对定位</strong>，否则各个面竖直分布，无法合成正方形</li>
+<li><code>transform: rotateX(90deg) translateZ(50px);</code><strong>注意rotate和translate顺序！旋转后z轴方向改变为向上，故向上平移！</strong><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>透视骰子<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">      transform-style: preserve-3d;</span><br><span class="line"><span class="css">      <span class="comment">/* 重点！没有整体3d旋转则看上去会是一个重叠的平面正方形 */</span></span></span><br><span class="line">      transform: rotateX(-35deg) rotateY(30deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="selector-class">.side</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="comment">/* 如不绝对定位则各个面竖直分布，无法合成正方形 */</span></span></span><br><span class="line">      position: absolute;</span><br><span class="line">      width: 100px;</span><br><span class="line">      height: 100px;</span><br><span class="line"><span class="css">      <span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(255, 99, 71, 0<span class="selector-class">.6</span>);</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-tag">rgba</span>(0, 0, 0, 0<span class="selector-class">.5</span>);</span></span><br><span class="line">      color: white;</span><br><span class="line">      text-align: center;</span><br><span class="line">      line-height: 100px;</span><br><span class="line">      font-size: 50px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 1 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.front</span> &#123;</span></span><br><span class="line">      transform: translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 2 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.bottom</span> &#123;</span></span><br><span class="line">      transform: rotateX(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 3 ，注意顺序！旋转后z轴方向为向上，故向上平移 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span> &#123;</span></span><br><span class="line">      transform: rotateX(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 4 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span> &#123;</span></span><br><span class="line">      transform: rotateY(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 5 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.top</span> &#123;</span></span><br><span class="line">      transform: rotateY(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 6 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.back</span> &#123;</span></span><br><span class="line">      transform: rotateY(180deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side front"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side back"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side right"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side left"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side top"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side bottom"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://www.runoob.com/cssref/css3-pr-transform.html" target="_blank" rel="noopener">CSS3 transform 属性</a>应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等</p>
+<ul>
 <li><code>rotateX(angle)</code>定义沿着 X 轴的 3D 旋转。</li>
 <li><code>translateZ(z)</code>定义 3D 平移，只是用 Z 轴的值。</li>
 <li><a href="https://www.cnblogs.com/zhangnan35/p/10709876.html" target="_blank" rel="noopener">注意XYZ轴的方向，以及rotate的方向与角度正负的关系</a>：<ul>
-<li>原点位于<strong>元素正中心</strong>，x轴朝右，y轴朝下，z轴朝我们</li>
+<li>原点位于<strong>元素正中心</strong>，x轴朝右，y轴朝下，z轴屏幕朝我们</li>
 <li><strong>rotate方向 左手法则</strong>：伸出左手，大拇指指向正轴方向，四个手指的指向即是旋转正向。</li>
 </ul>
 </li>
+<li><strong>重点：rotateX(..) 和translateZ(..)的前后顺序会导致结果不一样！</strong><ul>
+<li><code>transform: rotateX(90deg) translateZ(50px);</code>意为沿着x轴旋转90度再沿着z轴平移50px，<strong>旋转后z轴方向为向上！</strong></li>
+<li><code>transform: translateZ(50px) rotateX(90deg);</code>意为沿着z轴平移50px再沿着x轴旋转90度，<strong>此时z轴方向为屏幕朝我们！</strong></li>
 </ul>
 </li>
-<li><a href="https://www.runoob.com/cssref/css3-pr-transform-style.html" target="_blank" rel="noopener">CSS3 transform-style 属性</a>指定嵌套元素是怎样在三维空间中呈现。<ul>
+</ul>
+</li>
+<li><p><a href="https://www.runoob.com/cssref/css3-pr-transform-style.html" target="_blank" rel="noopener">CSS3 transform-style 属性</a>指定嵌套元素是怎样在三维空间中呈现。</p>
+<ul>
 <li><strong>注意</strong>： 使用此属性<strong>必须先使用 transform 属性</strong></li>
 <li><code>preserve-3d</code>表示<strong>所有子元素在3D空间中</strong>呈现</li>
 </ul>
 </li>
-<li><strong>rgba:</strong>颜色中<strong>Alpha</strong>为色彩空间，也就是<strong>透明度/不透明度</strong>。<ul>
+<li><p><strong>rgba:</strong>颜色中<strong>Alpha</strong>为色彩空间，也就是<strong>透明度/不透明度</strong>。</p>
+<ul>
 <li>它的范围为<strong>0.0（完全透明）到1.0（完全不透明）</strong>之间，<strong>0.5为半透明</strong>。</li>
-<li>rgba(255,255,255,0)则表示<strong>完全透明</strong>的白色；</li>
-<li>rgba(0,0,0,1)则表示<strong>完全不透明</strong>的黑色；<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>透视骰子<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">      font-size: 50px;</span><br><span class="line">      transform-style: preserve-3d;</span><br><span class="line">      transform: rotateX(-35deg) rotateY(30deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="selector-class">.side</span> &#123;</span></span><br><span class="line">      position: absolute;</span><br><span class="line">      width: 100px;</span><br><span class="line">      height: 100px;</span><br><span class="line"><span class="css">      <span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(255, 99, 71, 0<span class="selector-class">.6</span>);</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-tag">rgba</span>(0, 0, 0, 0<span class="selector-class">.5</span>);</span></span><br><span class="line">      color: white;</span><br><span class="line">      text-align: center;</span><br><span class="line">      line-height: 100px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 1 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.front</span> &#123;</span></span><br><span class="line">      transform: translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 2 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.bottom</span> &#123;</span></span><br><span class="line">      transform: rotateX(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 3 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.left</span> &#123;</span></span><br><span class="line">      transform: rotateX(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 4 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.right</span> &#123;</span></span><br><span class="line">      transform: rotateY(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 5 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.top</span> &#123;</span></span><br><span class="line">      transform: rotateY(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="comment">/* 6 */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.back</span> &#123;</span></span><br><span class="line">      transform: rotateY(180deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side front"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side back"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side right"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side left"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side top"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"side bottom"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li><code>rgba(255,255,255,0)</code>则表示<strong>完全透明</strong>的白色；</li>
+<li><code>rgba(0,0,0,1)</code>则表示<strong>完全不透明</strong>的黑色；</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h1 id="link标签和import标签的区别"><a href="#link标签和import标签的区别" class="headerlink" title="link标签和import标签的区别"></a>link标签和import标签的区别</h1><ul>
-<li><a href="https://www.w3school.com.cn/tags/tag_link.asp" target="_blank" rel="noopener">link</a>属于<strong>html标签</strong>，而<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@import" target="_blank" rel="noopener">@import</a>是<strong>css提供</strong>的</li>
+<h1 id="link标签和-import标签的区别"><a href="#link标签和-import标签的区别" class="headerlink" title="link标签和@import标签的区别"></a>link标签和@import标签的区别</h1><ul>
+<li><a href="https://www.w3school.com.cn/tags/tag_link.asp" target="_blank" rel="noopener">link</a>属于<strong>html标签，只能放入html源代码中使用</strong>，而<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@import" target="_blank" rel="noopener">@import</a>是<strong>css提供</strong>的，可看作为css样式，作用是引入css样式功能，<strong>html和css代码中都能使用</strong>。（<a href="http://www.divcss5.com/rumen/r431.shtml" target="_blank" rel="noopener">区别举例参考</a>）</li>
 <li>页面被加载时，link会<strong>同时被加载</strong>，而@import引用的css会等到<strong>页面加载结束后加载</strong>。</li>
 <li>link是html标签，因此<strong>没有兼容性</strong>，而@import只有IE5以上才能识别。</li>
 <li>link方式样式的<strong>权重</strong>高于@import的。</li>
-</ul>
-<h1 id="让footer始终位于页面的最底部"><a href="#让footer始终位于页面的最底部" class="headerlink" title="让footer始终位于页面的最底部"></a>让footer始终位于页面的最底部</h1><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法1和2的html</span></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>="<span class="symbol">page</span>"&gt;</span><br><span class="line">        &lt;<span class="symbol">header</span>&gt; 头部 &lt;/<span class="symbol">header</span>&gt; </span><br><span class="line">        &lt;<span class="symbol">div</span> <span class="symbol">class</span>="<span class="symbol">content</span>"&gt; </span><br><span class="line">            &lt;<span class="symbol">p</span> <span class="symbol">class</span>="内容区"&gt;&lt;/<span class="symbol">p</span>&gt; </span><br><span class="line">        &lt;/<span class="symbol">div</span>&gt; </span><br><span class="line">        &lt;<span class="symbol">footer</span>&gt; 底部 &lt;/<span class="symbol">footer</span>&gt;</span><br><span class="line">    &lt;/<span class="symbol">div</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">body</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><strong>子绝父相</strong>：footer使用<strong>绝对定位+bottom</strong>固定在底部：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfv3ywamyj30ic079q3l.jpg" alt="子绝父相"></li>
-<li><strong>使用flexbox方法1</strong>：<ul>
-<li><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvfc8g4ej30mp0e4gmy.jpg" alt="使用flexbox方法1"></li>
-<li><strong>header/footer</strong>：flex项不分配容器中的剩余空间，flex项宽度之和大于容器的时候也不发生收缩，在主轴方向上的初始大小参照flex项的width和height属性。</li>
-<li><strong>content</strong>：flex项分配容器中的所有剩余空间，flex项宽度之和大于容器的时候也不发生收缩，在主轴方向上的初始大小参照flex项的width和height属性。</li>
+<li><strong>link使用方法</strong>：<ul>
+<li>html文件中：<code>&lt;link href=&quot;CSSurl路径&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</code></li>
 </ul>
 </li>
-<li><strong>使用flexbox方法（阮一峰）</strong>：父元素设置100vh，子项内容设置为1，header便会自动吸顶，footer变会自动吸底<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfw2o6n8pj30ha0530sz.jpg" alt="使用flexbox方法（阮一峰）"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggfvymekycj30k70ammyk.jpg" alt="使用flexbox方法（阮一峰）">因为flex子元素的flex默认值是0 1 auto，也就是按照自己的宽高进行等比缩小。即，<strong>除了content，其他flex项都不会占有父元素剩余空间，他们只会按照自己的宽高进行等比缩小，自然就自动吸顶和吸底了。</strong></li>
+<li><strong>@import使用方法</strong>:<ul>
+<li>css文件中：<code>@import url(CSS文件路径地址);</code></li>
+<li>html文件中：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">@<span class="keyword">import</span> url(CSS文件路径地址);</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="让footer始终位于页面的最底部"><a href="#让footer始终位于页面的最底部" class="headerlink" title="让footer始终位于页面的最底部"></a>让footer始终位于页面的最底部</h1><ul>
+<li><strong>总结：</strong><ul>
+<li><strong>方法1：</strong> <strong>子绝父相</strong>，footer用<strong>bottom</strong>固定在底部</li>
+<li><strong>方法2：</strong>  <strong>flexbox</strong>，设定<strong>父元素高度</strong>，子元素中<strong>主内容<a href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20flexbox%EF%BC%89/#flex%E7%AE%80%E5%86%99flex-grow%E3%80%81flex-shrink%E5%92%8Cflex-basis" target="_blank" rel="noopener"><code>flex:1</code></a>，等比撑满所有剩余空间，header和footer使用<a href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20flexbox%EF%BC%89/#flex%E7%AE%80%E5%86%99flex-grow%E3%80%81flex-shrink%E5%92%8Cflex-basis" target="_blank" rel="noopener">默认的<code>flex:0 1 auto</code></a>使其只会在空间不足时等比缩小而不会放大</strong>，如此footer自然被撑在最下方<ul>
+<li><strong>父元素高度</strong>是<strong>主内容能撑起剩余空间的前提</strong></li>
+<li><strong>flexbox默认所有子元素横向排列，需要设置为纵向排列<code>flex-direction:column</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法1、2的html</span></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>="<span class="symbol">page</span>"&gt;</span><br><span class="line">        &lt;<span class="symbol">header</span>&gt; 头部 &lt;/<span class="symbol">header</span>&gt; </span><br><span class="line">        &lt;<span class="symbol">div</span> <span class="symbol">class</span>="<span class="symbol">content</span>"&gt; </span><br><span class="line">            &lt;<span class="symbol">p</span> <span class="symbol">class</span>="内容区"&gt;&lt;/<span class="symbol">p</span>&gt; </span><br><span class="line">        &lt;/<span class="symbol">div</span>&gt; </span><br><span class="line">        &lt;<span class="symbol">footer</span>&gt; 底部 &lt;/<span class="symbol">footer</span>&gt;</span><br><span class="line">    &lt;/<span class="symbol">div</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">body</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>子绝父相</strong>：footer使用<strong>绝对定位+bottom</strong>固定在底部：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line">  * &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.page</span> &#123;</span></span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">    min-height: 100vh;</span><br><span class="line">    position: relative;</span><br><span class="line">    padding-top: 20px;</span><br><span class="line">    padding-bottom: 20px;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.content</span> &#123;</span></span><br><span class="line">    background: red;</span><br><span class="line">  &#125;</span><br><span class="line">  header &#123;</span><br><span class="line">    background: blue;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 20px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 0;</span><br><span class="line">  &#125;</span><br><span class="line">  footer &#123;</span><br><span class="line">    background: yellow;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 20px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    bottom: 0;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用flexbox方法（阮一峰）</strong>：父元素设置100vh，子项主内容flex设置为1，header和footer使用默认的flex，则有空余空间时主内容扩张以撑满所有剩余的空间，此时header便会自动吸顶，footer自动吸底</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* 把body的外边距消除掉效果比较好 */</span></span></span><br><span class="line">  * &#123;</span><br><span class="line">    margin: 0;</span><br><span class="line">    padding: 0;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.page</span> &#123;</span></span><br><span class="line">    display: flex;</span><br><span class="line"><span class="css">    <span class="comment">/* 注意：默认是所有子项排列在一行上 */</span></span></span><br><span class="line">    flex-direction: column;</span><br><span class="line"><span class="css">    <span class="comment">/* 要flex:1撑起所有剩余高度，则父元素必须固定高度 */</span></span></span><br><span class="line">    min-height: 100vh;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-class">.content</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/* 放大比例设为1，则有剩余空间时撑满剩余空间 */</span></span></span><br><span class="line">    flex: 1;</span><br><span class="line">    background: red;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
+<p>因为flex子元素的flex默认值是0 1 auto（即0：如果存在剩余空间，也不放大。1：如果空间不足，则该子项格局1的比例缩小。auto：子项初始大小参照我的width和height属性）。而<code>flex:1</code>规定有空余空间时主内容扩张以撑满所有剩余的空间（注意前提是其父容器的尺寸不为零）。<strong>除了content，其他flex项都不会占有父元素剩余空间，他们只会按照自己的宽高进行等比缩小，自然就自动吸顶和吸底了。</strong></p>
 <h1 id="CSS3新属性：单位vh"><a href="#CSS3新属性：单位vh" class="headerlink" title="CSS3新属性：单位vh"></a>CSS3新属性：单位vh</h1><p>vh是相对于视口的高度。<strong>视口被均分为100单位的vh</strong></p>
 <h1 id="水平、垂直居中的方法"><a href="#水平、垂直居中的方法" class="headerlink" title="水平、垂直居中的方法"></a>水平、垂直居中的方法</h1><ul>
 <li>可参考<a href="https://huanglizhu.github.io/2019/11/22/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B1%85%E4%B8%AD%EF%BC%89/" target="_blank" rel="noopener">百度前端技术学院 第七天学习笔记（CSS 居中）</a></li>
 <li><strong>水平居中：</strong><ul>
-<li><strong><code>text-align: center;</code></strong>：<strong>行内文本/图片（给父元素设置text-align）/块内文本</strong></li>
-<li><strong>定宽块级元素：<code>margin: auto;</code>或<code>margin: 0 auto;</code></strong></li>
-<li><strong><code>text-align: center;</code></strong>：直接给<strong>不定宽的块级元素</strong>设置/给父元素加</li>
+<li><strong><code>text-align: center;</code></strong>：<strong>行内文本/块内文本（父子元素设置都可以），图片（给父元素设置text-align）</strong></li>
+<li><strong>定宽块级元素：子元素定宽+<code>margin: auto;</code>或<code>margin: 0 auto;</code></strong><ul>
+<li><strong>注意 子元素 也要定宽才有效！</strong></li>
+<li><strong>只适用于水平边距</strong>(如果<code>margin-top</code>或<code>margin-bottom</code>为<code>auto</code>，则其使用值为0)，不适用于浮动/内联/绝对/固定定位元素</li>
+</ul>
+</li>
+<li><strong>不定宽块级元素：</strong><ul>
 <li><code>position:absolute +left:50%+ transform:translateX(-50%)</code></li>
 <li><code>display:flex + justify-content: center</code></li>
 </ul>
 </li>
+</ul>
+</li>
 <li><strong>垂直居中：</strong>（<strong>必备条件：</strong>父元素是盒子容器且高度已经设定）<ul>
-<li><strong>line-height：</strong> 行内/块内<strong>文本</strong></li>
-<li><strong><code>vertical-align:middle</code></strong>：行内元素<strong>（图片）/单元格</strong>，作用于<strong>display属性值为inline、inline-block、inline-table另加一个table-cell的元素</strong></li>
-<li><strong>块内文本</strong>：<strong>单元格+vertical-align</strong>：给父元素设置<code>display:table;</code>子元素设定<code>display:table-cell;vertical-align:middle;</code><ul>
+<li><strong>line-height：</strong> 行内/块内<strong>文本</strong>垂直居中</li>
+<li><strong>父元素设置<code>vertical-align:middle</code>+<code>display：table-cell</code></strong>：<strong>块内文本/行内/单元格内 图片/文本/块级元素</strong>垂直居中<ul>
 <li><strong>注意</strong>：vertical-align <strong>不作用于span元素</strong></li>
 </ul>
 </li>
-<li><strong>定高块级元素：计算子元素的margin-top或margin-bottom，将其设置为(父元素高度-子元素高度)/2</strong></li>
+<li><strong>定高块级元素：计算子元素的margin-top或margin-bottom，将其设置为(父元素高度-子元素高度)/2</strong><ul>
+<li>设置auto不起效，如果<code>margin-top</code>或<code>margin-bottom</code>为<code>auto</code>，则其使用值为0</li>
+</ul>
+</li>
 <li><strong>不定高块级元素</strong>：<ul>
 <li><strong>flexbox：</strong>父元素使用<code>display: flex;</code>将其设置为弹性盒子父容器，然后设置<code>align-items: center;</code>定义子项在交叉轴上的对齐方式</li>
-<li><strong>line-height+inline-block</strong>:给块级元素设置<code>display:inline-block</code>,然后使用行内元素的line-height属性实现垂直居中。<ul>
-<li>补充：绝对定位/固定定位/浮动 都会使元素变为inline-block元素</li>
-</ul>
-</li>
-</ul>
-</li>
 <li><code>position：absolute +top:50%+ transform:translateY(-50%)</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>水平+垂直居中</strong>:<ul>
 <li><strong>text-align+ line-height</strong>:块/行内元素<strong>单行文本</strong>双向居中</li>
-<li><strong>text-align + vertical-align</strong>:实现行内元素<strong>（图片）</strong>双向垂直</li>
+<li><strong>父元素display: table-cell+text-align:center + vertical-align:middle</strong>:实现<strong>行内 元素/图片</strong>双向垂直</li>
 <li><strong>利用flex</strong>：将父元素设置为<code>display:flex</code>，并且设置<code>align-items:center;justify-content:center;</code></li>
-<li><strong>子绝父相+top、bottom、left、right设为0+margin:auto</strong>：定位为上下左右为0，margin：auto可以实现<strong>脱离文档流的居中</strong>（子绝父相的情况）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg" alt="margin:auto"><strong>原理</strong>是当top,bottom为0时，margin-top&amp;bottom设置auto的话会<strong>无限延伸沾满空间并平分</strong>，当left，right为0时,margin-left&amp;right设置auto会<strong>无限延伸占满空间并平分</strong></li>
 <li><strong>子绝父相+top、left设为50%+transform</strong>position：absolute +left:50%+top:50%+ transform:translate(-50%,-50%)</li>
+<li><strong>子绝父相+top、bottom、left、right设为0+margin:auto</strong>：定位为上下左右为0，margin：auto可以实现<strong>脱离文档流的居中</strong>（子绝父相的情况）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg" alt="margin:auto"><strong>原理</strong>是当top,bottom为0时，margin-top&amp;bottom设置auto的话会<strong>无限延伸沾满空间并平分</strong>，当left，right为0时,margin-left&amp;right设置auto会<strong>无限延伸占满空间并平分</strong></li>
 </ul>
 </li>
 </ul>
 <h2 id="如何实现图片在某个容器中居中的？"><a href="#如何实现图片在某个容器中居中的？" class="headerlink" title="如何实现图片在某个容器中居中的？"></a>如何实现图片在某个容器中居中的？</h2><ul>
-<li><strong>父元素不定宽高</strong>：<ul>
-<li><strong>弹性布局</strong> 父元素设置<code>display: flex</code>、<strong><code>align-items: center; justify-content: center</code></strong></li>
-<li><strong>【vertical-align单独用行不通，必须联合字体大小为0】父元素设置为单元格 <code>display: table-cell</code>、设置<code>text-align:center</code>实现水平居中、设置<code>vertical-align:middle</code>实现垂直居中</strong>。（vertical-align:middle可能会造成基线的问题导致垂直不太居中，可参考<a href="http://www.yzktw.com.cn/post/313.html" target="_blank" rel="noopener">这篇文章</a>，如果<strong>想解决这个偏差就需要设置字体大小为0</strong>）</li>
+<li><strong>父元素与图片固定宽高</strong>，计算并设置子元素margin值。</li>
+<li><strong>图片 不定宽高</strong>：<ul>
+<li><strong>父元素</strong>设置<code>display: flex</code>、<strong><code>align-items: center; justify-content: center</code></strong></li>
+<li><strong>【vertical-align单独用行不通，必须联合字体大小为0】父元素设置 <code>display: table-cell</code>+<code>text-align:center</code>+<code>vertical-align:middle</code></strong>。<ul>
+<li>vertical-align:middle可能会造成基线的问题导致垂直不太居中，可参考<a href="http://www.yzktw.com.cn/post/313.html" target="_blank" rel="noopener">这篇文章</a>，如果<strong>想解决这个偏差就需要设置字体大小为0</strong></li>
 </ul>
 </li>
-<li><strong>父元素固定宽高</strong>，子元素设置<code>position: absolute</code>，<code>margin：auto</code>平均分配margin</li>
-<li><strong>父元素与图片固定宽高</strong>，利用定位及设置子元素margin值为<strong>自身的一半</strong>。</li>
-<li><strong>图片不定宽高：</strong> css3属性transform。子元素设置<code>position: absolute; left: 50%; top: 50%;transform: translate(-50%,-50%);</code>即可。<ol>
+<li><strong>子绝父相+top、bottom、left、right设为0+margin:auto</strong></li>
+<li><strong>子绝父相</strong>，<strong>图片</strong>设置<code>position: absolute; left: 50%; top: 50%;transform: translate(-50%,-50%);</code><ol>
 <li>不知道自身宽高的情况下，可以利用<strong>translate()函数</strong>来进行<strong>水平垂直居中</strong>。</li>
 <li>当使用<code>position: absolute;top: 50%;left: 50%;</code>， 是以<strong>左上角为原点</strong>，故不处于中心位置。</li>
 <li><code>translate(-50%,-50%)</code>作用是<strong>往上（x轴）,左（y轴）移动自身长宽的 50%</strong>，以使其居于中心位置。</li>
 </ol>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="如何实现元素的垂直居中"><a href="#如何实现元素的垂直居中" class="headerlink" title="如何实现元素的垂直居中"></a>如何实现元素的垂直居中</h2><ul>
 <li><strong>行内/块内文本</strong>：line-height</li>
 <li>父元素display:flex,align-items:center;</li>
-<li>元素绝对定位，top:50%，margin-top：-（高度/2）<ul>
+<li><strong>高度确定</strong>时，元素<strong>绝对定位，top:50%，margin-top：-（高度/2）</strong><ul>
 <li>top:50%<strong>定位点是左上角</strong>，所以需要使用margin-top将其调高自身一半达到垂直居中</li>
 </ul>
 </li>
-<li><strong>高度不确定</strong>时元素绝对定位+<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/translateY" target="_blank" rel="noopener">transform：translateY（-50%）</a>向上移动自身高度的一半</li>
-<li><strong>行内元素/图片/单元格</strong>：子元素设置vertical-align:center;(vertical-align<strong>不作用于span元素</strong>)</li>
+<li><strong>高度不确定</strong>时，元素<strong>绝对定位+<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/translateY" target="_blank" rel="noopener">transform：translateY（-50%）</a></strong>向上移动自身高度的一半</li>
+<li><strong>行内/单元格内 图片/文本/块级元素</strong>：<strong>父元素设置<code>vertical-align:middle</code>+<code>display：table-cell</code></strong><ul>
+<li>vertical-align <strong>不作用于span元素</strong></li>
 </ul>
-<h2 id="width300，height300在屏幕上垂直水平居中"><a href="#width300，height300在屏幕上垂直水平居中" class="headerlink" title="width300，height300在屏幕上垂直水平居中"></a>width300，height300在屏幕上垂直水平居中</h2><p>对于行内块级元素:</p>
-<ol start="2">
+</li>
+</ul>
+<h2 id="width300，height300在屏幕上垂直水平居中"><a href="#width300，height300在屏幕上垂直水平居中" class="headerlink" title="width300，height300在屏幕上垂直水平居中"></a>width300，height300在屏幕上垂直水平居中</h2><ol start="2">
 <li><strong>【父单元格+vertical-align，子margin】</strong> <strong>父级元素</strong>设置display:table-cell，vertical-align:middle达到<strong>垂直居中</strong>,<strong>子元素</strong>设置margin:auto实现<strong>水平居中</strong></li>
 <li><strong>【子绝父相+top+left+transform/margin】</strong>采用绝对定位，原理是子绝父相，父元素设置position：relative，子元素设置position：absolute，然后通过transform或margin组合使用达到居中效果，设置top：50%，left：50%，transform：translate（-50%，-50%）</li>
 <li><strong>【子绝父相+top、bottom、left、right设为0+margin设为auto】</strong>绝对居中，原理是当top,bottom为0时，margin-top&amp;bottom设置auto的话会<strong>无限延伸沾满空间并平分</strong>，当left，right为0时,margin-left&amp;right设置auto会<strong>无限延伸占满空间并平分</strong></li>
@@ -346,16 +392,23 @@
 <li>Inline：<strong>行元素</strong>，设置width和height无效，<strong>margin在竖直方向上无效</strong>，<strong>padding在水平方向垂直方向都有效</strong>，<strong>前后无换行符</strong></li>
 <li>Inline-block：<strong>行内块元素</strong>，<strong>能设置宽度高度</strong>，margin/padding水平垂直方向 <strong>都有效</strong>，<strong>前后无换行符</strong></li>
 </ul>
-<h2 id="为什么img是inline还可以设置宽高"><a href="#为什么img是inline还可以设置宽高" class="headerlink" title="为什么img是inline还可以设置宽高"></a>为什么img是inline还可以设置宽高</h2><p>因为他是置换元素，<a href="https://huanglizhu.github.io/2019/12/08/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#img是行内元素，为什么可以设置框高？" target="_blank" rel="noopener">答案</a></p>
-<h1 id="怎么样让一个元素消失"><a href="#怎么样让一个元素消失" class="headerlink" title="怎么样让一个元素消失"></a>怎么样让一个元素消失</h1><h2 id="visibility-hidden，opacity-0，display-none"><a href="#visibility-hidden，opacity-0，display-none" class="headerlink" title="visibility:hidden，opacity:0，display:none"></a>visibility:hidden，opacity:0，display:none</h2><ul>
-<li>CSS3的<strong>opacity:0</strong>，该元素隐藏起来了，但<strong>不会改变页面布局</strong>，并且，<strong>可触发原绑定事件</strong>，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的</li>
-<li><strong>visibility:hidden</strong>，该元素隐藏起来了，但<strong>不会改变页面布局</strong>，但是<strong>不会触发该元素已经绑定的事件</strong></li>
-<li><strong>display:none</strong>，把元素隐藏起来，并且<strong>会改变页面布局</strong>，可以理解成在页面中把该元素删除掉一样。（<strong>搜索引擎会过滤掉这里面的内容</strong>）</li>
+<h2 id="为什么img是inline还可以设置宽高"><a href="#为什么img是inline还可以设置宽高" class="headerlink" title="为什么img是inline还可以设置宽高"></a>为什么img是inline还可以设置宽高</h2><ul>
+<li>因为他是<strong>置换元素</strong>，置换元素一般<strong>内置宽高属性</strong>，因此可以设置其宽高。</li>
+<li><strong>置换元素</strong>就是会<strong>根据标签属性来显示的元素</strong>。反之就是非置换元素了。<ul>
+<li>比如<strong>img根据src属性</strong>来显示，<strong>input根据type 属性决定是显示输入框还是按钮</strong>，因此可知道img和input是置换元素。</li>
+<li>当然同理<strong>button的type属性决定是提交还是重置</strong>、textarea、select也是置换元素。</li>
+</ul>
+</li>
+</ul>
+<h1 id="怎么样让一个元素消失"><a href="#怎么样让一个元素消失" class="headerlink" title="怎么样让一个元素消失"></a>怎么样让一个元素消失</h1><ul>
+<li><strong>visibility:hidden</strong>，元素隐藏，<strong>不会改变页面布局</strong>，<strong>无法触发该元素已经绑定的事件</strong></li>
+<li>CSS3的<strong>opacity:0</strong>，元素隐藏，<strong>不会改变页面布局</strong>，<strong>可触发原绑定事件</strong>，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的</li>
+<li><strong>display:none</strong>，元素隐藏，<strong>会改变页面布局</strong>，可以理解成在页面中把该元素删除掉一样。（<strong>搜索引擎会过滤掉这里面的内容</strong>）</li>
 </ul>
 <h1 id="双边距重叠问题（外边距折叠）"><a href="#双边距重叠问题（外边距折叠）" class="headerlink" title="双边距重叠问题（外边距折叠）"></a>双边距重叠问题（外边距折叠）</h1><ul>
-<li>多个相邻（兄弟或者父子关系）普通流的块元素垂直方向marigin会<a href="https://huanglizhu.github.io/2019/10/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%EF%BC%89/#块之间的-外边距margin折叠" target="_blank" rel="noopener">重叠</a><ul>
+<li>多个相邻（兄弟或者父子关系）普通流的块元素 <strong>垂直方向 marigin会<a href="https://huanglizhu.github.io/2019/10/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%EF%BC%89/#块之间的-外边距margin折叠" target="_blank" rel="noopener">重叠</a></strong><ul>
 <li>两个<strong>相邻的外边距都是正数</strong>时，折叠结果是它们<strong>两者之间较大的值</strong>。</li>
-<li>两个<strong>相邻的外边距都是负数</strong>时，折叠结果是<strong>两者绝对值的较大值</strong>。</li>
+<li><strong>注意：</strong>两个<strong>相邻的外边距都是负数</strong>时，折叠结果是<strong>两者绝对值的较大值</strong>。</li>
 <li>两个<strong>外边距一正一负</strong>时，折叠结果是<strong>两者的相加的和</strong>。</li>
 </ul>
 </li>
@@ -363,32 +416,34 @@
 <h1 id="position属性-比较"><a href="#position属性-比较" class="headerlink" title="position属性 比较"></a>position属性 比较</h1><ul>
 <li><strong>默认定位Static</strong>：默认值。没有定位，<strong>元素出现在正常的流中</strong>（忽略top, bottom, left, right 或者 z-index 声明）。</li>
 <li><strong>相对定位relative</strong>：如果对一个元素进行相对定位，它将出现在它所在的位置上。然后，可以通过设置垂直或水平位置，让这个<strong>元素“相对于”它的起点进行移动</strong>。 在使用相对定位时，无论是否进行移动，<strong>元素仍然占据原来的空间</strong>。因此，移动元素会导致它覆盖其它框。</li>
-<li><strong>绝对定位absolute</strong>：绝对定位的元素的位置<strong>相对于最近的已定位父元素</strong>，如果元素没有已定位的父元素，那么它的位置相对于<code>&lt;html&gt;</code>。 absolute 定位使元素的位置<strong>与文档流无关</strong>，因此<strong>不占据空间</strong>。 absolute 定位的元素和其他元素重叠。</li>
-<li><strong>固定定位fixed</strong>：元素的位置相对于<strong>浏览器窗口</strong>是固定位置，即使窗口是滚动的它也不会移动。Fixed定位使元素的位置与文档流无关，因此<strong>不占据空间</strong>。 Fixed定位的元素和其他元素重叠。</li>
+<li><strong>绝对定位absolute</strong>：绝对定位的元素的位置<strong>相对于最近的已定位父元素</strong>，如果元素<strong>没有已定位的父元素，则它的位置相对于<code>&lt;html&gt;</code></strong>。 absolute 定位使元素的位置<strong>与文档流无关</strong>，因此<strong>不占据空间</strong>。 absolute 定位的元素和其他元素重叠。</li>
+<li><strong>固定定位fixed</strong>：元素的位置相对于<strong>浏览器窗口</strong>是固定位置，即使窗口是滚动的它也不会移动。Fixed定位使元素的位置<strong>与文档流无关</strong>，因此<strong>不占据空间</strong>。 Fixed定位的元素和其他元素重叠。</li>
 <li><strong>粘性定位sticky</strong>：元素先按照普通文档流定位，然后相对于该元素在流中的flow root（BFC）和 containing block（最近的块级祖先元素）定位。而后，元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位。</li>
 <li><strong>inherit</strong>:规定应该从父元素继承position 属性的值。</li>
-<li><strong>注意：</strong>区分绝对定位和浮动，前者完全脱离文档流，<a href="https://huanglizhu.github.io/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/#元素脱离文档流但不脱离文本流" target="_blank" rel="noopener">后者不脱离文本流</a></li>
+<li><strong>注意：</strong>区分<strong>绝对定位和浮动</strong>，前者<strong>完全脱离文档流</strong>，<a href="https://huanglizhu.github.io/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/#元素脱离文档流但不脱离文本流" target="_blank" rel="noopener">后者不脱离文本流</a></li>
 </ul>
 <h2 id="z-index的定位方法"><a href="#z-index的定位方法" class="headerlink" title="z-index的定位方法"></a>z-index的定位方法</h2><ul>
-<li><a href="https://huanglizhu.github.io/2019/11/19/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20position" target="_blank" rel="noopener">z-index</a>/#z-index更改堆叠顺序)属性设置<strong>元素的堆叠顺序</strong></li>
+<li>z-index属性设置<strong>元素的堆叠顺序</strong></li>
 <li>z轴：一条<strong>从屏幕表面到你的脸的虚线</strong>。</li>
 <li><strong>正值将它们移动到堆栈上方，负值将它们向下移动到堆栈中</strong>。</li>
-<li>z-index <strong>可以为负</strong>，且z-index只能在<strong>定位元素</strong>上奏效</li>
+<li>z-index <strong>可以为负</strong>，且z-index只能在<strong>定位元素（position不为默认值static的元素）</strong>上奏效</li>
 <li>它的属性值默认auto(实际上为<strong>0</strong>)，默认，堆叠顺序与父元素相等，number，inherit，从父元素继承z-index属性的值</li>
 </ul>
 <h1 id="BFC（清除浮动，防止margin重叠等）"><a href="#BFC（清除浮动，防止margin重叠等）" class="headerlink" title="BFC（清除浮动，防止margin重叠等）"></a>BFC（清除浮动，防止margin重叠等）</h1><ul>
-<li><a href="https://huanglizhu.github.io/2019/12/10/BFC%E4%B8%8E%E6%B5%AE%E5%8A%A8/" target="_blank" rel="noopener">BFC</a>直译成：<strong>块级格式化上下文</strong>，是页面上的一个独立容器，规定了内部如何布局，并且这个区域的<strong>子元素不会影响到外面的元素</strong>(可参考<a href="https://zhuanlan.zhihu.com/p/25321647" target="_blank" rel="noopener">知乎</a>)</li>
+<li><a href="https://huanglizhu.github.io/2019/12/10/BFC%E4%B8%8E%E6%B5%AE%E5%8A%A8/" target="_blank" rel="noopener">BFC</a>直译成：<strong>块级格式化上下文</strong>，是页面上的一个独立容器，规定了内部如何布局，并且<strong>让处于 BFC 内部的子元素与外部的元素相互隔离，使内外元素的定位不会相互影响</strong>(可参考<a href="https://zhuanlan.zhihu.com/p/25321647" target="_blank" rel="noopener">知乎</a>)</li>
 <li>BFC内部box垂直放置</li>
 <li>BFC区域不会与float box重叠</li>
 <li>计算BFC的<strong>高度</strong>时，<strong>浮动元素也会参与计算</strong></li>
-<li>下面的元素会生成BFC：<ul>
-<li>根元素</li>
+<li>下面的元素会<strong>生成BFC</strong>：<ul>
+<li>根元素（<code>&lt;html&gt;</code>)</li>
 <li>float不为none的元素</li>
-<li>position为fixed和absolute的元素</li>
+<li>position为fixed和absolute的元素（<strong>注意relative不能生成BFC</strong>）</li>
 <li>display为inline-block、table-cell、table-caption，flex，inline-flex的元素(使用<strong>display:flow-root</strong>可以创建<strong>无副作用的BFC</strong>)</li>
 <li>overflow不为visible的元素</li>
 </ul>
 </li>
+<li><strong>BFC用于防止margin重叠：</strong>让2个会margin重叠的元素分属于2个不同的BFC，则他们之间的margin就不会重叠了。</li>
+<li><strong>BFC清除浮动的原理：</strong> BFC在计算高度时，<strong>内部浮动元素的高度也要计算在内</strong>，也就是说即使BFC区域内只有一个浮动元素，BFC的<strong>高度也不会发生塌缩</strong>，所以达到了清除浮动的目的。</li>
 </ul>
 <h1 id="浮动清除"><a href="#浮动清除" class="headerlink" title="浮动清除"></a>浮动清除</h1><ul>
 <li><strong>推荐方法：父元素添加<a href="https://huanglizhu.github.io/2019/12/10/BFC%E4%B8%8E%E6%B5%AE%E5%8A%A8/#方法1：使用overflow属性创建BFC" target="_blank" rel="noopener"><code>display: flow-root</code></a></strong>可以创建无副作用的BFC</li>
@@ -416,7 +471,7 @@
 <h2 id="overflow清除浮动的原理"><a href="#overflow清除浮动的原理" class="headerlink" title="overflow清除浮动的原理"></a>overflow清除浮动的原理</h2><ul>
 <li><a href="https://huanglizhu.github.io/2019/12/07/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%BE%B9%E6%A1%86%E3%80%81%E6%BB%9A%E5%8A%A8%E3%80%81%E6%96%87%E6%9C%AC%E6%8A%98%E8%A1%8C%E3%80%81%E8%A3%85%E9%A5%B0%E6%80%A7%E5%B1%9E%E6%80%A7/#滚动（overflow属性）" target="_blank" rel="noopener">滚动（overflow属性）</a></li>
 <li>要讲清楚这个解决方案的原理，首先需要了解<strong>块格式化上下文</strong>，块格式化上下文是CSS可视化渲染的一部分，它是一块区域，规定了内部块盒 的渲染方式，以及浮动相互之间的影响关系</li>
-<li>当元素设置了overflow样式且值不是visible时，该元素就构建了一个BFC，BFC在计算高度时，内部浮动元素的高度也要计算在内，也就是说即使BFC区域内只有一个浮动元素，BFC的高度也不会发生塌缩，所以达到了清除浮动的目的</li>
+<li>当元素设置了overflow样式且值不是visible时，该元素就构建了一个BFC，<strong>BFC在计算高度时，内部浮动元素的高度也要计算在内，也就是说即使BFC区域内只有一个浮动元素，BFC的高度也不会发生塌缩</strong>，所以达到了清除浮动的目的</li>
 </ul>
 
       
@@ -489,7 +544,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下css盒模型"><span class="nav-number">1.</span> <span class="nav-text">说一下css盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#box-sizing的语法和基本用处"><span class="nav-number">1.1.</span> <span class="nav-text">box-sizing的语法和基本用处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#画一条0-5px的线"><span class="nav-number">2.</span> <span class="nav-text">画一条0.5px的线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【看】CSS画三角形-正方体"><span class="nav-number">3.</span> <span class="nav-text">【看】CSS画三角形/正方体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#link标签和import标签的区别"><span class="nav-number">4.</span> <span class="nav-text">link标签和import标签的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让footer始终位于页面的最底部"><span class="nav-number">5.</span> <span class="nav-text">让footer始终位于页面的最底部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS3新属性：单位vh"><span class="nav-number">6.</span> <span class="nav-text">CSS3新属性：单位vh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#水平、垂直居中的方法"><span class="nav-number">7.</span> <span class="nav-text">水平、垂直居中的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现图片在某个容器中居中的？"><span class="nav-number">7.1.</span> <span class="nav-text">如何实现图片在某个容器中居中的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现元素的垂直居中"><span class="nav-number">7.2.</span> <span class="nav-text">如何实现元素的垂直居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#width300，height300在屏幕上垂直水平居中"><span class="nav-number">7.3.</span> <span class="nav-text">width300，height300在屏幕上垂直水平居中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于js动画和css3动画的差异性"><span class="nav-number">8.</span> <span class="nav-text">关于js动画和css3动画的差异性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display"><span class="nav-number">9.</span> <span class="nav-text">display</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block、inline和block的区别"><span class="nav-number">9.1.</span> <span class="nav-text">inline-block、inline和block的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么img是inline还可以设置宽高"><span class="nav-number">9.2.</span> <span class="nav-text">为什么img是inline还可以设置宽高</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么样让一个元素消失"><span class="nav-number">10.</span> <span class="nav-text">怎么样让一个元素消失</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#visibility-hidden，opacity-0，display-none"><span class="nav-number">10.1.</span> <span class="nav-text">visibility:hidden，opacity:0，display:none</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双边距重叠问题（外边距折叠）"><span class="nav-number">11.</span> <span class="nav-text">双边距重叠问题（外边距折叠）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#position属性-比较"><span class="nav-number">12.</span> <span class="nav-text">position属性 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#z-index的定位方法"><span class="nav-number">12.1.</span> <span class="nav-text">z-index的定位方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BFC（清除浮动，防止margin重叠等）"><span class="nav-number">13.</span> <span class="nav-text">BFC（清除浮动，防止margin重叠等）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浮动清除"><span class="nav-number">14.</span> <span class="nav-text">浮动清除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow清除浮动的原理"><span class="nav-number">14.1.</span> <span class="nav-text">overflow清除浮动的原理</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说一下css盒模型"><span class="nav-number">1.</span> <span class="nav-text">说一下css盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#box-sizing的语法和基本用处"><span class="nav-number">1.1.</span> <span class="nav-text">box-sizing的语法和基本用处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#画一条0-5px的线"><span class="nav-number">2.</span> <span class="nav-text">画一条0.5px的线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【看】CSS画三角形-正方体"><span class="nav-number">3.</span> <span class="nav-text">【看】CSS画三角形/正方体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#link标签和-import标签的区别"><span class="nav-number">4.</span> <span class="nav-text">link标签和@import标签的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让footer始终位于页面的最底部"><span class="nav-number">5.</span> <span class="nav-text">让footer始终位于页面的最底部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS3新属性：单位vh"><span class="nav-number">6.</span> <span class="nav-text">CSS3新属性：单位vh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#水平、垂直居中的方法"><span class="nav-number">7.</span> <span class="nav-text">水平、垂直居中的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现图片在某个容器中居中的？"><span class="nav-number">7.1.</span> <span class="nav-text">如何实现图片在某个容器中居中的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现元素的垂直居中"><span class="nav-number">7.2.</span> <span class="nav-text">如何实现元素的垂直居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#width300，height300在屏幕上垂直水平居中"><span class="nav-number">7.3.</span> <span class="nav-text">width300，height300在屏幕上垂直水平居中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于js动画和css3动画的差异性"><span class="nav-number">8.</span> <span class="nav-text">关于js动画和css3动画的差异性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display"><span class="nav-number">9.</span> <span class="nav-text">display</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-block、inline和block的区别"><span class="nav-number">9.1.</span> <span class="nav-text">inline-block、inline和block的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么img是inline还可以设置宽高"><span class="nav-number">9.2.</span> <span class="nav-text">为什么img是inline还可以设置宽高</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么样让一个元素消失"><span class="nav-number">10.</span> <span class="nav-text">怎么样让一个元素消失</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双边距重叠问题（外边距折叠）"><span class="nav-number">11.</span> <span class="nav-text">双边距重叠问题（外边距折叠）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#position属性-比较"><span class="nav-number">12.</span> <span class="nav-text">position属性 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#z-index的定位方法"><span class="nav-number">12.1.</span> <span class="nav-text">z-index的定位方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BFC（清除浮动，防止margin重叠等）"><span class="nav-number">13.</span> <span class="nav-text">BFC（清除浮动，防止margin重叠等）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#浮动清除"><span class="nav-number">14.</span> <span class="nav-text">浮动清除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow清除浮动的原理"><span class="nav-number">14.1.</span> <span class="nav-text">overflow清除浮动的原理</span></a></li></ol></li></ol>
     
     </div>
   </aside>

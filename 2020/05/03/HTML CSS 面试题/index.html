@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkwwl4evzmj30rn0iitao.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkwx722d8kj30bt0nb13q.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkwx80o5vrj313q0bxqch.jpg">
-<meta property="og:updated_time" content="2020-11-21T12:28:58.435Z">
+<meta property="og:updated_time" content="2021-05-02T06:53:39.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML CSS 面试题">
 <meta name="twitter:description" content="慕课 快速搞定前端技术一面 第三章 笔记">
@@ -244,19 +244,22 @@
 <li>一般用于PC网页</li>
 </ul>
 </li>
-<li>圣杯布局和双飞翼布局的<strong>技术总结</strong>（只要是达到这3个要点，细节不同无所谓）：<ul>
+<li><a href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#圣杯布局" target="_blank" rel="noopener">圣杯布局</a>和双飞翼布局的<strong>技术总结</strong>（只要是达到这3个要点，细节不同无所谓）：<ul>
 <li><strong>中间3栏都使用float布局，中间一栏100%宽度放最前面</strong></li>
 <li><strong>两侧都是使用margin负值</strong>，以便<strong>和中间内容横向重叠</strong>（同一行）</li>
 <li><strong>防止中间内容被两侧覆盖，圣杯用padding，双飞翼用margin</strong><ul>
-<li>圣杯用3栏的父元素设置padding往中间挤+左右往2边分开</li>
-<li>双飞翼用3栏中间盒子main内增加一个内层div（main-inner）设置margin空出左右两栏位置</li>
+<li>圣杯用3栏的<strong>父元素设置padding</strong>把<strong>三个子盒子往中间挤</strong>+<strong>左右两个盒子</strong>加 <strong>相对定位+left/right</strong> 往2边分开</li>
+<li>双飞翼用3栏<strong>中间盒子main内增加一个内层div</strong>（main-inner）设置<strong>margin空出左右两栏位置</strong><ul>
+<li><strong>注意</strong>：双飞翼一定是给中间盒子增加一个内盒子，如果直接在中间盒子上更改margin整个布局就乱了（图见<a href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#双飞翼布局" target="_blank" rel="noopener">前端举出-CSS（2）</a>）因为中间<strong>3个盒子都是浮动的，而float属性对兄弟元素的影响是会贴着旁边float元素</strong>，所以中间盒子向右边移动以后左边盒子也会跟着向右边移动，所以<strong>需要在中间盒子内部放置块元素来调整margin避免影响其他浮动元素</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#圣杯布局" target="_blank" rel="noopener">具体代码实现</a></li>
 </ul>
-<h4 id="手写clearfix"><a href="#手写clearfix" class="headerlink" title="手写clearfix"></a>手写clearfix</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">    <span class="attribute">display</span>:table;</span><br><span class="line">    <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="手写clearfix"><a href="#手写clearfix" class="headerlink" title="手写clearfix"></a>手写clearfix</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>; </span><br><span class="line">    <span class="attribute">visibility</span>:hidden;</span><br><span class="line">    <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a href="https://huanglizhu.github.io/2019/10/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E6%B5%AE%E5%8A%A8%EF%BC%89/#清除浮动-clear-属性" target="_blank" rel="noopener">参考“百度前端技术学院 第五天学习笔记 （CSS浮动）”的“清除浮动-clear-属性”</a></p>
 <h3 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h3><ul>
@@ -295,23 +298,30 @@
 <h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><h3 id="absolute和relative分别依据什么定位"><a href="#absolute和relative分别依据什么定位" class="headerlink" title="absolute和relative分别依据什么定位"></a>absolute和relative分别依据什么定位</h3><ul>
 <li><strong>relative</strong>依据<strong>自身</strong>定位</li>
 <li><strong>absolute</strong>依据<strong>最近一层的定位元素</strong>定位<ul>
-<li><strong>定为元素</strong>：absolute、relative、fixed、body</li>
+<li><strong>定为元素</strong>：absolute、relative、fixed、body（<code>&lt;html&gt;</code>标签）</li>
 </ul>
 </li>
 </ul>
 <h3 id="居中对齐"><a href="#居中对齐" class="headerlink" title="居中对齐"></a>居中对齐</h3><ul>
 <li><strong>水平居中：</strong><ul>
-<li><strong>inline元素</strong>：text-align：center</li>
-<li><strong>block元素（子元素宽度未知时）</strong>：margin：auto</li>
-<li><strong>absolute元素</strong>：<strong>left：50%</strong>+ margin-left负值/<strong>transform: translateX(-50%);（父元素宽度未知时）</strong></li>
+<li><strong>行内文本/图片（给父元素设置text-align）/块内文本</strong>：<code>text-align：center</code></li>
+<li><strong>block元素（子元素宽度未知时）</strong>：<code>margin：auto</code>/<code>margin：0 auto</code></li>
+<li><strong><code>position:absolute +left:50%+ transform:translateX(-50%)</code></strong></li>
+<li><strong><code>display:flex + justify-content: center</code></strong></li>
 </ul>
 </li>
-<li><strong>垂直居中：</strong><ul>
+<li><strong>垂直居中：</strong>（必备条件：父元素是盒子容器且高度已设定）<ul>
 <li><strong>inline元素</strong>：line-height的值等于height值</li>
-<li><strong>absolute元素</strong>：top：50%+ margin-top负值/<strong>transform: translateY(-50%);（子元素高度未知时）</strong></li>
+<li><strong>块内文本/行内/单元格内 图片/文本/块级元素 垂直居中：</strong>父元素设置<code>display: table-cell;vertical-align:middle</code><ul>
+<li><strong>注意</strong>：vertical-align 不作用于span元素</li>
+</ul>
+</li>
+<li><strong>position：absolute +top:50%+ transform:translateY(-50%)</strong>/margin-top负值</li>
+<li><code>display: flex;align-items: center;</code></li>
 </ul>
 </li>
 <li><strong>水平垂直居中：</strong>（前提是父元素高度确定）<ul>
+<li><strong><code>display:flex;align-items:center;justify-content:center;</code></strong></li>
 <li><strong>absolute元素（子元素宽高未知时）</strong>：top：50% + left：50% + transform:translate（-50%，-50%）</li>
 <li><strong>absolute元素（子元素宽高未知时）</strong>：<strong>top，left，bottom，right= 0 + margin：auto</strong><ul>
 <li>让绝对定位元素上下左右都等于0，再通过设置元素的margin自动填充达到居中效果</li>
@@ -337,7 +347,7 @@
 <li>px是绝对长度单位，最常用</li>
 <li>em是相对长度单位，相对于父元素的font-size，不常用</li>
 </ul>
-<h3 id="响应式布局的常用方案"><a href="#响应式布局的常用方案" class="headerlink" title="响应式布局的常用方案"></a>响应式布局的常用方案</h3><p><strong>media-query搭配rem</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkwwl4evzmj30rn0iitao.jpg" alt="media-query搭配rem"><br><strong>media-query</strong>根据不同的屏幕宽度来<strong>设置根元素font-size</strong><br><strong>rem</strong>基于根元素的相对单位</p>
+<h3 id="响应式布局的常用方案"><a href="#响应式布局的常用方案" class="headerlink" title="响应式布局的常用方案"></a>响应式布局的常用方案</h3><p><strong>media-query搭配rem</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gkwwl4evzmj30rn0iitao.jpg" alt="media-query搭配rem"><br><strong>media-query</strong>根据不同的屏幕宽度来<strong>设置根元素font-size</strong><br><strong>rem</strong>基于根元素的相对单位<br><strong>注意：最后一定要给<code>&lt;body&gt;</code>单独设置一遍font-size！否则默认的font-size就和设置rem的根元素一致了</strong></p>
 <h3 id="vw-vh"><a href="#vw-vh" class="headerlink" title="vw/vh"></a>vw/vh</h3><ul>
 <li><p><strong>rem的弊端：“阶梯性”</strong>，从上面“响应式布局的常用方案”例子中可以看到布局分为3个“阶梯”，一段一段的布局，vw/vh可以解决这个问题</p>
 </li>
