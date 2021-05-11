@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfpg6bcx3mj30rg06dgsa.jpg">
-<meta property="og:updated_time" content="2021-04-26T15:05:18.140Z">
+<meta property="og:updated_time" content="2021-05-11T05:38:25.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 运行环境">
 <meta name="twitter:description" content="运行环境介绍 运行环境即浏览器（server端有nodejs，移动端在app/微信上） 下载网页代码，渲染出页面，期间会执行若干JS 要保证代码在浏览器中：稳定且高效 网页加载过程 性能优化 安全">
@@ -304,7 +304,12 @@
 <h3 id="尽早开始执行JS"><a href="#尽早开始执行JS" class="headerlink" title="尽早开始执行JS"></a>尽早开始执行JS</h3><p><strong>使用DOMContentLoaded来触发JS比window.onload更好</strong>，不需要等图片、视频都加载完成才触发JS的加载，这样页面渲染会更快。<br><strong>DOMContentLoaded是当DOM树渲染完即可执行</strong>，此时图片、视频还可能没有加载完（注意是DOM渲染完成而不是页面渲染完成）<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfqr43b8v6j30tf06gahc.jpg" alt="尽早开始执行JS"></p>
 <hr>
 <h1 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖 debounce"></a>防抖 debounce</h1><ul>
-<li><strong>防抖</strong>：比如，监听一个输入框的文字变化后触发change事件，直接用keyup事件，则会频发触发change事件。如果使用<strong>防抖</strong>，则用户<strong>输入结束或暂停时</strong>，才会触发change事件。（防抖不仅限于change事件）</li>
+<li><strong>防抖和节流的区别</strong>：<strong>防抖</strong>是在触发结束<strong>后</strong>n秒<strong>都没触发了</strong>才会执行事件函数，<strong>节流</strong>则是<strong>只要连续触发n秒就执行事件函数</strong>，不会因为连续触发就重新计算n秒起始位置。<ul>
+<li>例子见下“节流”的事例</li>
+</ul>
+</li>
+<li><strong>防抖</strong>：指触发事件后<strong>在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则以最后一次触发为标准重新计算函数执行时间</strong>。</li>
+<li><strong>比如</strong>，监听一个输入框的文字变化后触发change事件，直接用keyup事件，则会频发触发change事件。如果使用<strong>防抖</strong>，则用户<strong>输入结束或暂停时</strong>，才会触发change事件。（防抖不仅限于change事件）</li>
 <li>防抖实际上是对<strong>定时器<a href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/#setTimeout" target="_blank" rel="noopener">setTimeout</a></strong>的使用，但我们通常将其<strong>封装为debounce函数</strong>来使用</li>
 <li><strong>例子</strong>：<ul>
 <li>原本设定是输入框中<strong>每输入一个字符就触发一个打印</strong>，将输入框中的值打印出来<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlo7sp71j30mu09c7b5.jpg" alt="原本的代码"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfrlpsejmhj30g5070jtv.jpg" alt="原本的效果"></li>
@@ -323,7 +328,11 @@
 </ul>
 <hr>
 <h1 id="节流-throttle"><a href="#节流-throttle" class="headerlink" title="节流 throttle"></a>节流 throttle</h1><ul>
-<li>比如：拖拽一个元素时，要随时拿到该元素被拖拽的位置。这里直接用drag事件则会频发触发，很容易导致卡顿。而使用<strong>节流</strong>，则<strong>无论拖拽速度多快，都会每隔100ms触发一次（时间自定义）</strong></li>
+<li><strong>节流：连续触发事件但是在 n 秒中只执行一次函数</strong></li>
+<li>比如：拖拽一个元素时，要随时拿到该元素被拖拽的位置。这里直接用drag事件则会频发触发，很容易导致卡顿。而使用<strong>节流</strong>，则<strong>无论拖拽速度多快，都会每隔100ms触发一次（时间自定义）</strong><ul>
+<li><strong>注意</strong>：如果用<strong>防抖</strong>的话，就会出现<strong>卡顿</strong>的感觉，因为<strong>只在停止的时候执行了一次</strong>，这个时候就应该用<strong>节流</strong>，在<strong>一定时间内多次执行</strong>，会<strong>流畅</strong>很多（具体原因可见上方“防抖”中“防抖与节流的区别”）</li>
+</ul>
+</li>
 <li><strong>例子：</strong><ul>
 <li>设置一个可拖拽元素并<strong>直接用drag事件</strong>，拖拽时实时打印元素位置：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrsad7t4j30om0db11u.jpg" alt="例子"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfsrtsx9nuj30hx0d179w.jpg" alt="效果"></li>
 <li>采取<strong>节流</strong>后：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss3neuf3j30ni0fck0c.jpg" alt="采取节流代码"><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfss23y3lyj30hw0clgqy.jpg" alt="效果"><strong>逻辑梳理：</strong><ol>

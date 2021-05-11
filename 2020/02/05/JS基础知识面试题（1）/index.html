@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gkzdksxj7xj30rk0d70v3.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
-<meta property="og:updated_time" content="2021-04-09T06:48:16.488Z">
+<meta property="og:updated_time" content="2021-05-06T06:14:50.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS基础知识面试题（1）">
 <meta name="twitter:description" content="慕课 快速搞定前端技术一面 第四五六章 笔记总结">
@@ -243,7 +243,10 @@
 
 <hr>
 <h1 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h1><h2 id="如何准确判断变量是不是数组（typeof不行）"><a href="#如何准确判断变量是不是数组（typeof不行）" class="headerlink" title="如何准确判断变量是不是数组（typeof不行）"></a>如何准确判断变量是不是数组（typeof不行）</h2><ol>
-<li><a href="https://huanglizhu.github.io/2020/02/04/JS%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/#instanceof运算符" target="_blank" rel="noopener">instanceof</a>判断<strong>引用类型</strong>（对象、数组、函数）属于哪个构造函数（Object()、Array()、Funtion()）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"></li>
+<li><a href="https://huanglizhu.github.io/2020/02/04/JS%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/#instanceof运算符" target="_blank" rel="noopener">instanceof</a>判断<strong>引用类型</strong>（对象、数组、函数）属于哪个构造函数（Object()、Array()、Funtion()）<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo72r6fvcj30kt036q4k.jpg" alt="答案"><ul>
+<li><strong>注意</strong>：数组<strong>通过instanceof到Array或Object都返回true</strong></li>
+</ul>
+</li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray" target="_blank" rel="noopener"><code>Array.isArray(obj)</code></a></li>
 </ol>
 <hr>
@@ -294,10 +297,11 @@
 <h2 id="描述new一个对象的过程"><a href="#描述new一个对象的过程" class="headerlink" title="描述new一个对象的过程"></a>描述new一个对象的过程</h2><p>【考察 构造函数】</p>
 <p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbo7e0k737j30xx0bb45g.jpg" alt="答案"></p>
 <ol>
-<li>创建一个新对象f</li>
+<li>创建一个新（空）对象f</li>
+<li>将新对象f的隐式原型（<code>__proto__</code>）指向构造函数的显式原型（<code>prototype</code>）</li>
 <li>构造函数Foo()的this指向这个新对象f（这里的this是个空对象）</li>
-<li>执行Foo()函数代码（即对this进行赋值）</li>
-<li>返回this对象给f（屏蔽第5行代码也是一样的效果，默认返回，此时this已经不是空对象了）</li>
+<li>让新对象f去执行Foo()函数代码（即对this进行赋值）</li>
+<li>如构造函数无返回值或返回一个非对象值，则返回新对象f；如返回值是新对象f则直接返回该对象。（屏蔽第5行代码也是一样的效果，默认返回，此时this已经不是空对象了）</li>
 </ol>
 <hr>
 <h1 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h1><h2 id="对变量提升的理解"><a href="#对变量提升的理解" class="headerlink" title="对变量提升的理解"></a>对<strong>变量提升</strong>的理解</h2><p>【变量定义、函数声明（注意和函数表达式的区别）】</p>

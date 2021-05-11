@@ -19,12 +19,10 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="ES6规范引入了新的数据类型Map和Set">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5efmiqxqj30eg0ekdgq.jpg">
-<meta property="og:updated_time" content="2020-07-27T04:22:15.088Z">
+<meta property="og:updated_time" content="2021-05-10T02:06:05.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 Map和Set">
 <meta name="twitter:description" content="ES6规范引入了新的数据类型Map和Set">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5efmiqxqj30eg0ekdgq.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -192,12 +190,19 @@
 
 </li>
 </ul>
-<h1 id="数组相关的面试题"><a href="#数组相关的面试题" class="headerlink" title="数组相关的面试题"></a>数组相关的面试题</h1><p><a href="https://mp.weixin.qq.com/s/4RbrgQw-wuDksr0DioaShw" target="_blank" rel="noopener">微信 一个学前端的码农 一道 JS 数组相关的面试题</a>（答案用不到Set）<br><strong>问题</strong>：给定一个有序数组，数组里有重复元素，要求原地操作数组，删除重复元素。<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gh5efmiqxqj30eg0ekdgq.jpg" alt="答案"></p>
+<h1 id="数组相关的面试题"><a href="#数组相关的面试题" class="headerlink" title="数组相关的面试题"></a>数组相关的面试题</h1><ul>
+<li><strong>问题</strong>：给定一个有序数组，数组里有重复元素，要求原地操作数组，删除重复元素。</li>
+<li><strong>答案：</strong><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>];</span><br><span class="line">function unique(arr) &#123;</span><br><span class="line">  <span class="comment">// 原地操作数组，删除重复元素</span></span><br><span class="line">  let len = <span class="number">0</span>; <span class="comment">// len为不重复数的index，结果数组长度len+1</span></span><br><span class="line">  <span class="comment">// 遍历原数组</span></span><br><span class="line">  for (let i = len; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 原数组中第一次找到的数组项放入数组前方，len长度+1</span></span><br><span class="line">    if (arr.indexOf(arr[i]) === i) &#123;</span><br><span class="line">      arr[len] = arr[i];</span><br><span class="line">      len++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 相同的i+1继续查</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 去重后，删除数组后方多余数据项</span></span><br><span class="line">  arr.splice(len);</span><br><span class="line">  <span class="comment">// 原地修改，不需要返回</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 针对 原地修改，不返回数组 的打印</span></span><br><span class="line">unique(arr);</span><br><span class="line">console.log(arr);<span class="comment">// [1, 2, 3, 4, 5, 11, 22, 33]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <ol>
-<li>设置一个 <strong>temp 变量</strong>，用来<strong>临时存储每一个不重复的数</strong></li>
-<li>在原数组上循环，<strong>i为循环的index</strong>，设置<strong>len为不重复数的index</strong>（也就是将不重复数替换到 原数组[len] 位置上，这样就不用新开一个数组了）</li>
-<li>先将temp设置为arr[0]，len设置为1，然后从i=1开始遍历数组，<strong>将arr[i]与temp比较</strong>，相同就不管，i++进行下一次循环，<strong>不同时将arr[i]赋给arr<a href="也就是将不同的这个数放到原数组靠前的位置上">len</a>，再将arr[i]拿去替换temp（即换掉下一次循环的比较对象），最后len++（使得下一次替换的原数组index+1）</strong></li>
-<li>全部去重后，<strong>使用splice(len)将len后面的多余数据删掉</strong></li>
+<li>设置<strong>len为不重复数组项的index</strong>（也就是将不重复数替换到 <code>原数组[len]</code> 位置上，这样就不用新开一个数组了）</li>
+<li>在<strong>原数组上循环</strong>，<strong>i为循环的index</strong></li>
+<li><strong>原数组中找<code>arr[i]</code>比对是否是该数组项的第一个位置</strong>，是则<strong>将<code>arr[i]</code>赋给<code>arr[len]</code>(也就是将不同的这个数放到原数组靠前的位置上)，再<code>len++</code>（使得下一次替换的原数组index+1）</strong>，不是就不管，i++进行下一次循环</li>
+<li>全部去重后，<strong>使用splice(len)将len后面的多余数据删掉</strong><ul>
+<li><strong>注意</strong>，最后一次符合if条件时len+1的位置还没用，所以删除时len最末尾也还属于 重复数组 ，一并删去</li>
+</ul>
+</li>
 </ol>
 
       
