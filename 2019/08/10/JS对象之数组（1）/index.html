@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="Array 数组：  数组中每一项都可以存放不同类型的数据，比如：第一个数是字符串，第二个数是数字，第三个数是布尔型。 数组大小可随着数据的添加自动增长。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-27T09:17:18.506Z">
+<meta property="og:updated_time" content="2021-05-16T06:00:51.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS对象之数组(1)">
 <meta name="twitter:description" content="Array 数组：  数组中每一项都可以存放不同类型的数据，比如：第一个数是字符串，第二个数是数字，第三个数是布尔型。 数组大小可随着数据的添加自动增长。">
@@ -352,48 +352,70 @@
 </ul>
 <hr>
 <h3 id="sort-升序-降序排序"><a href="#sort-升序-降序排序" class="headerlink" title="sort()升序/降序排序"></a>sort()升序/降序排序</h3><ul>
-<li>语法:<code>arrayObject.sort(sortby)</code><ul>
+<li><p>参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort" target="_blank" rel="noopener">MDN</a></p>
+</li>
+<li><p>语法:<code>arrayObject.sort(sortby)</code></p>
+<ul>
 <li>sortby:可选。规定排序顺序。必须是函数。<ul>
 <li><strong>sortby如果为空</strong>则按照<strong>字符串的大小</strong>来排序（也就是每个元素都先比较第一位的大小来排，再比较第二位），哪怕是数字也是如此。</li>
-<li>所以要放置一个<strong>匿名</strong>函数(<strong>排序函数</strong>)才能用于数字的升降序排序。</li>
+<li>所以要放置一个<strong>函数作为参数</strong>(<strong><code>（a,b）=&gt; { return xxx }</code></strong>)才能用于数字的升降序排序。<strong>a与b为数组中任意两个数组项</strong></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>功能:用于对数组的元素进行<strong>排序</strong>(升序/降序),<strong>参数决定排序的顺序</strong>。</li>
-<li>返回值:对数组的引用。</li>
-<li><strong>注意，数组在原数组上进行排序，不生成副本。</strong></li>
-<li>说明:</li>
-</ul>
-<ol>
-<li>即使数组中的每一项都是数值,sort()方法比较的也是字符串.</li>
-<li>sort()方法可以接收一个<strong>比较函数</strong>作为参数.(该比较函数为含有两个参数的匿名函数)</li>
-</ol>
+<li><p>功能:用于对数组的元素进行<strong>排序</strong>(升序/降序),<strong>比较函数的返回值决定排序的顺序</strong>。<strong>规定的排序规则如下：</strong></p>
 <ul>
-<li><strong>原理</strong>：  <ul>
+<li><strong>返回值&lt;0则排序结果a,b</strong></li>
+<li><strong>返回值&gt;0则排序结果b,a</strong></li>
+</ul>
+</li>
+<li><p><strong>记住简写：返回值a-b</strong>则<strong>永远升序</strong>，<strong>返回值b-a</strong>则<strong>永远降序</strong>。和数组的元素组成/顺序没有关系！<strong>原因见下“为何返回a-b永远是升序”</strong></p>
+</li>
+<li><p>返回值:对数组的引用。</p>
+</li>
+<li><p><strong>注意：数组在原数组上进行排序，不生成副本。</strong></p>
+</li>
+<li><p><strong>原理</strong>：  </p>
+<ul>
 <li>如果调用该方法时<strong>没有使用参数</strong>，将<strong>按字母顺序对数组中的元素进行排序</strong>，说得更精确点，是<strong>按照字符编码的顺序进行排序</strong>。</li>
 <li>如果想按照其他标准进行排序，就需要提供<strong>比较函数，该函数要比较两个值</strong>，然后返回一个用于说明这两个值的相对顺序的数字。<ul>
 <li><strong>比较函数应具有两个参数 a 和 b，根据返回值大小可判断ab的排序位置</strong>：  </li>
 </ul>
 <ol>
-<li><strong>返回值小于 0，则排序后的数组中 a 在 b 之前</strong>。【升序】</li>
+<li><strong>返回值小于 0，则排序后的数组中 a 在 b 之前</strong>。</li>
 <li>返回 0。</li>
-<li><strong>返回值大于 0，则排序后的数组中 a 在 b 之后</strong>。【降序】</li>
+<li><strong>返回值大于 0，则排序后的数组中 a 在 b 之后</strong>。</li>
 </ol>
+</li>
+</ul>
+</li>
+<li><p><strong>例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=[<span class="number">9</span>,<span class="number">23</span>,<span class="number">15</span>,<span class="number">-99</span>,<span class="number">88</span>,<span class="number">12</span>,<span class="number">-2</span>];</span><br><span class="line"><span class="comment">// b-a降序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> b-a&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[88, 23, 15, 12, 9, -2, -99]</span></span><br><span class="line"><span class="comment">// a-b升序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a-b&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[-99, -2, 9, 12, 15, 23, 88]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>例子原理</strong>：  </p>
 <ul>
-<li><strong>注意</strong>：不管是b-a还是a-b还是别的计算式，我们<strong>只关注返回值</strong>来确定a在b的前面还是后面。</li>
+<li>排序思想应该是<strong>类似于冒泡排序思想</strong>的，通过前后相邻的两个数进行比较。  </li>
+<li>例如9与23，这时将9作为方法函数<code>function(a,b)</code>参数列表中的a，23作为b，通过语句<code>return b - a;</code>返回一个数值，23-9=24,若返回值&gt;0，则表示 <strong>a在排序后的序列中出现在 b 之后</strong>,所以9会在排序后出现在23之后。<strong>也就是说数组将被由大到小排序。</strong></li>
+<li>此时，新的数据序列为<code>23,9,15,-99,88,12，-2</code>，再将9作为a，15作为b进行上述的做法。</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-<p><strong>例子</strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=[<span class="number">9</span>,<span class="number">23</span>,<span class="number">15</span>,<span class="number">-99</span>,<span class="number">88</span>,<span class="number">12</span>,<span class="number">-2</span>];</span><br><span class="line"><span class="comment">//降序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> b-a&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[88, 23, 15, 12, 9, -2, -99]</span></span><br><span class="line"><span class="comment">//升序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a-b&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[-99, -2, 9, 12, 15, 23, 88]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>例子原理</strong>：<br>排序思想应该是<strong>类似于冒泡排序思想</strong>的，通过前后相邻的两个数进行比较。<br>例如9与23，这时将9作为方法函数<code>function(a,b)</code>参数列表中的a，23作为b，通过语句<code>return b - a;</code>返回一个数值，23-9=24,  若返回值&gt;0，则表示 <strong>a在排序后的序列中出现在 b 之后</strong>,所以9会在排序后出现在23之后。<strong>也就是说数组将被由大到小排序。</strong><br>此时，新的数据序列为<code>23,9,15,-99,88,12，-2</code>，再将9作为a，15作为b进行上述的做法。</p>
-<p><strong>关于返回值：</strong></p>
+<li><p><strong>关于返回值：</strong></p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">array</span>1 = [<span class="number">1</span>, <span class="number">30</span>, <span class="number">4</span>, <span class="number">21</span>, <span class="number">100000</span>];</span><br><span class="line"><span class="built_in">array</span>2 = <span class="built_in">array</span>1.sort();</span><br><span class="line">console.log(<span class="built_in">array</span>2);</span><br><span class="line"><span class="comment">// expected output: Array [1, 100000, 21, 30, 4]</span></span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h4 id="为何返回a-b永远是升序"><a href="#为何返回a-b永远是升序" class="headerlink" title="为何返回a-b永远是升序"></a>为何返回a-b永远是升序</h4><ul>
+<li><p><a href="https://blog.csdn.net/weixin_42207975/article/details/107538527" target="_blank" rel="noopener">参考文章</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">当 a&gt;<span class="selector-tag">b</span> 时，可从数学角度得出<span class="selector-tag">a</span> - <span class="selector-tag">b</span> &gt; <span class="number">0</span>以及<span class="selector-tag">b</span> - <span class="selector-tag">a</span> &lt; <span class="number">0</span></span><br><span class="line">因为<span class="selector-tag">a</span> - <span class="selector-tag">b</span> &gt; <span class="number">0</span>  ，所以排序结果 ===&gt; b，<span class="selector-tag">a</span> （升序）</span><br><span class="line">因为<span class="selector-tag">b</span> - <span class="selector-tag">a</span> &lt; <span class="number">0</span>  ，所以排序结果 ===&gt; a，<span class="selector-tag">b</span> （降序）</span><br><span class="line"></span><br><span class="line">当 b&gt;<span class="selector-tag">a</span> 时，可从数学角度得出<span class="selector-tag">a</span> - <span class="selector-tag">b</span> &lt; <span class="number">0</span>以及<span class="selector-tag">b</span> - <span class="selector-tag">a</span> &gt; <span class="number">0</span></span><br><span class="line">因为<span class="selector-tag">a</span> - <span class="selector-tag">b</span> &lt; <span class="number">0</span>  ，所以排序结果 ===&gt; a，<span class="selector-tag">b</span> （升序）</span><br><span class="line">因为<span class="selector-tag">b</span> - <span class="selector-tag">a</span> &gt; <span class="number">0</span>  ，所以排序结果 ===&gt; b，<span class="selector-tag">a</span> （降序）</span><br><span class="line"></span><br><span class="line">当 <span class="selector-tag">a</span> = <span class="selector-tag">b</span> 时，可从数学角度得出<span class="selector-tag">a</span> - <span class="selector-tag">b</span> = <span class="selector-tag">b</span> - <span class="selector-tag">a</span> = <span class="number">0</span></span><br><span class="line">因为<span class="selector-tag">a</span> - <span class="selector-tag">b</span> = <span class="selector-tag">b</span> - <span class="selector-tag">a</span> = <span class="number">0</span> , 所以排序结果 ===&gt; 保持不变</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由此看出，<strong>无论a&gt;b还是b&gt;a</strong>，return a-b <strong>总能得到升序</strong>的结果，而 return b-a <strong>总能得到降序</strong>的结果。</p>
+</li>
+<li><p><strong>还是不能理解返回a-b是升序的话，完全可以像下面这样展开写</strong>。<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort" target="_blank" rel="noopener">MDN</a>中的<strong>“比较函数格式”其实就是<code>return a-b</code>/<code>return b-a</code></strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 升序（展开写的例子）</span></span><br><span class="line">let arr = [<span class="number">1</span>, <span class="number">22</span>, <span class="number">15</span>, <span class="number">32</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="comment">// 下面的写法完全等价于arr.sort((a, b) =&gt; a-b);</span></span><br><span class="line">arr.sort((a, b) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (a &gt; b) <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 返回值1&gt;0，排序结果b,a，又因为a&gt;b，所以是升序排列的</span></span><br><span class="line">  <span class="keyword">if</span> (a &lt; b) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 返回值-1&lt;0，排序结果a,b，又因为a&lt;b，所以是升序排列的</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// a=b的情况</span></span><br><span class="line">&#125;);</span><br><span class="line">console.log(arr); <span class="comment">// [1, 4, 5, 15, 22, 32]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>降序b-a展开写则是返回1和-1的情况颠倒即可。</p>
+</li>
+</ul>
 <hr>
 <h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="concat-连接两个或多个数组"><a href="#concat-连接两个或多个数组" class="headerlink" title="concat()连接两个或多个数组"></a>concat()连接两个或多个数组</h3><ul>
 <li>语法:<code>arrayObject.concat(arrayX,arrayX....…arrayX)</code></li>
@@ -575,7 +597,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数组"><span class="nav-number">1.</span> <span class="nav-text">创建数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组元素的读写"><span class="nav-number">2.</span> <span class="nav-text">数组元素的读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组长度"><span class="nav-number">3.</span> <span class="nav-text">数组长度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的方法"><span class="nav-number">4.</span> <span class="nav-text">数组的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#push-：在尾部添加元素"><span class="nav-number">4.1.</span> <span class="nav-text">push()：在尾部添加元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unshift-：在开头添加元素"><span class="nav-number">4.2.</span> <span class="nav-text">unshift()：在开头添加元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pop-：删除最后一个元素"><span class="nav-number">4.3.</span> <span class="nav-text">pop()：删除最后一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shift-：删除第一个元素"><span class="nav-number">4.4.</span> <span class="nav-text">shift()：删除第一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换方法：join-数组转换为字符串"><span class="nav-number">4.5.</span> <span class="nav-text">转换方法：join()数组转换为字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重排序方法"><span class="nav-number">4.6.</span> <span class="nav-text">重排序方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse-颠倒顺序"><span class="nav-number">4.6.1.</span> <span class="nav-text">reverse()颠倒顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-升序-降序排序"><span class="nav-number">4.6.2.</span> <span class="nav-text">sort()升序/降序排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作方法"><span class="nav-number">4.7.</span> <span class="nav-text">操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concat-连接两个或多个数组"><span class="nav-number">4.7.1.</span> <span class="nav-text">concat()连接两个或多个数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice-截取部分元素"><span class="nav-number">4.7.2.</span> <span class="nav-text">slice()截取部分元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice-删除、插入、替换"><span class="nav-number">4.7.3.</span> <span class="nav-text">splice()删除、插入、替换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">4.7.3.1.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">4.7.3.2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换"><span class="nav-number">4.7.3.3.</span> <span class="nav-text">替换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置查找方法"><span class="nav-number">4.8.</span> <span class="nav-text">位置查找方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf-从头开始找"><span class="nav-number">4.8.1.</span> <span class="nav-text">indexOf()从头开始找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lastIndexOf-从尾开始找"><span class="nav-number">4.8.2.</span> <span class="nav-text">lastIndexOf()从尾开始找</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建数组"><span class="nav-number">1.</span> <span class="nav-text">创建数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组元素的读写"><span class="nav-number">2.</span> <span class="nav-text">数组元素的读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组长度"><span class="nav-number">3.</span> <span class="nav-text">数组长度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的方法"><span class="nav-number">4.</span> <span class="nav-text">数组的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#push-：在尾部添加元素"><span class="nav-number">4.1.</span> <span class="nav-text">push()：在尾部添加元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unshift-：在开头添加元素"><span class="nav-number">4.2.</span> <span class="nav-text">unshift()：在开头添加元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pop-：删除最后一个元素"><span class="nav-number">4.3.</span> <span class="nav-text">pop()：删除最后一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shift-：删除第一个元素"><span class="nav-number">4.4.</span> <span class="nav-text">shift()：删除第一个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换方法：join-数组转换为字符串"><span class="nav-number">4.5.</span> <span class="nav-text">转换方法：join()数组转换为字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重排序方法"><span class="nav-number">4.6.</span> <span class="nav-text">重排序方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse-颠倒顺序"><span class="nav-number">4.6.1.</span> <span class="nav-text">reverse()颠倒顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-升序-降序排序"><span class="nav-number">4.6.2.</span> <span class="nav-text">sort()升序/降序排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为何返回a-b永远是升序"><span class="nav-number">4.6.2.1.</span> <span class="nav-text">为何返回a-b永远是升序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作方法"><span class="nav-number">4.7.</span> <span class="nav-text">操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concat-连接两个或多个数组"><span class="nav-number">4.7.1.</span> <span class="nav-text">concat()连接两个或多个数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice-截取部分元素"><span class="nav-number">4.7.2.</span> <span class="nav-text">slice()截取部分元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice-删除、插入、替换"><span class="nav-number">4.7.3.</span> <span class="nav-text">splice()删除、插入、替换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">4.7.3.1.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">4.7.3.2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换"><span class="nav-number">4.7.3.3.</span> <span class="nav-text">替换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置查找方法"><span class="nav-number">4.8.</span> <span class="nav-text">位置查找方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf-从头开始找"><span class="nav-number">4.8.1.</span> <span class="nav-text">indexOf()从头开始找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lastIndexOf-从尾开始找"><span class="nav-number">4.8.2.</span> <span class="nav-text">lastIndexOf()从尾开始找</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
@@ -603,7 +625,7 @@
                 <div class="clearfix container">
                     <div class="site-info">
                         &copy;
-                        2021
+                        2022
                             珠 All Rights Reserved.
                                 
                                     <span id="busuanzi_container_site_uv">

@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfkz4coiglj30g90ghjyu.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfkzh7nwz0j30ek0aigpq.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfkzgzsv8ej31030ce46p.jpg">
-<meta property="og:updated_time" content="2021-04-26T01:33:05.057Z">
+<meta property="og:updated_time" content="2021-05-18T06:06:47.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Web API 存储">
 <meta name="twitter:description" content="cookie 原本用于浏览器和server通讯（hhtp请求），最早是被“借用”到本地存储来的（因为localstorage和sessionstorage是html5才提出的） js中可用docuiment.cookie =&amp;#39;...&amp;#39;来修改cookie">
@@ -224,7 +224,15 @@
 <li><strong>生命周期</strong>：<ul>
 <li>Cookie：<strong>设置的cookie过期时间之前一直有效</strong>，即使窗口或浏览器关闭。未设置则<strong>默认为关闭浏览器后失效</strong>。(<strong>不是浏览器标签页</strong>，而是整个浏览器)</li>
 <li>Localstorage:除非被手动清除，否则<strong>永久保存</strong>，窗口或浏览器关闭也一直保存，因此<strong>用作持久数据</strong>。</li>
-<li>Sessionstorage：<strong>仅在当前网页会话下有效</strong>，关闭<strong>页面或浏览器</strong>后就会被清除（刷新页面不会被清除），自然也就不可能持久保持。</li>
+<li>Sessionstorage：<strong>仅在当前标签页下有效</strong>，关闭<strong>页面或浏览器</strong>后就会被清除（刷新页面不会被清除），自然也就不可能持久保持。<ul>
+<li><strong>注意：</strong><ul>
+<li><strong>单个窗口开启多个页面（同域名）时，不同标签页之间，相同域名下的sessionStorage是不同的</strong>。</li>
+<li><strong>多窗口情况，即使是同一页面，每个页面都有自己独立保存了一份sessionStorage，互不影响。</strong></li>
+<li>sessionStorage的session仅限<strong>当前标签页</strong>或者<strong>当前标签页打开的新标签页</strong>，通过<strong>其它方式新开的窗口或标签不认为是同一个session。</strong>打开标签页的方式不同有可能会导致你期望传递的数据传过去发现为空的问题。<strong>但就算sessionStorage传递到新窗口/页面，新旧窗口数据也不会互相同步，增删查改只和自己所处的窗口/页面有关。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>存放数据</strong>：<ul>
@@ -354,7 +362,7 @@
                 <div class="clearfix container">
                     <div class="site-info">
                         &copy;
-                        2021
+                        2022
                             珠 All Rights Reserved.
                                 
                                     <span id="busuanzi_container_site_uv">

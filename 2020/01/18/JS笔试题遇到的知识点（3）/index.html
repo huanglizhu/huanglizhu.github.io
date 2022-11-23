@@ -21,7 +21,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbluno9m0qj30s90lgtcu.jpg">
-<meta property="og:updated_time" content="2020-02-09T11:25:32.331Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcb2qoewo1j31e70mik5v.jpg">
+<meta property="og:updated_time" content="2021-05-17T03:29:22.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS笔试遇到的知识点（3）">
 <meta name="twitter:description" content="运算符优先级参考MDN的运算符优先级中的“汇总表”">
@@ -168,45 +169,206 @@
 <a id="more"></a>
 
 <hr>
-<h1 id="逻辑运算符-amp-amp-和-的规律"><a href="#逻辑运算符-amp-amp-和-的规律" class="headerlink" title="逻辑运算符&amp;&amp;和||的规律"></a>逻辑运算符<code>&amp;&amp;</code>和<code>||</code>的规律</h1><p>可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_Operators" target="_blank" rel="noopener">MDN的逻辑运算符</a><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg" alt="逻辑运算符"></p>
-<p><strong>明确：<code>&amp;&amp;</code>和<code>||</code>返回的是表达式，<code>!</code>返回的是布尔值！</strong></p>
-<p><strong>会被转换为 false 的表达式有</strong>：<br>null； NaN； 0； 空字符串（<code>&quot;&quot;</code> or <code>&#39;&#39;</code> or ``）； undefined。</p>
-<h2 id="帮助理解"><a href="#帮助理解" class="headerlink" title="帮助理解"></a>帮助理解</h2><p><strong>返回表达式的原则：从前往后判断，只要到了能判断出 整个表达式的真假 的位置我们就停下来返回这个位置的部分表达式。</strong></p>
-<p><strong>&amp;&amp;：前后都为真才是真，只要有一个是假的就是假。</strong>所以只要有第一个表达式是假的我们就不用继续判断了，返回第一个表达式。如果第一个表达式是真的我们就继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
-<p><strong>||：只要有一个是真就是真。</strong>所以只要有第一个表达式是真的就可以判断整个表达式都是真的，故返回第一个表达式。如果第一个表达式是假的那我们就要继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span><span class="number">10</span>可被强转为<span class="literal">true</span>，<span class="number">0</span>则是<span class="literal">false</span>，有一个错的就返回错的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span> &amp;&amp; <span class="number">0</span>);<span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="regexp">//</span><span class="string">""</span>可被强转为<span class="literal">false</span>，<span class="string">"abc"</span>可被强转为<span class="literal">true</span>，有一个是真的就返回真的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">""</span> || <span class="string">"abc"</span>);<span class="regexp">//</span><span class="string">"abc"</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="built_in">window</span>.abc);<span class="regexp">//</span><span class="literal">true</span>。`<span class="javascript"><span class="built_in">window</span>.abc</span>`是<span class="literal">undefined</span>，强转为<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h1 id="位运算符-amp-和"><a href="#位运算符-amp-和" class="headerlink" title="位运算符&amp;和|"></a>位运算符<code>&amp;</code>和<code>|</code></h1><ul>
+<li><a href="https://www.runoob.com/w3cnote/bit-operation.html" target="_blank" rel="noopener">参考</a></li>
+<li><code>&amp;</code>，按位与运算符，参加运算的两个数据，按<strong>二进制</strong>位进行”与”运算。<strong>两个 位 都为1时，结果才为1</strong><ul>
+<li><code>0&amp;0=0  0&amp;1=0  1&amp;0=0  1&amp;1=1</code></li>
+<li><code>3&amp;5</code> 即 <code>0011 &amp; 0101 = 0001</code>，因此 <strong><code>3&amp;5</code> 的值是1</strong></li>
+</ul>
+</li>
+<li><code>|</code>，或，<strong>两个位只要有一个为1，那么结果都为1，全为0才得0</strong><ul>
+<li><code>0|0=0  0|1=1  1|0=1  1|1=1</code></li>
+<li><code>3|5</code>即 <code>0011| 0101 = 0111</code>，因此，<code>3|5</code>的值得7。</li>
+</ul>
+</li>
+</ul>
+<h1 id="逻辑运算符-amp-amp-和-的规律"><a href="#逻辑运算符-amp-amp-和-的规律" class="headerlink" title="逻辑运算符&amp;&amp;和||的规律"></a>逻辑运算符<code>&amp;&amp;</code>和<code>||</code>的规律</h1><ul>
+<li>可参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_Operators" target="_blank" rel="noopener">MDN的逻辑运算符</a><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbn0hn2d3wj313h06g42l.jpg" alt="逻辑运算符"></li>
+<li><strong>明确：<code>&amp;&amp;</code>和<code>||</code>返回的是表达式，<code>!</code>返回的是布尔值！</strong></li>
+<li><strong>会被转换为 false 的表达式有</strong>：<ul>
+<li>null； NaN； 0； 空字符串（<code>&quot;&quot;</code> or <code>&#39;&#39;</code> or ``）； undefined。</li>
+</ul>
+</li>
+<li><strong>帮助理解</strong></li>
+</ul>
+<p><strong>返回表达式的原则：从前往后判断，只要到了能判断出 整个表达式的真假 的位置就停下来返回这个位置的部分表达式。</strong></p>
+<ul>
+<li><strong>&amp;&amp;：前后都为真才是真，只要有一个是假的就是假。</strong>所以只要有第一个表达式是假的我们就不用继续判断了，返回第一个表达式。如果第一个表达式是真的我们就继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</li>
+<li><strong>||：只要有一个是真就是真。</strong>所以只要有第一个表达式是真的就可以判断整个表达式都是真的，故返回第一个表达式。如果第一个表达式是假的那我们就要继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</li>
+<li><strong>例子</strong><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span><span class="number">10</span>可被强转为<span class="literal">true</span>，<span class="number">0</span>则是<span class="literal">false</span>，有一个错的就返回错的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span> &amp;&amp; <span class="number">0</span>);<span class="regexp">//</span><span class="number">0</span></span><br><span class="line"><span class="regexp">//</span><span class="string">""</span>可被强转为<span class="literal">false</span>，<span class="string">"abc"</span>可被强转为<span class="literal">true</span>，有一个是真的就返回真的表达式</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">""</span> || <span class="string">"abc"</span>);<span class="regexp">//</span><span class="string">"abc"</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="built_in">window</span>.abc);<span class="regexp">//</span><span class="literal">true</span>。`<span class="javascript"><span class="built_in">window</span>.abc</span>`是<span class="literal">undefined</span>，强转为<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><strong>问题</strong>：<code>1 &amp;&amp; 2&gt;1</code>返回的布尔值？<br><strong>答案</strong>：true<br><strong>解析</strong>：<br><code>&gt;</code>的优先级排在前，所以先判断右边的表达式，<code>2&gt;1</code> 结果为true。<br>得到<code>1&amp;&amp;true</code>，1可被强转为true，所以返回的结果是 运算符后面的表达式 ，也就是true。</p>
-<p><strong>改一下问题</strong>：console.log(2 &gt; 1 &amp;&amp;  1);<br><strong>答案</strong>：1<br><strong>解析</strong>：<br><code>2&gt;1</code> 结果为true，所以返回 运算符后面的表达式，也就是1.</p>
+</li>
+</ul>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ul>
+<li><strong>问题</strong>：<code>1 &amp;&amp; 2&gt;1</code>返回的布尔值？</li>
+<li><strong>答案</strong>：true</li>
+<li><strong>解析</strong>：<br>  <code>&gt;</code>的优先级排在前，所以先判断右边的表达式，<code>2&gt;1</code> 结果为true。得到<code>1&amp;&amp;true</code>，1可被强转为true，<strong>前真后真返回后</strong>，所以返回的结果是 运算符后面的表达式 ，也就是true。</li>
+<li><strong>改一下问题</strong>：<code>console.log(2 &gt; 1 &amp;&amp;  1);</code></li>
+<li><strong>答案</strong>：1</li>
+<li><strong>解析</strong>：<br>  <code>2&gt;1</code> 结果为true，所以返回 运算符后面的表达式，也就是1.</li>
+</ul>
 <hr>
-<h1 id="cookie的生命期"><a href="#cookie的生命期" class="headerlink" title="cookie的生命期"></a>cookie的生命期</h1><p><strong>cookie的有效时间默认为-1，如果不进行设置的话，就会默认在浏览器会话关闭时结束</strong>。<br>可以通过<code>setMaxAge()</code>方法设置cookie的生命期。<br>当<code>setMaxAge(0)</code>表示立刻删除该浏览器上指定的cookie。</p>
+<h1 id="cookie的生命期"><a href="#cookie的生命期" class="headerlink" title="cookie的生命期"></a>cookie的生命期</h1><ul>
+<li>cookie的<strong>有效时间<a href="https://www.runoob.com/js/js-cookies.html" target="_blank" rel="noopener"><code>expires/Max-Age</code></a>不设置的话</strong>默认值是Session【-1？】，意思是cookie会和session一起失效。当<strong>浏览器会话关闭(不是浏览器标签页，而是整个浏览器) 后，此cookie失效</strong>。</li>
+<li>可以通过<code>cookie.setMaxAge()</code>方法（单位：秒）设置cookie的生命期。不过这个方法基本舍弃了。<ul>
+<li>当<code>cookie.setMaxAge(0)</code>表示立刻删除该浏览器上指定的cookie。</li>
+<li><strong>使用expires</strong>为 cookie 添加一个过期时间（以 UTC 或 GMT 时间）<code>document.cookie=&quot;expires=Thu, 18 Dec 2043 12:00:00 GMT&quot;;</code></li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="Ajax技术的工作原理（XMLHttpRequest）"><a href="#Ajax技术的工作原理（XMLHttpRequest）" class="headerlink" title="Ajax技术的工作原理（XMLHttpRequest）"></a>Ajax技术的工作原理（XMLHttpRequest）</h1><p>可参考笔记<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/" target="_blank" rel="noopener">AJAX异步更新</a></p>
-<p><strong>Ajax技术核心就是XMLHttpRequest对象。</strong></p>
-<p>Ajax技术的<strong>工作原理</strong>(可以分成<strong>3步</strong>):</p>
+<h1 id="Ajax技术的工作原理（XMLHttpRequest）"><a href="#Ajax技术的工作原理（XMLHttpRequest）" class="headerlink" title="Ajax技术的工作原理（XMLHttpRequest）"></a>Ajax技术的工作原理（XMLHttpRequest）</h1><ul>
+<li><p>可参考笔记<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/" target="_blank" rel="noopener">AJAX异步更新</a></p>
+</li>
+<li><p><strong>Ajax技术核心就是XMLHttpRequest对象。</strong></p>
+</li>
+<li><p>Ajax技术的<strong>工作原理</strong>(可以分成<strong>3步</strong>):</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 创建XMLHttpRequest对象：</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">//2. xhr 发送请求：</span></span><br><span class="line">xhr.open(<span class="string">'get'</span>,<span class="string">'test.html'</span>,<span class="string">'true'</span>);</span><br><span class="line">xhr.send();</span><br><span class="line"><span class="comment">//3. xhr获取响应：</span></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(xhr.readystate == <span class="number">4</span>)&#123;<span class="comment">//请求的状态码</span></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    0:请求还没有建立（open执行前）</span></span><br><span class="line"><span class="comment">    1：请求建立了还没发送（执行了open）</span></span><br><span class="line"><span class="comment">    2：请求正式发送（执行了send）</span></span><br><span class="line"><span class="comment">    3：请求已受理，有部分数据可以用，但还没有处理完成</span></span><br><span class="line"><span class="comment">    4：请求完全处理完成</span></span><br><span class="line"><span class="comment">       */</span> </span><br><span class="line">    alert(xhr.responseText);<span class="comment">//返回的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，<strong>send()前是open()</strong></p>
-<p>在笔记“<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#向服务器发送请求" target="_blank" rel="noopener">AJAX异步更新</a>的向服务器发送请求”中也提到：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbluno9m0qj30s90lgtcu.jpg" alt="AJAX异步更新 步骤"></p>
+</li>
+<li><p>可以看到，<strong>send()前是open()</strong></p>
+</li>
+<li><p>在笔记“<a href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#向服务器发送请求" target="_blank" rel="noopener">AJAX异步更新</a>的向服务器发送请求”中也提到：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbluno9m0qj30s90lgtcu.jpg" alt="AJAX异步更新 步骤"></p>
+</li>
+</ul>
 <hr>
-<h1 id="解释型语言的特性-非独立、效率低"><a href="#解释型语言的特性-非独立、效率低" class="headerlink" title="解释型语言的特性:非独立、效率低"></a>解释型语言的特性:非独立、效率低</h1><p><strong>非独立</strong>：JavaScript语言依赖执行环境，对于客户端来说是浏览器，对于服务端来说是node。<br><strong>效率低</strong>：执行前不需要编译，执行时才编译，因此效率低。</p>
-<h2 id="解释性语言和编译性语言"><a href="#解释性语言和编译性语言" class="headerlink" title="解释性语言和编译性语言"></a>解释性语言和编译性语言</h2><p>计算机不能直接理解高级语言，只能直接理解机器语言，所以必须要把高级语言翻译成机器语言，计算机才能执行高级语言编写的程序。<br><strong>翻译的方式有两种，一个是编译，一个是解释。两种方式只是翻译的时间不同。</strong></p>
-<h3 id="解释性语言的定义"><a href="#解释性语言的定义" class="headerlink" title="解释性语言的定义"></a>解释性语言的定义</h3><p><strong>解释性语言的程序不需要编译，在运行程序的时候才翻译，每个语句都是执行的时候才翻译</strong>。这样解释性语言每执行一次就需要逐行翻译一次，效率比较低。<br>现代解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。</p>
-<h3 id="编译性语言的定义"><a href="#编译性语言的定义" class="headerlink" title="编译性语言的定义"></a>编译性语言的定义</h3><p>编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高。</p>
+<h1 id="解释型语言的特性：非独立、效率低"><a href="#解释型语言的特性：非独立、效率低" class="headerlink" title="解释型语言的特性：非独立、效率低"></a>解释型语言的特性：非独立、效率低</h1><ul>
+<li><strong>解释型语言</strong>：Python/JavaScript等。</li>
+<li><strong>非独立</strong>：JavaScript语言依赖执行环境，对于客户端来说是浏览器，对于服务端来说是node。</li>
+<li><strong>效率低</strong>：执行前不需要编译，<strong>执行时才编译</strong>，因此效率低。</li>
+</ul>
+<h2 id="解释性语言和编译性语言"><a href="#解释性语言和编译性语言" class="headerlink" title="解释性语言和编译性语言"></a>解释性语言和编译性语言</h2><ul>
+<li>计算机不能直接理解高级语言，只能直接理解机器语言，所以必须要把<strong>高级语言翻译成机器语言</strong>，计算机才能执行高级语言编写的程序。</li>
+<li><strong>翻译的方式有两种，一个是编译，一个是解释。两种方式只是翻译的时间不同。</strong></li>
+<li><strong>主要区别：</strong>编译性语言编译后即可在该平台运行，解释性语言是在运行期间才编译。所以<strong>编译性语言运行速度快，解释性语言跨平台性好</strong>。</li>
+<li><strong>解释性语言</strong><ul>
+<li><strong>定义：解释性语言的程序不需要编译，在运行程序的时候才翻译，每个语句都是执行的时候才翻译</strong>。这样解释性语言每执行一次就需要逐行翻译一次，效率比较低。</li>
+<li>比如：JS、python</li>
+<li>现代解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。</li>
+</ul>
+</li>
+<li><strong>编译性语言</strong><ul>
+<li><strong>定义：</strong>编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高。</li>
+<li>比如：c</li>
+</ul>
+</li>
+<li>java既可以算解释性语言也可以算编译性语言。</li>
+</ul>
 <hr>
-<h1 id="动态语言与静态语言"><a href="#动态语言与静态语言" class="headerlink" title="动态语言与静态语言"></a>动态语言与静态语言</h1><p><strong>JavaScript是动态语言。</strong></p>
-<h2 id="静态语言（强类型语言）"><a href="#静态语言（强类型语言）" class="headerlink" title="静态语言（强类型语言）"></a>静态语言（强类型语言）</h2><p>静态语言是<strong>在编译时</strong>变量的数据类型即可确定的语言，多数静态类型语言<strong>要求在使用变量之前必须声明数据类型</strong>。 </p>
-<p>例如：<strong>C++、Java、Delphi、C#、Objective-C等</strong>。</p>
-<h2 id="动态语言（弱类型语言）"><a href="#动态语言（弱类型语言）" class="headerlink" title="动态语言（弱类型语言）"></a>动态语言（弱类型语言）</h2><p>动态语言是<strong>在运行时</strong>确定数据类型的语言。<strong>变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。</strong><br>例如：<strong>PHP/ASP/Ruby/Python/Perl/ABAP/SQL/JavaScript/Unix Shell等等</strong>。</p>
+<h1 id="动态语言与静态语言"><a href="#动态语言与静态语言" class="headerlink" title="动态语言与静态语言"></a>动态语言与静态语言</h1><ul>
+<li><strong>JavaScript是动态语言（弱类型语言）。</strong></li>
+<li><strong>静态语言（强类型语言）：</strong><ul>
+<li>静态语言是<strong>在编译时</strong>变量的数据类型即可确定的语言，多数静态类型语言<strong>要求在使用变量之前必须声明数据类型</strong>。 </li>
+<li>例如：<strong>C++、Java、Delphi、C#、Objective-C等</strong>。</li>
+</ul>
+</li>
+<li><strong>动态语言（弱类型语言）：</strong><ul>
+<li>动态语言是<strong>在运行时</strong>确定数据类型的语言。<strong>变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。</strong> </li>
+<li>例如：<strong>PHP/ASP/Ruby/Python/Perl/ABAP/SQL/JavaScript/Unix Shell等等</strong>。</li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="区别-字符串字面量-和-String对象"><a href="#区别-字符串字面量-和-String对象" class="headerlink" title="区别 字符串字面量 和 String对象"></a>区别 字符串字面量 和 String对象</h1><p>首先注意：<strong>typeof来判断数据类型其实并不准确</strong>。比如<strong>数组、正则、日期、对象的typeof返回值都是object</strong>，这就会造成一些误差。<br>准确判断可以从<strong>构造函数（instanceof）</strong>、<strong>原型链（prototype.isPrototypeOf）</strong>上下手，具体可以看笔记 <a href="https://huanglizhu.github.io/2019/07/01/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#（面试题）如何判断一个对象是不是数组类型" target="_blank" rel="noopener">JS数据类型</a></p>
-<p><strong>JS 中值的类型分为原始值类型和对象类型</strong>。<br>原始值类型包括 number, string, boolean, null 和 undefined；（记忆：纳尼USB）<br>对象类型即 object。首先明确<strong>原始值类型不是对象</strong>。</p>
-<p>另外，要<strong>注意 <code>&quot;hello&quot;</code> 和 <code>new String(&#39;hello&#39;)</code> 的区别，前者是字符串字面值，属于原始类型，而后者是对象</strong>。<br>用 typeof 运算符返回的值也是完全不一样的：</p>
+<h1 id="区别-字符串字面量-和-String对象"><a href="#区别-字符串字面量-和-String对象" class="headerlink" title="区别 字符串字面量 和 String对象"></a>区别 字符串字面量 和 String对象</h1><ul>
+<li><p>首先注意：<strong>typeof来判断数据类型其实并不准确</strong>。比如<strong>数组、正则、日期、对象的typeof返回值都是object</strong>，这就会造成一些误差。</p>
+</li>
+<li><p>准确判断可以从<strong>构造函数（instanceof）</strong>、<strong>原型链（prototype.isPrototypeOf）</strong>上下手，具体可以看笔记 <a href="https://huanglizhu.github.io/2019/07/01/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#（面试题）如何判断一个对象是不是数组类型" target="_blank" rel="noopener">JS数据类型</a></p>
+</li>
+<li><p><strong>JS 中值的类型分为原始值类型和对象类型</strong>。</p>
+<ul>
+<li>原始值类型包括 number, string, boolean, null 和 undefined；（记忆：纳尼USB）</li>
+<li>对象类型即 object。首先明确<strong>原始值类型不是对象</strong>。</li>
+</ul>
+</li>
+<li><p>另外，要<strong>注意 <code>&quot;hello&quot;</code> 和 <code>new String(&#39;hello&#39;)</code> 的区别，前者是字符串字面值，属于 值类型 ，而后者是对象</strong>。<br>用 typeof 运算符返回的值也是完全不一样的：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span> <span class="keyword">typeof</span> <span class="string">'hello'</span>;<span class="comment">// 'string'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'hello'</span>);<span class="comment">// 'object'</span></span><br></pre></td></tr></table></figure>
-
-<p>很多人分不清字符串字面值和 String 对象，是因为 JS 的语法中的“装箱”：<br>当执行 <code>&#39;hello&#39;.length</code> 时，返回 5，很多人就觉得 <code>&#39;hello&#39;</code> 就是 <code>String 对象</code>，不然它怎么会有 String 对象的属性。<br>其实，这是由于 JS 在执行到这条语句的时候，内部将 <code>&#39;hello&#39;</code> 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 <strong>“装箱”</strong>，在其他面向对象语言里也有（如 C#）。<br>不要认为 JS 帮你装箱了，你就可以在写代码的时候不分箱里箱外了！<br>【题目可看20200205第十题】</p>
+</li>
+<li><p>很多人分不清字符串字面值和 String 对象，是因为 JS 的语法中的“装箱”：</p>
+<ul>
+<li>当执行 <code>&#39;hello&#39;.length</code> 时，返回 5，很多人就觉得 <code>&#39;hello&#39;</code> 就是 <code>String 对象</code>，不然它怎么会有 String 对象的属性。</li>
+<li>其实，这是由于 JS 在执行到这条语句的时候，内部将 <code>&#39;hello&#39;</code> 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 <strong>“装箱”</strong>，在其他面向对象语言里也有（如 C#）。<br>不要认为 JS 帮你装箱了，你就可以在写代码的时候不分箱里箱外了！<br>【题目可看20200205第十题】</li>
+</ul>
+</li>
+</ul>
 <hr>
-<p># </p>
+<h1 id="Array-sort-升序-降序排序的函数规则"><a href="#Array-sort-升序-降序排序的函数规则" class="headerlink" title="Array.sort()升序/降序排序的函数规则"></a>Array.sort()升序/降序排序的函数规则</h1><ul>
+<li>sort()方法可以接收一个<strong>比较函数作为参数</strong>.(该比较函数为含有两个参数的匿名函数)</li>
+<li>注意：sort()是直接改变原数组的</li>
+<li><a href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#sort-升序-降序排序" target="_blank" rel="noopener">例子以及详细笔记在这</a></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr=[<span class="number">9</span>,<span class="number">23</span>,<span class="number">15</span>,<span class="number">-99</span>,<span class="number">88</span>,<span class="number">12</span>,<span class="number">-2</span>];</span><br><span class="line"><span class="comment">//降序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> b-a&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[88, 23, 15, 12, 9, -2, -99]</span></span><br><span class="line"><span class="comment">//升序</span></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a-b&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[-99, -2, 9, 12, 15, 23, 88]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="JS模块化（CommonJS-AMD-CMD）"><a href="#JS模块化（CommonJS-AMD-CMD）" class="headerlink" title="JS模块化（CommonJS,AMD,CMD）"></a>JS模块化（CommonJS,AMD,CMD）</h1><ul>
+<li>主流的模块化包括 <strong>CommonJS,AMD,CMD</strong> 等。</li>
+<li>模块化<strong>有利于管理模块间的依赖，更依赖模块的维护</strong>。</li>
+<li>CommonJS是<strong>服务器端</strong>的js模块化规范，<strong>同步</strong>的。<ul>
+<li>NodeJS就采用这个规范。</li>
+</ul>
+</li>
+<li>AMD和CMD都是<strong>浏览器端</strong>的js模块化规范，是<strong>异步</strong>的。<ul>
+<li><strong>Require.JS遵循AMD规范，Sea.js遵循CMD规范</strong></li>
+<li>AMD推崇<strong>依赖前置</strong>，CMD推崇<strong>依赖就近</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="AMD和CMD"><a href="#AMD和CMD" class="headerlink" title="AMD和CMD"></a>AMD和CMD</h2><ul>
+<li><strong>AMD</strong>：<strong>异步模块定义</strong>（”Asynchronous Module Definition”）。</li>
+<li>它采用<strong>异步方式加载模块</strong>，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。</li>
+<li>AMD也采用<code>require()</code>语句加载模块，但是不同于CommonJS。</li>
+<li>主要有两个Javascript库<strong>遵循AMD规范：require.js和curl.js</strong>。</li>
+</ul>
+<h3 id="AMD和CMD的区别"><a href="#AMD和CMD的区别" class="headerlink" title="AMD和CMD的区别"></a>AMD和CMD的区别</h3><ol>
+<li>对于依赖的模块，<strong>AMD 是提前执行，CMD 是延迟执行</strong>。</li>
+<li><strong>CMD 推崇依赖就近，AMD 推崇依赖前置</strong>。</li>
+</ol>
+<hr>
+<h1 id="angularjs1中的-apply-【待补充】"><a href="#angularjs1中的-apply-【待补充】" class="headerlink" title="angularjs1中的$apply()【待补充】"></a>angularjs1中的<code>$apply()</code>【待补充】</h1><p><code>$apply</code> 是为了让angularJS内部没有在<code>$digest</code>状态当中的代码块进入到<code>$digest</code>当中，从而实现双向数据绑定。所谓<code>$digest</code>就是angularjs 检测数据更新的方式。 例如setTimeout这类延迟函数angularjs不会去去自动运行<code>$digest</code>来绑定数据。从而无法实现其效果（仅是双向数据绑定效果）一般安全使用方法：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span><span class="params">(<span class="variable">$scope</span>.$<span class="variable">$phase</span>)</span></span>&#123;  <span class="comment">//返回$digest状态</span></span><br><span class="line">    <span class="variable">$scope</span>.<span class="variable">$apply</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="函数的调用方式"><a href="#函数的调用方式" class="headerlink" title="函数的调用方式"></a>函数的调用方式</h1><ul>
+<li><strong>直接调用</strong></li>
+<li>作为<strong>对象方法</strong>调用</li>
+<li>作为<strong>构造函数</strong>调用<ul>
+<li>要以构造函数的方式调用函数，只需要在调用时<strong>加new 关键字</strong>.<ul>
+<li>比如：<code>function whatsMyContext(){ return this; };</code></li>
+<li>调用：<code>var one = new whatsMyContext();</code></li>
+</ul>
+</li>
+<li>(可参考这篇<a href="https://blog.csdn.net/hanburan/article/details/87880127" target="_blank" rel="noopener">博客</a>)</li>
+</ul>
+</li>
+<li>通过<strong>call和apply</strong>方法调用<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcb2qoewo1j31e70mik5v.jpg" alt="image.png"></li>
+</ul>
+<hr>
+<h1 id="可用作JS异步编程的方法"><a href="#可用作JS异步编程的方法" class="headerlink" title="可用作JS异步编程的方法"></a>可用作JS异步编程的方法</h1><ul>
+<li><p>看<a href="https://www.cnblogs.com/still-smile/p/12048078.html" target="_blank" rel="noopener">这里</a></p>
+</li>
+<li><p><strong>回调函数</strong>，这是异步编程最基本的方法。</p>
+<ul>
+<li>例：假定有两个函数f1和f2，后者等待前者的执行结果，如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。【此时f2是异步的，她耗费的时间并不影响同步任务的执行】<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"f1"</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">f1(f2);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br><span class="line"><span class="comment">// start f1 end f2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+<ul>
+<li>例：为f1绑定一个事件，当f1发生done事件，就执行f2。</li>
+</ul>
+</li>
+<li><p><strong>发布/订阅</strong>，与”事件监听”类似。</p>
+<ul>
+<li>我们假定，存在一个”信号中心”，<strong>某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行</strong>。这就叫做”发布/订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）。</li>
+<li>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</li>
+</ul>
+</li>
+<li><p><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。</p>
+<ul>
+<li>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</li>
+<li>例：f1的回调函数f2，f1().then(f2);</li>
+</ul>
+</li>
+</ul>
+<hr>
 
       
     </div>
@@ -278,7 +440,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">1.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑运算符-amp-amp-和-的规律"><span class="nav-number">2.</span> <span class="nav-text">逻辑运算符&amp;&amp;和||的规律</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助理解"><span class="nav-number">2.1.</span> <span class="nav-text">帮助理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">2.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.3.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的生命期"><span class="nav-number">3.</span> <span class="nav-text">cookie的生命期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax技术的工作原理（XMLHttpRequest）"><span class="nav-number">4.</span> <span class="nav-text">Ajax技术的工作原理（XMLHttpRequest）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解释型语言的特性-非独立、效率低"><span class="nav-number">5.</span> <span class="nav-text">解释型语言的特性:非独立、效率低</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解释性语言和编译性语言"><span class="nav-number">5.1.</span> <span class="nav-text">解释性语言和编译性语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释性语言的定义"><span class="nav-number">5.1.1.</span> <span class="nav-text">解释性语言的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译性语言的定义"><span class="nav-number">5.1.2.</span> <span class="nav-text">编译性语言的定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态语言与静态语言"><span class="nav-number">6.</span> <span class="nav-text">动态语言与静态语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态语言（强类型语言）"><span class="nav-number">6.1.</span> <span class="nav-text">静态语言（强类型语言）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态语言（弱类型语言）"><span class="nav-number">6.2.</span> <span class="nav-text">动态语言（弱类型语言）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区别-字符串字面量-和-String对象"><span class="nav-number">7.</span> <span class="nav-text">区别 字符串字面量 和 String对象</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符优先级"><span class="nav-number">1.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位运算符-amp-和"><span class="nav-number">2.</span> <span class="nav-text">位运算符&amp;和|</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑运算符-amp-amp-和-的规律"><span class="nav-number">3.</span> <span class="nav-text">逻辑运算符&amp;&amp;和||的规律</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的生命期"><span class="nav-number">4.</span> <span class="nav-text">cookie的生命期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax技术的工作原理（XMLHttpRequest）"><span class="nav-number">5.</span> <span class="nav-text">Ajax技术的工作原理（XMLHttpRequest）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解释型语言的特性：非独立、效率低"><span class="nav-number">6.</span> <span class="nav-text">解释型语言的特性：非独立、效率低</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解释性语言和编译性语言"><span class="nav-number">6.1.</span> <span class="nav-text">解释性语言和编译性语言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态语言与静态语言"><span class="nav-number">7.</span> <span class="nav-text">动态语言与静态语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区别-字符串字面量-和-String对象"><span class="nav-number">8.</span> <span class="nav-text">区别 字符串字面量 和 String对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array-sort-升序-降序排序的函数规则"><span class="nav-number">9.</span> <span class="nav-text">Array.sort()升序/降序排序的函数规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS模块化（CommonJS-AMD-CMD）"><span class="nav-number">10.</span> <span class="nav-text">JS模块化（CommonJS,AMD,CMD）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD和CMD"><span class="nav-number">10.1.</span> <span class="nav-text">AMD和CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AMD和CMD的区别"><span class="nav-number">10.1.1.</span> <span class="nav-text">AMD和CMD的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#angularjs1中的-apply-【待补充】"><span class="nav-number">11.</span> <span class="nav-text">angularjs1中的$apply()【待补充】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数的调用方式"><span class="nav-number">12.</span> <span class="nav-text">函数的调用方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可用作JS异步编程的方法"><span class="nav-number">13.</span> <span class="nav-text">可用作JS异步编程的方法</span></a></li></ol>
     
     </div>
   </aside>
@@ -306,7 +468,7 @@
                 <div class="clearfix container">
                     <div class="site-info">
                         &copy;
-                        2021
+                        2022
                             珠 All Rights Reserved.
                                 
                                     <span id="busuanzi_container_site_uv">
