@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
+  <meta name="description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bind()">
 <meta property="og:url" content="http://yoursite.com/2019/11/24/bind()/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
+<meta property="og:description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-14T02:43:52.273Z">
+<meta property="og:updated_time" content="2022-12-07T13:26:22.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bind()">
-<meta name="twitter:description" content="bind()ES5 引入了 Function.prototype.bind。bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。">
+<meta name="twitter:description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -161,53 +161,81 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h1><p>ES5 引入了 <code>Function.prototype.bind</code>。<br>bind()方法创建一个新的函数，在bind()被调用时，这个<strong>新函数的this被bind的第一个参数指定</strong>，其余的参数将作为新函数的参数供调用时使用。<a id="more"></a><br>也就是说，<strong>调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数上</strong>，无论这个函数是如何被调用的。bind绑定的参数只生效一次。</p>
+        <h1 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h1><ul>
+<li>ES5 引入了 <code>Function.prototype.bind</code>。</li>
+<li><code>bind()</code>方法创建一个新的函数，在<code>bind()</code>被调用时，这个<strong>新函数的this被bind的第一个参数指定</strong>，其余的参数将作为新函数的参数供调用时使用。</li>
+<li>也就是说，<strong>调用<code>f.bind(someObject)</code>会创建一个与<code>f</code>具有相同函数体和作用域的函数，但是在这个新函数中，<code>this</code>将永久地被绑定到了<code>bind</code>的第一个参数(<code>someObject</code>)上</strong>，无论这个函数是如何被调用的。<code>bind</code>绑定的参数只生效一次。</li>
+</ul>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
-<li>函数使用bind()返回的还是一个函数，而call()/apply()则是直接调用函数。</li>
-<li>使用函数声明的方式创建的函数不能使用bind()，只有使用函数表达式的方式创建的函数才能使用。</li>
-<li>call()/apply()/bind()都是使用第一个参数改变this的指向。</li>
-<li>bind()与call()/apply()的传参方法有所不同。</li>
+<li>函数使用bind()返回的还是一个函数，而<code>call()</code>/<code>apply()</code>则是直接调用函数。</li>
+<li>使用函数声明的方式创建的函数不能使用<code>bind()</code>，只有使用函数表达式的方式创建的函数才能使用。</li>
+<li><code>call()</code>/<code>apply()</code>/<code>bind()</code>都是使用第一个参数改变this的指向。</li>
+<li><code>bind()</code>与<code>call()</code>/<code>apply()</code>的传参方法有所不同。</li>
 </ol>
 <hr>
-<h1 id="javascript中apply、call和bind的共同点"><a href="#javascript中apply、call和bind的共同点" class="headerlink" title="javascript中apply、call和bind的共同点"></a>javascript中apply、call和bind的共同点</h1><p>在JS中，这三者都是用来<strong>改变函数的this对象的指向</strong>的，他们有什么样的区别呢。<br>他们的共同之处：</p>
+<h1 id="bind-与apply-、call-的共同点"><a href="#bind-与apply-、call-的共同点" class="headerlink" title="bind()与apply()、call()的共同点"></a>bind()与apply()、call()的共同点</h1><ul>
+<li>在JS中，这三者都是用来<strong>改变函数的this对象的指向</strong>的。</li>
+</ul>
 <ol>
-<li>都是用来改变函数的this对象的指向的。</li>
-<li>第一个参数都是this要指向的对象。</li>
-<li>都可以利用后续参数传参。</li>
+<li>都是用来<strong>改变函数的this对象的指向</strong>的。</li>
+<li><strong>第一个参数都是this</strong>要指向的对象。</li>
+<li>都可以<strong>利用后续参数传参</strong>。</li>
 </ol>
 <hr>
-<h1 id="bind（）与apply（）、call（）使用上的区别"><a href="#bind（）与apply（）、call（）使用上的区别" class="headerlink" title="bind（）与apply（）、call（）使用上的区别"></a>bind（）与apply（）、call（）使用上的区别</h1><h2 id="无参数情况"><a href="#无参数情况" class="headerlink" title="无参数情况"></a>无参数情况</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xw = &#123;</span><br><span class="line">    name: <span class="string">"小王"</span>,</span><br><span class="line">    gender: <span class="string">"男"</span>,</span><br><span class="line">    age: <span class="number">24</span>,</span><br><span class="line">    say: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name + <span class="string">" , "</span> + <span class="keyword">this</span>.gender + <span class="string">" ,今年"</span> + <span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xh = &#123;</span><br><span class="line">    name: <span class="string">"小红"</span>,</span><br><span class="line">    gender: <span class="string">"女"</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line">xw.say();</span><br></pre></td></tr></table></figure>
+<h1 id="bind-与apply-、call-使用上的区别"><a href="#bind-与apply-、call-使用上的区别" class="headerlink" title="bind()与apply()、call()使用上的区别"></a>bind()与apply()、call()使用上的区别</h1><h2 id="无参数情况"><a href="#无参数情况" class="headerlink" title="无参数情况"></a>无参数情况</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xw = &#123;</span><br><span class="line">    name: <span class="string">"小王"</span>,</span><br><span class="line">    gender: <span class="string">"男"</span>,</span><br><span class="line">    age: <span class="number">24</span>,</span><br><span class="line">    say: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name + <span class="string">" , "</span> + <span class="keyword">this</span>.gender + <span class="string">" ,今年"</span> + <span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xh = &#123;</span><br><span class="line">    name: <span class="string">"小红"</span>,</span><br><span class="line">    gender: <span class="string">"女"</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line">xw.say(); <span class="comment">// 小王 ， 男 ， 今年24</span></span><br></pre></td></tr></table></figure>
 
-<p>上面代码显示的是<code>小王 ， 男 ， 今年24</code>。<br>用xw的say方法来显示xh的数据的几种方法:</p>
-<ol>
+<ul>
+<li>用<strong>xw的say方法</strong>来<strong>显示xh的数据</strong>的几种方法:<ol>
 <li><code>xw.say.call(xh);</code></li>
 <li><code>xw.say.apply(xh);</code></li>
-<li><code>xw.say.bind(xh)();</code><br>如果直接写<code>xw.say.bind(xh)</code>不会有任何结果,call和apply都是对函数的直接调用，而<strong>bind方法返回的仍然是一个函数，因此后面还需要()来进行调用才可以</strong>。</li>
+<li><code>xw.say.bind(xh)();</code><ul>
+<li>如果直接写<code>xw.say.bind(xh)</code>不会有任何结果,<strong><code>call()</code>和<code>apply()</code></strong>都是对函数的<strong>直接调用</strong>，而<strong><code>bind()</code>返回的仍然是一个函数，因此后面还需要<code>()</code>来进行调用才可以</strong>。</li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 <hr>
-<h2 id="传参情况"><a href="#传参情况" class="headerlink" title="传参情况"></a>传参情况</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xw = &#123;</span><br><span class="line">        <span class="string">name :</span> <span class="string">"小王"</span>,</span><br><span class="line">        <span class="string">gender :</span> <span class="string">"男"</span>,</span><br><span class="line">        <span class="string">age :</span> <span class="number">24</span>,</span><br><span class="line">        <span class="string">say :</span> function(school,grade) &#123;</span><br><span class="line">                alert(<span class="keyword">this</span>.name + <span class="string">" , "</span> + <span class="keyword">this</span>.gender + <span class="string">" ,今年"</span> + <span class="keyword">this</span>.age + <span class="string">" ,在"</span> + school + <span class="string">"上"</span> + grade);                                </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">var xh = &#123;</span><br><span class="line">        <span class="string">name :</span> <span class="string">"小红"</span>,</span><br><span class="line">        <span class="string">gender :</span> <span class="string">"女"</span>,</span><br><span class="line">        <span class="string">age :</span> <span class="number">18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="传参情况"><a href="#传参情况" class="headerlink" title="传参情况"></a>传参情况</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xw = &#123;</span><br><span class="line">    <span class="string">name :</span> <span class="string">"小王"</span>,</span><br><span class="line">    <span class="string">gender :</span> <span class="string">"男"</span>,</span><br><span class="line">    <span class="string">age :</span> <span class="number">24</span>,</span><br><span class="line">    <span class="string">say :</span> function(school,grade) &#123;</span><br><span class="line">            alert(<span class="keyword">this</span>.name + <span class="string">" , "</span> + <span class="keyword">this</span>.gender + <span class="string">" ,今年"</span> + <span class="keyword">this</span>.age + <span class="string">" ,在"</span> + school + <span class="string">"上"</span> + grade);                                </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var xh = &#123;</span><br><span class="line">    <span class="string">name :</span> <span class="string">"小红"</span>,</span><br><span class="line">    <span class="string">gender :</span> <span class="string">"女"</span>,</span><br><span class="line">    <span class="string">age :</span> <span class="number">18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>可以看到say方法多了两个参数，我们通过4种方法进行传参：</p>
-<ol>
+<ul>
+<li>可以看到say方法多了<strong>两个参数</strong>，我们通过4种方法进行<strong>传参</strong>：<ol>
 <li><code>xw.say.call(xh,&quot;实验小学&quot;,&quot;六年级&quot;);</code></li>
 <li><code>xw.say.apply(xh,[&quot;实验小学&quot;,&quot;六年级&quot;]);</code></li>
 <li><code>xw.say.bind(xh,&quot;实验小学&quot;,&quot;六年级&quot;)();</code></li>
-<li><code>xw.say.bind(xh)(&quot;实验小学&quot;,&quot;六年级&quot;);</code><br>由于bind返回的仍然是一个函数，所以我们还可以在调用的时候再进行传参。</li>
+<li><code>xw.say.bind(xh)(&quot;实验小学&quot;,&quot;六年级&quot;);</code></li>
 </ol>
+<ul>
+<li>由于<code>bind()</code>返回的仍然是一个函数，所以我们还可以在调用的时候再进行传参。</li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="事件绑定函数与bind-this"><a href="#事件绑定函数与bind-this" class="headerlink" title="事件绑定函数与bind(this)"></a>事件绑定函数与<code>bind(this)</code></h1><p>在react中，常看到：</p>
+<h1 id="react事件绑定函数与bind-this"><a href="#react事件绑定函数与bind-this" class="headerlink" title="react事件绑定函数与bind(this)"></a>react事件绑定函数与<code>bind(this)</code></h1><p>在react中，常看到：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  constructor(props) &#123;<span class="comment">/*构造函数，用于实例化对象*/</span></span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.foo = <span class="keyword">this</span>.foo.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  foo() &#123;</span><br><span class="line">    <span class="comment">// todo something</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;<span class="type">View</span>&gt;</span><br><span class="line">        &lt;<span class="type">Button</span> onPress=&#123;<span class="keyword">this</span>.foo&#125;/&gt;</span><br><span class="line">      &lt;/<span class="type">View</span>&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>事件绑定处理函数（<code>onPress={this.foo}</code>）时，foo方法内部的this的指向就会丢失(此时在foo函数内部打印this得到的是undefined)</strong>。这就会出现外部的foo方法内部的this会丢失指向。<br>为了解决这个问题，我们需要在实例化对象的时候就<strong>需要在构造函数中绑定this（<code>this.foo = this.foo.bind(this);</code>），使得无论事件处理函数如何传递，它的this的指向都是固定的，固定指向我们所实例化的对象（App组件）</strong>。<br>（虽然在render函数中<code>&lt;Button onPress={this.foo.bind(this)}/&gt;</code>效果一样，但比较消耗性能，<strong>不推荐</strong>。）</p>
-<p>（<a href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React中的响应式设计思想和事件绑定" target="_blank" rel="noopener">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a>）</p>
+<ul>
+<li><strong>事件绑定处理函数（<code>onPress={this.foo}</code>）时，<code>foo</code>方法内部的<code>this</code>的指向就会丢失(此时在<code>foo</code>函数内部打印<code>this</code>得到的是<code>undefined</code>)</strong>。这就会出现外部的<code>foo</code>方法内部的<code>this</code>会丢失指向。</li>
+<li>为了解决这个问题，我们在实例化对象的时候就<strong>需要在构造函数中绑定<code>this</code>（<code>this.foo = this.foo.bind(this);</code>），使得无论事件处理函数如何传递，它的<code>this</code>的指向都是固定的，固定指向我们所实例化的对象（App组件）</strong>。<ul>
+<li>虽然在render函数中<code>&lt;Button onPress={this.foo.bind(this)}/&gt;</code>效果一样，但比较消耗性能，<strong>不推荐</strong>。</li>
+<li><a href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React中的响应式设计思想和事件绑定" target="_blank" rel="noopener">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="父组件传递函数给子组件也需绑定"><a href="#父组件传递函数给子组件也需绑定" class="headerlink" title="父组件传递函数给子组件也需绑定"></a>父组件传递函数给子组件也需绑定</h2><ul>
+<li><strong>注意：</strong>如父组件要传递函数给子组件，则需在父组件构造函数中<strong>使用<code>bind</code>绑定该函数<code>this</code>指向</strong><ul>
+<li><strong>原因：</strong>绑定<code>this</code>指向父组件，以免在子组件中使用函数时<code>this</code>指向不是我们所期望的。（比如期望在子组件内通过调用父组件方法来修改父组件的<code>this.state</code>，结果没绑定导致<code>this</code>指向子组件，自然无法修改父组件<code>this.state</code>）</li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="事件绑定函数传参"><a href="#事件绑定函数传参" class="headerlink" title="事件绑定函数传参"></a>事件绑定函数传参</h1><p><strong>方法1</strong>：<br>在React<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#使用Redux完成TodoList删除功能" target="_blank" rel="noopener">这个例子</a>中使用bind绑定事件函数handleItemDelete的this指向时<strong>还要将参数index传入函数</strong>，那么我们可以在绑定时传入：</p>
+<h1 id="react事件绑定函数传参2种情况"><a href="#react事件绑定函数传参2种情况" class="headerlink" title="react事件绑定函数传参2种情况"></a>react事件绑定函数传参2种情况</h1><h2 id="绑定this时传参"><a href="#绑定this时传参" class="headerlink" title="绑定this时传参"></a>绑定this时传参</h2><p>在React<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#使用Redux完成TodoList删除功能" target="_blank" rel="noopener">这个例子</a>中使用<code>bind</code>绑定事件函数<code>handleItemDelete</code>的<code>this</code>指向时,<strong>如果还想将参数index传入函数，则可在绑定时传入</strong>：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;List<span class="selector-class">.Item</span> onClick=&#123;this<span class="selector-class">.handleItemDelete</span><span class="selector-class">.bind</span>(this, index)&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure>
 
-<p><strong>方法2</strong>：<br>但如果<strong>事件函数和bind绑定都在父组件中，而函数的调用和传参在子组件</strong>，就可以这样传参：</p>
+<h2 id="父组件绑定this，子组件传参"><a href="#父组件绑定this，子组件传参" class="headerlink" title="父组件绑定this，子组件传参"></a>父组件绑定this，子组件传参</h2><p>但如果<strong>事件函数和bind绑定都在父组件中，而函数的调用和传参在子组件</strong>，就可以这样传参：</p>
 <ol>
 <li>在<strong>父组件</strong>的构造函数中使用bind绑定<code>this.handleItemDelete=this.handleItemDelete.bind();</code></li>
-<li>我们知道bind()返回的还是一个函数，所以在<strong>子组件</strong>中，我们通过<strong>箭头函数</strong>在每次调用handleItemDelete()时传入参数index：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;List<span class="selector-class">.Item</span> onClick=&#123;()=&gt;&#123;this<span class="selector-class">.props</span><span class="selector-class">.handleItemDelete</span>(index)&#125;&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure>
+<li>我们知道<code>bind()</code>返回的还是一个函数，所以在<strong>子组件</strong>中，我们通过<strong>箭头函数</strong>在每次调用<code>handleItemDelete()</code>时传入参数<code>index</code>：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;List<span class="selector-class">.Item</span> onClick=&#123;()=&gt;&#123;this<span class="selector-class">.props</span><span class="selector-class">.handleItemDelete</span>(index)&#125;&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -217,6 +245,11 @@
 <li><strong>箭头函数是JS表达式，在JSX中需要使用<code>{}</code></strong>，调用的父组件的函数也是JS表达式，同样中需要使用<code>{}</code>。</li>
 </ol>
 <hr>
+<h1 id="vue-element-ui中自定义form表单rules"><a href="#vue-element-ui中自定义form表单rules" class="headerlink" title="vue element-ui中自定义form表单rules"></a>vue element-ui中自定义form表单rules</h1><ul>
+<li>基础使用可参考<a href="https://element.eleme.cn/2.15/#/zh-CN/component/form#form-attributes" target="_blank" rel="noopener">element-ui文档</a></li>
+<li><strong>自定义rules</strong>时，我们可以把常用的规则封装到函数<code>validatePositiveNum()</code>内，再将不同的提示语作为<code>this</code>传入封装的函数<code>validatePositiveNum()</code>内，这样就不会干扰到<code>element-ui</code>中自定义rules的校验函数原本传入的参数<code>_rule, value, callback</code></li>
+<li><strong>例子：</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// computed内</span></span><br><span class="line">rules() &#123;</span><br><span class="line">  <span class="comment">// rule, value, callback是校验函数原本自带的传入参数</span></span><br><span class="line">  <span class="keyword">const</span> validatePositiveNum = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> reg = <span class="regexp">/^[+]&#123;0,1&#125;(\d+)$|^[+]&#123;0,1&#125;(\d+\.\d+)$/</span>; <span class="comment">// 检验正数</span></span><br><span class="line">      <span class="keyword">if</span> (!value) &#123; <span class="comment">// value是表单输入值</span></span><br><span class="line">        callback() <span class="comment">// 正常，无提示</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!reg.test(value)) &#123;</span><br><span class="line">        <span class="keyword">const</span> error = <span class="keyword">this</span> ? <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="keyword">this</span>) : <span class="string">'请输入正数'</span>;</span><br><span class="line">        callback(error); <span class="comment">// 表单下方出现提示语</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        callback(); <span class="comment">// 正常，无提示</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> rules = &#123;</span><br><span class="line">    weight: [</span><br><span class="line">      <span class="comment">// 使用bind就可以在不影响自带传入的那3个参数的前提下，传入提示语</span></span><br><span class="line">      &#123; <span class="attr">validator</span>: validatePositiveNum.bind(<span class="string">'重量必须为正数'</span>), <span class="attr">trigger</span>: [<span class="string">'change'</span>, <span class="string">'blur'</span>] &#125; </span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> rules</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -288,7 +321,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bind"><span class="nav-number">1.</span> <span class="nav-text">bind()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#javascript中apply、call和bind的共同点"><span class="nav-number">2.</span> <span class="nav-text">javascript中apply、call和bind的共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind（）与apply（）、call（）使用上的区别"><span class="nav-number">3.</span> <span class="nav-text">bind（）与apply（）、call（）使用上的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无参数情况"><span class="nav-number">3.1.</span> <span class="nav-text">无参数情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参情况"><span class="nav-number">3.2.</span> <span class="nav-text">传参情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件绑定函数与bind-this"><span class="nav-number">4.</span> <span class="nav-text">事件绑定函数与bind(this)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件绑定函数传参"><span class="nav-number">5.</span> <span class="nav-text">事件绑定函数传参</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bind"><span class="nav-number">1.</span> <span class="nav-text">bind()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind-与apply-、call-的共同点"><span class="nav-number">2.</span> <span class="nav-text">bind()与apply()、call()的共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bind-与apply-、call-使用上的区别"><span class="nav-number">3.</span> <span class="nav-text">bind()与apply()、call()使用上的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无参数情况"><span class="nav-number">3.1.</span> <span class="nav-text">无参数情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参情况"><span class="nav-number">3.2.</span> <span class="nav-text">传参情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react事件绑定函数与bind-this"><span class="nav-number">4.</span> <span class="nav-text">react事件绑定函数与bind(this)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#父组件传递函数给子组件也需绑定"><span class="nav-number">4.1.</span> <span class="nav-text">父组件传递函数给子组件也需绑定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react事件绑定函数传参2种情况"><span class="nav-number">5.</span> <span class="nav-text">react事件绑定函数传参2种情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定this时传参"><span class="nav-number">5.1.</span> <span class="nav-text">绑定this时传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#父组件绑定this，子组件传参"><span class="nav-number">5.2.</span> <span class="nav-text">父组件绑定this，子组件传参</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-element-ui中自定义form表单rules"><span class="nav-number">6.</span> <span class="nav-text">vue element-ui中自定义form表单rules</span></a></li></ol>
     
     </div>
   </aside>

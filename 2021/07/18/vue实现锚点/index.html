@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>vscode 前端 热更新 live-server | 珠</title>
+  <title>vue实现锚点 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue">
@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="在做我的web简历的时候，为了方便的实时查看页面效果，找到了live-server这个小工具进行页面的热更新。">
-<meta name="keywords" content="vscode">
+  <meta name="description" content="重写旧代码的时候，遇到需要写锚点功能，但是原本的href和id搭配的实现方法就不太合适了">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vscode 前端 热更新 live-server">
-<meta property="og:url" content="http://yoursite.com/2020/08/16/vscode 前端 热更新 live-server/index.html">
+<meta property="og:title" content="vue实现锚点">
+<meta property="og:url" content="http://yoursite.com/2021/07/18/vue实现锚点/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="在做我的web简历的时候，为了方便的实时查看页面效果，找到了live-server这个小工具进行页面的热更新。">
+<meta property="og:description" content="重写旧代码的时候，遇到需要写锚点功能，但是原本的href和id搭配的实现方法就不太合适了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-06T07:06:01.819Z">
+<meta property="og:updated_time" content="2022-12-07T13:33:18.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vscode 前端 热更新 live-server">
-<meta name="twitter:description" content="在做我的web简历的时候，为了方便的实时查看页面效果，找到了live-server这个小工具进行页面的热更新。">
+<meta name="twitter:title" content="vue实现锚点">
+<meta name="twitter:description" content="重写旧代码的时候，遇到需要写锚点功能，但是原本的href和id搭配的实现方法就不太合适了">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -129,7 +129,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-vscode 前端 热更新 live-server" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-vue实现锚点" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -137,7 +137,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      vscode 前端 热更新 live-server
+      vue实现锚点
     </h1>
   
 
@@ -145,13 +145,13 @@
     
     <div class="article-meta">
       
-	<a href="/2020/08/16/vscode 前端 热更新 live-server/" class="article-date">
-	  <time datetime="2020-08-16T06:56:04.000Z" itemprop="datePublished">八月 16, 2020</time>
+	<a href="/2021/07/18/vue实现锚点/" class="article-date">
+	  <time datetime="2021-07-18T09:33:34.000Z" itemprop="datePublished">七月 18, 2021</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a>
+    <a class="article-category-link" href="/categories/vue学习/">vue学习</a>, <a class="article-category-link" href="/categories/遇到的问题集/">遇到的问题集</a>
  
       
 	<span id="busuanzi_container_page_pv">
@@ -161,34 +161,32 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在做我的web简历的时候，为了方便的实时查看页面效果，找到了live-server这个小工具进行页面的热更新。</p>
+        <p>重写旧代码的时候，遇到需要写锚点功能，但是原本的href和id搭配的实现方法就不太合适了</p>
 <a id="more"></a>
 
-<h1 id="live-server服务器"><a href="#live-server服务器" class="headerlink" title="live-server服务器"></a>live-server服务器</h1><ul>
-<li>live-server是一个具有<strong>实时加载功能</strong>的小型服务器，可以使用它来破解html/css/javascript，但是不能用于部署最终站点。</li>
-<li>也就是说我们可以在项目中实时用live-server作为一个实时服务器<strong>实时查看开发的网页或项目效果</strong>。</li>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
+<li>做目录的时候，如果使用常规锚点（a href+ id）则会出现路由的问题，不能达到期望效果</li>
+<li>比如：点击href设为<code>#nav2</code>后会直接跳到当前根路径下的href位置<code>http://localhost:1644/#nav2</code>，</li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>首先你需要安装好nodejs（<a href="https://nodejs.org" target="_blank" rel="noopener">官网</a>）</li>
-<li>打开vscode，在项目<strong>终端输入<code>npm install live-server -g</code></strong></li>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>获取dom元素，通过使用<strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollIntoView" target="_blank" rel="noopener">Element.scrollIntoView()</a></strong>让当前元素滚动到浏览器窗口的可视区域内。即，<strong>通过vue的点击事件，点击后匹配到对应元素进行滚动即可。</strong></li>
 </ul>
-<h1 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h1><ul>
-<li>在项目<strong>终端输入<code>live-server</code></strong></li>
-<li>此时<strong>会自动打开一个127.0.0.1:8080的网页</strong>，可以看到效果</li>
-<li><strong>默认端口号是8080</strong>，如果想使用其他端口号可以在运行live-server的时候用<code>--port</code>的方式指定端口号，比如<code>live-server --port 8001</code></li>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;a @click="anchorJump('#nav2')"&gt;</span></span><br><span class="line">    <span class="variable">&lt;h5&gt;</span></span><br><span class="line">        版本区别</span><br><span class="line">        <span class="variable">&lt;i class="icon icon-nav-triangle"&gt;</span>&lt;/i&gt;</span><br><span class="line">    &lt;/h5&gt;</span><br><span class="line">&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">// ...</span><br><span class="line"></span><br><span class="line"><span class="built_in">anchor</span>Jump(<span class="built_in">anchor</span>Id) &#123;</span><br><span class="line">    const <span class="built_in">anchor</span>Ele = document.querySelector(<span class="built_in">anchor</span>Id);</span><br><span class="line">    if ( <span class="built_in">anchor</span>Ele )&#123;</span><br><span class="line">        <span class="built_in">anchor</span>Ele.scrollIntoView(true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://blog.csdn.net/qq_43363884/article/details/89134381" target="_blank" rel="noopener">参考1</a>、<a href="https://segmentfault.com/a/1190000018565969" target="_blank" rel="noopener">参考2</a></li>
 </ul>
-<h1 id="关闭服务"><a href="#关闭服务" class="headerlink" title="关闭服务"></a>关闭服务</h1><p>使用ctrl+c即可关闭服务</p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/vscode使用过程中的小tips/">vscode使用过程中的小tips</a>
+    <a class="article-category-link" href="/categories/vue学习/">vue学习</a>, <a class="article-category-link" href="/categories/遇到的问题集/">遇到的问题集</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/">vscode</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
 
       
         
@@ -223,19 +221,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/09/01/vscode 函数描述快捷键/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/07/19/vue路由跳转后从页面头部开始/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          vscode 函数描述快捷键
+          vue路由跳转后从页面头部开始
         
       </div>
     </a>
   
   
-    <a href="/2020/08/04/react antd 样式覆盖（自定义样式）/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/07/16/webpack和vue图片路径的问题/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">react antd 样式覆盖（自定义样式）</div>
+      <div class="article-nav-title">webpack和vue图片路径的问题</div>
     </a>
   
 </nav>
@@ -249,7 +247,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#live-server服务器"><span class="nav-number">1.</span> <span class="nav-text">live-server服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开启服务"><span class="nav-number">3.</span> <span class="nav-text">开启服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭服务"><span class="nav-number">4.</span> <span class="nav-text">关闭服务</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">3.</span> <span class="nav-text">例子</span></a></li></ol>
     
     </div>
   </aside>
