@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6扩展 正则扩展 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="复习：正则表达式简单来说就是用一定的规则去查找、替换符合这个规则的文本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6扩展 正则扩展">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/ES6%E6%89%A9%E5%B1%95%20%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="复习：正则表达式简单来说就是用一定的规则去查找、替换符合这个规则的文本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
+<meta property="article:published_time" content="2019-11-11T10:47:25.000Z">
+<meta property="article:modified_time" content="2023-04-06T14:07:17.123Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6扩展 正则扩展" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6扩展 正则扩展
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/11/ES6%E6%89%A9%E5%B1%95%20%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95/" class="article-date">
+	  <time datetime="2019-11-11T10:47:25.000Z" itemprop="datePublished">十一月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="复习：正则表达式"><a href="#复习：正则表达式" class="headerlink" title="复习：正则表达式"></a>复习：正则表达式</h1><p>简单来说就是用一定的规则去查找、替换符合这个规则的文本。</p>
+<span id="more"></span>
+
+<h2 id="JS中生成RegExp对象的两种方法"><a href="#JS中生成RegExp对象的两种方法" class="headerlink" title="JS中生成RegExp对象的两种方法"></a>JS中生成RegExp对象的两种方法</h2><ul>
+<li>RegExp 对象<strong>表示正则表达式</strong>。</li>
+<li><strong>修饰符</strong>包含属性** “g”、”i” 和 “m”<strong>，分别用于指定</strong>全局匹配、区分大小写的匹配和多行匹配**。</li>
+</ul>
+<p><strong>方法1：使用直接量的方式</strong><br><strong>规则用<code>//</code>包裹</strong>起来，修饰符跟在后面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp1=<span class="regexp">/规则/</span>修饰符;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>^表示开头，g表示全局匹配。即：开头为a的字符串就满足这个正则表达式</span><br><span class="line">const regexp1=<span class="regexp">/^a/g</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2：使用构造函数RegExp的方式</strong><br><strong>规则和修饰符都用引号</strong>包裹起来：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">&#x27;规则&#x27;</span>,<span class="string">&#x27;修饰符&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">&#x27;^a&#x27;</span>,<span class="string">&#x27;g&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp2=<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/规则/</span>修饰符);</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp3=<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/^a/g</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="正则方法"><a href="#正则方法" class="headerlink" title="正则方法"></a>正则方法</h2><ul>
+<li><strong>字符串的正则方法</strong>有：match()、replace()、search()、split()</li>
+<li><strong>正则对象</strong>的方法有：exec()、test()</li>
+<li>注意<strong>区分match()和exec()<strong>，他们都是返回匹配结果的</strong>数组</strong>，但区别如下表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>match()</th>
+<th>exec()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符串的正则方法，使用字符串对象进行调用</td>
+<td>正则对象的方法，使用RegExp对象进行调用</td>
+</tr>
+<tr>
+<td>返回的是<strong>匹配完成后完整的数组</strong></td>
+<td>每调用一次返回<strong>单次对应的匹配结果</strong>并用<strong>数组</strong>的方式显示</td>
+</tr>
+</tbody></table>
+<ul>
+<li>区分match()和exec()的例子：<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const r1 = /imooc/g;</span><br><span class="line"></span><br><span class="line">const str = &quot;imoocimooc_imooc&quot;;</span><br><span class="line"></span><br><span class="line">console.log(r1.exec(str));//[&quot;imooc&quot;, <span class="keyword">index</span>: <span class="number">0</span>, <span class="keyword">input</span>: &quot;imoocimooc_imooc&quot;, <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//[&quot;imooc&quot;, <span class="keyword">index</span>: <span class="number">5</span>, <span class="keyword">input</span>: &quot;imoocimooc_imooc&quot;, <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//[&quot;imooc&quot;, <span class="keyword">index</span>: <span class="number">11</span>, <span class="keyword">input</span>: &quot;imoocimooc_imooc&quot;, <span class="keyword">groups</span>: undefined]</span><br><span class="line">console.log(r1.exec(str));//<span class="keyword">null</span></span><br><span class="line"></span><br><span class="line">console.log(str.match(r1));//[&quot;imooc&quot;, &quot;imooc&quot;, &quot;imooc&quot;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="match-方法"><a href="#match-方法" class="headerlink" title="match() 方法"></a>match() 方法</h3><ul>
+<li>match() 方法可<strong>在字符串内检索指定的值，或找到一个或多个正则表达式的匹配</strong>。</li>
+<li>该方法类似 indexOf() 和 lastIndexOf()，但是它**返回指定的值(数组)**，而不是字符串的位置。</li>
+<li><strong>返回值</strong>:存放匹配结果的<strong>数组</strong>。</li>
+<li><strong>语法</strong>：<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>Object.match(searchvalue)</span><br><span class="line"><span class="built_in">string</span>Object.match(regexp)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>searchvalue</td>
+<td>必需。规定要检索的字符串值。</td>
+</tr>
+<tr>
+<td>regexp</td>
+<td>必需。规定要匹配的模式的 RegExp 对象。<br/>如果该参数不是 RegExp 对象，则需要首先把它传递给 RegExp 构造函数，将其转换为 RegExp 对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例子：在下面<strong>正则表达式完整例子</strong>中使用。</li>
+</ul>
+<hr>
+<h3 id="exec-方法"><a href="#exec-方法" class="headerlink" title="exec()方法"></a>exec()方法</h3><ul>
+<li>exec() 方法用于使用正则表达式，检索字符串中的正则表达式的匹配。</li>
+<li><strong>语法</strong>：<code>RegExpObject.exec(要检索的字符串)</code></li>
+<li>返回一个<strong>数组</strong>，其中存放匹配的结果。如果未找到匹配，则返回值为 <strong>null</strong>。</li>
+<li>与match()类似，他们都是返回匹配结果的<strong>数组</strong>，但<strong>match()是字符串的正则方法（是使用字符串对象进行调用），exec()是正则对象的方法（使用RegExp对象进行调用）</strong>。</li>
+<li>例子：在下面<strong>y粘连修饰符的例子</strong>*中使用。</li>
+</ul>
+<hr>
+<h3 id="test-方法"><a href="#test-方法" class="headerlink" title="test()方法"></a>test()方法</h3><ul>
+<li>test()方法用于检测一个字符串是否匹配某个模式.</li>
+<li><strong>返回值：布尔型</strong>。如果字符串中有匹配的值返回 true ，否则返回 false。</li>
+<li>注意：和match()类似，不过他返回的是布尔值而不是匹配值构成的数组。</li>
+<li><strong>语法</strong>：<code>RegExp对象.test(要检测的字符串)</code></li>
+<li>例子：在下面<strong>u修饰符的例子</strong>中使用。</li>
+</ul>
+<hr>
+<h2 id="正则表达式完整例子"><a href="#正则表达式完整例子" class="headerlink" title="正则表达式完整例子"></a>正则表达式完整例子</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>^表示开头，g表示全局匹配。即：开头为<span class="string">&quot;你&quot;</span>的字符串就满足这个正则表达式</span><br><span class="line">const regexp1 = <span class="regexp">/^你/g</span>;</span><br><span class="line">console.log(<span class="string">&quot;你好呀你好呀你好呀&quot;</span>.match(regexp1));<span class="regexp">//</span>[<span class="string">&quot;你&quot;</span>]</span><br><span class="line"></span><br><span class="line">const regexp2 = new RegExp(<span class="string">&quot;^你好&quot;</span>, <span class="string">&quot;g&quot;</span>);<span class="regexp">//</span>不要漏掉g的引号</span><br><span class="line">console.log(<span class="string">&quot;你好呀你好呀你好呀&quot;</span>.match(regexp2));<span class="regexp">//</span>[<span class="string">&quot;你好&quot;</span>]</span><br><span class="line"></span><br><span class="line">const regexp3 = new RegExp(<span class="regexp">/^我/g</span>);</span><br><span class="line">console.log(<span class="string">&quot;你好呀你好呀你好呀&quot;</span>.match(regexp3));<span class="regexp">//</span>null，不符合规则</span><br><span class="line"></span><br><span class="line">const regexp4 = <span class="regexp">/你/g</span>;<span class="regexp">//</span>去掉^</span><br><span class="line">console.log(<span class="string">&quot;你好呀你好呀你好呀&quot;</span>.match(regexp4));<span class="regexp">//</span>[<span class="string">&quot;你&quot;</span>, <span class="string">&quot;你&quot;</span>, <span class="string">&quot;你&quot;</span>]</span><br><span class="line"></span><br><span class="line">const regexp5 = <span class="regexp">/你/</span>;<span class="regexp">//</span>去掉g,不再全局搜索</span><br><span class="line">console.log(<span class="string">&quot;你好呀你好呀你好呀&quot;</span>.match(regexp5));<span class="regexp">//</span>[<span class="string">&quot;你&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="正则表达式构造函数RegExp的变化"><a href="#正则表达式构造函数RegExp的变化" class="headerlink" title="正则表达式构造函数RegExp的变化"></a>正则表达式构造函数RegExp的变化</h1><p><strong>不管有多少个“原来的修饰符”，都都会被”新增的修饰符”覆盖</strong>，注意：新增的修饰符需要引号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/规则/</span>原来的修饰符,<span class="string">&quot;新增的修饰符&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexp = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/^你/igm</span>,<span class="string">&quot;i&quot;</span>);<span class="comment">//最后生效的是i</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="新增的u、y修饰符"><a href="#新增的u、y修饰符" class="headerlink" title="新增的u、y修饰符"></a>新增的u、y修饰符</h1><h2 id="u修饰符"><a href="#u修饰符" class="headerlink" title="u修饰符"></a>u修饰符</h2><ul>
+<li>ES6 对正则表达式添加了 u 修饰符，含义为 “Unicode模式”，用来正确处理大于<code>\uFFFF</code>的Unicode字符。</li>
+<li>u修饰符的<strong>作用</strong>：使得要检测的字符串会被识别成一个字符而不是拆分成几个字符。使得可以<strong>正确处理四个字符的 UTF-16 编码</strong>。</li>
+<li>例子：<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>匹配开头为“\ud83d”的字符串，结果返回true，可是<span class="string">&quot;\ud83d\udc36&quot;</span>是<span class="string">&quot;🐶&quot;</span></span><br><span class="line">console.log(<span class="regexp">/^\ud83d/</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>true</span><br><span class="line"><span class="regexp">//</span>加上u修饰符：</span><br><span class="line">console.log(<span class="regexp">/^\ud83d/u</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>false</span><br></pre></td></tr></table></figure></li>
+<li><strong>例子分析</strong>：<br>上面代码中，<code>\ud83d\udc36</code> 是一个四字节的UTF-16 编码，代表<strong>一个字符</strong>“🐶”。<br>但是，<strong>ES5</strong>不支持四个字节的 UTF-16 编码，会<strong>将其识别为两个字符</strong>，导致第一行代码结果为 true。<br><strong>加了u修饰符以后，ES6就会识别其为一个字符</strong>，所以第二行代码结果为false。</li>
+</ul>
+<hr>
+<h2 id="y-粘连修饰符"><a href="#y-粘连修饰符" class="headerlink" title="y 粘连修饰符"></a>y 粘连修饰符</h2><ul>
+<li>y即 sticky（adj. 粘的；粘性的）</li>
+<li>y修饰符和g修饰符很像，他们都是全局匹配的，但<strong>y修饰符需要匹配到的第1个和第2个规则直接相粘连才能匹配到第2个</strong>，第一个匹配结束以后如果不是马上遇到第2个就停止匹配，返回null。</li>
+<li>例子：<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const r1 = /imooc/g;</span><br><span class="line">const r2 = /imooc/y;</span><br><span class="line"></span><br><span class="line">const <span class="built_in">str</span> = <span class="string">&quot;imoocimooc_imooc&quot;</span>;</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">&quot;-----------我是分割线-------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br></pre></td></tr></table></figure>
+<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg" alt="运行结果"><br><strong>例子分析</strong>：<br>可以看到全局匹配则可以的到3个“imooc”，而使用y（粘连修饰符）只能匹配到2个“imooc”。<br>这是因为y需要匹配到的第一个和第二个规则直接相粘连才能匹配到第2个，在这个例子中第二个“imooc”匹配完以后出现了<code>-</code>于是就停止匹配了。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6扩展 数值扩展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/07/ES6%E4%B9%8B%E5%89%8D%E9%81%8D%E5%8E%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%A5%E5%8F%8A%E9%81%8D%E5%8E%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B9%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E7%9A%84%E4%BE%8B%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6之前遍历字符串的方式以及遍历字符串并进行加密的例子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">复习：正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E4%B8%AD%E7%94%9F%E6%88%90RegExp%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">JS中生成RegExp对象的两种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">正则方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#match-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">match() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exec-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">exec()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#test-%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">test()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%8C%E6%95%B4%E4%BE%8B%E5%AD%90"><span class="nav-number">1.3.</span> <span class="nav-text">正则表达式完整例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0RegExp%E7%9A%84%E5%8F%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">正则表达式构造函数RegExp的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%9A%84u%E3%80%81y%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">新增的u、y修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">u修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#y-%E7%B2%98%E8%BF%9E%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.2.</span> <span class="nav-text">y 粘连修饰符</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2023
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

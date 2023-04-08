@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6 Map和Set | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="ES6规范引入了新的数据类型Map和Set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Map和Set">
+<meta property="og:url" content="http://yoursite.com/2020/04/09/ES6%20Map%E5%92%8CSet/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="ES6规范引入了新的数据类型Map和Set">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-09T04:21:51.000Z">
+<meta property="article:modified_time" content="2023-04-06T14:07:12.767Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6 Map和Set" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6 Map和Set
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/09/ES6%20Map%E5%92%8CSet/" class="article-date">
+	  <time datetime="2020-04-09T04:21:51.000Z" itemprop="datePublished">四月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES6规范引入了<strong>新的数据类型Map和Set</strong></p>
+<span id="more"></span>
+
+<h1 id="Map-键值对二维数组"><a href="#Map-键值对二维数组" class="headerlink" title="Map 键值对二维数组"></a>Map 键值对二维数组</h1><ul>
+<li>具体使用和更多方法可参考<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023024181109440">廖雪峰的博客</a></li>
+<li>Map是一组<strong>键值对的结构</strong>，具有极快的查找速度。</li>
+<li><strong>【创建方法】</strong>用Map实现，只需要一个<strong>“名字”-“成绩”的对照表</strong>，可直接根据名字查找成绩：<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">&#x27;Michael&#x27;</span>, <span class="number">95</span>], [<span class="string">&#x27;Bob&#x27;</span>, <span class="number">75</span>], [<span class="string">&#x27;Tracy&#x27;</span>, <span class="number">85</span>]]);</span><br><span class="line">m.<span class="keyword">get</span>(<span class="string">&#x27;Michael&#x27;</span>); <span class="comment">// 95</span></span><br></pre></td></tr></table></figure></li>
+<li>初始化Map需要一个<strong>二维数组</strong>，或者直接初始化一个空Map</li>
+<li>该二维数组中<strong>一个key只能对应一个value</strong>，所以，多次对一个key放入value，<strong>后面的值会把前面的值冲掉</strong></li>
+</ul>
+<h1 id="Set-数组去重"><a href="#Set-数组去重" class="headerlink" title="Set 数组去重"></a>Set 数组去重</h1><ul>
+<li>具体使用和更多方法可参考<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023024181109440">廖雪峰的博客</a></li>
+<li>Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，<strong>在Set中，没有重复的key</strong>。</li>
+<li><strong>【创建方法】</strong>要创建一个Set，需要提供一个<strong>Array作为输入</strong>，或者直接创建一个空Set：<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="built_in">Set</span>(); <span class="comment">// 空Set</span></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 含1, 2, 3</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>重复元素在Set中自动被过滤</strong>(注意 数字3 和 字符串<code>3</code> 是不同的元素)：<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var</span> s = new Set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, &#x27;<span class="number">3</span>&#x27;]);</span><br><span class="line"><span class="attribute">s</span>; // Set &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;3&quot;</span>&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="数组相关的面试题"><a href="#数组相关的面试题" class="headerlink" title="数组相关的面试题"></a>数组相关的面试题</h1><ul>
+<li><strong>问题</strong>：给定一个有序数组，数组里有重复元素，要求原地操作数组，删除重复元素。</li>
+<li><strong>答案：</strong><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>];</span><br><span class="line"><span class="keyword">function</span> unique(arr) &#123;</span><br><span class="line">  <span class="regexp">//</span> 原地操作数组，删除重复元素</span><br><span class="line">  let len = <span class="number">0</span>; <span class="regexp">//</span> len为不重复数的index，结果数组长度len+<span class="number">1</span></span><br><span class="line">  <span class="regexp">//</span> 遍历原数组</span><br><span class="line">  <span class="keyword">for</span> (let i = len; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="regexp">//</span> 原数组中第一次找到的数组项放入数组前方，len长度+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> (arr.indexOf(arr[i]) === i) &#123;</span><br><span class="line">      arr[len] = arr[i];</span><br><span class="line">      len++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="regexp">//</span> 相同的i+<span class="number">1</span>继续查</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="regexp">//</span> 去重后，删除数组后方多余数据项</span><br><span class="line">  arr.splice(len);</span><br><span class="line">  <span class="regexp">//</span> 原地修改，不需要返回</span><br><span class="line">&#125;</span><br><span class="line"><span class="regexp">//</span> 针对 原地修改，不返回数组 的打印</span><br><span class="line">unique(arr);</span><br><span class="line">console.log(arr);<span class="regexp">//</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>设置<strong>len为不重复数组项的index</strong>（也就是将不重复数替换到 <code>原数组[len]</code> 位置上，这样就不用新开一个数组了）</li>
+<li>在<strong>原数组上循环</strong>，<strong>i为循环的index</strong></li>
+<li><strong>原数组中找<code>arr[i]</code>比对是否是该数组项的第一个位置</strong>，是则<strong>将<code>arr[i]</code>赋给<code>arr[len]</code>(也就是将不同的这个数放到原数组靠前的位置上)，再<code>len++</code>（使得下一次替换的原数组index+1）</strong>，不是就不管，i++进行下一次循环</li>
+<li>全部去重后，<strong>使用splice(len)将len后面的多余数据删掉</strong><ul>
+<li><strong>注意</strong>，最后一次符合if条件时len+1的位置还没用，所以删除时len最末尾也还属于 重复数组 ，一并删去</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/10/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React知识点汇总（项目）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/08/CSS%E5%B8%83%E5%B1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS动画</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map-%E9%94%AE%E5%80%BC%E5%AF%B9%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">Map 键值对二维数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set-%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D"><span class="nav-number">2.</span> <span class="nav-text">Set 数组去重</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">数组相关的面试题</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2023
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
