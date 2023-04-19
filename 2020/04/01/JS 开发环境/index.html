@@ -32,17 +32,13 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo7tgds2pj30d80983yy.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo7w4wgygj30ma074q3k.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo7xf1lftj30je04pq30.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfn7yvkg6hj30el07d74q.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4gln87kj30ff078t8y.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo3pxbw8ej30wr0j1tbf.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4kycabej30an01dmx1.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4i0dvqzj30rz01wgll.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/webpack_config_js_module.png">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfodaf39tbj30x30rb0zl.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfoddeqf9mj30qr07hdgk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfodg6x8bzj30bb02uweg.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gfodjnqzzyj30x003paar.jpg">
 <meta property="article:published_time" content="2020-04-01T02:08:27.000Z">
-<meta property="article:modified_time" content="2023-04-17T14:05:37.634Z">
+<meta property="article:modified_time" content="2023-04-19T14:47:39.866Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -265,11 +261,16 @@
 </li>
 </ul>
 </li>
+<li>区别：<ul>
+<li><strong>babel</strong>：用于将ES6以上语法编译为ES5的工具</li>
+<li><strong>webpack</strong>：打包工具</li>
+</ul>
+</li>
 <li><strong>webpack和bebal使用思路</strong>：<ol>
 <li><strong>使用webpack插件进行第一次打包</strong>，将项目中js文件打包到bundle.js中（<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f323df0f3fd4">多文件打包参考这里</a>）</li>
 <li><strong>使用webpack-dev-server插件启动server服务</strong></li>
 <li>我们访问的html是<strong>通过html-webpack-plugin插件在解析html产出新的html文件时带上bundle.js</strong>，这样就能看到bundle.js被挂载在最后生成的html内</li>
-<li>配置babael后，<strong>使用webpack-dev-server插件时</strong> node_modules以外的js文件都<strong>经过babel-loader插件</strong>（它只是babel提供给webpack的插件，真正语法编译在@babel&#x2F;core），<strong>去@babel&#x2F;core进行语法转译</strong>。此时bundle.js中的ES6以上的语法也会被编译到ES5及以下后再放到最后显示的html中</li>
+<li>配置babael后，<strong>使用webpack-dev-server插件时</strong> node_modules以外的js文件都<strong>经过babel-loader插件</strong>（它只是babel提供给webpack的插件，真正语法编译在@babel&#x2F;core），<strong>去@babel&#x2F;core进行语法转译</strong>。此时bundle.js中的<strong>ES6以上的语法也会被编译到ES5及以下后再放到最后显示的html中</strong></li>
 <li><strong>注意：</strong>以上所有插件都是需要配置才能实现这些效果的</li>
 </ol>
 </li>
@@ -349,29 +350,32 @@
 </ol>
 <hr>
 <h2 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h2><ul>
-<li><strong>babel</strong>：编译ES6以上语法的工具</li>
-<li>经常<strong>结合webpack使用</strong></li>
+<li><strong>babel</strong>：用于将ES6以上语法编译为ES5的工具<ul>
+<li>毕竟浏览器暂不支持<strong>ES6模块化</strong>，也并不完全支持<strong>ES6语法</strong></li>
+</ul>
+</li>
+<li>babel和webpack是分开的，没啥关系，但<strong>babel可以提供插件给webpack使用</strong></li>
 <li><strong>插件</strong>（”@babel”是“组”的意思，”&#x2F;“说明时里面单个的模块，比如“@babel&#x2F;core”即为babel模块的core）：<ul>
 <li><strong>@babel&#x2F;core</strong>：babel核心</li>
 <li><strong>@babel&#x2F;preset-env</strong>：babel环境配置</li>
-<li><strong>babel-loader</strong>：给webpack使用的插件</li>
+<li><strong>babel-loader：给webpack使用的插件</strong></li>
 </ul>
 </li>
 <li><strong>使用步骤：</strong><ol>
 <li>安装上面三个插件</li>
-<li>新建.babelrc文件（json格式）进行babel配置（使用@babel&#x2F;preset-env插件）</li>
-<li>在webpack.config.js中进行module配置，让js文件都经过babel-loader插件去@babel&#x2F;core插件进行语法编译</li>
+<li>根目录下新建<code>.babelrc</code>文件（json格式）进行babel配置（使用@babel&#x2F;preset-env插件，这个插件是很多个插件的集合）</li>
+<li>在<code>webpack.config.js</code>中进行module配置，让手写的js文件都经过babel-loader插件去@babel&#x2F;core插件进行语法转译（node_modules是第三方插件的，没必要转译，安装时已经转译好了）</li>
 <li>运行 webpack-dev-server插件 启动服务器，则打包后的源码是经过转译的（不含有ES6以上语法）</li>
 </ol>
 </li>
 </ul>
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
-<li>在webpack例子的文件夹中，修改<strong>index.js，写入含有ES6语法的代码</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfn7yvkg6hj30el07d74q.jpg" alt="index.js"></li>
+<li>在webpack例子的文件夹中，修改<strong>index.js，写入含有ES6语法的代码</strong>：<code>const sum = (a + b) =&gt; &#123; return a + b &#125;</code></li>
 <li>**安装@babel&#x2F;core(babel核心)、@babel&#x2F;preset-env(babel环境配置)、babel-loader(给webpack使用的插件)**（”@babel”是“组”的意思，”&#x2F;“说明时里面单个的模块，比如“@babel&#x2F;core”即为babel模块的core）：<code>npm install @babel/core @babel/preset-env babel-loader -D</code></li>
-<li>根目录下<strong>新建.babelrc文件（json格式）</strong>，使用刚安装的@babel&#x2F;preset-env来<strong>配置babel</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4gln87kj30ff078t8y.jpg" alt=".babelrc"></li>
-<li><strong>在webpack.config.js中进行module配置</strong>（针对不同的模块做不同的解析）：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo3pxbw8ej30wr0j1tbf.jpg" alt="webpack.config.js">在src下node_modules以外的js文件都<strong>经过babel-loader插件</strong>（它只是babel提供给webpack的插件，真正语法编译在@babel&#x2F;core），<strong>去@babel&#x2F;core进行转译</strong></li>
-<li><strong>运行dev命令</strong>，启动server服务：<code>npm run dev</code>。出现compiled successfully说明编译成功：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4kycabej30an01dmx1.jpg" alt="编译成功"></li>
-<li><strong>查看源码中的bundle.js，可发现ES6语法已转译：</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gfo4i0dvqzj30rz01wgll.jpg" alt="打包后的bundle.js"></li>
+<li>根目录下<strong>新建.babelrc文件（json格式）</strong>，使用刚安装的@babel&#x2F;preset-env来<strong>配置babel</strong>：<code>&#123;&quot;presets&quot;: [&quot;@babel/preset-env&quot;]&#125;</code></li>
+<li><strong>在<code>webpack.config.js</code>中进行module配置</strong>（针对不同的模块做不同的解析）：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/webpack_config_js_module.png" alt="webpack_config_js_module" title="webpack_config_js_module">在src下node_modules以外的js文件都<strong>经过babel-loader插件</strong>（它只是babel提供给webpack的插件，真正语法编译在@babel&#x2F;core），<strong>去@babel&#x2F;core进行语法转译</strong></li>
+<li><strong>运行dev命令</strong>，启动server服务：<code>npm run dev</code>。出现compiled successfully说明编译成功</li>
+<li><strong>查看源码中的bundle.js，可发现ES6语法已转译：</strong><code>var sum = function sum(a + b) &#123; return a + b &#125;</code></li>
 </ol>
 <hr>
 <h2 id="webpack配置生产环境"><a href="#webpack配置生产环境" class="headerlink" title="webpack配置生产环境"></a>webpack配置生产环境</h2><p>之前我们配置的webpack是<strong>开发环境</strong>下的，使用的是<strong>默认的webpack.config.js文件</strong>。打包的内容<strong>不会被压缩</strong>。而<strong>生产环境下产生的打包bundle文件是被压缩后的</strong>。</p>
