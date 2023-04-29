@@ -19,20 +19,20 @@
 <meta property="og:description" content="慕课 前端框架及项目面试 聚焦VueReactWebpack 第八章 React 原理">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/VDOM_js_DOM.png">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg">
 <meta property="article:published_time" content="2020-05-06T12:17:40.000Z">
-<meta property="article:modified_time" content="2023-04-19T14:46:40.114Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.975Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta name="twitter:card" content="summary">
@@ -214,16 +214,16 @@
 <li>diff是一个广泛的概念，和组件化一样，她不是react独创的，如linux diff命令、git diff等</li>
 <li>两棵树做diff，两个js对象也可以做diff</li>
 <li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/#%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84Diff%E7%AE%97%E6%B3%95">diff算法</a> 优化时间复杂度</strong>：<ol>
-<li><strong>只比较同一层级</strong>，不跨级比较<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg" alt="diff图示"><br>逐层比对，<strong>如果第一层就不同，react就不会往下比对</strong>，而是直接使用 新的虚拟DOM 去生成真实的DOM。虽然可能会造成DOM节点渲染的浪费，但<strong>同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗</strong>。</li>
-<li><strong>tag不相同</strong>，则直接删掉重建，不再深度比较<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg" alt="diff图示2"></li>
-<li><strong>tag和key两者都相同</strong>，则认为是相同节点，不再深度比较<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg" alt="key值">在React中我们会<strong>根据key值给 虚拟DOM 命名</strong>，数据修改后 新的 虚拟DOM 就会根据key值和 原始的 虚拟DOM 进行快速比对，多出来的就是修改的DOM。这会大大提升性能。（<strong>所以key值需要是稳定的，可变的key值也就失去了它存在的意义</strong>）</li>
+<li><strong>只比较同一层级</strong>，不跨级比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg" alt="diff图示"><br>逐层比对，<strong>如果第一层就不同，react就不会往下比对</strong>，而是直接使用 新的虚拟DOM 去生成真实的DOM。虽然可能会造成DOM节点渲染的浪费，但<strong>同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗</strong>。</li>
+<li><strong>tag不相同</strong>，则直接删掉重建，不再深度比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg" alt="diff图示2"></li>
+<li><strong>tag和key两者都相同</strong>，则认为是相同节点，不再深度比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg" alt="key值">在React中我们会<strong>根据key值给 虚拟DOM 命名</strong>，数据修改后 新的 虚拟DOM 就会根据key值和 原始的 虚拟DOM 进行快速比对，多出来的就是修改的DOM。这会大大提升性能。（<strong>所以key值需要是稳定的，可变的key值也就失去了它存在的意义</strong>）</li>
 </ol>
 </li>
 </ul>
 <h1 id="JSX的本质"><a href="#JSX的本质" class="headerlink" title="JSX的本质"></a>JSX的本质</h1><ul>
 <li>JSX编译出来是什么本质就是什么</li>
-<li><a target="_blank" rel="noopener" href="https://www.babeljs.cn/repl">babel官网的“试一试”</a>可以直接看到<strong>JSX编译的结果</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg" alt="babel官网的“试一试”"><strong>遇到组件会继续拆分组件的jsx结构</strong>：<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg" alt="遇到组件会继续拆分组件的jsx结构"></li>
-<li><strong>总结</strong>：JSX编译出来<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg" alt="JSX编译出来"><ul>
+<li><a target="_blank" rel="noopener" href="https://www.babeljs.cn/repl">babel官网的“试一试”</a>可以直接看到<strong>JSX编译的结果</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg" alt="babel官网的“试一试”"><strong>遇到组件会继续拆分组件的jsx结构</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg" alt="遇到组件会继续拆分组件的jsx结构"></li>
+<li><strong>总结</strong>：JSX编译出来<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg" alt="JSX编译出来"><ul>
 <li>**JSX的本质就是React.creatElement()**：<ul>
 <li>参数1：组件&#x2F;html标签（大小写区分）</li>
 <li>参数2：属性</li>
@@ -239,7 +239,7 @@
 <li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/#%E5%85%B3%E4%BA%8Eevent%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%89">react的event</a>不是原生的，是react封装的<strong>SyntheticEvent合成事件对象</strong>，模拟出了 DOM 事件对象 所有的能力。<strong>event.nativeEvent 才是原生事件对象</strong></li>
 <li><strong>react事件 和 DOM 事件不一样</strong>，和 Vue 事件也不一样</li>
 </ul>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg" alt="合成事件机制"><br><strong>合成事件机制</strong>：</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg" alt="合成事件机制"><br><strong>合成事件机制</strong>：</p>
 <ol>
 <li><strong>div上绑定的事件被触发后冒泡到顶层document上</strong>，react中所有事件都绑定在document上</li>
 <li>react会<strong>实例化成统一的react合成事件</strong>（SyntheticEvent合成事件）再进行<strong>事件派发</strong>（通过target知道谁触发了事件以后就派发给他进行事件处理）<strong>将event对象交给对应的处理器执行</strong></li>
@@ -270,11 +270,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="setState主流程"><a href="#setState主流程" class="headerlink" title="setState主流程"></a>setState主流程</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg" alt="setState主流程"></p>
-<h2 id="batchUpdate机制"><a href="#batchUpdate机制" class="headerlink" title="batchUpdate机制"></a>batchUpdate机制</h2><p><strong>setState异步或同步 主要看能否命中batchUpdate机制（通过isBatchingUpadates判断）</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg" alt="batchUpdate机制与setState异步或同步1"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg" alt="batchUpdate机制与setState同步"><br><strong>注意：实际上isBatchingUpadates是在入口定义的，不是在函数里，上图只是演示方便</strong></p>
+<h2 id="setState主流程"><a href="#setState主流程" class="headerlink" title="setState主流程"></a>setState主流程</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg" alt="setState主流程"></p>
+<h2 id="batchUpdate机制"><a href="#batchUpdate机制" class="headerlink" title="batchUpdate机制"></a>batchUpdate机制</h2><p><strong>setState异步或同步 主要看能否命中batchUpdate机制（通过isBatchingUpadates判断）</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg" alt="batchUpdate机制与setState异步或同步1"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg" alt="batchUpdate机制与setState同步"><br><strong>注意：实际上isBatchingUpadates是在入口定义的，不是在函数里，上图只是演示方便</strong></p>
 <h3 id="能命中batchUpdate机制的入口-setState异步更新"><a href="#能命中batchUpdate机制的入口-setState异步更新" class="headerlink" title="能命中batchUpdate机制的入口(setState异步更新)"></a>能命中batchUpdate机制的入口(setState异步更新)</h3><p>react可以“管理”的入口：<br><strong>生命周期</strong>（和他调用的函数）<br><strong>react中注册的事件（合成事件）</strong>（和他调用的函数）</p>
 <h3 id="不能命中batchUpdate机制的入口-setState同步更新"><a href="#不能命中batchUpdate机制的入口-setState同步更新" class="headerlink" title="不能命中batchUpdate机制的入口(setState同步更新)"></a>不能命中batchUpdate机制的入口(setState同步更新)</h3><p>react“管不到”的入口：<br><strong>setTimeout setInterval等</strong>（和他调用的函数）<br><strong>自定义的DOM事件</strong>（和他调用的函数）</p>
-<h1 id="transaction（事务）机制"><a href="#transaction（事务）机制" class="headerlink" title="transaction（事务）机制"></a>transaction（事务）机制</h1><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg" alt="transaction（事务）机制"><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg" alt="transaction（事务）机制服务于batchUpdate机制"></p>
+<h1 id="transaction（事务）机制"><a href="#transaction（事务）机制" class="headerlink" title="transaction（事务）机制"></a>transaction（事务）机制</h1><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg" alt="transaction（事务）机制"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg" alt="transaction（事务）机制服务于batchUpdate机制"></p>
 <h1 id="React组件渲染和更新的过程"><a href="#React组件渲染和更新的过程" class="headerlink" title="React组件渲染和更新的过程"></a>React组件渲染和更新的过程</h1><h2 id="组件渲染过程"><a href="#组件渲染过程" class="headerlink" title="组件渲染过程"></a>组件渲染过程</h2><ol start="2">
 <li><strong>state数据+render()中解析JSX结构</strong>(creatElement函数)<strong>生成虚拟DOM</strong></li>
 <li>用 <strong>虚拟DOM 生成 真实的DOM ，显示在页面上</strong></li>

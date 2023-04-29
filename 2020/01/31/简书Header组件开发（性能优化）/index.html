@@ -18,19 +18,19 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="避免无意义的AJAX请求发送之前我们设置的有点问题，每次点击搜索框都会获取一次AJAX请求：但实际上我们只需要获取一次就够了。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov1blngsj30jd0563z0.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov0cb654j30vy04x0tr.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov54rzdaj30q203ugm6.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov4gotamj30rs0crq45.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov7y433mj30e008bwep.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov9qsy7wj30iu0c33zi.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov1blngsj30jd0563z0.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov0cb654j30vy04x0tr.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov54rzdaj30q203ugm6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov4gotamj30rs0crq45.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov7y433mj30e008bwep.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov9qsy7wj30iu0c33zi.jpg">
 <meta property="article:published_time" content="2020-01-31T07:12:30.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:08:44.008Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:38.974Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -173,18 +173,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="避免无意义的AJAX请求发送"><a href="#避免无意义的AJAX请求发送" class="headerlink" title="避免无意义的AJAX请求发送"></a>避免无意义的AJAX请求发送</h1><p>之前我们设置的有点问题，<strong>每次点击搜索框都会获取一次AJAX请求</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg" alt="多次获取AJAX请求"><br>但<strong>实际上我们只需要获取一次就够</strong>了。</p>
+        <h1 id="避免无意义的AJAX请求发送"><a href="#避免无意义的AJAX请求发送" class="headerlink" title="避免无意义的AJAX请求发送"></a>避免无意义的AJAX请求发送</h1><p>之前我们设置的有点问题，<strong>每次点击搜索框都会获取一次AJAX请求</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcous65ky4j319z0eimyx.jpg" alt="多次获取AJAX请求"><br>但<strong>实际上我们只需要获取一次就够</strong>了。</p>
 <span id="more"></span>
 
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>调用 点击事件函数handleInputFocus 时传入list数据，函数中判断<strong>只有<code>list===0</code>时才发送AJAX请求</strong>。</p>
-<h1 id="解决代码"><a href="#解决代码" class="headerlink" title="解决代码"></a>解决代码</h1><p><strong>1. 调用 点击事件函数handleInputFocus 时传入list数据</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov1blngsj30jd0563z0.jpg" alt="传入list数据"></p>
-<p><strong>2. 函数handleInputFocus接受并打印list</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov0cb654j30vy04x0tr.jpg" alt="打印list"><br>可以看到两次点击获取到的list中<code>size</code>是不同的，所以我们<strong>可以通过<code>list.size</code>判断是否发送AJAX请求：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov54rzdaj30q203ugm6.jpg" alt="通过`list.size`判断是否发送AJAX请求"><br><strong>只有当<code>list.size===0</code>时才发送请求</strong>，其实这行代码就相当于下面的3行代码：</p>
+<h1 id="解决代码"><a href="#解决代码" class="headerlink" title="解决代码"></a>解决代码</h1><p><strong>1. 调用 点击事件函数handleInputFocus 时传入list数据</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov1blngsj30jd0563z0.jpg" alt="传入list数据"></p>
+<p><strong>2. 函数handleInputFocus接受并打印list</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov0cb654j30vy04x0tr.jpg" alt="打印list"><br>可以看到两次点击获取到的list中<code>size</code>是不同的，所以我们<strong>可以通过<code>list.size</code>判断是否发送AJAX请求：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov54rzdaj30q203ugm6.jpg" alt="通过`list.size`判断是否发送AJAX请求"><br><strong>只有当<code>list.size===0</code>时才发送请求</strong>，其实这行代码就相当于下面的3行代码：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span><span class="params">(list.size === <span class="number">0</span>)</span></span>&#123;</span><br><span class="line"><span class="function"><span class="title">dispatch</span><span class="params">(actionCreators.getList()</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>结果：</strong>点击多次也只发送一次请求<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov4gotamj30rs0crq45.jpg" alt="结果"></p>
+<p><strong>结果：</strong>点击多次也只发送一次请求<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov4gotamj30rs0crq45.jpg" alt="结果"></p>
 <hr>
-<h1 id="优化样式"><a href="#优化样式" class="headerlink" title="优化样式"></a>优化样式</h1><p><strong>实现样式：鼠标移到“换一批”上则变手形状</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov7y433mj30e008bwep.jpg" alt="鼠标移到“换一批”上则变手形状"></p>
-<p><strong>优化方法：</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcov9qsy7wj30iu0c33zi.jpg" alt="优化方法"></p>
+<h1 id="优化样式"><a href="#优化样式" class="headerlink" title="优化样式"></a>优化样式</h1><p><strong>实现样式：鼠标移到“换一批”上则变手形状</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov7y433mj30e008bwep.jpg" alt="鼠标移到“换一批”上则变手形状"></p>
+<p><strong>优化方法：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcov9qsy7wj30iu0c33zi.jpg" alt="优化方法"></p>
 <hr>
 
       

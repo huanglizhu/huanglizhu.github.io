@@ -18,15 +18,15 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="面试： 虚拟DOM 是什么，有什么用总结：  虚拟DOM 就是一个JS对象，用它来描述 真实的DOM。 使用 虚拟DOM 有助于极大提升性能：React对性能的提升在于减少了 真实DOM对象 的生成与比较，取而代之的是使用 虚拟DOM(JS对象) 来完成数据改变后的生成与比较。而用JS形成一个 JS对象 性能损耗非常小，生成一个 DOM元素 性能损耗大，涉及DOM的操作都很耗性能。（具体可看下面">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgqruafkj313r08iwj5.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgvb5heej30sh0ccwg9.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgqruafkj313r08iwj5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgvb5heej30sh0ccwg9.jpg">
 <meta property="article:published_time" content="2020-01-07T11:40:02.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:08:09.948Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.963Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -245,11 +245,11 @@
 <p>下面的<strong>同层比较</strong> 和 <strong>key值匹配</strong> 就是 Diff算法 的一部分。</p>
 <h2 id="答之前的问题：为什么setState是异步的"><a href="#答之前的问题：为什么setState是异步的" class="headerlink" title="答之前的问题：为什么setState是异步的"></a>答之前的问题：为什么setState是异步的</h2><p>（关于什么是异步可参考笔记“<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/01/js%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/">JS中的同步与异步</a>”）<br>setState之所以是异步，是因为<strong>要提高React底层的性能</strong>。<br>提高性能主要靠<strong>减少比对次数</strong>：如果不是异步的，短时间内修改3次state，则react需要进行3次 虚拟DOM 的比对，而异步则可以把3次比对合并，react只需要进行1次 虚拟DOM 的比对。</p>
 <p>异步任务是指不进入主线程，而进入任务队列的任务，只有任务队列通知主线程，某个异步任务可以执行了，该任务才会进入主线程。<br>我的理解：也就是说如果短时间内多次修改，他会等你停止修改以后才通知主线程可以对我进行比对啦。</p>
-<h2 id="同层比较"><a href="#同层比较" class="headerlink" title="同层比较"></a>同层比较</h2><p><strong>React的 虚拟DOM 采用的是 同层比较 的算法。</strong><br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg" alt="例子"><br>逐层比对，如果第一层就不同，react就不会往下比对，而是直接使用 新的虚拟DOM 去生成真实的DOM。<strong>虽然可能会造成DOM节点渲染的浪费，但同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗。</strong></p>
+<h2 id="同层比较"><a href="#同层比较" class="headerlink" title="同层比较"></a>同层比较</h2><p><strong>React的 虚拟DOM 采用的是 同层比较 的算法。</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg" alt="例子"><br>逐层比对，如果第一层就不同，react就不会往下比对，而是直接使用 新的虚拟DOM 去生成真实的DOM。<strong>虽然可能会造成DOM节点渲染的浪费，但同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗。</strong></p>
 <h2 id="答之前的问题：为什么index不能作为key值"><a href="#答之前的问题：为什么index不能作为key值" class="headerlink" title="答之前的问题：为什么index不能作为key值"></a>答之前的问题：为什么index不能作为key值</h2><p><strong>key值需要是稳定的，可变的key值也就失去了它存在的意义。</strong></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgqruafkj313r08iwj5.jpg" alt="例子"><br>在React中我们会根据key值给 虚拟DOM 命名，数据修改后 新的 虚拟DOM 就会根据key值和 原始的 虚拟DOM 进行快速比对，多出来的就是修改的DOM。这会大大提升性能。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgqruafkj313r08iwj5.jpg" alt="例子"><br>在React中我们会根据key值给 虚拟DOM 命名，数据修改后 新的 虚拟DOM 就会根据key值和 原始的 虚拟DOM 进行快速比对，多出来的就是修改的DOM。这会大大提升性能。</p>
 <h3 id="之前的-TodoList-的例子"><a href="#之前的-TodoList-的例子" class="headerlink" title="之前的 TodoList 的例子"></a>之前的 TodoList 的例子</h3><p>如果我们使用数组下标index作为key值，我们就没办法保证 新的 虚拟DOM 和 原始的 虚拟DOM 的 名字（key值）一致，也就没办法快速匹配了。<br>所以<strong>使用一个稳定的内容作为key值才是稳妥的做法，数组下标index是会因为列表的变化而发生改变的，他是不稳定的。</strong></p>
-<p>结合我们<strong>之前的 TodoList 的例子</strong>，我们将数组下标index作为key值：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gbkgvb5heej30sh0ccwg9.jpg" alt="TodoList"><br>当我们在页面上依次输入“a,b,c”时，他们对应的key分别是“0 a,1 b,2 c”,而当我们点击a时，a被从list中删除掉，bc对应的key分别是“0 b,1 c”,可以发现如果我们将index作为key则key是可变的。但我们必须保证 新的 虚拟DOM 到了与 原始DOM 比对的树上时它的名字（key值）是没有变的，否则无法快速匹配。<strong>可变的key值也就失去了它存在的意义。</strong></p>
+<p>结合我们<strong>之前的 TodoList 的例子</strong>，我们将数组下标index作为key值：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgvb5heej30sh0ccwg9.jpg" alt="TodoList"><br>当我们在页面上依次输入“a,b,c”时，他们对应的key分别是“0 a,1 b,2 c”,而当我们点击a时，a被从list中删除掉，bc对应的key分别是“0 b,1 c”,可以发现如果我们将index作为key则key是可变的。但我们必须保证 新的 虚拟DOM 到了与 原始DOM 比对的树上时它的名字（key值）是没有变的，否则无法快速匹配。<strong>可变的key值也就失去了它存在的意义。</strong></p>
 
       
     </div>

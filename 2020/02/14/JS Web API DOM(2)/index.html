@@ -18,16 +18,16 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="DOM性能 DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的回流、重绘，reflow和repain过程是非常消耗性能的,要尽量避免频繁的DOM操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_DOM_more2one.jpg">
 <meta property="article:published_time" content="2020-02-14T04:56:45.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:53.484Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.446Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -174,9 +174,9 @@
 <li>DOM操作非常“昂贵”，占用CPU比较多，因为他可能会导致页面的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98">回流、重绘</a>，reflow和repain过程是非常消耗性能的,要尽量<strong>避免频繁的DOM操作</strong>。<span id="more"></span></li>
 <li>可以通过以下方法提高DOM性能：<strong>对DOM查询做缓存、将频繁操作改为一次性操作</strong></li>
 </ul>
-<h2 id="对DOM查询做缓存"><a href="#对DOM查询做缓存" class="headerlink" title="对DOM查询做缓存"></a>对DOM查询做缓存</h2><p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg" alt="对DOM查询做缓存"><br>如果每次循环都查询一次DOM，会很消耗性能。所以我们可以先查询出p节点的nodeList，将其<strong>缓存</strong>在变量pList中，接下来的操作也就不需要反复查询DOM了。</p>
-<h2 id="将频繁操作改为一次性操作"><a href="#将频繁操作改为一次性操作" class="headerlink" title="将频繁操作改为一次性操作"></a>将频繁操作改为一次性操作</h2><p>假如现在要<strong>往id为list的ul标签中插入10个li标签</strong>，按照以前的操作，我们会<strong>分10次使用appendChild()进行子节点添加</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg" alt="以前的操作"><br>这样频繁操作DOM是很<strong>消耗性能</strong>的。</p>
-<p>我们可以<strong>通过<code>createDocumentFragment()</code>先创建一个文档片段</strong>，这个文档片段是保存在JS中的（不是在DOM树中），然后<strong>将循环10次产生的子节点都添加到文档片段中</strong>，最后再<strong>将 文档片段 添加到DOM树上</strong>：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg" alt="将频繁操作改为一次性操作"></p>
+<h2 id="对DOM查询做缓存"><a href="#对DOM查询做缓存" class="headerlink" title="对DOM查询做缓存"></a>对DOM查询做缓存</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctw05x89hj30rb0be44s.jpg" alt="对DOM查询做缓存"><br>如果每次循环都查询一次DOM，会很消耗性能。所以我们可以先查询出p节点的nodeList，将其<strong>缓存</strong>在变量pList中，接下来的操作也就不需要反复查询DOM了。</p>
+<h2 id="将频繁操作改为一次性操作"><a href="#将频繁操作改为一次性操作" class="headerlink" title="将频繁操作改为一次性操作"></a>将频繁操作改为一次性操作</h2><p>假如现在要<strong>往id为list的ul标签中插入10个li标签</strong>，按照以前的操作，我们会<strong>分10次使用appendChild()进行子节点添加</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctwa43w0oj30q506sjwz.jpg" alt="以前的操作"><br>这样频繁操作DOM是很<strong>消耗性能</strong>的。</p>
+<p>我们可以<strong>通过<code>createDocumentFragment()</code>先创建一个文档片段</strong>，这个文档片段是保存在JS中的（不是在DOM树中），然后<strong>将循环10次产生的子节点都添加到文档片段中</strong>，最后再<strong>将 文档片段 添加到DOM树上</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gctwjxaxc3j30ke0f07bo.jpg" alt="将频繁操作改为一次性操作"></p>
 <hr>
 <h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><h2 id="DOM是哪种数据结构"><a href="#DOM是哪种数据结构" class="headerlink" title="DOM是哪种数据结构"></a>DOM是哪种数据结构</h2><p><strong>树（DOM树）</strong>，基于树状结构才有了父节点、子节点。</p>
 <hr>

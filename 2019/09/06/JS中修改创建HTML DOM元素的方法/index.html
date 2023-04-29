@@ -18,18 +18,18 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="JS往HTML中添加节点的流程总结HTML元素 通常是由 元素节点 和 文本节点 组成。  使用createElement()创建 元素节点 使用createTextNode() 创建 文本节点 使用appendChild() 将节点添加到另一个节点列表的末尾">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg">
 <meta property="article:published_time" content="2019-09-06T06:45:14.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:54.690Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.534Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="ES6">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -193,7 +193,7 @@
 </ul>
 <ol>
 <li>node2是添加到<strong>node1内部</strong>的！</li>
-<li><strong>如果node2已存在于js文件中，则appendChild()会将node2 移动 到node1之中</strong><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg" alt="移动节点对象"></li>
+<li><strong>如果node2已存在于js文件中，则appendChild()会将node2 移动 到node1之中</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcrk1847jbj30kv0br7cg.jpg" alt="移动节点对象"></li>
 </ol>
 <ul>
 <li><strong>参数node2</strong>：（节点对象）必须，你要<strong>添加的节点对象</strong>。</li>
@@ -247,10 +247,10 @@
 <li>然后给节点btn设置一个点击事件</li>
 <li>最后将节点btn<strong>添加</strong>到body中</li>
 </ol>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg" alt="使用var生成十个按钮每个按点击的时候弹出1-10"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级通过自调用时有传进来的i，这个i是随着函数的调用而产生，随着函数调用结束而释放的，不是作用在一开始的var i身上的，所以每一个函数都对应不同的数字。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg" alt="使用var生成十个按钮每个按点击的时候弹出1-10"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级通过自调用时有传进来的i，这个i是随着函数的调用而产生，随着函数调用结束而释放的，不是作用在一开始的var i身上的，所以每一个函数都对应不同的数字。</p>
 <p>变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。所以每一次循环中btn的innerText所指向的i其实都是同一个，循环到最后时前面的i全部被最后的结果覆盖了。而局部变量的话就是每循环一次产生一个新的i，所以不会被覆盖。</p>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg" alt="做这个修改则点击每个按钮弹出的都是11"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级直接就是var i了，所有的代码都作用在它身上，所以他会是11。</p>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg" alt="使用let生成十个按钮每个按点击的时候弹出1-10"><br>可以发现，使用let以后就不需要额外放一个自调用函数把他们框起来了。<br>变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg" alt="做这个修改则点击每个按钮弹出的都是11"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级直接就是var i了，所有的代码都作用在它身上，所以他会是11。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg" alt="使用let生成十个按钮每个按点击的时候弹出1-10"><br>可以发现，使用let以后就不需要额外放一个自调用函数把他们框起来了。<br>变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量。</p>
 <hr>
 
       

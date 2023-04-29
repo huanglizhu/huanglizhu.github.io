@@ -18,14 +18,14 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="原本从接口获取到数据的流程（完整例子在笔记“redux进阶（1）”中）  在组件中创建一个生命周期函数componentDidMount()。引用 axios 模块，在componentDidMount函数中借助 axios 模块发送ajax请求，使用axios.get(&quot;接口路径&quot;)来获取某个接口路径下的数据,请求成功后执行then()的回调函数（接收一个参数res表示接收到">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg">
 <meta property="article:published_time" content="2020-01-20T12:16:06.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:08:10.551Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.941Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -196,7 +196,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;./mock/TodoListMock&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>然后修改原代码，现在我们拿到的res.data中就会有list数组了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生命周期函数</span></span><br><span class="line"><span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 借助 `axios` 模块发送`ajax`请求,通过`get()`获取接口路径下的数据</span></span><br><span class="line">  axios.<span class="title function_">get</span>(<span class="string">&quot;/list.json&quot;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = res.<span class="property">data</span>.<span class="property">list</span>;</span><br><span class="line">    <span class="keyword">const</span> action=<span class="title function_">initListAction</span>(data);</span><br><span class="line">    <span class="comment">// console.log(action);</span></span><br><span class="line">    store.<span class="title function_">dispatch</span>(action);</span><br><span class="line">  &#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&quot;失败&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg" alt="效果"></p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc5fu6iwifj30hr08iq32.jpg" alt="效果"></p>
 <hr>
 <h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><ol>
 <li><strong>另外创建一个服务器专门用于放置mock文件夹</strong>，将模拟接口的数据都放在这个服务器内。<ul>
@@ -214,7 +214,7 @@
 <li>方法2则是直接模拟了一个后端项目，上线时直接将设置的<code>axios.defaults.baseURL</code>改成真正的后端地址或者删掉即可。</li>
 </ul>
 <hr>
-<h1 id="使用axios与jquery的区别"><a href="#使用axios与jquery的区别" class="headerlink" title="使用axios与jquery的区别"></a>使用axios与jquery的区别</h1><p>在上一篇笔记中，我的例子是<strong>使用jquery发起AJAX请求</strong>的，那个时候<strong>拿到的数据是 字符串</strong> ，如果想要方便后续操作就需要使用<code>JSON.parse()</code>将其转换为JS对象。<br>但<strong>在react中</strong>，我们<strong>通过axios发起 AJAX请求 拿到的数据直接就是对象</strong>，不需要进行转换(<strong>后端传JSON对象到前端，通过axios也会直接获取到JS对象，不需额外转换</strong>)：<br><img src="http://ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg" alt="使用axios时打印的res"></p>
+<h1 id="使用axios与jquery的区别"><a href="#使用axios与jquery的区别" class="headerlink" title="使用axios与jquery的区别"></a>使用axios与jquery的区别</h1><p>在上一篇笔记中，我的例子是<strong>使用jquery发起AJAX请求</strong>的，那个时候<strong>拿到的数据是 字符串</strong> ，如果想要方便后续操作就需要使用<code>JSON.parse()</code>将其转换为JS对象。<br>但<strong>在react中</strong>，我们<strong>通过axios发起 AJAX请求 拿到的数据直接就是对象</strong>，不需要进行转换(<strong>后端传JSON对象到前端，通过axios也会直接获取到JS对象，不需额外转换</strong>)：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc5gnjtckij30y7072jsc.jpg" alt="使用axios时打印的res"></p>
 <hr>
 
       

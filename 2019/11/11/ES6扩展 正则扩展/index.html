@@ -18,13 +18,13 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="复习：正则表达式简单来说就是用一定的规则去查找、替换符合这个规则的文本。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
 <meta property="article:published_time" content="2019-11-11T10:47:25.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:17.123Z">
+<meta property="article:modified_time" content="2023-04-29T14:39:37.269Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -267,15 +267,15 @@
 <h1 id="新增的u、y修饰符"><a href="#新增的u、y修饰符" class="headerlink" title="新增的u、y修饰符"></a>新增的u、y修饰符</h1><h2 id="u修饰符"><a href="#u修饰符" class="headerlink" title="u修饰符"></a>u修饰符</h2><ul>
 <li>ES6 对正则表达式添加了 u 修饰符，含义为 “Unicode模式”，用来正确处理大于<code>\uFFFF</code>的Unicode字符。</li>
 <li>u修饰符的<strong>作用</strong>：使得要检测的字符串会被识别成一个字符而不是拆分成几个字符。使得可以<strong>正确处理四个字符的 UTF-16 编码</strong>。</li>
-<li>例子：<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>匹配开头为“\ud83d”的字符串，结果返回true，可是<span class="string">&quot;\ud83d\udc36&quot;</span>是<span class="string">&quot;🐶&quot;</span></span><br><span class="line">console.log(<span class="regexp">/^\ud83d/</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>true</span><br><span class="line"><span class="regexp">//</span>加上u修饰符：</span><br><span class="line">console.log(<span class="regexp">/^\ud83d/u</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>false</span><br></pre></td></tr></table></figure></li>
-<li><strong>例子分析</strong>：<br>上面代码中，<code>\ud83d\udc36</code> 是一个四字节的UTF-16 编码，代表<strong>一个字符</strong>“🐶”。<br>但是，<strong>ES5</strong>不支持四个字节的 UTF-16 编码，会<strong>将其识别为两个字符</strong>，导致第一行代码结果为 true。<br><strong>加了u修饰符以后，ES6就会识别其为一个字符</strong>，所以第二行代码结果为false。</li>
+<li>例子：<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>匹配开头为“\ud83d”的字符串，结果返回true，可是<span class="string">&quot;\ud83d\udc36&quot;</span>是<span class="string">&quot;&quot;</span></span><br><span class="line">console.log(<span class="regexp">/^\ud83d/</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>true</span><br><span class="line"><span class="regexp">//</span>加上u修饰符：</span><br><span class="line">console.log(<span class="regexp">/^\ud83d/u</span>.test(<span class="string">&quot;\ud83d\udc36&quot;</span>));<span class="regexp">//</span>false</span><br></pre></td></tr></table></figure></li>
+<li><strong>例子分析</strong>：<br>上面代码中，<code>\ud83d\udc36</code> 是一个四字节的UTF-16 编码，代表<strong>一个字符</strong>“”。<br>但是，<strong>ES5</strong>不支持四个字节的 UTF-16 编码，会<strong>将其识别为两个字符</strong>，导致第一行代码结果为 true。<br><strong>加了u修饰符以后，ES6就会识别其为一个字符</strong>，所以第二行代码结果为false。</li>
 </ul>
 <hr>
 <h2 id="y-粘连修饰符"><a href="#y-粘连修饰符" class="headerlink" title="y 粘连修饰符"></a>y 粘连修饰符</h2><ul>
 <li>y即 sticky（adj. 粘的；粘性的）</li>
 <li>y修饰符和g修饰符很像，他们都是全局匹配的，但<strong>y修饰符需要匹配到的第1个和第2个规则直接相粘连才能匹配到第2个</strong>，第一个匹配结束以后如果不是马上遇到第2个就停止匹配，返回null。</li>
 <li>例子：<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const r1 = /imooc/g;</span><br><span class="line">const r2 = /imooc/y;</span><br><span class="line"></span><br><span class="line">const <span class="built_in">str</span> = <span class="string">&quot;imoocimooc_imooc&quot;</span>;</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r1.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">&quot;-----------我是分割线-------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br><span class="line">console.<span class="built_in">log</span>(r2.<span class="built_in">exec</span>(<span class="built_in">str</span>));</span><br></pre></td></tr></table></figure>
-<img src="http://ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg" alt="运行结果"><br><strong>例子分析</strong>：<br>可以看到全局匹配则可以的到3个“imooc”，而使用y（粘连修饰符）只能匹配到2个“imooc”。<br>这是因为y需要匹配到的第一个和第二个规则直接相粘连才能匹配到第2个，在这个例子中第二个“imooc”匹配完以后出现了<code>-</code>于是就停止匹配了。</li>
+<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8u2kfprapj30n20a3q41.jpg" alt="运行结果"><br><strong>例子分析</strong>：<br>可以看到全局匹配则可以的到3个“imooc”，而使用y（粘连修饰符）只能匹配到2个“imooc”。<br>这是因为y需要匹配到的第一个和第二个规则直接相粘连才能匹配到第2个，在这个例子中第二个“imooc”匹配完以后出现了<code>-</code>于是就停止匹配了。</li>
 </ul>
 
       
