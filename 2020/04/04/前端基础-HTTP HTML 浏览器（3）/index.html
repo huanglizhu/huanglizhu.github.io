@@ -21,8 +21,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem1.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem2.png">
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem2.png">
 <meta property="article:published_time" content="2020-04-04T06:30:27.000Z">
-<meta property="article:modified_time" content="2023-04-29T14:39:38.435Z">
+<meta property="article:modified_time" content="2023-05-29T13:01:31.285Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -184,18 +186,31 @@
 </ol>
 <p>如果<strong>使用了alt 属性，那么浏览器至少可以显示或读出有关图像的描述</strong>。</p>
 <hr>
-<h1 id="ajax-x2F-fetch发送2次请求的原因"><a href="#ajax-x2F-fetch发送2次请求的原因" class="headerlink" title="ajax&#x2F;fetch发送2次请求的原因"></a>ajax&#x2F;fetch发送2次请求的原因</h1><ul>
+<h1 id="ajax-fetch-axios发送2次请求的原因"><a href="#ajax-fetch-axios发送2次请求的原因" class="headerlink" title="ajax&#x2F;fetch&#x2F;axios发送2次请求的原因"></a>ajax&#x2F;fetch&#x2F;axios发送2次请求的原因</h1><ul>
+<li>补充：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E4%B8%AD-ajax-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6">fetch</a>是实际项目中 ajax 的常用插件实际项目中 ajax 的常用插件之一，其他的还有jquery、axios<ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API">MDN fetch API</a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">使用fetch</a>，详细可参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35404847">知乎 Ajax跨域问题总结</a></li>
-<li><strong>问题：</strong> fetch发送<strong>非简单请求</strong>的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
-<li><strong>原因：</strong>很简单，因为你用fetch的<strong>非简单请求</strong>的时候，导致fetch 第一次发送了一个<strong>Options请求</strong>，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。</li>
+</ul>
+</li>
+<li><strong>问题：</strong> 发送<strong>非简单请求</strong>的时候，总是发送2次，第一次状态码是204，第二次才成功？</li>
+<li><strong>可能原因1：</strong> <ul>
+<li>发送<strong>非简单请求</strong>的时候，第一次发送了一个<strong>Options请求（预检请求）</strong>，询问服务器是否支持修改的请求头，如果服务器支持，则在第二次中发送真正的请求。<ul>
 <li>浏览器对复杂<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#%E8%B7%A8%E5%9F%9F">跨域</a>请求的处理，<strong>在发送真正的请求前, 会先发送一个方法为OPTIONS的预请求(preflight request), 用于试探服务端是否能接受真正的请求</strong>，如果options获得的回应是拒绝性质的，比如404\403\500等http状态，就会停止post、put等请求的发出。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>可能原因2：</strong> <ul>
+<li>发送了重定向请求：例如在发送 POST 请求时，如果服务器返回 302 状态码，则浏览器会自动重定向到新的 URL，从而发起第二个请求</li>
+</ul>
+</li>
 </ul>
 <h2 id="发送2次请求的前提条件"><a href="#发送2次请求的前提条件" class="headerlink" title="发送2次请求的前提条件"></a>发送2次请求的前提条件</h2><ul>
 <li><strong>发送2次请求的前提条件：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5">跨域</a>+非简单请求</strong></li>
+<li>注意：发送json格式的ajax请求很常见，但是非跨域的情况并不会发送2次请求</li>
 <li>常见的<strong>非简单请求：</strong><ul>
 <li>put、delete方法的ajax请求</li>
-<li>发送json格式的ajax请求</li>
-<li>带自定义头的ajax请求</li>
+<li>发送json格式的ajax请求（即Content-Type为’application&#x2F;json’的）</li>
+<li>带自定义头的ajax请求（比如包含一个带令牌的token）</li>
 </ul>
 </li>
 <li><strong>补充了解：简单请求：</strong><ul>
@@ -231,28 +246,43 @@
 <li>Doctype声明于文档最前面，主要作用是告诉<strong>浏览器的解析器</strong>使用<strong>哪种HTML规范或者XHTML规范（方式）</strong>来解析页面。这里有两种模式，<strong>严格模式和混杂模式</strong>。</li>
 <li><strong>严格模式</strong>：又称标准模式，是指浏览器按照W3C标准，以<strong>该浏览器支持</strong>的<strong>最高标准</strong>来解析代码，呈现页面</li>
 <li><strong>混杂模式</strong>：又称为怪异模式或者兼容模式，是指<strong>浏览器按照自己的方式来解析代码</strong>，使用一种比较宽松的<strong>向后兼容</strong>的方式来显示页面，防止浏览器无法兼容页面。</li>
-<li><strong>HTML5 没有严格和混杂之分：</strong>对于HTML5文档，HTML5 没有 DTD ，因此也就没有严格模式与混杂模式的区别，HTML5 有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。</li>
+<li><strong>HTML5 没有严格和混杂之分：</strong>对于HTML5文档，HTML5 没有 DTD ，因此也就没有严格模式与混杂模式的区别，HTML5 有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。<ul>
+<li>声明HTML5：<code>&lt;!DOCTYPE html&gt;</code></li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="viewport和移动端布局"><a href="#viewport和移动端布局" class="headerlink" title="viewport和移动端布局"></a>viewport和移动端布局</h1><ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/forthealllight/blog/issues/13">响应式布局的常用解决方案对比(媒体查询、百分比、rem和vw&#x2F;vh）</a></p>
-</li>
-<li><p>总的来说，<strong>viewport</strong>即<strong>视口</strong>。广义的视口，是指<strong>浏览器显示内容的屏幕区域</strong>，狭义的视口包括了<strong>布局视口、视觉视口和理想视口</strong>。</p>
-<ul>
-<li><strong>理想视口</strong>或者应该全称为“理想的布局视口”，在移动设备中就是指设备的分辨率。换句话说，理想视口或者说分辨率就是给定设备物理像素的情况下，最佳的“布局视口”。</li>
-<li><strong>设置理想视口：</strong>在移动端布局时，在<strong>meta标签</strong>中我们会<strong>将width设置称为device-width</strong>，device-width一般是表示分辨率的宽，通过width&#x3D;device-width的设置我们就<strong>将布局视口设置成了理想的视口</strong>:<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="attribute">id</span>=<span class="string">&quot;viewport&quot;</span> <span class="attribute">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;&quot;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li>可参考<a target="_blank" rel="noopener" href="https://github.com/forthealllight/blog/issues/13">响应式布局的常用解决方案对比(媒体查询、百分比、rem和vw&#x2F;vh）</a>，很详细</li>
+<li><strong>总结：</strong>设置理想视口后通过<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/11/CSS%E5%B8%83%E5%B1%80%EF%BC%882%EF%BC%89%E6%B5%AE%E5%8A%A8%20inline-block%20%E5%93%8D%E5%BA%94%E5%BC%8F/#media-query%E6%A1%88%E4%BE%8B">媒体查询</a>、百分比、rem和vw&#x2F;vh来实现移动端布局</li>
+<li><strong>viewport</strong>即<strong>视口</strong>。PC端上，是指<strong>浏览器的可视区域</strong>。移动设备上，包括了<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904179345915917"><strong>布局视口(虚拟视口)、视觉视口和理想视口</strong></a>。设置好理想视口就可以方便的使用vh vw等实现响应式布局了<ul>
+<li>帮助理解：布局视口是普通网页大小，视觉视口是移动设备屏幕大小，理想视口就是让网页宽度变成设备宽度的大小，避免需要左右拖动查看</li>
+<li><strong>注意：在没有设置 viewport 的情况下，</strong>移动端浏览器会默认将布局视口的宽度设为980px左右，<strong>移动端的 vw&#x2F;vh 是根据布局视口来计算的</strong>，而非视觉视口，这就导致显示出来的效果等都比我们期望的小很多。所以我们<strong>需要设置理想视口使得vh和vw根据视觉视口来计算</strong>。</li>
+<li><strong>理想视口</strong>或者应该全称为“理想的布局视口”:<ul>
+<li>理想视口不是固定，是开发人员针对特定场景认为该场景下最适合的视口宽度</li>
+<li><strong>目前普遍认为移动端理想视口是：<code>布局视口的宽度 = 视觉视口的宽度</code>（将width设置称为device-width）</strong>，这样用户不用缩放和横向拖动网页就能很好的进行网页浏览</li>
 </ul>
 </li>
-<li><p><strong>移动端布局响应式布局</strong>:</p>
-<ul>
+<li><strong>设置理想视口：</strong>在移动端布局时，在<strong>meta标签</strong>中我们会<strong>将width设置称为device-width</strong>，device-width一般是表示分辨率的宽，通过width&#x3D;device-width的设置我们就<strong>将布局视口设置成了理想的视口</strong>:(<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/11/CSS%E5%B8%83%E5%B1%80%EF%BC%882%EF%BC%89%E6%B5%AE%E5%8A%A8%20inline-block%20%E5%93%8D%E5%BA%94%E5%BC%8F/#viewport%E6%A1%88%E4%BE%8B%EF%BC%88%E9%80%82%E9%85%8D%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89">例子</a>)<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="attribute">id</span>=<span class="string">&quot;viewport&quot;</span> <span class="attribute">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;&quot;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>移动端布局响应式布局</strong>:<ul>
 <li><strong>通过rem</strong>:<ul>
 <li><strong>rem单位</strong>无论嵌套层级如何，都只<strong>相对于浏览器的根元素（HTML元素）的font-size</strong>，默认1 rem &#x3D; 16px。</li>
 <li>如果通过rem来实现响应式的布局，只需要<strong>根据视图容器的大小，动态的改变font-size即可</strong>。</li>
-<li><strong>缺点</strong>：在响应式布局中，<strong>必须通过js来动态控制根元素font-size的大小</strong>。也就是说css样式和js代码有一定的耦合性。且必须将改变font-size的代码放在css样式之前。</li>
+<li><strong>缺点</strong>：在响应式布局中，<strong>必须通过js来动态控制根元素font-size的大小</strong>。也就是说css样式和js代码有一定的耦合性。且<strong>必须将改变font-size的代码放在css样式之前</strong>。</li>
+<li>单位换算插件：<ul>
+<li>rem2px：从rem换算成px，rem乘以相应的font-size中的大小，就能换算成px</li>
+<li>px2rem：从px转化为rem，可以在css文件中用px，通过webpack配置px2rem-loader将css文件中的所有px单位，转化成rem单位（<a target="_blank" rel="noopener" href="https://github.com/forthealllight/blog/issues/13">例子</a>）</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>通过vw&#x2F;vh来实现自适应</strong>，这样就不需要使用js来动态控制根元素大小了:<ul>
-<li><strong>css3中引入了新的单位vw&#x2F;vh</strong>，与<strong>视图窗口</strong>有关，vw表示相对于视图窗口的宽度（视窗宽度是100vw），vh表示相对于视图窗口高度（视窗高度是100vh）。</li>
+<li><strong>css3中引入了新的单位vw&#x2F;vh</strong>，与<strong>视图窗口</strong>有关，vw表示相对于视图窗口的宽度（视窗宽度是100vw），vh表示相对于视图窗口高度（视窗高度是100vh）。<ul>
+<li>注意：移动端是根据布局视口来计算vw&#x2F;vh的，如果没有设置理想视口，则布局视口是普通网页大小</li>
+</ul>
+</li>
 <li><strong>px换算成vw单位方法：</strong><ul>
 <li>很简单，只要确定视图的窗口大小（布局视口），比如移动端的分辨率宽度是375px，则375px&#x3D;100vw，1px&#x3D;100&#x2F;375vw。</li>
 <li>或者使用postcss的相应插件<a target="_blank" rel="noopener" href="https://github.com/evrone/postcss-px-to-viewport">postcss-px-to-viewport</a>预处理css做一个自动的转换，可以自动将px转化成vw。</li>
@@ -263,6 +293,12 @@
 </ul>
 </li>
 </ul>
+<h2 id="rem例子"><a href="#rem例子" class="headerlink" title="rem例子"></a>rem例子</h2><ul>
+<li>rem单位都是相对于根元素html的font-size来决定大小的,根元素的font-size相当于提供了一个基准，当页面的size发生变化时，只需要改变font-size的值，那么以rem为固定单位的元素的大小也会发生响应的变化。</li>
+<li>因此，如果通过rem来实现响应式的布局，只需要<strong>根据视图容器的大小，动态的改变浏览器根元素的font-size</strong>即可<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">setRem</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> html = <span class="variable language_">document</span>.<span class="property">documentElement</span>;</span><br><span class="line">  <span class="keyword">var</span> windowWidth = html.<span class="property">clientWidth</span>;</span><br><span class="line">  html.<span class="property">style</span>.<span class="property">fontSize</span> = windowWidth / <span class="number">10</span> + <span class="string">&#x27;px&#x27;</span>; <span class="comment">// 设置 html 的 font-size 为窗口宽度的十分之一</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;resize&#x27;</span>, setRem); <span class="comment">// 监听窗口 resize 事件</span></span><br><span class="line"><span class="title function_">setRem</span>(); <span class="comment">// 初始化时设置一次 rem 值</span></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在header标签中执行这段js代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;your-js-file.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>上述代码中将视图容器分为10份，font-size用十分之一的宽度来表示，最后<strong>在header标签中执行这段代码</strong>，我们使用 addEventListener 方法监听窗口的 resize 事件，并在窗口大小改变时重新计算并设置 rem 的值。同时，我们也调用 setRem 函数来初始化页面的 rem 值，从而<strong>使1rem在不同的视觉容器中表示不同的大小，用rem固定单位可以实现不同容器内布局的自适应</strong></li>
+</ul>
 <hr>
 <h1 id="click在ios上有300ms延迟，原因及如何解决？"><a href="#click在ios上有300ms延迟，原因及如何解决？" class="headerlink" title="click在ios上有300ms延迟，原因及如何解决？"></a>click在ios上有300ms延迟，原因及如何解决？</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chaojidan/p/4517895.html">参考</a></li>
@@ -271,9 +307,10 @@
 </ul>
 <hr>
 <h1 id="addEventListener参数"><a href="#addEventListener参数" class="headerlink" title="addEventListener参数"></a>addEventListener参数</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-addeventlistener.html">参考</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-addeventlistener.html">参考菜鸟</a></li>
 <li><code>DOM元素.addEventListener(event, function, useCapture)</code><br>event指定<strong>事件名</strong>；function指定要<strong>事件触发时执行的函数</strong>；useCapture指定<strong>事件是否在捕获或冒泡阶段执行</strong>。<ul>
 <li>true - 事件句柄在<strong>捕获</strong>阶段执行。false- 默认。事件句柄在<strong>冒泡</strong>阶段执行</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_element_addeventlistener_capture">例子</a>，点击div中的p元素，根据p和div的click事件触发顺序展示两者区别</li>
 <li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/#%E4%BA%8B%E4%BB%B6%E6%B5%81">捕获与冒泡</a>总得来说，<strong>冒泡：</strong>当事件发生后，这个事件就要开始冒泡(<strong>从里到外</strong>)。<strong>捕获</strong>事件则是<strong>从外往里</strong>（只有特殊需要再使用事件捕获即可）</li>
 </ul>
 </li>
@@ -287,30 +324,66 @@
 <p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem1.png" alt="语义元素图示" title="语义元素图示"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem2.png" alt="语义元素图示" title="语义元素图示"></p>
 <hr>
 <h1 id="说一下web-worker"><a href="#说一下web-worker" class="headerlink" title="说一下web worker"></a>说一下web worker</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.toutiao.com/i6745682418058920456/?in_ogs=1&traffic_source=CS1112&utm_source=CZ&source=search_tab&utm_medium=wap_search&original_source=1&in_tfs=CZ&channel=">参考</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-webworkers.html">参考</a></li>
 <li><strong>出现理由：</strong> JS是单线程没有多线程，当JS在页面中运行长耗时同步任务的时候就会导致页面假死影响用户体验，从而需要设置把任务放在任务队列中；执行任务队列中的任务也并非多线程进行的，然而现在<strong>HTML5提供了Web Workers API，可以让浏览器作为宿主环境提供给JS一个多线程运行的环境。</strong></li>
 <li>Web Workers 使得一个Web应用程序可以在与主执行线程分离的后台线程中运行一个脚本操作。这样做的好处是可以在一个单独的线程中执行费时的处理任务，从而允许主（通常是UI）线程运行而不被阻塞。</li>
 <li><strong>作用</strong>：就是<strong>给JS创造多线程运行环境</strong>，允许主线程创建worker线程，分配任务给后者，主线程运行的同时worker线程也在运行，相互不干扰，在worker线程运行结束后把结果返回给主线程。这样做的<strong>好处是主线程可以把计算密集型或高延迟的任务交给worker线程执行，这样主线程就会变得轻松，不会被阻塞或拖慢</strong>。</li>
 <li><strong>注意：</strong>这并<strong>不意味着JS语言本身支持了多线程</strong>能力，而是浏览器作为宿主环境提供了JS一个多线程运行的环境。</li>
 <li><strong>缺点：</strong>因为worker一旦新建，就会一直运行，不会被主线程的活动打断，这样有利于随时响应主线程的通性，但是也会<strong>造成资源的浪费</strong>，所以不应过度使用，用完注意关闭。或者说：如果worker无实例引用，该worker空闲后立即会被关闭；如果worker实列引用不为0，该worker空闲也不会被关闭。</li>
+<li><strong>关键：</strong> （<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-webworkers.html">简单例子</a>）<ul>
+<li>web worker 文件”xxx.js”中：<ul>
+<li><code>postMessage()</code>： <strong>向 HTML 页面传回一段消息</strong></li>
+</ul>
+</li>
+<li>html文件中：<ul>
+<li><code>var w = new WorkerWorker(&#39;xxx.js&#39;)</code>： <strong>创建一个新的 web worker 对象 w</strong> ，然后运行 “xxx.js” (web worker 文件)中的代码</li>
+<li><code>w.onmessage</code>：给 web worker 对象 w 添加一个 “onmessage” 事件监听器，<strong>获取从 web worker 发送过来的消息</strong></li>
+<li><code>w.terminate()</code>：<strong>终止 Web Worker</strong> ， 创建 web worker 对象后，它会继续监听消息（即使在外部脚本完成之后）直到其被终止为止</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="说一下HTML5-drag-api"><a href="#说一下HTML5-drag-api" class="headerlink" title="说一下HTML5 drag api"></a>说一下HTML5 drag api</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html5/html_5_draganddrop.asp">例子</a></li>
-<li>draggable属性：<strong>使元素可拖动</strong>，把 draggable 属性设置为 true </li>
-<li>dragstart：事件主体是<strong>被拖放元素</strong>，在<strong>开始拖放</strong>被拖放元素时触发。</li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html5/html_5_draganddrop.asp">w3c例子</a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-draganddrop.html">菜鸟例子</a></li>
+<li>加粗的就是例子中有所使用的：<ul>
+<li><strong>draggable属性：使元素可拖动</strong>，把 draggable 属性设置为 true </li>
+<li><strong>dragstart：</strong>事件主体是<strong>被拖放元素</strong>，在<strong>开始拖放</strong>被拖放元素时触发。<ul>
+<li>一般用于存储被拖拽元素的id，以便在drop事件中获取被拖拽元素。用<code>event.dataTransfer.setData(&#39;xxx&#39;, event.target.id)</code>存储在事件对象中</li>
+</ul>
+</li>
 <li>darg：事件主体是被拖放元素，在<strong>正在拖放</strong>被拖放元素时触发。</li>
 <li>dragenter：事件主体是<strong>目标元素</strong>，在<strong>被拖放元素进入某元素时</strong>触发。</li>
-<li>dragover：事件主体是目标元素，在<strong>被拖放元素在某元素内移动时</strong>触发。</li>
+<li><strong>dragover：</strong>事件主体是目标元素，在<strong>被拖放元素在某元素内移动时</strong>触发。<ul>
+<li>dragover 事件的默认行为是数据&#x2F;元素无法被放置到其他元素中，所以要使用<code>event.preventDefault()</code>阻止，不然后续都无法触发drop事件</li>
+</ul>
+</li>
 <li>dragleave：事件主体是目标元素，在被拖放元素<strong>移出目标元素</strong>时触发。</li>
-<li>drop：事件主体是<strong>目标元素</strong>，在目标元素<strong>完全接受</strong>被拖放元素时触发。</li>
+<li><strong>drop：</strong>事件主体是<strong>目标元素</strong>，在目标元素<strong>完全接受</strong>被拖放元素时触发。<ul>
+<li>drop 事件的默认行为是以链接形式打开，所以drop事件中要<code>event.preventDefault()</code>阻止浏览器默认处理方式</li>
+<li>再去根据<code>event.dataTransfer.getData(&quot;xxx&quot;)</code>被拖拽元素的id<code>xxxId</code>，</li>
+<li>操作<code>event.target.appendChild(document.getElementById(xxxId))</code>实现放置效果</li>
+</ul>
+</li>
 <li>dragend：事件主体是<strong>被拖放元素</strong>，在整个拖放操作结束时触发</li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
+<li>要使用<code>event.preventDefault()</code>阻止元素的默认处理方式<ul>
+<li>dragover 事件的默认行为是数据&#x2F;元素无法被放置到其他元素中，所以要阻止，不然后续都无法触发drop事件</li>
+<li>drop 事件的默认行为是以链接形式打开，所以drop事件中要阻止浏览器默认处理方式，再去操作appendChild实现放置效果</li>
+</ul>
+</li>
+<li>虽然是appendChild，但是加进去的是用getElementById获取到的被拖拽元素他本人，所以不用另外处理被拖拽的旧数据元素</li>
+</ul>
+</li>
 <li><strong>dragstart与ondragstart</strong><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondragstart.html">参考这</a><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfco573q9zj30w006bdg8.jpg" alt="dragstart与ondragstart"></li>
 </ul>
 <hr>
-<h1 id="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h1><h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><ol>
-<li>新增<strong>自定义属性<code>data-xxx</code></strong>(用于<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%881%EF%BC%89/#%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E5%B0%8F%E5%9C%86%E7%82%B9">帮助实现手写轮播图</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/w1418899532/article/details/90515969">帮助实现原生JS的图片懒加载</a>)<ul>
-<li><strong>jquery中获取自定义属性的方法：</strong> 1是<code>.attr(&#39;data-xxx&#39;)</code>，2是<code>.data(&#39;xxx&#39;)</code></li>
+<h1 id="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h1><h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><ul>
+<li>新增<strong>自定义属性<code>data-xxx</code></strong>(用于<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/07/14/JS%20%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E9%A2%98%E6%B1%87%E6%80%BB/#%E6%89%8B%E5%86%99%E5%9B%BE%E7%89%87%E8%BD%AE%E6%92%AD">帮助实现手写轮播图</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/07/14/JS%20%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E9%A2%98%E6%B1%87%E6%80%BB/#%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD">帮助实现原生JS的图片懒加载</a>)<ul>
+<li><strong>jquery中获取自定义属性的方法：</strong> <code>.attr(&#39;data-xxx&#39;)</code>或<code>.data(&#39;xxx&#39;)</code></li>
 <li><strong>js中获取自定义属性的方法：</strong> <ul>
 <li><strong>通过attribute：</strong> <code>getAttribute(&#39;data-xxx&#39;)</code></li>
 <li><strong>通过dataset（html5属性）：</strong>以下例子假设自定义属性data-xxx<ul>
@@ -325,49 +398,81 @@
 </ul>
 </li>
 <li><strong>标签增删</strong><ul>
-<li>html5为了更好的实践web语义化，增加了**新的<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html5_semantic_elements.asp">语义元素</a>**：<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-header.html">header</a> <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-main.html">main</a>  <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-footer.html">footer</a> section aside nav article <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-figure.html">figure</a> figcaption<ul>
+<li>html5为了更好的实践web语义化，增加了<strong>新的<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html5_semantic_elements.asp">语义元素</a></strong> ：<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-header.html">header</a> <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-main.html">main</a>  <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-footer.html">footer</a> section aside nav article <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-figure.html">figure</a> figcaption<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem1.png" alt="语义元素图示" title="语义元素图示"></li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/html5elem2.png" alt="语义元素图示" title="语义元素图示"></li>
 <li>新增语义更加明确的标签，不建议使用一些语义不强的元素：b、i、font等，方便写出更加语义化的结构</li>
 <li><strong>注意：</strong> 文档中可以有多个header和footer，但是<strong>main只能有一个，所以main不应包含在文档中重复出现的内容，不能是以下元素的后代：<code>&lt;article&gt;</code>、<code>&lt;aside&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;header&gt;</code> 或 <code>&lt;nav&gt;</code>。</strong></li>
 </ul>
 </li>
-<li>新增<strong>内容元素</strong><a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-mark.html">mark</a>高亮 <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-progress.html">progress</a>进度</li>
-<li>在<strong>表单方面</strong>：<ul>
-<li>为了<strong>增强<a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html">表单验证</a><strong>，为</strong>input增加了新的type属性</strong>：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_color.asp">color</a>，<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/dom-obj-email.html">emial</a>，data ，range等（<strong>表单验证</strong>在这之前只能通过js来完成）【<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-form-input-types.html">更多验证可参考</a>】</li>
-<li>**<a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html">其他新增的input属性</a>**：require pattern（正则验证） autofacus placeholder list <ul>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-datalist.html"><code>&lt;datalist&gt;</code></a>规定input合法的输入值列表（并不显示），由<code>input</code> 元素的 <code>list</code> 属性来绑定 <code>datalist</code>的<code>id</code>(<a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html">例子</a>)</li>
+<li>新增<strong>内容元素</strong>：<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-mark.html"><code>&lt;mark&gt;</code></a>高亮、<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-progress.html"><code>&lt;progress&gt;</code></a>进度条</li>
+<li><strong>表单方面</strong> 增强功能+表单验证：<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-output.html"><code>&lt;output&gt;</code></a>元素：作为计算结果输出显示(比如执行脚本的输出)（<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-output.html">例子</a>）</li>
+<li><strong>input元素：</strong><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-input.html">input新旧属性图表和例子</a><ul>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#required">required属性</a>增强表单验证，若输入值为空,则拒绝提交,并会有一个提示</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#placeholder">placeholder属性</a>免去了用JS去实现点击清除表单初始值</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#autofocus">autofocus属性</a>默认聚焦,可在页面加载时聚焦到一个表单控件,类似于JS的focus()</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#list">list属性</a>需要与<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-datalist.html"><code>&lt;datalist&gt;</code></a>共用,datalist是对input预定义的输入值列表（点击输入框后显示）,由<code>input</code> 元素的 <code>list</code> 属性来绑定 <code>datalist</code>的<code>id</code>(<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryhtml5_datalist">例子</a>)</li>
 </ul>
 </li>
-<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html"><code>contenteditable</code>属性</a>可以让这个元素里面的文本节点或值<strong>变为可编辑</strong>（比如<code>&lt;p&gt;</code>内用）</li>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-output.html"><code>&lt;output&gt;</code></a>作为计算结果输出显示(比如执行脚本的输出)</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-form-input-types.html">input新的type类型</a><ul>
+<li><strong>增强表单验证：</strong><ul>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#email">email</a>校验email地址</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#url">url</a>校验URL地址</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#number">number</a>校验数字，默认会有上下两个按钮</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#pattern">pattern</a>正则验证</li>
+</ul>
+</li>
+<li><strong>增强功能：</strong><ul>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#range">range</a>可拖动的滑块条，可通过设定max&#x2F;min&#x2F;step值限定拖动范围，拖动时会反馈给value一个值</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#color">color</a>颜色选择器，选中颜色值会反馈到value中，可设置默认值</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#date">date, time, datetime, datetime-local, month, week</a>完全解决了烦琐的JS日历控件问题.但目前只有Opera&#x2F;Chrome新版本支持,且展示效果也不一样</li>
+<li><a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#search">search</a>示输入的将是一个<strong>搜索关键字</strong>,通过results&#x3D;s 或者 x-webkit-speech 可显示一个搜索小图标. [在chrome下才能看得见]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>移除</strong>过时标签big font frame frameset</li>
 </ul>
 </li>
-<li><strong>canvas绘图</strong>，支持内联SVG。支持MathML</li>
-<li>在<strong>多媒体方面</strong>规定了音频和视频元素<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-audio.html">audio</a>和<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-video.html">vedio</a></li>
+<li><strong>多媒体方面：</strong> 新增 音频元素<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-audio.html">audio</a>、视频元素<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-video.html">vedio</a></li>
 <li><strong>新的API</strong>（离线存储、本地存储、音视频、图形、实时通信、设备能力）<strong>【JS层面的】</strong><ul>
 <li><strong>本地离线存储</strong>，把需要离线存储在本地的文件列在一个manifest配置文件</li>
 <li><strong>web存储（浏览器存储）</strong>：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#%E6%8F%8F%E8%BF%B0cookie-localStorage-sessionStorage%E5%8C%BA%E5%88%AB">localStorage、SessionStorage</a>，原本只能借用cookie。（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/30/JS%20Web%20API%20%E5%AD%98%E5%82%A8/#localStorage%E5%92%8CsessionStorage">使用方法</a>）<ul>
-<li>通过<strong>本地离线存储 和 web存储方面</strong>方便数据在客户端的存储和获取（原本只有cookie，**<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-webstorage.html">HTML5 web 存储</a>是比cookie更好的本地存储方式**）</li>
+<li>通过<strong>本地离线存储 和 web存储方面</strong>方便数据在客户端的存储和获取（原本只有cookie，**<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-webstorage.html">HTML5 web 存储</a>是比cookie更好的本地存储方式** ）</li>
 <li><strong>注意：session保存在服务器端，而cookie、sessionStorage，localStorage搜保存在浏览器端</strong></li>
 </ul>
 </li>
-<li>**<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-canvas.html">canvas绘图</a>**，支持内联SVG。支持MathML</li>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-draganddrop.html">拖放drag</a>，多线程编程的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">web worker</a>和<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-websocket.html">websocket协议</a></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-canvas.html">canvas绘图</a></strong> ，支持内联SVG。支持MathML</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-draganddrop.html">拖放drag和drop</a>，多线程编程的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">web worker</a>和<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-websocket.html">websocket协议</a></li>
 </ul>
 </li>
 <li><strong>分类和嵌套变更</strong>（变成<strong>按照内容分类</strong>，分类和推理过程的改变导致嵌套规则的改变，<strong>在html5中将a标签视作“透明”</strong>再来判断嵌套合法性）</li>
-</ol>
-<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><ol>
-<li><strong>CSS3边框</strong>如border-radius（可做<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/08/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CSS%E5%81%9A%E4%B8%89%E8%A7%92%E5%BD%A2-%E6%89%87%E5%BD%A2">扇形</a>），box-shadow等；</li>
-<li><strong>CSS3背景</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-size%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F">background-size</a>，background-origin等；</li>
-<li><strong>CSS3 2D，3D转换</strong>如transform等（我多用于<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#%E6%B0%B4%E5%B9%B3%E3%80%81%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95">搭配子绝父相实现元素居中</a>）；</li>
-<li><strong>CSS3动画</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#transition%E5%92%8Canimation%E7%9A%84%E5%8C%BA%E5%88%AB">transition和animation</a>等。 </li>
+<li>补充一个不是html5但很有用的属性：<a target="_blank" rel="noopener" href="http://caibaojian.com/html5/form.html#contenteidtable"><code>contenteditable</code>属性</a>可以让这个元素里面的文本节点或值<strong>变为可编辑</strong>（比如<code>&lt;p&gt;</code>内用）</li>
+</ul>
+<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><ul>
+<li><strong>CSS3边框</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/09/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/#%E5%9C%86%E8%A7%92border-radius">border-radius</a>（可做<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/08/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CSS%E5%81%9A%E4%B8%89%E8%A7%92%E5%BD%A2-%E6%89%87%E5%BD%A2">扇形</a>），<a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=h8sL1osiZHClVqsEV6O444QU8a_Padr6mYFIH2-9V6ctFYvD0naRtMNDLGXlmrcmu8KXikM4XzZY92GbSLj41K&wd=&eqid=c90e12f000011b49000000065f03e6c6">box-shadow</a>,<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-border-image.html">border-image</a>：CSS3边框图片，可以使用图片来创建边框。；</li>
+<li><strong>CSS3背景</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-size%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F">background-size</a>，<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-background-origin.html">background-origin</a>规定背景图片的定位区域。背景图片可以放置于 content-box、padding-box 或 border-box 区域。</li>
+<li><strong>CSS3文字效果</strong>：<ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/#%E6%96%87%E5%AD%97%E9%98%B4%E5%BD%B1">text-shadow</a>：在 CSS3 中，text-shadow 可向文本应用阴影。<code>text-shadow:5px 5px 5px #FFFFFF;</code></li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/07/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%BE%B9%E6%A1%86%E3%80%81%E6%BB%9A%E5%8A%A8%E3%80%81%E6%96%87%E6%9C%AC%E6%8A%98%E8%A1%8C%E3%80%81%E8%A3%85%E9%A5%B0%E6%80%A7%E5%B1%9E%E6%80%A7/#overflow-wrap-word-wrap-%E5%B1%9E%E6%80%A7-%E9%80%9A%E7%94%A8%E6%8D%A2%E8%A1%8C%E6%8E%A7%E5%88%B6">word-wrap</a> :单词太长的话就可能无法超出某个区域，允许对长单词进行拆分，并换行到下一行：<code>p&#123;word-wrap:break-word;&#125;</code></li>
+</ul>
+</li>
+<li><strong>CSS3 2D，3D转换</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/07/CSS3%20transform%E5%B1%9E%E6%80%A7/">transform</a>等；（我多用于<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#%E6%B0%B4%E5%B9%B3%E3%80%81%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95">搭配子绝父相实现元素居中</a>）</li>
+<li><strong>CSS3动画</strong>如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#transition%E5%92%8Canimation%E7%9A%84%E5%8C%BA%E5%88%AB">transition和animation</a></li>
+<li><strong>布局方面</strong>新增了<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-flex.html">flex属性</a></li>
+<li><strong>选择器方面</strong>新增了例如<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/sel-first-of-type.html">:first-of-type</a>,<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/11/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89/#nth-child-n-%E9%80%89%E6%8B%A9%E5%99%A8%EF%BC%88CSS3%EF%BC%89">:nth-child</a>等选择器</li>
+<li><strong>盒模型方面</strong>添加了<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bcss%E7%9B%92%E6%A8%A1%E5%9E%8B">box-sizing</a>替代盒模型</li>
+<li><strong>颜色方面</strong>添加<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_opacity.asp">opacity</a>(透明)，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-color%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2">rgba</a>等</li>
 <li><strong>新增单位：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">vh、vw</a></strong></li>
-<li><strong>新增属性：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bcss%E7%9B%92%E6%A8%A1%E5%9E%8B">box-sizing</a>替代盒模型</strong></li>
-</ol>
-<p>更多特性可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%882%EF%BC%89/#CSS3%E6%96%B0%E7%89%B9%E6%80%A7">“前端基础-CSS（2）”中CSS3新特性</a></p>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-mediaquery.html">@media查询</a>针对不同的媒体类型&#x2F;屏幕尺寸定义不同的样式</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-pointer-events.html">css3 pointer-events</a>设置文字点击事件防抖的展示效果，点击后等待时间中设为none，等待时间结束后设为auto</li>
+</ul>
 <hr>
 
       
@@ -440,7 +545,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%BE%88%E5%AE%9E%E7%94%A8%E7%9A%84BOM%E5%B1%9E%E6%80%A7%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-Quality%EF%BC%88%E6%97%A0%E9%9A%9C%E7%A2%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-x2F-fetch%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">ajax&#x2F;fetch发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">发送2次请求的前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9APOST%E8%AF%B7%E6%B1%82%E4%B9%9F%E4%BC%9A%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">补充：POST请求也会发送2次请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype%E4%BD%9C%E7%94%A8-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%8E%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%EF%BC%9F%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click%E5%9C%A8ios%E4%B8%8A%E6%9C%89300ms%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%8E%9F%E5%9B%A0%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener%E5%8F%82%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9HTML%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">9.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker"><span class="nav-number">10.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8BHTML5-drag-api"><span class="nav-number">11.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5%E5%92%8CCSS3%E7%94%A8%E7%9A%84%E5%A4%9A%E5%90%97%EF%BC%9F%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%AE%83%E4%BB%AC%E7%9A%84%E6%96%B0%E5%B1%9E%E6%80%A7%E5%90%97%EF%BC%9F%E6%9C%89%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8%E8%BF%87%E5%90%97%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">12.1.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3"><span class="nav-number">12.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%BE%88%E5%AE%9E%E7%94%A8%E7%9A%84BOM%E5%B1%9E%E6%80%A7%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">几个很实用的BOM属性对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-Quality%EF%BC%88%E6%97%A0%E9%9A%9C%E7%A2%8D%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">说一下web Quality（无障碍）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax-fetch-axios%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">ajax&#x2F;fetch&#x2F;axios发送2次请求的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">发送2次请求的前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9APOST%E8%AF%B7%E6%B1%82%E4%B9%9F%E4%BC%9A%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">补充：POST请求也会发送2次请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iframe%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">iframe是什么？有什么缺点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doctype%E4%BD%9C%E7%94%A8-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%8E%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%EF%BC%9F%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89"><span class="nav-number">5.</span> <span class="nav-text">Doctype作用?严格模式与混杂模式如何区分？它们有何意义?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80"><span class="nav-number">6.</span> <span class="nav-text">viewport和移动端布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rem%E4%BE%8B%E5%AD%90"><span class="nav-number">6.1.</span> <span class="nav-text">rem例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#click%E5%9C%A8ios%E4%B8%8A%E6%9C%89300ms%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%8E%9F%E5%9B%A0%E5%8F%8A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">click在ios上有300ms延迟，原因及如何解决？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addEventListener%E5%8F%82%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">addEventListener参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9HTML%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">9.</span> <span class="nav-text">对HTML语义化标签的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker"><span class="nav-number">10.</span> <span class="nav-text">说一下web worker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8BHTML5-drag-api"><span class="nav-number">11.</span> <span class="nav-text">说一下HTML5 drag api</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5%E5%92%8CCSS3%E7%94%A8%E7%9A%84%E5%A4%9A%E5%90%97%EF%BC%9F%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%AE%83%E4%BB%AC%E7%9A%84%E6%96%B0%E5%B1%9E%E6%80%A7%E5%90%97%EF%BC%9F%E6%9C%89%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8%E8%BF%87%E5%90%97%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">HTML5和CSS3用的多吗？你了解它们的新属性吗？有在项目中用过吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">12.1.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3"><span class="nav-number">12.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li></ol>
     
     </div>
   </aside>

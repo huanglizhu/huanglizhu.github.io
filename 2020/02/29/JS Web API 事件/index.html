@@ -11,32 +11,25 @@
   
   
   
-  <meta name="description" content="事件流 在浏览器发展的过程中，开发团队遇到了一个问题。那就是页面中的哪一部分拥有特定的事件？">
+  <meta name="description" content="写写有关事件流 事件绑定 冒泡与捕获">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS Web API 事件">
 <meta property="og:url" content="http://yoursite.com/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="事件流 在浏览器发展的过程中，开发团队遇到了一个问题。那就是页面中的哪一部分拥有特定的事件？">
+<meta property="og:description" content="写写有关事件流 事件绑定 冒泡与捕获">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcxhosyh7j30jd0hatad.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdbr53rcw0j30kb04ggob.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8i8hvayj31dj07lgx1.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8tf8tv0j30p508m7a8.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8t16nokj30q707gacd.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8vvb8mdj30m90cp76u.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcyhqlcsgj30sy06egsq.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcyi3wy5pj30pj06egps.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdbr4byo5xj30pi0eygv6.jpg">
-<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gddfhuemvvj316d0dudt5.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingPhraseExam1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingWithStopPropagation.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBroker.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/simpleBindEvent.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBindOfficial.png">
 <meta property="article:published_time" content="2020-02-29T04:56:45.000Z">
-<meta property="article:modified_time" content="2023-04-29T14:39:37.456Z">
+<meta property="article:modified_time" content="2023-05-05T12:57:31.400Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcxhosyh7j30jd0hatad.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -179,8 +172,11 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h1><ul>
-<li>在浏览器发展的过程中，开发团队遇到了一个问题。那就是页面中的哪一部分拥有特定的事件？<span id="more"></span></li>
+        <p>写写有关事件流 事件绑定 冒泡与捕获</p>
+<span id="more"></span>
+
+<h1 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h1><ul>
+<li>在浏览器发展的过程中，开发团队遇到了一个问题。那就是页面中的哪一部分拥有特定的事件？</li>
 <li>可以想象画在一张纸上的一组同心圆，如果你把手指放在圆心上，那么你的手指指向的其实不是一个圆，而是纸上所有的圆。放到实际页面中就是，你点击一个按钮，事实上你还同时点击了按钮所有的父元素。</li>
 <li>开发团队的问题就在于，当点击按钮时，是按钮最外层的父元素先收到事件并执行，还是具体元素先收到事件并执行？所以这儿引入了事件流的概念。</li>
 </ul>
@@ -199,11 +195,12 @@
 <li><strong>冒泡阶段</strong>（bubbling phrase，从目标节点到根节点 ）</li>
 </ol>
 </li>
-<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcxhosyh7j30jd0hatad.jpg" alt="三个阶段图示"></li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png" alt="三个阶段图示" title="三个阶段图示"></li>
 <li>当一个元素<strong>同时绑定冒泡和捕获事件</strong>，<strong>如果没有子节点</strong>，那么就会按照JavaScript顺序执行（即先绑定的btn冒泡事件，后绑定的btn捕获事件，则先冒泡后捕获，反之亦然），当一个元素同时绑定冒泡和捕获事件，<strong>如果有子节点那么会先捕获</strong>。</li>
 </ul>
 <hr>
-<h1 id="事件绑定（addEventListener-）"><a href="#事件绑定（addEventListener-）" class="headerlink" title="事件绑定（addEventListener()）"></a>事件绑定（<code>addEventListener()</code>）</h1><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdbr53rcw0j30kb04ggob.jpg" alt="事件绑定"></p>
+<h1 id="事件绑定（addEventListener-）"><a href="#事件绑定（addEventListener-）" class="headerlink" title="事件绑定（addEventListener()）"></a>事件绑定（<code>addEventListener()</code>）</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>注意：事件绑定函数可接受的参数1为事件对象，<code>事件对象.target</code>即触发事件的DOM元素</strong></li>
 <li><strong>addEventListener的参数3</strong>默认为false，即表示使用<strong>事件冒泡模式</strong>，设置为true则代表使用<strong>事件捕获模式</strong></li>
@@ -218,20 +215,16 @@
 </ul>
 <hr>
 <h1 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h1><ul>
-<li>当<strong>事件发生后，这个事件就要开始冒泡</strong>(从里到外)。为什么要传播呢？因为事件源本身（可能）并没有处理事件的能力，即处理事件的函数（方法）并未绑定在该事件源上。<ul>
+<li>当<strong>事件发生后，这个事件就要开始冒泡(从里到外)，先在最内层的元素上被触发，然后逐级向上传递到包含该元素的更外层元素，直到传递到最外层的文档对象。</strong>为什么要传播呢？因为事件源本身（可能）并没有处理事件的能力，即处理事件的函数（方法）并未绑定在该事件源上。<ul>
 <li>例如我们点击一个按钮时，就会产生一个click事件，但这个按钮本身可能没有绑定js函数去处理这个事件，所以这个点击事件必须从这个按钮传播出去，从而到达能够处理这个事件的代码中（例如我们给按钮的绑定一个onclick事件函数），或者按钮的父级绑定有事件函数，当该点击事件发生在按钮上，按钮本身并无处理事件函数，则冒泡到父级去处理。</li>
-<li><strong>补充：捕获事件则是从外往里</strong>（只有特殊需要再使用事件捕获即可）</li>
+<li><strong>补充：捕获事件则是从外往里</strong> ，先由文档对象捕获到事件，然后再逐级向下传递到触发该事件的最内层元素（只有特殊需要再使用事件捕获即可）</li>
 </ul>
 </li>
-<li><strong>例子1</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg" alt="代码1"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8i8hvayj31dj07lgx1.jpg" alt="代码2"><ul>
+<li><strong>冒泡例子</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingPhraseExam1.png" alt="冒泡例子" title="冒泡例子"><ul>
 <li>点击事件的<strong>传播顺序</strong>：p、div2、body、document、window</li>
 </ul>
 </li>
-<li><strong>例子2</strong>：给“取消”的文字上绑定click事件，由于取消按钮太多，所以直接绑定在body上，给“激活”的文字上也绑定click事件：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg" alt="代码1"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8tf8tv0j30p508m7a8.jpg" alt="例子2"><ol>
-<li>如果**不使用<code>事件对象.stopPropagation()</code>**，则<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8t16nokj30q707gacd.jpg" alt="不使用stopPropagation"></li>
-<li>如果使用<code>事件对象.stopPropagation()</code>，则<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdc8vvb8mdj30m90cp76u.jpg" alt="使用stopPropagation"></li>
-</ol>
-</li>
+<li><strong>阻止冒泡例子</strong>：给“取消”的文字上绑定click事件，由于取消按钮太多，所以直接绑定在body上，给“激活”的文字上也绑定click事件：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingWithStopPropagation.png" alt="阻止冒泡例子" title="阻止冒泡例子"></li>
 </ul>
 <h2 id="事件对象-stopPropagation-阻止冒泡"><a href="#事件对象-stopPropagation-阻止冒泡" class="headerlink" title="事件对象.stopPropagation()阻止冒泡"></a>事件对象.stopPropagation()阻止冒泡</h2><ul>
 <li><code>事件对象.stopPropagation()</code>可让事件传播<strong>到目标阶段后停止传播</strong></li>
@@ -243,11 +236,7 @@
 <li><strong>注意：</strong>不要滥用（一般用在瀑布流或者元素数量太多&#x2F;结构复杂的情况下）</li>
 <li>事件代理是基于事件冒泡机制的。</li>
 <li><strong>事件代理</strong>，即需要绑定事件的元素太多时<strong>将事件绑定在他们的父元素上</strong></li>
-<li><strong>例子</strong>：希望给所有a标签绑定点击事件（假设点击 加载更多 时会继续加载a标签，a标签的数量不定）<ul>
-<li>代码：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdd8i6cxz5j30l203ptb5.jpg" alt="代码1"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcyhqlcsgj30sy06egsq.jpg" alt="代码2"></li>
-<li>结果：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdcyi3wy5pj30pj06egps.jpg" alt="结果"></li>
-</ul>
-</li>
+<li><strong>例子</strong>：希望给所有a标签绑定点击事件（假设点击 加载更多 时会继续加载a标签，a标签的数量不定）<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBroker.png" alt="事件代理例子" title="事件代理例子"></li>
 </ul>
 <h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
 <li>代码简洁</li>
@@ -255,8 +244,12 @@
 </ul>
 <hr>
 <h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="通用的事件监听函数"><a href="#通用的事件监听函数" class="headerlink" title="通用的事件监听函数"></a>通用的事件监听函数</h2><ul>
-<li><strong>【简单版】</strong>可监听 <strong>普通绑定</strong> 的<strong>通用事件监听函数</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdbr4byo5xj30pi0eygv6.jpg" alt="通用的事件监听函数"></li>
-<li><strong>【正式版】可以同时监听 普通绑定 和 代理绑定 的通用事件监听函数</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gddfhuemvvj316d0dudt5.jpg" alt="通用的事件监听函数"></li>
+<li><strong>【简单版】</strong>可监听 <strong>普通绑定</strong> 的<strong>通用事件监听函数</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/simpleBindEvent.png" alt="通用的事件监听函数【简单版】" title="通用的事件监听函数【简单版】"></li>
+<li><strong>【正式版】可以同时监听 普通绑定 和 代理绑定 的通用事件监听函数</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBindOfficial.png" alt="通用的事件监听函数【正式版】" title="通用的事件监听函数【正式版】"><strong>普通绑定</strong>时this就指向<strong>触发事件的DOM元素</strong>；<strong>事件代理</strong>时就需要<code>事件对象.target</code>来获取<strong>触发事件的DOM元素</strong></li>
+</ul>
+<h3 id="event-target"><a href="#event-target" class="headerlink" title="event.target"></a>event.target</h3><ul>
+<li>事件对象的target属性<code>event.target</code>代表<strong>触发当前事件的DOM元素</strong></li>
+<li>比如 <code>&lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;</code></li>
 </ul>
 <h3 id="Element-matches"><a href="#Element-matches" class="headerlink" title="Element.matches()"></a>Element.matches()</h3><ul>
 <li><strong>如果元素匹配指定的选择器字符串，则Element.matches()返回true</strong>，否则返回false。</li>
@@ -350,7 +343,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%B5%81%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">DOM事件流的三个阶段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%EF%BC%88addEventListener-%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">事件绑定（addEventListener()）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-preventDefault-%E5%8F%96%E6%B6%88%E9%BB%98%E8%AE%A4%E5%8A%A8%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">事件对象.preventDefault()取消默认动作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">3.</span> <span class="nav-text">事件冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-stopPropagation-%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1"><span class="nav-number">3.1.</span> <span class="nav-text">事件对象.stopPropagation()阻止冒泡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">事件代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">通用的事件监听函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Element-matches"><span class="nav-number">5.1.1.</span> <span class="nav-text">Element.matches()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">描述事件冒泡的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E4%B8%8B%E6%8B%89%E7%9A%84%E5%9B%BE%E7%89%87%E5%88%97%E8%A1%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%E6%AF%8F%E4%B8%AA%E5%9B%BE%E7%89%87%E7%9A%84%E7%82%B9%E5%87%BB%EF%BC%9F"><span class="nav-number">5.3.</span> <span class="nav-text">无限下拉的图片列表，如何监听每个图片的点击？</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%B5%81%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">DOM事件流的三个阶段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%EF%BC%88addEventListener-%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">事件绑定（addEventListener()）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-preventDefault-%E5%8F%96%E6%B6%88%E9%BB%98%E8%AE%A4%E5%8A%A8%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">事件对象.preventDefault()取消默认动作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">3.</span> <span class="nav-text">事件冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-stopPropagation-%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1"><span class="nav-number">3.1.</span> <span class="nav-text">事件对象.stopPropagation()阻止冒泡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">事件代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">通用的事件监听函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#event-target"><span class="nav-number">5.1.1.</span> <span class="nav-text">event.target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Element-matches"><span class="nav-number">5.1.2.</span> <span class="nav-text">Element.matches()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">描述事件冒泡的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E4%B8%8B%E6%8B%89%E7%9A%84%E5%9B%BE%E7%89%87%E5%88%97%E8%A1%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%E6%AF%8F%E4%B8%AA%E5%9B%BE%E7%89%87%E7%9A%84%E7%82%B9%E5%87%BB%EF%BC%9F"><span class="nav-number">5.3.</span> <span class="nav-text">无限下拉的图片列表，如何监听每个图片的点击？</span></a></li></ol></li></ol>
     
     </div>
   </aside>

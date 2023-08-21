@@ -19,10 +19,10 @@
 <meta property="og:description" content="需求中有一个弹窗的表数据需要循环调用接口来获取，关闭弹窗时需要中断循环，但是出现中断失败的情况，为此查了一下原因并做了一些处理方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-22T01:49:34.000Z">
-<meta property="article:modified_time" content="2023-04-20T14:02:56.505Z">
+<meta property="article:modified_time" content="2023-06-04T07:15:54.778Z">
 <meta property="article:author" content="黄丽珠">
-<meta property="article:tag" content="vue">
 <meta property="article:tag" content="JS">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -178,10 +178,9 @@
 <li><strong>结局：</strong> timing为49的定时器执行中，如果清除，实际上并没清除49，因为进行中的定时器清除无效，所以如果走到一半才清除，那后面的会继续执行，所以会继续循环调用getProcess，<strong>中断失败</strong><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不加timing=null，在getProcess开头通过timing判断要不要执行就会报错如下</span></span><br><span class="line">---<span class="keyword">set</span> null</span><br><span class="line">---<span class="keyword">set</span> <span class="comment">45</span></span><br><span class="line">---结束后clear <span class="comment">45</span></span><br><span class="line">---<span class="keyword">set</span> <span class="comment">49</span></span><br><span class="line">---关闭弹窗clear <span class="comment">49</span></span><br><span class="line">---结束后clear <span class="comment">49</span></span><br><span class="line">---<span class="keyword">set</span> <span class="comment">54</span></span><br><span class="line">---结束后clear <span class="comment">54</span></span><br><span class="line">---<span class="keyword">set</span> <span class="comment">55</span></span><br><span class="line">---结束后clear <span class="comment">55</span></span><br><span class="line">---<span class="keyword">set</span> <span class="comment">56</span></span><br><span class="line">---结束后clear <span class="comment">56</span></span><br><span class="line">---<span class="keyword">set</span> <span class="comment">57</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="最终解决方法"><a href="#最终解决方法" class="headerlink" title="最终解决方法"></a>最终解决方法</h1><ul>
-<li>在<strong>弹窗关闭时清除（已设置并未执行的）定时器</strong>，那么此时就满足<strong>定时器先设置后清除</strong>，并且此时清除的是还没执行的定时器：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断方法 关闭弹窗时调用的方法</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dialogVisible</span> = <span class="literal">false</span></span><br><span class="line">  <span class="comment">// 重点：clearTimeout() 是取消由 setTimeout() 方法设置的定时操作，而不是打断！！</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗时正在执行的定时器&#x27;</span>, <span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> getProcess (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---set&#x27;</span>,<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 循环调用getProcess通过接口获取弹窗内表数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>)</span><br><span class="line">  <span class="comment">// 在弹窗关闭时 清除刚刚设置（还未执行的）定时器 停止后续调用getProcess</span></span><br><span class="line">  <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="property">dialogVisible</span>) &#123; <span class="comment">// 使用element的dialog组件，dialogVisible为弹窗显示与否状态</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗后清除未执行的定时器&#x27;</span>, <span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">    <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+<li>在<strong>弹窗关闭时清除（已设置并未执行的）定时器</strong>，那么此时就满足<strong>定时器先设置后清除</strong>，并且此时清除的是还没执行的定时器：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断方法 关闭弹窗时调用的方法</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dialogVisible</span> = <span class="literal">false</span></span><br><span class="line">  <span class="comment">// 重点：clearTimeout() 是取消由 setTimeout() 方法设置的定时操作，而不是打断！！</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗时正在执行的定时器&#x27;</span>, <span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> getProcess (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---set&#x27;</span>,<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 循环调用getProcess通过接口获取弹窗内表数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>)</span><br><span class="line">  <span class="comment">// 在弹窗关闭时 清除刚刚设置（还未执行的）定时器 停止后续调用getProcess</span></span><br><span class="line">  <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="property">dialogVisible</span>) &#123; <span class="comment">// 使用element的dialog组件，dialogVisible为弹窗显示与否状态</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗后清除未执行的定时器&#x27;</span>, <span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">    <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---<span class="built_in">set</span> <span class="literal">null</span></span><br><span class="line">---<span class="built_in">set</span> 47</span><br><span class="line">---关闭弹窗时正在执行的定时器 51</span><br><span class="line">---<span class="built_in">set</span> 51</span><br><span class="line">---关闭弹窗后清除未执行的定时器 51</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---<span class="built_in">set</span> <span class="literal">null</span></span><br><span class="line">---<span class="built_in">set</span> 47</span><br><span class="line">---关闭弹窗时正在执行的定时器 51</span><br><span class="line">---<span class="built_in">set</span> 51</span><br><span class="line">---关闭弹窗后清除未执行的定时器 51</span><br></pre></td></tr></table></figure>
-
 <h1 id="clearTimeout和设为null的区别"><a href="#clearTimeout和设为null的区别" class="headerlink" title="clearTimeout和设为null的区别"></a>clearTimeout和设为null的区别</h1><ul>
 <li><code>this.timing = null</code> 只是<strong>将定时器的指向改为<code>null</code>，并没有在内存中清除定时器</strong>，定时器还是会<strong>如期运行</strong>；如同在<code>debounce</code>函数中将<code>this.timing = null</code>并不能达到防抖的目的，因为每个定时器都<strong>只是将内存地址指向了<code>null</code>，而每个定时器都将会执行一遍</strong>.</li>
 <li>而<code>clearTimeout(this.timing)</code>会<strong>将定时器从内存中清除掉</strong>，</li>
@@ -194,23 +193,21 @@
 <li>设置定时器前需要清除定时器的：<ul>
 <li><strong>情况1：</strong>防抖之类的用法，对于频繁调用的方法，去掉中间多次无用的重复调用，只保留最后一个调用。典型应用于根据Input的keydown或者change来数据搜索查询。</li>
 <li><strong>情况2：</strong>防止定时器效果叠加之外，使用前清除定时器不是必须的。<ul>
-<li><strong>例子：</strong>比如写个hover特效不先清除定时器，鼠标多移入移出几次，可能会造成多个定时器的叠加，动画效果会一直在执行，体验不好</li>
+<li><strong>例子：</strong>比如写个hover延时触发的特效，如果不先清除定时器，鼠标多移入移出几次，可能会造成多个定时器的叠加，动画效果会一直在执行，体验不好<ul>
+<li>补充：用transition+<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-transitionend.html">transitionend 事件</a>代替可以省去很多麻烦（<a target="_blank" rel="noopener" href="https://juejin.cn/post/7143051955810598926">例子参考</a>）</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <h1 id="不使用-setInterval-实现轮询的原因"><a href="#不使用-setInterval-实现轮询的原因" class="headerlink" title="不使用 setInterval 实现轮询的原因"></a>不使用 setInterval 实现轮询的原因</h1><ul>
-<li><p>setTimeout 与 setInterval 执行方式的区别及图示可<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011282175">参考segmentfault</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038829248">参考segmentfault</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87595858">参考知乎</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6959777879680876575">参考掘金</a>：</p>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-win-setinterval.html">setInterval</a> 执行不一定准时</strong>:</p>
-<blockquote>
+<li>setTimeout 与 setInterval 执行方式的区别及图示可<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011282175">参考segmentfault</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038829248">参考segmentfault</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87595858">参考知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6959777879680876575">参考掘金</a>：</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-win-setinterval.html">setInterval</a> 执行不一定准时</strong>:<blockquote>
 <p>只能确保回调函数不会在指定的事件间隔之前运行，但可能会在那个时刻运行，也<strong>可能在那之后运行，要根据事件队列的状态而定</strong>。（比如回调函数执行时长&gt;间隔时间的情况）——《你不知道的 JavaScript》 p143</p>
 </blockquote>
 <ul>
@@ -219,22 +216,23 @@
 <li>根据事件循环的执行机制，就会知道 setInterval 是等待 call stack 为空的时候，才会执行回调，如果前面的定时器回调函数执行太久了，超出了给 setInterval  设定的时间间隔，此时回调函数已经进入队列，等 stack 终于为空的时候就会立即执行队列中的回调函数，这时候 web APIs 中的 setInterval  计时也已经在计时了一段时间了，很快又会把新一轮回调函数放入队列，就会发现怎么上一次执行完后，没到以为的事件间隔又执行了······· 另外，如果 setInterval 本身给定的回调函数执行的时间比设定的时间间隔长，也会带来这样的问题，失去了设置时间间隔的意义。</li>
 </ul>
 </li>
-<li><p><strong>相比之下使用setTimeout进行轮询的好处：</strong></p>
-<ul>
+<li><strong>相比之下使用setTimeout进行轮询的好处：</strong><ul>
 <li>在前一个定时器代码执行完之前，不会向队列插入新的定时器代码，确保不会有任何缺失的间隔（即“丢帧”现象）。</li>
 <li>而且，它可以保证在下一次定时器代码执行之前，至少要等待指定的间隔，避免了连续的运行。</li>
 <li><strong>注意：</strong>轮询例子中第二个setTimeout()调用使用了 <code>arguments.callee</code> 来获取对当前执行的函数的引用，并为其设置另外一个定时器<strong>【查查 <code>arguments.callee</code>！！！！！！！】</strong></li>
 </ul>
 </li>
-<li><p><strong>不要盲目使用 setTimeout 代替 setInterval</strong>。</p>
-<ul>
+<li><strong>不要盲目使用 setTimeout 代替 setInterval</strong>。<ul>
 <li>首先这两者都无法保证时间上的精确性。但在实际项目中，通常需要长时间执行的任务都会被优化掉，所以最终它们的回调执行时间并不会与期望时间点偏差太多。</li>
 <li>另外，「定时器」通常有两种，一种是固定地每间隔一定时间触发一下，就像钟表那样；另一种是在前一次触发之后，间隔一段时间再触发下一次，通常这种在触发时都会需要执行一个比较耗时的异步任务。</li>
 <li>对于上面所说的第一种，使用 setInterval 即可，而第二种才应当使用 setTimeout</li>
 </ul>
 </li>
 </ul>
-<h1 id="看看websocket"><a href="#看看websocket" class="headerlink" title="看看websocket"></a>看看websocket</h1>
+<h1 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h1><ul>
+<li>实际上应该用websocket来实现效果会更好，但是后端那边要求沿用轮询就先这样吧</li>
+</ul>
+
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -279,10 +277,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2023/04/05/console.log%E5%80%BC%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          console.log值不断更新导致的问题
+        
+      </div>
+    </a>
   
-    <a href="/2022/12/09/element-ui%E4%B8%ADv-loading%E8%87%AA%E5%AE%9A%E4%B9%89/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">element-ui中v-loading自定义</div>
+      <div class="article-nav-title">axios使用和简单封装</div>
     </a>
   
 </nav>
@@ -296,7 +303,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E7%B4%A7%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前提紧要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">问题出现场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">最终解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#clearTimeout%E5%92%8C%E8%AE%BE%E4%B8%BAnull%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">clearTimeout和设为null的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8%E5%89%8D%E9%9C%80%E8%A6%81%E6%B8%85%E9%99%A4%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">5.</span> <span class="nav-text">设置定时器前需要清除定时器的情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8-setInterval-%E5%AE%9E%E7%8E%B0%E8%BD%AE%E8%AF%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">6.</span> <span class="nav-text">不使用 setInterval 实现轮询的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9C%8B%E7%9C%8Bwebsocket"><span class="nav-number">7.</span> <span class="nav-text">看看websocket</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E7%B4%A7%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前提紧要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">问题出现场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">最终解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#clearTimeout%E5%92%8C%E8%AE%BE%E4%B8%BAnull%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">clearTimeout和设为null的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8%E5%89%8D%E9%9C%80%E8%A6%81%E6%B8%85%E9%99%A4%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">5.</span> <span class="nav-text">设置定时器前需要清除定时器的情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8-setInterval-%E5%AE%9E%E7%8E%B0%E8%BD%AE%E8%AF%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">6.</span> <span class="nav-text">不使用 setInterval 实现轮询的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#websocket"><span class="nav-number">7.</span> <span class="nav-text">websocket</span></a></li></ol>
     
     </div>
   </aside>

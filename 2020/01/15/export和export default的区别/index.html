@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>export和export default 的区别 | 珠</title>
+  <title>export、export default和module.exports、exports | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
@@ -11,18 +11,19 @@
   
   
   
-  <meta name="description" content="export，export default,import是什么 ES6模块主要有两个功能：export和import export用于规定 对外输出本模块（一个文件可以理解为一个模块）变量的接口 而export default则是用于规定模块的默认对外接口，很显然默认对外接口只能有一个，所以 export default 在同一个模块中只能出现一次 import用于在一个模块中加载引用另一个含有e">
+  <meta name="description" content="在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="export和export default 的区别">
+<meta property="og:title" content="export、export default和module.exports、exports">
 <meta property="og:url" content="http://yoursite.com/2020/01/15/export%E5%92%8Cexport%20default%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="export，export default,import是什么 ES6模块主要有两个功能：export和import export用于规定 对外输出本模块（一个文件可以理解为一个模块）变量的接口 而export default则是用于规定模块的默认对外接口，很显然默认对外接口只能有一个，所以 export default 在同一个模块中只能出现一次 import用于在一个模块中加载引用另一个含有e">
+<meta property="og:description" content="在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-15T02:06:51.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:18.246Z">
+<meta property="article:modified_time" content="2023-04-29T15:51:10.430Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta property="article:tag" content="ES6">
+<meta property="article:tag" content="Node.js学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
@@ -142,7 +143,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      export和export default 的区别
+      export、export default和module.exports、exports
     </h1>
   
 
@@ -156,7 +157,7 @@
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
  
       
 	<span id="busuanzi_container_page_pv">
@@ -166,28 +167,55 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="export，export-default-import是什么"><a href="#export，export-default-import是什么" class="headerlink" title="export，export default,import是什么"></a>export，export default,import是什么</h1><ul>
-<li>ES6模块主要有两个功能：export和import</li>
+        <p>在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下</p>
+<span id="more"></span>
+
+<h1 id="区分export、export-default和module-exports、exports"><a href="#区分export、export-default和module-exports、exports" class="headerlink" title="区分export、export default和module.exports、exports"></a>区分export、export default和module.exports、exports</h1><ul>
+<li><strong>相同点：</strong>文件、变量、函数等导出</li>
+<li><strong>不同点：</strong><code>module.exports</code>、<code>exports</code>是<strong>Common.Js规范</strong>；而<code>export</code>、<code>export default</code>是<strong>es6规范</strong>。</li>
+</ul>
+<h1 id="React-Vue"><a href="#React-Vue" class="headerlink" title="React&#x2F;Vue"></a>React&#x2F;Vue</h1><ul>
+<li>React遵循es6规范。</li>
+<li>一个js文件可以有很多个<code>export</code>，但只能拥有一个<code>export default</code>。</li>
+<li>在React.js中，输出可以使用<code>export</code>或者<code>export default</code>，<strong>建议使用<code>export</code>，性能会略微好一些</strong>。</li>
+</ul>
+<h2 id="export、export-default、import是什么"><a href="#export、export-default、import是什么" class="headerlink" title="export、export default、import是什么"></a>export、export default、import是什么</h2><ul>
+<li><strong>ES6模块</strong>主要有两个功能：<code>export</code>和<code>import</code></li>
 <li>export用于规定 对外输出本模块（一个文件可以理解为一个模块）变量的接口</li>
 <li>而<code>export default</code>则是用于规定<strong>模块的默认对外接口</strong>，很显然默认对外接口只能有一个，所以 <strong><code>export default</code> 在同一个模块中只能出现一次</strong></li>
-<li>import用于在一个模块中加载引用另一个含有export接口的模块。</li>
-<li>也就是说使用<strong>export命令定义了模块的对外接口</strong>以后，其他JS文件就可以<strong>通过import命令加载这个模块（文件）</strong>。<span id="more"></span></li>
+<li><code>import</code>用于在一个模块中加载引用另一个含有<code>export</code>接口的模块。</li>
+<li>也就是说使用<strong>export命令定义了模块的对外接口</strong>以后，其他JS文件就可以<strong>通过import命令加载这个模块（文件）</strong>。</li>
 </ul>
 <hr>
-<h1 id="export-和-export-default-区别"><a href="#export-和-export-default-区别" class="headerlink" title="export 和 export default 区别"></a>export 和 export default 区别</h1><p>1.export导出<strong>多个对象</strong>，export default只能导出<strong>一个对象</strong>。<br>2.export导出对象**需要用<code>&#123; &#125;</code><strong>，export default</strong>不需要<code>&#123; &#125;</code>**，如：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> &#123;A,B,C&#125;;</span><br><span class="line"><span class="built_in">export</span><span class="built_in"> default </span>A;</span><br></pre></td></tr></table></figure>
-<p>3.仅允许<strong>表达式、函数或类</strong>作为**<code>export default</code>导出**,你想使用<code>&#123; &#125;</code>导出对象时只能使用<code>default</code>。<br>4.在其他文件引用export default导出的对象时不一定使用导出时的名字。因为这种方式实际上是<strong>将该导出对象设置为 默认导出对象</strong>，如：<br>假设文件A、B在同级目录，实现文件B引入文件A的导出对象deObject。<br>文件A导出：<code>export default deObject;</code><br>文件B引用：<code>import deObject from &#39;./A&#39;</code>或者<code>import newDeObject from &#39;./A&#39;</code><br>5.性能上<code>export</code>会略微好一些，<strong>建议使用<code>export</code></strong>.</p>
+<h2 id="export-和-export-default-区别"><a href="#export-和-export-default-区别" class="headerlink" title="export 和 export default 区别"></a>export 和 export default 区别</h2><ul>
+<li>export导出<strong>多个对象</strong>，export default只能导出<strong>一个对象</strong>。</li>
+<li>export导出对象**需要用<code>&#123; &#125;</code><strong>，export default</strong>不需要<code>&#123; &#125;</code>**，如：<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// <span class="keyword">export</span>导出方式<span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> A = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">const</span> B = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> &#123;A,B,C&#125;;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">export</span>导出方式<span class="number">2</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> A = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> B = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"></span><br><span class="line">// <span class="keyword">export</span> default导出方式</span><br><span class="line"><span class="keyword">const</span> A = <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> default A;</span><br></pre></td></tr></table></figure></li>
+<li>仅允许<strong>表达式、函数或类</strong>作为**<code>export default</code>导出**,你想使用<code>&#123; &#125;</code>导出对象时只能使用<code>default</code>。</li>
+<li>在其他文件引用<code>export default</code>导出的对象时不一定使用导出时的名字。因为这种方式实际上是<strong>将该导出对象设置为 默认导出对象</strong>，如：  <ul>
+<li>假设文件A、B在同级目录，实现文件B引入文件A的导出对象deObject。</li>
+<li>文件A导出：<code>export default deObject;</code></li>
+<li>文件B引用：<code>import deObject from &#39;./A&#39;</code>或者<code>import newDeObject from &#39;./A&#39;</code></li>
+</ul>
+</li>
+<li>性能上<code>export</code>会略微好一些，<strong>建议使用<code>export</code></strong>.</li>
+</ul>
+<hr>
+<h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><h2 id="module-exports-与-exports"><a href="#module-exports-与-exports" class="headerlink" title="module.exports 与 exports"></a>module.exports 与 exports</h2><ul>
+<li>node.js遵循Common.Js规范。</li>
+<li>**推荐使用<code>modules.exports = xxx</code>**的方式来输出模块变量，它可以应对任何情况。<br>具体原因可以参考<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023027697415616">廖雪峰的博客</a>。使用exports可能会有意料之外的错误。</li>
+</ul>
+<hr>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js%E5%AD%A6%E4%B9%A0/" rel="tag">Node.js学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
 
       
         
@@ -248,7 +276,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#export%EF%BC%8Cexport-default-import%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">export，export default,import是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#export-%E5%92%8C-export-default-%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">export 和 export default 区别</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%88%86export%E3%80%81export-default%E5%92%8Cmodule-exports%E3%80%81exports"><span class="nav-number">1.</span> <span class="nav-text">区分export、export default和module.exports、exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Vue"><span class="nav-number">2.</span> <span class="nav-text">React&#x2F;Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#export%E3%80%81export-default%E3%80%81import%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.</span> <span class="nav-text">export、export default、import是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#export-%E5%92%8C-export-default-%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.</span> <span class="nav-text">export 和 export default 区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node"><span class="nav-number">3.</span> <span class="nav-text">node</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#module-exports-%E4%B8%8E-exports"><span class="nav-number">3.1.</span> <span class="nav-text">module.exports 与 exports</span></a></li></ol></li></ol>
     
     </div>
   </aside>

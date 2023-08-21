@@ -18,11 +18,13 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="transition 属性实现过渡效果 transition 属性是 transition-property，transition-duration，transition-timing-function 和 transition-delay 的一个简写属性。 2个属性：property name | duration，比如all .2s 3个属性： property name | duration">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/transitionBorder.png">
 <meta property="article:published_time" content="2019-10-28T11:46:42.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:06.095Z">
+<meta property="article:modified_time" content="2023-05-05T12:33:17.858Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/transitionBorder.png">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -272,6 +274,12 @@
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-delay">MDN 关于<code>transition-delay</code>属性</a></li>
 </ul>
 <hr>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ul>
+<li>在工作中，完成一个文字在鼠标移入时显示方框并提供删除图标，需要在移入&#x3D;》显示方框加上一个过渡效果</li>
+<li>例子：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sort-cell&quot;</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>审核时间<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sort-cell</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid transparent; // <span class="attribute">content</span>-box，加上透明边框占位置</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span> &#123; // hover显示边框，边框从无到有的过渡动画</span><br><span class="line">    <span class="attribute">transition</span>: all .<span class="number">15s</span> linear;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#0077FF</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/transitionBorder.png" alt="效果展示" title="效果展示"></li>
+</ul>
 
       
     </div>
@@ -343,7 +351,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transition-%E5%B1%9E%E6%80%A7%E5%AE%9E%E7%8E%B0%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">transition 属性实现过渡效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-property%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E7%9A%84-CSS-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%90%8D%E7%A7%B0"><span class="nav-number">1.1.</span> <span class="nav-text">transition-property属性规定设置过渡效果的 CSS 属性的名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-duration%E5%B1%9E%E6%80%A7%E6%8C%87%E5%AE%9A%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E6%97%B6%E9%95%BF"><span class="nav-number">1.2.</span> <span class="nav-text">transition-duration属性指定过渡效果时长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-timing-function-%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E9%80%9F%E5%BA%A6%E6%95%88%E6%9E%9C%E7%9A%84%E9%80%9F%E5%BA%A6%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.3.</span> <span class="nav-text">transition-timing-function 属性规定速度效果的速度曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-delay%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E4%BD%95%E6%97%B6%E5%BC%80%E5%A7%8B"><span class="nav-number">1.4.</span> <span class="nav-text">transition-delay属性定义过渡效果何时开始</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transition-%E5%B1%9E%E6%80%A7%E5%AE%9E%E7%8E%B0%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">transition 属性实现过渡效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-property%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E7%9A%84-CSS-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%90%8D%E7%A7%B0"><span class="nav-number">1.1.</span> <span class="nav-text">transition-property属性规定设置过渡效果的 CSS 属性的名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-duration%E5%B1%9E%E6%80%A7%E6%8C%87%E5%AE%9A%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E6%97%B6%E9%95%BF"><span class="nav-number">1.2.</span> <span class="nav-text">transition-duration属性指定过渡效果时长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-timing-function-%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E9%80%9F%E5%BA%A6%E6%95%88%E6%9E%9C%E7%9A%84%E9%80%9F%E5%BA%A6%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.3.</span> <span class="nav-text">transition-timing-function 属性规定速度效果的速度曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-delay%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E4%BD%95%E6%97%B6%E5%BC%80%E5%A7%8B"><span class="nav-number">1.4.</span> <span class="nav-text">transition-delay属性定义过渡效果何时开始</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">使用场景</span></a></li></ol>
     
     </div>
   </aside>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>3-1 vue基本使用 | 珠</title>
+  <title>console.log值不断更新导致的问题 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
@@ -11,21 +11,18 @@
   
   
   
-  <meta name="description" content="重新补一下vue2的基础使用（更新）">
+  <meta name="description" content="新同事问了我一个有趣的问题，可以反映出控制台log数据的不断更新和axios拦截器的特性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3-1 vue基本使用">
-<meta property="og:url" content="http://yoursite.com/2021/12/04/3-1%20vue%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="console.log值不断更新导致的问题">
+<meta property="og:url" content="http://yoursite.com/2023/04/05/console.log%E5%80%BC%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="重新补一下vue2的基础使用（更新）">
+<meta property="og:description" content="新同事问了我一个有趣的问题，可以反映出控制台log数据的不断更新和axios拦截器的特性">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/image_3E78XaugQ4.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/image_7ASS_xN5i6.png">
-<meta property="article:published_time" content="2021-12-04T03:52:13.000Z">
-<meta property="article:modified_time" content="2023-04-08T07:25:03.758Z">
+<meta property="article:published_time" content="2023-04-05T13:17:03.000Z">
+<meta property="article:modified_time" content="2023-06-25T13:21:49.368Z">
 <meta property="article:author" content="黄丽珠">
-<meta property="article:tag" content="vue">
+<meta property="article:tag" content="小tips">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/image_3E78XaugQ4.png">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -136,7 +133,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-3-1 vue基本使用" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-console.log值不断更新导致的问题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -144,7 +141,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      3-1 vue基本使用
+      console.log值不断更新导致的问题
     </h1>
   
 
@@ -152,13 +149,13 @@
     
     <div class="article-meta">
       
-	<a href="/2021/12/04/3-1%20vue%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="article-date">
-	  <time datetime="2021-12-04T03:52:13.000Z" itemprop="datePublished">十二月 4, 2021</time>
+	<a href="/2023/04/05/console.log%E5%80%BC%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+	  <time datetime="2023-04-05T13:17:03.000Z" itemprop="datePublished">四月 5, 2023</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+    <a class="article-category-link" href="/categories/%E5%B0%8Ftips/">小tips</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
  
       
 	<span id="busuanzi_container_page_pv">
@@ -168,31 +165,27 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>重新补一下vue2的基础使用（更新）</p>
+        <p>新同事问了我一个有趣的问题，可以反映出控制台log数据的不断更新和axios拦截器的特性</p>
 <span id="more"></span>
 
-<h1 id="3-1-vue基本使用"><a href="#3-1-vue基本使用" class="headerlink" title="3-1 vue基本使用"></a>3-1 vue基本使用</h1><ul>
-<li><p>插值、表达式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/image_3E78XaugQ4.png"></p>
-</li>
-<li><p>动态属性、指令</p>
-<ul>
-<li><strong>v-html：显示富文本，会有XSS 风险，会覆盖子组件</strong></li>
+<h1 id="console-log的推荐使用方法"><a href="#console-log的推荐使用方法" class="headerlink" title="console.log的推荐使用方法"></a>console.log的推荐使用方法</h1><ul>
+<li><code>console.log</code>可参考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Console/log">MDN</a></li>
+<li>不要使用 <code>console.log(obj)</code>，大多数浏览器会提供一个随着值的变化而<strong>不断更新的实时视图</strong></li>
+<li><strong>应该使用 <code>console.log(JSON.parse(JSON.stringify(obj)))</code>，这样可以确保你所看到的 obj 的值是当前输出的值</strong></li>
+<li><strong>注意：</strong>如果是undefined则走到<code>JSON.parse</code>可能会报错<code>SyntaxError: &quot;undefined&quot; is not valid JSON</code>，可以<strong>打断点查看当前值</strong>，也可以try-catch包一下</li>
+<li>担心报错的情况可以直接用<code>console.log(JSON.stringify(obj))</code>，一般没什么问题</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/image_7ASS_xN5i6.png"></p>
-</li>
-</ul>
-<h1 id="computed和watch"><a href="#computed和watch" class="headerlink" title="computed和watch"></a>computed和watch</h1><h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2>
+
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+    <a class="article-category-link" href="/categories/%E5%B0%8Ftips/">小tips</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8Ftips/" rel="tag">小tips</a></li></ul>
 
       
         
@@ -227,19 +220,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/12/10/vue%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6@click.stop(%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/06/14/vue3%20props%E4%BC%A0%E5%8F%82%20ref()%20%E5%93%8D%E5%BA%94%E5%BC%8F%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          vue点击事件@click.stop(阻止冒泡)
+          vue3 props传参 ref() 响应式无效的问题
         
       </div>
     </a>
   
   
-    <a href="/2021/11/02/%E5%92%8C%E9%97%AE%E5%8F%B7%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%89%E4%B8%AAJS%E8%BF%90%E7%AE%97%E7%AC%A6/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/03/22/%E4%B8%AD%E6%96%AD%E8%BD%AE%E8%AF%A2%E7%9A%84setTimeout%E6%97%A0%E6%95%88%E7%9A%84%E6%83%85%E5%86%B5/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">和问号相关的三个JS运算符</div>
+      <div class="article-nav-title">中断轮询的setTimeout无效的情况</div>
     </a>
   
 </nav>
@@ -253,7 +246,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-1-vue%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">3-1 vue基本使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#computed%E5%92%8Cwatch"><span class="nav-number">2.</span> <span class="nav-text">computed和watch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#computed"><span class="nav-number">2.1.</span> <span class="nav-text">computed</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#console-log%E7%9A%84%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">console.log的推荐使用方法</span></a></li></ol>
     
     </div>
   </aside>
