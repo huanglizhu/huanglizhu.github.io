@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>webpack和vue图片路径的问题 | 珠</title>
+  <title>webpack和vue图片动态路径的问题 | 珠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
@@ -13,13 +13,13 @@
   
   <meta name="description" content="在vue中使用图片时，出现找不到图片的情况，这和webpack解析图片路径有关系">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webpack和vue图片路径的问题">
-<meta property="og:url" content="http://yoursite.com/2021/07/16/webpack%E5%92%8Cvue%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="webpack和vue图片动态路径的问题">
+<meta property="og:url" content="http://yoursite.com/2021/07/16/webpack%E5%92%8Cvue%E5%9B%BE%E7%89%87%E5%8A%A8%E6%80%81%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="在vue中使用图片时，出现找不到图片的情况，这和webpack解析图片路径有关系">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-16T10:05:20.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:08:17.213Z">
+<meta property="article:modified_time" content="2023-08-21T16:31:05.880Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
@@ -133,7 +133,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-webpack和vue图片路径的问题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-webpack和vue图片动态路径的问题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -141,7 +141,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      webpack和vue图片路径的问题
+      webpack和vue图片动态路径的问题
     </h1>
   
 
@@ -149,7 +149,7 @@
     
     <div class="article-meta">
       
-	<a href="/2021/07/16/webpack%E5%92%8Cvue%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+	<a href="/2021/07/16/webpack%E5%92%8Cvue%E5%9B%BE%E7%89%87%E5%8A%A8%E6%80%81%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
 	  <time datetime="2021-07-16T10:05:20.000Z" itemprop="datePublished">七月 16, 2021</time>
 	</a>
 
@@ -168,30 +168,42 @@
         <p>在vue中使用图片时，出现找不到图片的情况，这和webpack解析图片路径有关系</p>
 <span id="more"></span>
 
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 错误示范：</span><br><span class="line">&lt;img :src=<span class="string">&quot;images/icon-basic.png&quot;</span>/&gt;</span><br><span class="line"><span class="regexp">//</span> npm run dev 或者npm run build之后，解析到的地址是http:<span class="regexp">//</span>localhost:<span class="number">1644</span><span class="regexp">/images/i</span>con-basic.png，这是找不到的</span><br><span class="line"><span class="regexp">//</span> 因为在webpack中会将图片来当做模块来用，图片被webpack后的路径都会被解析为<span class="regexp">/static/img</span><span class="regexp">/[filename].png，完整地址为localhost:1644/</span>static<span class="regexp">/img/</span>[filename].png</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 解决方法：</span><br><span class="line"><span class="regexp">//</span> 由于src里无法使用url的@相关配置，所以使用require将图片当成模块先引进来，再绑定</span><br><span class="line">&lt;img :src=<span class="string">&quot;require(&#x27;@/images/icon-basic.png&#x27;)&quot;</span>/&gt;</span><br><span class="line"><span class="regexp">//</span> webpack解析后的src路径为 <span class="string">&#x27;img/icon-basic.04735a2f.png&#x27;</span> </span><br><span class="line"><span class="regexp">//</span> http:<span class="regexp">//</span>localhost:<span class="number">1644</span><span class="regexp">/img/i</span>con-basic.<span class="number">04735</span>a2f.png</span><br></pre></td></tr></table></figure>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 错误示范：</span><br><span class="line">&lt;img :src=&quot;images/icon-basic.png&quot; /&gt;</span><br><span class="line">// npm run dev 或者npm run build之后，解析到的地址是http://localhost:1644/images/icon-basic.04735a2f.png，找不到对应图片</span><br><span class="line">// 因为在webpack中会将图片来当做模块来用，图片被webpack后的路径可能会被解析为类似/static/img/[filename].png，完整地址为localhost:1644/static/img/[filename].png</span><br><span class="line"></span><br><span class="line">// 解决方法：</span><br><span class="line">// 由于src里无法使用url的@相关配置，所以需要使用require将图片当成模块先引进来，再绑定</span><br><span class="line">&lt;img :src=&quot;require(&#x27;@/images/icon-basic.png&#x27;)&quot;/&gt;</span><br><span class="line">// webpack解析后的src路径为 &#x27;static/img/icon-basic.04735a2f.png&#x27; </span><br><span class="line">// 完整路径为 http://localhost:1644/static/img/icon-basic.04735a2f.png</span><br></pre></td></tr></table></figure>
 
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>img的src属性直接绑定图片路径，然而图片加载失败（src中不能使用<code>~@</code>）</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>img的src属性直接绑定图片相对路径，然而图片加载失败（src中不能使用<code>~@</code>）</p>
 <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><ul>
-<li><p>在webpack中会将图片来当做模块来用，图片被webpack解析后的路径都会被解析为<code>/static/img/[filename].png</code>，完整地址为<code>localhost:1644/static/img/[filename].png</code></p>
+<li>在webpack中会将图片来当做模块来用，图片被webpack解析后的路径都会被解析为<code>/static/img/[filename].png</code>，完整地址为<code>localhost:1644/static/img/[filename].png</code><ul>
+<li><strong>注意：</strong>webpack编译默认会将图片复制到<code>static/img</code>下存放</li>
+</ul>
 </li>
-<li><p>而直接使用<code>:src=&quot;images/icon-basic.png&quot;</code>，经过<code>npm run dev 或者npm run build</code>之后，webpack解析到的地址是<code>http://localhost:1644/images/icon-basic.png</code>，这是找不到的</p>
-</li>
+<li>而直接使用<code>:src=&quot;images/icon-basic.png&quot;</code>，经过<code>npm run dev 或者npm run build</code>之后，webpack解析到的地址是<code>http://localhost:1644/images/icon-basic.png</code>，这是找不到的</li>
 </ul>
 <h1 id="解决方法1：使用require"><a href="#解决方法1：使用require" class="headerlink" title="解决方法1：使用require"></a>解决方法1：使用require</h1><ul>
 <li><strong>使用require将图片当成模块先引进来</strong>，再绑定</li>
-<li>这样<code>npm run dev</code> webpack解析后的src路径为 ‘img&#x2F;icon-basic.04735a2f.png’，就能顺利找到了</li>
+<li>这样<code>npm run dev</code> webpack解析后的src路径为 <code>img/icon-basic.04735a2f.png</code>，就能顺利找到了</li>
 </ul>
-<h1 id="解决方法2：statics文件夹"><a href="#解决方法2：statics文件夹" class="headerlink" title="解决方法2：statics文件夹"></a>解决方法2：statics文件夹</h1><ul>
+<h1 id="解决方法2：statics文件夹【不推荐】"><a href="#解决方法2：statics文件夹【不推荐】" class="headerlink" title="解决方法2：statics文件夹【不推荐】"></a>解决方法2：statics文件夹【不推荐】</h1><ul>
 <li>将文件放在statics目录下（与src同级）(<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6ee27c825025">参考</a>)，但是他不能被webpack优化<ul>
 <li>图片一类的静态文件，可以放在这个static文件夹下</li>
 <li>这个文件夹下的文件（夹）会按照原本的结构放在网站根目录下</li>
-<li><strong>注意：</strong>这样的话<strong>必须写成绝对路径</strong>如<code>images:[&#123;src:”/static/1.png”&#125;,&#123;src:”/static/2.png”&#125;]</code></li>
-<li><strong>缺点：</strong>放到static里面<strong>webpack打包后</strong>只会把资源复制到发布目录而<strong>不会把小图片优化为base64</strong>，所以为了兼顾可以把图片资源优化，所以还是不适合把图片资源放到static</li>
+<li><strong>注意：</strong>这样的话<strong>必须写成绝对路径</strong>如<code>/static/1.png</code></li>
+<li><strong>缺点：</strong>放到static里面<strong>webpack打包后</strong>只会把资源复制到发布目录而<strong>不会把小图片优化为base64</strong>，所以为了兼顾可以把图片资源优化，还是不适合把图片资源放到static</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-cli的assets与static区别"><a href="#vue-cli的assets与static区别" class="headerlink" title="vue-cli的assets与static区别"></a>vue-cli的assets与static区别</h2><ul>
+<li>根据webpack的特性，图片放assets中更为合适。如果放到static里面webpack打包后只会把资源复制到发布目录而不会把小图片优化为base64</li>
+<li>assets：在项目编译的过程中会被webpack处理解析为模块依赖<ul>
+<li><strong>只支持相对路径</strong>的形式，如<code>&lt;img src=&quot;./logo.png&quot;&gt;</code>和<code>background:url(./logo.png),</code> <code>./logo.png</code>是相对资源路径，将有webpack解析为模块依赖</li>
+</ul>
+</li>
+<li>static：在这个目录下文件不会被webpack处理,简单就是说存放第三方文件的地方，不会被webpack解析。他会直接被复制到最终的打包目录(默认是<code>dist/static</code>)下<ul>
+<li><strong>必须使用绝对路径</strong>引用这些文件，这是通过config.js文件中的<code>build.assetsPublic</code>和<code>build.assertsSubDirectory</code>链接来确定的。任何放在<code>static/</code>中文件需要以绝对路径的形式引用：<code>/static[filename]</code></li>
 </ul>
 </li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li>参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6ee27c825025">vue中img的src动态赋值（本地图片的路径）</a>中“require方法”</li>
+<li>参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6ee27c825025">《vue中img的src动态赋值（本地图片的路径）》</a>中“require方法”</li>
 </ul>
 
       
@@ -264,7 +276,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%951%EF%BC%9A%E4%BD%BF%E7%94%A8require"><span class="nav-number">4.</span> <span class="nav-text">解决方法1：使用require</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%952%EF%BC%9Astatics%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">5.</span> <span class="nav-text">解决方法2：statics文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%951%EF%BC%9A%E4%BD%BF%E7%94%A8require"><span class="nav-number">4.</span> <span class="nav-text">解决方法1：使用require</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%952%EF%BC%9Astatics%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%90%E4%B8%8D%E6%8E%A8%E8%8D%90%E3%80%91"><span class="nav-number">5.</span> <span class="nav-text">解决方法2：statics文件夹【不推荐】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli%E7%9A%84assets%E4%B8%8Estatic%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">vue-cli的assets与static区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol>
     
     </div>
   </aside>

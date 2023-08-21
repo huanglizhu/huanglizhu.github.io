@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_fetch.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_fetch_post.jpg">
 <meta property="article:published_time" content="2020-03-01T04:56:45.000Z">
-<meta property="article:modified_time" content="2023-06-04T05:59:13.895Z">
+<meta property="article:modified_time" content="2023-08-21T16:28:12.778Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="AJAX">
 <meta property="article:tag" content="JS">
@@ -307,17 +307,42 @@
 </ul>
 <h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><ul>
 <li>跨域，是指<strong>浏览器不能执行其他网站的脚本</strong>，即，<strong>跨域名，跨端口，跨协议</strong>。它是由<strong>浏览器的同源策略</strong>造成的，是<strong>浏览器对JavaScript实施的安全限制</strong>。</li>
-<li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
-<li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
 <li>可通过<strong>jsonp、nginx反向代理、CORS</strong>实现跨域</li>
 <li>关于<strong>为什么会有跨域问题</strong>可参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/98d4bc7565b2">这里</a>，跨域问题 是<strong>浏览器对于ajax请求的一种安全限制</strong>：一个页面发起的ajax请求，只能是于当前页同域名的路径，这能<strong>有效的阻止跨站攻击</strong>。</li>
 </ul>
-<h2 id="实现跨域的常见方式"><a href="#实现跨域的常见方式" class="headerlink" title="实现跨域的常见方式"></a>实现跨域的常见方式</h2><p><strong>注意：如果是协议和端口造成的跨域问题，“前端”无法解决。</strong></p>
+<h2 id="实现跨域的前提"><a href="#实现跨域的前提" class="headerlink" title="实现跨域的前提"></a>实现跨域的前提</h2><ul>
+<li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
+<li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
+<li><strong>需要服务端如何配合：</strong><ul>
+<li><strong>jsonp：</strong><ul>
+<li>服务器端需要根据客户端传递的回调函数名，将数据包装在回调函数中返回给客户端</li>
+<li>设置响应头的 Content-Type 为 application&#x2F;javascript</li>
+</ul>
+</li>
+<li><strong>nginx反向代理：</strong> （proxy反向代理类似）<ul>
+<li>服务器端需要配置 Nginx 反向代理规则，将客户端请求转发到目标服务器的相应位置</li>
+<li>需要处理跨域请求头，允许指定的域名访问资源</li>
+<li>可选：配置 SSL 证书，以及根据需求进行其他代理参数的配置</li>
+</ul>
+</li>
+<li><strong>CORS：</strong><ul>
+<li>服务端需要设置响应头：服务端需要在响应中设置特定的响应头来允许跨域请求</li>
+<li>处理<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#ajax-x2F-fetch-x2F-axios%E5%8F%91%E9%80%812%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8E%9F%E5%9B%A0">预检请求</a>：服务端需要响应这个预检请求并设置相应的响应头<ul>
+<li>注意：jsonp发送的是get请求，自然不会触发预检请求</li>
+</ul>
+</li>
+<li>处理实际请求：服务端需要处理实际的跨域请求，并根据情况设置适当的响应头</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现跨域的常见方式"><a href="#实现跨域的常见方式" class="headerlink" title="实现跨域的常见方式"></a>实现跨域的常见方式</h2><p><strong>注意：如果是协议和端口造成的跨域问题，前端代码无法直接解决协议和端口造成的跨域问题。需要在服务器端进行相应的配置或使用其他后端技术来解决跨域请求的限制</strong></p>
 <h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><ul>
-<li>访问<a target="_blank" rel="noopener" href="https://imooc.com/%EF%BC%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%80%E5%AE%9A%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AAhtml%E6%96%87%E4%BB%B6%E5%90%97%EF%BC%9F">https://imooc.com/，服务端一定返回一个html文件吗？</a><br>并不是，<strong>服务器可以任意动态拼接数据返回，只要符合html格式要求</strong><br>同理，<code>&lt;script src=&quot;https://imooc.com/getData.js&quot;&gt;</code>,也不一定返回一个js文件，<strong>服务器可以任意动态拼接数据返回，只要符合js格式要求即可</strong>【详细见例子】</li>
+<li>访问<code>https://imooc.com/</code>，服务端一定返回一个html文件吗？<br>并不是，<strong>服务器可以任意动态拼接数据返回，只要符合html格式要求</strong><br>同理，<code>&lt;script src=&quot;https://imooc.com/getData.js&quot;&gt;</code>也不一定返回一个js文件，<strong>服务器可以任意动态拼接数据返回，只要符合js格式要求即可</strong>【详细见例子】</li>
 <li><strong>注意：</strong>jsonp<strong>只能发起GET请求</strong>且<strong>需要服务的支持</strong></li>
 <li><strong>jsonp原理</strong>：<ul>
-<li><strong><code>&lt;script&gt;</code><strong>可</strong>绕过跨域限制</strong>，所以script中src地址可以是跨域地址<strong>服务器</strong>可以<strong>任意动态拼接数据返回</strong>。所以，**<code>&lt;script&gt;</code>就可以获得跨域的数据，只要服务端愿意返回**。</li>
+<li><strong><code>&lt;script&gt;</code><strong>可</strong>绕过跨域限制</strong>，所以script中src地址可以是跨域地址<strong>服务器</strong>可以<strong>任意动态拼接数据返回</strong>。所以**<code>&lt;script&gt;</code>就可以获得跨域的数据，只要服务端愿意返回**</li>
 </ul>
 </li>
 <li><strong>例子（原理）</strong>：<ul>
@@ -346,7 +371,14 @@
 <li><strong>例子：</strong>前后端分离的项目，当有前端部署在自己的服务器上，后端也部署在自己的服务器上的情况就会造成<strong>前端无法访问后端接口的情况</strong>，这时就需要Nginx做一个代理的配置。<strong>当a域名访问b域名下某一个接口的时候，先让a域名访问a域名下的某一个url在通过Nginx转发到b域名下的某个接口</strong>，这样就让浏览器感觉好像都是在请求同一个服务器下的资源。</li>
 </ul>
 <hr>
+<h3 id="proxy反向代理"><a href="#proxy反向代理" class="headerlink" title="proxy反向代理"></a>proxy反向代理</h3><ul>
+<li>可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/#baseURL%E5%8F%8A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%88%86%E5%8F%91%E4%BB%A3%E7%90%86">《axios使用和简单封装》</a></li>
+<li><strong>例子：</strong><br>  开发环境中，假设<strong>前端服务是<code>http://localhost:8089/</code>，后端接口是存在<code>http://test01.7debao.com/</code>服务上的</strong><br>  那么前端打开页面时打开的就是<code>http://localhost:8089/</code>，前端页面中使用ajax请求获取数据时就会去获取<code>http://localhost:8089/</code>下的对应路径的数据<br>  而后端接口是存在<code>http://test01.7debao.com/</code>服务上的，所以数据其实保存在<code>http://test01.7debao.com/</code>下的对应路径中，<strong>这就导致无法获取数据</strong><br>  <strong>此时使用proxy进行反向代理，结合axios配置给接口加前缀<code>/api</code>，遇到<code>/api</code>开头的url时就通过proxy分配到后端服务请求数据，遇到<code>/</code>开头的url时就分配到前端服务显示页面，这样就没问题了</strong></li>
+<li><strong>注意：</strong>生产和测试环境一般前后端代码部署在同一服务器同一域名下，接口请求不存在跨域问题，自然不需要设置分发代理</li>
+</ul>
+<hr>
 <h3 id="CORS（纯服务端）"><a href="#CORS（纯服务端）" class="headerlink" title="CORS（纯服务端）"></a>CORS（纯服务端）</h3><ul>
+<li><strong>总结：</strong>前端不需要额外设置，后端需要在响应头中设置 CORS 相关字段</li>
 <li>可参考<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/cors.html">阮一峰的跨域资源共享 CORS 详解</a></li>
 <li>CORS是一个<strong>W3C标准</strong>，全称是”<strong>跨域资源共享</strong>“（Cross-origin resource sharing）。它<strong>规范化的跨域请求解决方案，安全可靠。</strong></li>
 <li>它<strong>允许浏览器向跨源服务器发出XMLHttpRequest请求</strong>，从而克服了AJAX只能同源使用的限制。</li>
@@ -357,7 +389,7 @@
 </li>
 <li><strong>优势</strong>：在<strong>服务端</strong>进行控制是否允许跨域，可自定义规则，支持各种请求方式</li>
 <li><strong>缺点</strong>：会产生额外的请求</li>
-<li>cors是<strong>纯服务端</strong>的操作，通过服务端设置http header可实现允许跨域。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_CORS.jpg" alt="cors" title="cors"></li>
+<li><strong>实现方法：</strong> cors是<strong>纯服务端</strong>的操作，通过服务端设置http header可实现允许跨域：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_CORS.jpg" alt="cors" title="cors"></li>
 <li><strong>如果使用cors允许跨域，则跨域请求和发送ajax请求时完全一样的，不需要再考虑跨域问题</strong></li>
 <li>CORS是一种<strong>新标准</strong>，支持<strong>同源通信</strong>，也支持<strong>跨域通信</strong>。<strong>fetch</strong>是实现CORS通信的</li>
 <li><strong>虽然原理比较复杂，但是使用可以比较简单。</strong>浏览器端都有浏览器自动完成，我们无需操心。服务端可以通过拦截器统一实现，不必每次都去进行跨域判定的编写。所以<strong>可直接使用SpringMVC写好的CORS的跨域过滤器：CorsFilter</strong> ,内部已经实现了刚才所讲的判定逻辑，我们直接用就好了。</li>
@@ -367,7 +399,10 @@
 <p>模拟404情况，换成不存在的地址：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg" alt="模拟404情况" title="模拟404情况"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg" alt="运行结果" title="运行结果"></p>
 <h2 id="跨域的实现方式"><a href="#跨域的实现方式" class="headerlink" title="跨域的实现方式"></a>跨域的实现方式</h2><ol>
 <li><strong>jsonp原理</strong></li>
-<li><strong>cors（纯服务端）</strong></li>
+<li><strong>cors（纯服务端）</strong><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/#nginx%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%81%94%E8%B0%83%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8">博客项目登录（前端联调）</a></li>
+</ul>
+</li>
 <li><strong>nginx反向代理</strong></li>
 </ol>
 <hr>
@@ -453,7 +488,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XMLHttpRequest%EF%BC%88ajax%E6%A0%B8%E5%BF%83API%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">XMLHttpRequest（ajax核心API）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#onreadystatechange%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">onreadystatechange事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open"><span class="nav-number">1.2.</span> <span class="nav-text">open()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#send"><span class="nav-number">1.3.</span> <span class="nav-text">send()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readyState%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">readyState属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">status属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#responseText-%E4%B8%8E-responseXML-%E5%B1%9E%E6%80%A7"><span class="nav-number">1.6.</span> <span class="nav-text">responseText 与 responseXML 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">AJAX例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">post请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">浏览器的同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87-CSS-js%E5%8F%AF%E6%97%A0%E8%A7%86%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">3.1.</span> <span class="nav-text">加载图片 CSS js可无视同源策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%B8%B8%E8%A7%81%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">实现跨域的常见方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">4.1.1.</span> <span class="nav-text">jsonp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jquery%E5%AE%9E%E7%8E%B0jsonp"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">jquery实现jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.1.2.</span> <span class="nav-text">nginx反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS%EF%BC%88%E7%BA%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%89"><span class="nav-number">4.1.3.</span> <span class="nav-text">CORS（纯服务端）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">ajax相关面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93ajax"><span class="nav-number">5.1.</span> <span class="nav-text">手写简易ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">跨域的实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E4%B8%AD-ajax-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">实际项目中 ajax 的常用插件</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XMLHttpRequest%EF%BC%88ajax%E6%A0%B8%E5%BF%83API%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">XMLHttpRequest（ajax核心API）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#onreadystatechange%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">onreadystatechange事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open"><span class="nav-number">1.2.</span> <span class="nav-text">open()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#send"><span class="nav-number">1.3.</span> <span class="nav-text">send()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readyState%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">readyState属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">status属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#responseText-%E4%B8%8E-responseXML-%E5%B1%9E%E6%80%A7"><span class="nav-number">1.6.</span> <span class="nav-text">responseText 与 responseXML 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">AJAX例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">post请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">浏览器的同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87-CSS-js%E5%8F%AF%E6%97%A0%E8%A7%86%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">3.1.</span> <span class="nav-text">加载图片 CSS js可无视同源策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%89%8D%E6%8F%90"><span class="nav-number">4.1.</span> <span class="nav-text">实现跨域的前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%B8%B8%E8%A7%81%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">实现跨域的常见方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">4.2.1.</span> <span class="nav-text">jsonp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jquery%E5%AE%9E%E7%8E%B0jsonp"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">jquery实现jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.2.</span> <span class="nav-text">nginx反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.3.</span> <span class="nav-text">proxy反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS%EF%BC%88%E7%BA%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%89"><span class="nav-number">4.2.4.</span> <span class="nav-text">CORS（纯服务端）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">ajax相关面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93ajax"><span class="nav-number">5.1.</span> <span class="nav-text">手写简易ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">跨域的实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E4%B8%AD-ajax-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">实际项目中 ajax 的常用插件</span></a></li></ol>
     
     </div>
   </aside>

@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggkqyh6qryj30bu0bm3yw.jpg">
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggh1vdyd2uj30a30fyq3f.jpg">
 <meta property="article:published_time" content="2020-04-05T08:17:53.000Z">
-<meta property="article:modified_time" content="2023-06-03T07:04:04.587Z">
+<meta property="article:modified_time" content="2023-08-21T16:31:57.854Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
@@ -372,19 +372,29 @@
 </ol>
 </li>
 </ul>
-<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><p>主要取值有none,block,inline-block,inline,flex等</p>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><p>主要取值有none,block,inline-block,inline,flex,grid等</p>
 <h2 id="inline-block、inline和block的区别"><a href="#inline-block、inline和block的区别" class="headerlink" title="inline-block、inline和block的区别"></a>inline-block、inline和block的区别</h2><ul>
-<li>Block是<strong>块级元素</strong>，其前后都会有换行符，<strong>能设置宽度，高度</strong>，margin&#x2F;padding <strong>水平垂直方向都有效</strong>。</li>
-<li>Inline：<strong>行元素</strong>，设置width和height无效，<strong>margin在竖直方向上无效</strong>，<strong>padding在水平方向垂直方向都有效</strong>，<strong>前后无换行符</strong></li>
-<li>Inline-block：<strong>行内块元素</strong>，<strong>能设置宽度高度</strong>，margin&#x2F;padding水平垂直方向 <strong>都有效</strong>，<strong>前后无换行符</strong></li>
+<li>Block：<strong>块级元素</strong>，其前后都会有换行符，<strong>能设置宽度，高度</strong>，margin&#x2F;padding <strong>水平垂直方向都有效</strong><ul>
+<li>常见的块级元素包括 <code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>、<code>&lt;h1&gt;</code> 到 <code>&lt;h6&gt;</code>、<code>&lt;ul&gt;</code>、<code>&lt;ol&gt;</code>、<code>&lt;li&gt;</code>等</li>
+</ul>
+</li>
+<li>Inline：<strong>行元素</strong>，设置width和height无效，宽度和高度是由其内容决定。<strong>margin在竖直方向上无效</strong>，<strong>padding在水平方向垂直方向都有效</strong>，<strong>前后无换行符</strong><ul>
+<li>常见的内联元素包括 <code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;strong&gt;</code>、<code>&lt;em&gt;</code>、<code>&lt;img&gt;</code>、</li>
+<li>内联元素不能包含块级元素，但<strong>可以包含其他内联元素</strong></li>
+</ul>
+</li>
+<li>Inline-block：<strong>行内块元素</strong>，<strong>能设置宽度高度</strong>，margin&#x2F;padding水平垂直方向 <strong>都有效</strong>，<strong>前后无换行符</strong><ul>
+<li>常见的内联块级元素包括<code>&lt;button&gt;</code>以及常见的表单元素：<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-input.html"><code>&lt;input&gt;</code></a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/dom-obj-textarea.html"><code>&lt;textarea&gt;</code></a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/att-select-name.html"><select></a></li>
+</ul>
+</li>
 </ul>
 <h2 id="为什么img是inline还可以设置宽高"><a href="#为什么img是inline还可以设置宽高" class="headerlink" title="为什么img是inline还可以设置宽高"></a>为什么img是inline还可以设置宽高</h2><ul>
 <li>因为他是<strong>置换元素</strong>，置换元素一般<strong>内置宽高属性</strong>，因此可以设置其宽高。</li>
-<li><strong>置换元素</strong>就是会<strong>根据标签属性来显示的元素</strong>。反之就是非置换元素了。<ul>
-<li>比如<strong>img根据src属性</strong>来显示，<strong>input根据type 属性决定是显示输入框还是按钮</strong>，因此可知道img和input是置换元素。</li>
-<li>当然同理<strong>button的type属性决定是提交还是重置</strong>、textarea、select也是置换元素。</li>
-</ul>
-</li>
+<li><strong>置换元素</strong>就是会<strong>根据标签属性来显示的元素</strong>，反之就是非置换元素了</li>
+<li>常见的置换元素包括 <code>&lt;img&gt;</code>、<code>&lt;video&gt;</code>、<code>&lt;audio&gt;</code> 等</li>
+<li>表单元素中<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-input.html"><code>&lt;input&gt;</code></a> 和 <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/tag-textarea.html"><code>&lt;textarea&gt;</code></a> 具有替换内容（即用户输入的值），因此它们被归类为置换元素，但是他们可以设置宽高是因为本来就是inline-block</li>
+<li><strong>注意：置换元素通常具有尺寸、宽高比等特定的样式属性</strong></li>
+<li>示例：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- img根据src属性来显示内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;image.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;图片&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="怎么样让一个元素消失"><a href="#怎么样让一个元素消失" class="headerlink" title="怎么样让一个元素消失"></a>怎么样让一个元素消失</h1><ul>
 <li><strong><code>visibility:hidden</code><strong>，元素隐藏，</strong>不会改变页面布局</strong>，<strong>无法触发该元素已经绑定的事件</strong></li>
