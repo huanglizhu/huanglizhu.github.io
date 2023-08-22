@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="在学习解构赋值时我们有提到过给 对象的属性&#x2F;数组元素 设置默认值的方法。">
+  <meta name="description" content="在学习解构赋值时我们有提到过给 对象的属性&#x2F;数组元素 设置默认值的方法。  同样的，我们也可以给函数的参数设置默认值，当没有接收到该参数时就会使用默认值。  使用方法： 在传参时直接通过&#x3D;赋值即可，具体可看下面的例子。  注意： 当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为undefined。(当显式指定参数为null时，是不会使用默认值的)   简单">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6 参数默认值">
 <meta property="og:url" content="http://yoursite.com/2020/02/07/ES6%20%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC/index.html">
 <meta property="og:site_name" content="珠">
-<meta property="og:description" content="在学习解构赋值时我们有提到过给 对象的属性&#x2F;数组元素 设置默认值的方法。">
+<meta property="og:description" content="在学习解构赋值时我们有提到过给 对象的属性&#x2F;数组元素 设置默认值的方法。  同样的，我们也可以给函数的参数设置默认值，当没有接收到该参数时就会使用默认值。  使用方法： 在传参时直接通过&#x3D;赋值即可，具体可看下面的例子。  注意： 当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为undefined。(当显式指定参数为null时，是不会使用默认值的)   简单">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-07T13:29:20.000Z">
-<meta property="article:modified_time" content="2023-04-06T14:07:15.146Z">
+<meta property="article:modified_time" content="2023-08-22T14:03:21.618Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
@@ -165,16 +165,25 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>在学习<strong>解构赋值</strong>时我们有提到过<strong>给 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/#%E9%BB%98%E8%AE%A4%E5%80%BC">对象的属性&#x2F;数组元素</a> 设置默认值</strong>的方法。<span id="more"></span></li>
-<li>同样的，我们也可以<strong>给函数的参数设置默认值</strong>，当没有接收到该参数时就会使用默认值。</li>
-<li><strong>使用方法：</strong>在传参时直接通过<code>=</code>赋值即可，具体可看下面的例子。</li>
-<li><strong>注意：</strong>当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为<code>undefined</code>。(当显式指定参数为<code>null</code>时，是不会使用默认值的)</li>
+        <span id="more"></span>
+
+<ul>
+<li><p>在学习<strong>解构赋值</strong>时我们有提到过<strong>给 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/#%E9%BB%98%E8%AE%A4%E5%80%BC">对象的属性&#x2F;数组元素</a> 设置默认值</strong>的方法。</p>
+</li>
+<li><p>同样的，我们也可以<strong>给函数的参数设置默认值</strong>，当没有接收到该参数时就会使用默认值。</p>
+</li>
+<li><p><strong>使用方法：</strong> 在传参时直接通过<code>=</code>赋值即可，具体可看下面的例子。</p>
+</li>
+<li><p><strong>注意：</strong> 当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为<code>undefined</code>。(当显式指定参数为<code>null</code>时，是不会使用默认值的)</p>
+</li>
 </ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span> (<span class="params">a = <span class="number">10</span>, b = <span class="number">5</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="built_in">sum</span>(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="built_in">sum</span>(<span class="number">5</span>)); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="built_in">sum</span>()); <span class="comment">// 15</span></span><br><span class="line"><span class="comment">// 当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为undefined</span></span><br><span class="line"><span class="comment">// 需要注意，当显式指定参数为null时，是不会使用默认值的</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="literal">undefined</span>, <span class="number">10</span>); <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
+<h1 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span> (a = <span class="number">10</span>, b = <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">5</span>)); <span class="comment">// 10</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>()); <span class="comment">// 15</span></span><br><span class="line"><span class="comment">// 当需要第一个参数使用默认值，而指定第二个参数时，需要显式指定第一个参数值为undefined</span></span><br><span class="line"><span class="comment">// 需要注意，当显式指定参数为null时，是不会使用默认值的</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="literal">undefined</span>, <span class="number">10</span>); <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
 
 <hr>
+<h1 id="参数为对象并解构时的默认值"><a href="#参数为对象并解构时的默认值" class="headerlink" title="参数为对象并解构时的默认值"></a>参数为对象并解构时的默认值</h1><p><strong>注意：参数对象进行解构赋值时</strong>易忘记设置默认的空对象<code>&#123; a, b, c &#125; = &#123;&#125;</code>，不给默认值很容易在函数体中使用结构出的变量时出现<strong>解构赋值报错</strong>的问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">row, &#123;</span></span><br><span class="line"><span class="params">  type, buyerNick = <span class="literal">false</span>, isDecryptReceiverMobile = <span class="literal">true</span>, isDecryptPhone = <span class="literal">true</span>,</span></span><br><span class="line"><span class="params">&#125;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(row);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(type);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(buyerNick);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(isDecryptReceiverMobile);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(isDecryptPhone);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&quot;some row&quot;</span>); <span class="comment">// 会抛出解构赋值错误，因为第二个参数无法进行解构赋值操作</span></span><br></pre></td></tr></table></figure>
 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以提供一个默认的空对象作为第二个参数来避免这个错误</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">row, &#123;</span></span><br><span class="line"><span class="params">  type, buyerNick = <span class="literal">false</span>, isDecryptReceiverMobile = <span class="literal">true</span>, isDecryptPhone = <span class="literal">true</span>,</span></span><br><span class="line"><span class="params">&#125; = &#123;&#125;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(row);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(type);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(buyerNick);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(isDecryptReceiverMobile);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(isDecryptPhone);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="string">&quot;some row&quot;</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">some row</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">false</span></span><br><span class="line"><span class="comment">true</span></span><br><span class="line"><span class="comment">true</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -245,7 +254,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">简单例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%B9%B6%E8%A7%A3%E6%9E%84%E6%97%B6%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">参数为对象并解构时的默认值</span></a></li></ol>
     
     </div>
   </aside>
