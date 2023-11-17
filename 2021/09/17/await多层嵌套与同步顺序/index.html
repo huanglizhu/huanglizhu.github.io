@@ -19,7 +19,7 @@
 <meta property="og:description" content="多重await其实并不是完全同步顺序的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-17T04:07:15.000Z">
-<meta property="article:modified_time" content="2023-04-20T12:50:48.015Z">
+<meta property="article:modified_time" content="2023-11-17T13:56:24.166Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -172,7 +172,7 @@
 <li>我以为执行顺序是 同步代码1  &#x3D;&gt; a()中所有内容  &#x3D;&gt; 同步代码2 </li>
 <li>实际上是 同步代码1 &#x3D;&gt; a()中b()之前的内容 &#x3D;&gt; 同步代码2  &#x3D;&gt; b()中的内容</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">b</span>(<span class="params"></span>)&#123; <span class="comment">// 同步顺序只到这里</span></span><br><span class="line">        <span class="comment">// 这里的代码会在 同步代码2 结束后回头来执行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">同步代码<span class="number">1</span></span><br><span class="line"><span class="keyword">await</span> <span class="title function_">a</span>()</span><br><span class="line">同步代码<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">a</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">b</span>(<span class="params"></span>)&#123; <span class="comment">// 同步顺序只到这里</span></span><br><span class="line">        <span class="comment">// 这里的代码会在 同步代码2 结束后回头来执行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">同步代码<span class="number">1</span></span><br><span class="line"><span class="keyword">await</span> <span class="title function_">a</span>()</span><br><span class="line">同步代码<span class="number">2</span></span><br></pre></td></tr></table></figure>
 
 
 
