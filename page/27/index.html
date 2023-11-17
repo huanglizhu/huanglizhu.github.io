@@ -816,19 +816,111 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <span id="more"></span>
 
-          
-          <div class="entry-summary">
-          方法重用：call() 和 apply()
-不带参数的使用方法非常相似。
-带参数的使用方法有所区别：
+<h1 id="方法重用：call-和-apply"><a href="#方法重用：call-和-apply" class="headerlink" title="方法重用：call() 和 apply()"></a>方法重用：call() 和 apply()</h1><ul>
+<li><strong>不带参数</strong>的使用方法非常相似。</li>
+<li><strong>带参数</strong>的使用方法有所区别：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>call()</td>
+<td>参数列表</td>
+<td>person.fullName.call(person1, “Oslo”, “Norway”);</td>
+</tr>
+<tr>
+<td>apply()</td>
+<td>数组形式</td>
+<td>person.fullName.apply(person1, [“Oslo”, “Norway”]);</td>
+</tr>
+</tbody></table>
+<ul>
+<li>如果要使用数组而不是参数列表，则 apply() 方法非常方便。</li>
+</ul>
+<hr>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><p>语句var arr&#x3D;[a,b,c,d];执行后，数组arr中每项都是一个整数，能得到其中最大整数语句有：</p>
+<ol>
+<li><code>Math.max(arr[0], arr[1], arr[2], arr[3])</code></li>
+<li><code>Math.max.call(Math, arr[0], arr[1], arr[2], arr[3])</code></li>
+<li><code>Math.max.apply(Math,arr)</code></li>
+</ol>
+<p>不能得到其中最大整数语句有：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.<span class="built_in">max</span>(arr)</span><br></pre></td></tr></table></figure>
 
-        
-          <p class="article-more-link">
-            <a href="/2019/10/08/call()%E4%B8%8Eapply()/#more">阅读全文</a>
-          </p>
-        </div>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>Math的max()不支持传入数组,所以错误。</p>
+<hr>
+<h1 id="JavaScript-函数-Call"><a href="#JavaScript-函数-Call" class="headerlink" title="JavaScript 函数 Call"></a>JavaScript 函数 Call</h1><p><strong>可以通过 <code>call()</code>调用属于另一个对象的方法</strong>。</p>
+<h2 id="例子1-普通方法调用"><a href="#例子1-普通方法调用" class="headerlink" title="例子1:普通方法调用"></a>例子1:普通方法调用</h2><ul>
+<li>下面的例子创建了带有三个属性的对象（firstName、lastName、fullName）。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">    fullName: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">person.fullName();		<span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>fullName 属性是一个方法。person 对象是该方法的拥有者。</li>
+<li>fullName 属性属于 person 对象的方法。</li>
+</ul>
+<h2 id="例子2：使用函数-Call"><a href="#例子2：使用函数-Call" class="headerlink" title="例子2：使用函数 Call"></a>例子2：使用函数 Call</h2><p><strong>分别让person1与person2去调用person的fullName 方法</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: function() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Steve&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Jobs&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.call(person1);  <span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br><span class="line">person.fullName.call(person2);  <span class="comment">// 将返回 &quot;Steve Jobs&quot;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_call_1">完整例子</a></p>
+<h2 id="例子3：带参数的-call-方法"><a href="#例子3：带参数的-call-方法" class="headerlink" title="例子3：带参数的 call() 方法"></a>例子3：带参数的 call() 方法</h2><p><strong>让person1带着参数”Seattle”, “USA”去调用person的fullName属性（方法）</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  fullName: function(city, country) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName + <span class="string">&quot;,&quot;</span> + city + <span class="string">&quot;,&quot;</span> + country;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">  lastName: <span class="string">&quot;Gates&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">person.fullName.call(person1, <span class="string">&quot;Seattle&quot;</span>, <span class="string">&quot;USA&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_arguments">完整例子</a></p>
+<hr>
+<h1 id="JavaScript-函数-Apply"><a href="#JavaScript-函数-Apply" class="headerlink" title="JavaScript 函数 Apply"></a>JavaScript 函数 Apply</h1><ul>
+<li><code>apply()</code>会改变this的指向，</li>
+<li><strong>可以通过 <code>apply()</code> 方法调用属于另一个对象的方法。</strong></li>
+<li>但不仅限于此，<strong>当设置第一个参数为null时可以在某些本来需要写成遍历数组变量的任务中使用内建的函数</strong>,也就是说此时apply()的作用不是调用属于另一个对象的方法，而是<strong>使参数数组中的每一个元素都去执行func函数</strong>。【如：下方例子“使用Apply()在数组上模拟 max 方法”】</li>
+<li>call()方法的作用和 apply() 方法类似，区别就是call()方法接受的是<strong>参数列表</strong>，而apply()方法接受的是一个<strong>参数数组</strong>。</li>
+<li>apply() 方法调用一个<strong>具有给定this值的函数</strong>，以及作为一个<strong>数组（或类似数组对象</strong>）提供的参数。</li>
+<li><strong>语法</strong>：<code>func.apply(thisArg, [argsArray])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>thisArg</td>
+<td>可选的。<br/>在 func 函数运行时使用的 this 值。<br/>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
+</tr>
+<tr>
+<td>argsArray</td>
+<td>可选的。<br/>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br/>如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。<br/>从ECMAScript 5 开始可以使用类数组对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>返回值</strong>：调用有指定this值和参数的函数的结果。</li>
+<li><strong>描述</strong>：在调用一个存在的函数时，你可以为其指定一个 this 对象。 this 指当前对象，也就是正在调用这个函数的对象。 使用 apply， 你可以只写一次这个方法然后在另一个对象中继承它，而不用在新对象中重复写该方法。<br>你也可以使用 arguments对象作为 argsArray 参数。 arguments 是一个函数的局部变量。 它可以被用作被调用对象的所有未指定的参数。 这样，你在使用apply函数的时候就不需要知道被调用对象的所有参数。 你可以使用arguments来把所有的参数传递给被调用对象。 被调用对象接下来就负责处理这些参数。</li>
+</ul>
+<h2 id="例子：使用函数Apply"><a href="#例子：使用函数Apply" class="headerlink" title="例子：使用函数Apply"></a>例子：使用函数Apply</h2><p><strong>让person1去调用person的fullName 方法</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: function() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName: <span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.apply(person1);  <span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例子：带参数的-apply-方法"><a href="#例子：带参数的-apply-方法" class="headerlink" title="例子：带参数的 apply() 方法"></a>例子：带参数的 apply() 方法</h2><p>apply() 方法接受<strong>数组中的参数</strong>:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  fullName: function(city, country) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName + <span class="string">&quot;,&quot;</span> + city + <span class="string">&quot;,&quot;</span> + country;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  firstName:<span class="string">&quot;John&quot;</span>,</span><br><span class="line">  lastName: <span class="string">&quot;Doe&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">person.fullName.apply(person1, [<span class="string">&quot;Oslo&quot;</span>, <span class="string">&quot;Norway&quot;</span>]);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_apply_arguments">完整例子</a></p>
+<hr>
+<h1 id="使用Apply-在数组上模拟-max-方法"><a href="#使用Apply-在数组上模拟-max-方法" class="headerlink" title="使用Apply()在数组上模拟 max 方法"></a>使用Apply()在数组上模拟 max 方法</h1><h2 id="Math的max-方法"><a href="#Math的max-方法" class="headerlink" title="Math的max()方法"></a>Math的max()方法</h2><p>首先我们了解可以使用<code> Math.max()</code> 方法找到（数字列表中的）最大数字：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Math</span>.max(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);  // 会返回 <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_math">完整例子</a></p>
+<h2 id="让数组调用Math的max-方法"><a href="#让数组调用Math的max-方法" class="headerlink" title="让数组调用Math的max()方法"></a>让数组调用Math的max()方法</h2><p> 但是JavaScript <strong>数组没有 max() 方法</strong>，因此我们可以<strong>通过apply()让数组调用 Math的max() 方法</strong>：<br> <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.<span class="built_in">max</span>.apply(<span class="literal">null</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// 也会返回 3</span></span><br></pre></td></tr></table></figure><br> <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_math_apply_1">完整例子</a></p>
+<p> <strong>第一个参数（null）无关紧要</strong>。在本例中未使用它。这些例子会给出<strong>相同的结果</strong>：</p>
+<ol>
+<li><code>Math.max.apply(Math, [1,2,3]); // 也会返回 3</code></li>
+<li><code>Math.max.apply(&quot; &quot;, [1,2,3]); // 也会返回 3</code></li>
+<li><code>Math.max.apply(0, [1,2,3]); // 也会返回 3</code></li>
+</ol>
+<h3 id="JavaScript-严格模式"><a href="#JavaScript-严格模式" class="headerlink" title="JavaScript 严格模式"></a>JavaScript 严格模式</h3><p>在 JavaScript 严格模式下，如果 <code>apply() </code>方法的第一个参数不是对象，则它将成为被调用函数的所有者（对象）。在“非严格”模式下，它成为全局对象。</p>
+<hr>
+<h1 id="不能改变箭头函数this指向"><a href="#不能改变箭头函数this指向" class="headerlink" title="不能改变箭头函数this指向"></a>不能改变箭头函数this指向</h1><ul>
+<li><strong>注意： call, apply, bind 都不能改变箭头函数中的 this 指向</strong></li>
+<li>因为箭头函数的this只和定义时的作用域this有关，和调用者&#x2F;调用环境无关，也永远不会改变</li>
+</ul>
+
       
     </div>
     <footer class="entry-meta entry-footer">

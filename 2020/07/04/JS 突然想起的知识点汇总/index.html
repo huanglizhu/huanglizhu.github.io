@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg">
 <meta property="article:published_time" content="2020-07-04T01:15:00.000Z">
-<meta property="article:modified_time" content="2023-08-21T16:29:07.625Z">
+<meta property="article:modified_time" content="2023-11-17T13:24:43.417Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -348,7 +348,17 @@
 <h2 id="手写ajax"><a href="#手写ajax" class="headerlink" title="手写ajax"></a>手写ajax</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_easy.jpg" alt="手写简易ajax" title="手写简易ajax"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_result.jpg" alt="运行结果" title="运行结果"></p>
 <p>模拟404情况，换成不存在的地址：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg" alt="模拟404情况" title="模拟404情况"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg" alt="运行结果" title="运行结果"></p>
 <hr>
-<h1 id="JS-Web-API-AJAX中"><a href="#JS-Web-API-AJAX中" class="headerlink" title="JS Web API AJAX中"></a>JS Web API AJAX中</h1><h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><ul>
+<h1 id="JS-Web-API-AJAX中"><a href="#JS-Web-API-AJAX中" class="headerlink" title="JS Web API AJAX中"></a>JS Web API AJAX中</h1><ul>
+<li>同源和跨域可以看<a target="_blank" rel="noopener" href="https://blog.csdn.net/zheshihuahua/article/details/125793405">这篇帖子</a>，写的非常简洁易懂</li>
+</ul>
+<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
+<p>为什么要有同源与不同源？</p>
+</blockquote>
+<ol>
+<li>出于安全考虑，浏览器不允许，页面向不同源的接口请求数据，因为如果 接口 和 网页不同源，浏览器认为是2个不同的 服务器</li>
+<li>不同的服务器中内容是不可控的，不允许访问了<br>总结说人话： 浏览器为了保护你的电脑安全<br>举个栗子： 你去肯德基店里点餐，店员只允许你点肯德基的产品（炸鸡，可乐，上校鸡块），如果此时你在肯德基店里面点麦当劳的产品，浏览器会认为你是坏人，就会让保安把你赶出去</li>
+</ol>
+<ul>
 <li><strong>同源策略</strong>：ajax请求时，<strong>浏览器</strong>要求当前网页和server必须同源（为了安全）<ul>
 <li><strong>注意</strong>：同源是<strong>浏览器规定</strong>的，在服务端是可以发起跨域攻击的，比如爬虫，因为<strong>server端并无同源策略</strong></li>
 </ul>
@@ -365,8 +375,18 @@
 </li>
 </ul>
 <h2 id="跨域的使用场景"><a href="#跨域的使用场景" class="headerlink" title="跨域的使用场景"></a>跨域的使用场景</h2><ul>
+<li>跨域，简单来说就是浏览器使用 ajax请求 时，如果请求的 接口地址 和 当前打开的页面 地址 不同源</li>
 <li><strong>跨域问题</strong> 是<strong>浏览器</strong>对于ajax请求的一种安全限制：一个页面发起的ajax请求，只能是于当前页<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5">同源</a>的路径，这能有效的阻止跨站攻击。</li>
-<li><strong>前提：</strong><ul>
+<li>出现跨域问题的<strong>前提：</strong><ul>
+<li>ajax: 浏览器只有使用ajax发送请求才会出现跨域，href属性与src属性不会出现跨域<ul>
+<li>接口地址： ajax请求的url</li>
+<li>打开的页面：当前页面的window.location.href</li>
+<li>不同源： 浏览器使用ajax,向不同源的接口发送请求，称之为 跨域访问</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
 <li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
 <li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
 <li>具体配合可参考[《JS Web API AJAX》]</li>
@@ -395,13 +415,29 @@
 <h3 id="跨域的实现方式"><a href="#跨域的实现方式" class="headerlink" title="跨域的实现方式"></a>跨域的实现方式</h3><ul>
 <li><strong>注意：如果是协议和端口造成的跨域问题，“前端”无法解决。</strong></li>
 <li><strong>前提：</strong>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
-<li>可通<strong>过jsonp、nginx反向代理、CORS</strong>实现跨域<ol>
-<li><strong>jsonp原理</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#jsonp">JS Web API AJAX</a></li>
+<li>对于跨域请求，一般首选使用CORS（跨域资源共享），因为它是一种标准、通用且相对简单的解决方案(jsonp就复杂多了)，适用于大多数跨域问题。只有在特定情况下才需要考虑使用反向代理</li>
+<li>可通<strong>过jsonp、CORS、反向代理</strong>实现跨域<ol>
+<li><strong>jsonp原理</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#jsonp">JS Web API AJAX</a><ul>
+<li><blockquote>
+<p>曾经的跨域杀手，专治各种跨域问题。现在慢慢的淡出历史舞台</p>
+</blockquote>
+</li>
+<li>由于存在一些安全风险和功能上的限制，以及现代浏览器支持其他更强大、更安全的跨域解决方案，JSONP的使用已经减少</li>
+</ul>
+</li>
+<li><strong>CORS（纯服务端）</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#cors%EF%BC%88%E7%BA%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%89">JS Web API AJAX</a><ul>
+<li><blockquote>
+<p>目前的主流方案，也是最简单的方案。在实际工作中由后端人员来实现，前端不需要做任何事情</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>WebSocket</li>
 <li><strong>nginx反向代理</strong>：可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/#nginx%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%81%94%E8%B0%83%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8">博客项目登录（前端联调）</a>和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">nginx反向代理</a></li>
-<li><strong>[proxy反向代理]</strong> : 可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/#baseURL%E5%8F%8A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%88%86%E5%8F%91%E4%BB%A3%E7%90%86">axios使用和简单封装</a></li>
-<li><strong>CORS（纯服务端）</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#cors%EF%BC%88%E7%BA%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%89">JS Web API AJAX</a></li>
+<li><strong>proxy反向代理</strong> : 可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/#baseURL%E5%8F%8A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%88%86%E5%8F%91%E4%BB%A3%E7%90%86">axios使用和简单封装</a></li>
 </ol>
 </li>
+<li>如何选择跨域的实现方式可参考博客[JS Web API AJAX]</li>
 </ul>
 <hr>
 <h1 id="防抖-节流"><a href="#防抖-节流" class="headerlink" title="防抖 节流"></a>防抖 节流</h1><ul>

@@ -19,7 +19,7 @@
 <meta property="og:description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-24T13:26:40.000Z">
-<meta property="article:modified_time" content="2023-04-20T13:09:10.434Z">
+<meta property="article:modified_time" content="2023-11-17T13:22:54.014Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -185,6 +185,12 @@
 <li><strong>第一个参数都是this</strong>要指向的对象。</li>
 <li>都可以<strong>利用后续参数传参</strong>。</li>
 </ol>
+<ul>
+<li><strong>注意：call, apply, bind 都不能改变箭头函数中的this指向</strong><ul>
+<li>因为箭头函数的this只和定义时的作用域this有关，和调用者&#x2F;调用环境无关，也永远不会改变</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h1 id="bind-与apply-、call-使用上的区别"><a href="#bind-与apply-、call-使用上的区别" class="headerlink" title="bind()与apply()、call()使用上的区别"></a>bind()与apply()、call()使用上的区别</h1><h2 id="无参数情况"><a href="#无参数情况" class="headerlink" title="无参数情况"></a>无参数情况</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xw = &#123;</span><br><span class="line">    name: <span class="string">&quot;小王&quot;</span>,</span><br><span class="line">    gender: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">    age: <span class="number">24</span>,</span><br><span class="line">    say: function () &#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name + <span class="string">&quot; , &quot;</span> + <span class="keyword">this</span>.gender + <span class="string">&quot; ,今年&quot;</span> + <span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xh = &#123;</span><br><span class="line">    name: <span class="string">&quot;小红&quot;</span>,</span><br><span class="line">    gender: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line">xw.say(); <span class="comment">// 小王 ， 男 ， 今年24</span></span><br></pre></td></tr></table></figure>
 <ul>
