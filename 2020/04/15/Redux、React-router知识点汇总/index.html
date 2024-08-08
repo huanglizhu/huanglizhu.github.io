@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redux、React-router知识点汇总 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="Redux基本概念 redux中文官网 可参考博客“Redux入门（1）”、“Redux入门（2）”、Redux进阶(1)UI组件、容器组件、无状态组件 store state（注意state不可变值，可用immutable.js） action（redux-thunk中间件可使action为函数） reducer是一个纯函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux、React-router知识点汇总">
+<meta property="og:url" content="http://yoursite.com/2020/04/15/Redux%E3%80%81React-router%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="Redux基本概念 redux中文官网 可参考博客“Redux入门（1）”、“Redux入门（2）”、Redux进阶(1)UI组件、容器组件、无状态组件 store state（注意state不可变值，可用immutable.js） action（redux-thunk中间件可使action为函数） reducer是一个纯函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha1wtqy2hj30um0h87bl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha1hxzt43j30zs0dnqgz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha26khrtgj30zc0hltol.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha28zwm8wj315q0gyqjg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha40ossjpj315q0gyh2k.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha42lk3v9j30zv0gy4bp.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha4azlgnaj30w80h94ch.jpg">
+<meta property="article:published_time" content="2020-04-15T06:29:40.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.335Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha1wtqy2hj30um0h87bl.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Redux、React-router知识点汇总" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Redux、React-router知识点汇总
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/15/Redux%E3%80%81React-router%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" class="article-date">
+	  <time datetime="2020-04-15T06:29:40.000Z" itemprop="datePublished">四月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Redux基本概念"><a href="#Redux基本概念" class="headerlink" title="Redux基本概念"></a>Redux基本概念</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.redux.org.cn/">redux中文官网</a></li>
+<li>可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/14/Redux%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89/">“Redux入门（1）”</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/">“Redux入门（2）”</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/18/Redux%E8%BF%9B%E9%98%B6(1)UI%E7%BB%84%E4%BB%B6%E3%80%81%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6/">Redux进阶(1)UI组件、容器组件、无状态组件</a></li>
+<li><strong>store state</strong>（<strong>注意state不可变值，可用immutable.js</strong>）</li>
+<li><strong>action</strong>（<strong>redux-thunk中间件</strong>可使action为函数）</li>
+<li><strong>reducer</strong>是一个<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#reducer%E5%BF%85%E9%A1%BB%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0"><strong>纯函数</strong></a><span id="more"></span></li>
+</ul>
+<h2 id="单项数据流"><a href="#单项数据流" class="headerlink" title="单项数据流"></a>单项数据流</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha1wtqy2hj30um0h87bl.jpg" alt="redux数据流图"></p>
+<ul>
+<li>dispatch（action）</li>
+<li>reducer-&gt; newState</li>
+<li>subscribe触发通知</li>
+</ul>
+<p>在组件中调用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#actionCreator%E7%BB%9F%E4%B8%80%E5%88%9B%E5%BB%BAaction"><code>actionCreator</code></a>创建<code>action</code>方法，然后使用<code>store.dispatch(action)</code>将<code>action</code>传给<code>store</code><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg" alt="示意图"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#%E8%8E%B7%E5%8F%96store%E4%B8%AD%E6%95%B0%E6%8D%AE"><strong>获取<code>store</code>中数据：</strong></a>创建<code>store</code>&#x3D;&gt;创建<code>reducers</code>，设置state默认值&#x3D;》<code>store</code>连接<code>reducers</code>&#x3D;》组件<code>TodoList</code>连接<code>store</code>获取数据</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#%E6%94%B9%E5%8F%98store%E4%B8%AD%E6%95%B0%E6%8D%AE"><strong>改变<code>store</code>中数据：</strong></a>：<ol>
+<li>在<strong>actionTypes.js</strong>中创建type属性值由<strong>字符串转为常量</strong></li>
+<li>通过<code>actionCreator</code>创建 获取<code>action</code>对象的方法</li>
+<li>组件中调用<code>actionCreator</code>的方法<strong>获取<code>action</code>对象</strong>并传给<code>store</code></li>
+<li><code>store</code>自动将收到的<code>action</code>和自己的<code>state</code>数据<strong>打包传送给<code>reducer</code></strong></li>
+<li><code>reducer</code><strong>处理<code>action</code>和<code>state</code>并返回<code>newState</code>值</strong>给<code>store</code></li>
+<li><strong><code>store</code>获取到<code>newState</code>后自动替换<code>state</code></strong></li>
+<li><strong>组件中<code>state</code>由于监听函数，更新后页面重新渲染</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h2><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/">Redux进阶(3)React-Redux的使用</a></li>
+<li><strong>&lt; Provider&gt;</strong> 一般放在App.js中包裹组件最外层，<strong>使得被包含在该组件下的所有组件都有能力连接store</strong></li>
+<li><strong>connect()<strong>高阶组件，</strong>规定组件连接store的规则</strong><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/#%E4%BD%BF%E8%BE%93%E5%85%A5%E6%A1%86%E5%86%85%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E8%BE%93%E5%85%A5%E7%9A%84%E5%86%85%E5%AE%B9">mapStateToProps()</a>，获取state的值放到组件的props上</strong>。(<code>const mapStateToPrps = (state) =&gt; &#123; return &#123; xxx:state.xxx &#125;&#125;</code>获取<code>this.props.xxx</code>)</li>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/22/Redux%E8%BF%9B%E9%98%B6(3)React-Redux%E7%9A%84%E4%BD%BF%E7%94%A8/#%E4%BD%BF%E8%BE%93%E5%85%A5%E6%A1%86%E5%86%85%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E8%BE%93%E5%85%A5%E7%9A%84%E5%86%85%E5%AE%B9">mapDispatchToProps()</a>，接受store的dispatch()为参数，函数中可自定义函数放到组件的props上,使props中的函数可以调用dispatch()派发action</strong>。(<code>const mapDispatchToProps = (dispatch) =&gt; &#123; return &#123; ... &#125;&#125;</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="异步action"><a href="#异步action" class="headerlink" title="异步action"></a>异步action</h2><ul>
+<li>前端想要请求后端的数据时就需要用到ajax请求，而想要修改store中数据就要用到action，想在action中异步请求数据需要 异步action： <img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha1hxzt43j30zs0dnqgz.jpg" alt="异步action例子">当然不能直接这么写，<strong>action默认只能是对象</strong>，需要<strong>Redux-thunk中间件使得action可为函数</strong></li>
+<li>可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/21/Redux%E8%BF%9B%E9%98%B6(2)Redux-thunk%E4%B8%8ERedux-saga%E4%B8%AD%E9%97%B4%E4%BB%B6/">Redux进阶(2)Redux-thunk与Redux-saga中间件</a></li>
+</ul>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><ul>
+<li>可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/21/Redux%E8%BF%9B%E9%98%B6(2)Redux-thunk%E4%B8%8ERedux-saga%E4%B8%AD%E9%97%B4%E4%BB%B6/">Redux进阶(2)Redux-thunk与Redux-saga中间件</a></li>
+<li><strong>注意：</strong>中间件指的是<strong>action和store的中间</strong>。只有redux才有action和store，所以只有redux才有中间件！（react没有）</li>
+<li>总的来说，<strong>redux中间件就是对dispatch()做了个升级</strong><ul>
+<li>本来<strong>原始的dispatch()只能接收对象类型的action</strong>，接收以后直接传递给store。但<strong>经过redux-thunk中间件</strong>升级后，<strong>dispatch()可以接收 函数类型的 action</strong>，他会执行该函数。（<strong>在函数中就可以进行AJAX请求了</strong>）</li>
+</ul>
+</li>
+<li><strong>这个升级不能放在reducer中，因为reducer是纯函数</strong>，具体可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/17/Redux%E7%9A%84reducer%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%89%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/Redux%E7%9A%84reducer%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%89%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C">Redux的reducer为什么不能有异步操作</a></li>
+</ul>
+<h1 id="React-router使用"><a href="#React-router使用" class="headerlink" title="React-router使用"></a>React-router使用</h1><ul>
+<li>面试考点并不多（前提是熟悉React）</li>
+<li>每个React Router应用程序的<strong>核心应该是路由器组件</strong>。<ul>
+<li>对于Web项目，react-router-dom提供<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%84%E4%BB%B6"><strong><code>&lt;BrowserRouter&gt;</code>和<code>&lt;HashRouter&gt;</code>路由器</strong></a>。<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/06/React%E5%8E%9F%E7%90%86/#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1">两者之间的主要区别</a>是它们存储URL和与Web服务器通信的方式。</li>
+</ul>
+</li>
+<li><strong>路由模式（hash、H5 history）</strong>，同vue-router</li>
+<li><strong>路由配置（动态路由、懒加载）</strong>，同vue-router</li>
+</ul>
+<h2 id="路由模式（hash、H5-history）"><a href="#路由模式（hash、H5-history）" class="headerlink" title="路由模式（hash、H5 history）"></a>路由模式（hash、H5 history）</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha26khrtgj30zc0hltol.jpg" alt="React-router路由模式"></p>
+<ul>
+<li><strong>hash模式（默认）</strong>(HashRouter)<strong>使用的是url的hash部分，等于：window.location.hash</strong>，如<a target="_blank" rel="noopener" href="http://abc.com/#/user/10">http://abc.com/#/user/10</a></li>
+<li><strong>H5 history模式</strong>(BrowserRouter)，<strong>使得页面和浏览器的history保持一致，等于：window.location</strong>，如<a target="_blank" rel="noopener" href="http://abc.com/user/20">http://abc.com/user/20</a></li>
+<li><strong>后者需要server端支持</strong>，因此无特殊需求可选择前者</li>
+<li>对客户端的可用H5 history模式，对后台的可用hash模式</li>
+<li>如果你使用的是一个<strong>非静态</strong>的站点、要处理各种不同的url那么你就需要使用<strong>BrowserRouter</strong>。</li>
+<li>相反的如果你的server<strong>只处理静态的url，那么就使用HashRouter</strong>。</li>
+</ul>
+<h2 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h2><h3 id="动态传参"><a href="#动态传参" class="headerlink" title="动态传参"></a>动态传参</h3><ul>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha28zwm8wj315q0gyqjg.jpg" alt="动态路由"></li>
+<li><strong>补充（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC">前后端传值的例子</a>）</strong>：<ul>
+<li><strong>【react的url中传递参数值】</strong>组件的<strong>跳转路径上最好使用<code>/:参数值</code>的方法传值</strong>，这样组件中可以直接使用<code>this.props.match.params.参数名</code>获取所传参数值。</li>
+<li><strong>【react将参数值传递给node】</strong>在react的组件<strong>的action中通过ajax请求的路径中使用<code>?key=value</code>来传值</strong>，这样在node中通过<code>queryString.parse</code>可直接得到<strong>JSON对象</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="跳转路由"><a href="#跳转路由" class="headerlink" title="跳转路由"></a>跳转路由</h3><ul>
+<li><strong>Link组件：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha40ossjpj315q0gyh2k.jpg" alt="Link组件 跳转路由"></li>
+<li><strong>用js跳转路由：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha42lk3v9j30zv0gy4bp.jpg" alt="用js跳转路由"></li>
+</ul>
+<h3 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h3><ul>
+<li>使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%EF%BC%88%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%89">React.lazy+React.Suspense</a>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gha4azlgnaj30w80h94ch.jpg" alt="懒加载例子"></li>
+<li>或者使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/21/%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89%E3%80%81%E6%87%92%E5%8A%A0%E8%BD%BD%E3%80%81%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E6%B5%81%E7%A8%8B/#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%EF%BC%88%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%89%E5%8F%8AwithRouter%E8%B7%AF%E7%94%B1%E6%96%B9%E6%B3%95">react-loadable模块</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端面试题目（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React知识点汇总（高级特性）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">Redux基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%A1%B9%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-number">1.1.</span> <span class="nav-text">单项数据流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-redux"><span class="nav-number">1.2.</span> <span class="nav-text">react-redux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5action"><span class="nav-number">1.3.</span> <span class="nav-text">异步action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">中间件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-router%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">React-router使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F%EF%BC%88hash%E3%80%81H5-history%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">路由模式（hash、H5 history）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BC%A0%E5%8F%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">动态传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E8%B7%AF%E7%94%B1"><span class="nav-number">2.2.2.</span> <span class="nav-text">跳转路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.2.3.</span> <span class="nav-text">懒加载</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

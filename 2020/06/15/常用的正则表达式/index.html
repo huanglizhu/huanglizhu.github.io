@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常用的正则表达式 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="摘录下网上看到的常用的正则表达式，不过有些很显然并不是最简洁的写法，有时间慢慢改吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用的正则表达式">
+<meta property="og:url" content="http://yoursite.com/2020/06/15/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="摘录下网上看到的常用的正则表达式，不过有些很显然并不是最简洁的写法，有时间慢慢改吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-15T10:35:28.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.402Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-常用的正则表达式" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      常用的正则表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/06/15/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+	  <time datetime="2020-06-15T10:35:28.000Z" itemprop="datePublished">六月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘录下网上看到的常用的正则表达式，不过有些很显然并不是最简洁的写法，有时间慢慢改吧</p>
+<span id="more"></span>
+
+<h1 id="正则语法"><a href="#正则语法" class="headerlink" title="正则语法"></a>正则语法</h1><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/regexp/regexp-syntax.html">菜鸟教程</a></li>
+</ul>
+<h1 id="记一个疑惑"><a href="#记一个疑惑" class="headerlink" title="记一个疑惑"></a>记一个疑惑</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/regexp/regexp-syntax.html">正则语法</a>、<a target="_blank" rel="noopener" href="http://c.runoob.com/front-end/854">线上工具</a></li>
+<li><strong>问题描述：</strong><ul>
+<li>我需要一个正则判断 <strong>最多带3位小数的数字</strong></li>
+<li>此时我写出的<code>^[0-9]+(\.[0-9]&#123;1,3&#125;)?$</code>是满足要求的</li>
+<li><strong>但是去掉 子表达式符 号后：<code>^[0-9]+\.[0-9]&#123;1,3&#125;?$</code>会判断只有<code>1.1</code>这样带小数的才被匹配</strong></li>
+<li>那么<code>()</code>这个子表达式的存在就很重要，但我不知道为啥</li>
+</ul>
+</li>
+<li>值得一提的是<strong>网上关于 最多带3位小数的数字 的写法是<code>^([0-9]+)+(\.[0-9]&#123;1,3&#125;)?$</code></strong></li>
+<li><strong>灵魂提问：</strong><code>+</code>除了表示它之前的子表达式最少出现1次以外，还能表示<code>+</code>后的子表达式不是必须出现的吗？</li>
+<li><strong>老哥的解答：</strong><ul>
+<li>去掉后面的子表达式<code>()</code>后，最后的<code>?</code>没有对<code>\.</code>产生效果，导致<code>\.</code>必须存在，所以无法匹配整数</li>
+<li><strong>注意：<code>?</code>匹配前面的子表达式零次或一次</strong>，或指明一个非贪婪限定符。</li>
+</ul>
+</li>
+<li><strong>优化：</strong><ul>
+<li><code>[0-9]</code>换成<code>\d</code></li>
+<li><strong>最终正则：<code>^\d+(\.[0-9]&#123;1,3&#125;)?$</code></strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="校验数字的表达式"><a href="#校验数字的表达式" class="headerlink" title="校验数字的表达式"></a>校验数字的表达式</h1><ul>
+<li>数字：<code>^[0-9]*$</code></li>
+<li>n位的数字：<code>^\d&#123;n&#125;$</code></li>
+<li>至少n位的数字：<code>^\d&#123;n,&#125;$</code></li>
+<li>m-n位的数字：<code>^\d&#123;m,n&#125;$</code></li>
+<li>零和非零开头的数字：<code>^(0|[1-9][0-9]*)$</code></li>
+<li>非零开头的最多带两位小数的数字：<code>^([1-9][0-9]*)+(\.[0-9]&#123;1,2&#125;)?$</code></li>
+<li>带1-2位小数的正数或负数：<code>^(\-)?\d+(\.\d&#123;1,2&#125;)$</code></li>
+<li>正数、负数、和小数：<code>^(\-|\+)?\d+(\.\d+)?$</code></li>
+<li>有两位小数的正实数：<code>^[0-9]+(\.[0-9]&#123;2&#125;)?$</code></li>
+<li>有1~3位小数的正实数：<code>^[0-9]+(\.[0-9]&#123;1,3&#125;)?$</code></li>
+<li>非零的正整数：<code>^[1-9]\d*$ 或 ^([1-9][0-9]*)&#123;1,3&#125;$ 或 ^\+?[1-9][0-9]*$</code></li>
+<li>非零的负整数：<code>^\-[1-9][]0-9&quot;*$ 或 ^-[1-9]\d*$</code></li>
+<li>非负整数：<code>^\d+$ 或 ^[1-9]\d*|0$</code></li>
+<li>非正整数：<code>^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$</code></li>
+<li>非负浮点数：  <code>^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</code></li>
+<li>非正浮点数：  <code>^((-\d+(\.\d+)?)|(0+(\.0+)?))$</code> 或 <code>^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</code></li>
+<li>正浮点数：<code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</code> 或 <code>^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$</code></li>
+<li>负浮点数：<code>^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</code> 或 <code>^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$</code></li>
+<li>浮点数：<code>^(-?\d+)(\.\d+)?$</code> 或 <code>^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code></li>
+</ul>
+<h1 id="校验字符的表达式"><a href="#校验字符的表达式" class="headerlink" title="校验字符的表达式"></a>校验字符的表达式</h1><ul>
+<li>汉字：<code>^[\u4e00-\u9fa5]&#123;0,&#125;$</code></li>
+<li>英文和数字：<code>^[A-Za-z0-9]+$ 或 ^[A-Za-z0-9]&#123;4,40&#125;$</code></li>
+<li>长度为3-20的所有字符：<code>^.&#123;3,20&#125;$</code></li>
+<li>由26个英文字母组成的字符串：<code>^[A-Za-z]+$</code></li>
+<li>由26个大写英文字母组成的字符串：<code>^[A-Z]+$</code></li>
+<li>由26个小写英文字母组成的字符串：<code>^[a-z]+$</code></li>
+<li>由数字和26个英文字母组成的字符串：<code>^[A-Za-z0-9]+$</code></li>
+<li>由数字、26个英文字母或者下划线组成的字符串：<code>^\w+$ 或 ^\w&#123;3,20&#125;$</code></li>
+<li>中文、英文、数字包括下划线：<code>^[\u4E00-\u9FA5A-Za-z0-9_]+$</code></li>
+<li>中文、英文、数字但不包括下划线等符号：<code>^[\u4E00-\u9FA5A-Za-z0-9]+$</code> 或 <code>^[\u4E00-\u9FA5A-Za-z0-9]&#123;2,20&#125;$</code></li>
+<li>可以输入含有^%&amp;’,;&#x3D;?$&quot;等字符：<code>[^%&amp;&#39;,;=?$\x22]+</code></li>
+<li>禁止输入含有<del>的字符：&#96;[^</del>\x22]+&#96;</li>
+</ul>
+<h1 id="特殊需求表达式"><a href="#特殊需求表达式" class="headerlink" title="特殊需求表达式"></a>特殊需求表达式</h1><ul>
+<li>Email地址：<code>^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</code></li>
+<li>域名：<code>[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;(\.[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;)+\.?</code></li>
+<li>InternetURL：<code>[a-zA-z]+://[^\s]*</code> 或 <code>^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$</code></li>
+<li>手机号码：<code>^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$</code></li>
+<li>电话号码(“XXX-XXXXXXX”、”XXXX-XXXXXXXX”、”XXX-XXXXXXX”、”XXX-XXXXXXXX”、”XXXXXXX”和”XXXXXXXX)：<code>^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$</code></li>
+<li>国内电话号码(0511-4405222、021-87888822)：<code>\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;</code></li>
+<li>电话号码正则表达式（支持手机号码，3-4位区号，7-8位直播号码，1－4位分机号）: <code>((\d&#123;11&#125;)|^((\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;)|(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;))$)</code></li>
+<li>身份证号(15位、18位数字)，最后一位是校验位，可能为数字或字符X：<code>(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)</code></li>
+<li>帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]&#123;4,15&#125;$</code></li>
+<li>密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：<code>^[a-zA-Z]\w&#123;5,17&#125;$</code></li>
+<li>强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在 8-10 之间)：<code>^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]&#123;8,10&#125;$</code></li>
+<li>强密码(必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-10之间)：<code>^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$</code></li>
+<li>日期格式：<code>^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;</code></li>
+<li>一年的12个月(01～09和1～12)：<code>^(0?[1-9]|1[0-2])$</code></li>
+<li>一个月的31天(01～09和1～31)：<code>^((0?[1-9])|((1|2)[0-9])|30|31)$</code></li>
+<li>钱的输入格式：<ul>
+<li>有四种钱的表示形式我们可以接受:”10000.00” 和 “10,000.00”, 和没有 “分” 的 “10000” 和 “10,000”：<code>^[1-9][0-9]*$</code></li>
+<li>这表示任意一个不以0开头的数字,但是,这也意味着一个字符”0”不通过,所以我们采用下面的形式：<code>^(0|[1-9][0-9]*)$</code></li>
+<li>一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：<code>^(0|-?[1-9][0-9]*)$</code></li>
+<li>这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧。下面我们要加的是说明可能的小数部分：<code>^[0-9]+(.[0-9]+)?$</code></li>
+<li>必须说明的是,小数点后面至少应该有1位数,所以”10.”是不通过的,但是 “10” 和 “10.2” 是通过的：<code>^[0-9]+(.[0-9]&#123;2&#125;)?$</code></li>
+<li>这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：<code>^[0-9]+(.[0-9]&#123;1,2&#125;)?$</code></li>
+<li>这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：<code>^[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*(.[0-9]&#123;1,2&#125;)?$</code></li>
+<li>1到3个数字,后面跟着任意个逗号+3个数字,逗号成为可选,而不是必须：<code>^([0-9]+|[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*)(.[0-9]&#123;1,2&#125;)?$</code></li>
+<li>备注：这就是最终结果了,别忘了”+”可以用”*”替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里</li>
+</ul>
+</li>
+<li>xml文件：<code>^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$</code></li>
+<li>中文字符的正则表达式：<code>[\u4e00-\u9fa5]</code></li>
+<li>双字节字符：<code>[^\x00-\xff]</code>(包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))</li>
+<li>空白行的正则表达式：<code>\n\s*\r</code> (可以用来删除空白行)</li>
+<li>HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?|&lt;.*? /&gt;</code> (首尾空白字符的正则表达式：<code>^\s*|\s*$或(^\s*)|(\s*$)</code> (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)</li>
+<li>腾讯QQ号：<code>[1-9][0-9]&#123;4,&#125;</code>(腾讯QQ号从10000开始)</li>
+<li>中国邮政编码：<code>[1-9]\d&#123;5&#125;(?!\d)</code> (中国邮政编码为6位数字)</li>
+<li>IPv4地址：<code>((2(5[0-5]|[0-4]\d))|[0-1]?\d&#123;1,2&#125;)(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d&#123;1,2&#125;))&#123;3&#125;</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/18/antd%E4%BD%BF%E7%94%A8gutter%E5%AF%BC%E8%87%B4%E6%BB%9A%E5%8A%A8%E6%9D%A1%E7%9A%84%E4%BA%A7%E7%94%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          antd使用gutter导致滚动条的产生
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/13/jQuery%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%89%A9%E5%B1%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">jQuery事件与扩展</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">正则语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E4%B8%80%E4%B8%AA%E7%96%91%E6%83%91"><span class="nav-number">2.</span> <span class="nav-text">记一个疑惑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E6%95%B0%E5%AD%97%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">校验数字的表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">校验字符的表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E9%9C%80%E6%B1%82%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">特殊需求表达式</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

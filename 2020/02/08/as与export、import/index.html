@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>as与export/import | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="模块 模块功能主要由两个命令构成：export和import。 export命令用于规定模块的对外接口。 import命令用于引入其他模块提供的功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="as与export&#x2F;import">
+<meta property="og:url" content="http://yoursite.com/2020/02/08/as%E4%B8%8Eexport%E3%80%81import/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="模块 模块功能主要由两个命令构成：export和import。 export命令用于规定模块的对外接口。 import命令用于引入其他模块提供的功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-08T13:29:36.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.347Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-as与export、import" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      as与export/import
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/08/as%E4%B8%8Eexport%E3%80%81import/" class="article-date">
+	  <time datetime="2020-02-08T13:29:36.000Z" itemprop="datePublished">二月 8, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><ul>
+<li>模块功能主要由两个命令构成：<strong>export和import</strong>。</li>
+<li>export命令用于规定模块的<strong>对外接口</strong>。</li>
+<li>import命令用于引入其他模块提供的功能。<span id="more"></span></li>
+<li><strong>一个模块就是一个独立的文件</strong>。该文件内部的所有变量，<strong>外部无法获取</strong>。如果你希望外部能够读取模块内部的某个变量，就必须<strong>使用export关键字输出该变量</strong>。</li>
+<li>使用export命令定义了模块的对外接口以后，<strong>其他 JS 文件就可以通过import命令加载这个模块</strong>。</li>
+</ul>
+<hr>
+<h1 id="理解“接口”"><a href="#理解“接口”" class="headerlink" title="理解“接口”"></a>理解“接口”</h1><p>export命令<strong>规定的是对外的接口</strong>，必须与模块内部的变量建立一一对应关系。</p>
+<p><strong>错误写法：</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">export</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> m;</span><br></pre></td></tr></table></figure>
+<p>上面两种写法<strong>都会报错</strong>，因为<strong>没有提供对外的接口</strong>。<br>第一种写法直接输出 1，第二种写法通过变量m，还是直接输出 1。<br><strong>1只是一个值，不是接口!!!</strong></p>
+<p><strong>正确的写法:</strong></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法二</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;m&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法三</span></span><br><span class="line"><span class="keyword">var</span> n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;n <span class="keyword">as</span> m&#125;;</span><br></pre></td></tr></table></figure>
+<p>他们都规定了<strong>对外的接口m</strong>。<br>其他脚本可以通过这个接口，取到值1。<br>它们的实质是，在接口名与模块内部变量之间，建立了一一对应的关系。</p>
+<p>同样的，function和class的输出，也必须遵守这样的写法。</p>
+<hr>
+<h1 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h1><ul>
+<li>export命令可以输出<strong>变量、函数或类（class）</strong></li>
+<li>优先使用<code>&#123;&#125;</code>来输出一组数据。</li>
+</ul>
+<h2 id="2种输出方法"><a href="#2种输出方法" class="headerlink" title="2种输出方法"></a>2种输出方法</h2><p><strong>1.分别输出三个变量:</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// profile.js，保存了用户信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> firstName = <span class="string">&#x27;Michael&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> lastName = <span class="string">&#x27;Jackson&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> <span class="built_in">year</span> = <span class="number">1958</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.使用大括号指定所要输出的一组变量(优先考虑使用这种写法,因为这样就可以在脚本尾部，一眼看清楚输出了哪些变量:</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// profile.js</span></span><br><span class="line"><span class="keyword">var</span> firstName = <span class="string">&#x27;Michael&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> lastName = <span class="string">&#x27;Jackson&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">year</span> = <span class="number">1958</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; firstName, lastName, <span class="built_in">year</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="放置位置"><a href="#放置位置" class="headerlink" title="放置位置"></a>放置位置</h2><p>export命令<strong>可以出现在模块的任何位置</strong>，只要<strong>处于模块顶层</strong>就可以。<br>如果<strong>处于块级作用域内，就会报错</strong>，import命令也是如此。<br>这是因为处于条件代码块之中，就没法做静态优化了，违背了 ES6 模块的设计初衷。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="string">&#x27;bar&#x27;</span> <span class="comment">// SyntaxError</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>()</span><br></pre></td></tr></table></figure>
+<p>上面代码中，<strong>export语句放在函数之中，结果报错</strong>。</p>
+<hr>
+<h2 id="通过接口可获取模块内部实时的值"><a href="#通过接口可获取模块内部实时的值" class="headerlink" title="通过接口可获取模块内部实时的值"></a>通过接口可获取模块内部实时的值</h2><p>export语句输出的接口，与其对应的值是<strong>动态绑定</strong>关系，即<strong>通过该接口，可以取到模块内部实时的值。</strong></p>
+<p><strong>例子：</strong></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> var foo = <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="params">()</span> =&gt;</span> foo = <span class="string">&#x27;baz&#x27;</span>, <span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+<p>上面代码输出变量foo，值为bar，500 毫秒之后变成baz。</p>
+<p><strong>这一点与 CommonJS 规范完全不同</strong>。<br>CommonJS 模块输出的是<strong>值的缓存</strong>，不存在动态更新，详见<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/?search=as&x=0&y=0#docs/module-loader">Module 的加载实现</a>。</p>
+<hr>
+<h1 id="export-default命令"><a href="#export-default命令" class="headerlink" title="export default命令"></a>export default命令</h1><ul>
+<li>加上default相当是一个<strong>默认的入口</strong>，在一个文件里export default只能有一个。</li>
+<li>建议使用export。</li>
+<li>使用export default，则输出和引入的名字可以不同。<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">var</span> a=<span class="string">&#x27;jspang&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.js引入</span></span><br><span class="line">import <span class="built_in">str</span> <span class="keyword">from</span> <span class="string">&#x27;./temp&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="import命令"><a href="#import命令" class="headerlink" title="import命令"></a>import命令</h1><ul>
+<li>使用export命令定义了模块的对外接口以后，<strong>其他 JS 文件就可以通过import命令加载这个模块</strong>。</li>
+<li>import命令<strong>接受<code>&#123;&#125;</code>，<code>&#123;&#125;</code>里面是从其他模块导入的变量名</strong>。<ul>
+<li>导入的变量名 必须与 export导出模块的对外接口的名称<strong>相同</strong>（如果使用的是export default&#x3D;&gt;没规定对外接口名称 则不需要）</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; firstName, lastName, year &#125; <span class="keyword">from</span> <span class="string">&#x27;./profile.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">setName</span>(<span class="params">element</span>) &#123;</span><br><span class="line">  element.<span class="property">textContent</span> = firstName + <span class="string">&#x27; &#x27;</span> + lastName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码的import命令，用于加载profile.js文件，并从中输入变量。<br>import命令<strong>接受一对<em>大括号</em>，里面指定要从其他模块导入的变量名</strong>。<br>大括号里面的<strong>变量名，必须与被导入模块（profile.js）对外接口的名称相同</strong>。</p>
+<hr>
+<h2 id="只读变量（不可修改）"><a href="#只读变量（不可修改）" class="headerlink" title="只读变量（不可修改）"></a>只读变量（不可修改）</h2><ul>
+<li>import命令输入的<strong>变量都是只读的</strong>，因为它的本质是输入接口。也就是说，<strong>不允许在加载模块的脚本里面，改写接口。</strong></li>
+<li>引入的变量不可修改，一旦修改就会<strong>报错</strong>。</li>
+<li>但引入的对象，他的属性可以被修改且被别的模块读到修改后的值，不过，这种写法很难查错，<strong>建议凡是输入的变量，都当作完全只读，不要轻易改变它的属性。</strong></li>
+</ul>
+<p><strong>例子：</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">&#x27;./xxx.js&#x27;</span></span><br><span class="line">a = &#123;&#125;; // Syntax Error : <span class="string">&#x27;a&#x27;</span> <span class="keyword">is</span> <span class="keyword">read</span>-<span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，脚本<strong>加载了变量a</strong>，对其<strong>重新赋值就会报错</strong>，因为a是一个只读的接口。<strong>但是，如果a是一个对象，改写a的属性是允许的</strong>。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">&#x27;./xxx.js&#x27;</span></span><br><span class="line"></span><br><span class="line">a.foo = <span class="string">&#x27;hello&#x27;</span>; <span class="comment">// 合法操作</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，a的属性<strong>可以成功改写，并且其他模块也可以读到改写后的值</strong>。不过，这种写法很难查错，<strong>建议凡是输入的变量，都当作完全只读，不要轻易改变它的属性。</strong></p>
+<hr>
+<h2 id="模块路径"><a href="#模块路径" class="headerlink" title="模块路径"></a>模块路径</h2><ul>
+<li>import后面的from<strong>指定模块文件的位置</strong>，可以是<strong>相对路径</strong>，也可以是<strong>绝对路径</strong>。</li>
+<li><code>.js</code>后缀<strong>可以省略</strong>。如果只是<strong>模块名</strong>，不带有路径，那么<strong>必须有配置文件</strong>，告诉 JavaScript 引擎该模块的位置:<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;myMethod&#125; <span class="keyword">from</span> <span class="string">&#x27;util&#x27;</span>;</span><br></pre></td></tr></table></figure>
+上面代码中，<strong>util是模块文件名</strong>，由于不带有路径，必须通过配置，告诉引擎怎么取到这个模块。</li>
+</ul>
+<h3 id="import提升"><a href="#import提升" class="headerlink" title="import提升"></a>import提升</h3><ul>
+<li>注意，import命令具有提升效果，会<strong>提升到整个模块的头部</strong>，首先执行。</li>
+<li>提升的本质：<strong>import命令是编译阶段执行的</strong>，在代码运行之前。</li>
+</ul>
+<p><strong>例子：</strong></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">&#x27;my_module&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>上面的代码<strong>不会报错</strong>，因为import的执行早于foo的调用。这种行为的本质是，<strong>import命令是编译阶段执行的</strong>，在代码运行之前。</p>
+<h3 id="不含表达式"><a href="#不含表达式" class="headerlink" title="不含表达式"></a>不含表达式</h3><p>由于import是<strong>静态执行</strong>，所以<strong>不能使用表达式和变量</strong>，这些只有在运行时才能得到结果的语法结构:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="string">&#x27;f&#x27;</span> + <span class="string">&#x27;oo&#x27;</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;my_module&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable language_">module</span> = <span class="string">&#x27;my_module&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="variable language_">module</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">if</span> (x === <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">&#x27;module1&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">&#x27;module2&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面三种写法都会报错，因为它们用到了<strong>表达式、变量和if结构</strong>。<strong>在静态分析阶段，这些语法都是没法得到值的。</strong></p>
+<h3 id="import加载模块"><a href="#import加载模块" class="headerlink" title="import加载模块"></a>import加载模块</h3><p>import语句会执行所加载的模块，因此可以有下面的写法。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//仅执行lodash模块，但是不输入任何值</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//多次重复执行同一句import语句，那么只会执行一次，而不会执行多次。</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">&#x27;my_module&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bar &#125; <span class="keyword">from</span> <span class="string">&#x27;my_module&#x27;</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">&#x27;my_module&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>目前阶段，<strong>通过 Babel 转码，CommonJS 模块的 require命令 和 ES6 模块的 import命令 可以写在同一个模块里面，但是最好不要这样做。</strong><br>因为import在静态解析阶段执行，所以它是一个模块之中最早执行的。下面的代码可能不会得到预期结果。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;core-js/modules/es6.symbol&#x27;</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;core-js/modules/es6.promise&#x27;</span>);</span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;React&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="as重命名"><a href="#as重命名" class="headerlink" title="as重命名"></a>as重命名</h1><ul>
+<li>as的作用：<strong>重命名接口</strong>。</li>
+<li>可以在 <strong>输出&#x2F;引入</strong> 时使用as。</li>
+</ul>
+<h2 id="export时重命名接口"><a href="#export时重命名接口" class="headerlink" title="export时重命名接口"></a>export时重命名接口</h2><p>通常情况下，export输出的变量就是本来的名字，但是<strong>可以使用as关键字重命名</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">v1</span>(<span class="params"></span>) &#123; ... &#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">v2</span>(<span class="params"></span>) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  v1 <span class="keyword">as</span> streamV1,</span><br><span class="line">  v2 <span class="keyword">as</span> streamV2,</span><br><span class="line">  v2 <span class="keyword">as</span> streamLatestVersion</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面代码使用as关键字，重命名了函数v1和v2的对外接口。<strong>重命名后，v2可以用不同的名字输出两次</strong>。在别的文件中<strong>可使用别名进行引入</strong></p>
+<h2 id="import时重命名接口"><a href="#import时重命名接口" class="headerlink" title="import时重命名接口"></a>import时重命名接口</h2><p>如果想为输入的变量重新取一个名字，import命令要使用as关键字，将输入的变量重命名。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; lastName <span class="keyword">as</span> surname &#125; <span class="keyword">from</span> <span class="string">&#x27;./profile.js&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/09/ES6%20class%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6 class（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/08/%E8%B7%AF%E7%94%B1%20API%20%E8%B7%AF%E5%BE%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">路由 API 路径</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E2%80%9C%E6%8E%A5%E5%8F%A3%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">理解“接口”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#export%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">export命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E7%A7%8D%E8%BE%93%E5%87%BA%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">2种输出方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BE%E7%BD%AE%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">放置位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%8E%A5%E5%8F%A3%E5%8F%AF%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9D%97%E5%86%85%E9%83%A8%E5%AE%9E%E6%97%B6%E7%9A%84%E5%80%BC"><span class="nav-number">3.3.</span> <span class="nav-text">通过接口可获取模块内部实时的值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#export-default%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">export default命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#import%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">import命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F%EF%BC%88%E4%B8%8D%E5%8F%AF%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">只读变量（不可修改）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E8%B7%AF%E5%BE%84"><span class="nav-number">5.2.</span> <span class="nav-text">模块路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import%E6%8F%90%E5%8D%87"><span class="nav-number">5.2.1.</span> <span class="nav-text">import提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%AB%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.2.2.</span> <span class="nav-text">不含表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="nav-number">5.2.3.</span> <span class="nav-text">import加载模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#as%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">as重命名</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#export%E6%97%B6%E9%87%8D%E5%91%BD%E5%90%8D%E6%8E%A5%E5%8F%A3"><span class="nav-number">6.1.</span> <span class="nav-text">export时重命名接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import%E6%97%B6%E9%87%8D%E5%91%BD%E5%90%8D%E6%8E%A5%E5%8F%A3"><span class="nav-number">6.2.</span> <span class="nav-text">import时重命名接口</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

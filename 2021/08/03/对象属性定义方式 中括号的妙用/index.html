@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>对象属性定义方式 中括号的妙用 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="之前一直以为obj.属性名和obj[属性名]效果完全一致，直到我遇到 属性名 是不定的情况，这才发现[]的奇妙之处">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象属性定义方式 中括号的妙用">
+<meta property="og:url" content="http://yoursite.com/2021/08/03/%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F%20%E4%B8%AD%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%A6%99%E7%94%A8/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="之前一直以为obj.属性名和obj[属性名]效果完全一致，直到我遇到 属性名 是不定的情况，这才发现[]的奇妙之处">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-03T09:15:58.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.195Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-对象属性定义方式 中括号的妙用" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      对象属性定义方式 中括号的妙用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/08/03/%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F%20%E4%B8%AD%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%A6%99%E7%94%A8/" class="article-date">
+	  <time datetime="2021-08-03T09:15:58.000Z" itemprop="datePublished">八月 3, 2021</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前一直以为<code>obj.属性名</code>和<code>obj[属性名]</code>效果完全一致，直到我遇到 属性名 是不定的情况，这才发现<code>[]</code>的奇妙之处</p>
+<span id="more"></span>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>中括号的妙用</strong>：<ul>
+<li><code>obj.属性名</code> 里属性名是写死的</li>
+<li><code>obj[属性名]</code> 里<strong>属性名可以是变量名</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
+<li>封了个dialog组件，点击不同的下拉框选项时都弹出该组件</li>
+<li>后端有个请求的<strong>属性名要求是变化的，点击不同选项时传递的属性名是不同的</strong></li>
+<li>即接口接收的参数<code>params=&#123;固定属性名：参数值，可变属性名：参数值&#125;</code></li>
+<li>此时使用<code>obj.属性名</code>来定义可变参数名显然不可行，这是直接写死的</li>
+</ul>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>改用<code>obj[属性名]</code>来定义，此时<code>属性名</code>可以是变量名，比如:<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a <span class="operator">=</span> <span class="string">&quot;diffAttributeName&quot;</span><span class="comment">;</span></span><br><span class="line">obj[a] <span class="operator">=</span> <span class="number">123</span><span class="comment">; // 相当于obj.diffAttributeName = 123;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="拓展1"><a href="#拓展1" class="headerlink" title="拓展1"></a>拓展1</h1><ul>
+<li>同样的，在vue中，动态属性是个对象时，对象属性可以使用<code>[]</code>用变量来定义，比如：<code>&lt;p :class=&quot;&#123; [mutableClassName]: true, &#39;immutableClassName&#39;: true &#125;&quot;&gt;&lt;/p&gt;</code></li>
+<li>vue中用class，react才用className，以及用<code>.</code>获取属性时用className (可见<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#DOM%E6%93%8D%E4%BD%9C%E7%9A%84%E5%B8%B8%E7%94%A8API">《JS Web API 面试题》-“property的操作”</a>)</li>
+</ul>
+<h1 id="拓展2"><a href="#拓展2" class="headerlink" title="拓展2"></a>拓展2</h1><ul>
+<li>定义时就可以使用：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbolKey1 = <span class="string">&#x27;key1&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> symbolKey2 = <span class="string">&#x27;key2&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">stringKey1</span>: <span class="string">&#x27;value1&#x27;</span>,</span><br><span class="line">  [symbolKey1]: <span class="string">&#x27;value2&#x27;</span>,</span><br><span class="line">  <span class="attr">stringKey2</span>: <span class="string">&#x27;value3&#x27;</span>,</span><br><span class="line">  [symbolKey2]: <span class="string">&#x27;value4&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/13/vue%E7%BB%99this%E4%B8%AD%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%B5%8B%E5%80%BC%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          vue给this中对象属性赋值的坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/03/vue%20%E5%85%A8%E5%B1%80%E6%8C%82%E8%BD%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%88class%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">vue 全局挂载自定义函数（class）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%951"><span class="nav-number">4.</span> <span class="nav-text">拓展1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%952"><span class="nav-number">5.</span> <span class="nav-text">拓展2</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

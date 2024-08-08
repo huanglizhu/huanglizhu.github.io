@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS基础知识面试题（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="异步队列来实现依次执行函数【待思考】 要求：完成函数executeQueue()，使得执行executeQueue(a,b,c);时会依次执行传入的函数a、b、c。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS基础知识面试题（3）">
+<meta property="og:url" content="http://yoursite.com/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="异步队列来实现依次执行函数【待思考】 要求：完成函数executeQueue()，使得执行executeQueue(a,b,c);时会依次执行传入的函数a、b、c。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-07T09:19:47.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.310Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS基础知识面试题（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS基础知识面试题（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/" class="article-date">
+	  <time datetime="2020-02-07T09:19:47.000Z" itemprop="datePublished">二月 7, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异步队列来实现依次执行函数【待思考】"><a href="#异步队列来实现依次执行函数【待思考】" class="headerlink" title="异步队列来实现依次执行函数【待思考】"></a>异步队列来实现依次执行函数【待思考】</h1><ul>
+<li><strong>要求：</strong>完成函数executeQueue()，<strong>使得执行<code>executeQueue(a,b,c);</code>时会依次执行传入的函数a、b、c。</strong><span id="more"></span></li>
+<li><strong>重点：Promise</strong></li>
+<li><strong>思路：</strong>我们需要实现一个<strong>队列</strong>，将这些异步函数添加进队列并且管理它们的执行，队列具有<strong>First In First Out</strong>的特性，也就是先添加进去的会被先执行，接着才会执行下一个(注意跟栈作区别)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步函数a</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步函数b</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步函数c</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="思路：链式调用then"><a href="#思路：链式调用then" class="headerlink" title="思路：链式调用then"></a>思路：链式调用then</h2><p>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/06/ES6%20Promise%EF%BC%881%EF%BC%89/#Promise-prototype-then-%E4%B8%8E-%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C">Promise.prototype.then()与 链式操作</a>，可以解决问题，但不合题意，只是一个思路过渡</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//链式调用</span><br><span class="line">a()</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">b()</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">c()</span></span><br><span class="line">  &#125;)</span><br><span class="line">// a b c</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法1：构建队列"><a href="#方法1：构建队列" class="headerlink" title="方法1：构建队列"></a>方法1：构建队列</h2><ul>
+<li><strong>特点</strong>：封装方法，可移植到别处使用</li>
+<li>forEach不能和async&#x2F;await一起用，async&#x2F;await要与for-of才是异步的</li>
+<li>then()里的函数在resolved状态下会被执行<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建队列</span></span><br><span class="line">function <span class="built_in">queue</span>(arr) &#123;</span><br><span class="line">  <span class="selector-tag">var</span> sequence = Promise<span class="selector-class">.resolve</span>()</span><br><span class="line">  arr<span class="selector-class">.forEach</span>(function (item) &#123;</span><br><span class="line">    sequence = sequence<span class="selector-class">.then</span>(item)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行队列</span></span><br><span class="line"><span class="function"><span class="title">queue</span><span class="params">([a, b, c])</span></span></span><br></pre></td></tr></table></figure>
+<strong>注意：then里放的函数不需要<code>()</code>，联系事件绑定函数进行理解</strong>。下面方法2函数猴是需要<code>()</code>的。</li>
+</ul>
+<h2 id="方法2：使用async、await构建队列"><a href="#方法2：使用async、await构建队列" class="headerlink" title="方法2：使用async、await构建队列"></a>方法2：使用async、await构建队列</h2><ul>
+<li>同方法二，只是显得更高大上点</li>
+<li><strong>for-of常用于异步遍历，遇到 await 会挨个串行计算</strong>，可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#ES6-for-of%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-%E4%B8%8Easync-await">“JS异步进阶”的“ES6 for-of的应用场景(与async&#x2F;await)”</a></li>
+<li><strong>不能用forEach搭配async&#x2F;await</strong>，那样会反着打印c b a<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function <span class="built_in">queue</span>(arr) &#123;</span><br><span class="line">  for (let promise of arr) &#123;</span><br><span class="line">    await <span class="built_in">promise</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">queue</span>([a, b, c])</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="扩展：顺序执行需要传值的异步任务"><a href="#扩展：顺序执行需要传值的异步任务" class="headerlink" title="扩展：顺序执行需要传值的异步任务"></a>扩展：顺序执行需要传值的异步任务</h1><ul>
+<li><strong>场景：</strong>有a、b、c三个异步任务，要求必须先执行a，再执行b，最后执行c。且<strong>下一次任务必须要拿到上一次任务执行的结果，才能做操作</strong></li>
+<li>模拟3个异步函数：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步函数a</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步函数b</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(data + <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步函数c</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(data + <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="思路：链式操作then"><a href="#思路：链式操作then" class="headerlink" title="思路：链式操作then"></a>思路：链式操作then</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//链式调用</span><br><span class="line">a()</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> <span class="title"></span>(data) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">b(data)</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> <span class="title"></span>(data) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">c(data)</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="keyword">function</span> <span class="title"></span>(data) &#123;</span><br><span class="line">    console.log(data)// abc</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法1：构建队列-1"><a href="#方法1：构建队列-1" class="headerlink" title="方法1：构建队列"></a>方法1：构建队列</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建队列</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">queue</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> sequence = Promise.resolve()</span><br><span class="line">  arr.forEach(<span class="keyword">function</span> (<span class="params">item</span>) &#123;</span><br><span class="line">    sequence = sequence.then(item)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> sequence</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行队列</span></span><br><span class="line">queue([a, b, c])</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(data)<span class="comment">// abc</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>执行第一轮的时候 <strong>sequence</strong> 为<strong>a的Promise对象</strong>。<br>执行第二轮时， <strong>sequence</strong> 为aPromise成功时才进行的b函数最后返回的<strong>b的Promise对象</strong>，且b函数接受aPromise成功时传入的data。<strong>（b函数作为then()中的item，会自动接收aPromise成功时传入的data作为参数，所以不用另外传参！）</strong><br>执行第三轮时， <strong>sequence</strong> 同上，为<strong>c的Promise对象</strong>。<br>最后返回的sequence是c的Promise对象</p>
+<h2 id="方法2：使用async、await构建队列-1"><a href="#方法2：使用async、await构建队列-1" class="headerlink" title="方法2：使用async、await构建队列"></a>方法2：使用async、await构建队列</h2><p>使用await而不是then时就要<strong>注意自行传参</strong>，这里使用res暂存bc俩函数中所传参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">queue</span>(<span class="params">arr</span>) &#123;</span><br><span class="line"><span class="comment">// 函数中传（resolve中所传）的值保存在res中</span></span><br><span class="line">  <span class="keyword">let</span> res = <span class="literal">null</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> promise <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    res = <span class="keyword">await</span> <span class="title function_">promise</span>(res)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> res <span class="comment">// await abc自动转换为Promise对象，resolved状态下值为abc</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">queue</span>([a, b, c])</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data)<span class="comment">// abc</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="图片的懒加载"><a href="#图片的懒加载" class="headerlink" title="图片的懒加载"></a>图片的懒加载</h1><p>图片的懒加载也就是 <strong>延迟加载</strong> ，图片没有出现在页面可视区域内之前都只加载一个内存小的图片用于占位，等到图片出现在页面可视区域内时才加载真正的图片。</p>
+<h2 id="react的react-lazy-load库"><a href="#react的react-lazy-load库" class="headerlink" title="react的react-lazy-load库"></a>react的react-lazy-load库</h2><ul>
+<li>react中可使用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/react-lazy-load">react-lazy-load库</a>来实现图片的懒加载。</li>
+</ul>
+<h2 id="原生js"><a href="#原生js" class="headerlink" title="原生js"></a>原生js</h2><ul>
+<li>原生js实现图片懒加载<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55311726">可参考这篇文章</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/w1418899532/article/details/90515969">这篇博客</a>，如有需要可以了解<a target="_blank" rel="noopener" href="https://blog.csdn.net/zh_rey/article/details/78967174">JS中offsetTop、clientTop、scrollTop、offsetTop各位置属性详解</a></li>
+<li>jquery有<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ojrblog/p/14594829.html">EasyLazyload插件</a>可实现图片懒加载</li>
+</ul>
+<h2 id="面试题：预加载-与-懒加载"><a href="#面试题：预加载-与-懒加载" class="headerlink" title="面试题：预加载 与 懒加载"></a>面试题：预加载 与 懒加载</h2><ul>
+<li>**<a target="_blank" rel="noopener" href="https://www.jb51.net/article/186121.htm">预加载（异步加载）</a>**：提前加载图片，当用户需要查看时可直接从本地缓存中渲染。（<a target="_blank" rel="noopener" href="https://www.imooc.com/learn/502">预加载 慕课</a>）<ul>
+<li><strong>例子：</strong> loading页面显示时就是正在提前加载众多图片的时候，等待切换到下一个页面时众多图片已经加载完毕。</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.imooc.com/learn/502">实现方法</a>：</strong></li>
+</ul>
+<ol>
+<li><strong>显示loading页面</strong>时，将<strong>需要加载的图片src放入数组中</strong></li>
+<li>图片的load和error事件函数中就可以放<strong>进度条的进度计算</strong>，<strong>遍历图片数组加载图片</strong>（赋值给image对象的src）（error中也是正常进度，不然error就卡住永远无法加载结束）</li>
+<li>等<strong>图片数组遍历加载结束，隐藏loading页</strong>，正常显示网页，此时所有图片已加载过一次，用户查看时会直接从本地读取</li>
+</ol>
+</li>
+<li><strong>懒加载</strong>：懒加载的主要目的是作为服务器前端的优化，减少请求数或延迟请求数。</li>
+<li>两种技术的<strong>本质</strong>：两者的行为是相反的，一个是<strong>提前加载</strong>，一个是<strong>迟缓甚至不加载</strong>。</li>
+<li><strong>懒加载</strong>对服务器前端有一定的<strong>缓解压力</strong>作用，<strong>预加载</strong>则会<strong>增加服务器前端压力</strong>。</li>
+</ul>
+<hr>
+<h1 id="异步进阶"><a href="#异步进阶" class="headerlink" title="异步进阶"></a>异步进阶</h1><h2 id="描述event-loop机制"><a href="#描述event-loop机制" class="headerlink" title="描述event loop机制"></a>描述event loop机制</h2><ul>
+<li>第一遍可以只到宏任务微任务（**执行宏任务（同步任务）&#x3D;》清空微任务&#x3D;》清空宏任务&#x3D;》如有微任务则继续清空微任务&#x3D;》…**）</li>
+<li>第二遍深入可加上和宏任务微任务与DOM渲染的关系</li>
+<li>不要混着讲，怕乱</li>
+</ul>
+<h2 id="宏任务与微任务的区别"><a href="#宏任务与微任务的区别" class="headerlink" title="宏任务与微任务的区别"></a>宏任务与微任务的区别</h2><ul>
+<li><strong>宏任务</strong>：script setTimeout setInterval ajax DOM 事件<ul>
+<li><strong>除script，其他都是浏览器引擎来执行，因为宏任务都是Web API，不属于ES语法</strong></li>
+</ul>
+</li>
+<li><strong>微任务</strong>：Promise.then()（对于前端来说）async&#x2F;await<ul>
+<li><strong>js引擎来执行</strong></li>
+<li><strong>注意：Promise的函数体是定义时就立即执行的，then()是微任务。async函数体是同步，await当行代码也是同步，但await后的代码时异步（微任务）</strong></li>
+</ul>
+</li>
+<li>宏任务比微任务执行的更早，<strong>js引擎处理速度比浏览器引擎快，所以 异步任务中微任务执行时机先于宏任务</strong></li>
+<li><strong>微任务</strong>在DOM渲染<strong>前</strong>触发，宏任务在DOM渲染<strong>后</strong>触发</li>
+</ul>
+<h2 id="Promise的三种状态，如何变化"><a href="#Promise的三种状态，如何变化" class="headerlink" title="Promise的三种状态，如何变化"></a>Promise的三种状态，如何变化</h2><ul>
+<li>pending，resolved，rejected</li>
+<li>pending–&gt;resolved 或 pending–&gt;rejected</li>
+<li>变化不可逆</li>
+</ul>
+<h2 id="Promise-catch-连接-then"><a href="#Promise-catch-连接-then" class="headerlink" title="Promise catch 连接 then"></a>Promise catch 连接 then</h2><p>catch执行与否的问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一题</span></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二题</span></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;erro1&#x27;</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>) <span class="comment">// catch正常返回resolved</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三题</span></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;erro1&#x27;</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 注意这里是 catch，而catch正常返回resolved</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="async-await-语法问题"><a href="#async-await-语法问题" class="headerlink" title="async&#x2F;await 语法问题"></a>async&#x2F;await 语法问题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line">(<span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="title function_">fn</span>()  <span class="comment">// promise 值是100</span></span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="title function_">fn</span>() <span class="comment">// 100</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>) <span class="comment">// 同步，1</span></span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="number">100</span> <span class="comment">// 同步，2</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>, a) <span class="comment">// 异步（微任务）,5</span></span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">200</span>) <span class="comment">// 同步，3</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b&#x27;</span>, b) <span class="comment">// 异步（微任务）,6</span></span><br><span class="line">    <span class="keyword">const</span> c = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="number">300</span>) <span class="comment">// 同步，报错！后面的都不会执行。4</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>, c) <span class="comment">// 不执行</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>) <span class="comment">// 不执行</span></span><br><span class="line">&#125;)() <span class="comment">// 执行完毕，打印出那些内容？</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// start</span></span><br><span class="line"><span class="comment">// a 100</span></span><br><span class="line"><span class="comment">// b 200</span></span><br><span class="line"><span class="comment">// 报错，Uncaught (in promise) 300</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Promise-和-setTimeout-顺序"><a href="#Promise-和-setTimeout-顺序" class="headerlink" title="Promise 和 setTimeout 顺序"></a>Promise 和 setTimeout 顺序</h2><ul>
+<li>同步任务先于异步任务</li>
+<li>宏任务（setTimeout）先于微任务（Promise.then）</li>
+<li>但是同步任务也属于宏任务，所以 <strong>执行宏任务（同步任务）&#x3D;》清空微任务（Promise.then）&#x3D;》清空宏任务（setTimeout）</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">100</span>) <span class="comment">// 同步，1</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步，宏任务，4</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">200</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步，微任务，3</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">300</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">400</span>) <span class="comment">// 同步，2</span></span><br><span class="line"><span class="comment">// 100 400 300 200</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关于宏任务与微任务的执行方式：取出一个宏任务（同步任务）=》清空微任务=》清空宏任务</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">100</span>) <span class="comment">// 同步，1</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 异步，宏任务，5</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">200</span>)</span><br><span class="line">&#125;)</span><br><span class="line">Promise.resolve().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 异步，微任务，3</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">300</span>)</span><br><span class="line">&#125;)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 异步，宏任务，6</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">400</span>)</span><br><span class="line">&#125;)</span><br><span class="line">Promise.resolve().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 异步，微任务，4</span></span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">500</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">600</span>) <span class="comment">// 同步，2</span></span><br><span class="line"><span class="comment">// 100 600 300 500 200 400</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="【重点】async-await-执行顺序问题"><a href="#【重点】async-await-执行顺序问题" class="headerlink" title="【重点】async&#x2F;await 执行顺序问题"></a>【重点】async&#x2F;await 执行顺序问题</h2><ul>
+<li><strong>注意：</strong><ul>
+<li><strong>async()调用时函数体立即执行，await当行代码为同步，await后是微任务。</strong></li>
+<li><strong>Promise 的函数体（即new Promise(){…}）会立刻执行。</strong></li>
+<li><strong>then()是微任务</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 网上很经典的面试题</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async1</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 start&#x27;</span>) <span class="comment">// 2</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">async2</span>() <span class="comment">// 这一句会同步执行，返回 Promise ，其中的 `console.log(&#x27;async2&#x27;)` 也会同步执行</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 微任务，上面有 await ，下面就变成了“异步”，类似 callback 的功能</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 end&#x27;</span>) <span class="comment">// 6</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async2</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async2&#x27;</span>) <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script start&#x27;</span>) <span class="comment">// 同步，1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">// 异步，宏任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setTimeout&#x27;</span>) <span class="comment">// 8</span></span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">async1</span>() <span class="comment">// async的函数体是立即执行的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span> (<span class="keyword">function</span> (<span class="params">resolve</span>) &#123; <span class="comment">// 返回 Promise 之后，即同步执行完成，then 是异步代码</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise1&#x27;</span>) <span class="comment">// 4，Promise 的函数体会立刻执行</span></span><br><span class="line">  <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="property">then</span> (<span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">// 异步，微任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise2&#x27;</span>) <span class="comment">// 7</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script end&#x27;</span>) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p><strong>宏任务（同步，async）&#x3D;》清空微任务（await后，then）&#x3D;》宏任务（setTimeout）</strong></p>
+<p>script start<br>async1 start<br>async2<br>promise1<br>script end<br>（同步代码执行完毕）<br>async1 end<br>promise2<br>setTimeout</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/07/ES6%20%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6 参数默认值
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/06/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS基础知识面试题（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97%E6%9D%A5%E5%AE%9E%E7%8E%B0%E4%BE%9D%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E3%80%90%E5%BE%85%E6%80%9D%E8%80%83%E3%80%91"><span class="nav-number">1.</span> <span class="nav-text">异步队列来实现依次执行函数【待思考】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8then"><span class="nav-number">1.1.</span> <span class="nav-text">思路：链式调用then</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E6%9E%84%E5%BB%BA%E9%98%9F%E5%88%97"><span class="nav-number">1.2.</span> <span class="nav-text">方法1：构建队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8async%E3%80%81await%E6%9E%84%E5%BB%BA%E9%98%9F%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">方法2：使用async、await构建队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E9%9C%80%E8%A6%81%E4%BC%A0%E5%80%BC%E7%9A%84%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">扩展：顺序执行需要传值的异步任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9Cthen"><span class="nav-number">2.1.</span> <span class="nav-text">思路：链式操作then</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E6%9E%84%E5%BB%BA%E9%98%9F%E5%88%97-1"><span class="nav-number">2.2.</span> <span class="nav-text">方法1：构建队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8async%E3%80%81await%E6%9E%84%E5%BB%BA%E9%98%9F%E5%88%97-1"><span class="nav-number">2.3.</span> <span class="nav-text">方法2：使用async、await构建队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">图片的懒加载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react%E7%9A%84react-lazy-load%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">react的react-lazy-load库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%94%9Fjs"><span class="nav-number">3.2.</span> <span class="nav-text">原生js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E9%A2%84%E5%8A%A0%E8%BD%BD-%E4%B8%8E-%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.3.</span> <span class="nav-text">面试题：预加载 与 懒加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6"><span class="nav-number">4.</span> <span class="nav-text">异步进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0event-loop%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">描述event loop机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.</span> <span class="nav-text">宏任务与微任务的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%8C%E5%A6%82%E4%BD%95%E5%8F%98%E5%8C%96"><span class="nav-number">4.3.</span> <span class="nav-text">Promise的三种状态，如何变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-catch-%E8%BF%9E%E6%8E%A5-then"><span class="nav-number">4.4.</span> <span class="nav-text">Promise catch 连接 then</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async-await-%E8%AF%AD%E6%B3%95%E9%97%AE%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">async&#x2F;await 语法问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-%E5%92%8C-setTimeout-%E9%A1%BA%E5%BA%8F"><span class="nav-number">4.6.</span> <span class="nav-text">Promise 和 setTimeout 顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E9%87%8D%E7%82%B9%E3%80%91async-await-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-number">4.7.</span> <span class="nav-text">【重点】async&#x2F;await 执行顺序问题</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

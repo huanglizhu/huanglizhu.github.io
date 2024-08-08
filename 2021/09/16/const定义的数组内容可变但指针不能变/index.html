@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>const定义的数组内容可变但指针不能变 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="一个const与数组扩展运算符、push、splice的悲伤故事。const定义的数组内容可变但指针不能变，push改变内容但没改变指向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="const定义的数组内容可变但指针不能变">
+<meta property="og:url" content="http://yoursite.com/2021/09/16/const%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9%E5%8F%AF%E5%8F%98%E4%BD%86%E6%8C%87%E9%92%88%E4%B8%8D%E8%83%BD%E5%8F%98/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="一个const与数组扩展运算符、push、splice的悲伤故事。const定义的数组内容可变但指针不能变，push改变内容但没改变指向">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-16T02:16:28.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.350Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-const定义的数组内容可变但指针不能变" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      const定义的数组内容可变但指针不能变
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/09/16/const%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9%E5%8F%AF%E5%8F%98%E4%BD%86%E6%8C%87%E9%92%88%E4%B8%8D%E8%83%BD%E5%8F%98/" class="article-date">
+	  <time datetime="2021-09-16T02:16:28.000Z" itemprop="datePublished">九月 16, 2021</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个const与数组扩展运算符、push、splice的悲伤故事。const定义的数组内容可变但指针不能变，push改变内容但没改变指向</p>
+<span id="more"></span>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
+<li>打算往const定义的数组gridColumns里添加另一个数组paymentColumns，结果报错：<code>Error: &quot;gridColumns&quot; is read-only</code>，但是换成push&#x2F;splice又不报错了，<strong>当时想不通为啥 只读数组 不能 扩展运算符 却 可以push&#x2F;splice，毕竟push&#x2F;splice不也改变了原数组吗</strong></li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> 注意：问题就在这，是const定义的，内容可变但指针不能变！！只读数组就是这么来的</span><br><span class="line">const gridColumns = this.init<span class="params">()</span><span class="string">.formatRole</span><span class="params">(columns)</span> </span><br><span class="line"></span><br><span class="line"><span class="string">//</span> 没问题，正常</span><br><span class="line">gridColumns.push<span class="params">(...paymentColumns)</span></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> 使用下面这种写法会报错Error: <span class="string">&quot;gridColumns&quot;</span> is read-only</span><br><span class="line"><span class="string">//</span> 因为gridColumns是const定义的，这样相当于重新赋值，是会改变指针指向的，而push和splice是修改数组内容，不改变指针指向，所以不会报错</span><br><span class="line">gridColumns = [ </span><br><span class="line">  <span class="string">...gridColumns</span>,</span><br><span class="line">  <span class="string">...paymentColumns</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><ul>
+<li>gridColumns是<strong>const定义的，内容可变但指针不能变</strong>！！只读数组就是这么来的</li>
+<li>push&#x2F;splice之所以可以操作 只读数组gridColumns 是因为<strong>push&#x2F;splice只是修改内容，并未改变指针指向</strong></li>
+<li>扩展运算符之所以不行，是因为<strong>不仅扩开来还重新赋值了，重新赋值是会改变指针指向的，const又不允许改变指针指向，就报错了</strong></li>
+</ul>
+<hr>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><ul>
+<li>突然想到以前的一个问题，<strong>关于const定义的引用类型是否可以重新定义</strong></li>
+<li><strong>重点：const定义的只读含义是“内容可变但指针不能变”</strong></li>
+<li><strong>答案：</strong>值类型不可以，毕竟指针会直接改；但<strong>引用类型只有重新赋值时才会修改指针指向</strong>，所以修改内容不改指针指向是可以的</li>
+<li><strong>例子：</strong><ul>
+<li>const定义一元数组，一元数组不能重新定义，但数组元素可改，一元数组也可新增数组元素</li>
+<li>const定义对象，对象不能重新定义，但对象属性值可以，也可以给对象添加新属性</li>
+<li>const定义二元数组，二元数组不能重新定义。数组元素为对象时，数组元素可变，数组元素内属性值可变，也可给数组元素新增属性；数组元素为数组时，数组元素可变，数组元素内值也可变<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const a = <span class="comment">[11, 22]</span></span><br><span class="line">a = <span class="comment">[33]</span> // 报错</span><br><span class="line">a<span class="comment">[0]</span> = 33 // a = <span class="comment">[33, 22]</span></span><br><span class="line">a<span class="comment">[2]</span> = <span class="comment">[11]</span> // a = <span class="comment">[33, 22, <span class="comment">[11]</span>]</span></span><br><span class="line"></span><br><span class="line">const b = &#123; a:1, c:2 &#125;</span><br><span class="line">b = &#123; e: 4 &#125; // 报错</span><br><span class="line">b.a = 33 // b = &#123; a:33, c:2 &#125;</span><br><span class="line">b.f = 44 // b = &#123; a:33, c:2, f: 44 &#125;</span><br><span class="line"></span><br><span class="line">const r = <span class="comment">[&#123; a: 1 &#125;]</span> </span><br><span class="line">r = <span class="comment">[&#123; b: 2 &#125;]</span> // 报错</span><br><span class="line">r<span class="comment">[0]</span> = &#123; b: 2 &#125; // 报错</span><br><span class="line">r<span class="comment">[0]</span>.a = 33 // r = <span class="comment">[&#123; a: 33 &#125;]</span> </span><br><span class="line">r<span class="comment">[0]</span>.v = 44 // r = <span class="comment">[&#123; a: 33, v: 44 &#125;]</span> </span><br><span class="line"></span><br><span class="line">const t = <span class="comment">[<span class="comment">[1, 2]</span>]</span></span><br><span class="line">t = <span class="comment">[<span class="comment">[22]</span>]</span> // 报错</span><br><span class="line">t<span class="comment">[0]</span>=<span class="comment">[4, 5]</span> // t = <span class="comment">[<span class="comment">[4, 5]</span>]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/17/await%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97%E4%B8%8E%E5%90%8C%E6%AD%A5%E9%A1%BA%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          await多层嵌套与同步顺序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/15/%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E6%97%B6%E8%B5%8B%E4%BA%88%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E5%86%85%E5%AE%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">调用函数时赋予回调函数的函数内容</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95"><span class="nav-number">3.</span> <span class="nav-text">扩展</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

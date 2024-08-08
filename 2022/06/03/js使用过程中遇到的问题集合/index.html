@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js使用过程中遇到的问题集合 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="记录一些最近工作中遇到的js相关问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js使用过程中遇到的问题集合">
+<meta property="og:url" content="http://yoursite.com/2022/06/03/js%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="记录一些最近工作中遇到的js相关问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-03T07:01:28.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.363Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-js使用过程中遇到的问题集合" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      js使用过程中遇到的问题集合
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/06/03/js%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/" class="article-date">
+	  <time datetime="2022-06-03T07:01:28.000Z" itemprop="datePublished">六月 3, 2022</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录一些最近工作中遇到的js相关问题</p>
+<span id="more"></span>
+
+<h1 id="不想走完整个循环可用Array-every"><a href="#不想走完整个循环可用Array-every" class="headerlink" title="不想走完整个循环可用Array.every()"></a>不想走完整个循环可用Array.every()</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/jsref-every.html">菜鸟教程</a></li>
+<li>不想走完整个循环的可以试试every，走到false就会结束循环，而且返回的Boolean方便直接做判断条件决定是否弹出提示</li>
+</ul>
+<hr>
+<h1 id="export与export-default"><a href="#export与export-default" class="headerlink" title="export与export default"></a>export与export default</h1><ul>
+<li><strong>总结</strong>：export导出的是对象，引入时要解构；export default是直接导出，可直接import。</li>
+<li><strong>js文件中</strong>，函数很少情况是<code>export default</code> &#x3D;&gt; 直接引用。基本上都是把<strong>函数写表达式方式定义</strong>（<code>const a = function()&#123;...&#125;</code>），<strong>作为变量汇集成对象export出去</strong>，import引用时要用<code>&#123;&#125;</code>(<code>import &#123;a, ...&#125; from &#39;xxx.js&#39;</code>)。</li>
+</ul>
+<hr>
+<h1 id="外部script引入的报错"><a href="#外部script引入的报错" class="headerlink" title="外部script引入的报错"></a>外部script引入的报错</h1><ul>
+<li>js引入位置删除还报错时，有可能是缓存，重启服务即可</li>
+</ul>
+<hr>
+<h1 id="forEach到底会不会改变原数组"><a href="#forEach到底会不会改变原数组" class="headerlink" title="forEach到底会不会改变原数组"></a>forEach到底会不会改变原数组</h1><ul>
+<li>forEach到底能不能改变原数组的问题。对item进行更改时，对<strong>数组元素是基本类型的不会</strong>，<strong>引用类型改变单一属性会，引用类型改变整个对象不会</strong>；<strong>通过<code>arr[index]</code>来改则两种类型都会</strong></li>
+<li>[参考](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44628533/article/details/102495129%EF%BC%89">https://blog.csdn.net/weixin_44628533/article/details/102495129）</a></li>
+</ul>
+<hr>
+<h1 id="对象属性名带特殊字符-变量"><a href="#对象属性名带特殊字符-变量" class="headerlink" title="对象属性名带特殊字符&#x2F;变量"></a>对象属性名带特殊字符&#x2F;变量</h1><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/13/ES6%E6%89%A9%E5%B1%95%20%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95/#%E5%B1%9E%E6%80%A7%E5%90%8D%E8%A1%A8%E8%BE%BE%E5%BC%8F">ES6扩展 对象扩展</a>中“属性名表达式”的用法</li>
+<li><strong>对象属性名带特殊字符</strong>（比如<code>-</code>）：<ul>
+<li>例子：定义<code>let obj = &#123; &#39;SVC-TYD&#39;: &#39;1&#39; &#125;</code>，调用<code>obj[&#39;SVC-TYD&#39;] = &#39;2&#39;</code></li>
+</ul>
+</li>
+<li><strong>对象属性名带变量&#x2F;常量</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key=<span class="string">&quot;age&quot;</span>; <span class="comment">// 先定义一个常量key</span></span><br><span class="line"><span class="keyword">const</span> xiaoming =&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;xiaoming&quot;</span>,</span><br><span class="line">    [<span class="string">`now<span class="subst">$&#123;key&#125;</span>`</span>]: <span class="number">14</span>, <span class="comment">// 注意：使用 模板字符串，必须搭配中括号</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// xiaoming[`now$&#123;key&#125;`] = 14 // 或者这样定义</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(xiaoming);<span class="comment">//&#123;name: &quot;xiaoming&quot;, nowage: 14&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>**注意：对象属性名包含 常量&#x2F;变量，使用 模板字符串 时，必须搭配中括号<code>[``]</code>**；对象属性名带特殊字符，使用引号时可以不用中括号</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/07/18/%E5%89%8D%E7%AB%AF%E7%94%9F%E6%88%90csv%E6%96%87%E4%BB%B6%E5%B9%B6%E4%B8%8B%E8%BD%BD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端生成csv文件并下载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/10/el-input%20%E8%BE%93%E5%85%A5%E6%A1%86%E5%9B%9E%E8%BD%A6%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">el-input 输入框回车自动刷新页面的问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E6%83%B3%E8%B5%B0%E5%AE%8C%E6%95%B4%E4%B8%AA%E5%BE%AA%E7%8E%AF%E5%8F%AF%E7%94%A8Array-every"><span class="nav-number">1.</span> <span class="nav-text">不想走完整个循环可用Array.every()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#export%E4%B8%8Eexport-default"><span class="nav-number">2.</span> <span class="nav-text">export与export default</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%96%E9%83%A8script%E5%BC%95%E5%85%A5%E7%9A%84%E6%8A%A5%E9%94%99"><span class="nav-number">3.</span> <span class="nav-text">外部script引入的报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#forEach%E5%88%B0%E5%BA%95%E4%BC%9A%E4%B8%8D%E4%BC%9A%E6%94%B9%E5%8F%98%E5%8E%9F%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">forEach到底会不会改变原数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%90%8D%E5%B8%A6%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">对象属性名带特殊字符&#x2F;变量</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

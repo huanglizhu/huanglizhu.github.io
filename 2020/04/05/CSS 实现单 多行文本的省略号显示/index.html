@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 实现单/多行文本的省略号显示 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="工作中需要对后端返回的商品展示数据做处理时用到，对不确定到底多少行时可用伪元素处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 实现单&#x2F;多行文本的省略号显示">
+<meta property="og:url" content="http://yoursite.com/2020/04/05/CSS%20%E5%AE%9E%E7%8E%B0%E5%8D%95%20%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%98%BE%E7%A4%BA/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="工作中需要对后端返回的商品展示数据做处理时用到，对不确定到底多少行时可用伪元素处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggh2pba6zxj30em05hwfa.jpg">
+<meta property="article:published_time" content="2020-04-05T02:56:19.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.269Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggh2pba6zxj30em05hwfa.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS 实现单 多行文本的省略号显示" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS 实现单/多行文本的省略号显示
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/05/CSS%20%E5%AE%9E%E7%8E%B0%E5%8D%95%20%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%98%BE%E7%A4%BA/" class="article-date">
+	  <time datetime="2020-04-05T02:56:19.000Z" itemprop="datePublished">四月 5, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>工作中需要对后端返回的商品展示数据做处理时用到，对不确定到底多少行时可用伪元素处理</p>
+<span id="more"></span>
+
+<h1 id="单行文本的省略号显示"><a href="#单行文本的省略号显示" class="headerlink" title="单行文本的省略号显示"></a>单行文本的省略号显示</h1><h2 id="CSS3-text-overflow属性"><a href="#CSS3-text-overflow属性" class="headerlink" title="CSS3 text-overflow属性"></a>CSS3 text-overflow属性</h2><ul>
+<li>CSS3<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-text-overflow.html">text-overflow</a>属性可实现<strong>单行文本的省略号显示</strong>，可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=trycss3_text-overflow">例子</a><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.singleLineEllipsis</span>&#123;</span><br><span class="line">  // 让容器内多行文字不换行，在一行内显示</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">  // 隐藏溢出部分</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  // 省略号显示</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>text-overflow属性指定<strong>当文本溢出包含它的元素，应该发生什么</strong>。<ul>
+<li><strong>注意：</strong>运用于单行文本时，该属性需要搭配以下两个属性使用：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 让容器内多行文字不换行，在一行内显示 */</span></span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="comment">/* 隐藏溢出部分 */</span></span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="多行文本的省略号显示"><a href="#多行文本的省略号显示" class="headerlink" title="多行文本的省略号显示"></a>多行文本的省略号显示</h1><h2 id="确定行数"><a href="#确定行数" class="headerlink" title="确定行数"></a>确定行数</h2><h3 id="webkit-line-clamp属性"><a href="#webkit-line-clamp属性" class="headerlink" title="-webkit-line-clamp属性"></a>-webkit-line-clamp属性</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*将对象作为弹性伸缩盒子模型*/</span></span><br><span class="line">display: -webkit-box </span><br><span class="line"><span class="comment">/*设置或检索伸缩盒对象的子元素的排列方式，默认水平*/</span></span><br><span class="line">-webkit-box-orient:vertical</span><br><span class="line"><span class="comment">/*设置显示多少行*/</span></span><br><span class="line">-webkit-line-clamp:<span class="number">3</span> </span><br><span class="line"><span class="comment">/*元素内容溢出的部分隐藏*/</span></span><br><span class="line">overflow:hidden</span><br><span class="line"><span class="comment">/*当文本溢出包含它的元素，显示省略号“…”*/</span></span><br><span class="line">text-overflow: ellipsis;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggh2pba6zxj30em05hwfa.jpg" alt="效果"></p>
+<ul>
+<li><code>-webkit-line-clamp</code>是<strong>显示的文本的行数</strong>。为了实现该效果，<strong>需要组合其他的WebKit属性</strong>：<ol>
+<li><code>display: -webkit-box</code>:<strong>必须结合的属性</strong> ，将对象作为弹性盒子模型显示 。</li>
+<li><code>-webkit-box-orient</code>:<strong>必须结合的属性</strong> ，设置对象的子元素的排列方式 。</li>
+</ol>
+</li>
+<li><strong>注意：</strong><ul>
+<li><code>-webkit-line-clamp</code> 是一个非标准属性，只能在WebKit内核的浏览器中使用，例如Safari和Chrome。要在其他浏览器中实现相同的效果，可以考虑使用CSS的伪元素或JavaScript来实现。</li>
+<li>如果我有4行，但是设置<code>-webkit-line-clamp: 3;</code> ，结果第4行还是显示，只是在第3行末尾出现省略号，如果不确定行数时想实现在最后一行末尾省略号的效果可使用伪元素&#x2F;js</li>
+</ul>
+</li>
+</ul>
+<h2 id="不确定行数"><a href="#不确定行数" class="headerlink" title="不确定行数"></a>不确定行数</h2><h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><ul>
+<li>注意，这种方法只能在固定宽度的元素中使用，因为省略号元素的宽度是固定的。如果要在可变宽度的元素中使用，可以使用 JavaScript 或者其他技术实现。</li>
+<li>此外，这种方法只适用于使用单一字体的元素，因为不同字体的字符宽度可能会不同，可能导致省略号元素的位置不准确。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;test&quot;</span>&gt;</span>This is some long text that will not fit in the box<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.textContainer</span> &#123;</span><br><span class="line">    <span class="comment">/* 设置溢出隐藏 */</span></span><br><span class="line">	<span class="attribute">overflow</span>: hidden; </span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000000</span>;</span><br><span class="line">    <span class="comment">/* 设置宽高，超出部分不显示 */</span></span><br><span class="line">	<span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="comment">/* 子绝父相做个省略号伪元素 */</span></span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="comment">/* 使用伪元素实现最后一行末尾省略号 */</span></span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;...&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: absolute;</span><br><span class="line">      <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">1em</span>; <span class="comment">/* 留出空隙，不能用padding-left，那样加上...的宽度就多出来了 */</span></span><br><span class="line">      <span class="attribute">background-color</span>: white; <span class="comment">/* 遮盖原文本 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在上面的示例中，首先按照之前的方法设置文本溢出省略号。然后，使用 <code>position: relative</code> 属性将元素设置为相对定位。</li>
+<li>接着，使用 <code>&amp;::after</code> 伪元素在元素的末尾添加省略号。通过 <code>content</code> 属性设置省略号的文本内容，然后使用 <code>position: absolute</code> 属性将伪元素设置为绝对定位。最后，使用 <code>right: 0</code> 和 <code>bottom: 0</code> 属性将伪元素定位在元素的右下角，并使用 <code>padding-left</code> 属性留出一定的空隙，避免省略号与文本重叠。</li>
+<li>为了遮盖原文本，使用 <code>background-color: white</code> 属性将伪元素的背景色设置为白色。</li>
+<li>请注意，由于使用了伪元素，所以在实现时需要将样式应用于元素的父元素或者容器元素上，而不是直接应用于文本元素。</li>
+</ul>
+<h3 id="js（疯狂循环）"><a href="#js（疯狂循环）" class="headerlink" title="js（疯狂循环）"></a>js（疯狂循环）</h3><ul>
+<li>这个做法基本是把容器内可放的所有文字都循环了一边，虽然网上有二分处理，但还可能会出现空白太多的问题，目前我都是直接让后端返回显示的数量或者直接用单行省略号（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/li-lanie/p/5960625.html#:~:text=%E5%A4%9A%E8%A1%8C%E6%BA%A2%E5%87%BA%E9%9A%90%E8%97%8F%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7%E5%8A%9F%E8%83%BD%E7%9A%84JS%E5%AE%9E%E7%8E%B0%20-,%E5%93%92%E5%93%92%E5%A4%A7%E9%B1%BC%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD">二分处理可参考</a>）</li>
+<li>通过测量文本高度并截取文本来实现。具体步骤如下：<ul>
+<li>确定要设置多行文字省略号的元素。</li>
+<li>获取目标元素的高度和行高，并计算出目标元素可以显示的文本行数。</li>
+<li>获取元素的文本内容，并根据元素高度和行高计算出需要显示的文本内容。</li>
+<li>在该元素的内容末尾添加省略号。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;textContainer&quot;</span>&gt;</span></span><br><span class="line">  平台退换货状态退换货原因收货入仓状态收货入仓时间创建时间申请时间（买家在平台申请退换货的时间）</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addEl</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> target = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.textContainer&#x27;</span>); <span class="comment">// 获取目标元素</span></span><br><span class="line">  <span class="keyword">const</span> lineHeight = <span class="built_in">parseInt</span>(<span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>(target).<span class="property">lineHeight</span>); <span class="comment">// 获取目标元素的行高</span></span><br><span class="line">  <span class="keyword">const</span> height = <span class="built_in">parseInt</span>(<span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>(target).<span class="property">height</span>); <span class="comment">// 获取目标元素的高度</span></span><br><span class="line">  <span class="keyword">const</span> lines = <span class="title class_">Math</span>.<span class="title function_">floor</span>(height / lineHeight); <span class="comment">// 计算目标元素可以显示的最大行数【Math.floor返回小于等于参数的最大整数】</span></span><br><span class="line">  <span class="keyword">const</span> content = target.<span class="property">textContent</span>.<span class="title function_">trim</span>(); <span class="comment">// 获取目标元素的文本内容，去除首尾空白</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (content.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(target.<span class="property">scrollHeight</span> &lt;= height) &#123; <span class="comment">// 不需要省略号</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> arrContent = content.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>); <span class="comment">// 将文本转换为数组，方便删掉末尾的字符给省略号留位置！</span></span><br><span class="line">    <span class="keyword">let</span> truncated = <span class="literal">false</span>; <span class="comment">// 标记是否需要省略号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始4个字(1行1个字)作为测试文本，每次循环+1字，从少到多测试到目标元素最多能塞多少文字【疯狂循环，性能肯定不咋地，但是实现效果很好】</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = lines; i &lt; arrContent.<span class="property">length</span>; i++) &#123; </span><br><span class="line">      target.<span class="property">textContent</span> = arrContent.<span class="title function_">slice</span>(<span class="number">0</span>, i).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>); <span class="comment">// 更新元素的文本内容【用target元素显示部分文字作为测试文本试试会不会填满目标元素】</span></span><br><span class="line">      <span class="keyword">if</span> (target.<span class="property">scrollHeight</span> &gt; height) &#123; <span class="comment">// 如果文本高度超过目标元素高度，则说明需要省略号</span></span><br><span class="line">        target.<span class="property">textContent</span> = arrContent.<span class="title function_">slice</span>(<span class="number">0</span>, i - <span class="number">3</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>) + <span class="string">&#x27;...&#x27;</span>; <span class="comment">// 在文本末尾添加省略号</span></span><br><span class="line">        truncated = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span>; <span class="comment">// 循环到测试文本能填满容器可视高度的最后一行就作为文本末尾，剩下的不塞进target.textContent，不然省略号位置会出现在文本末尾，但不在可视范围</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端基础-CSS（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端基础-HTTP/HTML/浏览器（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%98%BE%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">单行文本的省略号显示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3-text-overflow%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">CSS3 text-overflow属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%98%BE%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">多行文本的省略号显示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E8%A1%8C%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">确定行数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webkit-line-clamp%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.1.</span> <span class="nav-text">-webkit-line-clamp属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%A1%AE%E5%AE%9A%E8%A1%8C%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">不确定行数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="nav-number">2.2.1.</span> <span class="nav-text">伪元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js%EF%BC%88%E7%96%AF%E7%8B%82%E5%BE%AA%E7%8E%AF%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">js（疯狂循环）</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

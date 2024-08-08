@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开发博客项目之接口(3) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="4-8 开发 博客详情路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发博客项目之接口(3)">
+<meta property="og:url" content="http://yoursite.com/2020/02/07/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(3)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="4-8 开发 博客详情路由">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdbfqahfuj311b0iu40s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdchej5hbj30hh03j3yk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdef1gow7j30gm026glr.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdik7ej38j30gm03jwew.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdlw371kcj31020jngng.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmd5vimsj30mu02m0t0.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmy06ewlj30sb0ii75s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmudbpppj30nb03i0t5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmzbel0fj30sd0ivq4h.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdni3bk6mj30zz0j03zy.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdnzmy7fwj30wa0iwabk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdo0mwmc9j310a0j2wg6.jpg">
+<meta property="article:published_time" content="2020-02-07T15:00:56.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.404Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdbfqahfuj311b0iu40s.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-开发博客项目之接口(3)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      开发博客项目之接口(3)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/07/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(3)/" class="article-date">
+	  <time datetime="2020-02-07T15:00:56.000Z" itemprop="datePublished">二月 7, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="4-8-开发-博客详情路由"><a href="#4-8-开发-博客详情路由" class="headerlink" title="4-8 开发 博客详情路由"></a>4-8 开发 博客详情路由</h1><span id="more"></span>
+<p><strong><code>controller</code>-<code>blog.js</code>中</strong>定义一个<code>getDetail()</code>用于返回假数据：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const getD<span class="attr">etail</span> <span class="operator">=</span> () =&gt; <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">//先返回假数据</span></span><br><span class="line">  <span class="title class_">return</span> <span class="punctuation">&#123;</span></span><br><span class="line"><span class="symbol">    id:</span> <span class="number">1</span>,</span><br><span class="line"><span class="symbol">    title:</span> <span class="string">&quot;标题A&quot;</span>,</span><br><span class="line"><span class="symbol">    content:</span> <span class="string">&quot;内容A&quot;</span>,</span><br><span class="line"><span class="symbol">    createTime:</span> <span class="number">1579421639661</span>,</span><br><span class="line"><span class="symbol">    author:</span> <span class="string">&quot;hlz&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>router</code>-<code>blog.js</code>中</strong>引入<code>getDetail()</code>，修改“获取博客详情”返回的内容:</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取博客详情</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">method</span> === &quot;<span class="title function_">GET</span>&quot; &amp;&amp; <span class="title function_">req</span>.<span class="title function_">path</span> === &quot;/<span class="title function_">api</span>/<span class="title function_">blog</span>/<span class="title function_">detail</span>&quot;) <span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  const id = req.query.id;</span></span><br><span class="line"><span class="comment">  const data = getDetail(id);</span></span><br><span class="line"><span class="comment">  return new SuccessModel(data);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>将我们在发送get请求时的id获取并传入<code>getDetail()</code>，得到的对象<code>data</code>传入<code>SucessModel()</code>中去新建一个对象，该对象是格式化后的数据对象，在<code>app.js</code>中该对象会通过<code>res.end()</code>显示在页面上:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdbfqahfuj311b0iu40s.jpg" alt="效果"></p>
+<hr>
+<h1 id="nodejs读取文件的简单示例"><a href="#nodejs读取文件的简单示例" class="headerlink" title="nodejs读取文件的简单示例"></a>nodejs读取文件的简单示例</h1><h2 id="读取a-json文件内容"><a href="#读取a-json文件内容" class="headerlink" title="读取a.json文件内容"></a>读取<code>a.json</code>文件内容</h2><p>新建<strong>文件夹<code>promise-test</code><strong>，该文件夹下新建一个</strong><code>index.js</code>用于读取文件</strong>。新建一个<code>**files</code>文件夹<strong>用于存放</strong>3个文件<code>a.json</code>、<code>b.json</code>、<code>c.json</code>**。</p>
+<p><strong><code>a.json</code>：</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;next&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;this is a&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>index.js</code>:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);<span class="comment">// fs是node自带的模块，用于读取文件</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);<span class="comment">//path是node自带的模块，用于获取路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取a.json文件的绝对路径fullFileName</span></span><br><span class="line"><span class="comment">//path的resolve()用于拼接路径，__dirname是node的全局变量，可直接使用，表示当前文件的目录</span></span><br><span class="line"><span class="keyword">const</span> fullFileName = path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;files&quot;</span>, <span class="string">&quot;a.json&quot;</span>)</span><br><span class="line"><span class="comment">//通过fs.readFile()读取绝对路径的文件</span></span><br><span class="line">fs.<span class="title function_">readFile</span>(fullFileName, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//fs.readFile()读取文件是异步的</span></span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="comment">// 如果报错就抛出</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 没报错就将读取到的数据data转换为字符串打印（data默认二进制）</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data.<span class="title function_">toString</span>());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>运行index.js可以打印出a.json的数据:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdchej5hbj30hh03j3yk.jpg" alt="运行index.js可以打印出a.json的数据"></p>
+<h2 id="通过回调函数的方式获取文件内容"><a href="#通过回调函数的方式获取文件内容" class="headerlink" title="通过回调函数的方式获取文件内容"></a>通过回调函数的方式获取文件内容</h2><p><strong>修改<code>index.js</code>获取a.json文件的内容:</strong></p>
+<ul>
+<li><strong>创建<code>getFileContent()</code></strong><ul>
+<li>**回调函数（参数函数）<code>callback</code>**：获取文件内容,转换为JSON对象后通过参数传给回调函数<code>callback</code>。</li>
+<li><strong>参数<code>fileName</code><strong>：需要获取内容的</strong>文件名</strong>（<code>a.json</code>）。</li>
+</ul>
+</li>
+<li>调用<code>getFileContent()</code>时只需要<strong>传入</strong>需要获取的<strong>文件名</strong>，（回调函数接受<strong>获取到的数据对象作为参数</strong>）即可在<strong>回调函数</strong>中对获取到的内容进行操作。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);<span class="comment">// fs是node自带的模块，用于读取文件</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);<span class="comment">//path是node自带的模块，用于获取路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// callback方式获取文件内容</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getFileContent</span>(<span class="params">fileName, callback</span>) &#123;</span><br><span class="line">  <span class="comment">//path的resolve()用于拼接路径，__dirname是node的全局变量，可直接使用，表示当前文件的目录</span></span><br><span class="line">  <span class="keyword">const</span> fullFileName = path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;files&quot;</span>, fileName)</span><br><span class="line">  <span class="comment">//通过fs.readFile()读取绝对路径的文件</span></span><br><span class="line">  fs.<span class="title function_">readFile</span>(fullFileName, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//fs.readFile()读取文件是异步的</span></span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="comment">// 如果报错就抛出</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 读取到的数据data默认二进制</span></span><br><span class="line">    <span class="comment">// 没报错就将data转换为字符串再转换为JSON对象后传给回调函数callback</span></span><br><span class="line">    <span class="title function_">callback</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(data.<span class="title function_">toString</span>()));</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="title function_">getFileContent</span>(<span class="string">&quot;a.json&quot;</span>, <span class="function"><span class="params">aData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a data&quot;</span>, aData)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdef1gow7j30gm026glr.jpg" alt="结果"></li>
+</ul>
+<h2 id="依次获取文件内容-回调地狱"><a href="#依次获取文件内容-回调地狱" class="headerlink" title="依次获取文件内容(回调地狱)"></a>依次获取文件内容(回调地狱)</h2><p><strong><code>b.json</code></strong>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;next&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;this is b&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>c.json</code></strong>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;next&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;this is c&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>index.js</strong>:</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 依次获取三个文件内容，回调地狱</span></span><br><span class="line">getFileContent(<span class="string">&quot;a.json&quot;</span>, aData =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;a data&quot;</span>, aData)</span><br><span class="line">  getFileContent(aData.next, bData =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(bData);</span><br><span class="line">    getFileContent(bData.next, cData =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.<span class="built_in">log</span>(cData);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdik7ej38j30gm03jwew.jpg" alt="结果"></p>
+<hr>
+<h2 id="使用Promise避免回调地狱"><a href="#使用Promise避免回调地狱" class="headerlink" title="使用Promise避免回调地狱"></a>使用Promise避免回调地狱</h2><ul>
+<li>使用**<code>getFileContent()</code><strong>只需要</strong>传入文件名fileName**,(避免回调地狱，不需要使用回调函数)<strong>返回的是一个Promise对象</strong>。</li>
+<li><strong><code>then()</code><strong>返回的Promise对象</strong>可以通过</strong>我们的<strong>设置返回新的Promise对象</strong>。</li>
+<li>then()中的参数函数（回调函数）获取到的<strong>参数</strong>是由调用它的Promise对象在决议为成功&#x2F;失败时(即**<code>resolve()</code>&#x2F;<code>reject()</code>中作为参数)返回的数据**。</li>
+</ul>
+<p><strong>关于Promise和resolve()、reject()：</strong></p>
+<ul>
+<li>在<code>getFileContent()</code>中我们<strong>返回的是一个Promise对象</strong>，这个对象中保存着一个<strong>异步操作的结果（成功&#x2F;失败）</strong>。（异步操作放在Promise的参数函数中）</li>
+<li>当Promise的参数函数中保存的异步操作<strong>成功</strong>，则可以调用<strong>resolve()<strong>将获取到的数据通过</strong>参数</strong>传递给<strong>then()的第一个参数函数</strong>。</li>
+<li>如果异步操作<strong>失败</strong>，则可以调用<strong>reject()<strong>将错误信息通过</strong>参数</strong>传递给<strong>then()的第二个参数函数&#x2F;catch()的参数函数</strong>。</li>
+<li><strong>注意：调用resolve()&#x2F;reject()都不会终止Promise的参数函数的执行</strong>（他们只改变Promise对象的状态并传递参数），所以<strong>为了防止resolve()或reject()后面的函数还继续执行，最好在resolve或reject前面加上return语句，这样函数就结束了，后面语句自然也就不会执行了（<code>return resolve();</code>）。</strong></li>
+</ul>
+<p><strong><code>index.js</code></strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);<span class="comment">// fs是node自带的模块，用于读取文件</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);<span class="comment">//path是node自带的模块，用于获取路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用Promise依次获取不同文件的内容</span></span><br><span class="line"><span class="comment">// 使用getFileContent()只需要传入文件名fileName，返回的是promise对象</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getFileContent</span>(<span class="params">fileName</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//path的resolve()用于拼接路径，__dirname是node的全局变量，可直接使用，表示当前文件的目录</span></span><br><span class="line">    <span class="keyword">const</span> fullFileName = path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;files&quot;</span>, fileName)</span><br><span class="line">    <span class="comment">//通过fs.readFile()读取绝对路径的文件</span></span><br><span class="line">    fs.<span class="title function_">readFile</span>(fullFileName, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//fs.readFile()读取文件是异步的</span></span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="comment">// 如果报错就将错误信息传给reject()</span></span><br><span class="line">        <span class="title function_">reject</span>(err);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">resolve</span>(</span><br><span class="line">        <span class="comment">// 读取到的数据data默认二进制</span></span><br><span class="line">        <span class="comment">// 没报错就将data转换为字符串再转换为JSON对象后传给resolve()</span></span><br><span class="line">        <span class="title class_">JSON</span>.<span class="title function_">parse</span>(data.<span class="title function_">toString</span>())</span><br><span class="line">      )</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试，getFileContent()会返回一个Promise对象</span></span><br><span class="line"><span class="comment">// 成功获取的数据作为参数传入then()的参数函数中</span></span><br><span class="line"><span class="title function_">getFileContent</span>(<span class="string">&quot;a.json&quot;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">aData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a data&quot;</span>, aData);</span><br><span class="line">  <span class="comment">// then()可以返回另一个Promise对象</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">getFileContent</span>(aData.<span class="property">next</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">bData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;b data&quot;</span>, bData);</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">getFileContent</span>(bData.<span class="property">next</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">cData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c data&quot;</span>, cData);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>补充：</strong>使用<code>async await</code>会更加简单，会在后面讲koa2框架时讲解。</p>
+<hr>
+<h1 id="4-9-处理post请求"><a href="#4-9-处理post请求" class="headerlink" title="4-9 处理post请求"></a>4-9 处理post请求</h1><p>之前我们处理的两个路由都是get请求的，现在我们来处理post请求的路由。</p>
+<h2 id="复习：post请求的简单示例"><a href="#复习：post请求的简单示例" class="headerlink" title="复习：post请求的简单示例"></a>复习：post请求的简单示例</h2><p>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/#%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%88%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89">“开发博客项目之接口（1）”post请求的例子</a><br><strong>注意：数据流获取数据的方式是异步的，所以我们可以使用Promise来获取数据</strong></p>
+<h2 id="通过Promise来解析postData"><a href="#通过Promise来解析postData" class="headerlink" title="通过Promise来解析postData"></a>通过Promise来解析postData</h2><ul>
+<li>回到**<code>blog-1</code>文件夹中，在<code>app.js</code>中新建函数<code>getPostData()</code>,<strong>在该函数中</strong>通过Promise来解析postData**。<ul>
+<li>其中我们没有用到<code>reject()</code>是因为在这里我们并不把 get请求 或者 请求类型为JSON以外的类型的数据（比如<code>form-data</code>类型）判定为错误的，只需要返回空数据就好。</li>
+</ul>
+</li>
+<li>在<code>app.js</code>中的<code>serverHandle()</code>中，我们会处理不同的路由，在<strong>处理路由前就需要使用<code>getPostData()</code>解析PostData</strong>。解析成功以后的数据会作为参数传到<code>then()</code>中，此时我们需要<strong>将所有路由的处理都放在<code>then()</code>的回调函数中</strong>，让接下来在<code>router</code>中处理路由时都能拿到PostData。</li>
+</ul>
+<p><strong><code>app.js</code>中添加函数<code>getPostData()</code>用于解析PostData</strong>:</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const getPostData = <span class="function"><span class="params">(req)</span> =&gt;</span> &#123;</span><br><span class="line">  const promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (req.method !== <span class="string">&quot;POST&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(&#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] !== <span class="string">&quot;application/json&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(&#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="regexp">//</span> 数据流获取数据的方式是异步的，可以放在<span class="built_in">Promise</span>中</span><br><span class="line">    let postData = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    req.<span class="literal">on</span>(<span class="string">&quot;data&quot;</span>, chunk =&gt; &#123;</span><br><span class="line">      postData += chunk.toString();</span><br><span class="line">    &#125;)</span><br><span class="line">    req.<span class="literal">on</span>(<span class="string">&quot;end&quot;</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!postData) &#123;</span><br><span class="line">        <span class="keyword">return</span> resolve(&#123;&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      resolve(<span class="built_in">JSON</span>.parse(postData));</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>app.js</code>中使用函数<code>getPostData()</code>获取PostData</strong>，原本req.body是空的，现在把获取到的postData放进去。<br>把所有 路由的处理 都放在<code>then()</code>的回调函数中，让接下来在<code>router</code>中处理路由时都能拿到PostData:</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> serverHandle = (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">//设置返回格式 JSON</span></span><br><span class="line">  res.setHeader(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取path</span></span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">url</span> = req.url</span><br><span class="line">  req.path = <span class="built_in">url</span>.split(<span class="string">&quot;?&quot;</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment">//解析query,parse方法用于将一个 JSON 字符串转换为JS对象</span></span><br><span class="line">  req.query = querystring.parse(<span class="built_in">url</span>.split(<span class="string">&quot;?&quot;</span>)[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理postData</span></span><br><span class="line">  getPostData(req).then(postData =&gt; &#123;</span><br><span class="line">    <span class="comment">// 原本req.body是空的，现在把获取到的postData放进去</span></span><br><span class="line">    req.body = postData;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理blog路由，blogData是通过调用函数handleBlogRouter得到的对象</span></span><br><span class="line">    <span class="keyword">const</span> blogData = handleBlogRouter(req, res)</span><br><span class="line">    <span class="keyword">if</span> (blogData) &#123;</span><br><span class="line">      res.end(</span><br><span class="line">        <span class="comment">//记住end是一句字符串，故必须把JS对象转换为JSON字符串</span></span><br><span class="line">        <span class="built_in">JSON</span>.stringify(blogData)</span><br><span class="line">      )</span><br><span class="line">      <span class="comment">//记住要使用return来结束</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理user路由(当路由命中handleUserRouter时)</span></span><br><span class="line">    <span class="keyword">const</span> userData = handleUserRouter(req, res)</span><br><span class="line">    <span class="keyword">if</span> (userData) &#123;</span><br><span class="line">      res.end(</span><br><span class="line">        <span class="comment">//记住end是一句字符串，故必须把对象转换为字符串</span></span><br><span class="line">        <span class="built_in">JSON</span>.stringify(userData)</span><br><span class="line">      )</span><br><span class="line">      <span class="comment">//记住要使用return来结束</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//未命中路由，返回404（这个了解即可，使用不多）</span></span><br><span class="line">    res.writeHead(<span class="number">404</span>, &#123; <span class="string">&quot;Content-type&quot;</span>: <span class="string">&quot;text/plain&quot;</span> &#125;)</span><br><span class="line">    res.write(<span class="string">&quot;404 Not Found\n&quot;</span>)</span><br><span class="line">    res.end()</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="4-10-开发-新建和更新博客路由"><a href="#4-10-开发-新建和更新博客路由" class="headerlink" title="4-10 开发 新建和更新博客路由"></a>4-10 开发 新建和更新博客路由</h1><h2 id="新建博客路由"><a href="#新建博客路由" class="headerlink" title="新建博客路由"></a>新建博客路由</h2><ul>
+<li>在<code>controller-blog.js</code>中新建一个函数<code>newBlog()</code>，先通过它返回假数据。</li>
+<li>在<code>router-blog.js</code>中引入<code>newBlog()</code>，开发新建博客的路由<code>&quot;/api/blog/new&quot;</code></li>
+</ul>
+<p><strong>在<code>controller-blog.js</code>中新建一个函数<code>newBlog()</code>，先通过它返回假数据：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 兼容：(ES6)如果没有blogData就给一个空对象</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">newBlog</span> = (<span class="params">blogData = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// blogData是一个博客对象，包含title content 属性</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">3</span><span class="comment">//表示新建博客，插入到数据表里面的id</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在<code>router-blog.js</code>中引入<code>newBlog()</code>，将controller中处理好的数据经过SuccessModel格式化后显示在页面上:</strong></p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新建一篇博客</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">method</span> === &quot;<span class="title function_">POST</span>&quot; &amp;&amp; <span class="title function_">req</span>.<span class="title function_">path</span> === &quot;/<span class="title function_">api</span>/<span class="title function_">blog</span>/<span class="title function_">new</span>&quot;) <span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  // req.body.js中获取到的postData</span></span><br><span class="line"><span class="comment">  const data = newBlog(req.body);</span></span><br><span class="line"><span class="comment">  return new SuccessModel(data);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>启动项目，使用postman测试一下效果：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdlw371kcj31020jngng.jpg" alt="postman测试"></p>
+<p><strong>可以在控制台看到postData：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmd5vimsj30mu02m0t0.jpg" alt="控制台"></p>
+<hr>
+<h2 id="更新博客路由"><a href="#更新博客路由" class="headerlink" title="更新博客路由"></a>更新博客路由</h2><ul>
+<li>和新建博客路由的思路类似，主要区别在更新博客我们还<strong>需要从get请求中获取一个id</strong>，以此判断更新哪一篇博客。</li>
+<li>要更新就<strong>需要获取id</strong>，在“获取博客详情”时我们使用了id，现在“更新博客路由”也要使用id，那我们就可以把获取id的表达式提取到路由处理的外面。</li>
+</ul>
+<p><strong><code>controller-blog.js</code>中处理数据:</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更新一篇博客</span></span><br><span class="line">const updateBlog = <span class="function">(<span class="params">id, blogData = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// id是要更新的博客的id</span></span><br><span class="line">  <span class="comment">// blogData是一个博客对象，包含title content 属性</span></span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;update blog...&quot;</span>, id, blogData);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回true说明更新成功</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>router-blog.js</code>中获取数据并以正确格式显示在页面上</strong>：</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新一篇博客</span></span><br><span class="line"><span class="keyword">if</span> (method === <span class="string">&quot;POST&quot;</span> &amp;&amp; req.path === <span class="string">&quot;/api/blog/update&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// id是从req.query中获取到的</span></span><br><span class="line">  <span class="keyword">const</span> result = updateBlog(id, req.<span class="keyword">body</span>);</span><br><span class="line">  <span class="comment">// result是updateBlog()返回的布尔值，true则更新成功</span></span><br><span class="line">  <span class="keyword">if</span> (result) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SuccessModel();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ErrorModel(<span class="string">&quot;更新博客失败&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过postman测试updateBlog()返回true时：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmy06ewlj30sb0ii75s.jpg" alt="postman测试updateBlog()返回true"><br><strong>控制台：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmudbpppj30nb03i0t5.jpg" alt="控制台"></p>
+<p><strong>通过postman测试updateBlog()返回false时：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdmzbel0fj30sd0ivq4h.jpg" alt="postman测试updateBlog()返回false"></p>
+<hr>
+<h1 id="4-11-开发-删除博客路由和登录路由"><a href="#4-11-开发-删除博客路由和登录路由" class="headerlink" title="4-11 开发 删除博客路由和登录路由"></a>4-11 开发 删除博客路由和登录路由</h1><h2 id="删除博客路由"><a href="#删除博客路由" class="headerlink" title="删除博客路由"></a>删除博客路由</h2><ul>
+<li>删除博客就很简单，只需要获取一个id即可。</li>
+<li>在<code>controller-blog.js</code>中新建方法<code>delBlog()</code>,根据传入的id删除博客。</li>
+<li>在<code>router-blog.js</code>中引用<code>delBlog()</code>，</li>
+</ul>
+<p><strong><code>controller-blog.js</code>：</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const delBlog = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// id是要删除的博客的id</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回true说明删除成功</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>router-blog.js</code>：</strong></p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除一篇博客</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">method</span> === <span class="string">&quot;POST&quot;</span> &amp;&amp; req.path === <span class="string">&quot;/api/blog/del&quot;</span>) &#123;</span><br><span class="line">  const result = delBlog(<span class="variable language_">id</span>);</span><br><span class="line">  <span class="keyword">if</span> (result) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SuccessModel();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ErrorModel(<span class="string">&quot;删除博客失败&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过postman测试updateBlog()返回true时：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdni3bk6mj30zz0j03zy.jpg" alt="postman测试"><br><strong>注意：我们虽然没有post数据，但是由于我们规定了<code>method === &quot;POST&quot;</code>，所以必须通过postman进行测试。</strong></p>
+<hr>
+<h2 id="登录路由"><a href="#登录路由" class="headerlink" title="登录路由"></a>登录路由</h2><p>blog.js中的路由就写完了，接下来就要处理user.js相关的路由。</p>
+<ul>
+<li>在<code>controller</code>文件夹中<strong>新建<code>user.js</code>文件</strong>，创建函数<code>loginCheck</code>用于处理登录路由的逻辑。</li>
+<li>在<code>router-user.js</code>中，引入函数<code>loginCheck</code>，在函数<code>handleUserPouter</code>接收<code>app.js</code>中传入的参数<code>req</code>、<code>res</code>,在该函数中处理登录路由，返回由<code>SuccessModel</code>格式后的数据。</li>
+</ul>
+<p>**<code>controller-user.js</code>**：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const loginCheck = <span class="function"><span class="params">(username, password)</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="regexp">//</span> 先使用假数据</span><br><span class="line">  <span class="keyword">if</span> (username === <span class="string">&quot;hlz&quot;</span> &amp;&amp; password === <span class="string">&quot;123&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.<span class="built_in">exports</span> = &#123;</span><br><span class="line">  loginCheck</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>router-user.js</code></strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; loginCheck &#125; = <span class="built_in">require</span>(<span class="string">&quot;../controller/user&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">SuccessModel</span>, <span class="title class_">ErrorModel</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;../model/resModel&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">handleUserRouter</span> = (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> method = req.<span class="property">method</span><span class="comment">//GET POST</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//登录</span></span><br><span class="line">  <span class="keyword">if</span> (method === <span class="string">&quot;POST&quot;</span> &amp;&amp; req.<span class="property">path</span> === <span class="string">&quot;/api/user/login&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// username和password都是从postData中获取的</span></span><br><span class="line">    <span class="comment">// 之前我们将password存在了req.body内</span></span><br><span class="line">    <span class="keyword">const</span> &#123; username, password &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="title function_">loginCheck</span>(username, password);</span><br><span class="line">    <span class="keyword">if</span> (result) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SuccessModel</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ErrorModel</span>(<span class="string">&quot;登录失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = handleUserRouter</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过postman测试登录数据正确时：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdnzmy7fwj30wa0iwabk.jpg" alt="postman测试登录数据正确"></p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcdo0mwmc9j310a0j2wg6.jpg" alt="postman测试登录数据错误时"></p>
+<hr>
+<h1 id="总结系统架构设计的四层"><a href="#总结系统架构设计的四层" class="headerlink" title="总结系统架构设计的四层"></a>总结系统架构设计的四层</h1><p>第一层： <a target="_blank" rel="noopener" href="http://www.js/">www.js</a> [开启 Server]<br>第二层：app.js [通信设置层]<br>第三层：router文件夹 [路由相关业务逻辑层]<br>第四层：controller文件夹 [数据处理层]</p>
+<ul>
+<li>一开始进入<strong>第一层</strong>，项目执行的是<code>bin</code>文件夹下的**<code>www.js</code><strong>,这里面只是<code>createServer</code>的逻辑，</strong>端口连通**什么的，和我们的业务逻辑没有关系。</li>
+<li><strong>第二层</strong>：<code>app.js</code> ，用来<strong>设置系统比较基础的功能</strong>（处理<code>blog</code>、<code>user</code>路由）或者定义一些<strong>公共参数</strong>（可以通过res&#x2F;req传给路由，比如：获取<code>path</code>、解析<code>query</code>、异步获取PostData）还有<strong>设置返回类型</strong>（JSON），还是<strong>不涉及业务逻辑</strong>的处理。</li>
+<li><strong>第三层</strong>：router文件夹下的两个<strong>路由文件</strong> <code>blog.js</code>、<code>user.js</code>，稍微涉及逻辑层，但<strong>只管路由</strong>。<ul>
+<li><strong>来了什么路由就分配什么数据</strong>，通过SuccessModel&#x2F;ErrorModel <strong>处理数据格式</strong>。</li>
+<li>匹配到路由（接口）以后会去处理一些数据，然后（通过SuccessModel）会给你返回一个 <strong>正确的格式</strong>。至于这些数据是怎么去匹配的，怎么去筛选的，是正确的还是错误的他不管，他只管和路由（接口）有关的数据分配。</li>
+</ul>
+</li>
+<li><strong>第四层</strong>：<code>controller.js</code> 是<strong>最关心数据</strong>的层次，他没有<code>res</code>、<code>req</code>、<code>path</code>、<code>query</code>这些东西，只是<strong>对传入的数据进行计算处理再返回</strong>。（我们目前还没有计算，接下来会有）。至于数据返回后是怎么分配给路由的<code>controller.js</code>是不管的。</li>
+</ul>
+<p><strong>一层层拆分是一个由最基础的http服务向逻辑层转变的过程。</strong></p>
+<p>我们一开始先<strong>在<code>www.js</code>上</strong>创建服务器server并监听8000端口，这个服务器做的事情放到<code>app.js</code>的serverHandle中。<br>然后<strong>在<code>app.js</code>中</strong>将HTTP请求req和响应res传到路由组件（<code>router</code>文件夹），并设置一些 公共参数 通过req&#x2F;res传给路由组件以供使用。<br><strong>在<code>router</code>文件夹下</strong>的路由组件<code>blog.js</code>、<code>user.js</code>中，根据<code>app.js</code>传过来的req、res匹配对应的接口并将从<code>controller.js</code>中得到的数据进行一些<strong>格式的处理</strong>。最终返回显示在页面上。<br><strong>在<code>controller.js</code>中</strong>对获取到的数据进行<em>8计算处理再返回</em>8。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/08/%E8%B7%AF%E7%94%B1%20API%20%E8%B7%AF%E5%BE%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          路由 API 路径
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/07/ES6%20%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6 参数默认值</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-8-%E5%BC%80%E5%8F%91-%E5%8D%9A%E5%AE%A2%E8%AF%A6%E6%83%85%E8%B7%AF%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">4-8 开发 博客详情路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">nodejs读取文件的简单示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96a-json%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.</span> <span class="nav-text">读取a.json文件内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.</span> <span class="nav-text">通过回调函数的方式获取文件内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E6%AC%A1%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9-%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1"><span class="nav-number">2.3.</span> <span class="nav-text">依次获取文件内容(回调地狱)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Promise%E9%81%BF%E5%85%8D%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1"><span class="nav-number">2.4.</span> <span class="nav-text">使用Promise避免回调地狱</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-9-%E5%A4%84%E7%90%86post%E8%AF%B7%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">4-9 处理post请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%EF%BC%9Apost%E8%AF%B7%E6%B1%82%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">复习：post请求的简单示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Promise%E6%9D%A5%E8%A7%A3%E6%9E%90postData"><span class="nav-number">3.2.</span> <span class="nav-text">通过Promise来解析postData</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-10-%E5%BC%80%E5%8F%91-%E6%96%B0%E5%BB%BA%E5%92%8C%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">4.</span> <span class="nav-text">4-10 开发 新建和更新博客路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">4.1.</span> <span class="nav-text">新建博客路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">4.2.</span> <span class="nav-text">更新博客路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-11-%E5%BC%80%E5%8F%91-%E5%88%A0%E9%99%A4%E5%8D%9A%E5%AE%A2%E8%B7%AF%E7%94%B1%E5%92%8C%E7%99%BB%E5%BD%95%E8%B7%AF%E7%94%B1"><span class="nav-number">5.</span> <span class="nav-text">4-11 开发 删除博客路由和登录路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%8D%9A%E5%AE%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">5.1.</span> <span class="nav-text">删除博客路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E8%B7%AF%E7%94%B1"><span class="nav-number">5.2.</span> <span class="nav-text">登录路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9B%9B%E5%B1%82"><span class="nav-number">6.</span> <span class="nav-text">总结系统架构设计的四层</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

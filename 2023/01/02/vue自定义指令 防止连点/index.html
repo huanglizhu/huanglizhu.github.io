@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue自定义指令 防止连点 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="针对按钮以及非按钮元素防止连续点击的处理方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue自定义指令 防止连点">
+<meta property="og:url" content="http://yoursite.com/2023/01/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4%20%E9%98%B2%E6%AD%A2%E8%BF%9E%E7%82%B9/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="针对按钮以及非按钮元素防止连续点击的处理方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-02T14:47:08.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.141Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-vue自定义指令 防止连点" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      vue自定义指令 防止连点
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2023/01/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4%20%E9%98%B2%E6%AD%A2%E8%BF%9E%E7%82%B9/" class="article-date">
+	  <time datetime="2023-01-02T14:47:08.000Z" itemprop="datePublished">一月 2, 2023</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>针对按钮以及非按钮元素防止连续点击的处理方法</p>
+<span id="more"></span>
+
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/v2/guide/custom-directive.html">文档</a>看<code>v-focus</code>例子</li>
+<li>对普通 DOM 元素进行底层操作的时候可用到自定义指令，它们可以用于操纵DOM、响应事件和修改元素样式等操作</li>
+<li>一般在nuxt脚手架的配置文件<code>nuxt.config.js</code>中配置<code>plugins</code>，在<code>plugins/plugins.js</code>中引入<code>import &#39;@/utils/directives&#39;;</code>，<code>utils/directives.js</code>中使用<code>Vue.directive</code>设置全局自定义指令</li>
+<li>创建基本步骤：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// directive-name 是自定义指令的名称</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&#x27;directive-name&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// 对象中的各个钩子函数（bind、inserted、update和unbind）用于定义指令的行为</span></span><br><span class="line">  <span class="attr">bind</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">    <span class="comment">// 绑定时的初始化逻辑</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">inserted</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">    <span class="comment">// 元素插入到父节点时的逻辑</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">update</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode, oldVnode</span>) &#123;</span><br><span class="line">    <span class="comment">// 组件更新时的逻辑</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">unbind</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">    <span class="comment">// 解绑时的清理逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>应用自定义指令：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-directive-name</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 可以通过指令修饰符（Directive Modifiers）和指令参数（Directive Arguments）来进一步定制指令的行为 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-directive-name.modifier</span>=<span class="string">&quot;value&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="工作场景"><a href="#工作场景" class="headerlink" title="工作场景"></a>工作场景</h1><ul>
+<li>各函数区别可参考<a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/v2/guide/custom-directive.html#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0">文档-自定义指令-钩子函数</a></li>
+<li><strong>期望实现效果：</strong>点击按钮要<strong>立即</strong>执行点击事件</li>
+<li><strong>处理方式：</strong>直接从样式上做限制简单，按钮控制disabled 属性，非按钮则控制<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-pointer-events.html">CSS3 pointer-events 属性</a><ul>
+<li><code>v-preventReClick</code>只是防止按钮被连续点击，只控制<code>disable</code>3s，不是防抖</li>
+<li>比直接对按钮的事件函数用防抖效果要好，直接用防抖则还得额外在页面处理按钮的loading或者disabled展示给用户看？</li>
+<li>如果做防抖，则还要考虑改写原本的点击事件，比如<code>@click=&#39;func&#39;</code>改为<code>v-xxx-click=&#39;func&#39;</code>，很麻烦，干脆直接改样式，如果有需要防抖的还是对事件处理函数使用防抖处理</li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
+<li>使用了addEventListener的，<strong>需要加一个 unbind 钩子函数在指令解绑时清除事件监听器</strong>，可确保在组件销毁或指令解绑时，移除按钮的事件监听器，避免潜在的内存泄漏问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="防止按钮重复点击（不是防抖）"><a href="#防止按钮重复点击（不是防抖）" class="headerlink" title="防止按钮重复点击（不是防抖）"></a>防止按钮重复点击（不是防抖）</h2><ul>
+<li>为防止按钮重复点击，增加<code>v-preventReClick</code>指令</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903944653651981#heading-16">参考</a></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建全局指令 用于防止按钮重复点击</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&quot;preventReClick&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">inserted</span>: <span class="keyword">function</span>(<span class="params">el, binding</span>) &#123;</span><br><span class="line">    el.<span class="property">handler</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!el.<span class="property">disabled</span>) &#123;</span><br><span class="line">        el.<span class="property">disabled</span> = <span class="literal">true</span>;</span><br><span class="line">        el.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;is-disabled&#x27;</span>)</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          el.<span class="property">disabled</span> = <span class="literal">false</span>;</span><br><span class="line">          el.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;is-disabled&#x27;</span>)</span><br><span class="line">        &#125;, binding.<span class="property">value</span> || <span class="number">3000</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">unbind</span>(<span class="params">el</span>) &#123;</span><br><span class="line">    <span class="comment">// console.log(&#x27;preventReClick&#x27;, el)</span></span><br><span class="line">    el.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">    el = <span class="literal">null</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用v-preventReClick --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">size</span>=<span class="string">&quot;mini&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handle().optionhandle()&quot;</span> <span class="attr">v-preventReClick</span>&gt;</span>查询<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>出现问题：</strong>对于button可以使用<a target="_blank" rel="noopener" href="https://www.runoob.com/tags/att-button-disabled.html">disabled属性</a>让其不触发，但有些按钮是用 div  &#x2F;  span 等这种实现的，disabled属性并不能阻止div的onclick事件，此时可使用<code>v-pointerReClick</code></li>
+<li><strong>解决：</strong>设置样式  <code>pointer-events: none</code>  ，该样式会将元素设置为不接收鼠标事件，包括点击事件</li>
+</ul>
+<h2 id="对非按钮元素点击事件加防抖命令"><a href="#对非按钮元素点击事件加防抖命令" class="headerlink" title="对非按钮元素点击事件加防抖命令"></a>对非按钮元素点击事件加防抖命令</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-pointer-events.html">CSS3 pointer-events 属性</a>设置元素是否对鼠标事件做出反应</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于防止按钮重复点击 可作用于div/span</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&#x27;pointerReClick&#x27;</span>, &#123;</span><br><span class="line">  <span class="title function_">inserted</span>(<span class="params">el, binding</span>) &#123;</span><br><span class="line">    el.<span class="property">handler</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      el.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        el.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;auto&#x27;</span></span><br><span class="line">      &#125;, binding.<span class="property">value</span> || <span class="number">1000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">unbind</span>(<span class="params">el</span>) &#123;</span><br><span class="line">    el.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">    el = <span class="literal">null</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用v-pointerReClick --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pointer&quot;</span> <span class="attr">v-pointerReClick</span>&gt;</span>文字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>出现问题：</strong><ul>
+<li>由于设置为<code>pointer-events:none</code>后，相当于该元素已经不存在了，那么这种情况的点击会不会穿透导致点击到它的外层呢？</li>
+<li>结果是肯定的，设置<code>pointer-events:none</code>后，点击了子节点是无效的，但同时相当于点击了其父节点</li>
+</ul>
+</li>
+<li><strong>解决方法：设置修饰符阻止冒泡？行不通，只能在父元素中查子元素pointerEvents未none时return出点击函数，不好做自定义指令，直接用封装的节流函数处理childClick比较方便。如果实在要做，可在自定义指令中使用节流（注意：如果做防抖节流的自定义指令，则还要改写原本的点击事件，比如</strong>**<code>@click=&#39;func&#39;</code><strong><strong>改为</strong></strong><code>v-xxx-click=&#39;func&#39;</code>**<strong>，再加上样式控制）</strong></li>
+<li>复杂的解决：只能在父元素中查子元素pointerEvents未none时return出点击函数，不好做自定义指令</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">parentClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>(<span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">child</span>).<span class="property">pointerEvents</span> === <span class="string">&#x27;none&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;父元素被点击&#x27;</span>);</span><br><span class="line">&#125;,</span><br><span class="line"><span class="title function_">childClick</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子元素被点击&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以放弃自定义指令，直接用封装的节流函数处理childClick，样式另外写</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">childClick</span>: _.<span class="title function_">throttle</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子元素被点击&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">3000</span>),</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>最终解决：</strong>自定义指令中使用节流（注意：如果做防抖节流的自定义指令，则还要改写原本的点击事件，比如<code>@click=&#39;func&#39;</code>改为<code>v-xxx-click=&#39;func&#39;</code>，再加上样式控制）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&quot;throttle-click&quot;</span>, &#123;</span><br><span class="line">  <span class="title function_">bind</span>(<span class="params">el, binding</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">const</span> delay = <span class="built_in">parseInt</span>(binding.<span class="property">arg</span>) || <span class="number">3000</span>; <span class="comment">// 获取节流的延迟时间</span></span><br><span class="line"></span><br><span class="line">    el.<span class="property">handler</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 防止冒泡，不然会触发父元素点击事件</span></span><br><span class="line">      event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">      <span class="keyword">if</span> (!timer) &#123;</span><br><span class="line">        <span class="comment">// 如果定时器不存在，则执行指令绑定的处理函数</span></span><br><span class="line">        binding.<span class="title function_">value</span>();</span><br><span class="line">        <span class="comment">// 样式控制</span></span><br><span class="line">        el.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;pointer&#x27;</span>)</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          timer = <span class="literal">null</span>;</span><br><span class="line">          el.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;pointer&#x27;</span>)</span><br><span class="line">        &#125;, delay);</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">unbind</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">    el.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pointer</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;parentClick&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-throttle-click</span>=<span class="string">&quot;childClick&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pointer&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;child&quot;</span>&gt;</span>123<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>用lodash中节流则event不太好传:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 能用lodash中节流</span></span><br><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&quot;throttle-click&quot;</span>, &#123;</span><br><span class="line">  <span class="title function_">bind</span>(<span class="params">el, binding</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">const</span> delay = <span class="built_in">parseInt</span>(binding.<span class="property">arg</span>) || <span class="number">3000</span>; <span class="comment">// 获取节流的延迟时间</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 节流函数</span></span><br><span class="line">    el.<span class="property">throttleClick</span> = _.<span class="title function_">throttle</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      binding.<span class="title function_">value</span>();</span><br><span class="line">      el.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;pointer&#x27;</span>)</span><br><span class="line">    &#125;, delay)</span><br><span class="line"></span><br><span class="line">    el.<span class="property">handler</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 样式控制</span></span><br><span class="line">      el.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;pointer&#x27;</span>)</span><br><span class="line">      <span class="comment">// 防止冒泡，不然会触发父元素点击事件</span></span><br><span class="line">      event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">      el.<span class="title function_">throttleClick</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">unbind</span>: <span class="keyword">function</span>(<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">    el.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, el.<span class="property">handler</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="binding-value-调用组件函数"><a href="#binding-value-调用组件函数" class="headerlink" title="binding.value()调用组件函数"></a>binding.value()调用组件函数</h2><ul>
+<li>在 Vue 的自定义指令中，通过 binding.value() 可以直接调用指令绑定的处理函数，而<strong>不需要使用 this 关键字</strong></li>
+<li>在指令的 bind 钩子函数中，binding.value 表示指令绑定的值，通常是一个函数。通过调用 binding.value()，就可以直接触发该函数。</li>
+<li>这是因为在 Vue 的指令系统中，binding.value 属性被设置为绑定指令时提供的值。当你在模板中使用指令时，可以将一个函数作为指令的值传递，并在自定义指令中通过 binding.value() 调用该函数。</li>
+<li>需要注意的是，通过 binding.value() 调用的函数，其上下文（this）可能会发生变化。如果需要在函数内部使用特定的上下文，可以使用 Function.prototype.bind() 方法来绑定函数的执行上下文</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binding.<span class="property">value</span>.<span class="title function_">bind</span>(context)(); <span class="comment">// context 是你希望绑定的执行上下文</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="区分修饰符prevent和stop"><a href="#区分修饰符prevent和stop" class="headerlink" title="区分修饰符prevent和stop"></a>区分修饰符prevent和stop</h2><ul>
+<li>prevent是阻止默认事件</li>
+<li>stop是阻止事件传播</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/22/%E4%B8%AD%E6%96%AD%E8%BD%AE%E8%AF%A2%E7%9A%84setTimeout%E6%97%A0%E6%95%88%E7%9A%84%E6%83%85%E5%86%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          中断轮询的setTimeout无效的情况
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">axios使用和简单封装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">工作场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E6%8C%89%E9%92%AE%E9%87%8D%E5%A4%8D%E7%82%B9%E5%87%BB%EF%BC%88%E4%B8%8D%E6%98%AF%E9%98%B2%E6%8A%96%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">防止按钮重复点击（不是防抖）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E9%9D%9E%E6%8C%89%E9%92%AE%E5%85%83%E7%B4%A0%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%8A%A0%E9%98%B2%E6%8A%96%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">对非按钮元素点击事件加防抖命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binding-value-%E8%B0%83%E7%94%A8%E7%BB%84%E4%BB%B6%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">binding.value()调用组件函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%88%86%E4%BF%AE%E9%A5%B0%E7%AC%A6prevent%E5%92%8Cstop"><span class="nav-number">2.4.</span> <span class="nav-text">区分修饰符prevent和stop</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

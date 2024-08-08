@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS异步与单线程、Date、Math | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="单线程和异步 单线程：一次只能做一件事情，js就是单线程的。 异步：为了让单线程不阻塞，就出现了异步。 js是单线程的，但是遇到等待（网络请求&#x2F;定时任务）的时候不能卡住，此时就需要异步。 异步通常是基于回调函数的形式，当然还有其他的方法实现异步，比如Promise   JS是单线程语言，只能同时做一件事。 浏览器和nodejs已支持JS启动进程，如Web Worker JS和DOM渲染共">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS异步与单线程、Date、Math">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/JS%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%8D%95%E7%BA%BF%E7%A8%8B%E3%80%81Date%E3%80%81Math/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="单线程和异步 单线程：一次只能做一件事情，js就是单线程的。 异步：为了让单线程不阻塞，就出现了异步。 js是单线程的，但是遇到等待（网络请求&#x2F;定时任务）的时候不能卡住，此时就需要异步。 异步通常是基于回调函数的形式，当然还有其他的方法实现异步，比如Promise   JS是单线程语言，只能同时做一件事。 浏览器和nodejs已支持JS启动进程，如Web Worker JS和DOM渲染共">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/setTimeout_async.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/sync_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_ajax_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_dynamic_loading_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_callback_hell.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_setTimeout_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Date_API.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg">
+<meta property="article:published_time" content="2020-02-06T09:05:51.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.312Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/setTimeout_async.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS异步与单线程、Date、Math" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS异步与单线程、Date、Math
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/06/JS%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%8D%95%E7%BA%BF%E7%A8%8B%E3%80%81Date%E3%80%81Math/" class="article-date">
+	  <time datetime="2020-02-06T09:05:51.000Z" itemprop="datePublished">二月 6, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="单线程和异步"><a href="#单线程和异步" class="headerlink" title="单线程和异步"></a>单线程和异步</h1><ul>
+<li><strong>单线程</strong>：<strong>一次只能做一件事情</strong>，js就是单线程的。</li>
+<li><strong>异步</strong>：<strong>为了让单线程不阻塞，就出现了异步</strong>。<ul>
+<li>js是<strong>单线程</strong>的，但是遇到等待（网络请求&#x2F;定时任务）的时候不能卡住，此时就需要异步。</li>
+<li>异步通常是基于<strong>回调函数</strong>的形式，当然还有其他的方法实现异步，比如<strong>Promise</strong></li>
+</ul>
+</li>
+<li><strong>JS是单线程语言</strong>，只能同时做一件事。</li>
+<li>浏览器和nodejs已支持JS启动<strong>进程</strong>，如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">Web Worker</a></li>
+<li>JS和DOM渲染共用同一个<strong>线程</strong>，因为JS可修改DOM结构<span id="more"></span></li>
+</ul>
+<h2 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h2><ul>
+<li><strong>何时需要异步：</strong><ul>
+<li>同步异步的区别就是会不会阻塞后面程序的运行，那么我们<strong>需要后面程序不被阻塞的时候就要使用异步</strong>。</li>
+<li>在可能发生等待的时候，等待过程中不能像alert一样阻塞程序运行，因此，所以的<strong>“等待的情况”都需要异步</strong>。</li>
+</ul>
+</li>
+<li><strong>异步</strong>：<ul>
+<li><strong>例子：</strong> setTimeout是异步，依次打印100 300 200，异步是<strong>不会阻塞后面程序的进行</strong>的。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/setTimeout_async.jpg" alt="setTimeout是异步" title="setTimeout是异步"><ul>
+<li><strong>注意：就算setTimeout没有设置时间，但执行栈中还是先执行同步任务，setTimeout会被拿出去放在任务队列中，等同步任务执行完毕才执行他，这和他需不需要等待没关系。</strong></li>
+<li>执行第一行，<strong>打印100</strong></li>
+<li>执行setTimeout后，传入setTimeout的函数会被<strong>暂存</strong>到任务队列，不会立即执行（单线程的特点，不能同时干两件事）</li>
+<li>执行最后一行，<strong>打印300</strong></li>
+<li>待所有程序执行完，处于空闲状态时，会立马看有没有在任务队列暂存起来的要执行。</li>
+<li>发现暂存起来的setTimeout中的函数无需等待时间，就立即来过来执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>同步</strong>：<ul>
+<li><strong>例子：</strong> alert是同步，打印100 200后需要等待用户点击确认，如不点击将一直卡在200，永远不会打印300。同步是会<strong>阻塞</strong>后面程序的进行。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/sync_example.jpg" alt="同步例子" title="同步例子"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="前端使用异步的场景"><a href="#前端使用异步的场景" class="headerlink" title="前端使用异步的场景"></a>前端使用异步的场景</h2><ul>
+<li><strong>定时任务</strong>：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/">“setTimeout()与setInterval()”</a></li>
+<li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载（即src赋值的过程是异步的）</li>
+<li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
+</ul>
+<h3 id="ajax请求的例子"><a href="#ajax请求的例子" class="headerlink" title="ajax请求的例子"></a>ajax请求的例子</h3><p>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/">ajax请求完整笔记</a><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_ajax_example.jpg" alt="ajax请求代码示例" title="ajax请求代码示例"><br><strong>打印“start”、“end”,然后等<code>./data1.json</code>中的数据请求成功后执行函数-打印获取到的数据<code>data1</code>。</strong>（关于<code>$.get()</code>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#get-%E4%BD%BF%E7%94%A8-AJAX-%E7%9A%84-HTTP-GET-%E8%AF%B7%E6%B1%82%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE">笔记</a>）</p>
+<h3 id="动态加载的例子"><a href="#动态加载的例子" class="headerlink" title="动态&lt;img&gt;加载的例子"></a>动态<code>&lt;img&gt;</code>加载的例子</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_dynamic_loading_example.jpg" alt="动态`&lt;img&gt;`加载的例子" title="动态`&lt;img&gt;`加载的例子"><br>关于<code>createElement()</code>可以参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/06/JS%E4%B8%AD%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BAHTML%20DOM%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95/">“JS中修改&#x2F;创建&#x2F;移动&#x2F;删除 HTML DOM元素”</a><br><code>onload事件</code>就是callback的一种形式</p>
+<p><strong>执行顺序：</strong><br><strong>打印“start”</strong>&#x3D;》<strong>创建一个图片元素img</strong>（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/01/let%E4%B8%8Econst/#%E8%A1%A5%E5%85%85%EF%BC%9AcreateElement-%E6%96%B9%E6%B3%95">可参考笔记</a>）&#x3D;》<strong>给img的src赋值</strong>，src 属性值更新时浏览器会<strong>自动加载</strong>并显示出新图像。(<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/04/HTML%20DOM%20Image%20%E5%AF%B9%E8%B1%A1/#src-%E5%B1%9E%E6%80%A7%EF%BC%88%E8%AE%BE%E7%BD%AE%E5%90%8E%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%EF%BC%89">可参考笔记</a>) &#x3D;》图片加载过程中<strong>打印“end”</strong> &#x3D;》 <strong>等img加载完成才会执行onload绑定的函数</strong>，打印<code>loaded</code>（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/09/JS_DOM%E4%BA%8B%E4%BB%B6/#onload-%E4%BA%8B%E4%BB%B6">可参考笔记</a>）</p>
+<p><strong>很明显src赋值的过程（图片动态加载）是异步的，不会阻塞end的打印</strong></p>
+<hr>
+<h3 id="事件绑定的例子"><a href="#事件绑定的例子" class="headerlink" title="事件绑定的例子"></a>事件绑定的例子</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg" alt="事件绑定的例子" title="事件绑定的例子"><br><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E5%8F%A5%E6%9F%84-click">addEventListener()相关笔记</a><br>或者通过<code>object.onclick=function()&#123;SomeJavaScriptCode&#125;;</code>绑定<code>onclick事件</code>也是一样的。</p>
+<hr>
+<h2 id="可用作JS异步编程的方法"><a href="#可用作JS异步编程的方法" class="headerlink" title="可用作JS异步编程的方法"></a>可用作JS异步编程的方法</h2><ul>
+<li><strong>回调函数</strong>，这是异步编程最基本的方法。<strong>上面提到的定时器、ajax请求、图片的动态加载、事件绑定 实际上都是回调函数的形式。</strong><ul>
+<li>例：假定有两个函数f1和f2，后者等待前者的执行结果，如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。【此时f2是异步的，她耗费的时间并不影响同步任务的执行】<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;f2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;start&quot;</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;f1&quot;</span>);</span><br><span class="line">  setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">f1(f2);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;end&quot;</span>);</span><br><span class="line"><span class="comment">// start f1 end f2</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。<ul>
+<li>简单说，它的思想是，<strong>每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。</strong>回调函数（回调地狱）变成了<strong>链式写法</strong>，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png" alt="Promise的例子" title="Promise的例子"></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/05/ES6%20async%E5%87%BD%E6%95%B0%E4%B8%8Eawait%E5%85%B3%E9%94%AE%E8%AF%8D/"><strong>async</strong></a>,async函数返回的是一个 Promise 对象，可以使用 then 方法添加回调函数，async 函数内部 return 语句返回的值，会成为 then 方法回调函数的参数。当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。<ul>
+<li>比起Promise，await则不需要then，<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png" alt="Promise与async对比的例子" title="Promise与async对比的例子"></li>
+</ul>
+</li>
+<li><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。<ul>
+<li>例：为f1绑定一个事件，当f1发生done事件，就执行f2。</li>
+</ul>
+</li>
+<li><strong>发布&#x2F;订阅</strong>，与”事件监听”类似。<ul>
+<li>我们假定，存在一个”信号中心”，<strong>某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行</strong>。这就叫做”发布&#x2F;订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）。</li>
+<li>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><ul>
+<li>Promise的出现<strong>解决了回调地狱</strong>的问题<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_callback_hell.png" alt="callback hell的例子" title="callback hell的例子">层层嵌套的方式不符合我们的思维顺序</li>
+</ul>
+</li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png" alt="Promise的例子" title="Promise的例子"></li>
+</ul>
+<hr>
+<h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><p>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AD%A5%E9%AA%A4%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%89">从输入url到页面显示都经历了什么</a><br><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</p>
+<hr>
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><h3 id="同步和异步的区别，分别举例子"><a href="#同步和异步的区别，分别举例子" class="headerlink" title="同步和异步的区别，分别举例子"></a>同步和异步的区别，分别举例子</h3><ul>
+<li>异步是基于JS是单线程语言而出现的</li>
+<li>同步任务会<strong>阻塞</strong>代码执行，而异步不会</li>
+<li>alert是同步，setTimeout是异步</li>
+</ul>
+<h3 id="手写用Promise加载一张图片"><a href="#手写用Promise加载一张图片" class="headerlink" title="手写用Promise加载一张图片"></a>手写用Promise加载一张图片</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载一张图片</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadImg</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">            img.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(img)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`图片加载失败 <span class="subst">$&#123;src&#125;</span>`</span>)</span><br><span class="line">                <span class="title function_">reject</span>(err)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">src</span> = src</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">&#x27;https://img.mukewang.com/5a9fc8070001a82402060220-140-140.jpg&#x27;</span></span><br><span class="line"><span class="title function_">loadImg</span>(url).<span class="title function_">then</span>(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img.<span class="property">width</span>)</span><br><span class="line">    <span class="keyword">return</span> img</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img.<span class="property">height</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">ex</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(ex))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png" alt="Promise加载一张图片的结果" title="Promise加载一张图片的结果"></p>
+<h4 id="Promise加载2张图片（解决回调地域）"><a href="#Promise加载2张图片（解决回调地域）" class="headerlink" title="Promise加载2张图片（解决回调地域）"></a>Promise加载2张图片（解决回调地域）</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载2张图片，即使用Promise解决回调地域</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadImg</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    const p = <span class="keyword">new</span> Promise(</span><br><span class="line">        <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            const img = document.createElement(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">            img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                resolve(img)</span><br><span class="line">            &#125;</span><br><span class="line">            img.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                const err = <span class="keyword">new</span> Error(<span class="string">`图片加载失败 <span class="subst">$&#123;src&#125;</span>`</span>)</span><br><span class="line">                reject(err)</span><br><span class="line">            &#125;</span><br><span class="line">            img.src = src</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const url1 = <span class="string">&#x27;https://img.mukewang.com/5a9fc8070001a82402060220-140-140.jpg&#x27;</span></span><br><span class="line">const url2 = <span class="string">&#x27;https://img3.mukewang.com/5a9fc8070001a82402060220-100-100.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line">loadImg(url1).then(<span class="function"><span class="params">img1</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(img1.width)</span><br><span class="line">    <span class="keyword">return</span> img1 <span class="comment">// 普通对象</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">img1</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(img1.height)</span><br><span class="line">    <span class="keyword">return</span> loadImg(url2) <span class="comment">// promise 实例</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">img2</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(img2.width)</span><br><span class="line">    <span class="keyword">return</span> img2</span><br><span class="line">&#125;).then(<span class="function"><span class="params">img2</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(img2.height)</span><br><span class="line">&#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">ex</span> =&gt;</span> <span class="built_in">console</span>.error(ex))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg2.png" alt="Promise加载2张图片的结果" title="Promise加载2张图片的结果"></p>
+<h3 id="关于setTimeout的笔试题"><a href="#关于setTimeout的笔试题" class="headerlink" title="关于setTimeout的笔试题"></a>关于setTimeout的笔试题</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_setTimeout_example.jpg" alt="题目" title="题目"><br>连续打印1 3 5 2<br><strong>一秒后打印4</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">1</span>);</span><br><span class="line">setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">3</span>);</span><br><span class="line">setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">4</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 连续打印1 3 5 ，1秒后4 ，1秒后2</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>所有的同步任务在主线程上执行，形成一个执行栈。<strong>异步任务有了 运行结果 才会在任务队列中放置一个事件</strong>。脚本运行时先依次运行执行栈中的所有同步任务，然后会从任务队列里提取事件，选择需要首先执行的异步任务然后执行。</p>
+<p><strong>4先有结果，所以4先出现在任务队列了</strong></p>
+<p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90%EF%BC%88%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%89">补充一个微任务、宏任务的题目</a></p>
+<h3 id="前端使用异步的场景有哪些"><a href="#前端使用异步的场景有哪些" class="headerlink" title="前端使用异步的场景有哪些"></a>前端使用异步的场景有哪些</h3><ul>
+<li><strong>定时任务</strong>：setTimeout，setInverval(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/">笔记“setTimeout()与setInterval()”</a>）</li>
+<li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载</li>
+<li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
+</ul>
+<h4 id="实现异步编程的方法"><a href="#实现异步编程的方法" class="headerlink" title="实现异步编程的方法"></a>实现异步编程的方法</h4><ul>
+<li>回调函数</li>
+<li>Promise</li>
+<li>事件绑定</li>
+<li>监听&#x2F;订阅</li>
+</ul>
+<hr>
+<h1 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h1><p>Date是日期的构造函数<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Date_API.jpg" alt="Date各种API" title="Date各种API"><br>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/20/JS_Date%E5%AF%B9%E8%B1%A1/">Date对象</a></p>
+<h1 id="Math-random"><a href="#Math-random" class="headerlink" title="Math.random()"></a>Math.random()</h1><ul>
+<li>Math的其他方法可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/12/Math%20%E5%AF%B9%E8%B1%A1/">Math对象</a></li>
+<li>在前端，Math.random()一般用于<strong>清除缓存</strong></li>
+</ul>
+<p>在项目中，有时改完js文件之后怎么也不能生效，只有清除浏览器缓存或者CTRL+F5强制刷新之后才能出现最新的版本，这样调试起来十分的不方便，此时可以<strong>在请求地址之后加上</strong>:</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;?ran=&quot;</span> + Math.<span class="built_in">random</span>(); <span class="comment">//当然这里参数 ran可以任意取了</span></span><br></pre></td></tr></table></figure>
+<p>采用<strong>随机数</strong>的方式，<strong>使每一次的请求都是一个新请求，从而防止浏览器从缓存中读取旧版本</strong>。<br><strong>注意</strong>：因为<strong>Math.random() 只能在Javascript 下起作用，故只能通过Javascript的调用才可以</strong>。</p>
+<p>除了加入随机数还可以加入<strong>当前时间</strong>：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;?time=&quot;</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().<span class="keyword">get</span><span class="built_in">Time</span>();</span><br></pre></td></tr></table></figure>
+<p>同样可以使每次请求的地址都是不一样的，从而防止浏览器使用缓存。</p>
+<hr>
+<h1 id="Date、Math相关题目"><a href="#Date、Math相关题目" class="headerlink" title="Date、Math相关题目"></a>Date、Math相关题目</h1><p>Date、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
+<h2 id="获取2017-06-10格式的日期"><a href="#获取2017-06-10格式的日期" class="headerlink" title="获取2017-06-10格式的日期"></a>获取2017-06-10格式的日期</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg" alt="获取2017-06-10格式的日期" title="获取2017-06-10格式的日期"></p>
+<ul>
+<li>1-18 函数 formatDate <strong>接受一个Date对象，返回一个格式化后的日期</strong><ul>
+<li>2-4 为防止报错，如果没有传入参数，就新建一个Date对象作为参数dt</li>
+<li>5 <code>getFullYear()</code>getFullYear()<code>获取年份</code>获取年份</li>
+<li>6 <code>getMonth()</code>获取月份，由于<strong>获取到的是0-11</strong>，所以需要+1</li>
+<li>7 <code>getDate()</code>获取日期</li>
+<li>8-15 由于我们<strong>需要格式化的日期是两位数</strong>的，所以当<code>month&lt;10</code>的时候我们需要在前面添加0。日期也是同理。<ul>
+<li>这里涉及到之前讲的<strong>字符串拼接</strong>，字符串<code>&quot;0&quot;</code>和数字month拼接后相当于**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/01/JS%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97/#%E5%8F%98%E9%87%8F%E8%AE%A1%E7%AE%97-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">强制类型转换</a>**，month将成为字符串。</li>
+</ul>
+</li>
+<li>17 通过<code>-</code>连接，将<strong>数字拼接字符串 得到 字符串</strong></li>
+</ul>
+</li>
+<li>19 新建一个Date对象dt</li>
+<li>20 将dt传入函数formatDate，得到格式化后的日期formatDate</li>
+<li>21 打印格式化后的日期formatDate</li>
+</ul>
+<hr>
+<h2 id="获取长度一致的字符串随机数"><a href="#获取长度一致的字符串随机数" class="headerlink" title="获取长度一致的字符串随机数"></a>获取长度一致的字符串随机数</h2><p><strong>题目：获取随机数，要求是长度一致的字符串格式</strong></p>
+<p><strong>注意：字符串也有slice()，和数组的slice()类似，用于截取字符串</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg" alt="获取长度一致的字符串格式的随机数" title="获取长度一致的字符串格式的随机数"><br>1 获取随机数random，小数部分长度不确定<br>2 <strong>随机数后加上10个0</strong>，保证截取的时候有10位（<strong>保证不报错</strong>）。数字拼接字符串后等于<strong>强制类型转换，random 变为字符串</strong><br>3 使用字符串的<strong>slice()截取random的前10位</strong>（注意：10不在截取范围）</p>
+<hr>
+<h2 id="遍历对象和数组的通用forEach函数"><a href="#遍历对象和数组的通用forEach函数" class="headerlink" title="遍历对象和数组的通用forEach函数"></a>遍历对象和数组的通用forEach函数</h2><p><strong>题目：写一个能遍历对象和数组的通用forEach函数</strong><br>（jquery中有现成的方法,<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组本身就有forEach()</a>）<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg" alt="能遍历对象和数组的通用forEach函数" title="能遍历对象和数组的通用forEach函数"></p>
+<ul>
+<li>1-14 <strong>定义forEach函数</strong><ul>
+<li><strong>参数1</strong>：对象&#x2F;数组。<strong>参数2</strong>：函数。</li>
+<li><strong>注意：我们这里定义的forEach函数的index和item的顺序和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组自己的forEach()</a>是反的</strong></li>
+<li>3-7 判断传入的是对象&#x2F;数组，<strong>如果是数组</strong>，就<strong>用<a href="(https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0)">数组自己的forEach()</a><strong>，遍历数组后</strong>将index和item传入 参数2（fn函数）</strong>，通过fn函数将index与item的位置调换一下后<strong>打印</strong>。</li>
+<li>8-13 <strong>如果是对象</strong>，就通过<code>for in</code>遍历对象属性，并将 属性名称<code>key</code> 和 属性值<code>obj[key]</code>传给 参数2（fn函数），被调用后会被打印。<ul>
+<li>注意：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#%E8%A1%A5%E5%85%85%EF%BC%9Ain%E8%BF%90%E7%AE%97%E7%AC%A6">in运算符</a>在 数组 中是判断有无 数组下标 的，不是数组元素。在 对象 中判断有无 属性。返回值是boolean。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>15 定义一个数组arr</li>
+<li>17-19 调用我们定义的forEach函数，传入<strong>参数1为数组arr</strong>，参数2为一个函数，该函数接收两个参数并打印他们。<ul>
+<li><strong>注意：这里的index和item的顺序和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组的forEach()</a>是反的，主要是为了照顾后面对象的<code>key</code>、<code>value</code></strong></li>
+</ul>
+</li>
+<li>21 定义一个对象obj</li>
+<li>22-24 让对象obj调用我们定义的forEach函数<ul>
+<li>key：属性名称。value：属性值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/06/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS基础知识面试题（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/05/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS基础知识面试题（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">单线程和异步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%90%8C%E6%AD%A5"><span class="nav-number">1.1.</span> <span class="nav-text">异步与同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">前端使用异步的场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax%E8%AF%B7%E6%B1%82%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">ajax请求的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">动态&lt;img&gt;加载的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">事件绑定的例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E7%94%A8%E4%BD%9CJS%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">可用作JS异步编程的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.3.1.</span> <span class="nav-text">Promise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">事件循环（JS的执行机制）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">1.5.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%88%86%E5%88%AB%E4%B8%BE%E4%BE%8B%E5%AD%90"><span class="nav-number">1.5.1.</span> <span class="nav-text">同步和异步的区别，分别举例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E7%94%A8Promise%E5%8A%A0%E8%BD%BD%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">1.5.2.</span> <span class="nav-text">手写用Promise加载一张图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise%E5%8A%A0%E8%BD%BD2%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%88%E8%A7%A3%E5%86%B3%E5%9B%9E%E8%B0%83%E5%9C%B0%E5%9F%9F%EF%BC%89"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Promise加载2张图片（解决回调地域）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EsetTimeout%E7%9A%84%E7%AC%94%E8%AF%95%E9%A2%98"><span class="nav-number">1.5.3.</span> <span class="nav-text">关于setTimeout的笔试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E7%9A%84%E5%9C%BA%E6%99%AF%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.5.4.</span> <span class="nav-text">前端使用异步的场景有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">实现异步编程的方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date"><span class="nav-number">2.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math-random"><span class="nav-number">3.</span> <span class="nav-text">Math.random()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date%E3%80%81Math%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">Date、Math相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%962017-06-10%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%97%A5%E6%9C%9F"><span class="nav-number">4.1.</span> <span class="nav-text">获取2017-06-10格式的日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%95%BF%E5%BA%A6%E4%B8%80%E8%87%B4%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">获取长度一致的字符串随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E9%80%9A%E7%94%A8forEach%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">遍历对象和数组的通用forEach函数</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

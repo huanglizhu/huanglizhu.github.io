@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DOM事件 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="总结下HTML JS React vue 中事件函数的区别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM事件">
+<meta property="og:url" content="http://yoursite.com/2019/09/11/JS_DOM%E4%BA%8B%E4%BB%B6/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="总结下HTML JS React vue 中事件函数的区别">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-11T06:38:27.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.304Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS_DOM事件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      DOM事件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/09/11/JS_DOM%E4%BA%8B%E4%BB%B6/" class="article-date">
+	  <time datetime="2019-09-11T06:38:27.000Z" itemprop="datePublished">九月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结下HTML JS React vue 中事件函数的区别</p>
+<span id="more"></span>
+
+<h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><p><strong>注意</strong>：<br>代码从上往下执行，在DOM事件中，如果先在<code>&lt;script&gt;</code>里获取对象再通过<code>&lt;div&gt;</code>定义对象会报错，因为这个对象的定义是出现在了获取的后面，你想要获取的时候还没定义。<strong>此时可以在<code>&lt;script&gt;</code>里使用鼠标事件中的onload（例子在下方）</strong></p>
+<h2 id="关于this指向"><a href="#关于this指向" class="headerlink" title="关于this指向"></a>关于this指向</h2><ul>
+<li>在事件触发的（function）函数中，this是对该DOM对象的引用。</li>
+<li>可以通过<code>console.log(this)</code>来看this在这个函数中指的是什么。</li>
+</ul>
+<h2 id="onload-事件"><a href="#onload-事件" class="headerlink" title="onload 事件"></a>onload 事件</h2><ul>
+<li>页面或图像加载完成后立即发生。</li>
+<li>onload 通常用于 <code>&lt;body&gt;</code> 元素，在页面完全载入后(包括图片、css文件等等。)执行脚本代码。</li>
+<li>该事件可作用于以下 HTML 标签：<code>&lt;body&gt;</code>, <code>&lt;frame&gt;</code>, <code>&lt;frameset&gt;</code>, <code>&lt;iframe&gt;</code>,<code> &lt;img&gt;</code>, <code>&lt;input type=&quot;image&quot;&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;script&gt;</code>,<code> &lt;style&gt;</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_img_onload">例子</a></li>
+</ul>
+<p><strong>语法：</strong><br><strong>在 HTML 中</strong>:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;body <span class="attribute">onload</span>=<span class="string">&quot;SomeJavaScriptCode&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>在 JavaScript 中</strong>:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">window.onload</span>=function()&#123;SomeJavaScriptCode&#125;<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ul>
+<li>onclick：<strong>鼠标点击</strong>时触发</li>
+<li>onmousedown：<strong>鼠标</strong>按钮在元素上<strong>按下</strong>时触发</li>
+<li>onmousemove：每次<strong>鼠标指针移动时</strong>都会触发</li>
+<li>onmouseover：<strong>鼠标滑过指定对象上</strong>时触发</li>
+<li>onmouseout：<strong>鼠标离开</strong>时触发</li>
+<li>onmouseenter：类似onmouseover，唯一的区别是 onmouseenter 事件不支持冒泡 </li>
+<li>onmouseleave：类似onmouseout，唯一的区别是 onmouseleave 事件不支持冒泡</li>
+<li>onmouseup：在元素上<strong>松开鼠标</strong>按钮时触发</li>
+<li>onfoucs：<strong>获得焦点时</strong>触发 <strong>（只能用于：input标签type为text、password<br>textarea标签）</strong> </li>
+<li>onblur：<strong>失去焦点</strong>时触发（blur v.使……模糊不清）</li>
+<li>onchange：<strong>域的内容改变</strong>时发生 <strong>（一般作用于（下拉框）select或checkbox或radio）</strong></li>
+<li>onsubmit：表单中的<strong>确认按钮被点击时</strong>发生 <strong>（onsubmit事件不是加在按钮上，而是表单上）</strong></li>
+<li>onresize：当<strong>调整浏览器窗口的大小时</strong>触发</li>
+<li>onscroll：拖动<strong>滚动条滚动时</strong>触发</li>
+</ul>
+<p><strong>需要知道：</strong></p>
+<ul>
+<li>onmousedown（按下鼠标）与onmouseup（松开鼠标）组成了onclick（鼠标点击）事件。</li>
+<li>onmouseover或onmousemove都必须和onmouseout结合才能实现移入移出不同效果的功能。（<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_onmouseover">onmouseover的例子</a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_onmousemove">onmousemove的例子</a>）</li>
+</ul>
+<h2 id="onmousemove与onmouseover的区别"><a href="#onmousemove与onmouseover的区别" class="headerlink" title="onmousemove与onmouseover的区别"></a>onmousemove与onmouseover的区别</h2><ul>
+<li><strong>时间上</strong> onmousemove 事件触发后，再触发 onmouseover 事件。</li>
+<li><strong>动作上</strong> onmouseover 只在刚进入区域时触发。onmousemove 除了刚进入区域触发外，在区域内移动鼠标，也会触发该事件。<br>（当鼠标移动很快时，可能不会触发这两个事件。）</li>
+<li>onmouseover 与 onmousemove 的区别是：<br><strong>onmousemove在每次鼠标移动时，都会触发</strong>，以此获得当前坐标值，用来判断这个点是否落在指定元素内。<strong>onmouseover，则会在进入对象时就触发，且仅会触发这一次</strong>。<br>当鼠标移过当前对象时就产生了onmouseover事件（onmouseover有个移入移出的过程）,当鼠标在当前对象上移动时就产生了onmousemove事件，只要是在对象上移动而且没有移出对象的，就是onmousemove事件。</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>用canvas标签，创建了一个画布，并画了一个小矩形，我想让鼠标悬停到矩形区域时改变矩形填充色，这里只能监听整个画布，看起来应该用over，<strong>实际上用的却是move</strong>。<br>因为，<strong>move在每次鼠标移动时，都会触发</strong>，会获得当前坐标值，用来判断这个点是否落在矩形内。<strong>若是用over，则会在进入画布时就触发，且仅会触发这一次</strong>，之后鼠标在画布内移动，一直都处于over状态，就不会触发，直到鼠标离开这个画布区域，失效。</p>
+<hr>
+<h1 id="HTML事件中调用JS函数时不加括号"><a href="#HTML事件中调用JS函数时不加括号" class="headerlink" title="HTML事件中调用JS函数时不加括号"></a>HTML事件中调用JS函数时不加括号</h1><ul>
+<li>加括号就是直接执行函数了，不加括号则是指向函数地址，当发生事件时才去调用函数。</li>
+<li><code>事件=function()&#123;&#125;</code>或者<code>事件=函数名</code>都是可以的，不能使用<code>事件=(function()&#123;&#125;)(参数)</code>或<code>事件=函数名()</code>。</li>
+<li>如果事件绑定函数想要传参可以使用<code>xx.onclick=function()&#123;函数名(参数);&#125;</code>，也就是绑定一个函数，函数在触发onclick时执行，函数内容是执行你想传参的那个函数。</li>
+</ul>
+<hr>
+<h2 id="对window使用onload的例子"><a href="#对window使用onload的例子" class="headerlink" title="对window使用onload的例子"></a>对window使用onload的例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 页面加载完成后才执行</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">window</span>.<span class="property">onload</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 获取box</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> box =<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;box&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> clicked=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;我被点击了！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            box.<span class="property">onclick</span>=clicked;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span>这是一个box<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="onfocus事件"><a href="#onfocus事件" class="headerlink" title="onfocus事件"></a>onfocus事件</h2><ul>
+<li>只能用于：input标签type为text、password</li>
+<li>textarea标签</li>
+</ul>
+<h2 id="onfocus和onblur事件的例子"><a href="#onfocus和onblur事件的例子" class="headerlink" title="onfocus和onblur事件的例子"></a>onfocus和onblur事件的例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">       <span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="language-css">       	  <span class="attribute">padding</span>:<span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">       &#125;</span></span><br><span class="line"><span class="language-css">       <span class="selector-class">.left</span>,<span class="selector-class">.tip</span>&#123;</span></span><br><span class="line"><span class="language-css">       	  <span class="attribute">float</span><span class="selector-pseudo">:left</span>;</span></span><br><span class="line"><span class="language-css">       &#125;</span></span><br><span class="line"><span class="language-css">       <span class="selector-class">.left</span>&#123;<span class="attribute">margin-right</span>:<span class="number">10px</span>;&#125;</span></span><br><span class="line"><span class="language-css">       <span class="selector-class">.tip</span>&#123;<span class="attribute">display</span>:none;<span class="attribute">font-size</span>:<span class="number">14px</span>;&#125;</span></span><br><span class="line"><span class="language-css">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">       <span class="variable language_">window</span>.<span class="property">onload</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">       	  <span class="comment">// 获取文本框和提示框</span></span></span><br><span class="line"><span class="language-javascript">       	  <span class="keyword">var</span> phone=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;phone&quot;</span>),</span></span><br><span class="line"><span class="language-javascript">              tip=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tip&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 给文本框绑定激活的事件</span></span></span><br><span class="line"><span class="language-javascript">          phone.<span class="property">onfocus</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">          	  <span class="comment">// 让tip显示出来</span></span></span><br><span class="line"><span class="language-javascript">          	  tip.<span class="property">style</span>.<span class="property">display</span>=<span class="string">&#x27;block&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 给文本框绑定失去焦点的事件</span></span></span><br><span class="line"><span class="language-javascript">          phone.<span class="property">onblur</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// 获取文本框的值,value用于获取表单元素的值</span></span></span><br><span class="line"><span class="language-javascript">             <span class="keyword">var</span> phoneVal=<span class="variable language_">this</span>.<span class="property">value</span>;</span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// 判断手机号码是否是11位的数字</span></span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// 如果输入正确，则显示对号图标，否则显示错号图标</span></span></span><br><span class="line"><span class="language-javascript">             <span class="keyword">if</span>(phoneVal.<span class="property">length</span>**<span class="number">11</span> &amp;&amp; <span class="built_in">isNaN</span>(phoneVal)**<span class="literal">false</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                tip.<span class="property">innerHTML</span>=<span class="string">&#x27;&lt;img src=&quot;E:/慕课网 前端小白入门系列课程完整版/JavaScript/6.javascriptDoM事件/img/right.png&quot;&gt;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">             &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">             	tip.<span class="property">innerHTML</span>=<span class="string">&#x27;&lt;img src=&quot;E:/慕课网 前端小白入门系列课程完整版/JavaScript/6.javascriptDoM事件/img/error.png&quot;&gt;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">             &#125;</span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">       &#125;</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;phone&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入手机号码&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span> <span class="attr">id</span>=<span class="string">&quot;tip&quot;</span>&gt;</span></span><br><span class="line">           请输入有效的手机号码</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实现效果可以看E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\index4.html</p>
+<h2 id="“onchange：域的内容改变时发生”的例子"><a href="#“onchange：域的内容改变时发生”的例子" class="headerlink" title="“onchange：域的内容改变时发生”的例子"></a>“onchange：域的内容改变时发生”的例子</h2><p>change事件,一般作用域（下拉框）select或checkbox或radio。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">       <span class="comment">// 页面加载（注意这是对DOM0级事件的命名函数调用，不要括号）</span></span></span><br><span class="line"><span class="language-javascript">       <span class="variable language_">window</span>.<span class="property">onload</span>=init;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">       <span class="comment">// 初始化</span></span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">function</span> <span class="title function_">init</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 获取下拉菜单</span></span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">var</span> menu=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;menu&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 给菜单绑定change事件,一般作用域select或checkbox或radio</span></span></span><br><span class="line"><span class="language-javascript">          menu.<span class="property">onchange</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// 获取当前选中的值</span></span></span><br><span class="line"><span class="language-javascript">             <span class="keyword">var</span> bgcolor=<span class="variable language_">this</span>.<span class="property">value</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//  var bgcolor=menu.options[menu.selectedIndex].value;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 可以先打印出来看看选中选项以后得到的value是什么</span></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// console.log(bgcolor);</span></span></span><br><span class="line"><span class="language-javascript">             </span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// 设置body的背景色             </span></span></span><br><span class="line"><span class="language-javascript">             <span class="comment">//如果bgcolor为空，则下面的脚本将不执行，否则是选择的颜色</span></span></span><br><span class="line"><span class="language-javascript">             <span class="keyword">if</span>(bgcolor**<span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="language-javascript">             &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">             	<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span>=bgcolor;</span></span><br><span class="line"><span class="language-javascript">             &#125;</span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">       &#125;</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">		请选择您喜欢的背景色：</span><br><span class="line">		<span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;menu&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;#f00&quot;</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;#0f0&quot;</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;#00f&quot;</span>&gt;</span>蓝色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;#ff0&quot;</span>&gt;</span>黄色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;#ccc&quot;</span>&gt;</span>灰色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="html中使用js中的onchange"><a href="#html中使用js中的onchange" class="headerlink" title="html中使用js中的onchange"></a>html中使用js中的<code>onchange</code></h2><p><strong>注意</strong>：<br>事件函数中调用函数都不用括号。<br>不建议使用html事件，建议使用DOM事件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">upperCase</span>(<span class="params">x</span>)</span></span><br><span class="line"><span class="language-javascript">&#123;</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> y=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(x).<span class="property">value</span></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(x).<span class="property">value</span>=y.<span class="title function_">toUpperCase</span>()</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">Enter your name: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;fname&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;upperCase(this.id)&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=hdom_onchange">效果</a></p>
+<hr>
+<h1 id="onchange事件编程练习"><a href="#onchange事件编程练习" class="headerlink" title="onchange事件编程练习"></a>onchange事件编程练习</h1><p><strong>注意：</strong> if的条件判断一定要注意是<strong>两个</strong>等号！！</p>
+<p><strong>要求实现下列功能</strong>:</p>
+<ol>
+<li>选择下拉列表中不同的选项，页面中的d iv就设置成不同的背景颜色，div中的内容也发生变化。<ul>
+<li>比如：选择黄色选项，div的背景颜色就变为黄色，文本内容就变为“我的背景颜色变成了yellow色”</li>
+</ul>
+</li>
+<li>当选择下拉列表中的“请选择”时，div的背累颜色变成白色，文本变为“我没有发生任何变化”</li>
+</ol>
+<p><strong>实现</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#div</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">2px</span> solid gray;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin</span>: <span class="number">100px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">display</span>: none;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 页面加载完成后才执行</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 获取下拉框与文字</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> colorSelect = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;color&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> bgText=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// console.log(bgText.innerHTML)</span></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 绑定事件</span></span></span><br><span class="line"><span class="language-javascript">            colorSelect.<span class="property">onchange</span> = choose;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">choose</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// console.log(this.value);</span></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> bgColor=<span class="variable language_">this</span>.<span class="property">value</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 选择颜色时让下方文字框可见</span></span></span><br><span class="line"><span class="language-javascript">                bgText.<span class="property">style</span>.<span class="property">display</span>=<span class="string">&quot;block&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 一定要注意是两个等号！</span></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span>(bgColor**<span class="string">&quot;0&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                    bgText.<span class="property">innerHTML</span>=<span class="string">&quot;我没有变化呀&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                    bgText.<span class="property">innerHTML</span>=<span class="string">&quot;我变成&quot;</span>+bgColor+<span class="string">&quot;色了诶&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span>=bgColor;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>请选择您喜欢的颜色：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;color&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;yellow&quot;</span>&gt;</span>黄色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;orange&quot;</span>&gt;</span>橘色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;pink&quot;</span>&gt;</span>粉色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;purple&quot;</span>&gt;</span>紫色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div&quot;</span>&gt;</span>我是下方文字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>地址：E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\test.html</p>
+<hr>
+<h1 id="onsubmit事件"><a href="#onsubmit事件" class="headerlink" title="onsubmit事件"></a>onsubmit事件</h1><p><strong>注意：</strong> onsubmit事件<strong>不是加在按钮上</strong>，而是form表单上。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 表单中的确认按钮被点击时发生 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>当提交表单是，触发函数并弹出提示信息。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;demo-form.php&quot;</span> <span class="attr">id</span>=<span class="string">&quot;form_ok&quot;</span>&gt;</span></span><br><span class="line">        输入名字: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;fname&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 获取表单（不是确认按钮！）</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> ok=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;form_ok&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 绑定事件</span></span></span><br><span class="line"><span class="language-javascript">        ok.<span class="property">onsubmit</span>=myFunction;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">alert</span>(<span class="string">&quot;表单已提交&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>E:\慕课网 前端小白入门系列课程完整版\JavaScript\6.javascriptDoM事件\onsubmit.html</p>
+<hr>
+<h1 id="三个比较简单的鼠标事件"><a href="#三个比较简单的鼠标事件" class="headerlink" title="三个比较简单的鼠标事件"></a>三个比较简单的鼠标事件</h1><p>想了解可以看index6.html</p>
+<ul>
+<li>onmousedown：鼠标按钮在元素上按下时触发</li>
+<li>onmousemove：在鼠标指针移动时发生</li>
+<li>onmouseup：在元素上松开鼠标按钮时触发</li>
+</ul>
+<hr>
+<h1 id="经常作用于window对象的两个事件"><a href="#经常作用于window对象的两个事件" class="headerlink" title="经常作用于window对象的两个事件"></a>经常作用于window对象的两个事件</h1><ul>
+<li>onresize：当调整浏览器窗口的大小时触发</li>
+<li>onscroll：拖动滚动条滚动时触发</li>
+</ul>
+<hr>
+<h1 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h1><ul>
+<li>总结：<ul>
+<li>html事件函数必须带<code>()</code>，否则不执行<ul>
+<li>event必须在绑定时传入才能获取<code>ondragstart=&quot;drag(event)&quot;</code></li>
+<li>注意：传入的实参必须是<code>event</code>，不能是别的名字，形参可自定义</li>
+</ul>
+</li>
+<li>js事件函数不需要<code>()</code><ul>
+<li>event不用传入即可获取到</li>
+<li>不传参则必须命名为event。如果想要传入，则实参和形参都可以自定义名字</li>
+</ul>
+</li>
+<li>react事件函数不能有<code>()</code>，否则会立即执行<ul>
+<li>event不用显示传入，但在函数接收参数时需要写明，比如定义函数时接收3个参数<code>id, title, event</code>实际传参时<code>fn(123, 快乐标题)</code>(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/#%E5%85%B3%E4%BA%8Eevent%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%89">《React知识点汇总（基础使用1）&gt;</a>)</li>
+<li>可以使用 e（或者任何你喜欢的变量名）作为事件处理函数的参数来接收事件对象</li>
+</ul>
+</li>
+<li>vue事件函数有没有<code>()</code>都可以（带不带的区别存在于<code>$event</code>传参方式（<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903910411354126">参考</a>））<ul>
+<li>有<code>()</code>则需要显示传入<code>$event</code></li>
+<li>没有<code>()</code>则隐式传入了<code>$event</code>，可直接获取</li>
+<li>注意：实参必须是<code>$event</code>，不能是别的名字，当然，定义形参时可以是你喜欢的名字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTML-事件处理"><a href="#HTML-事件处理" class="headerlink" title="HTML 事件处理"></a>HTML 事件处理</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/09/JS_DOM%E4%BA%8B%E4%BB%B6/#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6">DOM事件</a>写在html中<strong>不符合 行为、结构、样式 相分离的原则</strong></li>
+<li>尽量<strong>不要把DOM事件写在HTML中</strong>。<ol>
+<li>多元素绑定相同事件时，效率低。</li>
+<li>不建议在HTML元素中写JavaScript代码。（将页面元素写在HTML内，JS代码写在<code>&lt;script&gt;</code>内会更好）</li>
+</ol>
+</li>
+<li><strong>HTML中的语法</strong>：<code>&lt;element onclick=&quot;SomeJavaScriptCode&quot;&gt;</code></li>
+<li>直接绑定在html上的事件函数<strong>不需要手动销毁，</strong>HTML 元素上直接绑定的事件函数是直接附加到该元素上的，因此当该元素被销毁或移除时，相应的事件函数也会被自动清理，不会导致内存泄漏</li>
+<li><strong>以onclick举例：</strong><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- event必须传入才能获取到 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;clickHandle(event)&quot;</span>&gt;</span></span><br><span class="line">  激活按钮</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clickHandle</span>(<span class="params">e</span>)&#123;</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span> = e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryhtml5_draganddrop">html例子</a></li>
+</ul>
+<hr>
+<h2 id="JS-事件处理（DOM事件）"><a href="#JS-事件处理（DOM事件）" class="headerlink" title="JS 事件处理（DOM事件）"></a>JS 事件处理（DOM事件）</h2><ul>
+<li>注意：JS代码要在HTML代码加载完成后执行</li>
+<li>获取DOM元素&#x3D;&gt;绑定事件函数</li>
+</ul>
+<h3 id="DOM-0级事件处理"><a href="#DOM-0级事件处理" class="headerlink" title="DOM 0级事件处理"></a>DOM 0级事件处理</h3><ul>
+<li><strong>优点：</strong>符合 行为、结构、样式 相分离的原则。还可以选出DOM元素集合通过for循环统一操作。</li>
+<li><strong>缺点</strong>：每个DOM元素只能绑定一个同类事件。例如绑定onclick，当你想再绑定onclick会发现他被覆盖了。</li>
+<li><strong>语法（以onclick举例）</strong>：<code>object.onclick=function()&#123;SomeJavaScriptCode&#125;;</code></li>
+<li><strong>不需要手动销毁，</strong>它通过直接在 HTML 元素的事件属性上指定函数来定义事件处理逻辑，所以当元素被移除或销毁时，事件函数也会被自动清理，不会导致内存泄漏</li>
+<li><strong>以onclick举例：</strong><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>单击按钮触发函数。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">// event不用传入即可获取到</span></span><br><span class="line"><span class="comment">// 不传参则必须命名为event。如果想要传入，则实参和形参都可以自定义名字</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clickHandle</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;Hello World!&quot;</span> + event;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn&quot;</span>).<span class="property">onclick</span> = clickHandle</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="DOM-2级事件处理（事件监听）"><a href="#DOM-2级事件处理（事件监听）" class="headerlink" title="DOM 2级事件处理（事件监听）"></a>DOM 2级事件处理（事件监听）</h3><ul>
+<li><code>addEventListener(&quot;事件名&quot; , &quot;事件处理函数&quot; , &quot;布尔值&quot;);</code><ul>
+<li>false 事件冒泡; true 事件捕获</li>
+</ul>
+</li>
+<li><strong>优点</strong>相比前两个就多了。可以选择是事件流。可绑定多个同类事件。事件名可以组成字符串。</li>
+<li><strong>注意：</strong>使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E5%8F%A5%E6%9F%84">addEventListener</a>绑定事件，等结束后<strong>及时使用<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-removeeventlistener.html">removeEventListener</a>移除监听</strong><ul>
+<li>需要在元素被销毁或移除之前清理事件监听器，以确保事件处理函数不会继续被调用，从而避免潜在的内存泄漏问题</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_document_addeventlistener">例子</a>：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>该实例使用了 addEventListener() 方法向文档中添加点击事件。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>尝试点击文档的任何地方。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">// event不用传入即可获取到</span></span><br><span class="line"><span class="comment">// 不传参则必须命名为event。如果想要传入，则实参和形参都可以自定义名字</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clickHandle</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;Hello World!&quot;</span> + event;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, clickHandle);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="React事件处理"><a href="#React事件处理" class="headerlink" title="React事件处理"></a>React事件处理</h2><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/#%E4%BA%8B%E4%BB%B6">《React知识点汇总（基础使用1）》</a></li>
+<li>React 元素的事件处理和 DOM 元素类似。但是有一点<strong>语法上的不同</strong>:<ul>
+<li><strong>React 事件绑定</strong>函数的命名采用<strong>驼峰式写法</strong>，而不是小写。</li>
+</ul>
+</li>
+<li>在类中书写时注意在构造函数中使用bind()绑定事件函数的this指向。</li>
+<li>事件对象：<ul>
+<li>event不用显示传入，但在函数接收参数时需要写明，比如定义函数时接收3个参数<code>id, title, event</code>，实际传参时<code>fn(123, 快乐标题)</code>(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/#%E5%85%B3%E4%BA%8Eevent%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%89">《React知识点汇总（基础使用1）&gt;</a>)</li>
+<li>可以使用 e（或者任何你喜欢的变量名）作为事件处理函数的参数来接收事件对象</li>
+</ul>
+</li>
+<li>销毁事件：<ul>
+<li>大多数事件处理函数不需要手动销毁，因为 React 会自动处理事件的绑定和解绑。<strong>使用 onClick 等内置的事件处理函数</strong>时，React 会在组件挂载时自动为相应的元素添加事件监听器，并<strong>自动在组件卸载时自动移除事件监听器</strong>，以避免潜在的内存泄漏问题。这是因为 React 实际上是通过合成事件来处理事件的，而不是直接将事件绑定到真实的 DOM 元素上</li>
+<li>如果你<strong>在 componentDidMount 中添加原生的 DOM 事件，或者在组件挂载后动态地添加了事件监听器，你需要手动在componentWillUnmount的时候移除事件监听器</strong></li>
+</ul>
+</li>
+<li><strong>以onClick举例</strong>：<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSX语法中</span></span><br><span class="line">&lt;<span class="keyword">button</span> <span class="keyword">onClick</span>=&#123;activateLasers&#125;&gt;</span><br><span class="line">  激活按钮</span><br><span class="line">&lt;/<span class="keyword">button</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// activateLasers函数另写</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>具体事例：</strong>当使用 ES6 <strong>class 语法</strong>来定义一个<strong>组件</strong>的时候，事件处理函数会成为<strong>类的一个方法</strong>。<br>例如，<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=react-event1">Toggle 组件渲染一个让用户切换开关状态的按钮的例子</a></li>
+</ul>
+<hr>
+<h2 id="vue事件处理"><a href="#vue事件处理" class="headerlink" title="vue事件处理"></a>vue事件处理</h2><ul>
+<li>vue事件函数有没有<code>()</code>都可以（带不带的区别存在于<code>$event</code>传参方式（<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903910411354126">参考</a>））<ul>
+<li>有<code>()</code>则需要显示传入<code>$event</code></li>
+<li>没有<code>()</code>则隐式传入了<code>$event</code>，可直接获取</li>
+<li>注意：实参必须是<code>$event</code>，不能是别的名字，当然，定义形参时可以是你喜欢的名字</li>
+</ul>
+</li>
+<li>销毁事件：<ul>
+<li>和react一样，大多时候不需要手动销毁</li>
+<li><strong>使用 <code>@click</code> 等内置的事件处理函数</strong>时，Vue 会在组件渲染时自动为相应的元素添加事件监听器，并<strong>在组件销毁时自动移除事件监听器</strong></li>
+<li>手动使用原生的 DOM 事件绑定，或者在组件渲染后动态地添加了事件监听器，你需要手动在beforeDestroy中移除事件监听器</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryhtml5_draganddrop">html例子</a>对应的vue例子：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 事件处理函数无()则$event隐式传入 --&gt;</span><br><span class="line">&lt;div id=&quot;div1&quot; @drop=&quot;drop&quot; @dragover=&quot;allowDrop&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;!-- 事件处理函数有()则$event显示传入 --&gt;</span><br><span class="line">&lt;img decoding=&quot;async&quot; loading=&quot;lazy&quot; id=&quot;drag1&quot; src=&quot;~assets/images/wangwangLogo.png&quot; draggable=&quot;true&quot; @dragstart=&quot;drag($event)&quot; width=&quot;50&quot; height=&quot;50&quot;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">allowDrop</span>(<span class="params">ev</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---allowDrop&#x27;</span>)</span><br><span class="line">    ev.<span class="title function_">preventDefault</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">drag</span>(<span class="params">ev</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---drag&#x27;</span>)</span><br><span class="line">    ev.<span class="property">dataTransfer</span>.<span class="title function_">setData</span>(<span class="string">&quot;Text&quot;</span>,ev.<span class="property">target</span>.<span class="property">id</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">drop</span>(<span class="params">ev</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---drop&#x27;</span>)</span><br><span class="line">    ev.<span class="title function_">preventDefault</span>();</span><br><span class="line">    <span class="keyword">let</span> data=ev.<span class="property">dataTransfer</span>.<span class="title function_">getData</span>(<span class="string">&quot;Text&quot;</span>);</span><br><span class="line">    ev.<span class="property">target</span>.<span class="title function_">appendChild</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(data));</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="同时传入自定义参数与event"><a href="#同时传入自定义参数与event" class="headerlink" title="同时传入自定义参数与event"></a>同时传入自定义参数与event</h2><ul>
+<li>html正常显示传入<code>&lt;button onclick=&quot;myFunction(1, event)&quot;&gt;点我&lt;/button&gt;</code></li>
+<li>js使用addEventListener时可使用闭包或者使用bind方法：<ul>
+<li>方法1：  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用闭包：</span></span><br><span class="line"><span class="keyword">const</span> param1 = <span class="string">&#x27;Hello&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> param2 = <span class="string">&#x27;World&#x27;</span>;</span><br><span class="line"></span><br><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="comment">// 在这里可以使用 event 对象和其他参数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(param1, param2, event);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>方法2：  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用bind：</span></span><br><span class="line"><span class="keyword">const</span> param1 = <span class="string">&#x27;Hello&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> param2 = <span class="string">&#x27;World&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleClick</span>(<span class="params">param1, param2, event</span>) &#123;</span><br><span class="line">  <span class="comment">// 在这里可以使用 event 对象和其他参数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(param1, param2, event);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, handleClick.<span class="title function_">bind</span>(<span class="variable language_">this</span>, param1, param2));</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>vue正常显示传入<code>&lt;el-button @click=&quot;clickBtn(1, $event)&quot;&gt;默认按钮&lt;/el-button&gt;</code></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/13/BOM%20window%E5%AF%B9%E8%B1%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          BOM window对象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/06/JS%E4%B8%AD%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BAHTML%20DOM%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS中修改/创建/移动/删除 HTML DOM元素</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">事件类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ethis%E6%8C%87%E5%90%91"><span class="nav-number">1.1.</span> <span class="nav-text">关于this指向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onload-%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">onload 事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">鼠标事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onmousemove%E4%B8%8Eonmouseover%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.</span> <span class="nav-text">onmousemove与onmouseover的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML%E4%BA%8B%E4%BB%B6%E4%B8%AD%E8%B0%83%E7%94%A8JS%E5%87%BD%E6%95%B0%E6%97%B6%E4%B8%8D%E5%8A%A0%E6%8B%AC%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">HTML事件中调用JS函数时不加括号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9window%E4%BD%BF%E7%94%A8onload%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">对window使用onload的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onfocus%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">onfocus事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onfocus%E5%92%8Conblur%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.3.</span> <span class="nav-text">onfocus和onblur事件的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9Conchange%EF%BC%9A%E5%9F%9F%E7%9A%84%E5%86%85%E5%AE%B9%E6%94%B9%E5%8F%98%E6%97%B6%E5%8F%91%E7%94%9F%E2%80%9D%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.4.</span> <span class="nav-text">“onchange：域的内容改变时发生”的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html%E4%B8%AD%E4%BD%BF%E7%94%A8js%E4%B8%AD%E7%9A%84onchange"><span class="nav-number">2.5.</span> <span class="nav-text">html中使用js中的onchange</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#onchange%E4%BA%8B%E4%BB%B6%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">onchange事件编程练习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#onsubmit%E4%BA%8B%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">onsubmit事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E6%AF%94%E8%BE%83%E7%AE%80%E5%8D%95%E7%9A%84%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">三个比较简单的鼠标事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E5%B8%B8%E4%BD%9C%E7%94%A8%E4%BA%8Ewindow%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BA%8B%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">经常作用于window对象的两个事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">7.1.</span> <span class="nav-text">HTML 事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%EF%BC%88DOM%E4%BA%8B%E4%BB%B6%EF%BC%89"><span class="nav-number">7.2.</span> <span class="nav-text">JS 事件处理（DOM事件）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-0%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">7.2.1.</span> <span class="nav-text">DOM 0级事件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-2%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%EF%BC%89"><span class="nav-number">7.2.2.</span> <span class="nav-text">DOM 2级事件处理（事件监听）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">7.3.</span> <span class="nav-text">React事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">7.4.</span> <span class="nav-text">vue事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E4%BC%A0%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E4%B8%8Eevent"><span class="nav-number">7.5.</span> <span class="nav-text">同时传入自定义参数与event</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

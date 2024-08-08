@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Node.js前后端获取url url与绝对/相对路径 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="前端写久了差点忘记后端获取url的方法，在后端用location结果undefined了，这才想起前后端的差异，于是记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js前后端获取url url与绝对&#x2F;相对路径">
+<meta property="og:url" content="http://yoursite.com/2020/10/23/Node.js%E5%89%8D%E5%90%8E%E7%AB%AF%E8%8E%B7%E5%8F%96url%20url%E4%B8%8E%E7%BB%9D%E5%AF%B9%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="前端写久了差点忘记后端获取url的方法，在后端用location结果undefined了，这才想起前后端的差异，于是记录一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/loaction_common_property.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/koa2_postman_example.jpg">
+<meta property="article:published_time" content="2020-10-23T05:01:35.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.318Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/loaction_common_property.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Node.js前后端获取url url与绝对相对路径" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Node.js前后端获取url url与绝对/相对路径
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/10/23/Node.js%E5%89%8D%E5%90%8E%E7%AB%AF%E8%8E%B7%E5%8F%96url%20url%E4%B8%8E%E7%BB%9D%E5%AF%B9%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/" class="article-date">
+	  <time datetime="2020-10-23T05:01:35.000Z" itemprop="datePublished">十月 23, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/%E5%BE%AE%E5%8D%9A%E9%A1%B9%E7%9B%AE/">微博项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端写久了差点忘记后端获取url的方法，在后端用location结果undefined了，这才想起前后端的差异，于是记录一下。</p>
+<span id="more"></span>
+
+<h1 id="获取url的方法"><a href="#获取url的方法" class="headerlink" title="获取url的方法"></a>获取url的方法</h1><h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><ul>
+<li>使用<strong>location</strong>的常用属性:<ul>
+<li>location.href：整个网站地址(返回完整的URL)</li>
+<li>location.protocol：返回一个URL协议（比如https:&#x2F;http:）</li>
+<li>location.host：域名(返回一个URL的主机名和端口)</li>
+<li>location.search：返回一个URL的查询部分，即?后的内容</li>
+<li>location.hash：网址的哈希(返回一个URL的锚部分)，即#后的内容</li>
+<li>location.pathname：返回的URL路径名</li>
+</ul>
+</li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/loaction_common_property.jpg" alt="location常用属性的例子" title="location常用属性的例子"></li>
+</ul>
+<hr>
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><ul>
+<li>可参考我的文章<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/#%E6%A6%82%E6%8B%ACHTTP%E8%AF%B7%E6%B1%82%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B">“Node.js开发博客项目之接口(1)”</a></li>
+<li>通过**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/#request%EF%BC%88req%EF%BC%89%E5%92%8Cresponse%EF%BC%88res%EF%BC%89%E7%9A%84%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95">request 对象</a>的属性**获取url(注意request对象是怎么来的)：<ul>
+<li>request.method：客户端是用什么方法请求的(GET&#x2F;POST)</li>
+<li>request.url：获取<strong>完整的url</strong></li>
+<li>request.headers：客户端（浏览器）向服务端发送的请求中的头中的信息<ul>
+<li>request.headers[“content-type”]：请求的数据类型是什么（比如JSON）。</li>
+<li>request.setHeader(name, value)：为请求头对象设置单个请求头的值。 （<a target="_blank" rel="noopener" href="http://nodejs.cn/api/http.html#http_request_setheader_name_value">例子</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Koa2"><a href="#Koa2" class="headerlink" title="Koa2"></a>Koa2</h3><ul>
+<li>通过<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/06/koa2%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#%E4%BB%8B%E7%BB%8D%E8%B7%AF%E7%94%B1"><strong>ctx.request</strong></a>的属性来获取url，具体属性见下方的图片例子。<ul>
+<li><strong>补充：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/06/koa2%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#%E4%BB%8B%E7%BB%8D%E8%B7%AF%E7%94%B1">ctx.request.body</a>包含post请求中的数据</strong></li>
+</ul>
+</li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/koa2_postman_example.jpg" alt="postman的例子" title="postman的例子"></li>
+</ul>
+<hr>
+<h1 id="绝对-相对路径"><a href="#绝对-相对路径" class="headerlink" title="绝对&#x2F;相对路径"></a>绝对&#x2F;相对路径</h1><ul>
+<li>文件和url的绝对&#x2F;相对路径的知识涉及url中的<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html-url.html">Scheme</a>。</li>
+</ul>
+<h2 id="文件的绝对-相对路径"><a href="#文件的绝对-相对路径" class="headerlink" title="文件的绝对&#x2F;相对路径"></a>文件的绝对&#x2F;相对路径</h2><ul>
+<li>以前了解的绝对&#x2F;相对路径就是局限在文件是哪个，似乎我从未考虑过上线以后会发生什么。</li>
+<li><strong>相对路径：</strong><ul>
+<li><strong>&#x2F;<strong>：表示</strong>根目录</strong></li>
+<li><strong><code>./</code> 或 <code>/</code></strong> 一样：表示<strong>当前目录</strong> </li>
+<li><strong>..&#x2F;<strong>：表示</strong>父级目录</strong>（即 上一级目录）</li>
+</ul>
+</li>
+<li><strong>绝对路径：</strong><ul>
+<li>从根目录开始一直到该文件位置的全程的路径</li>
+<li><strong>比如：<code>E:\nodejsWorkspaces\weibo\package.json</code>就是weibo文件夹下package.json的绝对路径</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="url与绝对-相对路径"><a href="#url与绝对-相对路径" class="headerlink" title="url与绝对&#x2F;相对路径"></a>url与绝对&#x2F;相对路径</h2><ul>
+<li><strong>相对路径</strong> ：从该文件<strong>自身所在位置开始</strong>寻找路径。</li>
+<li><strong>绝对路径</strong> ：永远从<strong>网站的根目录</strong>开始寻找路径。<ul>
+<li><strong>网页 根目录 例子</strong>：<ul>
+<li><strong>本地项目</strong>：<code>http://localhost:3000/</code>是我的微博项目的 首页，<strong>它的根目录是<code>http://weibo.mokeyjay.com:3000</code></strong></li>
+<li><strong>线上项目</strong>：<code>http://weibo.mokeyjay.com:3000/comment</code>是我的微博项目的 评论页，<strong>它的根目录是<code>http://weibo.mokeyjay.com:3000</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参考<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/415271602/answer/1417594993">知乎</a>、<a target="_blank" rel="noopener" href="http://www.cppcns.com/web/htmlxhtml/5279.html">编程客栈</a></li>
+</ul>
+<h1 id="补充-dirname与"><a href="#补充-dirname与" class="headerlink" title="补充:__dirname与./"></a>补充:<code>__dirname</code>与<code>./</code></h1><ul>
+<li><a target="_blank" rel="noopener" href="http://nodejs.cn/api/modules/dirname.html"><code>__dirname</code></a>：表示<strong>当前文件所在的目录</strong>的<strong>绝对路径</strong><ul>
+<li><code>__filename</code> ：表示<strong>当前文件</strong>的<strong>绝对路径</strong></li>
+</ul>
+</li>
+<li><code>__dirname</code> 总是指向<strong>被执行 js 文件的绝对路径</strong>，所以当你在 <code>/d1/d2/myscript.js</code> 文件中写了 <code>__dirname</code>， 它的值就是 <code>/d1/d2</code> 。</li>
+<li>相反，<code>./</code> 会返回你<strong>执行 node 命令的路径</strong>，例如你的工作路径。</li>
+<li><strong>特殊情况</strong>：在 require() 中使用 <code>./</code> 时，这时的路径是含有 require() 的脚本文件的相对路径。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/%E5%BE%AE%E5%8D%9A%E9%A1%B9%E7%9B%AE/">微博项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/04/koa2%E9%A1%B9%E7%9B%AE%E5%8A%A0%E8%BD%BD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          koa2项目加载静态资源
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/11/Bootstrap%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E6%89%93%E5%8D%B0A4%E6%97%B6%E8%A2%AB%E8%AF%86%E5%88%AB%E4%B8%BA%E5%B0%8F%E5%B1%8F%E5%B9%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Bootstrap响应式页面打印A4时被识别为小屏幕</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96url%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">获取url的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">1.1.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF"><span class="nav-number">1.2.</span> <span class="nav-text">后端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">1.2.1.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Koa2"><span class="nav-number">1.2.2.</span> <span class="nav-text">Koa2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.</span> <span class="nav-text">绝对&#x2F;相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%9D%E5%AF%B9-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.1.</span> <span class="nav-text">文件的绝对&#x2F;相对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url%E4%B8%8E%E7%BB%9D%E5%AF%B9-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.2.</span> <span class="nav-text">url与绝对&#x2F;相对路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85-dirname%E4%B8%8E"><span class="nav-number">3.</span> <span class="nav-text">补充:__dirname与.&#x2F;</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

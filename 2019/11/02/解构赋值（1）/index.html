@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解构赋值（1） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="补充：扩展运算符位置 对象中的扩展运算符（…）用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中(数组也一样，自己替换)   扩展运算符用作合并时他是放在需要被合并的数组&#x2F;对象前的。 扩展运算符用作表示将还未匹配的数据包起来匹配给某变量时放在该变量前面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解构赋值（1）">
+<meta property="og:url" content="http://yoursite.com/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="补充：扩展运算符位置 对象中的扩展运算符（…）用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中(数组也一样，自己替换)   扩展运算符用作合并时他是放在需要被合并的数组&#x2F;对象前的。 扩展运算符用作表示将还未匹配的数据包起来匹配给某变量时放在该变量前面。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jou48xztj30ov07tgoh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8joyl707nj30om08htbz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jp6mp68tj30nd049q3k.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jpljzf8aj30uw0917c8.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqjf3n3jj30rl03l0vv.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqmsaxn4j30oj04vn0q.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqycmhgkj30l002awg4.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jr9kbx0oj30rq0fz11f.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jrgsjbb5j30qr0f245j.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsfn95zqj30ei07b0ve.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsk3unf2j30pc0i1qcb.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsorvi0lj30qj0hh49a.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jtd3sc61j30wi0j1wsl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m0tpzffjj30th07u44c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m39sbukvj30a505hmyl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m2ljbu42j30q006ajv1.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m2pnnutyj30d606sgnk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3fqhc2mj30vr07lwim.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3nr3z1uj30q8064dix.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3r31qcrj30sv06agpc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3sfrkeuj30rk041wgx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m7vyjdcjj30hx0grtef.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m83qebofj30nw0gmtf3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m86kacctj30r10d5dmq.jpg">
+<meta property="article:published_time" content="2019-11-02T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.239Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jou48xztj30ov07tgoh.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-解构赋值（1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      解构赋值（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/" class="article-date">
+	  <time datetime="2019-11-02T13:00:00.000Z" itemprop="datePublished">十一月 2, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="补充：扩展运算符位置"><a href="#补充：扩展运算符位置" class="headerlink" title="补充：扩展运算符位置"></a>补充：扩展运算符位置</h1><blockquote>
+<p>对象中的扩展运算符（…）用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中(数组也一样，自己替换)</p>
+</blockquote>
+<ul>
+<li>扩展运算符用作合并时他是放在需要被合并的数组&#x2F;对象前的。</li>
+<li>扩展运算符用作表示将还未匹配的数据包起来匹配给某变量时放在该变量前面。<span id="more"></span></li>
+</ul>
+<h1 id="补充：扩展运算符与深、浅拷贝"><a href="#补充：扩展运算符与深、浅拷贝" class="headerlink" title="补充：扩展运算符与深、浅拷贝"></a>补充：扩展运算符与深、浅拷贝</h1><ul>
+<li>基本数据类型（值类型），比如number，string，boolean，是可以使用扩展运算符进行<strong>深拷贝</strong>的</li>
+<li>引用类型的值，比如Object，Array，。引用类型使用扩展运算符进行的是<strong>浅拷贝</strong>，只是拷贝了引用地址。</li>
+</ul>
+<h1 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h1><blockquote>
+<p>解构赋值语法是一个JavaScript表达式，它可以<strong>将值从数组或属性从对象中提取到不同的变量中</strong>。<br>–MDN</p>
+</blockquote>
+<p>我认为，解构赋值可以将 值从数组 或 属性从对象 中提取到不同的变量<strong>或者常量const</strong>中。<br/></p>
+<p><strong>举例理解</strong>：<br>对象中,<code>const &#123;name&#125; = obj;</code>等价于<code>const name = obj.name;</code></p>
+<p>数组与对象的解构赋值相对重要一些，字符串、数值与布尔值、函数的解构赋值建立在数组与对象的解构赋的基础之上。</p>
+<hr>
+<h1 id="数组的解构赋值"><a href="#数组的解构赋值" class="headerlink" title="数组的解构赋值"></a>数组的解构赋值</h1><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jou48xztj30ov07tgoh.jpg" alt="数组的解构赋值"></p>
+<ul>
+<li>等号两边都是数组结构<code>let [a,b,c,d]=const[1,2,3,4] </code></li>
+<li>左边的<code>[]</code>中为需要赋值的变量</li>
+<li>右边为需要解构的数组</li>
+</ul>
+<hr>
+<h2 id="更复杂的匹配规则"><a href="#更复杂的匹配规则" class="headerlink" title="更复杂的匹配规则"></a>更复杂的匹配规则</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8joyl707nj30om08htbz.jpg" alt="当你只想取得arr第2个值时一定要注意保留1个逗号"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jp6mp68tj30nd049q3k.jpg" alt="想只取arr第3个值则注意保留2个逗号"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jpljzf8aj30uw0917c8.jpg" alt="想只获取arr的g元素，可以发现格式和arr一样"></p>
+<hr>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><ul>
+<li>在数组的解构赋值中可以使用<code>=</code>设置默认值，当解构赋值中匹配到undefined时自动使用默认值。</li>
+<li>const常量没有匹配到默认值时在这并不会报错，会反回undefined。</li>
+<li><strong>注意</strong>：一定是undefined才会使用默认值，null不会。</li>
+</ul>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqjf3n3jj30rl03l0vv.jpg" alt="没有设置默认值，我们可以看到没匹配到的常量d不会报错，只返回undefined"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqmsaxn4j30oj04vn0q.jpg" alt="部分设置默认值后"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jqycmhgkj30l002awg4.jpg" alt="注意：一定是undefined才会使用默认值，null不会"></p>
+<hr>
+<h2 id="交换变量"><a href="#交换变量" class="headerlink" title="交换变量"></a>交换变量</h2><p>使用数组的解构赋值可以使交换变量更加方便。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jr9kbx0oj30rq0fz11f.jpg" alt="交换变量方法对比"></p>
+<hr>
+<h2 id="接收多个“函数返回值”"><a href="#接收多个“函数返回值”" class="headerlink" title="接收多个“函数返回值”"></a>接收多个“函数返回值”</h2><p>使用数组的解构赋值可以使接收多个“函数返回值”更加方便。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jrgsjbb5j30qr0f245j.jpg" alt="使用数组的解构赋值接收多个“函数返回值”"><br>注意：return返回的是一个数组，第一项返回的是布尔值，第二项是一个对象，第三项返回字符串。通过数组的解构赋值可以将函数的多个返回值分别获取为status、data、msg。</p>
+<hr>
+<h2 id="结合扩展运算符（"><a href="#结合扩展运算符（" class="headerlink" title="结合扩展运算符（...)"></a>结合扩展运算符（<code>...</code>)</h2><ul>
+<li>可用于解构赋值中获取剩余数组元素、复制数组、合并数组  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解构赋值中获取剩余数组元素</span></span><br><span class="line"><span class="keyword">const</span> arr = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ]</span><br><span class="line"><span class="keyword">const</span> [ a, b, ...c ] = arr <span class="comment">// c 是 [ 3, 4 ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组合并</span></span><br><span class="line"><span class="keyword">const</span> cArr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, ...arr1];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cArr1);<span class="comment">//[1, 2, 3, 1, 2, 3, 4]</span></span><br><span class="line"><span class="keyword">const</span> cArr2 = [...arr1, ...arr2, ...arr3];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cArr2);<span class="comment">// [1, 2, 3, 4, 4, 3, 2, 1, &quot;nihao&quot;, 2.2, false]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//复制数组arr3</span></span><br><span class="line"><span class="keyword">const</span> cArr3 = [...arr3];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cArr3);<span class="comment">//[&quot;nihao&quot;, 2.2, false]</span></span><br><span class="line"><span class="keyword">const</span> [...cArr4] = arr3;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cArr4);<span class="comment">//[&quot;nihao&quot;, 2.2, false]</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>注意</strong>：<ul>
+<li><strong>扩展运算符与数组的解构赋值结合使用时只能放在最后</strong>，因为扩展运算符在这的意思是将数组后面剩余的还未匹配的值都包起来赋给使用了扩展运算符的那个变量</li>
+<li>变量a和b分别取到1和2，<strong>扩展运算符使得arr中剩余的3,4都包在一个数组内给了变量c</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h1><ul>
+<li>对象的结构赋值与数组的结构赋值相似。</li>
+<li>等号左右<strong>两边都为对象结构</strong><code>const&#123;a，b&#125;=&#123;a：1，b：2&#125;</code></li>
+<li>左边的<code>&#123;&#125;</code>中为需要赋值的变量（常量）</li>
+<li>右边为需要解构的对象</li>
+<li><strong>注意</strong>：<strong>等号左边的变量名必须与等号右边的对象属性完全一致才能匹配到</strong>，不一致则会返回undefined。</li>
+<li>数组的解构赋值之所以不需要左右一样是因为数组是有序的，他可以通过数组下标进行查找。而<strong>对象是无序的，所以必须要变量名与属性名一致才能完成查找</strong>。</li>
+</ul>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsfn95zqj30ei07b0ve.jpg" alt="对象的解构赋值"><br><strong>帮助理解</strong>：<br><code>const &#123; saber &#125; = obj;</code>相当于<code>const saber  = obj.saber;</code></p>
+<hr>
+<h2 id="稍微复杂的解构条件"><a href="#稍微复杂的解构条件" class="headerlink" title="稍微复杂的解构条件"></a>稍微复杂的解构条件</h2><p><strong>总结</strong>：<br/><br>可以将数组的解构赋值和对象的解构赋值一起使用，只要<strong>保证等号两边模式一致就能匹配上</strong>。（如何才是保证等号两边模式一致可以看第三个例子）</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsk3unf2j30pc0i1qcb.jpg" alt="获取player对象中的nickname属性"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jsorvi0lj30qj0hh49a.jpg" alt="只想获取skill中的数组第一项"><br>只想获取skill中的数组第一项而不想获取skill时，<strong>可以在对象的解构赋值中使用数组的解构赋值</strong>，此时就可以使用skill1,因为数组解构赋值对命名没有要求。（<strong>注意：要保证两边模式一致，不要漏掉对象的解构赋值和数组的解构赋值中间的冒号</strong>）</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8jtd3sc61j30wi0j1wsl.jpg" alt="例子"></p>
+<ul>
+<li>在对象中使用数组的解构赋值，获取skillNarme属性值注意：<strong>等号左右两边要模式一致才能匹配成功！</strong>所以不要漏掉大括号、冒号、中括号！</li>
+<li><strong>const不能重复定义</strong>，而<code>&#123;skillName&#125;</code>的意思是“获取skll中验组第二项的skillName属性值并赋给常量skillName”，所以采用<code>&#123;skillName：sklName&#125;</code>以免出现两个常量skillName而报错</li>
+</ul>
+<hr>
+<h2 id="结合扩展运算符（-）"><a href="#结合扩展运算符（-）" class="headerlink" title="结合扩展运算符（...）"></a>结合扩展运算符（<code>...</code>）</h2><h3 id="获取剩余属性"><a href="#获取剩余属性" class="headerlink" title="获取剩余属性"></a>获取剩余属性</h3><ul>
+<li>如果只知道对象的部分属性名又想获取剩余的属性时可以使用扩展运算符（其实这里应该叫剩余参数，他们符号相同含义不同）。</li>
+<li>扩展运算符（<code>...oth</code>）在对象的解构赋值中的作用是<strong>获取没有匹配到的剩余属性并把它们作为对象包起来返回</strong>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="string">&quot;lalalla&quot;</span>, <span class="attr">b</span>: <span class="string">&quot;kkk&quot;</span>, <span class="attr">c</span>: <span class="string">&quot;hahah&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> &#123; b, ...other &#125; = obj; <span class="comment">// other 为 &#123;a: &quot;lalalla&quot;, c: &quot;hahah&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="复制对象"><a href="#复制对象" class="headerlink" title="复制对象"></a>复制对象</h3><ul>
+<li>使用<strong>扩展运算符复制对象</strong>是<strong>浅拷贝</strong>的。  </li>
+<li>也就是说当你复制的对象obj1中包含一个对象c时，你实际上复制的是c的引用，当你修改复制所得到的对象copyObj1中的对象c的aa属性时，被复制的obj1对象中的对象c的属性aa也会被改变。</li>
+<li>而修改对象copyObj1的第一层属性b时是不会改动到复制对象obj1的属性b的值的：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: &#123; <span class="attr">aa</span>: <span class="number">3</span>, <span class="attr">bb</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> copyObj1 = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copyObj1.<span class="property">c</span>.<span class="property">aa</span>); <span class="comment">// 3</span></span><br><span class="line">copyObj1.<span class="property">c</span>.<span class="property">aa</span> = <span class="number">999</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copyObj1.<span class="property">c</span>.<span class="property">aa</span>); <span class="comment">// 999</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1.<span class="property">c</span>.<span class="property">aa</span>); <span class="comment">// 999,可以发现obj1的c中的aa也被修改了</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copyObj1.<span class="property">b</span>); <span class="comment">// 2</span></span><br><span class="line">copyObj1.<span class="property">b</span> = <span class="number">222</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copyObj1.<span class="property">b</span>); <span class="comment">// 222</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1.<span class="property">b</span>); <span class="comment">// 2,可以看到修改对象copyObj1的第一层属性b时是不会改动到复制对象obj1的属性b的值的</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m0tpzffjj30th07u44c.jpg" alt="使用扩展运算符合并对象常规例子"></p>
+<ul>
+<li>如果<strong>合并的两个对象中都含有相同属性名的属性</strong>，则属性顺序还是按照前面对象的，但<strong>后面对象的属性值覆盖前面的</strong>。（例子如下）</li>
+<li>不管是使用<strong>扩展运算符复制对象</strong>还是<strong>合并对象</strong>，他们都是<strong>浅拷贝</strong>的。（例子如下）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合并对象</span></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: &#123; <span class="attr">aa</span>: <span class="number">3</span>, <span class="attr">bb</span>: <span class="number">4</span> &#125;,  <span class="attr">s</span>:<span class="number">8</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = &#123; <span class="attr">a</span>: <span class="number">555</span>, <span class="attr">d</span>: <span class="number">33</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> newObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newObj); <span class="comment">// &#123;a: 555, b: 2, c: &#123;…&#125;, s: 8, d: 33&#125;</span></span><br><span class="line">newObj.<span class="property">c</span>.<span class="property">aa</span>=<span class="number">999</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1.<span class="property">c</span>.<span class="property">aa</span>); <span class="comment">// 999，证明合并对象也是浅拷贝的</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="如何对已经申明了的变量进行对象的解构赋值"><a href="#如何对已经申明了的变量进行对象的解构赋值" class="headerlink" title="如何对已经申明了的变量进行对象的解构赋值"></a>如何对已经申明了的变量进行对象的解构赋值</h2><p>首先我们要明确，虽然可以解决这个问题，但还是建议变量的申明与对象解构赋值同时进行。（也就是例子中的第一张图片）</p>
+<p><strong>解决方法</strong>：使用<strong>小括号</strong>将这一条解构赋值的语句括起来即可。</p>
+<p><strong>例子</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m39sbukvj30a505hmyl.jpg" alt="常规是变量的申明与对象解构赋值同时进行"><br>下图变量age是已经申明才进行解构赋值的，此时<code>&#123;&#125;</code>会被认为是<strong>块级作用域</strong>而不是对象的解构赋值，想要将对象obj赋给一个块级作用域就报错了。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m2ljbu42j30q006ajv1.jpg" alt="错误的使用"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m2pnnutyj30d606sgnk.jpg" alt="正确：使用小括号将解构赋值的语句括起来（但不建议使用）"></p>
+<hr>
+<h2 id="默认值-1"><a href="#默认值-1" class="headerlink" title="默认值"></a>默认值</h2><p>和数组的解构赋值的默认值用法一样，使用<code>=</code>,当属性没有匹配到或者匹配到undefined时就会返回默认值。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3fqhc2mj30vr07lwim.jpg" alt="没有匹配到的例子"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3nr3z1uj30q8064dix.jpg" alt="匹配到undefined的例子"></p>
+<hr>
+<h2 id="对象的解构赋值的主要用途"><a href="#对象的解构赋值的主要用途" class="headerlink" title="对象的解构赋值的主要用途"></a>对象的解构赋值的主要用途</h2><h3 id="提取对象属性"><a href="#提取对象属性" class="headerlink" title="提取对象属性"></a>提取对象属性</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3r31qcrj30sv06agpc.jpg" alt="hobby属性在这个例子里是没有获取到的"><br>在上图中可以看到hobby属性是没有获取到的，我们只获取了name属性以及hobby属性中的数组第一项。<br/><br>想要获取hobby属性需要在对象的解构赋值中另外加上hobby：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m3sfrkeuj30rk041wgx.jpg" alt="想要获取hobby属性需要另外加上hobby"></p>
+<hr>
+<h3 id="使用对象传入乱序的函数参数"><a href="#使用对象传入乱序的函数参数" class="headerlink" title="使用对象传入乱序的函数参数"></a>使用对象传入乱序的函数参数</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m7vyjdcjj30hx0grtef.jpg" alt="例子"><br>在这个例子中可以看到调用AJAX函数会传入一个对象作为参数，在这里我们使用AJAX函数时传入的参数具有属性url、data，虽然没有type，但是type有默认值，所以最后打印出来的是默认值get。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m83qebofj30nw0gmtf3.jpg" alt="调用AJAX函数时传入的参数顺序可以颠倒（乱序）"><br>data和url的<strong>顺序可以颠倒</strong>，毕竟对象的解构赋值只要属性名一致即可这也就是为什么<strong>可以传入乱序的函数参数</strong>。</p>
+<hr>
+<h3 id="获取多个“函数返回值”"><a href="#获取多个“函数返回值”" class="headerlink" title="获取多个“函数返回值”"></a>获取多个“函数返回值”</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8m86kacctj30r10d5dmq.jpg" alt="例子"></p>
+<ul>
+<li>在这个例子中，可以发现利用对象的解构赋值来获取多个“函数返回值”的方法和数组时非常相似。</li>
+<li>需要注意的是变量名与属性名一致才能匹配到，如果你<strong>希望获取到的值不是原本的属性名，可以直接在解构赋值时采用<code>属性名:希望获得的变量名</code>的写法</strong>，比如例子中的<code>msg:message</code>意思就是获取对象中的msg属性值并赋给变量message。</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          解构赋值（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/01/let%E4%B8%8Econst/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">let命令与const命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">补充：扩展运算符位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E6%B7%B1%E3%80%81%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">2.</span> <span class="nav-text">补充：扩展运算符与深、浅拷贝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">解构赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">数组的解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">更复杂的匹配规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">4.2.</span> <span class="nav-text">默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E5%8F%98%E9%87%8F"><span class="nav-number">4.3.</span> <span class="nav-text">交换变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%A4%9A%E4%B8%AA%E2%80%9C%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E2%80%9D"><span class="nav-number">4.4.</span> <span class="nav-text">接收多个“函数返回值”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88"><span class="nav-number">4.5.</span> <span class="nav-text">结合扩展运算符（...)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">对象的解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%9A%84%E8%A7%A3%E6%9E%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">稍微复杂的解构条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">结合扩展运算符（...）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%89%A9%E4%BD%99%E5%B1%9E%E6%80%A7"><span class="nav-number">5.2.1.</span> <span class="nav-text">获取剩余属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.2.2.</span> <span class="nav-text">复制对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.2.3.</span> <span class="nav-text">合并对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AF%B9%E5%B7%B2%E7%BB%8F%E7%94%B3%E6%98%8E%E4%BA%86%E7%9A%84%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">5.3.</span> <span class="nav-text">如何对已经申明了的变量进行对象的解构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC-1"><span class="nav-number">5.4.</span> <span class="nav-text">默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94"><span class="nav-number">5.5.</span> <span class="nav-text">对象的解构赋值的主要用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">5.5.1.</span> <span class="nav-text">提取对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%B9%E8%B1%A1%E4%BC%A0%E5%85%A5%E4%B9%B1%E5%BA%8F%E7%9A%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.2.</span> <span class="nav-text">使用对象传入乱序的函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E2%80%9C%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E2%80%9D"><span class="nav-number">5.5.3.</span> <span class="nav-text">获取多个“函数返回值”</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

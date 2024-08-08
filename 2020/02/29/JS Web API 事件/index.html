@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS Web API 事件 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="写写有关事件流 事件绑定 冒泡与捕获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS Web API 事件">
+<meta property="og:url" content="http://yoursite.com/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="写写有关事件流 事件绑定 冒泡与捕获">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingPhraseExam1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingWithStopPropagation.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBroker.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/simpleBindEvent.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBindOfficial.png">
+<meta property="article:published_time" content="2020-02-29T04:56:45.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.048Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS Web API 事件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS Web API 事件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/" class="article-date">
+	  <time datetime="2020-02-29T04:56:45.000Z" itemprop="datePublished">二月 29, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写写有关事件流 事件绑定 冒泡与捕获</p>
+<span id="more"></span>
+
+<h1 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h1><ul>
+<li>在浏览器发展的过程中，开发团队遇到了一个问题。那就是页面中的哪一部分拥有特定的事件？</li>
+<li>可以想象画在一张纸上的一组同心圆，如果你把手指放在圆心上，那么你的手指指向的其实不是一个圆，而是纸上所有的圆。放到实际页面中就是，你点击一个按钮，事实上你还同时点击了按钮所有的父元素。</li>
+<li>开发团队的问题就在于，当点击按钮时，是按钮最外层的父元素先收到事件并执行，还是具体元素先收到事件并执行？所以这儿引入了事件流的概念。</li>
+</ul>
+<blockquote>
+<p><strong>事件流</strong>所描述的就是从页面中接受<strong>事件</strong>的<strong>顺序</strong>。</p>
+</blockquote>
+<ul>
+<li>因为有两种观点，所以<strong>事件流也分为两种</strong>，分别是<strong>事件冒泡和事件捕获</strong>。现行的<strong>主流是事件冒泡</strong>。</li>
+</ul>
+<hr>
+<h2 id="DOM事件流的三个阶段"><a href="#DOM事件流的三个阶段" class="headerlink" title="DOM事件流的三个阶段"></a>DOM事件流的三个阶段</h2><ul>
+<li>DOM结构是一个树型结构，<strong>当一个DOM元素触发一个事件时，该事件会在元素结点与根结点之间的路径传播，路径所经过的结点都会收到该事件</strong>，这个<strong>传播过程</strong>可称为 <strong>DOM 事件流</strong>（DOM event flow ）。</li>
+<li>传播（Propagation）按顺序分<strong>三个阶段</strong>：<ol>
+<li><strong>捕获阶段</strong>（capture phrase，从根节点window到目标节点，即最近的、最精确的元素节点）</li>
+<li><strong>目标阶段</strong>（target phrase，到达目标事件位置（事发地），触发事件）</li>
+<li><strong>冒泡阶段</strong>（bubbling phrase，从目标节点到根节点 ）</li>
+</ol>
+</li>
+<li><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventFlow.png" alt="三个阶段图示" title="三个阶段图示"></li>
+<li>当一个元素<strong>同时绑定冒泡和捕获事件</strong>，<strong>如果没有子节点</strong>，那么就会按照JavaScript顺序执行（即先绑定的btn冒泡事件，后绑定的btn捕获事件，则先冒泡后捕获，反之亦然），当一个元素同时绑定冒泡和捕获事件，<strong>如果有子节点那么会先捕获</strong>。</li>
+</ul>
+<hr>
+<h1 id="事件绑定（addEventListener-）"><a href="#事件绑定（addEventListener-）" class="headerlink" title="事件绑定（addEventListener()）"></a>事件绑定（<code>addEventListener()</code>）</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>注意：事件绑定函数可接受的参数1为事件对象，<code>事件对象.target</code>即触发事件的DOM元素</strong></li>
+<li><strong>addEventListener的参数3</strong>默认为false，即表示使用<strong>事件冒泡模式</strong>，设置为true则代表使用<strong>事件捕获模式</strong></li>
+</ul>
+<h2 id="事件对象-preventDefault-取消默认动作"><a href="#事件对象-preventDefault-取消默认动作" class="headerlink" title="事件对象.preventDefault()取消默认动作"></a>事件对象.preventDefault()取消默认动作</h2><ul>
+<li><code>事件对象.preventDefault()</code>可<strong>取消事件的默认动作</strong></li>
+<li>例如：如果<code>addEventListener()</code>的参数1是 “submit”，通过调用preventDefault()可以阻止提交表单。<ul>
+<li>注意，如果 Event 对象的 cancelable 属性是 fasle，那么就没有默认动作，或者不能阻止默认动作。无论哪种情况，调用该方法都没有作用。</li>
+</ul>
+</li>
+<li>例子：下面“事件代理”的例子中有所体现。</li>
+</ul>
+<hr>
+<h1 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h1><ul>
+<li>当<strong>事件发生后，这个事件就要开始冒泡(从里到外)，先在最内层的元素上被触发，然后逐级向上传递到包含该元素的更外层元素，直到传递到最外层的文档对象。</strong>为什么要传播呢？因为事件源本身（可能）并没有处理事件的能力，即处理事件的函数（方法）并未绑定在该事件源上。<ul>
+<li>例如我们点击一个按钮时，就会产生一个click事件，但这个按钮本身可能没有绑定js函数去处理这个事件，所以这个点击事件必须从这个按钮传播出去，从而到达能够处理这个事件的代码中（例如我们给按钮的绑定一个onclick事件函数），或者按钮的父级绑定有事件函数，当该点击事件发生在按钮上，按钮本身并无处理事件函数，则冒泡到父级去处理。</li>
+<li><strong>补充：捕获事件则是从外往里</strong> ，先由文档对象捕获到事件，然后再逐级向下传递到触发该事件的最内层元素（只有特殊需要再使用事件捕获即可）</li>
+</ul>
+</li>
+<li><strong>冒泡例子</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingPhraseExam1.png" alt="冒泡例子" title="冒泡例子"><ul>
+<li>点击事件的<strong>传播顺序</strong>：p、div2、body、document、window</li>
+</ul>
+</li>
+<li><strong>阻止冒泡例子</strong>：给“取消”的文字上绑定click事件，由于取消按钮太多，所以直接绑定在body上，给“激活”的文字上也绑定click事件：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/bubblingWithStopPropagation.png" alt="阻止冒泡例子" title="阻止冒泡例子"></li>
+</ul>
+<h2 id="事件对象-stopPropagation-阻止冒泡"><a href="#事件对象-stopPropagation-阻止冒泡" class="headerlink" title="事件对象.stopPropagation()阻止冒泡"></a>事件对象.stopPropagation()阻止冒泡</h2><ul>
+<li><code>事件对象.stopPropagation()</code>可让事件传播<strong>到目标阶段后停止传播</strong></li>
+<li>即：终止事件在传播过程的捕获、目标处理或起泡阶段进一步传播。调用该方法后，该节点上处理该事件的处理程序将被调用，事件不再被分派到其他节点。</li>
+<li><strong>注意：使用该方法的节点事件还是会被触发，只是不冒泡去让别的元素触发事件了</strong></li>
+</ul>
+<hr>
+<h1 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h1><ul>
+<li><strong>注意：</strong>不要滥用（一般用在瀑布流或者元素数量太多&#x2F;结构复杂的情况下）</li>
+<li>事件代理是基于事件冒泡机制的。</li>
+<li><strong>事件代理</strong>，即需要绑定事件的元素太多时<strong>将事件绑定在他们的父元素上</strong></li>
+<li><strong>例子</strong>：希望给所有a标签绑定点击事件（假设点击 加载更多 时会继续加载a标签，a标签的数量不定）<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBroker.png" alt="事件代理例子" title="事件代理例子"></li>
+</ul>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
+<li>代码简洁</li>
+<li>减少浏览器内存占用</li>
+</ul>
+<hr>
+<h1 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h1><ul>
+<li><strong>重点：</strong><ul>
+<li>优先使用<code>keydown</code></li>
+<li>优先使用<code>event.key</code></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7029319401178398728">参考文章</a></li>
+</ul>
+<h2 id="2个主要事件"><a href="#2个主要事件" class="headerlink" title="2个主要事件"></a>2个主要事件</h2><ul>
+<li><code>keyup</code>&#x2F;<code>keydown</code>+<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-document-addeventlistener.html"><code>addEventListener</code></a>或者<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-onkeyup.html"><code>onKeyup</code></a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-onkeydown.html"><code>onKeydown</code></a><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keypress_event"><code>onKeypress</code></a>已弃用</li>
+</ul>
+</li>
+<li><strong>注意：推荐使用<code>keydown</code> 更胜于 <code>keyup</code></strong><ul>
+<li>虽然 <code>keydown</code> 和 <code>keyup</code> 事件都涵盖了所有的键，并且被大多数浏览器支持，但它们之间仍有一些不同之处，使得 <code>keydown</code> 更胜于 <code>keyup</code></li>
+<li><code>keydown</code> 事件在浏览器处理键之前触发，而 <code>keyup</code> 事件在浏览器处理键之后触发。如果你取消了 <code>keydown</code> 事件（例如使用 <code>event.preventDefault()</code>），浏览器的操作将被取消。在 <code>keyup</code> 事件的情况下，即使你取消了该事件，浏览器的操作也不会被取消</li>
+</ul>
+</li>
+</ul>
+<h2 id="支持绑定键盘事件的html元素"><a href="#支持绑定键盘事件的html元素" class="headerlink" title="支持绑定键盘事件的html元素"></a>支持绑定键盘事件的html元素</h2><ul>
+<li>在 HTML 中，<strong>并非所有的元素都能绑定键盘事件</strong> ，只有那些<strong>可以获取焦点（可获得用户输入）的元素</strong>才能绑定键盘事件<ul>
+<li>这些元素通常包括输入框（<code>&lt;input&gt;</code> 元素）、文本区域（<code>&lt;textarea&gt;</code> 元素）以及可编辑的元素（例如，<code>&lt;div contenteditable=&quot;true&quot;&gt;</code>）</li>
+</ul>
+</li>
+<li>支持键盘事件的常见 HTML 元素：<ul>
+<li><code>&lt;input&gt;</code> 元素（包括不同类型的输入，如文本、密码、数字等）</li>
+<li><code>&lt;textarea&gt;</code> 元素</li>
+<li><code>&lt;select&gt;</code> 元素</li>
+<li><code>&lt;button&gt;</code> 元素</li>
+<li><code>&lt;a&gt;</code> 元素（当具有 <code>href</code> 属性时）</li>
+<li><code>&lt;div&gt;</code> 元素（当设置 <code>contenteditable=&quot;true&quot;</code> 属性时）</li>
+<li><code>&lt;span&gt;</code> 元素（当设置 <code>contenteditable=&quot;true&quot;</code> 属性时）</li>
+</ul>
+</li>
+<li>这些元素可以通过添加事件监听器来捕获和处理键盘事件，如 <code>keyup</code>、<code>keydown</code> 等。其他元素，如 <code>&lt;p&gt;</code>、<code>&lt;h1&gt;</code>、<code>&lt;div&gt;</code>（默认不可编辑）、<code>&lt;img&gt;</code> 等，通常不支持直接绑定键盘事件，因为它们无法接收用户的键盘输入。</li>
+<li><strong>注意：</strong><ul>
+<li>即使某个元素可以绑定键盘事件，也可能会受到其他因素的影响，如元素的焦点状态、浏览器的默认行为等</li>
+<li><strong>在绑定键盘事件时，需要确保元素具有焦点或者通过其他方式使其处于焦点状态，以便能够正常触发键盘事件</strong></li>
+<li>如果想要绑定键盘事件的元素不属于上述列出的支持键盘事件的元素类型，可以考虑<strong>使用 JavaScript 的全局事件监听器（如 <code>document</code>+<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-document-addeventlistener.html"><code>addEventListener</code></a>）来捕获和处理键盘事件</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="交互式键盘事件游乐场"><a href="#交互式键盘事件游乐场" class="headerlink" title="交互式键盘事件游乐场"></a>交互式键盘事件游乐场</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://js-keycodes.stackblitz.io/">在这里</a>输入任意键即可查看有关它的上下文信息</li>
+</ul>
+<h2 id="KeyboardEvent-属性-方法"><a href="#KeyboardEvent-属性-方法" class="headerlink" title="KeyboardEvent 属性&#x2F;方法"></a>KeyboardEvent 属性&#x2F;方法</h2><ul>
+<li>常用的<code>event</code>属性：<ul>
+<li><code>altKey</code> <code>ctrlKey</code> <code>shiftKey</code>：按下几个<strong>特殊键</strong>会返回<strong>布尔值</strong><ul>
+<li>当需要判断按键组合时他们会十分有用，比如判断是否按下<code>ctrl+z</code>：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;to_focus&quot;</span>).<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">ctrlKey</span> &amp;&amp; event.<span class="property">key</span> === <span class="string">&quot;z&quot;</span>) &#123;</span><br><span class="line">        <span class="comment">// 做些事，可以是一个“撤销”操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>key</code>：按下的键的实际值<ul>
+<li>小写字母（a）和大写字母（A）的 <code>event.code</code> 值相同，但 <code>event.key</code> 值表示的是实际输入的字母</li>
+</ul>
+</li>
+<li><strong>【已弃用】</strong><code>keyCode</code>：返回按下键的数字代码<ul>
+<li>如不需要兼容老旧的浏览器，接下来都用<code>key</code></li>
+<li>如果你必须支持较旧的浏览器，较好的替代属性是 <code>event.which</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">key</span> !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="comment">//使用 KeyboardEvent.key 处理事件</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.<span class="property">which</span> !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="comment">// 使用 KeyboardEvent.which 处理事件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7029319401178398728#heading-6">键盘事件值的完整列表</a></li>
+</ul>
+<hr>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="通用的事件监听函数"><a href="#通用的事件监听函数" class="headerlink" title="通用的事件监听函数"></a>通用的事件监听函数</h2><ul>
+<li><strong>【简单版】</strong>可监听 <strong>普通绑定</strong> 的<strong>通用事件监听函数</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/simpleBindEvent.png" alt="通用的事件监听函数【简单版】" title="通用的事件监听函数【简单版】"></li>
+<li><strong>【正式版】可以同时监听 普通绑定 和 代理绑定 的通用事件监听函数</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/eventBindOfficial.png" alt="通用的事件监听函数【正式版】" title="通用的事件监听函数【正式版】"><strong>普通绑定</strong>时this就指向<strong>触发事件的DOM元素</strong>；<strong>事件代理</strong>时就需要<code>事件对象.target</code>来获取<strong>触发事件的DOM元素</strong></li>
+</ul>
+<h3 id="event-target"><a href="#event-target" class="headerlink" title="event.target"></a>event.target</h3><ul>
+<li>事件对象的target属性<code>event.target</code>代表<strong>触发当前事件的DOM元素</strong></li>
+<li>比如 <code>&lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;</code></li>
+</ul>
+<h3 id="Element-matches"><a href="#Element-matches" class="headerlink" title="Element.matches()"></a>Element.matches()</h3><ul>
+<li><strong>如果元素匹配指定的选择器字符串，则Element.matches()返回true</strong>，否则返回false。</li>
+<li><strong>语法</strong>：<code>let result = element.matches(selectorString);</code><ul>
+<li>result 的值为 true 或 false.</li>
+<li>selectorString 是个<strong>css选择器字符串</strong>.</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/matches">MDN文档</a></li>
+</ul>
+<hr>
+<h2 id="描述事件冒泡的流程"><a href="#描述事件冒泡的流程" class="headerlink" title="描述事件冒泡的流程"></a>描述事件冒泡的流程</h2><ul>
+<li>基于DOM树形结构</li>
+<li>事件会顺着触发元素往上冒泡</li>
+<li>应用场景：事件代理</li>
+</ul>
+<hr>
+<h2 id="无限下拉的图片列表，如何监听每个图片的点击？"><a href="#无限下拉的图片列表，如何监听每个图片的点击？" class="headerlink" title="无限下拉的图片列表，如何监听每个图片的点击？"></a>无限下拉的图片列表，如何监听每个图片的点击？</h2><ul>
+<li>事件代理</li>
+<li>用e.target获取触发元素</li>
+<li>用matches来判断是否是触发元素</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/01/JS%20Web%20API%20AJAX/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS Web API AJAX
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">博客项目登录（前端联调）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%B5%81%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">DOM事件流的三个阶段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%EF%BC%88addEventListener-%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">事件绑定（addEventListener()）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-preventDefault-%E5%8F%96%E6%B6%88%E9%BB%98%E8%AE%A4%E5%8A%A8%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">事件对象.preventDefault()取消默认动作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">3.</span> <span class="nav-text">事件冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1-stopPropagation-%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1"><span class="nav-number">3.1.</span> <span class="nav-text">事件对象.stopPropagation()阻止冒泡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">事件代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">键盘事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E4%B8%AA%E4%B8%BB%E8%A6%81%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">2个主要事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%BB%91%E5%AE%9A%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E7%9A%84html%E5%85%83%E7%B4%A0"><span class="nav-number">5.2.</span> <span class="nav-text">支持绑定键盘事件的html元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E6%B8%B8%E4%B9%90%E5%9C%BA"><span class="nav-number">5.3.</span> <span class="nav-text">交互式键盘事件游乐场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KeyboardEvent-%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95"><span class="nav-number">5.4.</span> <span class="nav-text">KeyboardEvent 属性&#x2F;方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">6.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">通用的事件监听函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#event-target"><span class="nav-number">6.1.1.</span> <span class="nav-text">event.target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Element-matches"><span class="nav-number">6.1.2.</span> <span class="nav-text">Element.matches()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">描述事件冒泡的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E4%B8%8B%E6%8B%89%E7%9A%84%E5%9B%BE%E7%89%87%E5%88%97%E8%A1%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E7%9B%91%E5%90%AC%E6%AF%8F%E4%B8%AA%E5%9B%BE%E7%89%87%E7%9A%84%E7%82%B9%E5%87%BB%EF%BC%9F"><span class="nav-number">6.3.</span> <span class="nav-text">无限下拉的图片列表，如何监听每个图片的点击？</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

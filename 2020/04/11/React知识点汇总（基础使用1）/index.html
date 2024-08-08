@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React知识点汇总（基础使用1） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="JSXJSX中使用原生html（dangerouslySetInnerHTML属性）想要让原生html在JSX中正常显示，需要将其写在dangerouslySetInnerHTML属性内：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React知识点汇总（基础使用1）">
+<meta property="og:url" content="http://yoursite.com/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="JSXJSX中使用原生html（dangerouslySetInnerHTML属性）想要让原生html在JSX中正常显示，需要将其写在dangerouslySetInnerHTML属性内：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh2cf1x1qaj30oe0drk0y.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh2cpoan1tj30us0i0ao5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh38dal2whj30rz0cq4ai.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh385tp6yzj30ju0e3jxn.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh39cc5rr8j30rh0apgtr.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh45n7mvogj319b0od7ba.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh49x8givoj31740b4q68.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4ebkdb5aj31480d4jtz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eli05pwj30zg0a0q47.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4en2zf3tj30xe0e076c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eonmupwj315u0aajst.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eqdwfbej318o0d5jtn.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4gp42aobj30px0ptdku.jpg">
+<meta property="article:published_time" content="2020-04-11T08:02:36.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.328Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh2cf1x1qaj30oe0drk0y.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React知识点汇总（基础使用1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React知识点汇总（基础使用1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/" class="article-date">
+	  <time datetime="2020-04-11T08:02:36.000Z" itemprop="datePublished">四月 11, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><h2 id="JSX中使用原生html（dangerouslySetInnerHTML属性）"><a href="#JSX中使用原生html（dangerouslySetInnerHTML属性）" class="headerlink" title="JSX中使用原生html（dangerouslySetInnerHTML属性）"></a>JSX中使用原生html（dangerouslySetInnerHTML属性）</h2><p>想要让<strong>原生html在JSX中正常显示，需要将其写在<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/17/react%E4%B8%AD%E7%9A%84dangerouslySetInnerHTML%E5%B1%9E%E6%80%A7/">dangerouslySetInnerHTML属性</a>内</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh2cf1x1qaj30oe0drk0y.jpg" alt="JSX中使用原生html"></p>
+<span id="more"></span>
+
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>(和js使用方法一样)**if else、三元表达式、逻辑运算符<code>&amp;&amp;</code>&#x2F;<code>||</code>**：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh2cpoan1tj30us0i0ao5.jpg" alt="条件判断"></p>
+<h2 id="map-渲染列表"><a href="#map-渲染列表" class="headerlink" title="map()渲染列表"></a>map()渲染列表</h2><p><strong>map()</strong>:可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#%E8%A1%A5%E5%85%85%EF%BC%9AJavaScript-Array-map-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C">React.js基础精讲</a>，需要注意map不会改变原数组，且<strong>它的返回值（数组）可直接渲染在页面上</strong>，不需要另外拆分</p>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="react事件函数为何需要bind绑定this"><a href="#react事件函数为何需要bind绑定this" class="headerlink" title="react事件函数为何需要bind绑定this"></a>react事件函数为何需要bind绑定this</h2><ul>
+<li>关于this可参考博客“<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#this">JS作用域和闭包</a>”，关于 react事件函数为何需要bind绑定this 可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/24/bind()/#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%87%BD%E6%95%B0%E4%B8%8Ebind-this">“bind()”</a></li>
+<li>react中的<strong>事件函数需要在构造函数中使用bind()绑定this</strong>后才能在事件函数中使用this，否则<strong>事件函数中的this默认是undefined</strong>。我们需要绑定this<strong>使得无论事件函数如何传递，它的this的指向都是固定的，固定指向我们所实例化的对象（父组件）</strong></li>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh38dal2whj30rz0cq4ai.jpg" alt="例子"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh385tp6yzj30ju0e3jxn.jpg" alt="如未绑定this则报错"></li>
+</ul>
+<h3 id="不需要bind-this-事件函数的方法"><a href="#不需要bind-this-事件函数的方法" class="headerlink" title="不需要bind this 事件函数的方法"></a>不需要bind this 事件函数的方法</h3><ol>
+<li><strong>借助react-redux库使用redux管理数据则不存在需要bind绑定this</strong>的事情，毕竟不存在<code>this.setState</code>或者<code>this.state</code>，直接操作state就行。</li>
+<li><strong>使用箭头函数定义事件函数，则this固定指向当前组件：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh39cc5rr8j30rh0apgtr.jpg" alt="使用箭头函数定义事件函数"></li>
+</ol>
+<h3 id="联系：js回调函数this指向"><a href="#联系：js回调函数this指向" class="headerlink" title="联系：js回调函数this指向"></a>联系：js回调函数this指向</h3><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this">ES6扩展 函数扩展 箭头函数 中“回调函数中的this”</a></li>
+<li><strong>回调函数中的this默认是指向windows的，</strong>可以用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E9%97%AD%E5%8C%85%E8%8E%B7%E5%8F%96"><strong>闭包&#x2F;箭头函数获取</strong></a></li>
+</ul>
+<h2 id="关于event参数（事件对象）"><a href="#关于event参数（事件对象）" class="headerlink" title="关于event参数（事件对象）"></a>关于event参数（事件对象）</h2><ul>
+<li>系统在调用事件函数时，<strong>把事件会发生的一切信息，都封装成一个对象</strong>，然后作为一个参数传递给事件处理程序，而这个对象就是事件对象。在原生的函数中，经常会看见一个<strong>event</strong>的东西，而这个东西就是我们说的<strong>事件对象</strong>。</li>
+<li>调用事件函数时不传参数，则事件函数的定义中获取到的参数为event（当前元素）。</li>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh45n7mvogj319b0od7ba.jpg" alt="例子"></li>
+</ul>
+<ol>
+<li><strong>react中的event 是react封装的 SyntheticEvent（组合事件【合成对象】），模拟出了 DOM 事件对象 所有的能力</strong></li>
+<li><strong>event.nativeEvent</strong> 才是<strong>原生事件对象</strong></li>
+<li>react中所有的<strong>事件都被挂载到 document 上</strong>，而原生的事件是绑定到DOM上面的</li>
+<li><strong>react事件 和 DOM 事件不一样</strong>，和 Vue 事件也不一样</li>
+</ol>
+<h3 id="联系：js中事件函数的event"><a href="#联系：js中事件函数的event" class="headerlink" title="联系：js中事件函数的event"></a>联系：js中事件函数的event</h3><ul>
+<li>事件绑定函数<strong>可接受的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E5%8F%A5%E6%9F%84">第一个参数</a>是事件对象</strong>。</li>
+</ul>
+<h2 id="传递自定义参数"><a href="#传递自定义参数" class="headerlink" title="传递自定义参数"></a>传递自定义参数</h2><ul>
+<li>事件函数传递自定义参数时，在<strong>事件函数的定义中</strong>可在<strong>最后追加一个参数，即可接收 event</strong></li>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh49x8givoj31740b4q68.jpg" alt="例子"></li>
+</ul>
+<hr>
+<h1 id="表单（受控组件）"><a href="#表单（受控组件）" class="headerlink" title="表单（受控组件）"></a>表单（受控组件）</h1><ul>
+<li><strong>受控组件:组件的值</strong>（value&#x2F;checked）<strong>可受到state的控制</strong>（即state变化时组件值变化）</li>
+<li><strong>非受控组件（在后面的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6">“高级特性”博客</a>中详细讲解）：</strong>组件中的值无法受state的控制</li>
+<li><strong>例子：</strong>比如input组件，想要页面上实时显示我们输入的内容是需要让其value与state相关联的<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4ebkdb5aj31480d4jtz.jpg" alt="例子">（<strong>注意区别 defaultValue属性 和 value属性</strong>）</li>
+<li><strong>注意：</strong> <ul>
+<li><strong>常见的受控组件： input组件（checkbox、radio）、textarea组件、select组件</strong> </li>
+<li>textarea组件 也是受控组件，但**在react中需要使用<code>&lt;textarea/&gt;</code>**，而html中是<code>&lt;textarea&gt;&lt;textarea/&gt;</code>。</li>
+<li>在react中label标签**使用<code>htmlFor</code>代替<code>for属性</code>**。</li>
+</ul>
+</li>
+</ul>
+<h2 id="区别-defaultValue属性-和-value属性"><a href="#区别-defaultValue属性-和-value属性" class="headerlink" title="区别 defaultValue属性 和 value属性"></a>区别 defaultValue属性 和 value属性</h2><ul>
+<li><strong>注意：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43851769/article/details/88100078">区别react中input的 defaultValue属性 和 value属性</a></strong><ul>
+<li>react中input的<strong>defaultValue就相当于原生DOM中的value属性</strong>，这样写出来的组件，其<strong>value值就是用户输入的内容，和react没有关系</strong>，完全不管输入的过程。</li>
+<li>而react中input的<strong>value属性必须使用onChange来监听这个input，使state和input关联（即 受控组件）</strong></li>
+<li>如果在<strong>使用input时只需要获取model里的值</strong>时，<strong>使用defaultValue</strong>就可以了。如果<strong>需要获取model的值并且还需要改变它</strong>的时候，就需要<strong>使用value结合onChange事件与state联系</strong>就可以了。（但还是<strong>尽量使用value</strong>，毕竟defaultValue需要结合ref来获取DOM元素，而react的设计初衷就是尽量不要操作DOM，通过state来带动DOM）</li>
+</ul>
+</li>
+</ul>
+<h2 id="input-textarea-select用value"><a href="#input-textarea-select用value" class="headerlink" title="input textarea select用value"></a>input textarea select用value</h2><ul>
+<li><strong>textarea组件：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eli05pwj30zg0a0q47.jpg" alt="textarea组件"></li>
+<li><strong>select组件：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4en2zf3tj30xe0e076c.jpg" alt="select组件"></li>
+<li>input组件例子在上方</li>
+</ul>
+<h2 id="checkbox-radio用checked"><a href="#checkbox-radio用checked" class="headerlink" title="checkbox radio用checked"></a>checkbox radio用checked</h2><ul>
+<li><strong>checkbox：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eonmupwj315u0aajst.jpg" alt="checkbox"></li>
+<li><strong>radio：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4eqdwfbej318o0d5jtn.jpg" alt="radio"></li>
+</ul>
+<hr>
+<h1 id="组件使用"><a href="#组件使用" class="headerlink" title="组件使用"></a>组件使用</h1><p><strong>补充：</strong>长的和props类型检查（propTypes）很像的是js原型的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89/#class%E7%9A%84%E5%8E%9F%E5%9E%8B%E6%9C%AC%E8%B4%A8">隐式原型<code>__proto__</code>和显式原型<code>prototype</code></a></p>
+<h2 id="props类型检查（propTypes）"><a href="#props类型检查（propTypes）" class="headerlink" title="props类型检查（propTypes）"></a>props类型检查（propTypes）</h2><ul>
+<li><strong>PropTypes 强校验</strong>可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/05/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9(1)/#PropTypes%E4%B8%8EDefaultProps%E7%9A%84%E5%BA%94%E7%94%A8">“React高级内容（1）”</a></li>
+<li><strong>子组件在接受父组件传过来的值</strong>（即 属性 ）<strong>时进行强校验</strong>。他可以<strong>要求父组件给子组件传的值是什么类型</strong>的。如若不是也并不会报错，只会在 开发者工具 中给出警告。</li>
+</ul>
+<h2 id="props传递数据-函数-React父子组件通讯"><a href="#props传递数据-函数-React父子组件通讯" class="headerlink" title="props传递数据&#x2F;函数(React父子组件通讯)"></a>props传递数据&#x2F;函数(React父子组件通讯)</h2><ul>
+<li>基础通讯方法 可参考博客 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/04/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/#%E9%9D%A2%E8%AF%95%E5%B8%B8%E9%97%AE%EF%BC%9AReact%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1">围绕 React 衍生出的思考</a>，还可以使用<strong>redux</strong>管理数据</li>
+<li><strong>父组件向子组件传值&#x2F;函数</strong>：在父组件中调用子组件的同时通过<strong>给子组件添加属性的方式向子组件传值&#x2F;函数</strong>，注意如要传递函数，则需在父组件构造函数中<strong>使用bind绑定该函数this指向</strong><ul>
+<li><strong>原因：</strong>绑定this指向父组件，以免在子组件中使用函数时this指向不是我们所期望的。</li>
+</ul>
+</li>
+<li><strong>子组件使用父组件传递的值&#x2F;函数</strong>：通过<code>&#123;this.props.属性名/函数名&#125;</code>来调用</li>
+<li><strong>子组件修改父组件中数据的方法：</strong>子组件通过调用父组件传递过来的函数间接的操作父组件的数据</li>
+</ul>
+<h2 id="数据（状态）提升"><a href="#数据（状态）提升" class="headerlink" title="数据（状态）提升"></a>数据（状态）提升</h2><ul>
+<li><strong>数据（状态）提升：将数据提到最高的组件中存放</strong>。</li>
+<li>设计思路：<strong>数据都放在 父组件 中进行管理</strong>，父组件将数据下发到各个子组件中进行处理&#x2F;渲染。</li>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh4gp42aobj30px0ptdku.jpg" alt="例子"></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React知识点汇总（基础使用2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/10/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React知识点汇总（项目）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX"><span class="nav-number">1.</span> <span class="nav-text">JSX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9Fhtml%EF%BC%88dangerouslySetInnerHTML%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">JSX中使用原生html（dangerouslySetInnerHTML属性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-number">1.2.</span> <span class="nav-text">条件判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-%E6%B8%B2%E6%9F%93%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">map()渲染列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81bind%E7%BB%91%E5%AE%9Athis"><span class="nav-number">2.1.</span> <span class="nav-text">react事件函数为何需要bind绑定this</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81bind-this-%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">不需要bind this 事件函数的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E7%B3%BB%EF%BC%9Ajs%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0this%E6%8C%87%E5%90%91"><span class="nav-number">2.1.2.</span> <span class="nav-text">联系：js回调函数this指向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Eevent%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">关于event参数（事件对象）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E7%B3%BB%EF%BC%9Ajs%E4%B8%AD%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E7%9A%84event"><span class="nav-number">2.2.1.</span> <span class="nav-text">联系：js中事件函数的event</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">传递自定义参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%EF%BC%88%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">表单（受控组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB-defaultValue%E5%B1%9E%E6%80%A7-%E5%92%8C-value%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">区别 defaultValue属性 和 value属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input-textarea-select%E7%94%A8value"><span class="nav-number">3.2.</span> <span class="nav-text">input textarea select用value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-radio%E7%94%A8checked"><span class="nav-number">3.3.</span> <span class="nav-text">checkbox radio用checked</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">组件使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#props%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5%EF%BC%88propTypes%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">props类型检查（propTypes）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#props%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE-%E5%87%BD%E6%95%B0-React%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E8%AE%AF"><span class="nav-number">4.2.</span> <span class="nav-text">props传递数据&#x2F;函数(React父子组件通讯)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89%E6%8F%90%E5%8D%87"><span class="nav-number">4.3.</span> <span class="nav-text">数据（状态）提升</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

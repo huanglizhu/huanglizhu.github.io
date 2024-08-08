@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ReactNative入门基础(2) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="props和state 我们使用两种数据来控制一个组件：props和state。 props是在父组件中指定，而且一经指定，在被指定的组件的生命周期中则不再改变。对于需要改变的数据，我们需要使用state。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative入门基础(2)">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/ReactNative%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80(2)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="props和state 我们使用两种数据来控制一个组件：props和state。 props是在父组件中指定，而且一经指定，在被指定的组件的生命周期中则不再改变。对于需要改变的数据，我们需要使用state。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1ka1v80ij30qk0mfafs.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1kdr3u42j307n0fhwgc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc40j8eqafj30j50g8jsy.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1slg2kahj30nl05jju2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1sw1x8gsj30zh0cbgpb.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1tuwqjmij313q0dewkl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1sk16yo4j30l107l3zp.jpg">
+<meta property="article:published_time" content="2019-04-01T14:03:36.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.325Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React Native">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1ka1v80ij30qk0mfafs.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ReactNative入门基础(2)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ReactNative入门基础(2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/01/ReactNative%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80(2)/" class="article-date">
+	  <time datetime="2019-04-01T14:03:36.000Z" itemprop="datePublished">四月 1, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native%E5%AD%A6%E4%B9%A0/">React Native学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="props和state"><a href="#props和state" class="headerlink" title="props和state"></a>props和state</h1><ul>
+<li>我们使用两种数据来控制一个组件：props和state。</li>
+<li><strong>props是在父组件中指定，而且一经指定，在被指定的组件的生命周期中则不再改变。对于需要改变的数据，我们需要使用state。</strong><span id="more"></span></li>
+</ul>
+<h2 id="Props（属性）"><a href="#Props（属性）" class="headerlink" title="Props（属性）"></a>Props（属性）</h2><ul>
+<li>大多数组件在创建时就可以使用各种参数来进行定制，用于定制的<strong>这些参数就称为props（属性）</strong>。</li>
+<li>以常见的基础组件Image为例：在创建一个图片时，可以传入一个名为source的 prop 来指定要显示的图片的地址，以及使用名为style的 prop 来控制其样式。</li>
+</ul>
+<h3 id="例子（自定义组件）"><a href="#例子（自定义组件）" class="headerlink" title="例子（自定义组件）"></a>例子（自定义组件）</h3><p><strong>自定义的组件也可以使用props</strong>:<br>通过在不同的场景使用不同的属性定制，可以尽量提高自定义组件的复用范畴。只需在render函数中引用<code>this.props</code>，然后按需处理即可。<br>【可以联想一下<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/#%E9%9D%A2%E8%AF%95%E5%B8%B8%E9%97%AE%EF%BC%9AReact%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1">react中的父子组件传值方式</a>】</p>
+<p>下面例子中，我们在Greeting组件中将name作为一个属性来定制，这样可以复用这一组件来制作各种不同的“问候语”：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1ka1v80ij30qk0mfafs.jpg" alt="例子"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1kdr3u42j307n0fhwgc.jpg" alt="效果"><br>【<strong>从react的角度理解</strong>， 父组件LotsOfGreetings1 在调用 子组件Greeting 时将name作为属性传值给子组件，在子组件中通过<code>this.props.name</code>获取到父组件传递过来的属性值，最终显示在父组件中】</p>
+<hr>
+<h2 id="State（状态）"><a href="#State（状态）" class="headerlink" title="State（状态）"></a>State（状态）</h2><ul>
+<li><strong>props是在父组件中指定，而且一经指定，在被指定的组件的生命周期中则不再改变。对于需要改变的数据，我们需要使用state。</strong></li>
+<li>一般来说，你需要在class的 constructor（构造函数） 中初始化中一个state对象，然后在需要修改时调用setState方法。</li>
+<li>在React中，<strong>状态(state)一旦发生变化，就会触发界面的重新渲染</strong>。一切界面变化都是状态state变化。</li>
+<li>state的修改必须通过setState()方法，<strong>this.state.num &#x3D; 100; 这样的直接赋值修改无效！</strong></li>
+<li>setState() 是<strong>异步操作，修改不会马上生效</strong>。</li>
+<li>State 的工作原理和 React.js 完全一致，所以对于处理 state 的一些更深入的细节，你可以参考react的笔记。</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>假如我们需要制作一段不停闪烁的文字。<br>文字内容本身在组件创建时就已经指定好了，所以文字内容应该是一个prop。<br>而文字的显示或隐藏的状态（快速的显隐切换就产生了闪烁的效果）则是随着时间变化的，因此这一状态应该写到state中:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Text</span>, <span class="title class_">View</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react-native&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Blink</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="comment">// 声明state对象</span></span><br><span class="line">  state = &#123; <span class="attr">isShowingText</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 每1000毫秒对showText状态做一次取反操作</span></span><br><span class="line">    <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;</span><br><span class="line">        <span class="attr">isShowingText</span>: !<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">isShowingText</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 根据当前showText的值决定是否显示text内容</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">isShowingText</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">Text</span>&gt;</span>&#123;this.props.text&#125;<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">BlinkApp</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Blink</span> <span class="attr">text</span>=<span class="string">&#x27;I love to blink&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Blink</span> <span class="attr">text</span>=<span class="string">&#x27;Yes blinking is so great&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Blink</span> <span class="attr">text</span>=<span class="string">&#x27;Why did they ever take this out of HTML&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Blink</span> <span class="attr">text</span>=<span class="string">&#x27;Look at me look at me look at me&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="ref-获取某个子组件"><a href="#ref-获取某个子组件" class="headerlink" title="ref 获取某个子组件"></a>ref 获取某个子组件</h1><ul>
+<li>React 支持一种非常特殊的属性 Ref ，你可以用来绑定到 render() 输出的任何组件上。</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=try_react_refs">例子</a></li>
+</ul>
+<p><strong>关于ref的理解：</strong><br>ref : 指向<strong>某个子组件</strong><br>this : 指向当前export的组件本身<br>this.refs : 指向<strong>当前export的组件的所有子组件</strong><br>this.refs.ref_phoneInput : 指向当前import的自定义封装组件<br>this.refs.ref_phoneInput.refs : 指向当前import的自定义封装组件的所有子组件<br>this.refs.ref_phoneInput.refs.PhoneNumberInput : 指向当前import的自定义封装组件的其中一个子组件</p>
+<p><strong>例子：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc40j8eqafj30j50g8jsy.jpg" alt="例子"><br><strong>注意</strong>：这里的<strong>this.refs.myInput就是组件实例</strong>，可以获取到实例的属性和方法。</p>
+<hr>
+<h1 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h1><h2 id="ScrollView-滚动"><a href="#ScrollView-滚动" class="headerlink" title="ScrollView 滚动"></a>ScrollView 滚动</h2><ul>
+<li>ScrollView 是一个通用的<strong>可滚动的容器</strong>，你可以在其中<strong>放入多个组件和视图</strong>，而且这些组件并<strong>不需要是同类型的</strong>。</li>
+<li>ScrollView 不仅可以<strong>垂直滚动</strong>，还能<strong>水平滚动</strong>（通过horizontal属性来设置。）</li>
+<li><strong>属性值</strong>：当<strong>horizontal属性为true</strong>的时候，所有的<strong>子视图会在水平方向上排成一行</strong>，而不是默认的在垂直方向上排成一列。默认值为false。（更多属性可查看<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/scrollview/">文档</a>）</li>
+<li>ScrollView 适合用来显示<strong>数量不多的滚动元素</strong>。放置在ScrollView 中的所有组件都会被渲染，哪怕有些组件因为内容太长被挤出了屏幕外。<strong>如果你需要显示较长的滚动列表，那么应该使用功能差不多但性能更好的FlatList组件</strong>。</li>
+</ul>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1slg2kahj30nl05jju2.jpg" alt="例子"></p>
+<hr>
+<h1 id="列表视图组件"><a href="#列表视图组件" class="headerlink" title="列表视图组件"></a>列表视图组件</h1><p>和一般化用途的ScrollView不同，<strong>下面的列表组件只会渲染当前屏幕可见的元素</strong>，这样有利于显示大量的数据。</p>
+<h2 id="FlatList-长列表组件"><a href="#FlatList-长列表组件" class="headerlink" title="FlatList 长列表组件"></a>FlatList 长列表组件</h2><ul>
+<li>React Native 提供了几个<strong>适用于展示长列表数据的组件</strong>，一般而言我们会选用<strong>FlatList或是SectionList</strong>。（如果要渲染的是一组需要分组的数据，也许还带有分组标签的，那么SectionList将是个不错的选择）</li>
+<li>FlatList组件用于显示一个<strong>垂直的滚动列表</strong>，其中的元素之间<strong>结构近似而仅数据不同</strong>。</li>
+<li><strong>区别于ScrollView：</strong> FlatList更适于长列表数据，且<strong>元素个数可以增删</strong>。和ScrollView不同的是，<strong>FlatList并不立即渲染所有元素，而是优先渲染屏幕上可见的元素</strong>。</li>
+<li><strong>必须的两个属性：data（数组）和renderItem(事件)<strong>。data是</strong>列表的数据源</strong>，而renderItem则<strong>从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染</strong>。【事件：是指发生在该组件上的事情。】</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>data</td>
+<td>为了简化起见，<strong>data 属性目前只支持普通数组</strong>。如果需要使用其他特殊数据结构，例如 immutable 数组，请直接使用更底层的<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/virtualizedlist/">VirtualizedList组件</a></td>
+</tr>
+<tr>
+<td>renderItem(事件)</td>
+<td><strong>函数</strong>，可接受3个参数。<code>renderItem(&#123;item, index, separators&#125;);</code><br />item：data中的各个<strong>数据项</strong><br />index：与数据数组中该项对应的<strong>索引</strong><br />separators：<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/flatlist/#renderitem">参考文档</a><br /><strong>作用：</strong>从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染各个数据</td>
+</tr>
+</tbody></table>
+<p><strong>例子：</strong><br>下面的例子创建了一个简单的FlatList，并预设了一些模拟数据data。<br>首先是初始化FlatList所需的data，其中的每一项（行）数据之后都在renderItem中被渲染成了Text组件，最后构成整个FlatList：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1sw1x8gsj30zh0cbgpb.jpg" alt="例子"></p>
+<hr>
+<h2 id="SectionList-【分组】长列表组件"><a href="#SectionList-【分组】长列表组件" class="headerlink" title="SectionList 【分组】长列表组件"></a>SectionList 【分组】长列表组件</h2><ul>
+<li>如果要渲染的是一组<strong>需要分组的数据</strong>，也许还带有分组标签的，那么SectionList将是个不错的选择。</li>
+<li>列表的一个常用场景就是<strong>从服务器端取回列表数据然后显示</strong>，要实现这一过程<strong>还需要学习React Native 的网络相关用法</strong>。</li>
+<li><strong>必须的属性:sections（数组）、renderItem（事件）</strong>。（更多属性可参考<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/sectionlist/">文档</a>）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>sections</strong></td>
+<td><strong>数组</strong>，用来渲染的数据，类似于FlatList中的data属性</td>
+</tr>
+<tr>
+<td><strong>renderItem</strong></td>
+<td><strong>函数</strong>，用来渲染每一个section中的每一个列表项的默认渲染器。<strong>必须返回一个react组件</strong>。可以在section级别上进行覆盖重写。</td>
+</tr>
+<tr>
+<td>renderSectionHeader</td>
+<td><strong>函数</strong>，在每个section的头部渲染。在iOS上，这些headers是默认粘接在ScrollView的顶部的</td>
+</tr>
+<tr>
+<td>renderSectionFooter</td>
+<td>每个组的尾部组件</td>
+</tr>
+</tbody></table>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1tuwqjmij313q0dewkl.jpg" alt="例子"></p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。</li>
+<li>本组件继承自<code>PureComponent</code>而非通常的<code>Component</code>，这意味着如果其props在<strong>浅比较</strong>中是相等的，则不会重新渲染。所以请先检查你的 renderItem函数 所依赖的 props数据（包括 data属性 以及可能用到的 父组件的state ）。如果是一个<strong>引用类型</strong>（Object或者数组都是引用类型），则需要先修改其引用地址（比如先复制到一个新的Object或者数组中【深拷贝】），然后再修改其值，否则界面很可能不会刷新。（这一段不了解的朋友建议先学习下<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002789651">js中的基本类型和引用类型</a>。）</li>
+<li>为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着<strong>如果用户滑动的速度超过渲染的速度，则会先看到空白的内容</strong>。这是为了优化不得不作出的妥协，而我们也在设法持续改进。</li>
+<li>默认情况下<strong>每行都需要提供一个不重复的key属性</strong>。你也可以提供一个<strong>keyExtractor函数来生成key</strong>。</li>
+</ul>
+<hr>
+<h1 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h1><h2 id="WebView-加载网页内容"><a href="#WebView-加载网页内容" class="headerlink" title="WebView 加载网页内容"></a>WebView 加载网页内容</h2><p>WebView组件可以实现<strong>直接加载网页内容在React Native框架中显示</strong>。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gc1sk16yo4j30l107l3zp.jpg" alt="例子"></p>
+<p><strong>更多组件</strong>：<br>更多组件可查询<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/components-and-apis/">文档</a></p>
+<hr>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><p>很多移动应用都需要从远程地址中获取数据或资源。你可能需要给某个 REST API 发起 POST 请求以提交用户数据，又或者可能仅仅需要从某个服务器上获取一些静态内容。</p>
+<h2 id="fetch的基本用法"><a href="#fetch的基本用法" class="headerlink" title="fetch的基本用法"></a>fetch的基本用法</h2><ul>
+<li>React Native 提供了和 web 标准一致的Fetch API，用于满足开发者访问网络的需求。</li>
+<li>这篇文章只会列出 Fetch 的基本用法，并不会讲述太多细节，你可以使用你喜欢的搜索引擎去搜索fetch api关键字以了解更多信息。</li>
+<li>可以参考<a target="_blank" rel="noopener" href="https://v.youku.com/v_show/id_XMTUyNTEwMTA5Ng==.html">视频教程</a></li>
+</ul>
+<h3 id="发起请求"><a href="#发起请求" class="headerlink" title="发起请求"></a>发起请求</h3><p>要从任意地址<strong>获取内容</strong>的话，只需简单地将网址作为参数传递给 fetch 方法即可（fetch 这个词本身也就是获取的意思）：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(&#x27;https<span class="symbol">://mywebsite</span>.com/mydata.json&#x27;)<span class="comment">;//获取该网址中mydata.json的内容</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>fetch() 还有可选的第二个参数，可以用来定制 HTTP 请求一些参数</strong>。你可以指定 header 参数，或是指定使用 POST 方法，又或是提交数据等等：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;https://mywebsite.com/endpoint/&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="keyword">method</span>: &#x27;<span class="title">POST</span>&#x27;,//<span class="title">GET</span>请求数据，<span class="title">POST</span>修改数据</span></span><br><span class="line"><span class="function">  <span class="title">headers</span>: </span>&#123;</span><br><span class="line">    Accept: <span class="string">&#x27;application/json&#x27;</span>,<span class="regexp">//</span>要求获取json格式的数据</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,<span class="regexp">//</span>表示发送的实体数据为json类型</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="regexp">//</span>使用POST请求需要把body部分以字符串或者FormData对象传过去</span><br><span class="line">  body: JSON.stringify(&#123;</span><br><span class="line">    firstParam: <span class="string">&#x27;yourValue&#x27;</span>,</span><br><span class="line">    secondParam: <span class="string">&#x27;yourOtherValue&#x27;</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>提交数据的格式</strong>关键取决于 headers 中的<strong>Content-Type</strong>。Content-Type有很多种，对应 body 的格式也有区别。<br>到底应该采用什么样的Content-Type取决于服务器端，所以请和服务器端的开发人员沟通确定清楚。<br>常用的’Content-Type’除了上面的’application&#x2F;json’，还有传统的网页表单形式，示例如下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;https://mywebsite.com/endpoint/&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="keyword">method</span>: &#x27;<span class="title">POST</span>&#x27;,</span></span><br><span class="line"><span class="function">  <span class="title">headers</span>: </span>&#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  body: <span class="string">&#x27;key1=value1&amp;key2=value2&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>可以参考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Request">Fetch 请求文档</a>来查看所有可用的参数。</p>
+<p><strong>注意</strong>：使用 Chrome 调试目前无法观测到 React Native 中的网络请求，<strong>可以使用第三方的react-native-debugger来进行观测</strong>。</p>
+<hr>
+<h3 id="补充：json"><a href="#补充：json" class="headerlink" title="补充：json()"></a>补充：json()</h3><ul>
+<li>json() 方法<strong>接收一个 Response对象</strong>，读取 Response 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个<strong>被解析为 JSON 格式的 Promise 对象</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Body/json">MDN文档</a></li>
+</ul>
+<h3 id="处理服务器的响应数据"><a href="#处理服务器的响应数据" class="headerlink" title="处理服务器的响应数据"></a>处理服务器的响应数据</h3><p>上面的例子演示了如何发起请求。很多情况下，你还需要处理服务器回复的数据。</p>
+<p><strong>网络请求</strong>天然是一种<strong>异步操作</strong>（异步的意思是你应该趁这个时间去做点别的事情，比如显示 loading，而不是让界面卡住傻等）。<strong>无论请求成功与否，fetch()都返回一个 promise 对象，请求成功时 resolve 对应请求的 Response对象（如果数据获取失败就会到进入catch）</strong>，这种模式可以简化异步风格的代码（<strong>别忘了 catch 住fetch可能抛出的异常，否则出错时你可能看不到任何提示</strong>）：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getMoviesFromApiAsync</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> fetch(<span class="string">&#x27;https://facebook.github.io/react-native/movies.json&#x27;</span>)</span><br><span class="line">  <span class="comment">//成功获取到的数据（Response对象）作为参数response传入then()</span></span><br><span class="line">    .then(<span class="function">(<span class="params">response</span>) =&gt;</span> response.json())<span class="comment">//解析为 JSON 格式的 Promise 对象</span></span><br><span class="line">    .then(<span class="function">(<span class="params">responseJson</span>) =&gt;</span> &#123;<span class="comment">//responseJson为上一个then()返回的数据</span></span><br><span class="line">      <span class="keyword">return</span> responseJson.movies;<span class="comment">//返回响应数据中的movies</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="keyword">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//catch 住fetch可能抛出的异常，否则出错时你可能看不到任何提示</span></span><br><span class="line">      <span class="built_in">console</span>.error(error);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>fetch()返回的是promise 对象，请求成功时将获取到的数据（Response对象）传入并执行then(),<strong>response是<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/web/api/response">Response对象</a><strong>，包含Header、status、statusText等属性。<br>Response对象 要</strong>获得具体数据</strong>需要使用<code>.json()</code>（解析为JSON格式）、<code>.text()</code>（解析为 USVString 格式）、<code>.formData()</code>（用于FormData对象）等方法。<br><code>response.json()</code>返回的是一个<strong>Promise对象</strong>，所以只能先return为下一个then()中的参数responseJson，再在下一层处理。【Promise 对象用于表示一个异步操作的最终完成 (或失败), 及其结果值。所以我们<strong>不能直接操作Promise对象，需要等异步操作成功以后使用then()取到成功后返回的数据，在then()中对数据进行操作</strong>】</p>
+<h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><ul>
+<li><strong>默认情况下，iOS 会阻止所有 http 的请求，以督促开发者使用 https</strong>。如果你仍然需要使用 http 协议，那么首先需要添加一个 App Transport Security 的例外，详细可参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002933776">这篇帖子</a>。</li>
+<li><strong>从 Android9 开始，也会默认阻止 http 请求</strong>，请参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40347548/article/details/86766932">相关配置</a>。</li>
+</ul>
+<hr>
+<h2 id="使用其他的网络库"><a href="#使用其他的网络库" class="headerlink" title="使用其他的网络库"></a>使用其他的网络库</h2><ul>
+<li>React Native 中已经内置了XMLHttpRequest API(也就是俗称的 ajax)。</li>
+<li>一些基于 XMLHttpRequest 封装的第三方库也<strong>可以使用</strong>，例如<strong>frisbee或axios</strong>等。但注意<strong>不能使用 jQuery</strong>，因为 jQuery 中还使用了很多浏览器中才有而 RN 中没有的东西（所以也不是所有 web 中的 ajax 库都可以直接使用）。【想要使用其他的网络库可以参考<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/network/#%E4%BD%BF%E7%94%A8%E5%85%B6%E4%BB%96%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BA%93">这个文档</a>】</li>
+<li>但是**不推荐使用第三方库，建议React Native中使用fetch()**。</li>
+<li>需要注意的是，安全机制与网页环境有所不同：<strong>在应用中你可以访问任何网站，没有<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">跨域</a>的限制。</strong></li>
+</ul>
+<hr>
+<h3 id="fetch和axios相比"><a href="#fetch和axios相比" class="headerlink" title="fetch和axios相比"></a>fetch和axios相比</h3><ul>
+<li>使用fetch()多了一步，<strong>axios通过get()获取到的直接是数据，而fetch()获取到的是Promise对象</strong>，还要通过<code>.json()</code>解析为JSON格式才能获取到数据。</li>
+<li>axios可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/06/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#%E5%80%9F%E5%8A%A9axios%E6%A8%A1%E5%9D%97">笔记</a></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native%E5%AD%A6%E4%B9%A0/">React Native学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/" rel="tag">React Native</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/03/ReactNative%20%E5%AF%BC%E8%88%AA%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ReactNative导航器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/11/ReactNative%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80(1)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ReactNative入门基础(1)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#props%E5%92%8Cstate"><span class="nav-number">1.</span> <span class="nav-text">props和state</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Props%EF%BC%88%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">Props（属性）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">例子（自定义组件）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">State（状态）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ref-%E8%8E%B7%E5%8F%96%E6%9F%90%E4%B8%AA%E5%AD%90%E7%BB%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">ref 获取某个子组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">基础组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ScrollView-%E6%BB%9A%E5%8A%A8"><span class="nav-number">3.1.</span> <span class="nav-text">ScrollView 滚动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E8%A7%86%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">列表视图组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FlatList-%E9%95%BF%E5%88%97%E8%A1%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">FlatList 长列表组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SectionList-%E3%80%90%E5%88%86%E7%BB%84%E3%80%91%E9%95%BF%E5%88%97%E8%A1%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">SectionList 【分组】长列表组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">4.2.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">其他组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView-%E5%8A%A0%E8%BD%BD%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-number">5.1.</span> <span class="nav-text">WebView 加载网页内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">6.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">fetch的基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">6.1.1.</span> <span class="nav-text">发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9Ajson"><span class="nav-number">6.1.2.</span> <span class="nav-text">补充：json()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.3.</span> <span class="nav-text">处理服务器的响应数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F-1"><span class="nav-number">6.1.3.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%B6%E4%BB%96%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BA%93"><span class="nav-number">6.2.</span> <span class="nav-text">使用其他的网络库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fetch%E5%92%8Caxios%E7%9B%B8%E6%AF%94"><span class="nav-number">6.2.1.</span> <span class="nav-text">fetch和axios相比</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

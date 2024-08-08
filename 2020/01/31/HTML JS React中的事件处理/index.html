@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTML/JS/React中的事件处理 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="总结 HTML和JS中，DOM事件都是类似onclick这样的小写，而 React 事件绑定属性的命名采用 驼峰式写法 。 尽量不要把DOM事件写在HTML中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML&#x2F;JS&#x2F;React中的事件处理">
+<meta property="og:url" content="http://yoursite.com/2020/01/31/HTML%20JS%20React%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="总结 HTML和JS中，DOM事件都是类似onclick这样的小写，而 React 事件绑定属性的命名采用 驼峰式写法 。 尽量不要把DOM事件写在HTML中。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-31T11:46:58.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.288Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="React.js">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-HTML JS React中的事件处理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      HTML/JS/React中的事件处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/31/HTML%20JS%20React%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/" class="article-date">
+	  <time datetime="2020-01-31T11:46:58.000Z" itemprop="datePublished">一月 31, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/HTML%E5%AD%A6%E4%B9%A0/">HTML学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>HTML和JS中，DOM事件都是类似<code>onclick</code>这样的小写，而 <strong>React</strong> 事件绑定属性的命名采用 <strong>驼峰式写法</strong> 。</li>
+<li>尽量不要把DOM事件写在HTML中。<span id="more"></span></li>
+</ul>
+<h1 id="HTML-事件处理"><a href="#HTML-事件处理" class="headerlink" title="HTML 事件处理"></a>HTML 事件处理</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/09/JS_DOM%E4%BA%8B%E4%BB%B6/#%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6">DOM事件</a>写在html中<strong>不符合 行为、结构、样式 相分离的原则</strong></li>
+<li>尽量<strong>不要把DOM事件写在HTML中</strong>。<ol>
+<li>多元素绑定相同事件时，效率低。</li>
+<li>不建议在HTML元素中写JavaScript代码。（将页面元素写在HTML内，JS代码写在<code>&lt;script&gt;</code>内会更好）</li>
+</ol>
+</li>
+</ul>
+<h2 id="以onclick举例"><a href="#以onclick举例" class="headerlink" title="以onclick举例"></a>以onclick举例</h2><p><strong>HTML中的语法</strong>：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;element <span class="attribute">onclick</span>=<span class="string">&quot;SomeJavaScriptCode&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子：</strong></p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">button</span> <span class="keyword">onclick</span>=<span class="string">&quot;activateLasers()&quot;</span>&gt;</span><br><span class="line">  激活按钮</span><br><span class="line">&lt;/<span class="keyword">button</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>然后<strong>activateLasers()写在JS代码中</strong>。</p>
+<hr>
+<h1 id="JS-事件处理"><a href="#JS-事件处理" class="headerlink" title="JS 事件处理"></a>JS 事件处理</h1><ol>
+<li>注意：JS代码要在HTML代码加载完成后执行</li>
+<li>获取DOM元素&#x3D;&gt;绑定事件函数</li>
+</ol>
+<h2 id="DOM-0级事件处理"><a href="#DOM-0级事件处理" class="headerlink" title="DOM 0级事件处理"></a>DOM 0级事件处理</h2><ul>
+<li><strong>优点：</strong>符合 行为、结构、样式 相分离的原则。还可以选出DOM元素集合通过for循环统一操作。</li>
+<li><strong>缺点</strong>：每个DOM元素只能绑定一个同类事件。例如绑定onclick，当你想再绑定onclick会发现他被覆盖了。</li>
+</ul>
+<h3 id="以onclick举例-1"><a href="#以onclick举例-1" class="headerlink" title="以onclick举例"></a>以onclick举例</h3><p><strong>JavaScript 中语法:</strong></p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span><span class="comment">&#123;SomeJavaScriptCode&#125;</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>例子：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>单击按钮触发函数。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn&quot;</span>).<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">    	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span>=<span class="string">&quot;Hello World&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="DOM-2级事件处理（事件监听）"><a href="#DOM-2级事件处理（事件监听）" class="headerlink" title="DOM 2级事件处理（事件监听）"></a>DOM 2级事件处理（事件监听）</h2><ul>
+<li><code>addEventListener(&quot;事件名&quot; , &quot;事件处理函数&quot; , &quot;布尔值&quot;);</code><ul>
+<li>false 事件冒泡;true   事件捕获</li>
+</ul>
+</li>
+<li><strong>优点</strong>相比前两个就多了。可以选择是事件流。可绑定多个同类事件。事件名可以组成字符串。</li>
+<li><strong>注意：</strong>使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E5%8F%A5%E6%9F%84">addEventListener</a>绑定事件，等结束后<strong>及时使用<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-removeeventlistener.html">removeEventListener</a>移除监听</strong></li>
+</ul>
+<hr>
+<h1 id="React事件处理"><a href="#React事件处理" class="headerlink" title="React事件处理"></a>React事件处理</h1><ul>
+<li>React 元素的事件处理和 DOM 元素类似。但是有一点<strong>语法上的不同</strong>:<ul>
+<li><strong>React 事件绑定</strong>函数的命名采用<strong>驼峰式写法</strong>，而不是小写。</li>
+</ul>
+</li>
+<li>在类中书写时注意在构造函数中使用bind()绑定事件函数的this指向。</li>
+</ul>
+<h2 id="以onClick举例"><a href="#以onClick举例" class="headerlink" title="以onClick举例"></a>以onClick举例</h2><p>在JSX语法中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;activateLasers&#125;</span>&gt;</span></span><br><span class="line">  激活按钮</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>activateLasers函数另写</p>
+<h2 id="具体事例"><a href="#具体事例" class="headerlink" title="具体事例"></a>具体事例</h2><p>当使用 ES6 <strong>class 语法</strong>来定义一个<strong>组件</strong>的时候，事件处理函数会成为<strong>类的一个方法</strong>。<br>例如，<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=react-event1">Toggle 组件渲染一个让用户切换开关状态的按钮的例子</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/HTML%E5%AD%A6%E4%B9%A0/">HTML学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/01/ES6%E5%AF%B9%E8%B1%A1%E7%AE%80%E5%86%99/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ES6对象简写
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/31/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">简书Header组件开发（性能优化）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">HTML 事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5onclick%E4%B8%BE%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">以onclick举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">JS 事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-0%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">DOM 0级事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5onclick%E4%B8%BE%E4%BE%8B-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">以onclick举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-2%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">DOM 2级事件处理（事件监听）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">React事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5onClick%E4%B8%BE%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">以onClick举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E4%BA%8B%E4%BE%8B"><span class="nav-number">4.2.</span> <span class="nav-text">具体事例</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

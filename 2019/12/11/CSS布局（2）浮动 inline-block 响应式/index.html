@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS布局（2）浮动 inline-block 响应式 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="浮动：两列布局方法1 设置左左浮动，或设置左右浮动（需要设置父元素的宽度）如果父级元素没有设置高度，则需要设置overflow:hidden避免父元素“高度坍塌”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS布局（2）浮动 inline-block 响应式">
+<meta property="og:url" content="http://yoursite.com/2019/12/11/CSS%E5%B8%83%E5%B1%80%EF%BC%882%EF%BC%89%E6%B5%AE%E5%8A%A8%20inline-block%20%E5%93%8D%E5%BA%94%E5%BC%8F/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="浮动：两列布局方法1 设置左左浮动，或设置左右浮动（需要设置父元素的宽度）如果父级元素没有设置高度，则需要设置overflow:hidden避免父元素“高度坍塌”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznf286gcj30es0iywkj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznfv6p9tj30n106974l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznpd6h9sj30dq0ksq91.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznpp6dbqj30na06bjrl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzo9rh05lj30cz09tjuj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzoa2rgkrj30mv05i0su.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpdduuqaj30dv0gpjwu.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpdqr6jrj30k705fjrg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpgst52qj31440gtae1.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpjutm23j30cg0glq7j.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpkg4wubj30n005fmx5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqqjip7tj314n06xjx2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqq76038j30hi0ji7ao.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqx2v8rvj31480amdii.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqyk4ljyj30b503xq3s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzr08i4sjj31420aoafh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga4zb4ofgj30mx09976v.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga50uh01qj30ds0c543v.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga4p4pyomj30an0jr10o.jpg">
+<meta property="article:published_time" content="2019-12-11T03:15:37.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.271Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS布局（2）浮动 inline-block 响应式" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS布局（2）浮动 inline-block 响应式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/12/11/CSS%E5%B8%83%E5%B1%80%EF%BC%882%EF%BC%89%E6%B5%AE%E5%8A%A8%20inline-block%20%E5%93%8D%E5%BA%94%E5%BC%8F/" class="article-date">
+	  <time datetime="2019-12-11T03:15:37.000Z" itemprop="datePublished">十二月 11, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="浮动：两列布局"><a href="#浮动：两列布局" class="headerlink" title="浮动：两列布局"></a>浮动：两列布局</h1><h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><ul>
+<li><strong>设置左左浮动，或设置左右浮动</strong>（需要设置父元素的宽度）<br>如果父级元素没有设置高度，则需要设置<code>overflow:hidden</code>避免父元素“高度坍塌”。<span id="more"></span></li>
+<li>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B8%83%E5%B1%80%EF%BC%89/#%E4%B8%A4%E5%88%97%E5%B8%83%E5%B1%80%EF%BC%88%E5%B8%B8%E7%94%A8float%EF%BC%89">CSS布局</a></li>
+</ul>
+<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p><strong>只设置一个左浮动元素</strong>（红色），然后给<strong>右边蓝色列</strong>设置与红色浮动<strong>等宽的<code>margin-left</code>使得两列不重合</strong>。</p>
+<p>**如果右边蓝色列不设置与红色浮动等宽的<code>margin-left</code>**，那么红蓝有一部分是重叠的，虽然不影响蓝色列文字的显示，但是后续文字<code>padding</code>的设置会很麻烦：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznbcg79mj30mx05omz8.jpg" alt="红色浮动元素，蓝色普通元素"></p>
+<p><strong>例子：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznf286gcj30es0iywkj.jpg" alt="例子代码"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznfv6p9tj30n106974l.jpg" alt="效果"></p>
+<hr>
+<h1 id="浮动：三列布局（3种方法）"><a href="#浮动：三列布局（3种方法）" class="headerlink" title="浮动：三列布局（3种方法）"></a>浮动：三列布局（3种方法）</h1><p><strong>方法1 【3个浮动元素】：（可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B8%83%E5%B1%80%EF%BC%89/#%E4%B8%89%E5%88%97%E5%B8%83%E5%B1%80%EF%BC%88%E6%B5%AE%E5%8A%A8%E6%88%96%E5%AD%90%E7%BB%9D%E7%88%B6%E7%9B%B8%EF%BC%89">三列布局（浮动或子绝父相）</a>）</strong><br>首先设置父级元素的宽度（<code>width: 100%;overflow: hidden;</code>）</p>
+<ol>
+<li>可以<strong>左左右设置浮动</strong>,然后<strong>中间设置margin调整间距</strong>。</li>
+<li>也可以<strong>都设置成左浮动</strong>，设置margin，调整间距。同样<strong>注意清除浮动</strong>！</li>
+</ol>
+<p>由于都是浮动元素，所以可以控制自己的宽高，也不用担心没脱离普通元素的文本流所引发的问题。（方法2就要注意这个问题）</p>
+<p><strong>方法2 【1、3列浮动，中间margin留位置】：</strong><br><strong>设置第1、3列为浮动，中间使用margin将空间留出来给普通元素。</strong><br>为<strong>防止第三列浮动元素受到中间普通元素文本的影响</strong>，需要在HTML中将最左和最右两个浮动写在一起，<strong>中间的普通元素放在最后</strong>。</p>
+<p><strong>方法3 【1、3列绝对定位，中间margin留位置】：</strong><br>使用<strong>子绝父相</strong>，将父元素设置为相对定位（<code>position：relative</code>），<strong>使用<code>position：absolute</code>将第1、3列设置为绝对定位</strong>，中间使用margin将空间留出来给普通元素。<br>（但我们很少这么做，因为绝对定位是完全脱离文档流的，缺少适应性方面的特性）</p>
+<h2 id="方法2-错误示范"><a href="#方法2-错误示范" class="headerlink" title="方法2 错误示范"></a>方法2 错误示范</h2><p>左列左浮动，中间使用<code>margin-left</code>和<code>margin-right</code>预留出左右两列的宽度，第三列右浮动：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznpd6h9sj30dq0ksq91.jpg" alt="错误代码"><br>可以看到<strong>蓝色列顶部是在中间列下面的，三列并未对齐</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbznpp6dbqj30na06bjrl.jpg" alt="错误效果"><br><strong>原因：</strong>第三列是浮动，<strong>不会脱离文本流</strong>，所以他会给中间的普通元素的文本留出位置。</p>
+<h2 id="方法2-正确示范"><a href="#方法2-正确示范" class="headerlink" title="方法2 正确示范"></a>方法2 正确示范</h2><p>在HTML中将最左和最右两个浮动写在一起，中间的普通元素放在最后。那么浮动元素：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzo9rh05lj30cz09tjuj.jpg" alt="正确代码"><br>此时，<strong>左边浮动尽量往上靠，右边浮动尽量往上靠，最后中间元素再进去看有没有空间</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzoa2rgkrj30mv05i0su.jpg" alt="效果"></p>
+<hr>
+<h1 id="inline-block布局"><a href="#inline-block布局" class="headerlink" title="inline-block布局"></a>inline-block布局</h1><ul>
+<li><strong>思路：</strong>像文本一样排block元素</li>
+<li><strong>优点：</strong>不需要处理清除浮动等问题</li>
+<li><strong>缺点：</strong>需要处理两个<code>inline-block</code>元素之间的<strong>间隙</strong></li>
+</ul>
+<h2 id="错误示范（间隙）"><a href="#错误示范（间隙）" class="headerlink" title="错误示范（间隙）"></a>错误示范（间隙）</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpdduuqaj30dv0gpjwu.jpg" alt="代码"><br><strong>效果</strong>：可以看到中间有一条缝，这是<strong>因为inline-block就像文字一样，两个文字中间一定是有间隙的</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpdqr6jrj30k705fjrg.jpg" alt="效果：可以看到中间有一条缝"></p>
+<h2 id="间隙的处理方法"><a href="#间隙的处理方法" class="headerlink" title="间隙的处理方法"></a>间隙的处理方法</h2><p><strong>解决方法：首先将父元素的<code>font-size</code>设为0</strong>（字体大小都为0了，间隙也就为0了，但同时他的子元素的文字也会消失），<strong>然后分别设置<code>inline-block</code>子元素的<code>font-size</code>使子元素中文字可以显示出来。</strong></p>
+<p>父元素：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpgst52qj31440gtae1.jpg" alt="父元素"><br>解决代码：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpjutm23j30cg0glq7j.jpg" alt="解决代码"><br>效果：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzpkg4wubj30n005fmx5.jpg" alt="效果"></p>
+<hr>
+<h1 id="什么时候使用浮动-inline-block布局"><a href="#什么时候使用浮动-inline-block布局" class="headerlink" title="什么时候使用浮动&#x2F;inline-block布局"></a>什么时候使用浮动&#x2F;inline-block布局</h1><ul>
+<li>使用inline-block布局比浮动布局要简单，但是处理一些<strong>自适应</strong>会比较麻烦，<strong>浮动布局会更加方便</strong>。</li>
+<li>处理<strong>定宽的问题</strong>时使用<strong>inline-block布局</strong>。</li>
+</ul>
+<hr>
+<h1 id="响应式设计和布局"><a href="#响应式设计和布局" class="headerlink" title="响应式设计和布局"></a>响应式设计和布局</h1><ul>
+<li><strong>响应式设计：</strong> 在不同设备上正常使用，一般主要处理屏幕大小问题。</li>
+<li><strong>主要方法：</strong><ol>
+<li>隐藏+折行+自适应空间</li>
+<li>rem&#x2F;viewport&#x2F;media query<ul>
+<li><strong>rem代替px</strong>：1rem 等于 HTML 中的根元素的字体大小，可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/#rem">CSS文本</a></li>
+<li><strong>viewport</strong>：使移动端网页<strong>页面的宽度</strong>和<strong>设备屏幕的宽度</strong>进行<strong>匹配</strong><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;</code><ul>
+<li><strong>width&#x3D;device-width：</strong>将<strong>页面宽度<code>width</code>设为 屏幕区域大小<code>device-width</code>（注意区分 页面 和 屏幕 ，<code>device-width</code>只和设备有关系）</strong>,使页面和屏幕的宽度进行匹配。（如果不加这个，那么很多手机上网页的默认宽度使980px，然而手机只有这么大却要显示980个像素，看起来页面就被缩小了很多）</li>
+<li><strong>initial-scale：</strong>表示初始的缩放比例，默认缩放比例为1，也就是不进行缩放。不允许用户缩放页面，能保证页面在不同设备上的显示效果一致</li>
+</ul>
+</li>
+<li><strong>media query：</strong> 根据不同设备的特性匹配不同样式。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="viewport案例（适配移动端）"><a href="#viewport案例（适配移动端）" class="headerlink" title="viewport案例（适配移动端）"></a>viewport案例（适配移动端）</h2><ul>
+<li><strong>viewport</strong> 是用户网页的<strong>可视区域</strong>。</li>
+<li>viewport 翻译为中文可以叫做”视口”。</li>
+<li>手机浏览器是把页面放在一个虚拟的”窗口”（viewport）中，通常这个虚拟的”窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过<strong>平移和缩放</strong>来看网页的不同部分。</li>
+<li><strong>没有使用viewport会出现的问题：</strong><ul>
+<li><strong>缩放问题：</strong>如果网页没有设置 viewport，浏览器会将整个网页缩小，以适应屏幕宽度。这可能导致网页中的字体和其他元素过小，难以阅读和操作。如果设置了 viewport，则可以通过调整视口大小和缩放级别来适应屏幕宽度</li>
+<li><strong>响应式设计问题：</strong>移动设备屏幕宽度通常较小，因此需要响应式设计以适应不同大小的屏幕。如果网页没有设置 viewport，它可能无法正确响应设备屏幕的大小和方向</li>
+<li><strong>布局问题：</strong>如果网页没有设置 viewport，浏览器可能会将整个网页缩放到适合屏幕宽度的大小，这可能导致布局混乱或者元素重叠</li>
+</ul>
+</li>
+<li><strong>没有使用viewport的效果</strong>：需要手动平移和缩放看全部效果<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqqjip7tj314n06xjx2.jpg" alt="没有使用viewport的效果"></li>
+<li><strong>加上viewport</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqq76038j30hi0ji7ao.jpg" alt="代码"><ul>
+<li><strong>加上viewport之后的效果</strong>：根据设定的样式进行缩放展示，不会出现横向的滚动条<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqx2v8rvj31480amdii.jpg" alt="加上viewport之后的效果"></li>
+</ul>
+</li>
+</ul>
+<h2 id="media-query案例"><a href="#media-query案例" class="headerlink" title="media query案例"></a>media query案例</h2><h3 id="隐藏"><a href="#隐藏" class="headerlink" title="隐藏"></a>隐藏</h3><p>给上一个例子加上media query，<strong>规定左边红色列只有在屏幕宽度大于640px的情况下显示</strong>，小于时隐藏左边红色列：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzqyk4ljyj30b503xq3s.jpg" alt="代码"><br>一般移动端都是小于640px的，所以移动端就会隐藏左边红色列：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbzr08i4sjj31420aoafh.jpg" alt="效果"></p>
+<hr>
+<h3 id="适配移动端"><a href="#适配移动端" class="headerlink" title="适配移动端"></a>适配移动端</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga4zb4ofgj30mx09976v.jpg" alt="效果对比"></p>
+<ul>
+<li><strong>实现效果：让文字大小适配屏幕大小</strong>（等比例）</li>
+<li><strong>实现方法</strong>：<ol>
+<li>使用<code>@media</code>判断为移动端设备时，设置<strong>元素居中并改为块级元素</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga50uh01qj30ds0c543v.jpg" alt="元素居中并改为块级元素">居中使其左右不留空位（滑动条），块级使其独占一行</li>
+<li>将所有<strong>文字单位调整成<code>rem</code><strong>，然后使用<code>@media</code>来设置</strong>不同屏幕大小时font-size的大小</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gga4p4pyomj30an0jr10o.jpg" alt="@media文字大小适配移动端"></li>
+</ol>
+</li>
+<li><strong>注意：<code>@media</code>规则中<code>max-width</code>小的放在下面，以此保证识别顺序</strong>。并且注意预留空间，因为<strong>rem精准性不高，当font-size与之相除产生小数点时将取近似数，要求精准时请勿使用rem</strong></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/12/CSS%E5%B8%83%E5%B1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          CSS布局面试题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/10/BFC%E4%B8%8E%E6%B5%AE%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">BFC与浮动</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%AE%E5%8A%A8%EF%BC%9A%E4%B8%A4%E5%88%97%E5%B8%83%E5%B1%80"><span class="nav-number">1.</span> <span class="nav-text">浮动：两列布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%951"><span class="nav-number">1.1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952"><span class="nav-number">1.2.</span> <span class="nav-text">方法2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%AE%E5%8A%A8%EF%BC%9A%E4%B8%89%E5%88%97%E5%B8%83%E5%B1%80%EF%BC%883%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">浮动：三列布局（3种方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952-%E9%94%99%E8%AF%AF%E7%A4%BA%E8%8C%83"><span class="nav-number">2.1.</span> <span class="nav-text">方法2 错误示范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952-%E6%AD%A3%E7%A1%AE%E7%A4%BA%E8%8C%83"><span class="nav-number">2.2.</span> <span class="nav-text">方法2 正确示范</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#inline-block%E5%B8%83%E5%B1%80"><span class="nav-number">3.</span> <span class="nav-text">inline-block布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%A4%BA%E8%8C%83%EF%BC%88%E9%97%B4%E9%9A%99%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">错误示范（间隙）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">间隙的处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E6%B5%AE%E5%8A%A8-inline-block%E5%B8%83%E5%B1%80"><span class="nav-number">4.</span> <span class="nav-text">什么时候使用浮动&#x2F;inline-block布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%B8%83%E5%B1%80"><span class="nav-number">5.</span> <span class="nav-text">响应式设计和布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport%E6%A1%88%E4%BE%8B%EF%BC%88%E9%80%82%E9%85%8D%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">viewport案例（适配移动端）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#media-query%E6%A1%88%E4%BE%8B"><span class="nav-number">5.2.</span> <span class="nav-text">media query案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%97%8F"><span class="nav-number">5.2.1.</span> <span class="nav-text">隐藏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="nav-number">5.2.2.</span> <span class="nav-text">适配移动端</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

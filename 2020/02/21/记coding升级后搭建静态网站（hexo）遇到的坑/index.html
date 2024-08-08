@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>记coding升级后搭建静态网站（hexo）遇到的坑 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="coding升级coding今年1月份升了个级，网上的教程似乎都不好使了，故把我遇到的坑和解决方法都记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记coding升级后搭建静态网站（hexo）遇到的坑">
+<meta property="og:url" content="http://yoursite.com/2020/02/21/%E8%AE%B0coding%E5%8D%87%E7%BA%A7%E5%90%8E%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%EF%BC%88hexo%EF%BC%89%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="coding升级coding今年1月份升了个级，网上的教程似乎都不好使了，故把我遇到的坑和解决方法都记录一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd1cu0yhdaj30pf077aat.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd0q2poh03j31dp0myznt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd1d3oyspej31gt0lxn0s.jpg">
+<meta property="article:published_time" content="2020-02-21T03:20:11.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.434Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd1cu0yhdaj30pf077aat.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-记coding升级后搭建静态网站（hexo）遇到的坑" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      记coding升级后搭建静态网站（hexo）遇到的坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/21/%E8%AE%B0coding%E5%8D%87%E7%BA%A7%E5%90%8E%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%EF%BC%88hexo%EF%BC%89%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="article-date">
+	  <time datetime="2020-02-21T03:20:11.000Z" itemprop="datePublished">二月 21, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/hexo%E4%B8%AD%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">hexo中遇到过的问题与解决方案</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="coding升级"><a href="#coding升级" class="headerlink" title="coding升级"></a>coding升级</h1><p>coding今年1月份升了个级，网上的教程似乎都不好使了，故把我遇到的坑和解决方法都记录一下。</p>
+<span id="more"></span>
+
+<h1 id="配置ssh报错"><a href="#配置ssh报错" class="headerlink" title="配置ssh报错"></a>配置ssh报错</h1><p>网上教程大多是执行<code>ssh -T git@git.coding.net</code>来看是否配置成功，但是我使用以后会</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><strong>根据官网</strong>,命令改了：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> -T git<span class="variable">@e</span>.coding.net</span><br></pre></td></tr></table></figure>
+<p>得到中文的提示即成功：</p>
+<blockquote>
+<p>Coding 提示: Hello oka, You’ve connected to Coding.net via SSH. This is a personal key.<br>xxx，你好，你已经通过 SSH 协议认证 Coding.net 服务，这是一个个人公钥</p>
+</blockquote>
+<h2 id="如果还是不行就试试这个"><a href="#如果还是不行就试试这个" class="headerlink" title="如果还是不行就试试这个"></a>如果还是不行就试试这个</h2><p>输入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">`ssh-agent`</span></span><br></pre></td></tr></table></figure>
+<p>再输入(<strong>这里的new是你自己存放ssh的文件</strong>)：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~<span class="regexp">/.ssh/</span><span class="keyword">new</span></span><br></pre></td></tr></table></figure>
+<p>再输入：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> -T git<span class="variable">@e</span>.coding.net</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="配置Hexo-config-yml同步上传github"><a href="#配置Hexo-config-yml同步上传github" class="headerlink" title="配置Hexo-_config.yml同步上传github"></a>配置Hexo-_config.yml同步上传github</h1><p>因为我原本就上传了github，所以想要两边<strong>同步更新</strong>，就跑来设置_config.yml，但是按照网上的教程都只能deploy到github，后来发现<strong>下面这种格式可以一次deploy到coding和github：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd1cu0yhdaj30pf077aat.jpg" alt="配置Hexo-_config.yml同步上传github"></p>
+<hr>
+<h1 id="coding搭建静态网站"><a href="#coding搭建静态网站" class="headerlink" title="coding搭建静态网站"></a>coding搭建静态网站</h1><ul>
+<li>先放个<a target="_blank" rel="noopener" href="https://help.coding.net/docs/devops/cd/static-website.html#%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99">官方帮助文档</a>，基本找到了“构建与部署”以后的步骤官方都给出来了。</li>
+<li><strong>问题就在我一开始进去项目是找不到“构建与部署”的！！</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd0q2poh03j31dp0myznt.jpg" alt="coding搭建静态网站"></li>
+</ul>
+<h2 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>进入项目-点击左下角<strong>“项目设置”</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd1d3oyspej31gt0lxn0s.jpg" alt="打开“构建与部署”"></li>
+<li>现在后退就有“构建与部署”了，接下来就跟着<a target="_blank" rel="noopener" href="https://help.coding.net/docs/devops/cd/static-website.html#%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99">官方帮助文档</a>步骤即可。</li>
+</ul>
+<hr>
+<h1 id="coding-me的问题"><a href="#coding-me的问题" class="headerlink" title="coding.me的问题"></a>coding.me的问题</h1><p>在很多教程里都有这段话：</p>
+<blockquote>
+<p>新建一个名为username.coding.me的项目，其中这里的username是coding注册时的username，等项目部署成功后它就是你博客的访问地址。</p>
+</blockquote>
+<p>但是<strong>升级以后coding取消了username，改为手机号和邮箱</strong>，所以我找了半天都没找到username在哪，好像只能使用随机生成的域名了。</p>
+<h2 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>买个域名在“设置”里自定义域名吧，听说现在域名一年在几十块一下，我觉得还可。</li>
+<li><a target="_blank" rel="noopener" href="https://help.coding.net/docs/devops/cd/static-website.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E8%AE%BE%E7%BD%AE">官方的自定义域名教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000020010241#item-3-5">可参考这篇博客实现国内的走coding，海外的走github，只要配置2个CNAME就行</a></li>
+</ul>
+<hr>
+<h1 id="百度收录【留着以后填坑】"><a href="#百度收录【留着以后填坑】" class="headerlink" title="百度收录【留着以后填坑】"></a>百度收录【留着以后填坑】</h1><ul>
+<li>弄好以后记得让百度收录，不然也很难受</li>
+<li>登录<a target="_blank" rel="noopener" href="https://ziyuan.baidu.com/?castk=LTE=">百度搜索资源平台</a>-&gt;链接提交。即可，没有绑定过的需要先新增站点并验证。<strong>注意https和http有区别</strong>，需要自己选择，选错了会验证不了</li>
+<li>我还没弄域名，所以这个留着以后填坑吧</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TRHX/p/11699948.html">可以参考这篇博客来弄</a></li>
+<li>推荐使用sitemap方式提交，推荐一个hexo的sitemap生成插件：hexo-generator-baidu-sitemap</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/hexo%E4%B8%AD%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">hexo中遇到过的问题与解决方案</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/21/%E8%AE%A9google%E6%94%B6%E5%BD%95github%20pages%EF%BC%88hexo%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          让google收录github pages（hexo）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">react-router-dom的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#coding%E5%8D%87%E7%BA%A7"><span class="nav-number">1.</span> <span class="nav-text">coding升级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEssh%E6%8A%A5%E9%94%99"><span class="nav-number">2.</span> <span class="nav-text">配置ssh报错</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%98%E6%98%AF%E4%B8%8D%E8%A1%8C%E5%B0%B1%E8%AF%95%E8%AF%95%E8%BF%99%E4%B8%AA"><span class="nav-number">2.2.</span> <span class="nav-text">如果还是不行就试试这个</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEHexo-config-yml%E5%90%8C%E6%AD%A5%E4%B8%8A%E4%BC%A0github"><span class="nav-number">3.</span> <span class="nav-text">配置Hexo-_config.yml同步上传github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">coding搭建静态网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-me%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">coding.me的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95-2"><span class="nav-number">5.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95%E3%80%90%E7%95%99%E7%9D%80%E4%BB%A5%E5%90%8E%E5%A1%AB%E5%9D%91%E3%80%91"><span class="nav-number">6.</span> <span class="nav-text">百度收录【留着以后填坑】</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

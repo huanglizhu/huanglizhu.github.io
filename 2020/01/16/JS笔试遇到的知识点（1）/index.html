@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS笔试遇到的知识点（1） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="四种touch事件1234touchstart:     &#x2F;&#x2F;手指放到屏幕上时触发touchmove:      &#x2F;&#x2F;手指在屏幕上滑动式触发touchend:    &#x2F;&#x2F;手指离开屏幕时触发touchcancel:     &#x2F;&#x2F;系统取消touch事件的时候触发，这个好像比较少用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔试遇到的知识点（1）">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="四种touch事件1234touchstart:     &#x2F;&#x2F;手指放到屏幕上时触发touchmove:      &#x2F;&#x2F;手指在屏幕上滑动式触发touchend:    &#x2F;&#x2F;手指离开屏幕时触发touchcancel:     &#x2F;&#x2F;系统取消touch事件的时候触发，这个好像比较少用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-16T03:29:40.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.314Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS笔试遇到的知识点（1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS笔试遇到的知识点（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/16/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%881%EF%BC%89/" class="article-date">
+	  <time datetime="2020-01-16T03:29:40.000Z" itemprop="datePublished">一月 16, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A2%98%E7%9B%AE/">牛客网题目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="四种touch事件"><a href="#四种touch事件" class="headerlink" title="四种touch事件"></a>四种touch事件</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">touchstart:</span>     <span class="comment">//手指放到屏幕上时触发</span></span><br><span class="line"><span class="symbol">touchmove:</span>      <span class="comment">//手指在屏幕上滑动式触发</span></span><br><span class="line"><span class="symbol">touchend:</span>    <span class="comment">//手指离开屏幕时触发</span></span><br><span class="line"><span class="symbol">touchcancel:</span>     <span class="comment">//系统取消touch事件的时候触发，这个好像比较少用</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<hr>
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5d70c7f46fb9a06afb61eac5">关于跨域</a></p>
+<h2 id="javascript中实现跨域的方式总结"><a href="#javascript中实现跨域的方式总结" class="headerlink" title="javascript中实现跨域的方式总结"></a>javascript中实现跨域的方式总结</h2><p><strong>第一种方式：jsonp请求</strong><br>jsonp的原理是利用<code>&lt;script&gt;</code>标签的跨域特性，可以不受限制地从其他域中加载资源，类似的标签还有<code>&lt;img&gt;</code>.<br><strong>第二种方式：<code>document.domain</code></strong><br>这种方式用在主域名相同子域名不同的跨域访问中<br><strong>第三种方式：<code>window.name</code></strong><br>window的name属性有个特征：在一个窗口(window)的生命周期内,窗口载入的所有的页面都是共享一个window.name的，每个页面对window.name都有读写的权限，window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。<br><strong>第四种方式：window.postMessage</strong><br>window.postMessages是html5中实现跨域访问的一种新方式，可以使用它来向其它的window对象发送消息，无论这个window对象是属于同源或不同源。<br><strong>第五种方式：CORS</strong><br>CORS背后的基本思想，就是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是应该失败。<br><strong>第六种方式：Web Sockets</strong><br>web sockets原理：在JS创建了web socket之后，会有一个HTTP请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP升级从HTTP协议交换为web sockt协议。</p>
+<hr>
+<h1 id="Math-对象"><a href="#Math-对象" class="headerlink" title="Math 对象"></a>Math 对象</h1><p>Math 对象用于执行数学任务。<br><strong>注释</strong>：Math 对象并不像 Date 和 String 那样是对象的类，因此没有构造函数 Math()，像 Math.sin() 这样的函数只是函数，不是某个对象的方法。您无需创建它，通过把 Math 作为对象使用就可以调用其所有属性和方法。</p>
+<hr>
+<h2 id="Math-round-）方法-返回最接近的整数"><a href="#Math-round-）方法-返回最接近的整数" class="headerlink" title="Math.round(）方法 返回最接近的整数"></a>Math.round(）方法 返回最接近的整数</h2><p>Math.round(）函数<strong>返回一个数字四舍五入后最接近的整数</strong><br>如果参数的小数部分大于0.5，四舍五入到相邻的绝对值更大的整数<br>如果参数的小数部分小于0.5，四舍五入到相邻的绝对值更小的整数<br>如果参数的小数部分等于0.5，四舍五入到相邻的在正无穷（+∞）方向上的整数。</p>
+<p>例：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">x</span><span class="operator">=</span>Math.round(<span class="number">2019.49</span>) <span class="comment">;      //2019</span></span><br><span class="line"><span class="attribute">x</span><span class="operator">=</span>Math.round(<span class="number">2019.5</span>)<span class="comment">;         //2020</span></span><br><span class="line"><span class="attribute">x</span><span class="operator">=</span>Math.round(-<span class="number">2019.5</span>)<span class="comment">;        //-2019</span></span><br><span class="line"><span class="attribute">x</span><span class="operator">=</span>Math.round(-<span class="number">2019.51</span>)<span class="comment">;      //-2020</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Math-abs-方法-返回数的绝对值"><a href="#Math-abs-方法-返回数的绝对值" class="headerlink" title="Math.abs() 方法 返回数的绝对值"></a>Math.abs() 方法 返回数的绝对值</h2><ul>
+<li>定义：abs() 方法可<strong>返回数的绝对值</strong>。</li>
+<li>语法：<code>Math.abs(x)</code></li>
+<li>参数：必需。必须是一个数值。</li>
+</ul>
+<hr>
+<h1 id="基本（原始）、复杂与全局数据类型"><a href="#基本（原始）、复杂与全局数据类型" class="headerlink" title="基本（原始）、复杂与全局数据类型"></a>基本（原始）、复杂与全局数据类型</h1><ul>
+<li><strong>基本数据类型（原始值）（记忆：NNUSB&#x3D;&gt;纳尼USB）</strong><br>Number，Null，Undefined，String，Boolean。<br>es6添加了一种新的原始数据类型：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22652486">Symbol</a>。所以现在 js的原始数据类型有6种。</li>
+<li><strong>复杂数据类型（对象值）</strong>：Object，Array，Function，RegExp，Date，Error</li>
+<li><strong>全局数据类型：Math</strong></li>
+</ul>
+<hr>
+<h1 id="原始值和引用值"><a href="#原始值和引用值" class="headerlink" title="原始值和引用值"></a>原始值和引用值</h1><p>ECMAScript中，变量可以存放两种类型的值，即<strong>原始值和引用值</strong>。<br><strong>原始值</strong>是存储在栈中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。(<strong>基本（原始）数据类型的值</strong>)<br><strong>引用值</strong>是存储在堆中的对象，也就是说，存储在变量处的值是一个指针，指向存储对象的内存处。（<strong>比如对象、数组</strong>）</p>
+<hr>
+<h1 id="RegExp正则表达式"><a href="#RegExp正则表达式" class="headerlink" title="RegExp正则表达式"></a>RegExp正则表达式</h1><p><strong>JavaScript RegExp 对象有3个方法：test()、exec()、compile()</strong><br>**test()**：检测一个字符串是否匹配某个正则表达式，如果匹配成功，则返回true，否则返回false；<br>**exec()**：检索字符串中与正则表达式匹配的值，返回一个数组，存放匹配的结果；如果未找到，返回null；<br><strong>compile()</strong>:可以在脚本执行过程中编译正则表达式，也可以改变已有表达式。<br><strong>注：match是支持正则表达式的String对象的方法.</strong></p>
+<hr>
+<h1 id="Array-对象方法"><a href="#Array-对象方法" class="headerlink" title="Array 对象方法"></a>Array 对象方法</h1><p>concat() 连接两个或更多的数组，并返回结果。<br>join() 把数组的所有元素放入一个字符串,元素通过指定的分隔符进行分隔。<br>pop() <strong>删除并返回</strong>数组的<strong>最后一个元素</strong> .<br>push() 向数组的<strong>末尾添加一个或更多元素</strong>，并返回新的长度。<br>reverse() 颠倒数组中元素的顺序。<br>shift() <strong>删除并返回</strong>数组的<strong>第一个元素</strong><br>unshift() 向数组的<strong>开头添加一个或更多元素</strong>，并返回新的长度。<br>slice() 从某个已有的数组返回选定的元素<br>sort() 对数组的元素进行 升序&#x2F;降序<strong>排序</strong>(请注意，<strong>数组在原数组上进行排序</strong>，不生成副本。)，<strong>参数决定排序的顺序</strong>（参数为空则按照字符编码的顺序进行排序，参数也可为比较函数）。<br>splice() 删除元素，并向数组添加新元素。**(删除，插入，替换；得到的数组都是被删去的）**<br>toSource() 返回该对象的源代码。<br>toString() 把数组转换为字符串，并返回结果。<br>toLocaleString() 把数组转换为本地数组，并返回结果。<br>valueOf() 返回数组对象的原始值</p>
+<h2 id="不会更改原有数组的方法"><a href="#不会更改原有数组的方法" class="headerlink" title="不会更改原有数组的方法"></a>不会更改原有数组的方法</h2><p>concat()连接两个或更多的数组，得到新数组。<br>map()循环数组</p>
+<h2 id="会更改原有数组的方法"><a href="#会更改原有数组的方法" class="headerlink" title="会更改原有数组的方法"></a>会更改原有数组的方法</h2><p>splice()【删除，插入，替换；得到的数组都是被删去的】<br>sort()【数组在原数组上进行排序，不生成副本。】</p>
+<hr>
+<h1 id="前后之区别"><a href="#前后之区别" class="headerlink" title="++前后之区别"></a><code>++</code>前后之区别</h1><p><strong>前置自增</strong>：++在前，<strong>先+1，再取值</strong>，表达式的值即为自增<strong>后</strong>的值<br><strong>后置自增</strong>：++在后，<strong>先取值，再+1</strong>，表达式的值即为自增<strong>前</strong>的值</p>
+<hr>
+<h1 id="对象-属性：值"><a href="#对象-属性：值" class="headerlink" title="对象&#x3D;{属性：值}"></a>对象&#x3D;{属性：值}</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> car = &#123;<span class="built_in">type</span>=<span class="string">&quot;porsche&quot;</span>,color=<span class="string">&quot;white&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Number类的toFixed（）与toPrecision（）"><a href="#Number类的toFixed（）与toPrecision（）" class="headerlink" title="Number类的toFixed（）与toPrecision（）"></a>Number类的toFixed（）与toPrecision（）</h1><ul>
+<li>两个方法返回的数字都是<strong>字符串形式</strong>。</li>
+</ul>
+<h2 id="toFixed（）"><a href="#toFixed（）" class="headerlink" title="toFixed（）"></a>toFixed（）</h2><p>把数字四舍五入转换为由参数指定小数位数的数字。（不采用科学记数法）</p>
+<h2 id="toPrecision（）"><a href="#toPrecision（）" class="headerlink" title="toPrecision（）"></a>toPrecision（）</h2><ul>
+<li>规定Number对象的值<strong>超出</strong>参数指定的有效数字的位数时将其<strong>有效长度</strong>格式化为<strong>参数指定的长度</strong>。</li>
+<li>当参数规定的<strong>有效数字的位数</strong>能包住Number对象时</li>
+<li><strong>注意</strong>：参数规定的<strong>有效数字的位数</strong>是从数字第一个不为0的数(包括整数部分和小数部分)开始计算的位数。</li>
+<li>Number对象的值 &gt; 参数指定的有效数字的位数 时，采用<strong>定点记数法</strong>（使用小数点）【比如参数为5时，312&#x3D;312.00;参数为2时，要求有效位数2位，0.8&#x3D;0.80】</li>
+<li>Number对象的值 &lt;&#x3D; 参数指定的有效数字的位数 时，采用<strong>科学记数法</strong>。【比如参数为2时，<code>1234.1234</code> &#x3D; <code>12.341234*10^2</code> &#x3D; <code>12.341234e10+2</code>】</li>
+</ul>
+<hr>
+<h1 id="AngularJS1数据绑定的占位符"><a href="#AngularJS1数据绑定的占位符" class="headerlink" title="AngularJS1数据绑定的占位符"></a>AngularJS1数据绑定的占位符</h1><p>AngularJS1中页面中用于数据绑定的占位符是<code>{{ }}</code></p>
+<hr>
+<h1 id="jquery获取当前窗口的宽度值"><a href="#jquery获取当前窗口的宽度值" class="headerlink" title="jquery获取当前窗口的宽度值"></a>jquery获取当前窗口的宽度值</h1><p>在jquery中，如果想要获取当前<strong>窗口的宽度值</strong>,使用<code>width()</code></p>
+<p><strong>在jquery中</strong>:</p>
+<ul>
+<li><code>width() </code>方法设置或返回元素的宽度（<strong>不包括内边距padding、边框border或外边距margin</strong>）。</li>
+<li><code>height() </code>方法设置或返回元素的高度（<strong>不包括内边距padding、边框border或外边距margin</strong>）。</li>
+<li><code>innerWidth() </code>方法返回元素的宽度（<strong>包括内边距padding</strong>）。</li>
+<li><code>innerHeight()</code> 方法返回元素的高度（<strong>包括内边距padding</strong>）。</li>
+<li><code>outerWidth() </code>方法返回元素的宽度（<strong>包括内边距padding和边框border</strong>）。</li>
+<li><code>outerHeight()</code> 方法返回元素的高度（<strong>包括内边距padding和边框border</strong>）。</li>
+<li><code>outerWidth(true)</code> 方法返回元素的宽度（<strong>包括内边距padding、边框border和外边距margin</strong>）。</li>
+<li><code>outerHeight(true)</code> 方法返回元素的高度（<strong>包括内边距padding、边框border和外边距margin</strong>）。</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alert</span>($(window)<span class="selector-class">.height</span>()); <span class="comment">//浏览器当前窗口可视区域高度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document)<span class="selector-class">.height</span>()); <span class="comment">//浏览器当前窗口文档的高度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document.body)<span class="selector-class">.height</span>());<span class="comment">//浏览器当前窗口文档body的高度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document.body)<span class="selector-class">.outerHeight</span>(true));<span class="comment">//浏览器当前窗口文档body的总高度 包括border padding margin </span></span><br><span class="line"><span class="built_in">alert</span>($(window)<span class="selector-class">.width</span>()); <span class="comment">//浏览器当前窗口可视区域宽度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document)<span class="selector-class">.width</span>());<span class="comment">//浏览器当前窗口文档对象宽度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document.body)<span class="selector-class">.width</span>());<span class="comment">//浏览器当前窗口文档body的宽度 </span></span><br><span class="line"><span class="built_in">alert</span>($(document.body)<span class="selector-class">.outerWidth</span>(true));<span class="comment">//浏览器当前窗口文档body的总宽度 包括border padding margin </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<br>区分jquery的innerheight（）与window的innerheight属性。<br><code>window.innerheight</code>	返回<strong>浏览器窗口的视口（viewport）高度</strong>（以像素为单位）；如果有水平滚动条，也<strong>包括滚动条高度</strong>。<br><code>window.outerHeight</code>属性设置或返回一个窗口的外部高度，包括所有界面元素（如工具栏&#x2F;滚动条）。</p>
+<hr>
+<h1 id="变量与函数提升"><a href="#变量与函数提升" class="headerlink" title="变量与函数提升"></a>变量与函数提升</h1><ul>
+<li><strong>变量声明会被提升，赋值语句不提升。使用 函数声明 时函数也会被提升，但使用 函数表达式 时不存在提升</strong>。（注意：函数表达式就是带等号的。函数在<strong>ES5中是整个函数被提升，在ES6中是只提升函数的声明（也就是只提升函数名）</strong>，函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。）</li>
+<li>变量声明、函数声明都会被提升到作用域顶处，且 <strong>函数提升优先级高于变量提升</strong>，且不会被同名变量声明时覆盖，但是会被变量赋值后覆盖。</li>
+<li><strong>补充</strong>：当出现多个同名变量与同名函数时，<strong>调用该变量名时的优先级为：变量声明&lt; 函数声明 &lt; 变量赋值</strong>（具体参考20191215第7题、20200205第4题）</li>
+</ul>
+<hr>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><ul>
+<li>闭包内变量执行后不会被清除，<strong>要到整个闭包被清除的时候才会清除</strong>，比如局部变量要等到函数执行完之后。</li>
+<li>自调用函数（立即执行函数）理论上是一个闭包。<strong>闭包可以访问其他函数内部变量的函数</strong>，而立即执行函数传参，相当于父级变量；<strong>闭包需要手动执行，不能自主释放内存</strong>；而立即执行函数相当于做了一次函数执行，最后释放内存。逻辑上立即执行函数可以理解为：声明闭包函数-执行-释放内存</li>
+</ul>
+<hr>
+<h1 id="与"><a href="#与" class="headerlink" title="&lt;link&gt;与&lt;script&gt;"></a><code>&lt;link&gt;</code>与<code>&lt;script&gt;</code></h1><ul>
+<li><strong><code>&lt;link&gt;</code> 和href配合 加载css</strong>，hypertext reference超文本引用，页面加载到href时<strong>不会停下来</strong>。</li>
+<li><strong><code>&lt;script&gt;</code>和src配合 加载script文件</strong>，source资源，页面会<strong>停下来等待资源加载完毕</strong>（并执行完），所以一般js放在body的最下面。</li>
+</ul>
+<hr>
+<h1 id="数组长度不包括数组的方法（函数）"><a href="#数组长度不包括数组的方法（函数）" class="headerlink" title="数组长度不包括数组的方法（函数）"></a>数组长度不包括数组的方法（函数）</h1><ol>
+<li>首先要明确：<strong>数组也是对象</strong></li>
+<li><strong>对象不能用length返回其拥有的属性数量</strong></li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var</span> arr = <span class="number">0</span>; </span><br><span class="line"><span class="attribute">arr</span>[<span class="number">0</span>] = <span class="number">0</span>; </span><br><span class="line"><span class="attribute">arr</span>[<span class="number">1</span>] = <span class="number">1</span>; </span><br><span class="line"><span class="attribute">arr</span>.foo = &#x27;C&#x27;; </span><br><span class="line"><span class="attribute">console</span>.loa(arr.lenath);//<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>这里要理解所谓‘数组’其实是array类型对象的一个特殊作用，就是：我们可以对它进行一种模式的数据存储，但除此之外，它依然是一个对象</p>
+<ul>
+<li><code>var arr = [‘1’，‘2’]</code> &#x2F;&#x2F;这本质上是一系列操作：得到一个数组对象；调用了它的数组方法存入了一些数据，<code>arr.length</code>根据存入数据的数目被修改</li>
+<li><code>arr.length</code>，对arr对象的length属性进行一个访问</li>
+<li><code>arr.foo = &#39;hello&#39;</code> 对arr对象创建一个属性，所以<code>.foo</code> 跟<code>.length</code>地位是并列的：就是arr的一个属性**，同时arr的数组方法跟这些属性是毫不相关的。</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A2%98%E7%9B%AE/">牛客网题目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Redux入门（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">开发博客项目之接口(1)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8Dtouch%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">四种touch事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E7%9A%84%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">2.1.</span> <span class="nav-text">javascript中实现跨域的方式总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math-%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">Math 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math-round-%EF%BC%89%E6%96%B9%E6%B3%95-%E8%BF%94%E5%9B%9E%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E6%95%B4%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">Math.round(）方法 返回最接近的整数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Math-abs-%E6%96%B9%E6%B3%95-%E8%BF%94%E5%9B%9E%E6%95%B0%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">Math.abs() 方法 返回数的绝对值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%EF%BC%88%E5%8E%9F%E5%A7%8B%EF%BC%89%E3%80%81%E5%A4%8D%E6%9D%82%E4%B8%8E%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">基本（原始）、复杂与全局数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">原始值和引用值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">RegExp正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array-%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">Array 对象方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E4%BC%9A%E6%9B%B4%E6%94%B9%E5%8E%9F%E6%9C%89%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.1.</span> <span class="nav-text">不会更改原有数组的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E6%9B%B4%E6%94%B9%E5%8E%9F%E6%9C%89%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.2.</span> <span class="nav-text">会更改原有数组的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E4%B9%8B%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">++前后之区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1-%E5%B1%9E%E6%80%A7%EF%BC%9A%E5%80%BC"><span class="nav-number">9.</span> <span class="nav-text">对象&#x3D;{属性：值}</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Number%E7%B1%BB%E7%9A%84toFixed%EF%BC%88%EF%BC%89%E4%B8%8EtoPrecision%EF%BC%88%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">Number类的toFixed（）与toPrecision（）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#toFixed%EF%BC%88%EF%BC%89"><span class="nav-number">10.1.</span> <span class="nav-text">toFixed（）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toPrecision%EF%BC%88%EF%BC%89"><span class="nav-number">10.2.</span> <span class="nav-text">toPrecision（）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AngularJS1%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">11.</span> <span class="nav-text">AngularJS1数据绑定的占位符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jquery%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%AA%97%E5%8F%A3%E7%9A%84%E5%AE%BD%E5%BA%A6%E5%80%BC"><span class="nav-number">12.</span> <span class="nav-text">jquery获取当前窗口的宽度值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87"><span class="nav-number">13.</span> <span class="nav-text">变量与函数提升</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">14.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E"><span class="nav-number">15.</span> <span class="nav-text">&lt;link&gt;与&lt;script&gt;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E4%B8%8D%E5%8C%85%E6%8B%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">16.</span> <span class="nav-text">数组长度不包括数组的方法（函数）</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

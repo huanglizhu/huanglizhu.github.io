@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redux入门（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="使用redux完成TodoList列表功能实现效果：继续上一篇笔记的例子，我们希望在点击 “提交”按钮 后，input框中的 数据value 存到store中的list 中，并清空input框。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux入门（2）">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="使用redux完成TodoList列表功能实现效果：继续上一篇笔记的例子，我们希望在点击 “提交”按钮 后，input框中的 数据value 存到store中的list 中，并清空input框。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtpjnfwghj30gs08twek.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtqr7lmpsj30gp0a1aa4.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtqsavripj30gv04st8m.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtri7h4q7j31g90cm3zr.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbuk7o2oj7j30p90ffjtl.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbukryzgp7j31d90afdix.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusumjpsgj30sa05jwk0.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusvzsyf9j30sd05o441.jpg">
+<meta property="article:published_time" content="2020-01-16T07:00:33.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.336Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtpjnfwghj30gs08twek.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Redux入门（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Redux入门（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/" class="article-date">
+	  <time datetime="2020-01-16T07:00:33.000Z" itemprop="datePublished">一月 16, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用redux完成TodoList列表功能"><a href="#使用redux完成TodoList列表功能" class="headerlink" title="使用redux完成TodoList列表功能"></a>使用<code>redux</code>完成<code>TodoList</code>列表功能</h1><p><strong>实现效果：</strong>继续上一篇笔记的例子，我们希望在<strong>点击 “提交”按钮 后，<code>input</code>框中的 数据<code>value</code> 存到<code>store</code>中的<code>list </code>中</strong>，并<strong>清空<code>input</code>框</strong>。</p>
+<span id="more"></span>
+<p>1.首先**给<code>button</code>绑定一个<code>onClick</code>事件函数<code>handleButtonClick</code>**（记得绑定this作用域，JS表达式在JSX中使用<code>&#123;&#125;</code>）:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleButtonClick&#125;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.在事件函数<code>handleButtonClick</code>中<strong>添加<code>action</code><strong>，写好<code>type</code>属性。（</strong>注意：这里不需要<code>value</code>属性去传值</strong>，<code>action</code>传给<code>store</code>以后<code>store</code>会把之前的<code>state</code>数据和<code>action</code>一起传给<code>reducer</code>）</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">handleButtonClick()&#123;</span><br><span class="line">    <span class="keyword">const</span> action=&#123;</span><br><span class="line">        type:<span class="string">&quot;add_todo_item&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    store.dispatch(action)</span><br><span class="line">    // 传给store以后store会把之前的<span class="keyword">state</span>数据和action一起传给reducer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(<strong>我们到时候在<code>reducer</code>中使用<code>reducer</code>的<code>state</code>中的<code>inputValue</code>的数据即可.</strong>)</p>
+<p>3.<code>store</code>收到<code>action</code>后会自动把<strong>之前的<code>state</code>数据</strong>和<code>action</code>一起传给<code>reducer</code><br>4.<strong>在<code>reducer</code>中</strong>，一样先深拷贝<code>state</code>，然后通过<code>newState.list.push(newState.inputValue);</code><strong>将<code>input</code>框中的值加入到<code>list</code>数组中</strong>。（记得返回<code>newState</code>给<code>store</code>）,<strong>并清空输入框</strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(action.<span class="property">type</span> === <span class="string">&quot;add_todo_item&quot;</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> newState=<span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(state));</span><br><span class="line">    <span class="comment">// newState.list= [...newState.list,newState.inputValue];效果一样</span></span><br><span class="line">    newState.<span class="property">list</span>.<span class="title function_">push</span>(newState.<span class="property">inputValue</span>);</span><br><span class="line">    <span class="comment">// 清空输入框</span></span><br><span class="line">    newState.<span class="property">inputValue</span>=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> newState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.<strong><code>store</code>接收到<code>newState</code>后会替换掉原本的<code>state</code><strong>，而我们之前</strong>在组件上</strong>使用<code>store.subscribe(this.handleStoreChange);</code>**监听了<code>store</code>**，在该函数中我们使用<code>this.setState(store.getState());</code>获取了<code>store</code>中的<code>state</code>来改变 组件的<code>state</code>，组件的<code>state</code>发生改变后，页面数据自然重新渲染：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtpjnfwghj30gs08twek.jpg" alt="新增第三条内容"></p>
+<hr>
+<h1 id="使用Redux完成TodoList删除功能"><a href="#使用Redux完成TodoList删除功能" class="headerlink" title="使用Redux完成TodoList删除功能"></a>使用Redux完成TodoList删除功能</h1><p>1.在<code>reducer</code>中清空<code>input</code>框的内容和<code>list</code>列表的数据：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const defaultS<span class="attr">tate</span> <span class="operator">=</span> <span class="punctuation">&#123;</span></span><br><span class="line"><span class="symbol">    inputValue:</span> <span class="string">&quot;&quot;</span>,</span><br><span class="line"><span class="symbol">    list:</span> []</span><br><span class="line"><span class="punctuation">&#125;;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtqr7lmpsj30gp0a1aa4.jpg" alt="效果"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtqsavripj30gv04st8m.jpg" alt="输入111后"><br>那么我们希望<strong>点击“111”后他会消失</strong></p>
+<p>2.在组件<code>TodoList</code>中，我们的列表子项是通过<code>&lt;List.Item&gt;</code>进行渲染的，所以我们可以<strong>给<code>&lt;List.Item&gt;</code>绑定一个 事件函数<code>handleItemDelete</code></strong> ,**增加一个参数<code>index</code>传入<code>&lt;List.Item&gt;</code><strong>，并</strong>通过<code>bind()</code>的第二个参数将<code>index</code>传入函数<code>handleItemDelete</code>**：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">renderItem=&#123;<span class="function">(<span class="params">item, index</span>) =&gt;</span> <span class="language-xml"><span class="tag">&lt;<span class="name">List.Item</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemDelete.bind(this,index)&#125;</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">List.Item</span>&gt;</span></span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.在事件函数<code>handleItemDelete</code>中<strong>书写<code>action</code>,将<code>type</code>和<code>index</code>一起传给<code>store</code></strong>:</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handleItemDelete(<span class="built_in">index</span>)&#123;</span><br><span class="line">    const <span class="keyword">action</span>=&#123;</span><br><span class="line">        <span class="keyword">type</span>:<span class="string">&quot;delete_todo_item&quot;</span>,</span><br><span class="line">        // <span class="built_in">index</span>相当于<span class="built_in">index</span>:<span class="built_in">index</span></span><br><span class="line">        <span class="built_in">index</span></span><br><span class="line">    &#125;</span><br><span class="line">    store.dispatch(<span class="keyword">action</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.<code>store</code>接收到<code>type</code>和<code>index</code>后就<strong>自动</strong>带上原本的<code>state</code>一起打包发给<code>reducer</code>。<br>5.在<code>reducer</code>中通过数组的<code>splice</code>方法删除<code>index</code>子项：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(action.type === <span class="string">&quot;delete_todo_item&quot;</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> newState=JSON.parse(JSON.stringify(<span class="keyword">state</span>));</span><br><span class="line">    // 删除list数组中index项</span><br><span class="line">    newState.list.splice(action.index,<span class="number">1</span>);</span><br><span class="line">    return newState;</span><br><span class="line">&#125;</span><br><span class="line">return <span class="keyword">state</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>实现效果：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbtri7h4q7j31g90cm3zr.jpg" alt="实现效果"></p>
+<hr>
+<h1 id="actionTypes拆分type属性值"><a href="#actionTypes拆分type属性值" class="headerlink" title="actionTypes拆分type属性值"></a><code>actionTypes</code>拆分<code>type</code>属性值</h1><p><strong>注意</strong>：</p>
+<ul>
+<li>在<code>actionType.js</code>中<strong>输出的是各个常量名</strong>，在别的文件也是使用对象的方式引用多个常量名再进行使用。（常量名的引用没有引号，区分于字符串）</li>
+<li><strong>常量的输出不能使用<code>export default</code>,只能使用<code>export</code></strong>.仅允许表达式、函数或类作为“默认”导出:<blockquote>
+<p>Parsing error: Only expressions, functions or classes are allowed as the <code>default</code> export.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>我们之前<strong>在<code>action</code>中</strong>都是使用<strong>字符串</strong>作为<strong>属性值</strong>（<code>type: &quot;add_todo_item&quot;</code>），<strong>在<code>reducer.js</code>中</strong>（<code>if(action.type === &quot;add_todo_item&quot;)&#123;&#125;</code>）也都是调用的<strong>字符串</strong>。<br>假设<strong>一旦字符串中有一个字母输错了，页面不会报错，但功能无法实现</strong>，所以我们需要把这个 字符串 保存在另一个js文件的常量（<code>const</code>）中，在需要使用他们的时候再进行文件和常量的引用。这样一来，<strong>一旦 常量书写错误，页面就会进行相应的报错</strong>。</p>
+<h2 id="拆分过程"><a href="#拆分过程" class="headerlink" title="拆分过程"></a>拆分过程</h2><p>我们应该<strong>把所有<code>action</code>中的 <code>type</code>属性值</strong> 拆分出来<strong>写在<code>store</code>文件夹下的<code>actionType.js</code>中</strong>,然后再<strong>在组件<code>TodoList.js</code>和<code>reducer.js</code>中</strong>分别<strong>引用<code>actionType.js</code>中对应 <code>type</code>属性值的各个 常量（<code>const</code>）</strong>。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>1.在<code>store</code>文件夹下<strong>新建<code>actionType.js</code><strong>用于存放所有<code>action</code>中的 <code>type</code>属性值，</strong>记得把这些常量输出</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记得输出才能在别的文件引用</span></span><br><span class="line"><span class="keyword">export</span> <span class="type">const</span> CHANGE_INPUT_VALUE = <span class="string">&quot;change_input_value&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="type">const</span> ADD_DOTO_ITEM = <span class="string">&quot;add_todo_item&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="type">const</span> DELETE_TODO_ITEM = <span class="string">&quot;delete_todo_item&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>2.在**<code>TodoList.js</code>中引入**：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CHANGE_INPUT_VALUE, ADD_DOTO_ITEM, DELETE_TODO_ITEM &#125; <span class="keyword">from</span> <span class="string">&quot;./store/actionTypes&quot;</span></span><br></pre></td></tr></table></figure>
+<p>3.将<code>TodoList.js</code>中的所有<code>action</code>中的**<code>type</code>属性值从字符串修改为常量名** （注意：常量名的引用不需要引号）：<br><code>type: CHANGE_INPUT_VALUE,</code>、<code>type: ADD_DOTO_ITEM,</code>、<code>type: DELETE_TODO_ITEM,</code><br>4.在**<code>reducer.js</code>中引入**(注意路径的改变)：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CHANGE_INPUT_VALUE, ADD_DOTO_ITEM, DELETE_TODO_ITEM &#125; <span class="keyword">from</span> <span class="string">&quot;./actionTypes&quot;</span></span><br></pre></td></tr></table></figure>
+<p>5.将<code>reducer.js</code>中的所有<code>action</code>中的**<code>type</code>属性值从字符串修改为常量名** （注意：常量名的引用不需要引号）：<br><code>if (action.type === CHANGE_INPUT_VALUE) &#123;&#125;</code>、<code>if(action.type === ADD_DOTO_ITEM)&#123;&#125;</code>、<code>if(action.type === DELETE_TODO_ITEM)&#123;&#125;</code></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>将<code>reducer.js</code>中的<code>DELETE_TODO_ITEM</code>写错：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(action.type <span class="operator">=</span><span class="operator">=</span><span class="operator">=</span> DELET_TODO_ITEM)&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbuk7o2oj7j30p90ffjtl.jpg" alt="报错"><br>会告诉你“<code>DELET_TODO_ITEM</code>没有被定义”也就是说<code>DELET_TODO_ITEM</code>没被声明，它不是一个变量，那我们就很容易发现错误了。</p>
+<hr>
+<h1 id="actionCreator统一创建action"><a href="#actionCreator统一创建action" class="headerlink" title="actionCreator统一创建action"></a><code>actionCreator</code>统一创建<code>action</code></h1><h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
+<li>方便管理，<strong>提高代码的可维护性</strong>。</li>
+<li>前端有自动化测试工具，把<code>action</code>统一写在<code>actionCreator.js</code>文件中将<strong>方便测试</strong>。</li>
+</ul>
+<h2 id="拆分过程-1"><a href="#拆分过程-1" class="headerlink" title="拆分过程"></a>拆分过程</h2><p>在<code>store</code>文件夹下创建<code>actionCreator.js</code>文件并引入<code>action</code>的<code>type</code>属性值，将<code>action</code>的创建都都写在<code>actionCreator.js</code>的不同常量定义的方法中，在组件中直接引用方法即可。（需要由组件传递到<code>action</code>中的方法通过函数进行传递）</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><h3 id="修改第一个action"><a href="#修改第一个action" class="headerlink" title="修改第一个action"></a>修改第一个<code>action</code></h3><p>1.在<code>store</code>文件夹下<strong>创建<code>actionCreator.js</code>文件，引入<code>type</code>常量并写入一个新函数（记得输出</strong>）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">CHANGE_INPUT_VALUE</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./actionTypes&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用const创建一个箭头函数</span></span><br><span class="line"><span class="comment">// return后只返回一个对象可将`return&#123;&#125;`省略为`()`</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">getInputChangeAction</span> = (<span class="params">value</span>) =&gt; (&#123;</span><br><span class="line">    <span class="comment">// value接收了TodoList中传过来的e.target.value</span></span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">CHANGE_INPUT_VALUE</span>,</span><br><span class="line">    <span class="comment">// value相当于value:value</span></span><br><span class="line">    value</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>2.在**<code>TodoList.js</code>中引入<code>actionCreator.js</code>**中的<code>getInputChangeAction</code>方法:</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getInputChangeAction &#125; <span class="keyword">from</span> <span class="string">&quot;./store/actionCreator&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>3.<strong>修改<code>TodoList.js</code>中<code>action</code></strong>,调用<code>getInputChangeAction</code>方法时将<code>e.target.value</code>传过去，<code>getInputChangeAction</code>方法收到后就将它作为<code>value</code>返回:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbukryzgp7j31d90afdix.jpg" alt="修改`TodoList.js`中`action`"></p>
+<h3 id="修改剩下的action"><a href="#修改剩下的action" class="headerlink" title="修改剩下的action"></a>修改剩下的<code>action</code></h3><p>1.将剩余会使用的<code>type</code>值都引入到<code>actionCreator.js</code>中，创建剩余的<code>action</code>:</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CHANGE_INPUT_VALUE,ADD_DOTO_ITEM, DELETE_TODO_ITEM &#125; <span class="keyword">from</span> <span class="string">&quot;./actionTypes&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> const getButtonClickAction = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">    type: ADD_DOTO_ITEM,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> const getItemDeleteAction = <span class="function"><span class="params">(index)</span> =&gt;</span> (&#123;</span><br><span class="line">    type: DELETE_TODO_ITEM,</span><br><span class="line">    index</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>2.在<code>TodoList.js</code>中 <strong>引入 并 使用</strong> 剩余两个获取<code>actin</code>的方法：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getInputChangeAction,getButtonClickAction,getItemDeleteAction &#125; <span class="keyword">from</span> <span class="string">&quot;./store/actionCreator&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><code>const action =getButtonClickAction();</code>和<code>const action = getItemDeleteAction(index);</code></p>
+<p>3.<strong>删除<code>TodoList.js</code>中无用的引用</strong>:<code>import &#123; CHANGE_INPUT_VALUE, ADD_DOTO_ITEM, DELETE_TODO_ITEM &#125; from &quot;./store/actionTypes&quot;;</code></p>
+<hr>
+<h1 id="重新归纳redux的工作流程"><a href="#重新归纳redux的工作流程" class="headerlink" title="重新归纳redux的工作流程"></a>重新归纳<code>redux</code>的工作流程</h1><p>使用<code>actionCreator</code>以后，工作流程变更为：<br>在组件中调用<code>actionCreator</code>创建<code>action</code>方法，然后<code>store</code>使用<code>dispatch()</code>将<code>action</code>传给<code>store</code><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusjbgj0qj30sv0hwqb7.jpg" alt="示意图"></p>
+<h2 id="获取store中数据"><a href="#获取store中数据" class="headerlink" title="获取store中数据"></a>获取<code>store</code>中数据</h2><ul>
+<li><strong>创建<code>store</code>：</strong>在<code>store</code>文件夹下的<code>index.js</code>中，通过引用自<code>react</code>的<code>createStore（）</code>创建<code>store</code>。（记得输出<code>store</code>）</li>
+<li><strong>创建<code>reducers</code>：</strong>在<code>store</code>文件夹下的<code>reducers.js</code>中，需要输出一个参数为<code>state</code>和<code>action</code>的函数，<code>reducer</code>中的<code>state</code>就是<code>store</code>的<code>state</code>。所以我们可以通过设置<code>state</code>的默认值<code>defaultState</code>并在函数中返回，<strong>将默认<code>state</code>的值返回给<code>store</code></strong></li>
+<li>**<code>store</code>连接<code>reducers</code>**：将<code>reducers.js</code>中的<code>reducers</code>作为<code>createStore（）</code>的第一个参数传给 <code>store</code>。<code>store</code>从<code>reducers</code>获取到初始<code>state</code>值，然后<code>store</code>将其替换掉自身的<code>state</code>.</li>
+<li><strong>组件<code>TodoList</code>连接<code>store</code>获取数据</strong>:在组件的构造函数中通过<code>store.subscribe();</code>监听一个函数，在被监听的函数中把<code>store</code>的<code>state</code>赋值给 组件的<code>state</code>，这样第一次渲染页面时，组件的<code>state</code>的就会获取到<code>store</code>中的<code>state</code>值。</li>
+</ul>
+<h2 id="改变store中数据"><a href="#改变store中数据" class="headerlink" title="改变store中数据"></a>改变<code>store</code>中数据</h2><ul>
+<li><strong>通过<code>actionCreator</code>创建 获取<code>action</code>对象的方法：</strong>通过<code>actionCreator.js</code>创建组件需要的 <code>action</code>对象 存储在不同的 方法 中，这些方法会返回 <code>action</code>对象 （记得输出）</li>
+<li><strong>在<code>actionTypes.js</code>中将<code>type</code>属性值转为常量：</strong>在<code>actionTypes.js</code>中将<code>action</code>对象的<code>type</code>属性值统一由字符串赋值给常量。</li>
+<li><strong>在组件中调用<code>actionCreator</code>的方法获取<code>action</code>对象并传给<code>store</code>：</strong>在组件中引用<code>actionCreator.js</code>并调用<code>actionCreator.js</code>中的方法获取<code>action</code>,通过<code>store.dispatch()</code>将<code>action</code>传送给<code>store</code></li>
+<li><strong><code>store</code>自动将收到的<code>action</code>和自己的<code>state</code>数据打包传送给<code>reducer</code></strong></li>
+<li><strong><code>reducer</code>处理<code>action</code>并返回<code>newState</code>值给<code>store</code>：</strong><code>reducer</code>根据<code>action</code>中不同的<code>type</code>属性值做出不同的处理并返回新的<code>newState</code>值给<code>store</code></li>
+<li><strong><code>store</code>获取到<code>newState</code>后自动替换<code>state</code></strong></li>
+<li><strong>组件中<code>state</code>由于监听函数，更新后页面重新渲染：</strong>组件中之前通过<code>store.subscribe();</code>监听的函数会在<code>store</code>的<code>state</code>改变时将<code>store</code>的<code>state</code>赋值给 组件的<code>state</code>，组件自然重新渲染。</li>
+</ul>
+<hr>
+<h1 id="Redux设计和使用的三大基本原则"><a href="#Redux设计和使用的三大基本原则" class="headerlink" title="Redux设计和使用的三大基本原则"></a><code>Redux</code>设计和使用的三大基本原则</h1><h2 id="store是唯一的"><a href="#store是唯一的" class="headerlink" title="store是唯一的"></a><code>store</code>是唯一的</h2><h2 id="只有store能改变自己的内容"><a href="#只有store能改变自己的内容" class="headerlink" title="只有store能改变自己的内容"></a>只有<code>store</code>能改变自己的内容</h2><ul>
+<li><code>reducer</code>从<code>store</code>拿到之前的<code>state</code>数据，深拷贝为一个新的<code>newState</code>，修改<code>newState</code>后返回给<code>store</code>，**<code>store</code>拿到<code>newState</code>后自己把<code>state</code>替换掉，所以最后其实是<code>store</code>自己改变了自己的内容**。</li>
+<li><strong><code>reducer</code>中的<code>state</code>就是<code>store</code>的<code>state</code></strong>,这也就是为什么我们需要深拷贝一个<code>newState</code>出来用而**不能直接修改<code>reducer</code>中的<code>state</code>**。</li>
+</ul>
+<h2 id="reducer必须是纯函数"><a href="#reducer必须是纯函数" class="headerlink" title="reducer必须是纯函数"></a><code>reducer</code>必须是纯函数</h2><ul>
+<li><strong>纯函数</strong>指的是：<strong>给定固定的输入，就一定会有固定的输出，且不能对传入的参数进行修改</strong>。</li>
+<li>纯函数不能涉及 异步 或者是关于 时间 的操作，一旦函数中<strong>涉及 AJAX请求、<code>new Date()</code>、<code>setTimeout()</code></strong> ,他就 <strong>不是纯函数</strong>。</li>
+</ul>
+<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h3><p><strong>纯函数:</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusumjpsgj30sa05jwk0.jpg" alt="纯函数"><br>也就是说<code>state</code>和<code>action</code>确定时，返回的<code>newState</code>就是确定的。</p>
+<p><strong>非纯函数：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbusvzsyf9j30sd05o441.jpg" alt="非纯函数"><br><code>state</code>和<code>action</code>确定时，返回的<code>newState</code>是不固定的，他会收到当前时间的影响。</p>
+<h1 id="Redux中的核心api"><a href="#Redux中的核心api" class="headerlink" title="Redux中的核心api"></a><code>Redux</code>中的核心api</h1><ul>
+<li><code>redux</code>的<code>createStore（）</code>可以帮助我们创建<code>store</code></li>
+<li><code>store.dispatch()</code>帮助我们将<code>action</code>传给<code>store</code></li>
+<li><code>store.getState()</code>帮助我们获取<code>store</code>中的所有数据</li>
+<li><code>store.subscribe()</code>帮助我们订阅<code>store</code>的改变，只要<code>store</code>发生改变，<code>store.subscribe()</code>接收的回调函数就会执行</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/17/Redux%E7%9A%84reducer%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%89%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Redux的reducer为什么不能有异步操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/16/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS笔试遇到的知识点（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8redux%E5%AE%8C%E6%88%90TodoList%E5%88%97%E8%A1%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">使用redux完成TodoList列表功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Redux%E5%AE%8C%E6%88%90TodoList%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">使用Redux完成TodoList删除功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionTypes%E6%8B%86%E5%88%86type%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">actionTypes拆分type属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%86%E5%88%86%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">3.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actionCreator%E7%BB%9F%E4%B8%80%E5%88%9B%E5%BB%BAaction"><span class="nav-number">4.</span> <span class="nav-text">actionCreator统一创建action</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84"><span class="nav-number">4.1.</span> <span class="nav-text">好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%86%E5%88%86%E8%BF%87%E7%A8%8B-1"><span class="nav-number">4.2.</span> <span class="nav-text">拆分过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%AC%AC%E4%B8%80%E4%B8%AAaction"><span class="nav-number">4.3.1.</span> <span class="nav-text">修改第一个action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%89%A9%E4%B8%8B%E7%9A%84action"><span class="nav-number">4.3.2.</span> <span class="nav-text">修改剩下的action</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E5%BD%92%E7%BA%B3redux%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">重新归纳redux的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96store%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="nav-number">5.1.</span> <span class="nav-text">获取store中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E5%8F%98store%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="nav-number">5.2.</span> <span class="nav-text">改变store中数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux%E8%AE%BE%E8%AE%A1%E5%92%8C%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="nav-number">6.</span> <span class="nav-text">Redux设计和使用的三大基本原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#store%E6%98%AF%E5%94%AF%E4%B8%80%E7%9A%84"><span class="nav-number">6.1.</span> <span class="nav-text">store是唯一的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89store%E8%83%BD%E6%94%B9%E5%8F%98%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">6.2.</span> <span class="nav-text">只有store能改变自己的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reducer%E5%BF%85%E9%A1%BB%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="nav-number">6.3.</span> <span class="nav-text">reducer必须是纯函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux%E4%B8%AD%E7%9A%84%E6%A0%B8%E5%BF%83api"><span class="nav-number">7.</span> <span class="nav-text">Redux中的核心api</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

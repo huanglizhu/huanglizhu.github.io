@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>中断轮询的setTimeout无效的情况 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="需求中有一个弹窗的表数据需要循环调用接口来获取，关闭弹窗时需要中断循环，但是出现中断失败的情况，为此查了一下原因并做了一些处理方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中断轮询的setTimeout无效的情况">
+<meta property="og:url" content="http://yoursite.com/2023/03/22/%E4%B8%AD%E6%96%AD%E8%BD%AE%E8%AF%A2%E7%9A%84setTimeout%E6%97%A0%E6%95%88%E7%9A%84%E6%83%85%E5%86%B5/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="需求中有一个弹窗的表数据需要循环调用接口来获取，关闭弹窗时需要中断循环，但是出现中断失败的情况，为此查了一下原因并做了一些处理方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T01:49:34.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.159Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-中断轮询的setTimeout无效的情况" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      中断轮询的setTimeout无效的情况
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2023/03/22/%E4%B8%AD%E6%96%AD%E8%BD%AE%E8%AF%A2%E7%9A%84setTimeout%E6%97%A0%E6%95%88%E7%9A%84%E6%83%85%E5%86%B5/" class="article-date">
+	  <time datetime="2023-03-22T01:49:34.000Z" itemprop="datePublished">三月 22, 2023</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需求中有一个弹窗的表数据需要循环调用接口来获取，关闭弹窗时需要中断循环，但是出现中断失败的情况，为此查了一下原因并做了一些处理方法</p>
+<span id="more"></span>
+
+<h1 id="前提紧要"><a href="#前提紧要" class="headerlink" title="前提紧要"></a>前提紧要</h1><ul>
+<li><code>clearTimeout</code>给你一个反悔的机会，重点<strong>是要在<code>setTimeout</code>事情发生之前</strong>，当<code>setTimeout</code>事件<strong>进行中</strong>再<code>clearTimeout</code>是<strong>无法清除</strong>定时器的。这是我的代码出现问题的重要原因。</li>
+</ul>
+<h1 id="问题出现场景"><a href="#问题出现场景" class="headerlink" title="问题出现场景"></a>问题出现场景</h1><ul>
+<li><strong>需求：</strong>弹窗的表数据需要循环调用接口来获取，关闭弹窗时需要中断循环（后续的接口不继续调用了）</li>
+<li><strong>错误代码：</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断方法 关闭弹窗时调用的方法</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 重点：clearTimeout() 是取消由 setTimeout() 设置的定时操作，而不是打断！！</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗清除的定时器&#x27;</span>,<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">timing</span>) &#123;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    如果走到一半才关闭弹窗（企图清除进行中的定时器），当存在this.timing的定时器</span></span><br><span class="line"><span class="comment">    进行中时，clearTimeout自然无法取消进行中的事情，就会导致getProcess继续执行，</span></span><br><span class="line"><span class="comment">    继续循环调用直至接口判断数据请求结束才停【实际上这样是无效的】</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getProcess</span> (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---执行中的定时器&#x27;</span>,<span class="variable language_">this</span>.<span class="property">timing</span>)</span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 循环调用getProcess通过接口获取弹窗内表数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>结局：</strong> timing为49的定时器执行中，如果清除，实际上并没清除49，因为进行中的定时器清除无效，所以如果走到一半才清除，那后面的会继续执行，所以会继续循环调用getProcess，<strong>中断失败</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不加timing=null，在getProcess开头通过timing判断要不要执行就会报错如下</span></span><br><span class="line">---执行中的定时器 <span class="literal">null</span></span><br><span class="line">---执行中的定时器 <span class="number">45</span></span><br><span class="line">---执行中的定时器 <span class="number">49</span> </span><br><span class="line">---关闭弹窗清除的定时器 <span class="number">49</span> <span class="comment">// 因为定时器49正在执行，所以定时器清除失败，后续轮询继续</span></span><br><span class="line">---执行中的定时器 <span class="number">54</span></span><br><span class="line">---执行中的定时器 <span class="number">55</span></span><br><span class="line">---执行中的定时器 <span class="number">56</span></span><br><span class="line">---执行中的定时器 <span class="number">57</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="最终解决"><a href="#最终解决" class="headerlink" title="最终解决"></a>最终解决</h1><ul>
+<li>下面3个方法，方法1是顺着上面的思路解决问题的方法，但实际上不顺思路更好些，目前感觉最优解是方法3</li>
+<li>方法2和方法3不需要 timing 也可以，但是方法1离不开 timing ，需要通过定时器名字来清除未执行的定时器<ul>
+<li>毕竟是频繁创建定时器，执行完就通过设置 timing 为 null 来清除下定时器的引用是挺好的，明确释放对定时器的引用，以帮助垃圾回收，但如果不设置 null 也行，执行完的定时器会自动被释放</li>
+</ul>
+</li>
+</ul>
+<h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><ul>
+<li>在<strong>弹窗关闭时清除（已设置并未执行的）定时器</strong>，那么此时就满足<strong>定时器先设置后清除</strong>，并且此时清除的是还没执行的定时器：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断方法 关闭弹窗时调用的方法</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dialogVisible</span> = <span class="literal">false</span></span><br><span class="line">  <span class="comment">// 重点：clearTimeout() 是取消由 setTimeout() 方法设置的定时操作，而不是打断！！</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getProcess</span> (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  <span class="keyword">let</span> timing = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 循环调用getProcess通过接口获取弹窗内表数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---set&#x27;</span>,timing)</span><br><span class="line">  <span class="comment">// 在弹窗关闭时 清除刚刚设置（还未执行的）定时器 停止后续调用getProcess</span></span><br><span class="line">  <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="property">dialogVisible</span>) &#123; <span class="comment">// 使用element的dialog组件，dialogVisible为弹窗显示与否状态</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---关闭弹窗后清除未执行的定时器&#x27;</span>, timing)</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timing)</span><br><span class="line">    timing = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---set <span class="number">54</span></span><br><span class="line">---set <span class="number">55</span></span><br><span class="line">---set <span class="number">59</span></span><br><span class="line"><span class="comment">// 执行中的定时器是55</span></span><br><span class="line">---关闭弹窗后清除未执行的定时器 <span class="number">59</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><ul>
+<li>轮询之前先判断弹窗是否显示，显示才继续请求：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关闭弹窗时 只控制visible</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dialogVisible</span> = <span class="literal">false</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getProcess</span> (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="comment">/* </span></span><br><span class="line"><span class="comment">  毕竟是频繁创建定时器，执行完就清除下定时器的引用，</span></span><br><span class="line"><span class="comment">  明确释放对定时器的引用，以帮助垃圾回收，</span></span><br><span class="line"><span class="comment">  不设置 null 也行，执行完的定时器会自动被释放</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">timing</span>) &#123;</span><br><span class="line">    <span class="comment">// 用上 clearTimeout 可以确保只有一个定时器在运行，其实在这不用也行</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">timing</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 只有弹窗显示时才轮询调用getProcess</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">dialogVisible</span>) &#123;</span><br><span class="line">    <span class="comment">// 不用设置 null 也行，执行完的定时器会自动被释放</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法3【最优解】"><a href="#方法3【最优解】" class="headerlink" title="方法3【最优解】"></a>方法3【最优解】</h2><ul>
+<li>轮询之前先判断弹窗是否显示，不显示则直接返回，不继续请求：</li>
+<li><strong>注意：</strong>将 this.timing 设置为定时器的引用是有效的，但需要确保在每次创建新定时器之前先清除旧的定时器，所以设为 null 需要放在 getProcess 的首部位置</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关闭弹窗时 只控制visible</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleClose</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dialogVisible</span> = <span class="literal">false</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 循环调用接口的方法 弹窗初始会调用this.getProcess(&#123; taskId: xxx &#125;)触发</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getProcess</span> (&#123; taskId &#125;) &#123;</span><br><span class="line">  <span class="comment">// 清除旧定时器</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">timing</span>) &#123;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    用上 clearTimeout 可以确保只有一个定时器在运行，</span></span><br><span class="line"><span class="comment">    其实在这不用也行，毕竟await不会导致两个定时器重叠</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(<span class="variable language_">this</span>.<span class="property">timing</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...axios post方法，发出请求...</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 只有弹窗显示时才轮询调用getProcess</span></span><br><span class="line">  <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="property">dialogVisible</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">timing</span> = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getProcess</span>(&#123; taskId &#125;);</span><br><span class="line">  &#125;, <span class="number">500</span>)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="clearTimeout和设为null"><a href="#clearTimeout和设为null" class="headerlink" title="clearTimeout和设为null"></a>clearTimeout和设为null</h1><ul>
+<li><strong>总结：</strong>搭配使用效果更好</li>
+<li><strong>建议：</strong>在每次创建新定时器之前都清除旧的定时器，这是为了确保不会出现多个定时器同时运行的情况。如果你确定不会出现多个定时器并发运行的情况，你可以简化代码，不清除旧定时器，但在一般情况下，清除旧定时器是一个安全的做法</li>
+<li><code>clearTimeout(this.timing)</code>会<strong>将定时器从内存中清除掉</strong></li>
+<li><code>this.timing = null</code>使用原因：<ul>
+<li>有时，当定时器不再需要执行时，如果不将其设置为 null，它可能会继续存在，并在不合适的时候触发回调函数。所以一般会<strong>在 clearTimeout 后将定时器设置为 null ，可以确保不再有对其的引用，从而避免悬挂定时器的问题</strong></li>
+<li>单独使用则只是<strong>将定时器的指向改为<code>null</code>，并没有在内存中清除定时器</strong>，定时器还是会<strong>如期运行</strong>；如同在<code>debounce</code>函数中将<code>this.timing = null</code>并不能达到防抖的目的，因为每个定时器都<strong>只是将内存地址指向了<code>null</code>，而每个定时器都将会执行一遍</strong></li>
+</ul>
+</li>
+<li><strong>定时器是否需要用完清除：</strong><ul>
+<li>如果是很少个数的定时器，可以不清除</li>
+<li>如果数量很多或者数量不可控，则必须要做到手动清除，否则定时器将会非常占用电脑cpu，非常影响性能<ul>
+<li>对于大量轮询请求的情况，确实需要谨慎处理，以避免占用过多的 CPU 和内存资源。在这种情况下，手动清除已触发的定时器可能是一个好的做法，以确保不会积累大量未完成的定时器。</li>
+<li>一个常见的解决方案是在每次轮询之前通过 clearTimeout 和设为 null 清除旧的定时器，以确保只有一个定时器在运行 来实现。这确保了每次只有一个定时器在后台执行，从而降低 CPU 和内存的使用</li>
+</ul>
+</li>
+<li>将定时器变量设置为  null 通常用于释放对定时器的引用，以便在后续代码中无法再次使用它。这通常用于在不再需要定时器的情况下，帮助垃圾回收。但<strong>对于已经触发的定时器，不需要担心释放对它的引用，因为它会自动释放，这是JavaScript的内置行为。但如果你希望明确释放对定时器的引用，以帮助垃圾回收，可以手动设置为 null。</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="变量设为null的作用"><a href="#变量设为null的作用" class="headerlink" title="变量设为null的作用"></a>变量设为null的作用</h2><ol>
+<li><p><strong>释放内存</strong>：将变量设为 <code>null</code> 可以告诉 JavaScript 引擎不再需要该变量，从而触发垃圾回收机制。这有助于释放变量所占用的内存，特别是在变量引用的对象或数据结构较大时。这可以提高应用程序的性能，尤其是在长时间运行的应用程序中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="title function_">fetchLargeData</span>(); <span class="comment">// 获取大量数据</span></span><br><span class="line"><span class="title function_">processData</span>(data);</span><br><span class="line">data = <span class="literal">null</span>; <span class="comment">// 释放内存</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>取消引用</strong>：将变量设为 <code>null</code> 可以取消对对象的引用。这对于确保对象不再被访问或修改非常有用。如果对象不再被引用，它将成为垃圾并最终被垃圾回收。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;John&#x27;</span> &#125;;</span><br><span class="line">obj = <span class="literal">null</span>; <span class="comment">// 取消对对象的引用</span></span><br><span class="line"><span class="comment">// 现在，对象将成为垃圾</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>初始化</strong>：有时，将变量设置为 <code>null</code> 可以用作初始化值，表示该变量当前没有有效值。这在某些算法和逻辑中很有用，可以明确表示变量的状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = <span class="literal">null</span>; <span class="comment">// 初始化为 null</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">  result = <span class="title function_">performOperation</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><strong>注意：</strong><ul>
+<li>将变量设置为 <code>null</code> 并不总是必需的，而且在某些情况下可能会导致不必要的复杂性</li>
+<li>通常情况下，JS 引擎会自动处理内存管理，不必手动将变量设置为 <code>null</code>。只有在确切需要释放内存或取消引用时，才需要这样做</li>
+<li>不过，在某些情况下，明确设置变量为 <code>null</code> 可以提高代码的可读性和可维护性</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="设置定时器前需要清除定时器的情况"><a href="#设置定时器前需要清除定时器的情况" class="headerlink" title="设置定时器前需要清除定时器的情况"></a>设置定时器前需要清除定时器的情况</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000007520385">参考文章</a></li>
+<li>如果是setTimeout这种定时器，不清理就会在线程空闲后立即执行一次。</li>
+<li>如果是setInterval这种，不清理，就一直按照间隔不断的执行下去。</li>
+<li>设置定时器前需要清除定时器的：<ul>
+<li><strong>情况1：</strong>防抖之类的用法，对于频繁调用的方法，去掉中间多次无用的重复调用，只保留最后一个调用。典型应用于根据Input的keydown或者change来数据搜索查询。</li>
+<li><strong>情况2：</strong>防止定时器效果叠加之外，使用前清除定时器不是必须的。<ul>
+<li><strong>例子：</strong>比如写个hover延时触发的特效，如果不先清除定时器，鼠标多移入移出几次，可能会造成多个定时器的叠加，动画效果会一直在执行，体验不好<ul>
+<li>补充：用transition+<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-transitionend.html">transitionend 事件</a>代替可以省去很多麻烦（<a target="_blank" rel="noopener" href="https://juejin.cn/post/7143051955810598926">例子参考</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>补充：<ul>
+<li>当前产品的这个需求要求轮询请求后端异步查询的数据结果的场景<strong>不需要在设置定时器前清除定时器</strong>，因为已执行的定时器在执行后会自动从计划任务中删除，它们会被 JS 引擎的垃圾回收机制自动处理（JS 引擎会定期检查不再被引用的对象，包括已完成的定时器），这意味着它们不会持续占用 CPU 或内存资源</li>
+<li>所以只需要在满足条件（关闭弹窗）时将未执行的定时器清除即可</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="不使用-setInterval-实现轮询的原因"><a href="#不使用-setInterval-实现轮询的原因" class="headerlink" title="不使用 setInterval 实现轮询的原因"></a>不使用 setInterval 实现轮询的原因</h1><ul>
+<li>setTimeout 与 setInterval 执行方式的区别及图示可<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011282175">参考segmentfault</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038829248">参考segmentfault</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87595858">参考知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6959777879680876575">参考掘金</a>：</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-win-setinterval.html">setInterval</a> 执行不一定准时</strong>:<blockquote>
+<p>只能确保回调函数不会在指定的事件间隔之前运行，但可能会在那个时刻运行，也<strong>可能在那之后运行，要根据事件队列的状态而定</strong>。（比如回调函数执行时长&gt;间隔时间的情况）——《你不知道的 JavaScript》 p143</p>
+</blockquote>
+<ul>
+<li><strong>“丢帧”现象</strong>（setInterval()仅当<strong>队列中</strong>没有该定时器的任何其他代码实例在（等待）时，才将定时器代码添加到队列中）【例子可见<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011282175">这篇segmentfault</a>，图解文字都非常详细】</li>
+<li>不同定时器的代码的执行间隔可能 &lt; 预期设定的时间间隔</li>
+<li>根据事件循环的执行机制，就会知道 setInterval 是等待 call stack 为空的时候，才会执行回调，如果前面的定时器回调函数执行太久了，超出了给 setInterval  设定的时间间隔，此时回调函数已经进入队列，等 stack 终于为空的时候就会立即执行队列中的回调函数，这时候 web APIs 中的 setInterval  计时也已经在计时了一段时间了，很快又会把新一轮回调函数放入队列，就会发现怎么上一次执行完后，没到以为的事件间隔又执行了······· 另外，如果 setInterval 本身给定的回调函数执行的时间比设定的时间间隔长，也会带来这样的问题，失去了设置时间间隔的意义。</li>
+</ul>
+</li>
+<li><strong>相比之下使用setTimeout进行轮询的好处：</strong><ul>
+<li>在前一个定时器代码执行完之前，不会向队列插入新的定时器代码，确保不会有任何缺失的间隔（即“丢帧”现象）。</li>
+<li>而且，它可以保证在下一次定时器代码执行之前，至少要等待指定的间隔，避免了连续的运行。</li>
+<li><strong>注意：</strong>轮询例子中第二个setTimeout()调用使用了 <code>arguments.callee</code> 来获取对当前执行的函数的引用，并为其设置另外一个定时器<strong>【查查 <code>arguments.callee</code>！！！！！！！】</strong></li>
+</ul>
+</li>
+<li><strong>不要盲目使用 setTimeout 代替 setInterval</strong>。<ul>
+<li>首先这两者都无法保证时间上的精确性。但在实际项目中，通常需要长时间执行的任务都会被优化掉，所以最终它们的回调执行时间并不会与期望时间点偏差太多。</li>
+<li>另外，「定时器」通常有两种，一种是固定地每间隔一定时间触发一下，就像钟表那样；另一种是在前一次触发之后，间隔一段时间再触发下一次，通常这种在触发时都会需要执行一个比较耗时的异步任务。</li>
+<li>对于上面所说的第一种，使用 setInterval 即可，而第二种才应当使用 setTimeout</li>
+</ul>
+</li>
+</ul>
+<h1 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h1><ul>
+<li>实际上应该用websocket来实现效果会更好，但是后端那边要求沿用轮询就先这样吧</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/04/05/console.log%E5%80%BC%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          console.log值不断更新导致的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4%20%E9%98%B2%E6%AD%A2%E8%BF%9E%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">vue自定义指令 防止连点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E7%B4%A7%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前提紧要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">问题出现场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">最终解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%951"><span class="nav-number">3.1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952"><span class="nav-number">3.2.</span> <span class="nav-text">方法2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%953%E3%80%90%E6%9C%80%E4%BC%98%E8%A7%A3%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">方法3【最优解】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#clearTimeout%E5%92%8C%E8%AE%BE%E4%B8%BAnull"><span class="nav-number">4.</span> <span class="nav-text">clearTimeout和设为null</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E8%AE%BE%E4%B8%BAnull%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">变量设为null的作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8%E5%89%8D%E9%9C%80%E8%A6%81%E6%B8%85%E9%99%A4%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">5.</span> <span class="nav-text">设置定时器前需要清除定时器的情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8-setInterval-%E5%AE%9E%E7%8E%B0%E8%BD%AE%E8%AF%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">6.</span> <span class="nav-text">不使用 setInterval 实现轮询的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#websocket"><span class="nav-number">7.</span> <span class="nav-text">websocket</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

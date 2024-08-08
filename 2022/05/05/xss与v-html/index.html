@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>xss与v-html | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="在vue开发过程中的一些关于xss与v-html的思考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xss与v-html">
+<meta property="og:url" content="http://yoursite.com/2022/05/05/xss%E4%B8%8Ev-html/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="在vue开发过程中的一些关于xss与v-html的思考">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-05T03:04:29.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.379Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-xss与v-html" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      xss与v-html
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/05/05/xss%E4%B8%8Ev-html/" class="article-date">
+	  <time datetime="2022-05-05T03:04:29.000Z" itemprop="datePublished">五月 5, 2022</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在vue开发过程中的一些关于xss与v-html的思考</p>
+<span id="more"></span>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
+<li>vue开发中，在一个下拉框中需要将下拉数据中后端返回的html代码效果直接显示在下拉框中<blockquote>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#v-html">文档：</a>在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#XSS%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E6%94%BB%E5%87%BB">XSS 攻击</a>。<strong>只在可信内容上使用 <code>v-html</code>，永不用在用户提交的内容上</strong>。</p>
+</blockquote>
+</li>
+<li>于是我开始思考，接口返回的内容算可信内容吗？会不会出现接口被截取导致返回内容不可信的情况发生？（事实上是我多虑了…）</li>
+<li>询问了我的哥哥（后端）以后，得到了靠谱的答案！</li>
+</ul>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul>
+<li><strong>接口返回的内容可以使用v-html显示。</strong></li>
+<li>接口返回的内容需要<strong>后端做应对xss攻击的安全处理</strong>以后才能显示</li>
+<li>因为 xss 攻击主要是为了获取用户的 cookie 也就是登录身份。攻击者如果都能截取请求返回值了，为什么不直接去取请求里的 cookie 呢？所以基本不用担心攻击者截取接口篡改返回内容。</li>
+</ul>
+<h1 id="前端预防XSS"><a href="#前端预防XSS" class="headerlink" title="前端预防XSS"></a>前端预防XSS</h1><ul>
+<li>当然，如果还是担心，前端也可通过<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具</a>替换特殊字符，如<code>&lt;</code>变为<code>&amp;lt；</code> <code>&gt;</code>变为<code>&amp;gt</code>,<code>&lt;script&gt;</code>变为<code>&amp;lt；script&amp;gt；</code>直接显示，而<strong>不会作为脚本执行</strong></li>
+<li><strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83XSS%E6%94%BB%E5%87%BB">XSS网络攻击及防范</a>)</li>
+</ul>
+<h2 id="vue中使用XSS工具"><a href="#vue中使用XSS工具" class="headerlink" title="vue中使用XSS工具"></a>vue中使用XSS工具</h2><ul>
+<li>除了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具官网</a>提供的使用方法，还可以通过<strong>覆盖html指令</strong>实现。引入组件<code>XSS</code>，在编译前将从<code>vue-loader</code>传入的<code>compilerOptions.directives</code>和<code>baseOptions.directives</code>进行了合并。<ul>
+<li>覆写可以方便的从根本上面解决XSS攻击的问题，不用担心后续其他开发重复操作等问题</li>
+</ul>
+</li>
+<li><strong>覆写步骤：</strong><br>1.<code>npm isntall xss</code><br>2.<strong>配置文件：</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @/utils/xss.j</span></span><br><span class="line"><span class="keyword">const</span> xss = <span class="built_in">require</span>(<span class="string">&#x27;xss&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  <span class="attr">css</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="title function_">onTag</span>(<span class="params">tag, html, options</span>) &#123;</span><br><span class="line"> <span class="keyword">if</span> (tag === <span class="string">&#x27;iframe&#x27;</span>) &#123;</span><br><span class="line">   <span class="keyword">return</span> html.<span class="title function_">replace</span>(<span class="regexp">/javascript:?/</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"> &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 避免把页面样式过滤掉</span></span><br><span class="line">  <span class="title function_">onIgnoreTagAttr</span>(<span class="params">tag, name, value, isWhiteAttr</span>) &#123;</span><br><span class="line"> <span class="comment">// 过滤掉标签上的事件</span></span><br><span class="line"> <span class="keyword">if</span> (<span class="regexp">/^[^on]/</span>.<span class="title function_">test</span>(name)) &#123;</span><br><span class="line">   <span class="keyword">return</span> name + <span class="string">&#x27;=&quot;&#x27;</span> + xss.<span class="title function_">escapeAttrValue</span>(value) + <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line"> &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> filter = <span class="keyword">new</span> xss.<span class="title class_">FilterXSS</span>(options)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> filter</span><br></pre></td></tr></table></figure>
+3.<strong>挂载全局：</strong>在<code>main.js</code>页面引入（为了在 loader中能够通过该方法过滤全局的 <code>v-html</code> 返回数据）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xss <span class="keyword">from</span> <span class="string">&#x27;xss&#x27;</span>;</span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">xss</span> = xss</span><br></pre></td></tr></table></figure>
+4.<strong>模块预处理：</strong>在<code>vue.config.js</code>中覆写html指令（如果是nuxt.js框架写的就是在<code>nuxt.config.js</code>）<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 增加 xss 处理</span></span><br><span class="line"> config.module</span><br><span class="line">   .rule(<span class="string">&#x27;vue&#x27;</span>)</span><br><span class="line">   .use(<span class="string">&#x27;vue-loader&#x27;</span>)</span><br><span class="line">   .loader(<span class="string">&#x27;vue-loader&#x27;</span>)</span><br><span class="line">   .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">     options.compilerOptions.directives = &#123;</span><br><span class="line">       html (node, directiveMeta) &#123;</span><br><span class="line">         const props = node.props || (node.props = [])</span><br><span class="line">         props.<span class="built_in">push</span>(&#123;</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;innerHTML&#x27;</span>,</span><br><span class="line">           <span class="attr">value</span>: <span class="string">`$xss.process(_s(<span class="subst">$&#123;directiveMeta.value&#125;</span>))`</span>,</span><br><span class="line">         &#125;)</span><br><span class="line">       &#125;,</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> options</span><br><span class="line">   &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/06/vue%20props%E4%B8%ADdefault%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          vue props中default不生效的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/25/scss%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">scss使用过程中遇到的问题集合</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%A2%84%E9%98%B2XSS"><span class="nav-number">3.</span> <span class="nav-text">前端预防XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue%E4%B8%AD%E4%BD%BF%E7%94%A8XSS%E5%B7%A5%E5%85%B7"><span class="nav-number">3.1.</span> <span class="nav-text">vue中使用XSS工具</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

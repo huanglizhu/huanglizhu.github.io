@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从输入url到页面显示都经历了什么 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从输入url到页面显示都经历了什么">
+<meta property="og:url" content="http://yoursite.com/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/DNSanalysis.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/tcpThreeTimesHandshake.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/sendHttpReq.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpReqGet.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpReqPost.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/severRes.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpRes.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reqResDiff.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderTree.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderPath.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/MacroTaskMicroTask.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/queue.png">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w1vs056j30gp056dgz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w4ijarcj30hr05qwgo.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w5f25kjj30hq03z3zm.jpg">
+<meta property="article:published_time" content="2019-09-27T12:05:01.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.381Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/DNSanalysis.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-从输入url到页面显示都经历了什么" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      从输入url到页面显示都经历了什么
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/" class="article-date">
+	  <time datetime="2019-09-27T12:05:01.000Z" itemprop="datePublished">九月 27, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/HTML%E5%AD%A6%E4%B9%A0/">HTML学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从输入url到页面显示都经历了什么"><a href="#从输入url到页面显示都经历了什么" class="headerlink" title="从输入url到页面显示都经历了什么"></a>从输入url到页面显示都经历了什么</h1><p>（可参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a877684a4cdd">简书</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53351608">知乎</a>）</p>
+<span id="more"></span>
+
+<h2 id="精简总结"><a href="#精简总结" class="headerlink" title="精简总结"></a>精简总结</h2><ol>
+<li><strong>客户端（浏览器）</strong>：  <ul>
+<li><strong>DNS解析</strong>：通过输入的域名解析到一个IP地址；  </li>
+<li><strong>建立TCP连接</strong>（三次握手）；  </li>
+<li><strong>发送http请求</strong>。</li>
+</ul>
+</li>
+<li><strong>服务端</strong>：<br><strong>server接收到http请求（Request），处理，并返回HTTP报文（Response）。</strong>（具体处理过程在“开发博客项目之接口(1)”中的“nodejs处理HTTP请求”中）（res返回的都是字符串，只是形式不同，通过content-type来决定，比如html或者json）</li>
+<li><strong>客户端（浏览器）</strong>：<br><strong>接收到服务端返回的数据，处理数据（如渲染页面，执行js）</strong>。</li>
+</ol>
+<h2 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h2><h3 id="客户端-建立连接-发送请求"><a href="#客户端-建立连接-发送请求" class="headerlink" title="客户端 建立连接 发送请求"></a>客户端 建立连接 发送请求</h3><ul>
+<li><strong>DNS解析：</strong><br>首先需要<strong>找到这个url域名的服务器ip</strong>,为了寻找这个ip，先搜索<strong>浏览器自身的DNS缓存</strong>,如果存在，则域名解析到此完成。<br>如果浏览器自身的缓存里面没有找到对应的条目，那么会尝试<strong>读取操作系统的hosts文件</strong>看是否存在对应的映射关系,如果存在，则域名解析到此完成。<br>如果本地hosts文件不存在映射关系，则查找<strong>本地DNS服务器</strong>(ISP服务器,或者自己手动设置的DNS服务器),如果存在,域名到此解析完成。<br>如果本地DNS服务器还没找到的话,它就会<strong>向根服务器发出请求,进行递归查询</strong>。</li>
+<li><strong>建立TCP连接</strong>（三次握手）：<br>客户端发送一个<strong>TCP连接请求报文</strong>-》服务端回送一个<strong>TCP确认响应+请求连接报文</strong>-》客户端向服务器发送一个 <strong>“TCP确认”的报文</strong></li>
+<li><strong>发送http请求</strong>：<br>通过三次握手建立了可靠的tcp连接后就可以进行是数据传输了。浏览器根据这个ip以及相应的端口号，<strong>构造一个http请求</strong>，这个请求报文会包括这次请求的信息，主要是请求方法，请求说明和请求附带的数据，并<strong>将这个http请求封装在一个tcp包中</strong>，这个tcp包会依次经过<strong>传输层，网络层，数据链路层，物理层</strong>到达服务器。（ISO 模型中的第五个层次应用层就是http请求这一层，就不会经过了）</li>
+</ul>
+<h3 id="服务端-处理请求-发出响应"><a href="#服务端-处理请求-发出响应" class="headerlink" title="服务端 处理请求 发出响应"></a>服务端 处理请求 发出响应</h3><p>服务器收到 TCP 数据包后，会将 TCP 数据包中的 HTTP 请求报文解析出来，并发送 HTTP 响应给客户端，即<strong>返回相应的html</strong>给浏览器。</p>
+<h3 id="客户端-解析数据-渲染页面-断开连接"><a href="#客户端-解析数据-渲染页面-断开连接" class="headerlink" title="客户端 解析数据 渲染页面 断开连接"></a>客户端 解析数据 渲染页面 断开连接</h3><ul>
+<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+<li><strong>构建CSS对象模型CSSOM：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建CSS对象模型CSSOM</strong><ul>
+<li><strong>建议CSS写在head中</strong>：页面<strong>边解析边渲染</strong>，如果把CSS写在HTML后，则先解析DOM树渲染在页面上，再生成CSSOM合成渲染树重新渲染在页面上，这样会有一个过程，用户可能会看到一个过程变化。<strong>所以在DOM树生成之前就先生成CSSOM会更好</strong>，这样当DOM树生成时就可<strong>直接和所有CSSOM进行合并，一步渲染完成</strong>。</li>
+</ul>
+</li>
+<li><strong>合并为渲染树：</strong> CSSOM树构建完成后<strong>CSSOM树和DOM树合并为渲染树</strong>，这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点。</li>
+<li>最后浏览器<strong>将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong><ul>
+<li><strong>回流：</strong>浏览器去计算各个元素（盒模型）的位置和大小等</li>
+<li><strong>重绘：</strong>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容</li>
+</ul>
+</li>
+<li><strong>注意:<strong>在dom树的构建过程&#x2F;渲染树的</strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
+<li>总结代码放置顺序：CSS HTML JS</li>
+</ul>
+</li>
+<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89">事件循环</a></li>
+<li><strong>另外的HTTP请求：</strong> html文件中会含有 图片、视频、音频、js、jquery、css等其他资源，这些又是另外的HTTP请求。在解析DOM的过程中，遇到这些都会进行并行下载，浏览器对每个域的并行下载数量有一定的限制，一般是4-6个，可能会通过一个网页产生很多的HTTP请求，<strong>请求越少性能越好</strong>。</li>
+<li>为提高性能要关注<strong>缓存</strong>（强缓存和协商缓存），缓存一般通过Cache-Control、Last-Modify、Expires等首部字段控制。 <ul>
+<li>Cache-Control和Expires的区别在于Cache-Control使用<strong>相对时间</strong>，Expires使用的是基于服务器 端的<strong>绝对时间</strong>，因为存在时差问题，一般采用Cache-Control。</li>
+<li>在请求这些有设置了缓存的数据时，如是<strong>强缓存，则不发送请求，直接从缓存中获取数据</strong>。</li>
+<li>如是<strong>协商缓存</strong>，则会<strong>发送请求到服务器</strong>，如果上一次 响应设置了ETag值，则会在这次请求的时候作为If-None-Match的值交给服务器<strong>校验</strong>，如果一致，继续校验客户端发送的IF-Modified-Since与服务端的 Last-Modified是否一致，没有设置ETag则直接验证Last-Modified，<strong>都一致则返回304（Not Changed）告知浏览器可以直接从缓存获取，否则返回最新的资源内容</strong>。</li>
+</ul>
+</li>
+<li><strong>连接结束：</strong><ul>
+<li>浏览器请求的资源已经被服务器完全发送给浏览器时，浏览器会进行 <strong>TCP 四次挥手，释放 TCP 连接</strong><ol>
+<li>客户端向服务器发送 FIN 报文，表示客户端不再发送数据。</li>
+<li>服务器收到 FIN 报文，向客户端发送 ACK 报文，表示服务器已经接收到客户端的 FIN 报文。</li>
+<li>服务器向客户端发送 FIN 报文，表示服务器不再发送数据。</li>
+<li>客户端收到 FIN 报文，向服务器发送 ACK 报文，表示客户端已经接收到服务器的 FIN 报文。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h2><h3 id="客户端（浏览器）进行DNS解析"><a href="#客户端（浏览器）进行DNS解析" class="headerlink" title="客户端（浏览器）进行DNS解析"></a><strong>客户端（浏览器）进行DNS解析</strong></h3><ul>
+<li>DNS解析的过程就是寻找哪台机器上有你需要资源的过程。</li>
+<li>当你在浏览器中输入一个地址时，例如<code>http://www.baidu.com</code>，其实不是百度网站真正意义上的地址。</li>
+<li>互联网上每一台计算机的<strong>唯一标识是它的IP地址</strong>，但是IP地址并不方便记忆。用户更喜欢用方便记忆的网址去寻找互联网上的其它计算机，也就是上面提到的百度的网址。所以互联网设计者需要在用户的方便性与可用性方面做一个权衡，这个权衡就是一个<strong>网址到IP地址的转换</strong>，这个过程就是<strong>DNS解析</strong>。它实际上充当了一个翻译的角色，实现了网址到IP地址的转换。</li>
+<li>当然如果你直接输入的是另一台电脑的IP地址来访问它，那么则不存在这一步。</li>
+<li><strong>例子：</strong><ul>
+<li>浏览器或者操作系统本身是有<strong>缓存</strong>的，如果是 缓存过期 或者 没有缓存 又或者是 第一次访问，浏览器 或者 操作系统 就会去<strong>域名工程商</strong>去<strong>通过域名去DNS服务器换取IP地址</strong>。（更多详情需要复习 计算机网络 ）</li>
+<li><strong>server端就是这个IP地址的服务器！！</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/DNSanalysis.png" alt="DNS解析" title="DNS解析"><br>（百度比较大，全国各地使用人数多，看到的IP地址不一样是正常的，就算是自己今天看到的和昨天看到的不一样也是很正常的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="建立TCP连接"><a href="#建立TCP连接" class="headerlink" title="建立TCP连接"></a>建立TCP连接</h3><ul>
+<li><strong>客户端找到IP地址之后就会和这个IP地址的服务器（server端）进行TCP连接</strong>（三次握手）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>握手</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1次</td>
+<td>客户端（浏览器）询问服务器（server端）：“你是否可以使用？”【客户机发送一个<strong>TCP连接请求报文</strong> 】</td>
+</tr>
+<tr>
+<td>第2次</td>
+<td>服务器（server端）回答客户端（浏览器）：“我可以用。”【服务器回送一个<strong>TCP确认响应报文</strong>】</td>
+</tr>
+<tr>
+<td>第3次</td>
+<td>客户端（浏览器）告诉服务器（server端）：“我知道啦，我来访问你啦。”【客户机向服务器发送一个 <strong>“TCP确认”的报文</strong>】</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/tcpThreeTimesHandshake.png" alt="tcp三次握手" title="tcp三次握手"></p>
+<ul>
+<li>tcp三次握手和四次挥手具体可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%A6%82%E6%8B%AC">前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）</a></li>
+</ul>
+<h3 id="客户端（浏览器）发送http请求"><a href="#客户端（浏览器）发送http请求" class="headerlink" title="客户端（浏览器）发送http请求"></a>客户端（浏览器）发送http请求</h3><ul>
+<li><strong>例子：</strong><ul>
+<li>客户端（浏览器）通过url使用get方法向服务端发送http请求，头部包含了请求信息，他们告诉了服务端这个客户端（浏览器）是什么样子的以及有什么要求。<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/sendHttpReq.png" alt="发送http请求" title="发送http请求"><br><strong>（注意：请求req都是客户端发起的，而回复res都是服务端做的。）</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h4><ul>
+<li><p>HTTP协议使用TCP协议进行传输，在应用层协议发起交互之前，首先是TCP的三次握手。完成了TCP三次握手后，<strong>浏览器向服务器发出一个 HTTP 请求</strong>。</p>
+</li>
+<li><p><strong>HTTP请求报文</strong> 是由三部分组成: <strong>请求行, 首部行和报文主体</strong>。</p>
+</li>
+<li><p>HTTP请求报文（get）：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpReqGet.png" alt="HTTP请求报文（get）" title="HTTP请求报文（get）"></p>
+</li>
+<li><p>HTTP请求报文（post）：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpReqPost.png" alt="HTTP请求报文（post）" title="HTTP请求报文（post）"></p>
+</li>
+<li><p><strong>请求行（请求方法 URI 协议&#x2F;版本）</strong>：</p>
+<ul>
+<li>例如：<code>GET/sample.jsp HTTP/1.1</code>“GET”代表<strong>请求方法</strong>，“&#x2F;sample.jsp”表示<strong>URI</strong>，“HTTP&#x2F;1.1代表<strong>协议和协议的版本</strong>。</li>
+<li><code>POST/sample.jsp HTTP/1.1</code>，POST方法之后是URI(“&#x2F;sample.jsp”)，表示<strong>请求的页面地址</strong>，“&#x2F;”表示服务器的根目录。之后是表示http的版本。</li>
+</ul>
+</li>
+<li><p><strong>首部行</strong>包含许多有关的客户端环境和请求正文的有用信息。例如，声明浏览器所用的语言，请求正文的长度等。例如：</p>
+<ul>
+<li><code>Accept:image/gif.image/jpeg.*/*</code><strong>请求的对象类型</strong>。如果是“&#x2F;”表示任意类型，如果是指定的类型，则会变成“type&#x2F;”。</li>
+<li><code>Accept-Language:zh-cn</code><strong>使用的语言种类</strong></li>
+<li><code>Connection:Keep-Alive</code><strong>对于HTTP连接的处理</strong>，keep-alive表示保持连接，如果是在响应报文中发送页面完毕就会关闭连接，状态变为close。</li>
+<li><code>Host:localhost</code><strong>连接的目标主机</strong>，如果连接的服务器是非标准端口，在这里会出现使用的非标准端口。</li>
+<li><code>User-Agent:Mozila/4.0(compatible:MSIE5.01:Windows NT5.0)</code><strong>提供了客户端浏览器的类型和版本</strong></li>
+<li><code>Accept-Encoding:gzip,deflate.</code><strong>页面编码种类</strong></li>
+</ul>
+</li>
+<li><p><strong>报文主体</strong></p>
+<ul>
+<li>报文首部 和 报文主体 之间是一个<strong>空行</strong>，这个行非常重要，它表示 报文首部 已经结束，接下来的是 报文主体。</li>
+<li><strong>报文主体 中可以包含客户提交的查询字符串信息</strong>：<br><code>username=jinqiao&amp;password=1234</code></li>
+<li>在实际应用中，HTTP请求报文主体可以包含更多的内容。</li>
+</ul>
+</li>
+</ul>
+<h3 id="server端接收http请求，处理并返回"><a href="#server端接收http请求，处理并返回" class="headerlink" title="server端接收http请求，处理并返回"></a>server端接收http请求，处理并返回</h3><ul>
+<li><strong>server端就是这个IP地址的服务器</strong>。</li>
+<li><strong>server端</strong>接到HTTP请求后，会根据 HTTP 请求中的内容来决定如何获取相应的 HTML 文件，再将得到的 <strong>HTML 文件发送给浏览器（客户端）</strong>，最后返回<strong>HTTP响应报文</strong>。</li>
+<li><strong>例子：</strong><ul>
+<li>服务器 通过Response Headers 告诉客户端：我<strong>反回的是html代码而不是纯文本</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/severRes.png" alt="server端回复的信息" title="server端回复的信息"></li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h4><ul>
+<li>当收到get或post等方法发来的请求后，服务器就要对报文进行响应。</li>
+<li><strong>HTTP响应报文</strong>也是由三部分组成: <strong>状态行, 首部行和报文实体</strong>。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/httpRes.png" alt="HTTP响应报文" title="HTTP响应报文"></li>
+</ul>
+<ol>
+<li><p><strong>状态行（服务器的http版本，状态码，状态短语）</strong>：</p>
+<ul>
+<li>1xx：<strong>指示信息</strong>–表示请求已接收，继续处理（继续进程，在发送post后可以收到该应答）。</li>
+<li>2xx：<strong>成功</strong>–表示请求已被成功接收、理解、接受。(在发送get后返回)<ul>
+<li><code>200 OK</code>:请求成功，请求的对象在这个报文后面</li>
+</ul>
+</li>
+<li>3xx：<strong>重定向</strong>–要完成请求必须进行更进一步的操作。<ul>
+<li><code>301 Moved Permanently</code>:请求的对象已转移，新的URL在响应报文的<code>Location:首部行</code>中指定。</li>
+</ul>
+</li>
+<li>4xx：<strong>客户端错误</strong>–请求有语法错误或请求无法实现。<ul>
+<li><code>400 Bad Request</code>:请求报文不为服务器理解</li>
+<li><code>404 Not Found</code>:请求的文档没有在该服务器上发现</li>
+</ul>
+</li>
+<li>5xx：<strong>服务器端错误</strong>–服务器未能实现合法的请求。<ul>
+<li><code>505 HTTP Version Not Supported</code>:服务器不支持请求报文使用的HTTP版本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>首部行</strong>：</p>
+<ul>
+<li>Server:服务器软件版本</li>
+<li>Content-Type:应答请求后返回的数据类型</li>
+<li>Date:发送日期(当前服务器的时间)</li>
+<li>Content-Length(对象长度)</li>
+<li>Connection:close为关闭连接，抓包可以发现在响应返回后服务器向客户端发出fin包单向关闭了连接。</li>
+<li>Expires：在某个时间以前可以不用重新缓存该页面。（cookie的有效期）</li>
+<li>cache-control表示对页面是否进行缓存。</li>
+<li>Pragma的参数no-cache表示对页面不进行缓存。</li>
+</ul>
+</li>
+<li><p><strong>报文实体</strong>：</p>
+<ul>
+<li>服务器返回给浏览器的文本信息，通常HTML, CSS, JS, 图片等文件就放在这一部分。</li>
+</ul>
+</li>
+</ol>
+<h4 id="对比-请求报文、响应报文"><a href="#对比-请求报文、响应报文" class="headerlink" title="对比 请求报文、响应报文"></a>对比 请求报文、响应报文</h4><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reqResDiff.png" alt="实体首部字段" title="实体首部字段"></p>
+<h3 id="客户端（浏览器）解析数据-渲染页面"><a href="#客户端（浏览器）解析数据-渲染页面" class="headerlink" title="客户端（浏览器）解析数据 渲染页面"></a>客户端（浏览器）解析数据 渲染页面</h3><ul>
+<li><strong>客户端（浏览器）</strong>接收到server端返回的 HTML 文件 后就会<strong>解析这些html代码</strong>，在还<strong>没有完全接收 HTML 文件</strong>时便<strong>开始渲染、显示网页</strong>。</li>
+<li>在执行 HTML 中代码时，先是解析html，解析html过程中遇到引入了css，则会在解析html的同时解析css。</li>
+<li><strong>如果遇到引入了js，则会解析js，停止html和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）。等解析完js再解析剩下未解析完的html和css。</strong></li>
+<li>页面显示之后的 加载图片、加载js、加载jquery、加载css等，这些又是<strong>另外的HTTP请求</strong>。可能会通过一个网页产生很多的HTTP请求，请求越少性能越好。</li>
+</ul>
+<h4 id="边解析边渲染"><a href="#边解析边渲染" class="headerlink" title="边解析边渲染"></a>边解析边渲染</h4><ul>
+<li>浏览器是一个<strong>边解析边渲染</strong>的过程。（可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/25/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/#CSS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">CSS是如何工作的</a>、<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/629913274412345484.html">容易理解的渲染树</a>）</li>
+</ul>
+<ol>
+<li>首先浏览器<strong>解析HTML文件构建DOM树</strong></li>
+<li>然后<strong>解析CSS文件构建 CSS对象模型</strong>：解析提取的CSS文件，并根据选择器类型分到不同的“存储桶”，例如元素，类，ID等。根据找到的选择器，它确定应将哪些 <strong>CSS规则</strong> 应用于<strong>DOM中的哪些节点</strong>，并根据需要<strong>向其附加样式</strong>。<br>（<strong>CSS 规则</strong>由两个主要的部分构成：选择器，以及一条或多条声明。）</li>
+<li>等到渲染树构建完成后，浏览器开始根据DOM树<strong>合成渲染树（将 渲染树 放在合适的HTML元素中）</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderTree.png" alt="渲染树图解" title="渲染树图解"></li>
+<li>最后<strong>浏览器将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong></li>
+<li><strong>渲染过程中遇到<code>&lt;script&gt;</code>则暂停渲染</strong>（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>），优先加载并执行JS代码，完成再继续渲染<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderPath.png" alt="图解全过程" title="图解全过程"></li>
+</ol>
+<h4 id="浏览器-reflow-回流-和repain-重绘"><a href="#浏览器-reflow-回流-和repain-重绘" class="headerlink" title="浏览器 reflow(回流)和repain(重绘)"></a>浏览器 reflow(回流)和repain(重绘)</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e081f9aa03fb">参考简书</a>、<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903569087266823">参考掘金</a></li>
+<li><strong>总结</strong>：<ul>
+<li>会引起<strong>元素位置&#x2F;内容变化、布局、隐藏</strong>的就会**reflow(回流)**，如：窗口大小改变、字体大小改变、以及元素位置改变，都会引起周围的元素改变他们以前的位置。</li>
+<li><strong>不会引起位置、布局变化，只是影响元素的外观的</strong>，比如改变背景颜色等，只会**repaint(重绘)**。</li>
+<li><strong>回流必将引起重绘，而重绘不一定会引起回流。</strong>因为在回流的时候，浏览器会使渲染树中受到影响的部分失效，并重新构造这部分渲染树，完成回流后，浏览器会重新绘制受影响的部分到屏幕中，这就是回流必将引起重绘。</li>
+</ul>
+</li>
+<li>DOM节点中的各个元素都是以盒模型的形式存在，这些都需要浏览器去计算其<strong>位置</strong>和大小等，这个过程称为<strong>relow(回流)</strong>;<ul>
+<li>会导致回流的操作：<ul>
+<li>页面首次渲染</li>
+<li>浏览器窗口大小发生改变</li>
+<li>元素尺寸或位置发生改变</li>
+<li>元素内容变化（<strong>文字数量</strong>或<strong>图片大小</strong>等等）</li>
+<li>元素<strong>字体大小变化</strong></li>
+<li>添加或者删除<strong>可见的</strong>DOM元素</li>
+<li><strong>激活CSS伪类</strong>（例如：<code>:hover</code>）</li>
+<li><strong>查询某些属性或调用某些方法</strong>（常用且会导致回流的属性和方法）<ul>
+<li>clientWidth、clientHeight、clientTop、clientLeft<br>offsetWidth、offsetHeight、offsetTop、offsetLeft<br>scrollWidth、scrollHeight、scrollTop、scrollLeft<br>scrollIntoView()、scrollIntoViewIfNeeded()<br>getComputedStyle()<br>getBoundingClientRect()<br>scrollTo()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当页面中<strong>元素样式的改变并不影响它在文档流中的位置</strong>时（例如：color、background-color、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#visibility-hidden%EF%BC%8Copacity-0%EF%BC%8Cdisplay-none">visibility:hidden</a>等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为**repain(重绘)**。</li>
+<li><strong>页面在首次加载时必然会经历reflow和repain</strong>。reflow和repain过程是<strong>非常消耗性能</strong>的，尤其是在移动设备上，它会破坏用户体验，有时会造成页面卡顿。所以我们应该<strong>尽可能少的减少reflow和repain</strong></li>
+</ul>
+<h5 id="减少回流、重绘的方法"><a href="#减少回流、重绘的方法" class="headerlink" title="减少回流、重绘的方法"></a>减少回流、重绘的方法</h5><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并DOM操作</a></strong> ：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
+<li><strong>避免频繁读取会引发回流&#x2F;重绘的属性(见上)<strong>，如果确实需要多次使用，就用一个</strong>变量缓存</strong>起来。</li>
+<li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
+</ul>
+<h4 id="JS的解析（同步、异步）"><a href="#JS的解析（同步、异步）" class="headerlink" title="JS的解析（同步、异步）"></a>JS的解析（同步、异步）</h4><ul>
+<li><strong>JS的解析是由浏览器中的JS解析引擎完成的</strong>。</li>
+<li>JS是<strong>单线程运行</strong>，也就是说，<strong>在同一个时间内只能做一件事</strong>，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。（HTML5提供的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">Web Workers API</a>可以让浏览器作为宿主环境提供给JS一个<strong>多线程运行的环境</strong>）</li>
+<li>但是又存在某些任务比较耗时，如 IO读写 等，所以需要一种机制可以先执行排在后面的任务，这就是：<strong>同步任务(synchronous)和异步任务(asynchronous)</strong></li>
+<li><strong>同步任务</strong>就是放在主线程（执行栈）上执行的任务，<strong>异步任务</strong>是放在任务队列中的任务。【<strong>注意：异步任务中有两个任务队列：宏任务和微任务</strong>】</li>
+<li>JS的执行机制就可以看做是一个 <strong>主线程（执行栈）</strong> 加上一个 <strong>任务队列</strong>(task queue)。</li>
+</ul>
+<h5 id="JS的执行步骤（事件循环）"><a href="#JS的执行步骤（事件循环）" class="headerlink" title="JS的执行步骤（事件循环）"></a>JS的执行步骤（事件循环）</h5><ul>
+<li><strong>事件循环是解决javaScript单线程运行阻塞的一种机制</strong>。</li>
+<li>所有的<strong>同步任务</strong>在主线程上执行，形成一个<strong>执行栈</strong>。<strong>异步任务</strong>有了<strong>运行结果</strong>就会在<strong>任务队列</strong>中放置一个<strong>事件</strong>。脚本运行时<strong>先依次运行执行栈中的所有同步任务，执行完毕后取出 微任务 队列中的所有任务顺序执行</strong>；然后<strong>开始检查是否需要DOM渲染，需要则渲染</strong>，之后再取 宏任务，<strong>每次宏任务结束时都给一个DOM渲染的机会</strong>，周而复始，直至两个队列的任务都取完。<ul>
+<li><strong>任务队列 分为（但不包含） 宏任务队列 和 微任务队列（因为script中的同步任务也属于宏任务）</strong>。</li>
+<li><strong>宏任务先于微任务执行（第一个执行的宏任务是script中的同步任务）</strong></li>
+<li><strong>每一次执行栈结束都会给一次DOM渲染的机会</strong> </li>
+<li>DOM 渲染<strong>前</strong>触发微任务，DOM 渲染<strong>后</strong>触发宏任务(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#event-loop%E5%9B%BE%E8%A7%A3%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E4%B8%8EDOM%E6%B8%B2%E6%9F%93%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F">“JS异步进阶”中”event-loop图解宏任务和微任务与DOM渲染的执行顺序”</a>)</li>
+<li><strong>补充</strong>：<strong>任务队列</strong>中除了完成的异步任务还会有<strong>被触发的DOM事件</strong>，图示可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#DOM%E4%BA%8B%E4%BB%B6%E5%92%8Cevent-loop%E7%9A%84%E5%85%B3%E7%B3%BB">“JS异步进阶”中的“DOM事件和event loop的关系”</a></li>
+</ul>
+</li>
+<li>在此过程中，主线程要做的就是从任务队列中去执行事件，执行完毕，再取事件，再执行事件…这样不断取事件，执行事件的循环机制就叫做<strong>事件循环机制</strong>。</li>
+<li><strong>注意：</strong>异步任务被挂起时<strong>宏任务</strong>会由<strong>浏览器的引擎（web api，即不属于ES语法的代码）</strong>去执行他们，而<strong>微任务和同步任务</strong>则是由<strong>JS的引擎</strong>去执行。又<strong>js处理比浏览器快</strong>，所以 <strong>同步-&gt;微任务-&gt;宏任务-&gt;微任务…</strong></li>
+<li><strong>总结事件循环：</strong><br>  <strong>执行栈（第一个宏任务） 全部执行完毕后 –&gt;清空 微任务 –&gt;尝试DOM渲染–&gt;取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 尝试DOM渲染–&gt;无线循环</strong></li>
+</ul>
+<h5 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h5><ul>
+<li><strong>宏任务先于微任务执行</strong>。</li>
+<li><strong>MacroTask（宏任务）</strong>：<ul>
+<li>**script(整体代码):**第一个宏任务队列中只有一个任务： <strong>执行主线程的js代码</strong></li>
+<li><strong>定时器：</strong> setTimeout、setInterval</li>
+<li>ajax</li>
+<li>DOM 事件</li>
+<li>I&#x2F;O</li>
+<li>UI交互事件</li>
+</ul>
+</li>
+<li><strong>MicroTask（微任务）</strong>：<ul>
+<li>Promise.then()【但是Promise 的函数体会立刻执行】</li>
+<li>async 函数中 await当行代码 后面的内容【async和await当行代码立即执行】</li>
+<li>Process.nextTick（Node独有）</li>
+<li>MutationObserver（具体使用方式查看这里）</li>
+</ul>
+</li>
+<li>在<strong>挂起异步任务时</strong>，JS 引擎会<strong>将所有异步任务按照类别分到这两个队列</strong>中，首先在 宏任务 的队列中取出第一个任务，<strong>执行栈执行完毕后，取出 微任务 队列中的所有任务顺序执行，接着检查是否需要DOM渲染，需要则渲染</strong>，之后再取 宏任务，查看是否有微任务再队列中，周而复始，直至两个队列的任务都取完。</li>
+<li><strong>注意：同步任务也属于宏任务，所以第一个取出的宏任务是同步任务</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/MacroTaskMicroTask.png" alt="宏任务和微任务" title="宏任务和微任务"></li>
+</ul>
+<h6 id="事件循环例子（面试题）"><a href="#事件循环例子（面试题）" class="headerlink" title="事件循环例子（面试题）"></a>事件循环例子（面试题）</h6><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;script start&#x27;</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;timer over&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">Promise.resolve().then(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;promise1&#x27;</span>)</span><br><span class="line">&#125;).then(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;promise2&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;script end&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// script start</span></span><br><span class="line"><span class="comment">// script end</span></span><br><span class="line"><span class="comment">// promise1</span></span><br><span class="line"><span class="comment">// promise2</span></span><br><span class="line"><span class="comment">// timer over</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>整体代码script是宏任务</strong>，所以<strong>先打印<code>script start</code></strong></li>
+<li>再执行到<strong>setTimeout属于异步任务，也是宏任务</strong>的一种，<strong>放到 宏任务队列 里面</strong></li>
+<li>接着就<strong>执行到Promise也是异步任务，但是属于微任务，进入到 微任务队列</strong></li>
+<li>然后<strong>执行到 script的最后打印出<code>script end</code>，主线程（执行栈）被清空</strong></li>
+<li>这里要注意的是<strong>主线程一旦全部执行完毕就会取清空微任务</strong>，所以接下来微任务队列中的 <code>Promise.then()</code>被加入到主线程中执行。执行了回调，<strong>打印出<code>promise1</code>，同时产生了新的微任务 <code>Promise.then()</code><strong>，执行完毕后，</strong>主线程又被清空</strong>了</li>
+<li><strong>微任务队列</strong>里还有刚刚产生的<code>Promise.then()</code>，又被<strong>加入到主线程执行打印出<code>promise2</code></strong></li>
+<li>此时<strong>微任务队列和主线程都被清空</strong>,接着在宏任务队列里<strong>取出一个宏任务加入到主线程中执行 <code>setTimeout callback</code>，打印出<code>setTimeout</code></strong></li>
+<li>这时主线程、微任务队列、宏任务队列都被清空，代码执行完毕，所以最后的执行结果为script start、script end、promise1、promise2、setTimeout。如果宏任务队列和微任务队列还没清空，就会：<strong>执行栈 全部执行完毕后 –&gt;清空 微任务 –&gt;会取出一个 宏任务  –&gt; 执行完毕后–&gt;清空 微任务 -&gt; 无线循环</strong>，这就是我们所说的<strong>事件循环</strong>（Event Loop），也就是<strong>javascript的执行机制</strong>。</li>
+</ol>
+<h3 id="连接结束"><a href="#连接结束" class="headerlink" title="连接结束"></a>连接结束</h3><ul>
+<li>浏览器请求的资源已经被服务器完全发送给浏览器时，浏览器会进行 <strong>TCP 四次挥手，释放 TCP 连接</strong><ol>
+<li>客户端向服务器发送 FIN 报文，表示客户端不再发送数据。</li>
+<li>服务器收到 FIN 报文，向客户端发送 ACK 报文，表示服务器已经接收到客户端的 FIN 报文。</li>
+<li>服务器向客户端发送 FIN 报文，表示服务器不再发送数据。</li>
+<li>客户端收到 FIN 报文，向服务器发送 ACK 报文，表示客户端已经接收到服务器的 FIN 报文。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ul>
+<li>浏览器在解析过程中，如果遇到请求外部资源时，如图像,iconfont,JS等。这些又是<strong>另外的HTTP请求</strong>，浏览器将<strong>重复以上所有过程</strong>下载该资源。可能会通过一个网页产生很多的HTTP请求，请求越少性能越好。</li>
+<li><strong>请求过程是异步</strong>的，并<strong>不会影响HTML文档进行加载</strong>，但是<strong>当文档加载过程中遇到JS文件，HTML文档会挂起渲染过程，不仅要等到文档中JS文件加载完毕还要等待解析执行完毕，才会继续HTML的渲染过程</strong>。</li>
+<li>原因是<strong>因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a><strong>，这就意味着JS执行完成前，后续所有资源的下载是没有必要的，这就是</strong>JS阻塞后续资源下载的根本原因</strong>。</li>
+<li>CSS文件的加载不影响JS文件的加载，但是却影响JS文件的执行。<strong>JS代码执行前浏览器必须保证CSS文件已经下载并加载完毕</strong>。</li>
+</ul>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><ul>
+<li>堆表示一大块非结构化的内存区域。对象，数据被存放在堆中。</li>
+</ul>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ul>
+<li>栈在javascript中又称<strong>执行栈</strong>、调用栈，是一种<strong>后进先出</strong>的数组结构，</li>
+<li>Javascript 有一个 主线程（main thread）和 调用栈(或执行栈call-stack)，<strong>主线各所有的任务都会被放到执行栈等待主线程执行</strong>。</li>
+<li>JS调用栈采用的是后进先出的规则，<strong>当函数执行的时候，会被添加到栈的顶部，当执行栈执行完该函数后，函数就会从栈顶移出，直到栈内被清空</strong>。</li>
+</ul>
+<p><strong>举个例子</strong>：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">b</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b + <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> foo(x * y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(bar(<span class="number">7</span>)); <span class="comment">// 返回 42</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>当<strong>调用 bar 时，创建了第一个帧</strong> ，帧中包含了 bar 的参数和局部变量。当 <strong>bar 调用 foo 时，第二个帧就被创建，并被压到第一个帧之上</strong>，帧中包含了 foo 的参数和局部变量。<strong>当 foo 返回时，最上层的帧就被弹出栈</strong>（剩下 bar 函数的调用帧 ）。<strong>当 bar 返回的时候，栈就空了</strong>。</li>
+<li><strong>注意：这里的堆栈，是数据结构的堆栈，不是内存中的堆栈（内存中的堆栈，堆存放引用类型的数据，栈存放基本类型的数据）</strong></li>
+</ul>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>队列即<strong>任务队列</strong>Task Queue，是一种<strong>先进先出</strong>的一种数据结构。在队尾添加新元素，从队头移除元素。<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/queue.png" alt="队列图示" title="队列图示"></p>
+<hr>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><ul>
+<li>cookie是一种<strong>类似缓存的机制</strong>，它保存在一个本地的文本文件中，其主要作用是在发送请求时将cookie放在请求首部中发送给服务器，服务器收到cookie后查找自己已有的cookie信息，确定客户端的身份，然后返回相应的页面。</li>
+<li>cookie的方便之处在于<strong>可以保持一种已登录的状态</strong>，例如：我们注册一个论坛，每次访问都需要进行填写用户名和密码然后登录。而使用了cookie后，如果cookie没有到达过期时间，那么我们只需在第一次登录时填写信息然后登录，以后的访问就可以省略这一步骤。</li>
+</ul>
+<p>在HTTP协议中，<strong>cookie的交互过程</strong>：</p>
+<ol>
+<li>首先是<strong>三次握手建立TCP连接</strong></li>
+<li>然后<strong>客户端发出一个http request</strong>，（第一次请求时）这个request中<strong>不包含任何cookie</strong>信息：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w1vs056j30gp056dgz.jpg" alt="request中不包含任何cookie信息"></li>
+<li>当<strong>服务器</strong>收到这个报文后，针对request method作出响应动作，<strong>在响应报文的头部（首部行）加入了set-cookie段，set-cookie段中给出了cookie的id，过期时间以及参数path</strong>，path是表示在哪个虚拟目录路径下的页面可以读取使用该cookie。<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w4ijarcj30hr05qwgo.jpg" alt="响应报文"></li>
+<li><strong>客户端</strong>接受到这些信息后，<strong>在以后的http request中就会将自己的cookie段用这些信息填充</strong>。</li>
+<li>如果用户在连接中通过了服务器相应的<strong>认证程序</strong>，服务器会添加一个<code>cdb_auth</code>到<code>set-cookie</code>中，这个段表示了客户端的认证信息，而<strong>客户端以后在访问过程中也会将<code>cdb_auth</code>信息写入自己的<code>cookie</code>字段</strong>。服务器每次收到http request后读取cookie，然后根据cookie的信息返回不同的页面。例如，没有通过认证的客户端在request中不会有<code>cdb_auth</code>，因此服务器读取cookie后，不会将通过认证的客户端的页面返回给该客户端。<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd4w5f25kjj30hq03z3zm.jpg" alt="请求报文"></li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/HTML%E5%AD%A6%E4%B9%A0/">HTML学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/01/js%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS中的同步与异步
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第四天学习笔记（CSS背景）（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">从输入url到页面显示都经历了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B2%BE%E7%AE%80%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.</span> <span class="nav-text">精简总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">具体流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5-%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-number">1.2.1.</span> <span class="nav-text">客户端 建立连接 发送请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF-%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82-%E5%8F%91%E5%87%BA%E5%93%8D%E5%BA%94"><span class="nav-number">1.2.2.</span> <span class="nav-text">服务端 处理请求 发出响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE-%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2-%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.3.</span> <span class="nav-text">客户端 解析数据 渲染页面 断开连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">实例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%88%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%89%E8%BF%9B%E8%A1%8CDNS%E8%A7%A3%E6%9E%90"><span class="nav-number">1.3.1.</span> <span class="nav-text">客户端（浏览器）进行DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">建立TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%88%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%89%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82"><span class="nav-number">1.3.3.</span> <span class="nav-text">客户端（浏览器）发送http请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">HTTP请求报文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server%E7%AB%AF%E6%8E%A5%E6%94%B6http%E8%AF%B7%E6%B1%82%EF%BC%8C%E5%A4%84%E7%90%86%E5%B9%B6%E8%BF%94%E5%9B%9E"><span class="nav-number">1.3.4.</span> <span class="nav-text">server端接收http请求，处理并返回</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">HTTP响应报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E3%80%81%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">对比 请求报文、响应报文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%88%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%89%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE-%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.3.5.</span> <span class="nav-text">客户端（浏览器）解析数据 渲染页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E8%A7%A3%E6%9E%90%E8%BE%B9%E6%B8%B2%E6%9F%93"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">边解析边渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">浏览器 reflow(回流)和repain(重绘)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%8F%E5%B0%91%E5%9B%9E%E6%B5%81%E3%80%81%E9%87%8D%E7%BB%98%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.5.2.1.</span> <span class="nav-text">减少回流、重绘的方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89"><span class="nav-number">1.3.5.3.</span> <span class="nav-text">JS的解析（同步、异步）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AD%A5%E9%AA%A4%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%89"><span class="nav-number">1.3.5.3.1.</span> <span class="nav-text">JS的执行步骤（事件循环）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.3.5.3.2.</span> <span class="nav-text">宏任务和微任务</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90%EF%BC%88%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%89"><span class="nav-number">1.3.5.3.2.1.</span> <span class="nav-text">事件循环例子（面试题）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E7%BB%93%E6%9D%9F"><span class="nav-number">1.3.6.</span> <span class="nav-text">连接结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.3.7.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">1.3.7.1.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.3.7.2.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-number">1.3.7.3.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie"><span class="nav-number">2.</span> <span class="nav-text">cookie</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

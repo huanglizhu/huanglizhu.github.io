@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BOM window对象 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="注意 敲代码时一定要注意，&lt;script&gt;中用到的属性值要加引号！（style中不用）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOM window对象">
+<meta property="og:url" content="http://yoursite.com/2019/09/13/BOM%20window%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="注意 敲代码时一定要注意，&lt;script&gt;中用到的属性值要加引号！（style中不用）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-13T15:20:25.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.264Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-BOM window对象" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      BOM window对象
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/09/13/BOM%20window%E5%AF%B9%E8%B1%A1/" class="article-date">
+	  <time datetime="2019-09-13T15:20:25.000Z" itemprop="datePublished">九月 13, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ul>
+<li>敲代码时一定要注意，<code>&lt;script&gt;</code>中用到的<strong>属性值要加引号！</strong>（style中不用）<span id="more"></span></li>
+</ul>
+<hr>
+<h1 id="Window对象的方法"><a href="#Window对象的方法" class="headerlink" title="Window对象的方法"></a>Window对象的方法</h1><ul>
+<li>window 对象<strong>表示浏览器中打开的窗口</strong>。</li>
+<li><strong>注意：</strong>  弹框中的<strong>文本</strong>需要 <strong>换行</strong> 使用 <strong><code>\n</code></strong></li>
+</ul>
+<h2 id="alert-消息-确认按钮的警告框"><a href="#alert-消息-确认按钮的警告框" class="headerlink" title="alert()消息+确认按钮的警告框"></a>alert()消息+确认按钮的警告框</h2><ul>
+<li>语法：<code>window.alert（&quot;content&quot;)</code></li>
+<li>功能：显示带有<strong>一段消息</strong>和<strong>一个确认按钮</strong>的<strong>警告框</strong></li>
+</ul>
+<hr>
+<h2 id="confirm-消息-OK-取消按钮的对话框"><a href="#confirm-消息-OK-取消按钮的对话框" class="headerlink" title="confirm()消息+OK+取消按钮的对话框"></a>confirm()消息+OK+取消按钮的对话框</h2><ul>
+<li>语法：<code>window.confirm（“你想要显示的提示消息&quot;）</code></li>
+<li>功能：显示一个带有<strong>指定消息</strong>和<strong>OK及取消按钮</strong>的对话</li>
+<li>返回值 <strong>（布尔型）</strong>：  <ul>
+<li>如果用户点击确定按钮，则confirm（）返回true  </li>
+<li>如果用户点击取消按钮，则confirm（）返回false</li>
+</ul>
+</li>
+<li><strong>举例：</strong><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>iphone6s<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;删除&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">       <span class="comment">// 获取按钮,绑定事件</span></span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> btn=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">       btn.<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">       	   <span class="comment">// 弹出确认对话框</span></span></span><br><span class="line"><span class="language-javascript">       	   <span class="keyword">var</span> result=<span class="variable language_">window</span>.<span class="title function_">confirm</span>(<span class="string">&quot;您确定要删除吗？删除之后该信息\n将不可恢复！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">       	   <span class="keyword">if</span>(result)&#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;box&quot;</span>).<span class="property">style</span>.<span class="property">display</span>=<span class="string">&quot;none&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">       	   &#125;</span></span><br><span class="line"><span class="language-javascript">       &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="prompt-消息-输入框-OK-取消按钮的对话框"><a href="#prompt-消息-输入框-OK-取消按钮的对话框" class="headerlink" title="prompt()消息+输入框+OK+取消按钮的对话框"></a>prompt()消息+输入框+OK+取消按钮的对话框</h2><ul>
+<li>语法：<code>window.prompt（&quot;text，defaultText&quot;）</code><ul>
+<li>text：要在对话框中显示的纯文本（而不是HTML格式的文本）  </li>
+<li>defaultText：默认的<strong>输入文本</strong></li>
+</ul>
+</li>
+<li>返回值 <strong>（字符串）</strong>：  <ul>
+<li>如果用户单击提示框的取消按钮，则返回null  </li>
+<li>如果用户单击确认按钮，则返回输入字段当前显示的文本</li>
+</ul>
+</li>
+<li><strong>举例：</strong><br>刷新页面时就会弹出提示框，点击“取消”发现打印出null，点击“确认”，发现返回默认的输入文本”天蝎座”，输入“金牛座”再点击“确认”，返回的是“金牛座”。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> message=<span class="title function_">prompt</span>(<span class="string">&quot;请输入您的星座&quot;</span>,<span class="string">&quot;天蝎座&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(message);</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="编程练习"><a href="#编程练习" class="headerlink" title="编程练习"></a>编程练习</h2><p>点击页面上的“删除”按钮，弹出确认框<br>（1）当点击确认框上的“确定“时，按钮上的字变为红色；<br>（2）当点击确认框上的“取消“时，按钮上的字变为绿色。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;删除&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 获取按钮</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> btn=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 绑定鼠标单击事件</span></span></span><br><span class="line"><span class="language-javascript">        btn.<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 弹框</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> result=<span class="variable language_">window</span>.<span class="title function_">confirm</span>(<span class="string">&quot;确定要删除吗？&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span>(result)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 一定要注意，属性值要加引号！</span></span></span><br><span class="line"><span class="language-javascript">                btn.<span class="property">style</span>.<span class="property">color</span>=<span class="string">&quot;red&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                btn.<span class="property">style</span>.<span class="property">color</span>=<span class="string">&quot;green&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>地址：E:\慕课网 前端小白入门系列课程完整版\JavaScript\7.javascriptBOM对象\test1.html</p>
+<hr>
+<h2 id="open-打开新的浏览器窗口或查找一个已命名的窗口"><a href="#open-打开新的浏览器窗口或查找一个已命名的窗口" class="headerlink" title="open()打开新的浏览器窗口或查找一个已命名的窗口"></a>open()打开新的浏览器窗口或查找一个已命名的窗口</h2><ul>
+<li>语法：<code>window.open（pageURL，name，parameters）</code><ul>
+<li><strong>pageURL</strong>：子窗口路径（同一目录下可以直接写文件名称）。  </li>
+<li><strong>name</strong>：子窗口句柄。（name声明了新窗口的名称，方便后期通过name对子窗口进行引用）  </li>
+<li><strong>parameters</strong>：窗口参数（各参数用<strong>逗号</strong>分隔）</li>
+</ul>
+</li>
+<li>功能：打开一个新的浏览器窗口或查找一个已命名的窗口</li>
+<li><strong>窗口参数</strong>包括：  <ul>
+<li>width：窗口宽度  </li>
+<li>height：窗口高度  </li>
+<li>left：窗口X轴坐标   </li>
+<li>top：窗口Y轴坐标  </li>
+<li>toolbar：是否显示浏览器的工具栏  </li>
+<li>menubar：是否显示菜单栏  </li>
+<li>scrollbars：是否显示滚动条  </li>
+<li>location：是否显示地址字段  </li>
+<li>status：是否添加状态栏</li>
+</ul>
+</li>
+</ul>
+<h3 id="close-关闭浏览器窗口"><a href="#close-关闭浏览器窗口" class="headerlink" title="close()关闭浏览器窗口"></a>close()关闭浏览器窗口</h3><ul>
+<li>语法：<code>window.close（）</code></li>
+<li>功能：关闭浏览器窗口</li>
+</ul>
+<h3 id="合并举例"><a href="#合并举例" class="headerlink" title="合并举例"></a>合并举例</h3><h2 id="同目录下两个页面第二个页面（newwindow-html）"><a href="#同目录下两个页面第二个页面（newwindow-html）" class="headerlink" title="同目录下两个页面第二个页面（newwindow.html）"></a>同目录下两个页面<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;退 出&quot;</span> <span class="attr">id</span>=<span class="string">&quot;quit&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">       <span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">       	  <span class="comment">// 打开子窗口，显示newwindow.html</span></span></span><br><span class="line"><span class="language-javascript">       	  <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&quot;newwindow.html&quot;</span>,<span class="string">&quot;width=400,height=200,left=0,top=0,toolbar=no,menubar=no,scrollbars=no,location=no,status=no&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">       	  <span class="keyword">var</span> quit = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;quit&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">       	  <span class="comment">// 点击关闭当前窗口（子窗口是不会关的，可以在子窗口内做一个退出按钮）</span></span></span><br><span class="line"><span class="language-javascript">       	  quit.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">       	  	  <span class="variable language_">window</span>.<span class="title function_">close</span>();</span></span><br><span class="line"><span class="language-javascript">       	  &#125;</span></span><br><span class="line"><span class="language-javascript">       &#125;</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure><br>第二个页面（newwindow.html）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello window.open<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></h2><h1 id="超时调用与间歇调用"><a href="#超时调用与间歇调用" class="headerlink" title="超时调用与间歇调用"></a>超时调用与间歇调用</h1><h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>首先要明确JavaScript是单线程语言，单线程就是所执行的代码必须<strong>按照顺序</strong>。</li>
+<li><strong>【1秒等于1000毫秒】</strong></li>
+</ul>
+<h2 id="setTimeout-超时调用"><a href="#setTimeout-超时调用" class="headerlink" title="setTimeout()超时调用"></a>setTimeout()超时调用</h2><ul>
+<li>语法：<code>setTimeout（code，millisec）</code><ul>
+<li>code：要调用的<strong>函数</strong>或要执行的<strong>JavaScript代码串</strong><br>【<strong>注意：并不建议写代码串，最好是用匿名函数或者自定义函数</strong>】  </li>
+<li>millisec：在执行代码前需等待的<strong>毫秒数</strong></li>
+</ul>
+</li>
+<li>功能：在指定的<strong>毫秒数</strong>后调用<strong>函数或计算表达式</strong>  ,即延长多少时间以后再发生这个事。</li>
+<li>说明：setTimeout（）<strong>只执行code一次</strong>。如果要多次调用，请使用setlnterval（）或者让code自身再次调用setTimeout（）【例子在下面】</li>
+</ul>
+<h3 id="使用超时调用实现多次调用的例子"><a href="#使用超时调用实现多次调用的例子" class="headerlink" title="使用超时调用实现多次调用的例子"></a>使用超时调用实现多次调用的例子</h3><p>让setTimeout（）自身再次调用setTimeout（）实现间隔一秒输出数字1-10：</p>
+<ol>
+<li>函数inCreamentNum调用时先打印num（1）</li>
+<li>递增（num&#x3D;2），然后判断是否小于max（10）</li>
+<li>如果小于则再次调用setTimeout（），输出num（2）</li>
+<li>一直到num为11时清除延时调用。</li>
+<li><strong>补充</strong>：<strong>timer之所以给null而不是空字符是因为超时调用的id是个</strong>对象<strong>，建议给null来释放内存是因为</strong>空字符<strong>就指定了这个对象实例的值是一个长度为0的</strong>空字符串<strong>。</strong><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> num=<span class="number">1</span>,</span></span><br><span class="line"><span class="language-javascript">            max=<span class="number">10</span>,</span></span><br><span class="line"><span class="language-javascript">            timer=<span class="literal">null</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 使用超时调用实现间隔一秒输出数字1-10</span></span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">function</span> <span class="title function_">inCreamentNum</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">           <span class="variable language_">console</span>.<span class="title function_">log</span>(num);   <span class="comment">// 1 2 3 ... 10 </span></span></span><br><span class="line"><span class="language-javascript">           num++;      </span></span><br><span class="line"><span class="language-javascript">           <span class="keyword">if</span>(num&lt;=max)&#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="built_in">setTimeout</span>(inCreamentNum,<span class="number">1000</span>);</span></span><br><span class="line"><span class="language-javascript">           &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">           	  <span class="built_in">clearTimeout</span>(timer);</span></span><br><span class="line"><span class="language-javascript">           &#125;</span></span><br><span class="line"><span class="language-javascript">       &#125;</span></span><br><span class="line"><span class="language-javascript">       timer=<span class="built_in">setTimeout</span>(inCreamentNum,<span class="number">1000</span>);</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="clearTimeout-清除（取消）超时调用"><a href="#clearTimeout-清除（取消）超时调用" class="headerlink" title="clearTimeout()清除（取消）超时调用"></a>clearTimeout()清除（取消）超时调用</h2><ul>
+<li>SetTimeout方法返回一个ID值，我们可以通过它取消超时调用。</li>
+<li>语法：<code>clearTimeout（id_of settimeout）</code><ul>
+<li>id of settimeout：由setTimeout（）返回的ID值，该值标识要取消的延迟执行代码块。</li>
+</ul>
+</li>
+<li>功能：取消由setTimeout（）方法设置的timeout</li>
+</ul>
+<h2 id="合并举例-1"><a href="#合并举例-1" class="headerlink" title="合并举例"></a>合并举例</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">//setTimeout(&quot;alert(&#x27;hello&#x27;)&quot;,4000);不推荐</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">//  自定义函数1</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> fnCall = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">         <span class="title function_">alert</span>(<span class="string">&quot;world&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">//  自定义函数2，调用</span></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">//setTimeout(fnCall,5000);</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">//  匿名函数</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> timeout1 = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">         <span class="title function_">alert</span>(<span class="string">&quot;hello&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;, <span class="number">2000</span>)</span></span><br><span class="line"><span class="language-javascript">      </span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 清除超时调用</span></span></span><br><span class="line"><span class="language-javascript">      <span class="built_in">clearTimeout</span>(timeout1);</span></span><br><span class="line"><span class="language-javascript">   </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="setinterval-间歇调用"><a href="#setinterval-间歇调用" class="headerlink" title="setinterval()间歇调用"></a>setinterval()间歇调用</h2><ul>
+<li>语法：<code>setinterval（code，millisec）</code><ul>
+<li>code：要调用的函数或要执行的代码串。  </li>
+<li>millisec：<strong>周期性</strong>执行或调用code之间的<strong>时间间隔</strong>，以毫秒计</li>
+</ul>
+</li>
+<li>功能：每隔指定的时间执行一次代码</li>
+</ul>
+<h2 id="clearIntervall-清除间歇调用"><a href="#clearIntervall-清除间歇调用" class="headerlink" title="clearIntervall()清除间歇调用"></a>clearIntervall()清除间歇调用</h2><ul>
+<li>语法：<code>clearIntervall（id of setinterval）</code><ul>
+<li>id_of_setinterval：由setinterval（）返回的ID值</li>
+</ul>
+</li>
+<li>功能：取消由setInterval（）方法设置的interval</li>
+</ul>
+<h2 id="合并举例-2"><a href="#合并举例-2" class="headerlink" title="合并举例"></a>合并举例</h2><p>打印10次”您好”：</p>
+<ol>
+<li>利用间歇调用打印”您好”</li>
+<li>延时调用使得10秒之后执行“清除间歇调用”停止打印<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 打印10次&quot;您好&quot;</span></span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> intervalId=<span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;您好&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="number">1000</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 10秒之后停止打印</span></span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="built_in">clearInterval</span>(intervalId);</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="number">10000</span>);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+间隔1秒输出1-10：</li>
+<li>利用间歇调用与递增打印</li>
+<li>每一次递增后都判断是否到达10，到达则清除间歇调用<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">        <span class="built_in">var</span> <span class="built_in">num</span>=<span class="number">1</span>,</span><br><span class="line">            <span class="built_in">max</span>=<span class="number">10</span>,</span><br><span class="line">            <span class="built_in">timer</span>=null;</span><br><span class="line">       // 每隔<span class="number">1</span>秒针<span class="built_in">num</span>递增一次，直到<span class="built_in">num</span>的值等于<span class="built_in">max</span>清除</span><br><span class="line">      <span class="built_in">timer</span>=setInterval(function()&#123;</span><br><span class="line">           console.<span class="built_in">log</span>(<span class="built_in">num</span>);</span><br><span class="line">           <span class="built_in">num</span>++;</span><br><span class="line">           <span class="keyword">if</span>(<span class="built_in">num</span>&gt;<span class="built_in">max</span>)&#123;</span><br><span class="line">              clearInterval(<span class="built_in">timer</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,<span class="number">1000</span>)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/16/history%E5%AF%B9%E8%B1%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          history对象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/11/JS_DOM%E4%BA%8B%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">DOM事件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Window%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Window对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#alert-%E6%B6%88%E6%81%AF-%E7%A1%AE%E8%AE%A4%E6%8C%89%E9%92%AE%E7%9A%84%E8%AD%A6%E5%91%8A%E6%A1%86"><span class="nav-number">2.1.</span> <span class="nav-text">alert()消息+确认按钮的警告框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#confirm-%E6%B6%88%E6%81%AF-OK-%E5%8F%96%E6%B6%88%E6%8C%89%E9%92%AE%E7%9A%84%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">2.2.</span> <span class="nav-text">confirm()消息+OK+取消按钮的对话框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prompt-%E6%B6%88%E6%81%AF-%E8%BE%93%E5%85%A5%E6%A1%86-OK-%E5%8F%96%E6%B6%88%E6%8C%89%E9%92%AE%E7%9A%84%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="nav-number">2.3.</span> <span class="nav-text">prompt()消息+输入框+OK+取消按钮的对话框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0"><span class="nav-number">2.4.</span> <span class="nav-text">编程练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open-%E6%89%93%E5%BC%80%E6%96%B0%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AA%97%E5%8F%A3%E6%88%96%E6%9F%A5%E6%89%BE%E4%B8%80%E4%B8%AA%E5%B7%B2%E5%91%BD%E5%90%8D%E7%9A%84%E7%AA%97%E5%8F%A3"><span class="nav-number">2.5.</span> <span class="nav-text">open()打开新的浏览器窗口或查找一个已命名的窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#close-%E5%85%B3%E9%97%AD%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">2.5.1.</span> <span class="nav-text">close()关闭浏览器窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%B8%BE%E4%BE%8B"><span class="nav-number">2.5.2.</span> <span class="nav-text">合并举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E7%9B%AE%E5%BD%95%E4%B8%8B%E4%B8%A4%E4%B8%AA%E9%A1%B5%E9%9D%A2%E7%AC%AC%E4%BA%8C%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%88newwindow-html%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">同目录下两个页面1234567891011121314&lt;body&gt;	&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;退 出&quot; id&#x3D;&quot;quit&quot;&gt;	&lt;script&gt;       window.onload &#x3D; function(){       	  &#x2F;&#x2F; 打开子窗口，显示newwindow.html       	  window.open(&quot;newwindow.html&quot;,&quot;width&#x3D;400,height&#x3D;200,left&#x3D;0,top&#x3D;0,toolbar&#x3D;no,menubar&#x3D;no,scrollbars&#x3D;no,location&#x3D;no,status&#x3D;no&quot;);       	  var quit &#x3D; document.getElementById(&quot;quit&quot;);       	  &#x2F;&#x2F; 点击关闭当前窗口（子窗口是不会关的，可以在子窗口内做一个退出按钮）       	  quit.onclick &#x3D; function(){       	  	  window.close();       	  }       }	&lt;&#x2F;script&gt;&lt;&#x2F;body&gt;第二个页面（newwindow.html）123&lt;body&gt;	&lt;h1&gt;hello window.open&lt;&#x2F;h1&gt;&lt;&#x2F;body&gt;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%85%E6%97%B6%E8%B0%83%E7%94%A8%E4%B8%8E%E9%97%B4%E6%AD%87%E8%B0%83%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">超时调用与间歇调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F-1"><span class="nav-number">3.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-%E8%B6%85%E6%97%B6%E8%B0%83%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">setTimeout()超时调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%B6%85%E6%97%B6%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%AC%A1%E8%B0%83%E7%94%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.2.1.</span> <span class="nav-text">使用超时调用实现多次调用的例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clearTimeout-%E6%B8%85%E9%99%A4%EF%BC%88%E5%8F%96%E6%B6%88%EF%BC%89%E8%B6%85%E6%97%B6%E8%B0%83%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">clearTimeout()清除（取消）超时调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%B8%BE%E4%BE%8B-1"><span class="nav-number">3.4.</span> <span class="nav-text">合并举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setinterval-%E9%97%B4%E6%AD%87%E8%B0%83%E7%94%A8"><span class="nav-number">3.5.</span> <span class="nav-text">setinterval()间歇调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clearIntervall-%E6%B8%85%E9%99%A4%E9%97%B4%E6%AD%87%E8%B0%83%E7%94%A8"><span class="nav-number">3.6.</span> <span class="nav-text">clearIntervall()清除间歇调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%B8%BE%E4%BE%8B-2"><span class="nav-number">3.7.</span> <span class="nav-text">合并举例</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

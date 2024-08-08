@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>博客项目上线及配置 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="PM2核心【重点记忆】 进程守护，系统崩溃自动重启 启动多进程，充分利用CPU和内存 自带日志记录功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客项目上线及配置">
+<meta property="og:url" content="http://yoursite.com/2020/03/08/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%8F%8A%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="PM2核心【重点记忆】 进程守护，系统崩溃自动重启 启动多进程，充分利用CPU和内存 自带日志记录功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnl7ikc1oj30of0cwdnu.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnl7q3r0pj30lf0c644q.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmd58ra5j311u0g3000.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnlfhoxukj311k08vqca.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnltrdhbcj30lh0fsdpg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnludw1y2j30vw0heh4c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnlzsu08zj31100hy141.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnm85cia1j30li0j9n6r.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmg1qki2j311i0d24dq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmznhytlj30p30brn5n.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnn1p60ipj30q20620y7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnmjjctij311k0hv1dc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnnmd1j9j310r0gwngu.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnpjep5nj30lo07gdof.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogbj6l5tj30e10fogrg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogn8twxcj30790f30v4.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogol4utfj30fa0g379r.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh3sbtq7j30kk0d7ter.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh4vwcnej311f0heh53.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh6pwi6fj306d07p0tm.jpg">
+<meta property="article:published_time" content="2020-03-08T02:51:26.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.395Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnl7ikc1oj30of0cwdnu.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-博客项目上线及配置" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      博客项目上线及配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/03/08/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2020-03-08T02:51:26.000Z" itemprop="datePublished">三月 8, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PM2核心【重点记忆】"><a href="#PM2核心【重点记忆】" class="headerlink" title="PM2核心【重点记忆】"></a>PM2核心【重点记忆】</h1><ul>
+<li><strong>进程守护</strong>，系统崩溃自动重启</li>
+<li><strong>启动多进程</strong>，充分利用CPU和内存</li>
+<li><strong>自带日志记录功能</strong><span id="more"></span></li>
+</ul>
+<h2 id="nodemon和PM2区别"><a href="#nodemon和PM2区别" class="headerlink" title="nodemon和PM2区别"></a>nodemon和PM2区别</h2><ul>
+<li><strong>nodemon是在控制台前端监听的服务器启动</strong>，一旦使用就不能再在控制台输入其他命令，必须停止nodemon才能输入其他命令</li>
+<li><strong>PM2是在控制台后台监听的服务器启动</strong>，所以使用PM2时还可以在控制台输入其他命令</li>
+</ul>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><ol>
+<li>新建文件夹pm2-test，初始化环境，<strong>安装pm2：<code>npm i pm2 -g</code></strong></li>
+<li><strong>查看pm2版本：<code>pm2 --version</code></strong></li>
+</ol>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><ol>
+<li>package.json：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnl7ikc1oj30of0cwdnu.jpg" alt="package.json"></li>
+<li>app.js：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnl7q3r0pj30lf0c644q.jpg" alt="app.js"></li>
+<li>控制台：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmd58ra5j311u0g3000.jpg" alt="控制台"><strong>使用pm2我们可以继续操作控制台</strong>，使用nodemon则是在前台运行，控制台上不可做其他操作</li>
+</ol>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ol>
+<li><strong>运行进程：</strong><code>pm2 start ...</code><ul>
+<li>在上面的例子中，package.json中规定的prd命令中就使用了<code>pm2 start</code></li>
+<li><strong><code>...</code>：需要启动的 js文件名 或者 配置文件</strong><ul>
+<li>“PM2常用配置”的例子中使用的就是<code>pm2 start 配置文件</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>进程列表：</strong><code>pm2 list</code><ul>
+<li>上面的例子：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnlfhoxukj311k08vqca.jpg" alt="上面的例子"></li>
+</ul>
+</li>
+<li><strong>重启进程：</strong><code>pm2 restart &lt;AppName&gt;或&lt;id&gt;</code><ul>
+<li>AppName和id都来源于进程列表</li>
+<li>上面例子中则是：<code>pm2 restart app</code>&#x2F;<code>pm2 restart 0</code></li>
+</ul>
+</li>
+<li><strong>停止进程：</strong><code>pm2 stop &lt;AppName&gt;或&lt;id&gt;</code><ul>
+<li>停止以后还可重新启动</li>
+</ul>
+</li>
+<li><strong>删除进程：</strong><code>pm2 delete &lt;AppName&gt;或&lt;id&gt;</code></li>
+<li><strong>查看基本信息：</strong><code>pm2 info &lt;AppName&gt;或&lt;id&gt;</code></li>
+<li><strong>查看进程日志：</strong><code>pm2 log &lt;AppName&gt;或&lt;id&gt;</code><ol>
+<li>修改上方例子，<strong>添加自定义日志</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnltrdhbcj30lh0fsdpg.jpg" alt="添加自定义日志"></li>
+<li><strong>查看pm2处理结果</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnludw1y2j30vw0heh4c.jpg" alt="pm2处理结果"></li>
+<li>没做配置的情况下，pm2将 通过<code>console.log</code>和<code>console.error</code>自定义的日志 保存在这两个文件中，<strong>故之前提到自定义日志不需要手动保存于文件中</strong>。后面<strong>可通过配置改变报错的文件路径</strong>。</li>
+</ol>
+</li>
+<li><strong>监控进程的cpu和内存信息：</strong><code>pm2 monit &lt;AppName&gt;或&lt;id&gt;</code><ul>
+<li>可用于查看内存是否爆了或者cpu占的太满</li>
+<li>例子：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnlzsu08zj31100hy141.jpg" alt="例子">线上环境下想调试一些问题就可以在服务器上使用该命令</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="PM2进程守护"><a href="#PM2进程守护" class="headerlink" title="PM2进程守护"></a>PM2进程守护</h1><ul>
+<li><strong>进程守护</strong>是<strong>保证服务器稳定性</strong>的重要手段<ul>
+<li>使用node app.js或nodemon appjs启动项目，进程崩溃则不能访问入</li>
+<li><strong>使用pm2启动项目，遇到进程奔溃会自动重启</strong><ul>
+<li>出错的页面虽然出错，但<strong>pm2可以保证不出错的页面依旧可以访问，不至于一个地方崩溃就全部崩溃</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
+<li>继续上面例子，<strong>模拟错误，使其崩溃：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnm85cia1j30li0j9n6r.jpg" alt="例子"><ol>
+<li>先访问首页，正常显示</li>
+<li>访问<code>/err</code>页面，显示错误</li>
+<li>再访问首页，正常显示</li>
+<li>但查看 进程列表 可以看到重启次数增加了3次（正常页面是不会重启的，次数不是关键，关键是能重启）</li>
+<li>并且错误日志会被记录：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmg1qki2j311i0d24dq.jpg" alt="错误日志"></li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="PM2常用配置和日志记录"><a href="#PM2常用配置和日志记录" class="headerlink" title="PM2常用配置和日志记录"></a>PM2常用配置和日志记录</h1><ul>
+<li>新建PM2配置文件（包括进程数量，日志文件目录等）</li>
+<li>修改PM2启动命令，重启</li>
+<li>访问server，检查日志文件的内容（日志记录是否生效）</li>
+</ul>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>接上面从“基本使用”开始的例子，<strong>新建logs文件夹-新建err.log用于存放错误日志（<code>console.err()</code>打印的）、out.log存放<code>console.log()</code>打印的日志</strong></li>
+<li><strong>新建pm2.conf.json，作为PM2的配置文件</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnmznhytlj30p30brn5n.jpg" alt="pm2.conf.json"><ul>
+<li>注意是<strong>json格式</strong>的</li>
+<li><strong><code>watch</code>：是否热更新，true为是</strong>。建议填false</li>
+</ul>
+</li>
+<li><strong>修改package.json，使配置文件生效</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnn1p60ipj30q20620y7.jpg" alt="修改package.json"></li>
+<li>删除进程后重新启动进程，可看到<strong>配置文件已被运行</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnmjjctij311k0hv1dc.jpg" alt="控制台"></li>
+<li><strong>查看基本信息，可看到日志保存路径成功改变：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnnmd1j9j310r0gwngu.jpg" alt="查看基本信息"></li>
+<li>多次访问网页，<strong>查看日志文件</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdnnpjep5nj30lo07gdof.jpg" alt="日志文件">可以看到<strong>配置文件中的时间戳被自动加载每条日志前面</strong></li>
+</ol>
+<hr>
+<h1 id="PM2多进程"><a href="#PM2多进程" class="headerlink" title="PM2多进程"></a>PM2多进程</h1><ul>
+<li>多进程能充分利用服务器的内存和cpu资源</li>
+<li>多进程内存不共享，但可通过redis解决此问题</li>
+</ul>
+<h2 id="为何使用多进程"><a href="#为何使用多进程" class="headerlink" title="为何使用多进程"></a>为何使用多进程</h2><ul>
+<li>分成多个进程，这样其中一个进程崩了不至于全都崩了</li>
+<li>回顾之前session相关知识点说过，<strong>操作系统限制一个进程的最大内存</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogbj6l5tj30e10fogrg.jpg" alt="单个进程的内存是受限的"><ul>
+<li>单进程无法充分<strong>利用机器全部内存</strong></li>
+<li>单进程无法充分<strong>利用多核CPU的优势</strong><ul>
+<li>几核cpu就擅长同时处理几个进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="多进程内存不共享和redis"><a href="#多进程内存不共享和redis" class="headerlink" title="多进程内存不共享和redis"></a>多进程内存不共享和redis</h2><ul>
+<li>使用多进程可能会带来一些问题，比如<strong>多个进程之间内存无法共享</strong><ul>
+<li>比如，<strong>多个进程之间的session无法共享</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogn8twxcj30790f30v4.jpg" alt="session"></li>
+<li><strong>解决方法：多进程访问一个redis，共享session</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdogol4utfj30fa0g379r.jpg" alt="解决方法"></li>
+</ul>
+</li>
+</ul>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><ol>
+<li>延续上面的例子，在配置文件中<strong>设置4核</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh3sbtq7j30kk0d7ter.jpg" alt="配置文件"></li>
+<li>运行程序，可看到<strong>进程列表中出现了4个进程</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh4vwcnej311f0heh53.jpg" alt="进程列表"></li>
+<li>多次访问页面，可发现<strong>4个进程分别对应不同的日志文件</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh6pwi6fj306d07p0tm.jpg" alt="日志文件">pm2自有一套计算规则，哪个进程更闲就将请求派发到哪个进程</li>
+</ol>
+<hr>
+<h1 id="关于服务器运维"><a href="#关于服务器运维" class="headerlink" title="关于服务器运维"></a>关于服务器运维</h1><ul>
+<li>服务器运维，一般都由专业的OP人员和部门来处理</li>
+<li>大公司都有自己的运维团队</li>
+<li>中小型工期推荐使用一些云服务，如阿里云的node平台</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/09/%E4%BB%8B%E7%BB%8Dkoa2%20%E5%88%9B%E5%BB%BA%E5%BE%AE%E5%8D%9A%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          介绍koa2 创建微博项目
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/07/koa2%E9%87%8D%E6%9E%84%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">koa2重构博客项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PM2%E6%A0%B8%E5%BF%83%E3%80%90%E9%87%8D%E7%82%B9%E8%AE%B0%E5%BF%86%E3%80%91"><span class="nav-number">1.</span> <span class="nav-text">PM2核心【重点记忆】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodemon%E5%92%8CPM2%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">nodemon和PM2区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.4.</span> <span class="nav-text">常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PM2%E8%BF%9B%E7%A8%8B%E5%AE%88%E6%8A%A4"><span class="nav-number">2.</span> <span class="nav-text">PM2进程守护</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PM2%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E5%92%8C%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">PM2常用配置和日志记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PM2%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">PM2多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E4%BD%BF%E7%94%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">为何使用多进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E4%B8%8D%E5%85%B1%E4%BA%AB%E5%92%8Credis"><span class="nav-number">4.2.</span> <span class="nav-text">多进程内存不共享和redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4"><span class="nav-number">5.</span> <span class="nav-text">关于服务器运维</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

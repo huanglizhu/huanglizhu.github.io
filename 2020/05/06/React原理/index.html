@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React原理 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="慕课 前端框架及项目面试 聚焦VueReactWebpack 第八章 React 原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React原理">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/React%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="慕课 前端框架及项目面试 聚焦VueReactWebpack 第八章 React 原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/VDOM_js_DOM.png">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg">
+<meta property="article:published_time" content="2020-05-06T12:17:40.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.326Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/VDOM_js_DOM.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React原理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/05/06/React%E5%8E%9F%E7%90%86/" class="article-date">
+	  <time datetime="2020-05-06T12:17:40.000Z" itemprop="datePublished">五月 6, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>慕课 前端框架及项目面试 聚焦VueReactWebpack 第八章 React 原理</p>
+<span id="more"></span>
+
+<h1 id="函数式编程（不可变值）"><a href="#函数式编程（不可变值）" class="headerlink" title="函数式编程（不可变值）"></a>函数式编程（不可变值）</h1><ul>
+<li>函数式编程是一种编程范式（面向对象也是一种编程范式），概念比较多</li>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/04/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a></strong> 重点：<ul>
+<li><strong>纯函数</strong>：<strong>给定固定的输入，就一定会有固定的输出，且不能对传入的参数进行修改。</strong>纯函数<strong>不能涉及 异步 或者是关于 时间 的操作</strong>，一旦函数中涉及 AJAX请求、new Date()、setTimeout() ,他就 不是纯函数。<strong>要求reducer是纯函数</strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/#%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9-state-%EF%BC%8C%E4%BD%BF%E7%94%A8-%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%80%BC">不可变值</a><strong>：不管是</strong>setState还是redux创建action</strong>时，都必须使用不可变值。</li>
+</ul>
+</li>
+<li><strong>好处</strong>：给前端自动化测试带来很大便捷性。只需要给函数一个输入值，看看函数输出的时候符合预期即可。</li>
+<li>整个Redux都是<strong>函数式编程</strong>的范式，<strong>要求reducer是纯函数</strong>也是自然而然的事情，使用纯函数才能保证相同的输入得到相同的输入，保证状态的可预测。</li>
+</ul>
+<h1 id="虚拟dom和diff算法"><a href="#虚拟dom和diff算法" class="headerlink" title="虚拟dom和diff算法"></a>虚拟dom和diff算法</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/">虚拟dom</a>和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/#%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84Diff%E7%AE%97%E6%B3%95">diff算法</a>是<strong>实现React的核心技术</strong></li>
+</ul>
+<h2 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h2><p>vue和react实现vdom细节不同，但核心概念和实现思路是一样的。</p>
+<h3 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h3><ul>
+<li><strong>DOM操作非常消耗性能</strong>，以前使用原生js可以自己控制DOM操作的时机来进行<strong>性能优化</strong>（缓存DOM操作，合并DOM操作），react是<strong>数据驱动视图</strong>，不会直接操作DOM，想有效控制DOM操作<strong>提升性能</strong>就依靠<strong>虚拟DOM</strong>。</li>
+<li><strong>虚拟DOM 就是一个JS对象</strong>，用它来描述 真实的DOM。把DOM计算更多的转为js（虚拟DOM）计算（js执行速度很快），计算出最小的变更后再操作DOM（计算过程就是diff算法）。React对性能的提升在于<strong>减少了 真实DOM对象 的生成与比较，取而代之的是使用 虚拟DOM(JS对象) 来完成数据改变后的生成与比较</strong>。而<strong>用JS形成一个 JS对象 性能损耗非常小</strong>，生成一个 DOM元素 性能损耗大能。（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/#%E9%9D%A2%E8%AF%95%EF%BC%9A-%E8%99%9A%E6%8B%9FDOM-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8">React中的虚拟DOM</a>）</li>
+</ul>
+<h3 id="js对象（vnode）模拟DOM结构"><a href="#js对象（vnode）模拟DOM结构" class="headerlink" title="js对象（vnode）模拟DOM结构"></a>js对象（vnode）模拟DOM结构</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/VDOM_js_DOM.png" alt="js对象模拟DOM结构" title="js对象模拟DOM结构"></p>
+<ul>
+<li>js对象的结构主要包含三部分：<strong>标签名tag、属性props、子元素children</strong>，具体命名可能有所不同，但结构都这样<ul>
+<li>class在ES6是关键词了，所以这里用的className</li>
+</ul>
+</li>
+<li>试试看，要自己能从左图写出右图</li>
+</ul>
+<h2 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h2><ul>
+<li><strong>diff算法是虚拟DOM中最核心的部分</strong>，虚拟DOM的比对就是通过diff算法</li>
+<li>diff算法能在日常使用react中体现出来（如key）</li>
+<li>diff是一个广泛的概念，和组件化一样，她不是react独创的，如linux diff命令、git diff等</li>
+<li>两棵树做diff，两个js对象也可以做diff</li>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/#%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84Diff%E7%AE%97%E6%B3%95">diff算法</a> 优化时间复杂度</strong>：<ol>
+<li><strong>只比较同一层级</strong>，不跨级比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0kzwh7s6j30zc0h6wvj.jpg" alt="diff图示"><br>逐层比对，<strong>如果第一层就不同，react就不会往下比对</strong>，而是直接使用 新的虚拟DOM 去生成真实的DOM。虽然可能会造成DOM节点渲染的浪费，但<strong>同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗</strong>。</li>
+<li><strong>tag不相同</strong>，则直接删掉重建，不再深度比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0l2qpvp1j31250j4hce.jpg" alt="diff图示2"></li>
+<li><strong>tag和key两者都相同</strong>，则认为是相同节点，不再深度比较<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0lcyl1xuj313r08in22.jpg" alt="key值">在React中我们会<strong>根据key值给 虚拟DOM 命名</strong>，数据修改后 新的 虚拟DOM 就会根据key值和 原始的 虚拟DOM 进行快速比对，多出来的就是修改的DOM。这会大大提升性能。（<strong>所以key值需要是稳定的，可变的key值也就失去了它存在的意义</strong>）</li>
+</ol>
+</li>
+</ul>
+<h1 id="JSX的本质"><a href="#JSX的本质" class="headerlink" title="JSX的本质"></a>JSX的本质</h1><ul>
+<li>JSX编译出来是什么本质就是什么</li>
+<li><a target="_blank" rel="noopener" href="https://www.babeljs.cn/repl">babel官网的“试一试”</a>可以直接看到<strong>JSX编译的结果</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mbauqzwj31at0nswhw.jpg" alt="babel官网的“试一试”"><strong>遇到组件会继续拆分组件的jsx结构</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0mnipo1kj30w40nwnhz.jpg" alt="遇到组件会继续拆分组件的jsx结构"></li>
+<li><strong>总结</strong>：JSX编译出来<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0m5zaenvj310o09jn6g.jpg" alt="JSX编译出来"><ul>
+<li>**JSX的本质就是React.creatElement()**：<ul>
+<li>参数1：组件&#x2F;html标签（大小写区分）</li>
+<li>参数2：属性</li>
+<li>参数3：子元素</li>
+</ul>
+</li>
+<li><strong>React.creatElement()执行生成vnode（虚拟DOM）</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="React的合成事件机制"><a href="#React的合成事件机制" class="headerlink" title="React的合成事件机制"></a>React的合成事件机制</h1><ul>
+<li><strong>react中所有事件（SyntheticEvent）挂载在document上</strong>，而原生的事件（event）是绑定到DOM上面的</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/11/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A81%EF%BC%89/#%E5%85%B3%E4%BA%8Eevent%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%89">react的event</a>不是原生的，是react封装的<strong>SyntheticEvent合成事件对象</strong>，模拟出了 DOM 事件对象 所有的能力。<strong>event.nativeEvent 才是原生事件对象</strong></li>
+<li><strong>react事件 和 DOM 事件不一样</strong>，和 Vue 事件也不一样</li>
+</ul>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0n5pt17ij31fy0mgkb6.jpg" alt="合成事件机制"><br><strong>合成事件机制</strong>：</p>
+<ol>
+<li><strong>div上绑定的事件被触发后冒泡到顶层document上</strong>，react中所有事件都绑定在document上</li>
+<li>react会<strong>实例化成统一的react合成事件</strong>（SyntheticEvent合成事件）再进行<strong>事件派发</strong>（通过target知道谁触发了事件以后就派发给他进行事件处理）<strong>将event对象交给对应的处理器执行</strong></li>
+</ol>
+<h2 id="为什么需要合成事件机制"><a href="#为什么需要合成事件机制" class="headerlink" title="为什么需要合成事件机制"></a>为什么需要合成事件机制</h2><ul>
+<li>更好的兼容性和跨平台</li>
+<li>所有事件都挂载在document上，<strong>减少内存消耗</strong>，<strong>避免频繁解绑</strong><ul>
+<li>单一标签移除时不需要解绑事件，因为事件都挂载在document上</li>
+<li>原生js中事件绑定，元素移除后需要解绑：<ul>
+<li><code>div.onclick=null; </code></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-removeeventlistener.html"><code>removeEventListener()</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方便事件的统一管理（如<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/06/React%E5%8E%9F%E7%90%86/#transaction%EF%BC%88%E4%BA%8B%E5%8A%A1%EF%BC%89%E6%9C%BA%E5%88%B6">事务机制</a>）</li>
+</ul>
+<h1 id="React的batchUpdate机制-setState异-同步更新"><a href="#React的batchUpdate机制-setState异-同步更新" class="headerlink" title="React的batchUpdate机制(setState异&#x2F;同步更新)"></a>React的batchUpdate机制(setState异&#x2F;同步更新)</h1><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/#setState-%E5%8F%AF%E8%83%BD%E6%98%AF%E5%BC%82%E6%AD%A5-%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0">setState 可能是异步&#x2F;同步更新</a><strong>，在</strong>合成事件和钩子函数中是“异步”</strong>的，在<strong>原生DOM事件和setTimeout 中都是同步</strong>的。<ul>
+<li>setState 的“异步”并不是说内部由异步代码实现，其实<strong>本身执行的过程和代码都是同步</strong>的，只是<strong>合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形成了所谓的“异步”</strong></li>
+<li>可以通过setState第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果(同步）。</li>
+<li><strong>setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和setTimeout 中不会批量更新</strong>，在“异步”中如果对同一个值进行多次setState，setState的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时setState多个不同的值，在更新时会对其进行合并批量更新。</li>
+</ul>
+</li>
+<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/#setState%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%89%8D%E5%90%88%E5%B9%B6-%E4%B8%8D%E5%90%88%E5%B9%B6">setState异步更新前合并&#x2F;不合并</a>：</strong><ul>
+<li><strong>setState中传入对象，会被合并</strong>，多个setState只执行一次</li>
+<li><strong>setState中传入函数，不会被合并</strong>，多个setState执行多次</li>
+</ul>
+</li>
+</ul>
+<h2 id="setState主流程"><a href="#setState主流程" class="headerlink" title="setState主流程"></a>setState主流程</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pgfmb60j30xv0i2dmk.jpg" alt="setState主流程"></p>
+<h2 id="batchUpdate机制"><a href="#batchUpdate机制" class="headerlink" title="batchUpdate机制"></a>batchUpdate机制</h2><p><strong>setState异步或同步 主要看能否命中batchUpdate机制（通过isBatchingUpadates判断）</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pl40x9rj31l30qxhdt.jpg" alt="batchUpdate机制与setState异步或同步1"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0ppgvxoej318x0nm1kx.jpg" alt="batchUpdate机制与setState同步"><br><strong>注意：实际上isBatchingUpadates是在入口定义的，不是在函数里，上图只是演示方便</strong></p>
+<h3 id="能命中batchUpdate机制的入口-setState异步更新"><a href="#能命中batchUpdate机制的入口-setState异步更新" class="headerlink" title="能命中batchUpdate机制的入口(setState异步更新)"></a>能命中batchUpdate机制的入口(setState异步更新)</h3><p>react可以“管理”的入口：<br><strong>生命周期</strong>（和他调用的函数）<br><strong>react中注册的事件（合成事件）</strong>（和他调用的函数）</p>
+<h3 id="不能命中batchUpdate机制的入口-setState同步更新"><a href="#不能命中batchUpdate机制的入口-setState同步更新" class="headerlink" title="不能命中batchUpdate机制的入口(setState同步更新)"></a>不能命中batchUpdate机制的入口(setState同步更新)</h3><p>react“管不到”的入口：<br><strong>setTimeout setInterval等</strong>（和他调用的函数）<br><strong>自定义的DOM事件</strong>（和他调用的函数）</p>
+<h1 id="transaction（事务）机制"><a href="#transaction（事务）机制" class="headerlink" title="transaction（事务）机制"></a>transaction（事务）机制</h1><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0q000f2wj31dn0k0wzn.jpg" alt="transaction（事务）机制"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gl0pxxpgbuj30os0mx4ev.jpg" alt="transaction（事务）机制服务于batchUpdate机制"></p>
+<h1 id="React组件渲染和更新的过程"><a href="#React组件渲染和更新的过程" class="headerlink" title="React组件渲染和更新的过程"></a>React组件渲染和更新的过程</h1><h2 id="组件渲染过程"><a href="#组件渲染过程" class="headerlink" title="组件渲染过程"></a>组件渲染过程</h2><ol start="2">
+<li><strong>state数据+render()中解析JSX结构</strong>(creatElement函数)<strong>生成虚拟DOM</strong></li>
+<li>用 <strong>虚拟DOM 生成 真实的DOM ，显示在页面上</strong></li>
+</ol>
+<h2 id="组件更新过程"><a href="#组件更新过程" class="headerlink" title="组件更新过程"></a>组件更新过程</h2><ol>
+<li>state 数据 发生改变</li>
+<li>数据 + JSX模版 结合，生成 <strong>新的 虚拟的DOM</strong></li>
+<li><strong>比较 原始虚拟DOM 和 新的虚拟DOM 的区别（diff算法，纯js计算）</strong>，找到区别</li>
+<li><strong>直接操作有区别的DOM（将diff结果渲染DOM）</strong></li>
+</ol>
+<h1 id="React-fiber如何优化性能"><a href="#React-fiber如何优化性能" class="headerlink" title="React-fiber如何优化性能"></a>React-fiber如何优化性能</h1><ul>
+<li>React-fiber是<strong>React内部运行机制</strong>(是一种基于浏览器的<strong>单线程调度算法</strong>)，开发者体会不到</li>
+<li>了解背景和基本概念即可</li>
+<li><strong>组件更新过程中，diff算法计算了虚拟DOM的区别以后才进行页面渲染</strong>，而JS是单线程，且和DOM渲染共用一个线程。当组件足够复杂，组件更新时计算和渲染都压力大，同时再有DOM操作需求（动画，鼠标拖拽等），<strong>将卡顿</strong>。<ul>
+<li><strong>React-fiber就是解决卡顿的方法</strong>。它将递归diff算法比对虚拟DOM这个阶段进行<strong>任务拆分</strong>（DOM渲染阶段无法拆分），<strong>DOM需要渲染时暂停，空闲时恢复</strong>（window.requestIdleCallback）</li>
+</ul>
+</li>
+</ul>
+<h1 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h1><p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/15/Redux%E3%80%81React-router%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F%EF%BC%88hash%E3%80%81H5-history%EF%BC%89">React-router使用 路由模式（hash、H5 history）</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/76909668">知乎</a></p>
+<ul>
+<li><strong>hash特点</strong>：<ul>
+<li>hash变化会触发网页跳转，即浏览器的前进、后退、跳转</li>
+<li>hash变化<strong>不会刷新页面</strong>，单页面应用必需的特点</li>
+<li>hash<strong>永远不会提交到server端（前端自生自灭）</strong></li>
+</ul>
+</li>
+<li><strong>history特点</strong>：<ul>
+<li>页面和浏览器的history保持一致</li>
+<li>需要后端支持</li>
+</ul>
+</li>
+<li>react-router-dom是应用程序中路由的库。React库中没有路由功能，需要单独安装react-router-dom。它提供两个路由器 BrowserRouter和HashRouter。<ul>
+<li><strong>BrowserRouter</strong>，这是对Router接口的实现。使得页面和浏览器的history保持一致。等于：window.location。<code>http://127.0.0.1:3000/user/type</code></li>
+<li><strong>HashRouter</strong>，和上面的一样，只是使用的是url的hash部分，等于：window.location.hash。<code>http://127.0.0.1:3000/#/user/type</code>不一定是这样，但#是少不了的）</li>
+</ul>
+</li>
+<li>如果你使用的是一个非静态的站点、要处理各种不同的url那么你就需要使用BrowserRouter。</li>
+<li>相反的如果你的server只处理静态的url，那么就使用HashRouter。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/08/React%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React面试题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS异步进阶</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%80%BC%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">函数式编程（不可变值）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">虚拟dom和diff算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9FDOM"><span class="nav-number">2.1.</span> <span class="nav-text">虚拟DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8E%B0%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">出现原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js%E5%AF%B9%E8%B1%A1%EF%BC%88vnode%EF%BC%89%E6%A8%A1%E6%8B%9FDOM%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.2.</span> <span class="nav-text">js对象（vnode）模拟DOM结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">diff算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">3.</span> <span class="nav-text">JSX的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%9A%84%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">React的合成事件机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">为什么需要合成事件机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%9A%84batchUpdate%E6%9C%BA%E5%88%B6-setState%E5%BC%82-%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0"><span class="nav-number">5.</span> <span class="nav-text">React的batchUpdate机制(setState异&#x2F;同步更新)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#setState%E4%B8%BB%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.</span> <span class="nav-text">setState主流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#batchUpdate%E6%9C%BA%E5%88%B6"><span class="nav-number">5.2.</span> <span class="nav-text">batchUpdate机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E5%91%BD%E4%B8%ADbatchUpdate%E6%9C%BA%E5%88%B6%E7%9A%84%E5%85%A5%E5%8F%A3-setState%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0"><span class="nav-number">5.2.1.</span> <span class="nav-text">能命中batchUpdate机制的入口(setState异步更新)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E5%91%BD%E4%B8%ADbatchUpdate%E6%9C%BA%E5%88%B6%E7%9A%84%E5%85%A5%E5%8F%A3-setState%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0"><span class="nav-number">5.2.2.</span> <span class="nav-text">不能命中batchUpdate机制的入口(setState同步更新)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transaction%EF%BC%88%E4%BA%8B%E5%8A%A1%EF%BC%89%E6%9C%BA%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">transaction（事务）机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%BB%84%E4%BB%B6%E6%B8%B2%E6%9F%93%E5%92%8C%E6%9B%B4%E6%96%B0%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">React组件渲染和更新的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B"><span class="nav-number">7.1.</span> <span class="nav-text">组件渲染过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%9B%B4%E6%96%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">7.2.</span> <span class="nav-text">组件更新过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-fiber%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD"><span class="nav-number">8.</span> <span class="nav-text">React-fiber如何优化性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1"><span class="nav-number">9.</span> <span class="nav-text">前端路由</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

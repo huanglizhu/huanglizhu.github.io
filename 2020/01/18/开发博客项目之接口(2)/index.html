@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开发博客项目之接口(2) | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="4-5 搭建开发环境 从0开始搭建，不使用任何框架 使用nodemon监测文件变化，自动重启node（不需要像之前那样使用node xxx.js来手动重启node） 使用cross-env设置环境变量，兼容mac linux和windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发博客项目之接口(2)">
+<meta property="og:url" content="http://yoursite.com/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="4-5 搭建开发环境 从0开始搭建，不使用任何框架 使用nodemon监测文件变化，自动重启node（不需要像之前那样使用node xxx.js来手动重启node） 使用cross-env设置环境变量，兼容mac linux和windows">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0yojqeb3j30ra0powj0.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb10diqpfqj31hc0bz75z.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0qirz3acj31630b2qb9.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd3qqvuyej30rm0be79f.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11q3neczj308t0aegm1.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb10mohhknj31hc0c5401.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11iw6tr5j31hc0ac0ud.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11mdp062j314i0j2q52.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11nyta5tj314s0iz0up.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tb4p4q7j30q60bc7ak.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tbqiz33j30r809czpb.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tc05gzmj30p10a8q9y.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd8hzht4sj30a80e3wf3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd4zbgvrmj30zl09wqar.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb1xw9xgbqj318z0anq41.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb1yiis6csj31hc0inadk.jpg">
+<meta property="article:published_time" content="2020-01-18T14:00:10.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.402Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0yojqeb3j30ra0powj0.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-开发博客项目之接口(2)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      开发博客项目之接口(2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/" class="article-date">
+	  <time datetime="2020-01-18T14:00:10.000Z" itemprop="datePublished">一月 18, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="4-5-搭建开发环境"><a href="#4-5-搭建开发环境" class="headerlink" title="4-5 搭建开发环境"></a>4-5 搭建开发环境</h1><ul>
+<li>从0开始搭建，<strong>不使用任何框架</strong></li>
+<li><strong>使用nodemon监测文件变化，自动重启node</strong>（不需要像之前那样使用<code>node xxx.js</code>来手动重启node）</li>
+<li><strong>使用cross-env设置环境变量</strong>，兼容mac linux和windows<span id="more"></span></li>
+</ul>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><p>根据上一篇笔记的“模块化规范”初始npm环境，并在<code>package.json</code>文件中继续以下步骤：</p>
+<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p><strong>安装nodemon</strong>：<br><code>npm install nodemon --save</code>或者<code>npm i nodemon -D</code><br><strong>启动nodemon</strong>:<br><code>nodemon app.js</code>(用nodemon替换node去启动项目的入口文件将项目改变成自动重启服务器)<br>当你看到每次保存以后终端都自动更新，<strong>说明自启动成功</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0yojqeb3j30ra0powj0.jpg" alt="nodemon自动重启成功"><br><strong>后续启动项目</strong>：（<code>package.json</code>中的配置写在了下面）<br><code>npm run dev</code></p>
+<h3 id="cross-env"><a href="#cross-env" class="headerlink" title="cross-env"></a>cross-env</h3><p><strong>安装cross-env</strong>：<br><code>npm install cross-env --save-dev</code>或者<code>npm i cross-env -D</code></p>
+<p>手动补齐<code>package.json</code>：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;blog-1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;bin/www.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;</span><span class="keyword">Error</span>: <span class="keyword">no</span> <span class="keyword">test</span> specified\<span class="string">&quot; &amp;&amp; exit 1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=dev nodemon ./bin/www.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;prd&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=production nodemon ./bin/www.js&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;keywords&quot;</span>: [],</span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span>,</span><br><span class="line">  <span class="string">&quot;devDependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;cross-env&quot;</span>: <span class="string">&quot;^6.0.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;nodemon&quot;</span>: <span class="string">&quot;^2.0.2&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在node中，<strong>process对象是全局变量，它提供当前node.js的有关信息，以及控制当前node.js的有关进程</strong>。因为是全局变量，它对于node应用程序是始终可用的，无需require()。</li>
+<li><strong>env</strong>是process的一个属性，这个<strong>属性返回包含用户环境信息的对象</strong>。在终端输入node后，在输入process.env可以看到打印出来的信息。</li>
+<li><strong><code>NODE_ENV</code>不是<code>process.env</code>对象上原有的属性，它是我们自己添加上去的一个环境变量，用来确定当前所处的开发阶段</strong>。<ul>
+<li>一般 <strong>生产阶段</strong> 设为production，<strong>开发阶段</strong> 设为develop（在<code>package.json</code>中设置），然后在 脚本 中读取<code>process.env.NODE_ENV</code>即可知道现在是开发阶段还是生产阶段。</li>
+</ul>
+</li>
+</ul>
+<p><code>app.js</code>:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const serverHandle = (req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">//设置返回格式 JSON</span></span><br><span class="line">    res<span class="selector-class">.setHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    const resData = &#123;</span><br><span class="line">        name: <span class="string">&quot;Hlz&quot;</span>,</span><br><span class="line">        site: <span class="string">&quot;imooc&quot;</span>,</span><br><span class="line">        <span class="comment">//这里还是开发阶段,</span></span><br><span class="line">        <span class="comment">//所以NODE_ENV读到的是我们`package.json`中设置好的dev</span></span><br><span class="line">        env: process<span class="selector-class">.env</span><span class="selector-class">.NODE_ENV</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res<span class="selector-class">.end</span>(</span><br><span class="line">        JSON<span class="selector-class">.stringify</span>(resData)</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module<span class="selector-class">.exports</span> = serverHandle</span><br></pre></td></tr></table></figure>
+
+<p><code>./bin/www.js</code>:</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = require(<span class="string">&quot;http&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">8000</span></span><br><span class="line"><span class="keyword">const</span> serverHandle = require(<span class="string">&quot;../app&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">server</span> = http.createServer(serverHandle)</span><br><span class="line"><span class="keyword">server</span>.listen(PORT)</span><br></pre></td></tr></table></figure>
+
+<p>千万不要忘记**终端执行<code>npm run dev</code>**！！</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb10diqpfqj31hc0bz75z.jpg" alt="连通8000成功"></p>
+<hr>
+<h1 id="4-6-初始化路由-开发接口"><a href="#4-6-初始化路由-开发接口" class="headerlink" title="4-6 初始化路由 开发接口"></a>4-6 初始化路由 开发接口</h1><p><strong>初始化路由</strong>：根据之前技术方案的设计，做出路由<br><strong>返回假数据</strong>：将路由和数据处理分离，以符合设计原则<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0qirz3acj31630b2qb9.jpg" alt="之前技术方案的接口设计"></p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li><strong>路由组件（函数）写好后</strong>需要<strong>通过<code>module. exports</code>输出</strong>出去，然后再在需要调用的js文件顶部<strong>通过<code>require</code>调用</strong>后才能使用。**(app.js中的serverHandle不是路由组件，但是注意，函数都需要输出！不输出<code>www.js</code>中就用不了)**</li>
+<li>千万不要忘记在**终端执行<code>npm run dev</code>**！！(否则就不会去监听8000端口)</li>
+<li>设置接口路径时前面前往不要忘记<strong>api前面的<code>/</code></strong>!</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们先不管接口内容，去把各个接口跑通。<br><strong><code>blog.js</code>和<code>user.js</code><strong>中存放的是</strong>路由组件</strong>。<br><strong><code>app.js</code><strong>用来设置系统比较基础的功能（处理<code>blog</code>、<code>user</code>路由）或者参数（获取<code>path</code>、解析<code>query</code>）还有返回类型（JSON），还是</strong>不涉及业务逻辑</strong>的处理。<br>在<code>blog.js</code>和<code>user.js</code>中通过判断以后<strong>返回的是对象</strong>，所以在<code>app.js</code>中得到的<code>blogData</code>也是一个对象，但<code>res.end</code>返回的需要是字符串，所以需要通过<code>JSON.stringify（）</code>来转换一下，此时注意需要<code>return</code>来结束。</p>
+<h2 id="复习：处理HTTP请求简单示例"><a href="#复习：处理HTTP请求简单示例" class="headerlink" title="复习：处理HTTP请求简单示例"></a>复习：处理HTTP请求简单示例</h2><p>为了帮助理解下面被拆分的代码，我们需要先复习一下一个简单的示例。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd3qqvuyej30rm0be79f.jpg" alt="处理HTTP请求简单示例"></p>
+<ol>
+<li><strong>调用</strong> node的**<code>&#39;http&#39;</code>模块**</li>
+<li>使用<code>&#39;http&#39;</code>模块的<code>createServer()</code>来<strong>创建一个<code>server</code>服务端</strong></li>
+<li><code>createServer()</code>接收一个<strong>函数作为参数，该函数接收2个参数</strong>，分别是 浏览器向<code>server</code>服务端**发送的请求<code>req</code><strong>和 服务端返回给浏览器的</strong>响应<code>res</code>**。</li>
+<li>其中**<code>res.end()</code>中需要返回字符串**,该字符串<strong>会显示在页面上</strong>。</li>
+<li>让**<code>server</code>服务端监听8000端口**，好让浏览器访问<code>http://localhost:8000/</code>时可以访问到服务端。</li>
+</ol>
+<p>在下面的代码中，这一部分的<strong>“开启 Server,监听8000端口”写在<code>www.js</code>中，<code>createServer()</code>的回调函数（参数）被写在<code>app.js</code>中。</strong></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11q3neczj308t0aegm1.jpg" alt="目录"></p>
+<p><code>www.js</code>开启 Server,监听8000端口:</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = require(<span class="string">&quot;http&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">8000</span></span><br><span class="line"><span class="keyword">const</span> serverHandle = require(<span class="string">&quot;../app&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过createServer()调用app.js中的serverHandle，创建服务器server</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">server</span> = http.createServer(serverHandle)</span><br><span class="line"><span class="comment">//启动监听服务，监听8000端口</span></span><br><span class="line"><span class="keyword">server</span>.listen(PORT)</span><br></pre></td></tr></table></figure>
+
+
+<p><code>app.js</code>处理逻辑:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用路由组件</span></span><br><span class="line"><span class="keyword">const</span> handleBlogRouter = <span class="built_in">require</span>(<span class="string">&quot;./src/router/blog&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> handleUserRouter = <span class="built_in">require</span>(<span class="string">&quot;./src/router/user&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// serverHandle接收2个参数：浏览器的请求req，服务端的响应res</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">serverHandle</span> = (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">//设置返回格式 JSON</span></span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理blog路由，blogData是通过调用函数handleBlogRouter得到的对象</span></span><br><span class="line">    <span class="comment">//将req和res传过去</span></span><br><span class="line">    <span class="keyword">const</span> blogData = <span class="title function_">handleBlogRouter</span>(req, res)</span><br><span class="line">    <span class="keyword">if</span> (blogData) &#123;</span><br><span class="line">        res.<span class="title function_">end</span>(</span><br><span class="line">            <span class="comment">//记住end是一句字符串，故必须把对象转换为字符串</span></span><br><span class="line">            <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(blogData)</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//记住要使用return来结束</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理user路由(当路由命中handleUserRouter时)</span></span><br><span class="line">    <span class="keyword">const</span> userData = <span class="title function_">handleUserRouter</span>(req, res)</span><br><span class="line">    <span class="keyword">if</span> (userData) &#123;</span><br><span class="line">        res.<span class="title function_">end</span>(</span><br><span class="line">            <span class="comment">//记住end是一句字符串，故必须把对象转换为字符串</span></span><br><span class="line">            <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(userData)</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//记住要使用return来结束</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//未命中路由，返回404（这个了解即可，使用不多）</span></span><br><span class="line">    res.<span class="title function_">writeHead</span>(<span class="number">404</span>, &#123; <span class="string">&quot;Content-type&quot;</span>: <span class="string">&quot;text/plain&quot;</span> &#125;)</span><br><span class="line">    res.<span class="title function_">write</span>(<span class="string">&quot;404 Not Found\n&quot;</span>)</span><br><span class="line">    res.<span class="title function_">end</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//函数也需要输出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = serverHandle</span><br><span class="line"></span><br><span class="line"><span class="comment">//process.env.NODE_ENV</span></span><br></pre></td></tr></table></figure>
+
+<p><code>blog.js</code>5个路由接口:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//接收 浏览器的请求req，服务端的响应res</span><br><span class="line">const handleBlogRouter = (req, res) =&gt; &#123;</span><br><span class="line">    const <span class="function"><span class="keyword">method</span> = <span class="title">req</span>.<span class="title">method</span>//<span class="title">GET</span> <span class="title">POST</span></span></span><br><span class="line"><span class="function">    <span class="title">const</span> <span class="title">url</span> = <span class="title">req</span>.<span class="title">url</span></span></span><br><span class="line"><span class="function">    <span class="title">const</span> <span class="title">path</span> = <span class="title">url</span>.<span class="title">split</span>(&quot;?&quot;)[0]</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    //获取博客列表,<span class="title">api</span>前面千万不要漏掉 / !!!</span></span><br><span class="line"><span class="function">    <span class="title">if</span> (<span class="title">method</span> === &quot;<span class="title">GET</span>&quot; &amp;&amp; <span class="title">path</span> === &quot;/<span class="title">api</span>/<span class="title">blog</span>/<span class="title">list</span>&quot;) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&quot;这是获取博客列表的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取博客详情</span><br><span class="line">    <span class="keyword">if</span> (<span class="function"><span class="keyword">method</span> === &quot;<span class="title">GET</span>&quot; &amp;&amp; <span class="title">path</span> === &quot;/<span class="title">api</span>/<span class="title">blog</span>/<span class="title">detail</span>&quot;) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&quot;这是获取博客详情的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //新建一篇博客</span><br><span class="line">    <span class="keyword">if</span> (<span class="function"><span class="keyword">method</span> === &quot;<span class="title">POST</span>&quot; &amp;&amp; <span class="title">path</span> === &quot;/<span class="title">api</span>/<span class="title">blog</span>/<span class="title">new</span>&quot;) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&quot;这是新建一篇博客的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //更新一篇博客</span><br><span class="line">    <span class="keyword">if</span> (<span class="function"><span class="keyword">method</span> === &quot;<span class="title">POST</span>&quot; &amp;&amp; <span class="title">path</span> === &quot;/<span class="title">api</span>/<span class="title">blog</span>/<span class="title">update</span>&quot;) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&quot;这是更新一篇博客的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    //删除一篇博客</span><br><span class="line">    <span class="keyword">if</span> (<span class="function"><span class="keyword">method</span> === &quot;<span class="title">POST</span>&quot; &amp;&amp; <span class="title">path</span> === &quot;/<span class="title">api</span>/<span class="title">blog</span>/<span class="title">del</span>&quot;) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="string">&quot;这是删除一篇博客的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 不要忘记输出函数 */</span><br><span class="line">module.exports = handleBlogRouter</span><br></pre></td></tr></table></figure>
+
+<p><code>user.js</code>一个登录接口：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleUserRouter = (req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> method = req.method<span class="comment">//GET POST</span></span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">url</span> = req.url</span><br><span class="line">    <span class="keyword">const</span> path = <span class="built_in">url</span>.split(<span class="string">&quot;?&quot;</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">//登录</span></span><br><span class="line">    <span class="keyword">if</span> (method === <span class="string">&quot;POST&quot;</span> &amp;&amp; path === <span class="string">&quot;/api/user/login&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attribute">msg</span>: <span class="string">&quot;这是登陆的接口&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = handleUserRouter</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>直接输入<code>http://localhost:8000/</code>,未命中设定好的任何一个路由，触发设定好的404：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb10mohhknj31hc0c5401.jpg" alt="直接输入`http://localhost:8000/`"></p>
+<p>输入<code>http://localhost:8000/api/blog/list?author=hlz&amp;keyword=hahaha</code>,命中其中一个接口：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11iw6tr5j31hc0ac0ud.jpg" alt="直接输入`http://localhost:8000/api/blog/list?author=hlz&amp;keyword=hahaha`"></p>
+<p><strong>打开postman测试post请求</strong>，如下图所示：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11mdp062j314i0j2q52.jpg" alt="postman测试post请求"><br>再测试一个user的登录接口：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb11nyta5tj314s0iz0up.jpg" alt="测试一个user的登录接口"></p>
+<h3 id="简化"><a href="#简化" class="headerlink" title="简化"></a>简化</h3><p><strong>把两个路由<code>blog.js</code>和<code>user.js</code>中都用得到的<code>path</code>参数放到<code>app.js</code>中一次性获取。（因为req和res都会传给路由组件，所以可以在<code>app.js</code>中获取<code>path</code>参数以后挂载在req&#x2F;res上传给用的到的路由组件）</strong></p>
+<p><strong>原始代码：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tb4p4q7j30q60bc7ak.jpg" alt="原始代码"><br><strong>简化后：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tbqiz33j30r809czpb.jpg" alt="简化后1"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb0tc05gzmj30p10a8q9y.jpg" alt="简化后2"></p>
+<hr>
+<h1 id="补充：constructor构造方法"><a href="#补充：constructor构造方法" class="headerlink" title="补充：constructor构造方法"></a>补充：constructor构造方法</h1><p>constructor 是一种用于<strong>创建和初始化class创建的对象</strong>的特殊方法。<br>在一个构造方法中可以使用<strong>super关键字来调用一个父类的构造方法</strong>。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes/constructor">MDN中关于constructor构造方法的解释和例子</a><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd8hzht4sj30a80e3wf3.jpg" alt="例子"></p>
+<hr>
+<h1 id="补充：JSON-parse"><a href="#补充：JSON-parse" class="headerlink" title="补充：JSON.parse() "></a>补充：<code>JSON.parse() </code></h1><p><code>JSON.parse()</code> 方法用于<strong>将一个 JSON 字符串转换为对象</strong>。<br><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/20/JSON%E6%96%B9%E6%B3%95/#parse-%E5%B0%86JSON%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA-JS-%E5%AF%B9%E8%B1%A1%EF%BC%88%E6%8E%A5%E5%8F%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B0%E6%8D%AE%EF%BC%89">可参考笔记“JSON方法”</a></p>
+<hr>
+<h1 id="4-7-开发路由（博客列表路由）"><a href="#4-7-开发路由（博客列表路由）" class="headerlink" title="4-7 开发路由（博客列表路由）"></a>4-7 开发路由（博客列表路由）</h1><h2 id="resModel-js建数据模型"><a href="#resModel-js建数据模型" class="headerlink" title="resModel.js建数据模型"></a><code>resModel.js</code>建数据模型</h2><p>在<code>src</code>下<strong>新建<code>model</code>文件夹</strong>，在该文件夹下<strong>新建<code>resModel.js</code>文件</strong>，在该文件**新建一个基类<code>BaseModel</code>**。<br>通过基类<code>BaseModel</code> <strong>建两个模型<code>SuccessModel</code>和<code>ErrorModel</code><strong>，希望通过这两个模型</strong>实现返回格式的统一</strong>。</p>
+<p><strong><code>resModel.js</code>代码解析：</strong></p>
+<ul>
+<li>4 <code>BaseModel</code>中，<code>constructor()</code>传入的**<code>data</code>是一个对象<strong>类型，</strong><code>message</code>是一个字符串**类型的消息。</li>
+<li>6-13 <strong>兼容，使得<code>constructor()</code>可以只传一个字符串，也可以传一个对象和一个字符串。</strong><ul>
+<li>假设传入的第一个参数<code>data</code>是字符串类型且没有传入第二个参数<code>message</code>，为使其兼容则需将参数<code>data</code>赋给<code>BaseModel</code>的<code>message</code>，且<code>data</code>和<code>message</code>都不要了。</li>
+<li><strong>注意：<code>this.message</code>才是<code>BaseModel</code>的<code>message</code>。<code>data</code>和<code>message</code>都只是传入的参数</strong>。(不清楚可以看MDN中的例子)</li>
+</ul>
+</li>
+<li>14-19 如果传入<code>constructor()</code>的是data对象，那就赋值给<code>BaseModel</code>的<code>data</code>(<code>this.data</code>)。<code>message</code>同理。</li>
+<li>23 我们需要**设立两个模型<code>SuccessModel</code>和<code>ErrorModel</code><strong>（他们</strong>继承<code>BaseModel</code>**），用于<code>app.js</code>中 的<code>res.end</code>。<ul>
+<li>26 使用<code>super</code><strong>继承父类<code>BaseModel</code>的<code>data</code>和<code>message</code><strong>。super相当于执行了<code>BaseModel</code>的<code>constructor</code>,统一</strong>将<code>data</code>和<code>message</code>传过去放在父类<code>BaseModel</code>中处理</strong></li>
+</ul>
+</li>
+<li>最后<strong>记得输出</strong>两个模块（SuccessModel和ErrorModel）。</li>
+<li><strong>注意：BaseModel中的this指向使用SuccessModel&#x2F;ErrorModel的对象</strong><ul>
+<li>比如：<code>router</code>-<code>blog.js</code>-<code>handleBlogRouter()</code>里new了一个<code>SuccessModel</code>，那么<code>this</code>就指向在<code>app.js</code>中调用了<code>handleBlogRouter()</code>的**，对象<code>blogData</code>**。所以对象<code>blogData</code>中就会有<code>SuccessModel</code>中的<code>data</code>、<code>message</code>、<code>errno</code>。</li>
+</ul>
+</li>
+<li>接下来就可以**通过<code>new SuccessModel()</code>或<code>new ErrorModel()</code>来new一个对象了。(数据等就可以通过参数传入)**（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes/constructor">可参考MDN理解</a>）</li>
+</ul>
+<p><strong><code>resModel.js</code>:</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseModel</span> </span>&#123;</span><br><span class="line">    <span class="comment">//constructor 是一种用于创建和初始化class创建的对象的特殊方法。</span></span><br><span class="line">    <span class="comment">//要求传入的data为对象，message为字符串</span></span><br><span class="line">    constructor(data, message) &#123;</span><br><span class="line">        <span class="comment">//兼容，如果只传入了 字符串date，没有传入message</span></span><br><span class="line">        <span class="keyword">if</span> (typeof data === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">            <span class="comment">// 则将传入的date赋值给BaseModel的message，并清空data、message</span></span><br><span class="line">            <span class="keyword">this</span>.message = data</span><br><span class="line">            <span class="comment">//注意，this.message才是BaseModel的message</span></span><br><span class="line">            <span class="comment">//data和message都只是传入的参数</span></span><br><span class="line">            data = <span class="literal">null</span></span><br><span class="line">            message = <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (data) &#123;</span><br><span class="line">            <span class="keyword">this</span>.data = data</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (message) &#123;</span><br><span class="line">            <span class="keyword">this</span>.message = message</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuccessModel</span> <span class="keyword">extends</span> <span class="title">BaseModel</span> </span>&#123;</span><br><span class="line">    constructor(data, message) &#123;</span><br><span class="line">        <span class="comment">//super相当于执行了BaseModel的constructor,统一将data和message传过去放在父类BaseModel中处理</span></span><br><span class="line">        <span class="keyword">super</span>(data, message)</span><br><span class="line">        <span class="keyword">this</span>.errno = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorModel</span> <span class="keyword">extends</span> <span class="title">BaseModel</span> </span>&#123;</span><br><span class="line">    constructor(data, message) &#123;</span><br><span class="line">        <span class="keyword">super</span>(data, message)</span><br><span class="line">        <span class="keyword">this</span>.errno = <span class="number">-1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//记得输出</span></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    <span class="type">SuccessModel</span>,</span><br><span class="line">    <span class="type">ErrorModel</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>借助这2个模型我们<strong>希望实现返回格式的统一</strong>（非实际使用，只是在app.js中做效果展示）：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcd4zbgvrmj30zl09wqar.jpg" alt="使用范例"></p>
+<h2 id="app-js解析公共参数"><a href="#app-js解析公共参数" class="headerlink" title="app.js解析公共参数"></a><code>app.js</code>解析公共参数</h2><p>所有<strong>公共的参数都放到<code>app.js</code>中进行解析</strong>(比如query的解析)：<br>（<code>req.query</code>得到的效果<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/#%E4%BE%8B%E5%AD%90">可以参考这个例子</a>）</p>
+<p>1.<strong><code>app.js</code>中顶部</strong>增添:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引用js原生模块querystring</span></span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>2.<strong><code>app.js</code>的<code>serverHandle</code>中</strong>增添:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析query,parse方法用于将一个 JSON 字符串转换为对象</span></span><br><span class="line">req<span class="selector-class">.query</span> = querystring<span class="selector-class">.parse</span>(url<span class="selector-class">.split</span>(<span class="string">&quot;?&quot;</span>)<span class="selector-attr">[1]</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="新建controller文件夹"><a href="#新建controller文件夹" class="headerlink" title="新建controller文件夹"></a>新建<code>controller</code>文件夹</h2><ul>
+<li>在<code>src</code>下新建<code>controller</code>文件夹，在该文件夹下新建<code>blog.js</code>文件。<ul>
+<li><code>controller</code>文件夹中的js文件<strong>类似于<code>router</code>中的文件</strong>。</li>
+</ul>
+</li>
+<li><code>blog.js</code>文件中<strong>先返回假数据</strong>（格式是正确的），此时虽然author和keyword没有使用，但我们假装他使用了并返回了很多的元素（博客）。<ul>
+<li>没连接数据库，先返回假数据</li>
+</ul>
+</li>
+<li>由于接下来还要建很多个函数，所以返回（输出）的是对象（方便增加返回的函数）。</li>
+</ul>
+<p><strong><code>controller</code>文件夹内的<code>blog.js</code></strong>:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const getL<span class="attr">ist</span> <span class="operator">=</span> (author, keyword) =&gt; <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">//虽然author,keyword没有使用，但先返回假数据（格式是正确的）</span></span><br><span class="line">    <span class="comment">//返回的是数组，数组元素为博客文章</span></span><br><span class="line">    return [</span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line"><span class="symbol">            id:</span> <span class="number">1</span>,</span><br><span class="line"><span class="symbol">            title:</span> <span class="string">&quot;标题A&quot;</span>,</span><br><span class="line"><span class="symbol">            content:</span> <span class="string">&quot;内容A&quot;</span>,</span><br><span class="line"><span class="symbol">            createTime:</span> <span class="number">1579421639661</span>,</span><br><span class="line"><span class="symbol">            author:</span> <span class="string">&quot;hlz&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span>,</span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line"><span class="symbol">            id:</span> <span class="number">2</span>,</span><br><span class="line"><span class="symbol">            title:</span> <span class="string">&quot;标题B&quot;</span>,</span><br><span class="line"><span class="symbol">            content:</span> <span class="string">&quot;内容B&quot;</span>,</span><br><span class="line"><span class="symbol">            createTime:</span> <span class="number">1579421789492</span>,</span><br><span class="line"><span class="symbol">            author:</span> <span class="string">&quot;lv&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    ]</span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//接下来还会有函数需要输出，所以先使用对象的方式进行返回</span></span><br><span class="line">module.<span class="attr">exports</span> <span class="operator">=</span> <span class="punctuation">&#123;</span></span><br><span class="line">    getList</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>createTime</code>可以在网页上获取一个来使用：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb1xw9xgbqj318z0anq41.jpg" alt="createTime获取方法"></p>
+<h2 id="router中引用controller"><a href="#router中引用controller" class="headerlink" title="router中引用controller"></a><code>router</code>中引用<code>controller</code></h2><ul>
+<li>可以在<code>router</code>文件夹内的<code>blog.js</code>文件中<strong>通过解构赋值的方式引用</strong>在<code>controller</code>文件夹内的<code>blog.js</code>文件中定义的**<code>getList</code>函数**。（至于为什么使用解构赋值可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/23/Node.js%E5%87%BD%E6%95%B0%E5%BC%95%E7%94%A8%E4%B8%8E%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/">“Node.js函数引用与解构赋值”</a>）</li>
+<li>想要调用<code>getList</code>就必须传入参数<code>author, keyword</code>，而<code>author, keyword</code>是从<code>queryString</code>中来的，所以我们可以<strong>在<code>app.js</code>中统一获取到<code>req.query</code>里</strong><ul>
+<li><strong>注意：<code>req.query</code>得到的是一个JSON对象</strong>，如果我们访问<code>http://localhost:8000/api/blog/list?author=hlz&amp;keyword=hahaha</code>，则这个对象中<strong>有<code>author</code>属性和<code>keyword</code>属性</strong>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/#%E4%BE%8B%E5%AD%90">可参考这个例子</a>。</li>
+</ul>
+</li>
+<li>通过<code>getList()</code>拿到的<strong>数据<code>listData</code></strong> 作为参数data **传入<code>SuccessModel</code>**。<ul>
+<li><code>SuccessModel</code>中的**<code>this</code>指向<code>blogData</code>对象<strong>。经过<code>SuccessModel</code>相当于</strong>给<code>blogData</code>对象添加属性<code>data</code>以及属性值<code>listData</code>和属性<code>errno </code>**。<ul>
+<li><strong>注意：BaseModel中的this指向使用SuccessModel&#x2F;ErrorModel的对象</strong></li>
+<li>也就是说：<code>router</code>-<code>blog.js</code>-<code>handleBlogRouter()</code>里new了一个<code>SuccessModel</code>对象，那么<code>this</code>就指向在<code>app.js</code>中调用了<code>handleBlogRouter()</code>的<strong>对象<code>blogData</code></strong> 。所以**对象<code>blogData</code>中就会有<code>SuccessModel</code>中的<code>data</code>、<code>message</code>、<code>errno</code>**。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过<code>SuccessModel</code>合成后的数据在<code>app.js</code>中作为<code>blogData</code>对象的属性 通过<code>res.end()</code><strong>显示在页面上</strong>。</li>
+</ul>
+<p><code>router</code>文件夹内的<code>blog.js</code>顶部：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过解构赋值的方式引用controller/blog.js中的getList函数</span></span><br><span class="line"><span class="keyword">const</span> &#123; getList &#125; = <span class="built_in">require</span>(<span class="string">&quot;../controller/blog&quot;</span>)</span><br><span class="line"><span class="comment">//引入resModel.js中的两个模块</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">SuccessModel</span>, <span class="title class_">ErrorModel</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;../model/resModel&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>将<code>router</code>文件夹内的<code>blog.js</code>中<strong>“获取博客列表”的部分进行修改</strong>：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取博客列表,api前面千万不要漏掉 / !!!</span></span><br><span class="line"><span class="keyword">if</span> (method === <span class="string">&quot;GET&quot;</span> &amp;&amp; req.path === <span class="string">&quot;/api/blog/list&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">//从app.js中解析的query中读取author、keyword，没有则空</span></span><br><span class="line">    <span class="keyword">const</span> author = req.<span class="keyword">query</span>.author || <span class="string">&quot; &quot;</span></span><br><span class="line">    <span class="keyword">const</span> keyword = req.<span class="keyword">query</span>.keyword || <span class="string">&quot; &quot;</span></span><br><span class="line">    <span class="comment">//将读取到的author, keyword传到controller/blog.js中的getList函数，</span></span><br><span class="line">    <span class="comment">//获取返回的博客列表数据listData</span></span><br><span class="line">    <span class="keyword">const</span> listData = getList(author, keyword)</span><br><span class="line">    <span class="comment">//将博客列表数据listData传入SuccessModel，</span></span><br><span class="line">    <span class="comment">//此时我们只传入了data参数，没有传入message参数</span></span><br><span class="line">    <span class="keyword">return</span> new SuccessModel(listData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试</strong>获取博客列表的接口通过假数据显示已经跑通了：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gb1yiis6csj31hc0inadk.jpg" alt="image.png"></p>
+<h1 id="捋清思路（系统架构设计的四层）"><a href="#捋清思路（系统架构设计的四层）" class="headerlink" title="捋清思路（系统架构设计的四层）"></a>捋清思路（系统架构设计的四层）</h1><p>系统架构设计的<strong>四层抽象</strong>：<br>第一层： <a target="_blank" rel="noopener" href="http://www.js/">www.js</a> [开启 Server]<br>第二层：app.js [通信设置层]<br>第三层：router文件夹 [业务逻辑层]<br>第四层：controller文件夹 [数据层]</p>
+<p><strong>一开始</strong>进入项目执行的是<code>bin</code>文件夹下的**<code>www.js</code><strong>,这里面只是<code>createServer</code>的逻辑，</strong>端口连通<strong>什么的，和我们的业务逻辑没有关系。<br><strong>第二层</strong>：<code>app.js</code> ，用来设置系统比较基础的功能（处理<code>blog</code>、<code>user</code>路由）或者参数（获取<code>path</code>、解析<code>query</code>）还有返回类型（JSON），还是</strong>不涉及业务逻辑<strong>的处理。<br><strong>第三层</strong>：router文件夹下的两个</strong>路由文件** <code>blog.js</code>、<code>user.js</code>，稍微涉及逻辑层，但只管路由。匹配到路由（接口）以后会去处理一些数据，然后（通过SuccessModel）会给你返回一个<strong>正确的格式</strong>。至于这些数据是怎么去匹配的，怎么去筛选的，是正确的还是错误的他不管，他只管和路由（接口）有关的。<br><strong>第四层</strong>：<code>controller.js</code> 是<strong>最关心数据</strong>的层次，他没有<code>res</code>、<code>req</code>、<code>path</code>、<code>query</code>这些东西，只是对传入的数据进行计算处理再返回。（我们目前还没有计算，接下来会有）。至于数据返回后是怎么处理的<code>controller.js</code>是不管的。</p>
+<p><strong>一层层拆分是一个由最基础的http服务向逻辑层转变的过程。</strong></p>
+<p>我们一开始先<strong>在<code>www.js</code>上</strong>创建服务器server并监听8000端口，这个服务器做的事情放到<code>app.js</code>的serverHandle中。<br>然后<strong>在<code>app.js</code>中</strong>将HTTP请求req和响应res传到路由组件（<code>router</code>文件夹），并设置一些 公共参数 通过req&#x2F;res传给路由组件以供使用。<br><strong>在<code>router</code>文件夹下</strong>的路由组件<code>blog.js</code>、<code>user.js</code>中，根据<code>app.js</code>传过来的req、res匹配对应的接口并将从<code>controller.js</code>中得到的数据进行一些<strong>格式的处理</strong>。最终返回显示在页面上。<br><strong>在<code>controller.js</code>中</strong>对数据进行计算处理再返回。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/19/Mock.js%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Mock.js的使用方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/18/Redux%E8%BF%9B%E9%98%B6(1)UI%E7%BB%84%E4%BB%B6%E3%80%81%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Redux进阶(1)UI组件、容器组件、无状态组件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-5-%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">4-5 搭建开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodemon"><span class="nav-number">1.1.1.</span> <span class="nav-text">nodemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cross-env"><span class="nav-number">1.1.2.</span> <span class="nav-text">cross-env</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-6-%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B7%AF%E7%94%B1-%E5%BC%80%E5%8F%91%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">4-6 初始化路由 开发接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%A4%84%E7%90%86HTTP%E8%AF%B7%E6%B1%82%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">复习：处理HTTP请求简单示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">2.4.</span> <span class="nav-text">测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8C%96"><span class="nav-number">2.4.1.</span> <span class="nav-text">简化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9Aconstructor%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">补充：constructor构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9AJSON-parse"><span class="nav-number">4.</span> <span class="nav-text">补充：JSON.parse() </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-7-%E5%BC%80%E5%8F%91%E8%B7%AF%E7%94%B1%EF%BC%88%E5%8D%9A%E5%AE%A2%E5%88%97%E8%A1%A8%E8%B7%AF%E7%94%B1%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">4-7 开发路由（博客列表路由）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#resModel-js%E5%BB%BA%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">resModel.js建数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app-js%E8%A7%A3%E6%9E%90%E5%85%AC%E5%85%B1%E5%8F%82%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">app.js解析公共参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAcontroller%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">5.3.</span> <span class="nav-text">新建controller文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router%E4%B8%AD%E5%BC%95%E7%94%A8controller"><span class="nav-number">5.4.</span> <span class="nav-text">router中引用controller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8D%8B%E6%B8%85%E6%80%9D%E8%B7%AF%EF%BC%88%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9B%9B%E5%B1%82%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">捋清思路（系统架构设计的四层）</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

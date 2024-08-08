@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 图片固定大小显示（裁剪 不变形） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="起因假设后端返回的图片是不同尺寸的，那么我希望页面上显示的统一尺寸但不变形的图片，可以使用img标签+css的object-fit属性来实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 图片固定大小显示（裁剪 不变形）">
+<meta property="og:url" content="http://yoursite.com/2020/06/09/CSS%20%E5%9B%BE%E7%89%87%E5%9B%BA%E5%AE%9A%E5%A4%A7%E5%B0%8F%E6%98%BE%E7%A4%BA%EF%BC%88%E8%A3%81%E5%89%AA%20%E4%B8%8D%E5%8F%98%E5%BD%A2%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="起因假设后端返回的图片是不同尺寸的，那么我希望页面上显示的统一尺寸但不变形的图片，可以使用img标签+css的object-fit属性来实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gjj4ogyo7ej30yh0apdlp.jpg">
+<meta property="article:published_time" content="2020-06-09T07:30:20.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.268Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gjj4ogyo7ej30yh0apdlp.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS 图片固定大小显示（裁剪 不变形）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS 图片固定大小显示（裁剪 不变形）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/06/09/CSS%20%E5%9B%BE%E7%89%87%E5%9B%BA%E5%AE%9A%E5%A4%A7%E5%B0%8F%E6%98%BE%E7%A4%BA%EF%BC%88%E8%A3%81%E5%89%AA%20%E4%B8%8D%E5%8F%98%E5%BD%A2%EF%BC%89/" class="article-date">
+	  <time datetime="2020-06-09T07:30:20.000Z" itemprop="datePublished">六月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>假设<strong>后端返回的图片是不同尺寸</strong>的，那么我希望<strong>页面上显示的统一尺寸但不变形的图片</strong>，可以<strong>使用img标签+css的object-fit属性</strong>来实现。</p>
+<span id="more"></span>
+
+<h1 id="img标签-object-fit属性"><a href="#img标签-object-fit属性" class="headerlink" title="img标签 object-fit属性"></a>img标签 object-fit属性</h1><ul>
+<li><strong>object-fit 属性</strong>指定元素的内容应该<strong>如何去适应指定容器的高度与宽度</strong>，一般用于 img 和 video 标签，一般可以对这些元素进行<strong>保留原始比例的剪切、缩放或者直接进行拉伸等</strong>。</li>
+<li>可以通过使用 <a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/pr-object-position.html">object-position 属性</a>来切换被替换元素的内容对象在元素框内的对齐方式。</li>
+<li>更多属性值可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/pr-object-fit.html">菜鸟教程</a></li>
+<li>例子：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gjj4ogyo7ej30yh0apdlp.jpg" alt="例子"></li>
+</ul>
+<h1 id="同样效果：background-size属性"><a href="#同样效果：background-size属性" class="headerlink" title="同样效果：background-size属性"></a>同样效果：background-size属性</h1><ul>
+<li>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/26/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/#background-size%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F">百度前端技术学院 第四天学习笔记（1）（CSS背景）</a>，效果可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=trycss3_background-size2">菜鸟教程</a></li>
+</ul>
+<h2 id="属性值cover与contain"><a href="#属性值cover与contain" class="headerlink" title="属性值cover与contain"></a>属性值cover与contain</h2><h3 id="相同之处"><a href="#相同之处" class="headerlink" title="相同之处"></a>相同之处</h3><ul>
+<li>他们都会<strong>对图片进行等比缩放</strong></li>
+</ul>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<li><strong>cover属性值：</strong><ul>
+<li>缩放背景图片以<strong>完全 覆盖 背景区</strong>，可能背景图片部分看不见。</li>
+<li>该背景图以它的<strong>全部宽或者高</strong>覆盖所在容器。<strong>当容器和背景图大小不同时，背景图的 左&#x2F;右 或者 上&#x2F;下 部分会被 裁剪。</strong></li>
+</ul>
+</li>
+<li><strong>contain属性值：</strong><ul>
+<li><strong>保证图片始终 完整 的显示在背景区域，不裁剪图片</strong></li>
+<li>缩放背景图片以<strong>完全 装入 背景区</strong>，可能背景区部分空白。</li>
+<li>该背景图会<strong>填充</strong>所在的容器。当背景图和容器的大小的不同时，<strong>容器的空白区域（上&#x2F;下或者左&#x2F;右）会显示由 background-color 设置的背景颜色。</strong></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/13/jQuery%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%89%A9%E5%B1%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          jQuery事件与扩展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/07/react%20%E6%8A%A5%E9%94%99%20Module%20not%20found%20createSuper/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">react 报错 Module not found:Can&#39;t resolve &#39;@babel/runtime/helpers/esm/createSuper&#39;</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#img%E6%A0%87%E7%AD%BE-object-fit%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">img标签 object-fit属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E6%A0%B7%E6%95%88%E6%9E%9C%EF%BC%9Abackground-size%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">同样效果：background-size属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BCcover%E4%B8%8Econtain"><span class="nav-number">3.1.</span> <span class="nav-text">属性值cover与contain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E4%B9%8B%E5%A4%84"><span class="nav-number">3.1.1.</span> <span class="nav-text">相同之处</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">区别</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS 深度比较 与 `===` | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="可以回顾何时使用&#x3D;&#x3D;何时使用&#x3D;&#x3D;&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 深度比较 与 &#96;&#x3D;&#x3D;&#x3D;&#96;">
+<meta property="og:url" content="http://yoursite.com/2020/04/13/JS%20%E6%B7%B1%E5%BA%A6%E6%AF%94%E8%BE%83%20%E4%B8%8E%20===/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="可以回顾何时使用&#x3D;&#x3D;何时使用&#x3D;&#x3D;&#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-13T07:20:44.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.301Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS 深度比较 与 ===" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS 深度比较 与 `===`
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/13/JS%20%E6%B7%B1%E5%BA%A6%E6%AF%94%E8%BE%83%20%E4%B8%8E%20===/" class="article-date">
+	  <time datetime="2020-04-13T07:20:44.000Z" itemprop="datePublished">四月 13, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>可以回顾<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89/#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8-%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8">何时使用<code>==</code>何时使用<code>===</code></a></p>
+<span id="more"></span>
+
+<h1 id="全等比较（严格相等）"><a href="#全等比较（严格相等）" class="headerlink" title="全等比较（严格相等）"></a>全等比较（严格相等）</h1><ul>
+<li>当我们使用<code>===</code>比较<strong>引用类型</strong>时，是会对<strong>地址</strong>进行比较的，所以就算属性和属性值完全相等的两个对象也是不等的。</li>
+</ul>
+<h1 id="深度比较"><a href="#深度比较" class="headerlink" title="深度比较"></a>深度比较</h1><ul>
+<li>深度比较则不会对<strong>引用类型的地址</strong>进行比较，只要内容相等就判定为相等。</li>
+<li>可以使用**<a target="_blank" rel="noopener" href="https://www.lodashjs.com/docs/lodash.isEqual">lodash库的isEqual()</a>**来进行深度比较，也可以自己使用js写</li>
+<li><strong>回顾</strong>：lodash库的cloneDeep()可以用来<strong>深拷贝</strong>引用类型</li>
+<li><strong>注意：lodash库的 isEqual()深度比较 和 cloneDeep()深拷贝 都很耗费性能，他们都要进行一次性递归到底。轻易不推荐使用。</strong></li>
+</ul>
+<h2 id="js实现深度比较"><a href="#js实现深度比较" class="headerlink" title="js实现深度比较"></a>js实现深度比较</h2><p>思路： </p>
+<ol>
+<li>先判断2个对象的<strong>数据类型</strong>是否一致。</li>
+<li>如果对象的数据是<strong>基础的数据类型则直接比较</strong>; 如果是 Number, 对NaN进行特殊处理。</li>
+<li>如果对象的数据类型是 Array，对象进行循环, 逐值进行判断。</li>
+<li>如果对象的数据类型是 Object，分别对象的key, value 进行判断。（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys">Reflect.ownKeys() </a>返回一个由目标对象自身的属性键组成的数组）</li>
+<li>如果对象的数据类型是 Map 或者 Set， 转化为Array进行判断。</li>
+</ol>
+<p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * </span></span><br><span class="line"><span class="comment">    * 返回对相应的数据类型</span></span><br><span class="line"><span class="comment">    */</span>    </span><br><span class="line">   function getType(<span class="keyword">data</span>) &#123;</span><br><span class="line">       <span class="keyword">return</span> Object.prototype.toString.call(<span class="keyword">data</span>).substring(<span class="number">8</span>).split(/]/)[<span class="number">0</span>]</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 假设data为123</span></span><br><span class="line">   <span class="comment">// Object.prototype.toString.call(data)得到&quot;[object Number]&quot;</span></span><br><span class="line">   <span class="comment">// substring从第八位开始截取，得到&quot;Number]&quot;</span></span><br><span class="line">   <span class="comment">// split从]分隔为数组，取第一位，得到Number</span></span><br><span class="line">   <span class="comment">// 注意：NaN也会得到Number，但NaN.toString()可得NaN</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &#123;*&#125; sourceObj     </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &#123;*&#125; compareObj    </span></span><br><span class="line"><span class="comment">    * </span></span><br><span class="line"><span class="comment">    * 比较对象是否相等</span></span><br><span class="line"><span class="comment">    * </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   function comparisonObject(sourceObj, compareObj) &#123;</span><br><span class="line">       <span class="keyword">if</span> (arguments.length &lt; <span class="number">2</span>) <span class="keyword">throw</span> <span class="string">&quot;Incorrect number of parameters&quot;</span>;</span><br><span class="line">       let sourceType = getType(sourceObj);</span><br><span class="line">       <span class="keyword">if</span> (sourceType !== getType(compareObj)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       <span class="comment">// Not objects and arrays</span></span><br><span class="line">       <span class="keyword">if</span> (sourceType !== <span class="string">&quot;Array&quot;</span> &amp;&amp; sourceType !== <span class="string">&quot;Object&quot;</span> &amp;&amp; sourceType !== <span class="string">&quot;Set&quot;</span> &amp;&amp; sourceType !== <span class="string">&quot;Map&quot;</span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> (sourceType === <span class="string">&quot;Number&quot;</span> &amp;&amp; sourceObj.toString() === <span class="string">&quot;NaN&quot;</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> compareObj.toString() === <span class="string">&quot;NaN&quot;</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (sourceType === <span class="string">&quot;Date&quot;</span> || sourceType === <span class="string">&quot;RegExp&quot;</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> sourceObj.toString() === compareObj.toString()</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> sourceObj === compareObj</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sourceType === <span class="string">&quot;Array&quot;</span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> (sourceObj.length !== compareObj.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">           <span class="keyword">if</span> (sourceObj.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//???</span></span><br><span class="line">           <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; sourceObj.length; i++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (!comparisonObject(sourceObj[i], compareObj[i])) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sourceType === <span class="string">&quot;Object&quot;</span>) &#123;</span><br><span class="line">       <span class="comment">// 通过Reflect.ownKeys得到属性名组成的数组</span></span><br><span class="line">           let sourceKeyList = Reflect.ownKeys(sourceObj);</span><br><span class="line">           let compareKeyList = Reflect.ownKeys(compareObj);</span><br><span class="line">           let key;</span><br><span class="line">           <span class="keyword">if</span> (sourceKeyList.length !== compareKeyList.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">           <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; sourceKeyList.length; i++) &#123;</span><br><span class="line">               key = sourceKeyList[i];</span><br><span class="line">               <span class="comment">// 比较属性名</span></span><br><span class="line">               <span class="keyword">if</span> (key !== compareKeyList[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">               <span class="comment">// 比较属性值</span></span><br><span class="line">               <span class="keyword">if</span> (!comparisonObject(sourceObj[key], compareObj[key])) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sourceType === <span class="string">&quot;Set&quot;</span> || sourceType === <span class="string">&quot;Map&quot;</span>) &#123;</span><br><span class="line">           <span class="comment">// 把 Set Map 转为 Array</span></span><br><span class="line">           <span class="keyword">if</span> (!comparisonObject(Array.from(sourceObj), Array.from(compareObj))) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React知识点汇总（高级特性）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/12/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A82%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React知识点汇总（基础使用2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E7%AD%89%E6%AF%94%E8%BE%83%EF%BC%88%E4%B8%A5%E6%A0%BC%E7%9B%B8%E7%AD%89%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">全等比较（严格相等）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%AF%94%E8%BE%83"><span class="nav-number">2.</span> <span class="nav-text">深度比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#js%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E6%AF%94%E8%BE%83"><span class="nav-number">2.1.</span> <span class="nav-text">js实现深度比较</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

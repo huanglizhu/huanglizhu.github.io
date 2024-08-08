@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6 Promise（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="接着《ES6 Promise（1）》继续学习Promise">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Promise（2）">
+<meta property="og:url" content="http://yoursite.com/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="接着《ES6 Promise（1）》继续学习Promise">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8bylgj6j30ln0ji12x.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8sbvrigj30o00ef11i.jpg">
+<meta property="article:published_time" content="2019-12-07T07:43:26.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:29.939Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8bylgj6j30ln0ji12x.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6 Promise（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6 Promise（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/" class="article-date">
+	  <time datetime="2019-12-07T07:43:26.000Z" itemprop="datePublished">十二月 7, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接着《ES6 Promise（1）》继续学习Promise</p>
+<span id="more"></span>
+
+<h1 id="信任问题"><a href="#信任问题" class="headerlink" title="信任问题"></a>信任问题</h1><p><strong>回调函数信任问题：</strong><br>在使用传统的回调函数来处理异步操作时，存在信任问题。<br>因为在一些情况下，可能无法确保回调函数会被及时调用，或者根本不会被调用。<br>例如，在一个异步请求完成后，如果网络出现问题或其他错误，回调函数可能永远不会被调用，导致无法得知异步操作的结果。这会使代码变得难以理解和维护。</p>
+<p><strong>结合笔记“ES6 Promise（1）”中<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/06/ES6%20Promise%EF%BC%881%EF%BC%89/#%E4%BD%BF%E7%94%A8Promise%E5%AE%9E%E7%8E%B0%E5%B9%B3%E7%A7%BB%E5%8A%A8%E7%94%BB">“回调函数和promise实现平移动画”</a>的例子来看。使用Promise不仅是解决了回调函数层层嵌套的问题，更多的是解决了“信任问题”，不交由第三方库，直接自己控制流程。</strong></p>
+<p><strong>回调函数：</strong><br>假设我们将回调函数cb传给<strong>第三方库method</strong>，那么由于种种原因我们并不能保证这个第三方库安装我们的预想去执行回调，它<strong>有可能 快了一些&#x2F;慢了一些&#x2F;因为bug执行了两次cb函数</strong>。<br>这导致了回调函数信任问题的一个方面：在异步代码中，对于回调的执行时机和正确性，我们需要信任所使用的库或函数</p>
+<p><strong>使用Promise：</strong><br>Promise 可以将控制权从第三方库转移到我们自己的代码中，可以在 <code>.then()</code> 或 <code>.catch()</code> 方法中定义回调函数，而不用担心第三方库是否会正确调用这些回调。Promise 提供了一种更可靠的方式来处理异步操作，避免了信任问题<br>Promise状态一旦改变为 成功&#x2F;失败 就不能再被改变，所以传进去的函数不会被重复执行：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8bylgj6j30ln0ji12x.jpg" alt="回调和promise对比"></p>
+<h2 id="控制反转"><a href="#控制反转" class="headerlink" title="控制反转"></a>控制反转</h2><p><strong>控制反转：</strong><br>控制反转是一种设计模式，它强调将决策权从代码的一部分转移到另一部分。<br><strong>Promise 使用控制反转来解决回调函数信任问题</strong><br><strong>Promise 将决定什么时候调用回调函数，而不是由我们的代码来决定</strong> 。当异步操作完成时，Promise 决定调用 <code>.then()</code> 或 <code>.catch()</code> 方法中的回调函数。<br>这种控制权的转移使得代码更可靠、更易于管理，并提供了一种更为结构化的处理异步操作的方式</p>
+<p><strong>回调函数：</strong>控制权已经在第三方库而不在自己手上了，第三方库有可能会在执行回调函数的时候“添油加醋”干些别的。</p>
+<p><strong>使用Promise：</strong> 在resolve()中的代码都是自己写的，很大程度上改善了“控制反转”的问题：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8sbvrigj30o00ef11i.jpg" alt="对比例子"></p>
+<hr>
+<h1 id="Promise-all-获取多个Promise实例的参数"><a href="#Promise-all-获取多个Promise实例的参数" class="headerlink" title="Promise.all()获取多个Promise实例的参数"></a>Promise.all()获取多个Promise实例的参数</h1><ul>
+<li>Promise.all()方法用于<strong>将多个 Promise 实例，包装成一个新的 Promise 实例</strong>。</li>
+<li><strong>使用Promise.all()得到的一定是Promise 实例</strong>，如果参数数组中有不是 Promise实例 的存在，那么他会自动通过Promise.resolve()将其转换为 Promise实例 。</li>
+</ul>
+<p><strong>新的Promise 实例的状态判断：</strong></p>
+<ul>
+<li>数组中各个 Promise实例 的状态<strong>都是</strong> fulfilled，新的Promise实例 的状态才是fulfilled。</li>
+<li><strong>一旦有一个</strong>数组中的Promise实例状态为rejected，新的Promise实例 的状态就会变成rejected。</li>
+<li><strong>注意</strong>：<strong>参数为空数组</strong>时会<strong>直接决定新的Promise实例的状态为 已成功</strong>。</li>
+</ul>
+<p><strong>使用Promise.all()传参：</strong></p>
+<ul>
+<li><strong>新的Promise实例 的状态为fulfilled时</strong>，参数数组中各个 Promise 实例的返回值组成一个数组，传递给 新的Promise实例 的回调函数。</li>
+<li><strong>新的Promise实例 的状态为rejected时</strong>，第一个被reject的Promise实例的返回值，会传递给 新的Promise实例 的回调函数。</li>
+</ul>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>参数可以是一个<strong>数组，各数组元素必须是Promise 实例</strong>（如果不是Promise 实例，就会先调用下面讲到的<strong>Promise.resolve方法将其转换为Promise 实例</strong>）</li>
+<li>Promise.all()方法的参数<strong>可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例</strong>。</li>
+</ul>
+<h2 id="状态（fulfilled-rejected）和传参"><a href="#状态（fulfilled-rejected）和传参" class="headerlink" title="状态（fulfilled&#x2F;rejected）和传参"></a>状态（fulfilled&#x2F;rejected）和传参</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">const</span> p = Promise.all([<span class="built_in">p1</span>, <span class="built_in">p2</span>, <span class="built_in">p3</span>])<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，<strong>Promise.all()方法</strong>接受一个<strong>数组作为参数</strong>，<strong>p1、p2、p3都是 Promise 实例</strong>。<br>如果不是Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。<br>另外，<strong>Promise.all()方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例</strong>。</p>
+<p><strong>p的状态</strong>由p1、p2、p3决定，<strong>分成两种情况</strong>:</p>
+<ol>
+<li><strong>只有p1、p2、p3的状态都变成 fulfilled，p的状态才会变成fulfilled</strong>，此时p1、p2、p3的<strong>返回值组成一个数组，传递给p的回调函数</strong>。</li>
+<li>只要p1、p2、p3之中<strong>有一个被rejected，p的状态就变成 rejected</strong>，此时<strong>第一个被reject的实例的返回值，会传递给p的回调函数</strong>。</li>
+</ol>
+<hr>
+<h2 id="例子：p状态为fulfilled"><a href="#例子：p状态为fulfilled" class="headerlink" title="例子：p状态为fulfilled"></a>例子：p状态为fulfilled</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟需要多个请求的数据 才能进行下一步操作的情况</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第一条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data1&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第二条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data2&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData3</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第三条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data3&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData4</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第四条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data4&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([ <span class="title function_">getData1</span>(), <span class="title function_">getData2</span>(), <span class="title function_">getData3</span>(), <span class="title function_">getData4</span>() ])</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">arr</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">1秒后打印出如下数据：</span></span><br><span class="line"><span class="comment">第一条数据加载成功</span></span><br><span class="line"><span class="comment">第二条数据加载成功</span></span><br><span class="line"><span class="comment">第三条数据加载成功</span></span><br><span class="line"><span class="comment">第四条数据加载成功</span></span><br><span class="line"><span class="comment">[&#x27;data1&#x27;, &#x27;data2&#x27;, &#x27;data3&#x27;, &#x27;data4&#x27;]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例子：p状态为rejected"><a href="#例子：p状态为rejected" class="headerlink" title="例子：p状态为rejected"></a>例子：p状态为rejected</h2><p><strong>将getData4()的状态改为reject</strong>并传参<code>data4 err</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟需要多个请求的数据 才能进行下一步操作的情况</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第一条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data1&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第二条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data2&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData3</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;第三条数据加载成功&#x27;</span>);</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;data3&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData4</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// console.log(&#x27;第四条数据加载成功&#x27;);</span></span><br><span class="line">      <span class="title function_">reject</span>(<span class="string">&#x27;data4 err&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([ <span class="title function_">getData1</span>(), <span class="title function_">getData2</span>(), <span class="title function_">getData3</span>(), <span class="title function_">getData4</span>() ])</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">arr</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br><span class="line">&#125;, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;then的参数2&#x27;</span>, e);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">异步操作还是会执行，但是参数不会被传递！！</span></span><br><span class="line"><span class="comment">此时p的then()第一参数将不被执行，执行第二参数：</span></span><br><span class="line"><span class="comment">第一条数据加载成功</span></span><br><span class="line"><span class="comment">第二条数据加载成功</span></span><br><span class="line"><span class="comment">第三条数据加载成功</span></span><br><span class="line"><span class="comment">then的参数2 data4 err</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="例子：参数为空数组"><a href="#例子：参数为空数组" class="headerlink" title="例子：参数为空数组"></a>例子：参数为空数组</h2><p>参数为空数组时会<strong>直接决定新的Promise实例的状态为 已成功</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([])</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;lalalala&#x27;</span>);</span><br><span class="line">&#125;, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// lalalala</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h1><p>（<strong>race 竞赛</strong>，所以可以理解为<strong>参数数组中各个Promise实例在竞赛</strong>，谁的状态先改变就影响新的Promise实例的状态）</p>
+<ul>
+<li>Promise.race()方法<strong>同样是将多个 Promise 实例，包装成一个新的 Promise 实例。</strong></li>
+<li><strong>使用Promise.race()得到的一定是Promise 实例</strong>，如果参数数组中有不是 Promise实例 的存在，那么他会自动通过Promise.resolve()将其转换为 Promise实例 。</li>
+<li>但<strong>新的 Promise 实例的状态的判断方法不同</strong>，只要参数中的 Promise实例 中<strong>有一个实例率先改变状态，新的 Promise 实例 的状态就跟着改变</strong>。</li>
+<li><strong>传参：</strong>率先改变的那个 Promise 实例的返回值，就传递给 新的Promise 实例 的回调函数。</li>
+</ul>
+<h2 id="和Promise-all-的区别"><a href="#和Promise-all-的区别" class="headerlink" title="和Promise.all()的区别"></a>和Promise.all()的区别</h2><ul>
+<li>Promise.all()中<strong>参数为空数组</strong>时会<strong>直接决定新的Promise实例的状态为 已成功</strong>。</li>
+<li>在Promise.race()中<strong>参数为空数组</strong>时会直接挂起，什么反应也没有。</li>
+</ul>
+<h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><ul>
+<li>和<code>all()</code>参数一样，可以是一个<strong>数组，各数组元素必须是Promise 实例</strong>（如果不是Promise 实例，就会先调用下面讲到的<strong>Promise.resolve方法将其转换为Promise 实例</strong>）</li>
+<li>Promise.all()方法的参数<strong>可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例</strong>。</li>
+</ul>
+<h2 id="状态（fulfilled-rejected）和传参-1"><a href="#状态（fulfilled-rejected）和传参-1" class="headerlink" title="状态（fulfilled&#x2F;rejected）和传参"></a>状态（fulfilled&#x2F;rejected）和传参</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">const</span> p = Promise.race([<span class="built_in">p1</span>, <span class="built_in">p2</span>, <span class="built_in">p3</span>])<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，<strong>只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。</strong><br>那个<strong>率先改变的 Promise 实例的返回值，就传递给p的回调函数</strong>。</p>
+<hr>
+<h1 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h1><ul>
+<li><code>Promise.resolve()</code>可以<strong>将现有对象转为 Promise 对象</strong>，可以<strong>不带参数调用它迅速得到一个resolved状态的 Promise 对象</strong>。</li>
+<li><strong>注意：</strong><ul>
+<li>当你调用 <code>Promise.resolve(value)</code> 时，value 的解析会被放入<strong>微任务队列</strong>，而不是像普通的Promise定义函数一样立即执行(具体可看下面“不带参数”的例子)</li>
+<li>当你<strong>在 Promise 中返回一个值，无论是直接的值还是通过 <code>resolve()</code> 返回，这个值都会被传递给 <code>then</code> 方法注册的回调函数</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>参数可以是 <strong>普通的值&#x2F;Promise实例&#x2F;thenable对象</strong>。</p>
+<h3 id="例子：参数为普通的值"><a href="#例子：参数为普通的值" class="headerlink" title="例子：参数为普通的值"></a>例子：参数为普通的值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise.resolve() 和 Promise.reject()</span></span><br><span class="line"><span class="comment">// 常用来生成已经被决议为失败或者成功的promise实例</span></span><br><span class="line"><span class="comment">// Promise.resolve</span></span><br><span class="line"><span class="comment">// --------------------------------------------</span></span><br><span class="line"><span class="comment">// 传递一个普通的值</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&#x27;成功!&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 等价的:</span></span><br><span class="line"><span class="keyword">let</span> p2 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>( <span class="string">&#x27;成功!&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="例子：参数为Promise实例"><a href="#例子：参数为Promise实例" class="headerlink" title="例子：参数为Promise实例"></a>例子：参数为Promise实例</h3><p>如果参数是 Promise 实例，那么<strong>Promise.resolve</strong>将不做任何修改、<strong>原封不动地返回这个实例</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传递一个Promise实例</span></span><br><span class="line"><span class="keyword">let</span> poruomiesi = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&#x27;耶!&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 等价的:直接返回传递进去的promise</span></span><br><span class="line"><span class="keyword">let</span> p = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(poruomiesi)</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> <span class="keyword">void</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(data))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p === poruomiesi) <span class="comment">//true 耶!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="例子：参数为thenable对象"><a href="#例子：参数为thenable对象" class="headerlink" title="例子：参数为thenable对象"></a>例子：参数为thenable对象</h3><ul>
+<li><strong>thenable对象</strong>：和类数组的概念相似，类数组看着像是数组，那么就可以当作数组转换。<strong>thenable对象指具有then()的对象，它看起来像是Promise对象。</strong></li>
+<li><strong>Promise.resolve方法会将这个thenable对象转为 Promise 对象</strong>，然后由于已成功的状态，就会<strong>立即执行thenable对象的then方法</strong>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传递一个thenable</span></span><br><span class="line"><span class="comment">// 如果传递的是个thenable</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="title function_">then</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;我被执行了&#x27;</span>);</span><br><span class="line">    <span class="title function_">cb</span>(<span class="string">&#x27;哼!&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">oth</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;我被抛弃了&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 立即执行then方法</span></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>(obj).<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 成功状态的返回值&#x27;哼!&#x27;被当作参数data传入then的参数1函数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">我被执行了</span></span><br><span class="line"><span class="comment">哼!</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="例子：不带有任何参数"><a href="#例子：不带有任何参数" class="headerlink" title="例子：不带有任何参数"></a>例子：不带有任何参数</h3><p><code>Promise.resolve()</code>方法允许调用时不带参数，<strong>直接返回一个resolved状态的 Promise 对象</strong>，所以如果希望得到一个 Promise 对象，比较方便的方法就是直接调用Promise.resolve()方法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面代码的变量<strong>p就是一个 Promise 对象</strong>。</p>
+<p><strong>注意:立即<code>resolve()</code>的 Promise 对象，是微任务，先于宏任务</strong>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;three&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;two&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;one&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// one</span></span><br><span class="line"><span class="comment">// two</span></span><br><span class="line"><span class="comment">// three</span></span><br></pre></td></tr></table></figure>
+<p>虽然 <code>setTimeout</code> 的延时设为 0，但它仍然会被放入<strong>宏任务队列</strong>，而不是立即执行。同时，Promise 的 <code>.then</code> 方法会在当前的<strong>微任务队列</strong>中添加一个<strong>微任务</strong>。微任务队列的优先级高于任务队列。所以，代码输出的顺序是 <code>&#39;one&#39;</code> -&gt; <code>&#39;two&#39;</code> -&gt; <code>&#39;three&#39;</code>。</p>
+<p><strong>需要了解：</strong><br>在事件循环中，JS 引擎会先执行当前执行上下文中的<strong>同步代码</strong>，然后检查<strong>微任务</strong>队列，按顺序执行微任务。接着，它会检查<strong>宏任务</strong>队列，按顺序执行宏任务。这个过程不断循环，形成了<strong>事件循环</strong><br><strong>微任务</strong>通常包括 Promise 的 <code>.then</code> 回调、MutationObserver 回调等<br><strong>宏任务</strong>可以包括<strong>定时器</strong>回调（如 setTimeout、setInterval）、事件回调（如 DOM 事件、网络请求等）等（同步任务也可以被看作是宏任务的一种）</p>
+<hr>
+<h1 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h1><ul>
+<li><code>Promise.reject(reason)</code>方法也会返回一个新的 Promise 实例，该实例的状态为rejected。</li>
+<li><strong>注意：与<code>Promise.resolve</code>方法不一样</strong>。<code>Promise.reject()</code>方法的参数，会<strong>原封不动地作为reject的理由，变成后续方法的参数</strong>。（可以参考下面“例子：参数为thenable对象”）</li>
+</ul>
+<h2 id="传参-1"><a href="#传参-1" class="headerlink" title="传参"></a>传参</h2><h3 id="例子：参数为普通的值-1"><a href="#例子：参数为普通的值-1" class="headerlink" title="例子：参数为普通的值"></a>例子：参数为普通的值</h3><p>下面代码生成一个 Promise 对象的实例p，状态为rejected，回调函数会立即执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> <span class="title function_">reject</span>(<span class="string">&#x27;出错了&#x27;</span>))</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="literal">null</span>, <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(s)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 出错了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="例子：参数为thenable对象-1"><a href="#例子：参数为thenable对象-1" class="headerlink" title="例子：参数为thenable对象"></a>例子：参数为thenable对象</h3><p>下面代码中，Promise.reject方法的参数是一个thenable对象，执行以后，后面<strong>catch方法的参数不是reject抛出的“出错了”这个字符串，而是thenable对象</strong>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> thenable = &#123;</span><br><span class="line">  <span class="title function_">then</span>(<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">    <span class="title function_">reject</span>(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">reject</span>(thenable)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e === thenable)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/07/CSS3%20transform%E5%B1%9E%E6%80%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          CSS3 transform、transform-origin属性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/07/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%BE%B9%E6%A1%86%E3%80%81%E6%BB%9A%E5%8A%A8%E3%80%81%E6%96%87%E6%9C%AC%E6%8A%98%E8%A1%8C%E3%80%81%E8%A3%85%E9%A5%B0%E6%80%A7%E5%B1%9E%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS非布局样式：边框、滚动、文本折行、装饰性属性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E4%BB%BB%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">信任问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="nav-number">1.1.</span> <span class="nav-text">控制反转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-all-%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AAPromise%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Promise.all()获取多个Promise实例的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%EF%BC%88fulfilled-rejected%EF%BC%89%E5%92%8C%E4%BC%A0%E5%8F%82"><span class="nav-number">2.2.</span> <span class="nav-text">状态（fulfilled&#x2F;rejected）和传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9Ap%E7%8A%B6%E6%80%81%E4%B8%BAfulfilled"><span class="nav-number">2.3.</span> <span class="nav-text">例子：p状态为fulfilled</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9Ap%E7%8A%B6%E6%80%81%E4%B8%BArejected"><span class="nav-number">2.4.</span> <span class="nav-text">例子：p状态为rejected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E6%95%B0%E7%BB%84"><span class="nav-number">2.5.</span> <span class="nav-text">例子：参数为空数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-race"><span class="nav-number">3.</span> <span class="nav-text">Promise.race()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8CPromise-all-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">和Promise.all()的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-1"><span class="nav-number">3.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%EF%BC%88fulfilled-rejected%EF%BC%89%E5%92%8C%E4%BC%A0%E5%8F%82-1"><span class="nav-number">3.3.</span> <span class="nav-text">状态（fulfilled&#x2F;rejected）和传参</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-resolve"><span class="nav-number">4.</span> <span class="nav-text">Promise.resolve()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E5%8F%82"><span class="nav-number">4.1.</span> <span class="nav-text">传参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BA%E6%99%AE%E9%80%9A%E7%9A%84%E5%80%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text">例子：参数为普通的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BAPromise%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">例子：参数为Promise实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BAthenable%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.3.</span> <span class="nav-text">例子：参数为thenable对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E4%B8%8D%E5%B8%A6%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.4.</span> <span class="nav-text">例子：不带有任何参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-reject"><span class="nav-number">5.</span> <span class="nav-text">Promise.reject()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E5%8F%82-1"><span class="nav-number">5.1.</span> <span class="nav-text">传参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BA%E6%99%AE%E9%80%9A%E7%9A%84%E5%80%BC-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">例子：参数为普通的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%8F%82%E6%95%B0%E4%B8%BAthenable%E5%AF%B9%E8%B1%A1-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">例子：参数为thenable对象</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

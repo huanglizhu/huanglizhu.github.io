@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue3 props传参 ref() 响应式无效的问题 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="新同事提出一个问题，为什么父组件传props到子组件，父组件中属性值是onMounted中通过接口异步获取的，子组件获取不到，得用watch监听prop变化，我看了他的代码，发现是ref和toRef、toRefs使用上的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3 props传参 ref() 响应式无效的问题">
+<meta property="og:url" content="http://yoursite.com/2023/06/14/vue3%20props%E4%BC%A0%E5%8F%82%20ref()%20%E5%93%8D%E5%BA%94%E5%BC%8F%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="新同事提出一个问题，为什么父组件传props到子组件，父组件中属性值是onMounted中通过接口异步获取的，子组件获取不到，得用watch监听prop变化，我看了他的代码，发现是ref和toRef、toRefs使用上的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-14T12:28:25.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.377Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-vue3 props传参 ref() 响应式无效的问题" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      vue3 props传参 ref() 响应式无效的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2023/06/14/vue3%20props%E4%BC%A0%E5%8F%82%20ref()%20%E5%93%8D%E5%BA%94%E5%BC%8F%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+	  <time datetime="2023-06-14T12:28:25.000Z" itemprop="datePublished">六月 14, 2023</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新同事提出一个问题，为什么父组件传props到子组件，父组件中属性值是onMounted中通过接口异步获取的，子组件获取不到，得用watch监听prop变化，我看了他的代码，发现是ref和toRef、toRefs使用上的问题</p>
+<span id="more"></span>
+
+<h1 id="想要实现的功能想要实现的功能"><a href="#想要实现的功能想要实现的功能" class="headerlink" title="想要实现的功能想要实现的功能"></a>想要实现的功能想要实现的功能</h1><p>父组件传prop给子组件，子组件v-for用列表展示prop，并且可以对列表数据进行增删，父组件会通过接口获取值改变子组件的展示</p>
+<h1 id="问题代码"><a href="#问题代码" class="headerlink" title="问题代码"></a>问题代码</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Custom</span> <span class="attr">:originDateList</span>=<span class="string">&quot;originDateList&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> &#123; getUserConfigSelectionRequest &#125; <span class="keyword">from</span> <span class="string">&quot;@/api&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> <span class="title class_">Custom</span> <span class="keyword">from</span> <span class="string">&quot;./custom&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> originDateList = <span class="title function_">ref</span>([]); </span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> <span class="title function_">getDateComposition</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">  	<span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">getUserConfigSelectionRequest</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;expirationDate&quot;</span> &#125;);</span></span><br><span class="line"><span class="language-javascript">  	originDateList.<span class="property">value</span> = res.<span class="property">data</span></span></span><br><span class="line"><span class="language-javascript">  &#125;;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">onMounted</span>(<span class="title function_">async</span>() =&gt; <span class="keyword">await</span> <span class="title function_">getDateComposition</span>());</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;divItem&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in dateForm&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> props = <span class="title function_">defineProps</span>([<span class="string">&quot;originDateList&quot;</span>]);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> dateForm = <span class="title function_">ref</span>([]); </span></span><br><span class="line"><span class="language-javascript">  dateForm.<span class="property">value</span> = props.<span class="property">originDateList</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>他的问题：</strong>父组件的 <code>originDateList</code> 改变后，子组件获取的 <code>originDateList</code> 没有变，没有触发重新渲染</li>
+<li><strong>他的解决方法：</strong>使用 <code>watch</code> 监听 <code>originDateList</code> ，有变化时去改 <code>dateForm</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="title function_">watch</span>(</span><br><span class="line">	<span class="function">() =&gt;</span> props.<span class="property">originDateList</span>,</span><br><span class="line">	<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">		dateForm.<span class="property">value</span> = val;</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123; <span class="attr">deep</span>: <span class="literal">true</span> &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li>全部都走watch，那这vue3设计也忒不合理，明显不是这个解决方法</li>
+</ul>
+<h1 id="实际产生问题的原因"><a href="#实际产生问题的原因" class="headerlink" title="实际产生问题的原因"></a>实际产生问题的原因</h1><ul>
+<li>首先要明确一点，<strong>父组件传值变化时，子组件 <code>props</code> 也会相应地发生变化</strong>。在 Vue 3 中，默认情况下，组件的 props 是响应式的<ul>
+<li>所以如果不需要对prop做修改，纯展示，那直接用prop也行</li>
+<li>但他需要增删列表，自然也需要新建一个<code>ref对象</code>避免修改到prop，这里他用了<code>ref()</code>也就导致了问题</li>
+</ul>
+</li>
+<li><strong>出问题的是将 prop <code>originDateList</code> 赋值给 ref对象 <code>dateForm</code> 这个操作，实际上建立响应式关系的变成了 <code>prop值</code> 和 <code>ref对象</code><strong>，而我们</strong>期望建立同步关系的是 <code>prop</code> 和 <code>ref对象</code></strong><ul>
+<li>使用 <code>ref()</code> 是将 <code>props.originDateList</code> 的<strong>值</strong>复制给 <code>dateForm.value</code>了，此后<code>dateForm.value</code> 的值与 <code>props.originDateList</code> 的值是独立的，这意味着<strong>当 <code>props.originDateList</code> 的值发生变化时，<code>dateForm.value</code> 的值不会自动更新，因为它们不是同一个引用</strong></li>
+<li>你需要手动更新 <code>dateForm.value</code>，以确保它与 <code>props.originDateList</code> 的值保持同步，这也是为什么他使用watch解决的原因</li>
+</ul>
+</li>
+<li>但是实际上，父组件 <code>originDateList</code> 发生变化时， <code>props.originDateList</code> 是能监听到变化的，只是 ref对象 <code>dateForm</code> 不行，因为它只和初始时 <code>props.originDateList</code> 的属性值产生响应关系</li>
+<li>所以借助 <code>toRef</code> 、 <code>toRefs</code> 建立 <code>prop</code> 和 <code>ref对象</code> 之间的响应式引用就能解决问题</li>
+</ul>
+<h1 id="正确解决方案"><a href="#正确解决方案" class="headerlink" title="正确解决方案"></a>正确解决方案</h1><h2 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h2><p>使用 <code>toRef</code> 建立和 prop源数据 之间的响应关系，以此在父组件prop变化时获取新的值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;divItem&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in originDateList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> originDateList = <span class="title function_">toRef</span>(props, <span class="string">&#x27;originDateList&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h2><p>使用 <code>toRefs</code> 与props中每个prop源数据都建立响应关系</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;divItem&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in originDateList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> &#123; originDateList &#125; = <span class="title function_">toRefs</span>(props);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-utilities.html#toref">toRef()</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-utilities.html#torefs">toRefs()</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/06/splice%E6%8C%89%E5%A4%A7%E5%B0%8F%E5%88%87%E5%89%B2%E6%95%B0%E7%BB%84%20websocket%E5%88%86%E6%89%B9%E4%BC%A0%E8%BE%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">splice按大小切割数组 websocket分批传输</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%B3%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD%E6%83%B3%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">想要实现的功能想要实现的功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">问题代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E4%BA%A7%E7%94%9F%E9%97%AE%E9%A2%98%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">实际产生问题的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">正确解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%881"><span class="nav-number">4.1.</span> <span class="nav-text">方案1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%882"><span class="nav-number">4.2.</span> <span class="nav-text">方案2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

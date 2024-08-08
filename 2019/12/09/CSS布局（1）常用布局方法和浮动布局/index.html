@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS布局（1）常用布局方法和浮动布局 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="CSS布局 CSS布局是CSS知识体系的重中之重 早期以table为主（简单） 后来以技巧性布局为主（难） 现在又flexbox&#x2F;grid（偏简单） 响应式布局是必备知识（适配移动端）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS布局（1）常用布局方法和浮动布局">
+<meta property="og:url" content="http://yoursite.com/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="CSS布局 CSS布局是CSS知识体系的重中之重 早期以table为主（简单） 后来以技巧性布局为主（难） 现在又flexbox&#x2F;grid（偏简单） 响应式布局是必备知识（适配移动端）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyaj5mc6tj31d70nv7uj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyd2ug9vej30bo04wq5f.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydbwvwe2j30zs0i3qb2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydp26jwfj30je08ujwg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydq17pd6j30c2031mxb.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyds27ic5j310e0b1q6l.jpg">
+<meta property="article:published_time" content="2019-12-09T13:01:40.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.270Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyaj5mc6tj31d70nv7uj.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS布局（1）常用布局方法和浮动布局" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS布局（1）常用布局方法和浮动布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/12/09/CSS%E5%B8%83%E5%B1%80%EF%BC%881%EF%BC%89%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95%E5%92%8C%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80/" class="article-date">
+	  <time datetime="2019-12-09T13:01:40.000Z" itemprop="datePublished">十二月 9, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS布局"><a href="#CSS布局" class="headerlink" title="CSS布局"></a>CSS布局</h1><ul>
+<li>CSS布局是CSS知识体系的重中之重</li>
+<li>早期以table为主（简单）</li>
+<li>后来以技巧性布局为主（难）</li>
+<li>现在又flexbox&#x2F;grid（偏简单）</li>
+<li>响应式布局是必备知识（适配移动端）<span id="more"></span></li>
+</ul>
+<hr>
+<h1 id="常用布局方法"><a href="#常用布局方法" class="headerlink" title="常用布局方法"></a>常用布局方法</h1><ul>
+<li>table 表格布局</li>
+<li>float 浮动 + margin</li>
+<li>inline-block 布局</li>
+<li>flexbox 布局</li>
+</ul>
+<hr>
+<h2 id="table-表格布局"><a href="#table-表格布局" class="headerlink" title="table 表格布局"></a>table 表格布局</h2><p>以前的表格布局不推荐使用，但是遇到实在解决不了的问题可以使用红框内的方法来实现“表格”布局：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyaj5mc6tj31d70nv7uj.jpg" alt="表格布局对比"><br>（可以通过在<code>.table-cell</code>中添加<code>vertical-align：middle</code>使<strong>表格内部文字垂直居中</strong>）</p>
+<hr>
+<h2 id="布局属性"><a href="#布局属性" class="headerlink" title="布局属性"></a>布局属性</h2><h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><p>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%EF%BC%89/#%E7%9B%92%E6%A8%A1%E5%9E%8B">CSS盒模型</a></p>
+<h3 id="display、position属性"><a href="#display、position属性" class="headerlink" title="display、position属性"></a>display、position属性</h3><ul>
+<li>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%EF%BC%89/#display%E5%B1%9E%E6%80%A7%E5%80%BC">display属性值</a></li>
+<li>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/19/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20position">position属性</a>&#x2F;)</li>
+</ul>
+<hr>
+<h2 id="flexbox-布局"><a href="#flexbox-布局" class="headerlink" title="flexbox 布局"></a>flexbox 布局</h2><ul>
+<li>完整笔记可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20flexbox%EF%BC%89/">CSS flexbox</a></li>
+<li>flexbox,即 弹性盒子。<strong>这些盒子本来就是并列的</strong>，不需要特殊设置，<strong>只需要指定宽度</strong>即可。</li>
+<li>但兼容性不好，需要写很多兼容的代码。</li>
+</ul>
+<h3 id="flexbox-父容器"><a href="#flexbox-父容器" class="headerlink" title="flexbox 父容器"></a>flexbox 父容器</h3><ul>
+<li><code>display:flex;</code>定义flexbox父容器。</li>
+</ul>
+<h3 id="flexbox子项"><a href="#flexbox子项" class="headerlink" title="flexbox子项"></a>flexbox子项</h3><ul>
+<li><code>flex:1</code>，flex为简写属性，但一般只需要将 flex 设置为 auto，initial，none，或一个无单位正数 即可。如果写多个flex属性值，那他是有顺序要求的！（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/20/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%20flexbox%EF%BC%89/">CSS flexbox</a>）</li>
+<li>想让<strong>子项固定大小</strong>可设置<strong>flex为none</strong>然后<strong>给定width</strong>。</li>
+</ul>
+<hr>
+<h1 id="float-布局"><a href="#float-布局" class="headerlink" title="float 布局"></a>float 布局</h1><ul>
+<li>完整笔记可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E6%B5%AE%E5%8A%A8%EF%BC%89/#%E6%B5%AE%E5%8A%A8-float%E5%B1%9E%E6%80%A7">CSS 浮动</a></li>
+<li><strong>float属性值</strong>有left、right。</li>
+</ul>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>拥有 float属性 的元素<strong>脱离文档流但不脱离文本流</strong>。</li>
+<li>float属性 会<strong>使元素形成“块”</strong>，能使内联元素也可设置宽高（给<code>span</code>元素添加float属性后可以设置宽高）<strong>【也就是改变元素的display属性值为inline-block】</strong></li>
+<li><strong>float属性对自身的影响</strong>：元素**位置会尽量靠上，然后再根据属性值尽量靠左&#x2F;右.**（具体体现在三列浮动中）</li>
+<li><strong>float属性对兄弟元素的影响：</strong></li>
+</ul>
+<h2 id="元素脱离文档流但不脱离文本流"><a href="#元素脱离文档流但不脱离文本流" class="headerlink" title="元素脱离文档流但不脱离文本流"></a>元素脱离文档流但不脱离文本流</h2><ul>
+<li>使用float属性后，<strong>元素会脱离文档流</strong>（像绝对定位那样，不会对其他元素造成影响，文档中不会为他预留位置（他会和别的元素重叠并位于上方）），<strong>但不脱离文本流</strong>，也就是说他会影响其他元素的文本（会占据其他元素文本的空间）。</li>
+<li>这个特性是float本身创造出来的作用，它可以帮助我们实现<strong>文字环绕图片</strong>的效果。</li>
+</ul>
+<p><strong>例子：</strong><br>绿色是靠左浮动，红色是普通div。可以看到绿色浮动元素并未占据文档中的位置，他和红色元素重叠了。但是绿色浮动元素占据了红色普通div中文字的空间，文字部分并未重叠。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyd2ug9vej30bo04wq5f.jpg" alt="绿色是靠左浮动，红色是普通div"></p>
+<hr>
+<h2 id="float属性-使元素形成“块”"><a href="#float属性-使元素形成“块”" class="headerlink" title="float属性 使元素形成“块”"></a>float属性 使元素形成“块”</h2><p><strong>【也就是改变元素的display属性值为inline-block】</strong></p>
+<p>给<code>span</code>元素添加float属性后<strong>可以设置宽高</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydbwvwe2j30zs0i3qb2.jpg" alt="例子"></p>
+<hr>
+<h2 id="float属性对自身元素的影响"><a href="#float属性对自身元素的影响" class="headerlink" title="float属性对自身元素的影响"></a>float属性对自身元素的影响</h2><ul>
+<li>float属性的元素<strong>位置会尽量靠上，然后再根据属性值尽量靠左&#x2F;右.</strong></li>
+<li><strong>注意</strong>：如果是三列浮动，前面两列最好指定left，第三列指定right。如果第二列和第三列都指定right，那么第二列会显示在最右边，而第三列会显示在中间。因为第二列源代码顺序上比第三列等级要高 (DOM上第二列先出现并声明了<code>float: right;</code>) ，所以在浮动顺序上也会比第三列等级要高。又因为两者同时像右浮动，所以第二列就会更加地靠右。</li>
+</ul>
+<p><strong>例子</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydp26jwfj30je08ujwg.jpg" alt="代码"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbydq17pd6j30c2031mxb.jpg" alt="效果"><br>可以看到第一个float尽量靠上显示了，第二个float由于必须要把<code>span</code>中的元素显示出来的关系，他只能挨着<code>span</code>尽量靠上，然后再靠左边。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbyds27ic5j310e0b1q6l.jpg" alt="不能靠上的情况"><br>float的元素时<strong>尽量靠上</strong>，那么当我们的float宽度太大的时候，没办法靠着红色<code>span</code>也就只能向下走了。</p>
+<hr>
+<h2 id="float属性对兄弟元素的影响"><a href="#float属性对兄弟元素的影响" class="headerlink" title="float属性对兄弟元素的影响"></a>float属性对兄弟元素的影响</h2><ul>
+<li>上面贴非float元素</li>
+<li>旁边贴float元素</li>
+<li>不影响其他块级元素<strong>位置</strong></li>
+<li>影响其他块级元素<strong>内部文本</strong></li>
+</ul>
+<p>以上影响都可以从上一个例子体现出来。</p>
+<hr>
+<h1 id="float属性对父级元素的影响"><a href="#float属性对父级元素的影响" class="headerlink" title="float属性对父级元素的影响"></a>float属性对父级元素的影响</h1><ul>
+<li>float元素会从布局上“消失”</li>
+<li><strong>父级元素高度塌陷</strong>（假设一个float元素是100px的高度，那么他会希望父级元素能撑开100px的高度，但是因为float元素脱硫文档流，所以如果父级里没有其他元素能撑起100px的高度，那么父级高度就会变成0）</li>
+</ul>
+<h2 id="解决父级元素高度塌陷"><a href="#解决父级元素高度塌陷" class="headerlink" title="解决父级元素高度塌陷"></a>解决父级元素高度塌陷</h2><h3 id="通过overflow属性控制父元素宽高"><a href="#通过overflow属性控制父元素宽高" class="headerlink" title="通过overflow属性控制父元素宽高"></a>通过<code>overflow</code>属性控制父元素宽高</h3><p>我们可以让父元素能控制自己的宽高。给父级元素设置<code>overflow:auto</code>，则父级元素会关注内部的元素，当内部元素超出时进行滚动。（当然<code>overflow:hidden</code>也可以）</p>
+<h3 id="在float元素后清除浮动"><a href="#在float元素后清除浮动" class="headerlink" title="在float元素后清除浮动"></a>在float元素后清除浮动</h3><p>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/24/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E6%B5%AE%E5%8A%A8%EF%BC%89/#%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8-clear-%E5%B1%9E%E6%80%A7">清除浮动( clear 属性)</a></p>
+<p>通过给float元素使用**<code>::after</code> 伪元素**来清除浮动：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">&quot;.&quot;</span>; </span><br><span class="line">    <span class="attribute">display</span>:block; </span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>; </span><br><span class="line">    <span class="attribute">visibility</span>:hidden; </span><br><span class="line">    <span class="attribute">clear</span>:both; </span><br><span class="line">    &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123; *zoom:<span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>::after</code>的意思是在<code>.clearfix</code>内部的最后加入伪元素<code>::after</code></li>
+<li>首先要显示伪元素，所以<code>display:block</code>(display默认inline)</li>
+<li>然后为伪元素加入空内容，以便伪元素中不会有内容显示在页面中，所以， <code>content:&quot;&quot;</code>；(<code>.</code>也可以，只要加上<code>visibility:hidden</code>;)</li>
+<li>其次，为使伪元素不影响页面布局，将伪元素高度设置为0，所以， <code>height:0</code></li>
+<li>最后，要清除浮动，所以，<code>clear:both</code>。</li>
+</ul>
+<p>after伪元素其实是通过 content 在元素的后面生成了内容为一个点的块级元素。这样一来只要设置这两个非浮动元素之间的距离就行了。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/10/BFC%E4%B8%8E%E6%B5%AE%E5%8A%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          BFC与浮动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/08/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS非布局样式 知识点汇总</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS%E5%B8%83%E5%B1%80"><span class="nav-number">1.</span> <span class="nav-text">CSS布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">常用布局方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#table-%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80"><span class="nav-number">2.1.</span> <span class="nav-text">table 表格布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B1%80%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">布局属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">盒模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#display%E3%80%81position%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.2.</span> <span class="nav-text">display、position属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flexbox-%E5%B8%83%E5%B1%80"><span class="nav-number">2.3.</span> <span class="nav-text">flexbox 布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flexbox-%E7%88%B6%E5%AE%B9%E5%99%A8"><span class="nav-number">2.3.1.</span> <span class="nav-text">flexbox 父容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flexbox%E5%AD%90%E9%A1%B9"><span class="nav-number">2.3.2.</span> <span class="nav-text">flexbox子项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#float-%E5%B8%83%E5%B1%80"><span class="nav-number">3.</span> <span class="nav-text">float 布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E8%84%B1%E7%A6%BB%E6%96%87%E6%A1%A3%E6%B5%81%E4%BD%86%E4%B8%8D%E8%84%B1%E7%A6%BB%E6%96%87%E6%9C%AC%E6%B5%81"><span class="nav-number">3.2.</span> <span class="nav-text">元素脱离文档流但不脱离文本流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float%E5%B1%9E%E6%80%A7-%E4%BD%BF%E5%85%83%E7%B4%A0%E5%BD%A2%E6%88%90%E2%80%9C%E5%9D%97%E2%80%9D"><span class="nav-number">3.3.</span> <span class="nav-text">float属性 使元素形成“块”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float%E5%B1%9E%E6%80%A7%E5%AF%B9%E8%87%AA%E8%BA%AB%E5%85%83%E7%B4%A0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.4.</span> <span class="nav-text">float属性对自身元素的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float%E5%B1%9E%E6%80%A7%E5%AF%B9%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.5.</span> <span class="nav-text">float属性对兄弟元素的影响</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#float%E5%B1%9E%E6%80%A7%E5%AF%B9%E7%88%B6%E7%BA%A7%E5%85%83%E7%B4%A0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">4.</span> <span class="nav-text">float属性对父级元素的影响</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%88%B6%E7%BA%A7%E5%85%83%E7%B4%A0%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7"><span class="nav-number">4.1.</span> <span class="nav-text">解决父级元素高度塌陷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87overflow%E5%B1%9E%E6%80%A7%E6%8E%A7%E5%88%B6%E7%88%B6%E5%85%83%E7%B4%A0%E5%AE%BD%E9%AB%98"><span class="nav-number">4.1.1.</span> <span class="nav-text">通过overflow属性控制父元素宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8float%E5%85%83%E7%B4%A0%E5%90%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8"><span class="nav-number">4.1.2.</span> <span class="nav-text">在float元素后清除浮动</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

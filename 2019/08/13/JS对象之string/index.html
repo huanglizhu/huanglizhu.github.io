@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS对象之string | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="查找字符（串）的4种方法charAt()查找字符 语法:stringObject.charAt(index) 功能:返回stringObject中index位置的字符.12var str&#x3D;&quot;hello world&quot;; console. log(str. charAt(4));&#x2F;&#x2F;o ES6中可以直接使用str[index]，与str.charAt(index)效果一样  cha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS对象之string">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="查找字符（串）的4种方法charAt()查找字符 语法:stringObject.charAt(index) 功能:返回stringObject中index位置的字符.12var str&#x3D;&quot;hello world&quot;; console. log(str. charAt(4));&#x2F;&#x2F;o ES6中可以直接使用str[index]，与str.charAt(index)效果一样  cha">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-13T03:40:52.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.311Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS对象之string" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS对象之string
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/" class="article-date">
+	  <time datetime="2019-08-13T03:40:52.000Z" itemprop="datePublished">八月 13, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="查找字符（串）的4种方法"><a href="#查找字符（串）的4种方法" class="headerlink" title="查找字符（串）的4种方法"></a>查找字符（串）的4种方法</h1><h2 id="charAt-查找字符"><a href="#charAt-查找字符" class="headerlink" title="charAt()查找字符"></a>charAt()<strong>查找字符</strong></h2><ul>
+<li>语法:<br><code>stringObject.charAt(index)</code></li>
+<li>功能:返回stringObject中index位置的<strong>字符</strong>.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;hello world&quot;</span>; </span><br><span class="line"><span class="built_in">console</span>. <span class="built_in">log</span>(str. charAt(<span class="number">4</span>));<span class="comment">//o</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>ES6中可以直接使用<code>str[index]</code>，与<code>str.charAt(index)</code>效果一样</strong></li>
+</ul>
+<h2 id="charCodeAt-查找字符的编码"><a href="#charCodeAt-查找字符的编码" class="headerlink" title="charCodeAt()查找字符的编码"></a>charCodeAt()<strong>查找字符的编码</strong></h2><ul>
+<li>语法:<br><code>stringObject.charCodeAt(index)</code></li>
+<li>功能:<br>返回stringObject中index位置<strong>字符的字符编码</strong>.</li>
+<li>说明：<br>ECMAScript5中可使用“方括号加字符索引”来访问字符串中特定的字符，但是IE7及更早的浏览器会返回undefined。<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;hello world&quot;</span>; </span><br><span class="line"><span class="built_in">console</span>. <span class="built_in">log</span>(str. charCodeAt(<span class="number">4</span>));<span class="comment">//111</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="indexOf-与lastIndexOf（）"><a href="#indexOf-与lastIndexOf（）" class="headerlink" title="indexOf()与lastIndexOf（）"></a>indexOf()与lastIndexOf（）</h2><ol>
+<li>和数组中的indexOf()与lastIndexOf（）类似</li>
+<li>都可以查字符串的位置，不过返回的是第一个字符的位置</li>
+</ol>
+<h3 id="indexOf-返回字符（串）的位置"><a href="#indexOf-返回字符（串）的位置" class="headerlink" title="indexOf()返回字符（串）的位置"></a>indexOf()返回字符（串）的位置</h3><p>和数组中的indexOf()类似</p>
+<ul>
+<li>语法:<br><code>stringObject.indexOf(&quot;o&quot;)</code></li>
+<li>功能:<br>从一个字符串中搜索给定的<strong>子字符串</strong>,返回子字符串的<strong>位置</strong>.</li>
+<li>返回值:数值</li>
+<li>说明:如果没有找到该子字符串,则返回-1.</li>
+</ul>
+<h3 id="lastIndexOf-倒着查，返回字符（串）的位置"><a href="#lastIndexOf-倒着查，返回字符（串）的位置" class="headerlink" title="lastIndexOf()倒着查，返回字符（串）的位置"></a>lastIndexOf()倒着查，返回字符（串）的位置</h3><ul>
+<li>语法:<br><code>stringObject.lastIndexOf(&quot;o&quot;)</code><blockquote>
+<p>o是你想查找的字符</p>
+</blockquote>
+</li>
+<li>功能:<br>倒着查，从一个字符串中搜索给定的<strong>子字符串</strong>,返回子字符串的位置</li>
+<li>返回值:数值</li>
+<li>说明:如果没有找到该子字符串,则返回-1<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> email = <span class="string">&quot;marry.mail@sohu.com&quot;</span>;</span><br><span class="line"><span class="comment">//检测@在emai1中出现的位置</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(email.<span class="built_in">indexOf</span>(<span class="string">&quot;o&quot;</span>)); <span class="comment">//12</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(email.<span class="built_in">indexOf</span>(<span class="string">&quot;ar&quot;</span>)); <span class="comment">//1，可以查字符串的位置，不过返回的是第一个字符的位置</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(email.lastIndexOf(<span class="string">&quot;.&quot;</span>));<span class="comment">//15</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(email.lastIndexOf(<span class="string">&quot;ma&quot;</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="截取字符串的3种方法"><a href="#截取字符串的3种方法" class="headerlink" title="截取字符串的3种方法"></a>截取字符串的3种方法</h1><h2 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h2><p><strong>和数组的slice()类似</strong></p>
+<ul>
+<li>语法：<code>stringValue.slice(start,end)</code></li>
+<li>功能:<br>截取子字符串.</li>
+<li>参数说明:</li>
+</ul>
+<ol>
+<li>start:<strong>必需</strong>,指定子字符串的开始位置.</li>
+<li>end:<strong>可选</strong>,表示子字符串到哪里结束,<strong>end本身不在截取范围之内</strong>,省略时截取至字符串的未尾.</li>
+<li>当参数为<strong>负数</strong>时 <strong>(注意：两个参数都适用)</strong>,会将传入的负值与字符串的长度相加来得到起始位置 <strong>（参数值&#x3D;字符串长度+负值）</strong>.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="comment">//截取orl </span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.<span class="built_in">slice</span>(<span class="number">7</span>, <span class="number">10</span>));</span><br><span class="line"><span class="comment">// 11-3=8，相當於str.slice(8)</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.<span class="built_in">slice</span>(<span class="number">-3</span>));<span class="comment">//rld</span></span><br><span class="line"><span class="comment">// 11-7=4,11-2=9</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.<span class="built_in">slice</span>(<span class="number">-7</span>,<span class="number">-2</span>));<span class="comment">//o wor</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h2><ul>
+<li><strong>语法及功能同slice()完全一样</strong>.</li>
+<li><strong>区别</strong>:<ol>
+<li>当参数为负数时,自动将参数转换为0.</li>
+<li>substring()会将较小的数作为开始位置,将较大的数作为结束位置.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;hello world&quot;</span>;<span class="comment">//11位</span></span><br><span class="line"><span class="comment">//自动将参数转换为0.</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.substring(<span class="number">-7</span>,<span class="number">5</span>));<span class="comment">//(0,5),hello</span></span><br><span class="line"><span class="comment">//将较小的数作为开始位置,将较大的数作为结束位置.</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.substring(<span class="number">2</span>,<span class="number">-5</span>));<span class="comment">//(0,2),he</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h2><ul>
+<li>语法:<br><code>stringValue.substr(start,len)</code></li>
+<li>功能:<br>截取子字符串.</li>
+<li>参数说明:</li>
+</ul>
+<ol>
+<li>start:<strong>必需</strong>,指定子字符串的开始位置.</li>
+<li>len:<strong>可选</strong>,表示<strong>截取的字符总数</strong>,省略时截取至字符串的未尾.</li>
+<li>当<strong>start为负数</strong>时,会将传入的负值与字符串的长度相加.<strong>（start参数值&#x3D;字符串长度+负值）</strong> <strong>【注意这里和以往不一样，不是两个参数了】</strong></li>
+<li>当<strong>len为负数</strong>时,返回<strong>空字符串</strong>.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;hello world&quot;</span>;<span class="comment">//11位</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.substr(<span class="number">6</span>, <span class="number">3</span>)); <span class="comment">//wor</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.substr(<span class="number">-5</span>, <span class="number">4</span>));<span class="comment">//相當於(6,4),worl</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str.substr(<span class="number">3</span>, <span class="number">-4</span>));<span class="comment">//空</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="获取扩展名实例"><a href="#获取扩展名实例" class="headerlink" title="获取扩展名实例"></a>获取扩展名实例</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取扩展名</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFileFormat</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 获取.在url中出现的位置</span></span><br><span class="line">    <span class="keyword">var</span> pos=<span class="built_in">url</span>.lastIndexOf(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">url</span>.substr(pos+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baidu=<span class="string">&quot;http://baidu.com/index.txt&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> formatName=getFileFormat(baidu);</span><br><span class="line"><span class="keyword">var</span> picFormat=getFileFormat(<span class="string">&quot;1231212.jpg&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(formatName,picFormat);<span class="comment">//txt png</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="编程练习"><a href="#编程练习" class="headerlink" title="编程练习"></a>编程练习</h1><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编程练习：用户输入登录的邮箱，对邮箱进行解析，解析出邮箱的用户名和邮箱的域名</span></span><br><span class="line"><span class="keyword">var</span> email=prompt(<span class="string">&quot;请输入登录邮箱&quot;</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getName</span>(<span class="params">email</span>)&#123;</span><br><span class="line">    <span class="comment">// 获取@在email中的位置</span></span><br><span class="line">    <span class="keyword">var</span> at=email.<span class="built_in">indexOf</span>(<span class="string">&quot;@&quot;</span>);</span><br><span class="line">    <span class="comment">// 截取@前的字符串得到用户名</span></span><br><span class="line">    <span class="keyword">return</span> email.substring(<span class="number">0</span>,at);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getDomainName</span>(<span class="params">email</span>)&#123;</span><br><span class="line">    <span class="comment">// 获取@在email中的位置</span></span><br><span class="line">    <span class="keyword">var</span> at=email.<span class="built_in">indexOf</span>(<span class="string">&quot;@&quot;</span>);</span><br><span class="line">    <span class="comment">// 截取@后的字符串得到域名</span></span><br><span class="line">    <span class="keyword">return</span> email.substring(at+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 要注意换行符&quot;&lt;br/&gt;&quot;在双引号里面</span></span><br><span class="line">document.write(<span class="string">&quot;邮箱的用户名是：&quot;</span>+getName(email)+<span class="string">&quot;&lt;br/&gt;&quot;</span>+<span class="string">&quot;登录的邮箱域名是：&quot;</span>+getDomainName(email));</span><br></pre></td></tr></table></figure>
+
+<h1 id="split-字符串转换为数组"><a href="#split-字符串转换为数组" class="headerlink" title="split()字符串转换为数组"></a>split()字符串转换为数组</h1><ul>
+<li><strong>正好相反，数组中的join()方法是将数组转换为字符串</strong></li>
+<li><strong>语法</strong>:<code>stringObject.split(separator)</code>  <ul>
+<li>separator:必需,分隔符。<strong>分隔符可以是字符串</strong></li>
+</ul>
+</li>
+<li><strong>功能</strong>:把一个字符串分割成字符串数组.</li>
+<li><strong>返回值</strong>:Array.</li>
+</ul>
+<h1 id="replace-替换字符串"><a href="#replace-替换字符串" class="headerlink" title="replace()替换字符串"></a>replace()替换字符串</h1><ul>
+<li><strong>注意：它不会影响原来的字符串，它是产生新的字符串。</strong></li>
+<li><strong>语法</strong>:<br><code>stringObject.replace(regexp/substr,replacement)</code><blockquote>
+<p>即：<code>stringObject.replace(替换前字符（串）,替换后字符（串）)</code>  </p>
+</blockquote>
+<ul>
+<li>regexp:必需.规定子字符串或要替换的模式的RegExp对象.  </li>
+<li>如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。<strong>否则，它只替换第一个匹配子串</strong>。</li>
+<li>replacement:必需.一个字符串值.</li>
+</ul>
+</li>
+<li><strong>功能</strong>:在字符串中用一些字符替换另一些字符,或替换一个与正则表达式匹配的子串.</li>
+<li><strong>返回值</strong>:String</li>
+</ul>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;welcome-to-beijing&#x27;</span>;</span><br><span class="line"><span class="comment">//使用split将str转换为数组</span></span><br><span class="line"><span class="keyword">var</span> arr = str.<span class="built_in">split</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(arr);<span class="comment">//[&quot;welcome&quot;, &quot;to&quot;, &quot;beijing&quot;]</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">date</span> = <span class="string">&#x27;2016/05/05&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> dateArr = <span class="built_in">date</span>.<span class="built_in">split</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(dateArr);<span class="comment">//[&quot;2016&quot;, &quot;05&quot;, &quot;05&quot;]</span></span><br><span class="line"><span class="comment">// 看来分隔符可以是字符串</span></span><br><span class="line"><span class="keyword">var</span> date2 = <span class="string">&#x27;2016//05//05&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> dateArr2 = date2.<span class="built_in">split</span>(<span class="string">&quot;//&quot;</span>);</span><br><span class="line"><span class="comment">//替换</span></span><br><span class="line"><span class="keyword">var</span> tel = <span class="string">&#x27;010-62971268,400-100-9098,010-867898891&#x27;</span>;</span><br><span class="line"><span class="comment">//newTel:被替换之后的字符串</span></span><br><span class="line"><span class="keyword">var</span> newTel = tel.<span class="built_in">replace</span>(<span class="string">&#x27;,&#x27;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(tel);<span class="comment">//010-62971268,400-100-9098,010-867898891</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(newTel);<span class="comment">//010-62971268 400-100-9098,010-867898891</span></span><br><span class="line"><span class="comment">//newTel2:被替换之后的字符串,只替换第一个匹配子串</span></span><br><span class="line"><span class="keyword">var</span> tel2 = <span class="string">&#x27;010-62971268,,400-100-9098,,010-867898891&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> newTel2 = tel2.<span class="built_in">replace</span>(<span class="string">&#x27;,,&#x27;</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(newTel2);<span class="comment">//010-62971268 400-100-9098,,010-867898891</span></span><br><span class="line"><span class="comment">// 使用正则，加上全局标志 g，则替换所有匹配子串</span></span><br><span class="line"><span class="keyword">var</span> tel3 = <span class="string">&#x27;010-62971268,,400-100-9098,,010-867898891&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> newTel3 = tel3.<span class="built_in">replace</span>(<span class="regexp">/,,/g</span>, <span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(newTel3);<span class="comment">//010-62971268 400-100-9098 010-867898891</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串转换大小写"><a href="#字符串转换大小写" class="headerlink" title="字符串转换大小写"></a>字符串转换大小写</h1><h2 id="toUpperCase-转大写"><a href="#toUpperCase-转大写" class="headerlink" title="toUpperCase()转大写"></a>toUpperCase()转大写</h2><ul>
+<li><strong>语法</strong>:<code>stringValue.toUpperCase()</code></li>
+<li><strong>功能</strong>:把字符串转换为<strong>大写</strong>.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">upper</span>=str.charAt(<span class="number">6</span>).toUpperCase();</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="built_in">upper</span>);<span class="comment">//W</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="toLowerCase-转小写"><a href="#toLowerCase-转小写" class="headerlink" title="toLowerCase()转小写"></a>toLowerCase()转小写</h2><ul>
+<li><strong>语法</strong>:<code>stringValue.toLowerCase()</code></li>
+<li><strong>功能</strong>:把字符串转换为<strong>小写</strong>.<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str2=<span class="string">&quot;WELCOME&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(str2.toLowerCase());<span class="comment">//welcome</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="案例：将字符串-border-left-color转换成borderLeftColor（驼峰形式）"><a href="#案例：将字符串-border-left-color转换成borderLeftColor（驼峰形式）" class="headerlink" title="案例：将字符串 border-left-color转换成borderLeftColor（驼峰形式）"></a>案例：将字符串 border-left-color转换成borderLeftColor（驼峰形式）</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">camelBack</span>(<span class="params">str</span>)&#123;</span><br><span class="line">    <span class="comment">// 通过“-”将字符串str拆分为数组</span></span><br><span class="line">    <span class="keyword">var</span> arr=str.<span class="built_in">split</span>(<span class="string">&quot;-&quot;</span>),</span><br><span class="line">        newStr=arr[<span class="number">0</span>];<span class="comment">//数组第一项不用变大写所以一开始就可以指定arr[0]为newStr</span></span><br><span class="line">    <span class="comment">// console.log(arr);// [&quot;border&quot;, &quot;left&quot;, &quot;color&quot;]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>,len=arr.<span class="built_in">length</span>;i&lt;len;i++)&#123;<span class="comment">//i从1开始，因为数组第一项不用变大写</span></span><br><span class="line">        <span class="comment">// 遍历数组,改变除第一个单词之外的所有单词的首字母并连接剩余字符</span></span><br><span class="line">        newStr += arr[i].charAt(<span class="number">0</span>).toUpperCase()+arr[i].substr(<span class="number">1</span>);</span><br><span class="line">    &#125;<span class="built_in">console</span>.<span class="built_in">log</span>(newStr);<span class="comment">//borderLeftColor</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> camelFormat=camelBack(<span class="string">&quot;border-left-color&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="编程练习-1"><a href="#编程练习-1" class="headerlink" title="编程练习"></a>编程练习</h2><p>小伙伴们,我们学习了string的转化大小写的方法,那么接下来任务来了,将字符串”Never deter till tomorrow that which you can do today”的”tomorrow”转化为大写.</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将字符串&quot;Never deter till tomorrow that which you can do today&quot;的&quot;tomorrow&quot;转化为大写</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;Never deter till tomorrow that which you can do today&quot;</span>;</span><br><span class="line"><span class="comment">// 获取tomorrow位置</span></span><br><span class="line"><span class="keyword">var</span> t=str.<span class="built_in">indexOf</span>(<span class="string">&quot;tomorrow&quot;</span>);</span><br><span class="line"><span class="comment">// console.log(t,str.indexOf(&quot;w&quot;));//17 24</span></span><br><span class="line"><span class="comment">// 截取</span></span><br><span class="line"><span class="keyword">var</span> tm=str.substring(<span class="number">17</span>,<span class="number">25</span>);</span><br><span class="line"><span class="comment">// console.log(tm);</span></span><br><span class="line"><span class="comment">// 改为大写并替换</span></span><br><span class="line"><span class="keyword">var</span> newStr=str.<span class="built_in">replace</span>(str.substring(<span class="number">17</span>,<span class="number">25</span>),tm.toUpperCase());</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(newStr);<span class="comment">//Never deter till TOMORROW that which you can do today</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="trim-删除头尾空格"><a href="#trim-删除头尾空格" class="headerlink" title="trim()删除头尾空格"></a>trim()删除头尾空格</h1><ul>
+<li>trim() 方法用于<strong>删除字符串的头尾空格</strong>。</li>
+<li>语法：<code>string.trim()</code></li>
+<li>trim() 方法<strong>不会改变原始字符串</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_trim">例子</a></li>
+</ul>
+<h2 id="正则表达式删除头尾空格"><a href="#正则表达式删除头尾空格" class="headerlink" title="正则表达式删除头尾空格"></a>正则表达式删除头尾空格</h2><p>如果你的浏览器不支持 trim() 方法，你可以使用正则表达式来实现:</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myTrim</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> x.<span class="built_in">replace</span>(<span class="regexp">/^\s+|\s+$/gm</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> str = myTrim(<span class="string">&quot;        Runoob        &quot;</span>);</span><br><span class="line">  alert(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(<a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryjsref_trim2">完整例子</a>)</p>
+<ul>
+<li>生成<strong>正则表达式</strong>对象：<code>const regexp1=/规则/修饰符;</code></li>
+<li><strong>修饰符</strong>：g表示全局匹配，m表示多行匹配。</li>
+<li><strong>规则</strong>：<ul>
+<li><strong>定位符</strong>：^ 输入字符串开始的位置，$ 输入字符串结尾的位置。</li>
+<li><strong><code>\s</code>匹配任何空白字符</strong>，包括空格、制表符、换页符等等。等价于 <code>[ \f\n\r\t\v]</code>。注意 Unicode 正则表达式会匹配全角空格符。</li>
+<li><strong><code>|</code>指明两项之间的一个选择</strong>。要匹配 <code>|</code>，请使用 <code>\|</code>。</li>
+<li><strong><code>+</code>匹配前面的子表达式一次或多次</strong>。例如，<code>zo+</code> 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。<code>+ </code>等价于 <code>&#123;1,&#125;</code>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结：也就是说，如果x以一个或多个空格开始，替换全部空格为空（<code>^\s+</code>）；或者(<code>|</code>)，如果x以一个或多个空格结束(<code>\s+$</code>)，替换全部空格为空。</strong></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/04/HTML%20DOM%20Image%20%E5%AF%B9%E8%B1%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          HTML DOM Image 对象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/12/Math%20%E5%AF%B9%E8%B1%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Math对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%B2%EF%BC%89%E7%9A%844%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">查找字符（串）的4种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#charAt-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">charAt()查找字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#charCodeAt-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">charCodeAt()查找字符的编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf-%E4%B8%8ElastIndexOf%EF%BC%88%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">indexOf()与lastIndexOf（）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf-%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%B2%EF%BC%89%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.3.1.</span> <span class="nav-text">indexOf()返回字符（串）的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lastIndexOf-%E5%80%92%E7%9D%80%E6%9F%A5%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%B2%EF%BC%89%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">lastIndexOf()倒着查，返回字符（串）的位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">截取字符串的3种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#slice"><span class="nav-number">2.1.</span> <span class="nav-text">slice()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#substring"><span class="nav-number">2.2.</span> <span class="nav-text">substring()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#substr"><span class="nav-number">2.3.</span> <span class="nav-text">substr()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%A9%E5%B1%95%E5%90%8D%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">获取扩展名实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#split-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">split()字符串转换为数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#replace-%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.</span> <span class="nav-text">replace()替换字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="nav-number">6.</span> <span class="nav-text">字符串转换大小写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#toUpperCase-%E8%BD%AC%E5%A4%A7%E5%86%99"><span class="nav-number">6.1.</span> <span class="nav-text">toUpperCase()转大写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toLowerCase-%E8%BD%AC%E5%B0%8F%E5%86%99"><span class="nav-number">6.2.</span> <span class="nav-text">toLowerCase()转小写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2-border-left-color%E8%BD%AC%E6%8D%A2%E6%88%90borderLeftColor%EF%BC%88%E9%A9%BC%E5%B3%B0%E5%BD%A2%E5%BC%8F%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">案例：将字符串 border-left-color转换成borderLeftColor（驼峰形式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0-1"><span class="nav-number">6.4.</span> <span class="nav-text">编程练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#trim-%E5%88%A0%E9%99%A4%E5%A4%B4%E5%B0%BE%E7%A9%BA%E6%A0%BC"><span class="nav-number">7.</span> <span class="nav-text">trim()删除头尾空格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%A0%E9%99%A4%E5%A4%B4%E5%B0%BE%E7%A9%BA%E6%A0%BC"><span class="nav-number">7.1.</span> <span class="nav-text">正则表达式删除头尾空格</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

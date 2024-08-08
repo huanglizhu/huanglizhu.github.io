@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6 Symbol | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="ES6规范引入了原始数据类型：Symbol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Symbol">
+<meta property="og:url" content="http://yoursite.com/2020/06/04/ES6%20Symbol/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="ES6规范引入了原始数据类型：Symbol">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-04T08:53:14.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:29.950Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6 Symbol" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      ES6 Symbol
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/06/04/ES6%20Symbol/" class="article-date">
+	  <time datetime="2020-06-04T08:53:14.000Z" itemprop="datePublished">六月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES6规范引入了<strong>原始数据类型：Symbol</strong></p>
+<span id="more"></span>
+
+<h1 id="基本（原始）、复杂与全局数据类型"><a href="#基本（原始）、复杂与全局数据类型" class="headerlink" title="基本（原始）、复杂与全局数据类型"></a>基本（原始）、复杂与全局数据类型</h1><ul>
+<li><strong>基本数据类型</strong>（原始值）（记忆：NNUSB&#x3D;&gt;纳尼USB）：<br>Number，Null，Undefined，String，Boolean。</li>
+<li>es6添加了一种<strong>新的原始数据类型：Symbol</strong>。所以现在 js的原始数据类型有6种。</li>
+<li><strong>复杂数据类型</strong>（对象值）：Object，Array，Function，RegExp，Date，Error</li>
+<li><strong>全局数据类型</strong>：Math</li>
+</ul>
+<h1 id="Symbol（原始类型）"><a href="#Symbol（原始类型）" class="headerlink" title="Symbol（原始类型）"></a>Symbol（原始类型）</h1><ul>
+<li><strong>Symbol 生成一个全局唯一的值。</strong></li>
+<li>Symbol 可以<strong>创建一个 独一无二 的值</strong>（但并<strong>不是字符串</strong>）</li>
+<li>可参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22652486">知乎</a>，上面的例子生动易懂。</li>
+<li>详细语法等信息可参考<a target="_blank" rel="noopener" href="https://www.baidu.com/link?url=Q2xConUeXOu9bwqxIe-R3tjukPe8u8dJWS0kSFP0jL6PUEKHw603-lRBB5hBl2RxxxFMhJXB-LU2zAzvgLZLianXD5mtIQd1QBRb-uT-5Jty7JMRHDanj8WEo8wnTtpI4GJn62KseSByAVR1zFyoa_&wd=&eqid=cc1438a70000f525000000065fa26c70">MDN</a></li>
+</ul>
+<h1 id="属性-方法"><a href="#属性-方法" class="headerlink" title="属性 方法"></a>属性 方法</h1><ul>
+<li><code>Symbol.for()</code>:  创建以<strong>参数</strong>作为描述的Symbol值，<strong>如存在此参数则返回原有的Symbol值(先搜索后创建，登记在全局环境)</strong></li>
+<li>注意<strong>区分<code>Symbol.for()</code>和<code>Symbol()</code>:</strong><ul>
+<li><code>Symbol.for()</code>使得传入相同描述的 Symbol 在全局范围内共享一个引用，而不是每次都创建一个新的 Symbol</li>
+<li><code>Symbol(&quot;xxx&quot;)</code> 每次调用都会创建一个新的独立 Symbol，因此它们的引用是不同的，即使描述相同  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>(<span class="string">&quot;es&quot;</span>) === <span class="title class_">Symbol</span>(<span class="string">&quot;es&quot;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;es&quot;</span>) === <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;es&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>Symbol.keyFor()</code>：返回已登记的Symbol值的描述 <strong>(只能返回<code>Symbol.for()</code>的key)</strong></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/description"><code>description</code></a>属性: 只读属性，它会返回 Symbol 对象的可选描述的字符串</li>
+<li><code>Object.getOwnPropertySymbols()</code> ：返回一个包含给定对象所有自有 Symbol 属性的数组</li>
+<li><code>Object.getOwnPropertyNames()</code> 本身不包含对象的 Symbol 属性，只包含字符串属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="title class_">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> b = <span class="title class_">Symbol</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a === b); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol.for()</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;domesy&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> d = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;domesy&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c === d); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol.keyFor()</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(e)); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Symbol.description</span></span><br><span class="line"><span class="keyword">let</span> symbol = <span class="title class_">Symbol</span>(<span class="string">&quot;es&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(symbol.<span class="property">description</span>); <span class="comment">// es</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/es6-symbol.html">菜鸟</a></p>
+<h2 id="作为属性名"><a href="#作为属性名" class="headerlink" title="作为属性名"></a>作为属性名</h2><p>保证属性不重名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sy = <span class="title class_">Symbol</span>(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 写法1</span></span><br><span class="line"><span class="keyword">let</span> syObject = &#123;&#125;;</span><br><span class="line">syObject[sy] = <span class="string">&quot;kk&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(syObject);    <span class="comment">// &#123;Symbol(key1): &quot;kk&quot;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 写法2</span></span><br><span class="line"><span class="keyword">let</span> syObject = &#123;</span><br><span class="line">  [sy]: <span class="string">&quot;kk&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(syObject);    <span class="comment">// &#123;Symbol(key1): &quot;kk&quot;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 写法3</span></span><br><span class="line"><span class="keyword">let</span> syObject = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(syObject, sy, &#123;<span class="attr">value</span>: <span class="string">&quot;kk&quot;</span>&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(syObject);   <span class="comment">// &#123;Symbol(key1): &quot;kk&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Symbol 作为对象属性名时不能用<code>.</code>运算符，要用<strong>方括号</strong>。因为<code>.</code>运算符后面是字符串，所以取到的是字符串 sy 属性，而不是 Symbol 值 sy 属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> syObject = &#123;&#125;;</span><br><span class="line">syObject[sy] = <span class="string">&quot;kk&quot;</span>;</span><br><span class="line"> </span><br><span class="line">syObject[sy];  <span class="comment">// &quot;kk&quot;</span></span><br><span class="line">syObject.<span class="property">sy</span>;   <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> Symbol 值作为属性名时，该属性是公有属性不是私有属性，可以在类的外部访问。但是不会出现在 for…in 、 for…of 的循环中，也不会被 Object.keys() 、 Object.getOwnPropertyNames() 返回。如果要读取到一个对象的 Symbol 属性，可以通过 Object.getOwnPropertySymbols() 和 Reflect.ownKeys() 取到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> syObject = &#123;&#125;;</span><br><span class="line">syObject[sy] = <span class="string">&quot;kk&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(syObject);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> syObject) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;    <span class="comment">// 无输出</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(syObject);                     <span class="comment">// []</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(syObject);    <span class="comment">// [Symbol(key1)]</span></span><br><span class="line"><span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(syObject);                 <span class="comment">// [Symbol(key1)]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="定义常量"><a href="#定义常量" class="headerlink" title="定义常量"></a>定义常量</h2><ul>
+<li>Symbol 的值是唯一的，所以可以保证常量唯一，解决字符串作为常量有可能引发的问题</li>
+<li>当使用<strong>字符串</strong>作为常量时，可能会引发以下问题：<ol>
+<li><strong>命名冲突</strong>：如果多个模块或代码段使用相同的字符串常量，可能会导致命名冲突，因为字符串是全局可见的。这可能会导致不同部分的代码无意中修改了彼此的常量，造成不可预测的结果。</li>
+<li><strong>拼写错误</strong>：使用字符串常量可能会导致拼写错误，因为没有办法在编译时检测错误。一个拼写错误可能会导致代码无法正常工作，而且很难发现问题的根本原因。</li>
+<li><strong>不可靠的比较</strong>：使用字符串常量进行比较时，可能会遇到因为拼写错误或大小写问题而导致的错误比较。</li>
+</ol>
+</li>
+<li>使用 <code>Symbol</code> 来定义不同的订单状态常量。这样做的好处是：<ol>
+<li><strong>唯一性</strong>：每个 <code>Symbol</code> 都是唯一的，不会有命名冲突或拼写错误。</li>
+<li><strong>可靠的比较</strong>：我们可以使用 <code>===</code> 运算符来比较 <code>Symbol</code>，确保比较是准确的，不会受到拼写错误或大小写问题的影响。</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7028830157230047263#heading-2">例子：</a><ul>
+<li>我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，为了保证这一点，我们需要为常量赋一个唯一的值（比如这里的’AUDIO’、’VIDEO’、 ‘IMAGE’），常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_AUDIO</span> = <span class="string">&#x27;AUDIO&#x27;</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_VIDEO</span> = <span class="string">&#x27;VIDEO&#x27;</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_IMAGE</span> = <span class="string">&#x27;IMAGE&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>有了Symbol，大可不必这么麻烦了  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_AUDIO</span> = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_VIDEO</span> = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TYPE_IMAGE</span> = <span class="title class_">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleFileResource</span>(<span class="params">resource</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span>(resource.<span class="property">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="attr">TYPE_AUDIO</span>:</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="attr">TYPE_VIDEO</span>:</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="attr">TYPE_IMAGE</span>:</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;3&#x27;</span>)  </span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Unknown type of resource&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">handleFileResource</span>(&#123; <span class="attr">type</span>: <span class="variable constant_">TYPE_VIDEO</span> &#125;) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/07/react%20%E6%8A%A5%E9%94%99%20Module%20not%20found%20createSuper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          react 报错 Module not found:Can&#39;t resolve &#39;@babel/runtime/helpers/esm/createSuper&#39;
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/02/jQuery%E9%80%89%E6%8B%A9%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">jQuery选择器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%EF%BC%88%E5%8E%9F%E5%A7%8B%EF%BC%89%E3%80%81%E5%A4%8D%E6%9D%82%E4%B8%8E%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">基本（原始）、复杂与全局数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbol%EF%BC%88%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Symbol（原始类型）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">属性 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E4%B8%BA%E5%B1%9E%E6%80%A7%E5%90%8D"><span class="nav-number">4.1.</span> <span class="nav-text">作为属性名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">定义常量</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

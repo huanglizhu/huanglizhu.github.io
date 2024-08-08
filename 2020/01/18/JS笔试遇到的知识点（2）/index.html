@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS笔试遇到的知识点（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java），可以存在同名函数，只要传入的参数数量或者类型不同即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS笔试遇到的知识点（2）">
+<meta property="og:url" content="http://yoursite.com/2020/01/18/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="js中同名函数后面会覆盖前面的js里面没有函数重载的概念，在其他语言中（如java），可以存在同名函数，只要传入的参数数量或者类型不同即可。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg">
+<meta property="article:published_time" content="2020-01-18T04:08:59.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.314Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS笔试遇到的知识点（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS笔试遇到的知识点（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/18/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%882%EF%BC%89/" class="article-date">
+	  <time datetime="2020-01-18T04:08:59.000Z" itemprop="datePublished">一月 18, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A2%98%E7%9B%AE/">牛客网题目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="js中同名函数后面会覆盖前面的"><a href="#js中同名函数后面会覆盖前面的" class="headerlink" title="js中同名函数后面会覆盖前面的"></a>js中同名函数后面会覆盖前面的</h1><p>js里面没有函数重载的概念，在其他语言中（如java），可以存在同名函数，只要传入的参数数量或者类型不同即可。</p>
+<span id="more"></span>
+
+<p><strong>在js中，定义了两个同名函数后，后面的函数会覆盖前面定义的函数</strong>。<br>也就是说，前面定义的函数内容会被后面的函数内容覆盖，当你以为自己执行的是前面的函数内容时，其实执行的是后面的函数内容。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line">    var m= <span class="number">1</span>, j = k = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">function</span> <span class="title">add</span>(n) &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="type">n</span> = n+<span class="number">1</span>; </span><br><span class="line">　 &#125; </span><br><span class="line">    y = add(m); </span><br><span class="line">    <span class="keyword">function</span> <span class="title">add</span>(n) &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="type">n</span> = n + <span class="number">3</span>; </span><br><span class="line">    &#125; </span><br><span class="line">z = add(m); </span><br><span class="line">&lt;/script&gt; </span><br></pre></td></tr></table></figure>
+<p><strong>例子结果</strong>：y和z的最终结果为:4,4<br><strong>例子分析</strong>：由于<strong>函数声明提升</strong>，所以函数声明会提前，由于存在同名函数，<strong>后面的add函数将覆盖第一个add函数，所以两次调用add()返回的值是相同的</strong>。</p>
+<hr>
+<h1 id="void关键词"><a href="#void关键词" class="headerlink" title="void关键词"></a>void关键词</h1><ul>
+<li>void是一元运算符，它出现在操作数之前，操作数可以是任意类型，操作数会照常计算，但会忽略计算结果并返回undefined。由于void会忽略操作数的值，因此在操作数具有副作用的时候使用void来让程序更具语义。</li>
+<li>void 作为运算符后面接的是表达式，void expression。而<code>void(0)</code>也是被当做<code>void 0</code>。如果直接<code>void()</code>，那么我觉得应该是把void当做函数使用了，但是**<code>void()</code> 是关键词，并不能作为函数使用,所以<code>void ();</code>会报SyntaxError，即“语法错误”。**。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>  <span class="number">0</span>; <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">void</span> (<span class="number">0</span>);<span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">void</span> (); <span class="comment">//SyntaxError 语法错误</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span>  <span class="number">1</span>; <span class="comment">//&#x27;number&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> (<span class="number">1</span>);<span class="comment">//&#x27;number&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> (); <span class="comment">//SyntaxError 语法错误</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="按位与运算"><a href="#按位与运算" class="headerlink" title="按位与运算&amp;"></a>按位与运算<code>&amp;</code></h1><p><code>&amp;</code>:<strong>位运算符</strong> 比较两个数字的<strong>二进制的数位</strong>，按位与运算中 <strong>相等为1，否则为0</strong>。<br><strong>例子</strong>：<br>1&amp;2返回的是0<br><strong>计算过程：（注意是针对二进制的数位进行对比是否相等！！）</strong><br><strong>1＝0001 ，2＝0010，运算以后＝0000</strong>， 转换为数字结果为0，故返回0。</p>
+<hr>
+<h1 id="返回值和输出值不一样"><a href="#返回值和输出值不一样" class="headerlink" title="返回值和输出值不一样"></a>返回值和输出值不一样</h1><p><strong>注意：返回值和输出值不是一种东西！</strong><br>任何函数执行完一次，如果没有 return 返回值和声明变量接受返回值，都会立即消失，永远找不到值！（undefined）也就是说，<strong>没有写return语句的函数都会默认返回undefined。</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gahf8tvespj30nx0jk3zi.jpg" alt="相关题目"></p>
+<ol>
+<li>先立即执行匿名函数，输出Hello World！</li>
+<li>匿名函数没有写return语句默认返回undefined，则输出未定义</li>
+</ol>
+<hr>
+<h1 id="定义函数的三种方法"><a href="#定义函数的三种方法" class="headerlink" title="定义函数的三种方法"></a>定义函数的三种方法</h1><p>在Javascript定义一个函数一般有如下三种方式：</p>
+<ol>
+<li><strong>函数关键字(function)语句</strong>： <code>function fnMethodName(x)&#123;alert(x);&#125;</code> (最常用的方法)</li>
+<li><strong>函数字面量</strong>(Function Literals)： <code>var fnMethodName = function(x)&#123;alert(x);&#125; </code></li>
+<li><strong>Function()构造函数</strong>： <code>var fnMethodName = new Function(‘x’,’alert(x);’) </code><br>后两种都是把一个函数赋值给变量fnMethodName，而这个函数是没有名字的，即<strong>匿名函数</strong>（拉达姆函数）。<br>类似于 <code>var foo = function bar()&#123;...&#125;</code> 这样的统一按第2种方法处理，即<strong>在函数外部无法通过 bar 访问到函数</strong>，因为这已经变成了一个表达式。</li>
+</ol>
+<p><strong>注意，Function()构造函数没有{}</strong></p>
+<hr>
+<h1 id="几个常见的事件的方法"><a href="#几个常见的事件的方法" class="headerlink" title="几个常见的事件的方法"></a>几个常见的事件的方法</h1><p><code>preventDefault()</code>    <strong>取消事件默认行为</strong>（不是阻止事件冒泡），如阻止点击提交按钮时对表单的提交（click没有默认行为）<br><code>stopImmediatePropagation()</code>   <strong>取消事件冒泡同时阻止当前节点上的事件处理程序被调用</strong>，影响当前的事件<br><code>stopPropagation()</code>   <strong>取消事件冒泡，不影响事件</strong><br><code>cancelBubbe()</code>     <strong>取消事件冒泡</strong><br><code>returnValue() </code>     <strong>取消事件默认行为</strong></p>
+<hr>
+<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><p>IIFE(立即执行函数表达式)中的this指向window</p>
+<hr>
+<h1 id="null与undefined"><a href="#null与undefined" class="headerlink" title="null与undefined"></a>null与undefined</h1><p>null和undefined是不同的，但它们都表示“值的空缺”，判断相等运算符“&#x3D;&#x3D;”认为两者是相等的（使用严格相等运算符“&#x3D;&#x3D;&#x3D;”来区分它们则不等）</p>
+<hr>
+<h1 id="运算符instanceof、-、"><a href="#运算符instanceof、-、" class="headerlink" title="运算符instanceof、===、=="></a>运算符<code>instanceof</code>、<code>===</code>、<code>==</code></h1><ol>
+<li><p>instanceof运算符希望<strong>左操作数是一个对象，右操作数表示对象的类</strong>（初始化对象的构造函数）。<strong>如果左侧的对象是右侧对象的实例，返回true，否则返回false</strong>。<br>例如：计算<code>o instanceof f  </code><br>首先计算<code>f.prototype</code>，然后在原型链中查找o，找到返回true</p>
+</li>
+<li><p><code>===</code>严格相等运算符：首先计算其操作数的值，然后比较这两个值，比较过程中没有任何类型转换</p>
+</li>
+<li><p><code>==</code>相等运算符：如果两个操作数不是同一类型，那么会尝试进行一些类型转换，然后进行比较<br>（1）尽管null和undefined是不同的，但它们都表示“值的空缺”，两者往往可以互换，因此&#x3D;&#x3D;运算符认为两者是相等的<br>（2）NaN表示非数字值，特殊之处：它和任何值都不相等，包括自身。判断NaN的方法：x!&#x3D;x返回true</p>
+</li>
+</ol>
+<hr>
+<h1 id="JS继承方式"><a href="#JS继承方式" class="headerlink" title="JS继承方式"></a>JS继承方式</h1><p>JavaScript实现继承共6种方式：<br>原型链继承、借用构造函数继承、组合继承、原型式继承、寄生式继承、寄生组合式继承。</p>
+<hr>
+<h1 id="转换为布尔值"><a href="#转换为布尔值" class="headerlink" title="转换为布尔值"></a>转换为布尔值</h1><p>0、“ ”、null、undefined转换为布尔型是false，其余都是true。</p>
+<hr>
+<h1 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h1><p>+加号运算符优先级大于<code>?:</code>三目运算符。（具体可看20200109第六题）</p>
+<hr>
+<h1 id="ES6中promise的三种状态"><a href="#ES6中promise的三种状态" class="headerlink" title="ES6中promise的三种状态"></a>ES6中promise的三种状态</h1><ul>
+<li>一个 promise 可能有三种状态：<strong>等待（pending）、已完成（Resolved，又称fulfilled）、已拒绝（rejected）</strong></li>
+<li>一个promise的状态只可能从“等待”转到“完成”态或者“拒绝”态，<strong>不能逆向转换</strong>，同时“完成”态和“拒绝”态<strong>不能相互转换</strong>。</li>
+<li>promise必须实现then方法（可以说，then就是promise的核心），而且then必须返回一个promise，同一个promise的then可以调用多次，并且回调的执行顺序跟它们被定义时的顺序一致</li>
+<li>then方法接受两个参数，第一个参数是成功时的回调，在promise由“等待”态转换到“完成”态时调用，另一个是失败时的回调，在promise由“等待”态转换到“拒绝”态时调用。同时，then可以接受另一个promise传入，也接受一个“类then”的对象或方法，即thenable对象。</li>
+</ul>
+<hr>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>js中，数组会自动根据最大下标延长一位，既下标为n，则数组的长度为n+1。<strong>没有填值默认为undefinded</strong>。</p>
+<hr>
+<h1 id="分母为0isNaN-1-0"><a href="#分母为0isNaN-1-0" class="headerlink" title="分母为0isNaN(1/0)"></a>分母为0<code>isNaN(1/0)</code></h1><ul>
+<li>任何 <strong>数值除以0</strong> 都会导致错误而<strong>终止程序执行</strong>。但是<strong>在 JavaScript 中，会返回出特殊的值，因此不会影响程序的执行</strong>。</li>
+<li>比0大的数除以0，则会得到无穷大，所以 js 用 <strong>Infinity （无穷）</strong>来显示。</li>
+<li>也就是1&#x2F;0得到的是Infinity。**<code>isNaN(1/0)</code>返回的是false。但是isNaN(0&#x2F;0)返回的就是true**。</li>
+</ul>
+<hr>
+<h1 id="in操作符"><a href="#in操作符" class="headerlink" title="in操作符"></a>in操作符</h1><p>（可参考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/in">MDN的in运算符</a>）</p>
+<ul>
+<li>如果指定的 <strong>属性</strong> 在指定的对象或其原型链中，则in 运算符返回true。</li>
+<li>如果指定的 <strong>数组索引</strong> 在数组中，则in 运算符返回true。</li>
+<li><strong><code>1 in [1]</code>并不是表示数字1在不在数组里。而是表示数组中含不含有1这个索引index值。</strong></li>
+<li>数组长度为1，所以只含有的index值为0，<code>1 in [1]</code>返回fasle。</li>
+</ul>
+<hr>
+<h1 id="for-in-和-for-of"><a href="#for-in-和-for-of" class="headerlink" title="for-in 和 for-of"></a>for-in 和 for-of</h1><ul>
+<li><code>for-in</code>与<code>for-of</code>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/13/ES6%E6%89%A9%E5%B1%95%20%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95/#%E8%A1%A5%E5%85%85%EF%BC%9Afor-in%E4%B8%8E%E3%80%90ES6%E5%BC%95%E5%85%A5%E7%9A%84%E3%80%91for-of">《ES6扩展 对象扩展》</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A2%98%E7%9B%AE/">牛客网题目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/18/Redux%E8%BF%9B%E9%98%B6(1)UI%E7%BB%84%E4%BB%B6%E3%80%81%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Redux进阶(1)UI组件、容器组件、无状态组件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/18/JS%E7%AC%94%E8%AF%95%E9%A2%98%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS笔试遇到的知识点（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js%E4%B8%AD%E5%90%8C%E5%90%8D%E5%87%BD%E6%95%B0%E5%90%8E%E9%9D%A2%E4%BC%9A%E8%A6%86%E7%9B%96%E5%89%8D%E9%9D%A2%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">js中同名函数后面会覆盖前面的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">2.</span> <span class="nav-text">void关键词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">按位与运算&amp;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E5%92%8C%E8%BE%93%E5%87%BA%E5%80%BC%E4%B8%8D%E4%B8%80%E6%A0%B7"><span class="nav-number">4.</span> <span class="nav-text">返回值和输出值不一样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">定义函数的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">几个常见的事件的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">7.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null%E4%B8%8Eundefined"><span class="nav-number">8.</span> <span class="nav-text">null与undefined</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6instanceof%E3%80%81-%E3%80%81"><span class="nav-number">9.</span> <span class="nav-text">运算符instanceof、&#x3D;&#x3D;&#x3D;、&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">JS继承方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">11.</span> <span class="nav-text">转换为布尔值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">12.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6%E4%B8%ADpromise%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">13.</span> <span class="nav-text">ES6中promise的三种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">14.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%AF%8D%E4%B8%BA0isNaN-1-0"><span class="nav-number">15.</span> <span class="nav-text">分母为0isNaN(1&#x2F;0)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#in%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">16.</span> <span class="nav-text">in操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for-in-%E5%92%8C-for-of"><span class="nav-number">17.</span> <span class="nav-text">for-in 和 for-of</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

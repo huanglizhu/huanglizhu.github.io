@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>export、export default和module.exports、exports | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="export、export default和module.exports、exports">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/export%E5%92%8Cexport%20default%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-15T02:06:51.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.357Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="Node.js学习">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-export和export default的区别" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      export、export default和module.exports、exports
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/15/export%E5%92%8Cexport%20default%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+	  <time datetime="2020-01-15T02:06:51.000Z" itemprop="datePublished">一月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在node和react&#x2F;vue(ES6)的使用中导出导入十分相似，拎出来区分下</p>
+<span id="more"></span>
+
+<h1 id="区分export、export-default和module-exports、exports"><a href="#区分export、export-default和module-exports、exports" class="headerlink" title="区分export、export default和module.exports、exports"></a>区分export、export default和module.exports、exports</h1><ul>
+<li><strong>相同点：</strong>文件、变量、函数等导出</li>
+<li><strong>不同点：</strong><code>module.exports</code>、<code>exports</code>是<strong>Common.Js规范</strong>；而<code>export</code>、<code>export default</code>是<strong>es6规范</strong>。</li>
+</ul>
+<h1 id="React-Vue"><a href="#React-Vue" class="headerlink" title="React&#x2F;Vue"></a>React&#x2F;Vue</h1><ul>
+<li>React遵循es6规范。</li>
+<li>一个js文件可以有很多个<code>export</code>，但只能拥有一个<code>export default</code>。</li>
+<li>在React.js中，输出可以使用<code>export</code>或者<code>export default</code>，<strong>建议使用<code>export</code>，性能会略微好一些</strong>。</li>
+</ul>
+<h2 id="export、export-default、import是什么"><a href="#export、export-default、import是什么" class="headerlink" title="export、export default、import是什么"></a>export、export default、import是什么</h2><ul>
+<li><strong>ES6模块</strong>主要有两个功能：<code>export</code>和<code>import</code></li>
+<li>export用于规定 对外输出本模块（一个文件可以理解为一个模块）变量的接口</li>
+<li>而<code>export default</code>则是用于规定<strong>模块的默认对外接口</strong>，很显然默认对外接口只能有一个，所以 <strong><code>export default</code> 在同一个模块中只能出现一次</strong></li>
+<li><code>import</code>用于在一个模块中加载引用另一个含有<code>export</code>接口的模块。</li>
+<li>也就是说使用<strong>export命令定义了模块的对外接口</strong>以后，其他JS文件就可以<strong>通过import命令加载这个模块（文件）</strong>。</li>
+</ul>
+<hr>
+<h2 id="export-和-export-default-区别"><a href="#export-和-export-default-区别" class="headerlink" title="export 和 export default 区别"></a>export 和 export default 区别</h2><ul>
+<li>export导出<strong>多个对象</strong>，export default只能导出<strong>一个对象</strong>。</li>
+<li>export导出对象**需要用<code>&#123; &#125;</code><strong>，export default</strong>不需要<code>&#123; &#125;</code>**，如：<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// <span class="keyword">export</span>导出方式<span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> A = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">const</span> B = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> &#123;A,B,C&#125;;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">export</span>导出方式<span class="number">2</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> A = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> B = () =&gt; <span class="meta">&#123;...&#125;</span></span><br><span class="line"></span><br><span class="line">// <span class="keyword">export</span> default导出方式</span><br><span class="line"><span class="keyword">const</span> A = <span class="meta">&#123;...&#125;</span></span><br><span class="line"><span class="keyword">export</span> default A;</span><br></pre></td></tr></table></figure></li>
+<li>仅允许<strong>表达式、函数或类</strong>作为**<code>export default</code>导出**,你想使用<code>&#123; &#125;</code>导出对象时只能使用<code>default</code>。</li>
+<li>在其他文件引用<code>export default</code>导出的对象时不一定使用导出时的名字。因为这种方式实际上是<strong>将该导出对象设置为 默认导出对象</strong>，如：  <ul>
+<li>假设文件A、B在同级目录，实现文件B引入文件A的导出对象deObject。</li>
+<li>文件A导出：<code>export default deObject;</code></li>
+<li>文件B引用：<code>import deObject from &#39;./A&#39;</code>或者<code>import newDeObject from &#39;./A&#39;</code></li>
+</ul>
+</li>
+<li>性能上<code>export</code>会略微好一些，<strong>建议使用<code>export</code></strong>.</li>
+</ul>
+<hr>
+<h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><h2 id="module-exports-与-exports"><a href="#module-exports-与-exports" class="headerlink" title="module.exports 与 exports"></a>module.exports 与 exports</h2><ul>
+<li>node.js遵循Common.Js规范。</li>
+<li>**推荐使用<code>modules.exports = xxx</code>**的方式来输出模块变量，它可以应对任何情况。<br>具体原因可以参考<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023027697415616">廖雪峰的博客</a>。使用exports可能会有意料之外的错误。</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>, <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>, <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js%E5%AD%A6%E4%B9%A0/" rel="tag">Node.js学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/15/Node.js%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(1)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          开发博客项目之接口(1)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/14/Redux%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Redux入门（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%88%86export%E3%80%81export-default%E5%92%8Cmodule-exports%E3%80%81exports"><span class="nav-number">1.</span> <span class="nav-text">区分export、export default和module.exports、exports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Vue"><span class="nav-number">2.</span> <span class="nav-text">React&#x2F;Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#export%E3%80%81export-default%E3%80%81import%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.</span> <span class="nav-text">export、export default、import是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#export-%E5%92%8C-export-default-%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.</span> <span class="nav-text">export 和 export default 区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node"><span class="nav-number">3.</span> <span class="nav-text">node</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#module-exports-%E4%B8%8E-exports"><span class="nav-number">3.1.</span> <span class="nav-text">module.exports 与 exports</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

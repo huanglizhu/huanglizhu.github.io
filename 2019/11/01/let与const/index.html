@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>let命令与const命令 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="注意 变量是从里面往外面找，块级作用域嵌套时是没有包含关系的，也就是说这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块。 const优于let,在 let 和 const 建议优先使用const，尤其在全局环境，不应设置变量，只因设置常量。  const优于let的原因：  const可以提醒阅读程序的人这个变量不应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="let命令与const命令">
+<meta property="og:url" content="http://yoursite.com/2019/11/01/let%E4%B8%8Econst/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="注意 变量是从里面往外面找，块级作用域嵌套时是没有包含关系的，也就是说这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块。 const优于let,在 let 和 const 建议优先使用const，尤其在全局环境，不应设置变量，只因设置常量。  const优于let的原因：  const可以提醒阅读程序的人这个变量不应">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8hlftnk55j305y02m74h.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8icysl3ibj30eq03ldh7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8icnqabxlj30cx074t8u.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id3t9bpbj30kb04oq6g.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id5x6191j30rz01tq59.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id8fwnipj30sx021wh5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idczstdzj30o802utaw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idfs7guyj30o601xmz8.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idi64wtfj30qi05k788.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idlmh06vj30tn05a78r.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iknnjqx6j30ux02c776.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ikv0pbx5j30uc080q9l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8il8b7606j30u103pjvf.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ilg6ur5pj30qj07z44n.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ilkk6pt3j30v804179m.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imb95cekj30uc0d2wky.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imfhstj8j30wm0et7cc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imzeyfkhj30rr0iln7l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8inkpgb86j30hy08ygow.jpg">
+<meta property="article:published_time" content="2019-11-01T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.366Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8hlftnk55j305y02m74h.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-let与const" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      let命令与const命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/01/let%E4%B8%8Econst/" class="article-date">
+	  <time datetime="2019-11-01T13:00:00.000Z" itemprop="datePublished">十一月 1, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol>
+<li>变量是从里面往外面找，块级作用域嵌套时是没有包含关系的，也就是说<strong>这个代码块不包含它体内的另一个函数内的内容</strong>，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块。</li>
+<li><strong>const优于let</strong>,在 let 和 const 建议优先使用const，尤其在全局环境，不应设置变量，只因设置常量。</li>
+</ol>
+<p><strong>const优于let的原因</strong>：</p>
+<ul>
+<li>const可以提醒阅读程序的人这个变量不应该改变。</li>
+<li>const比较符合函数式编程思想，运算不改变值，只是新建值，防止无意间修改变量值所导致的错误，而且这样也有利于将来分布式运算。</li>
+<li>JavaScript编译器会对const进行优化。</li>
+<li>多使用const，有利于提高程序的运行效率。</li>
+<li>let和const的本质区别，其实是编译器内部的处理不同。</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h1><ul>
+<li>注意：花括号包含块级作用域，<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8hlftnk55j305y02m74h.jpg" alt="声明一个一个对象">但声明一个一个对并不是块级作用域。</li>
+</ul>
+<hr>
+<h1 id="var"><a href="#var" class="headerlink" title="var"></a>var</h1><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8icysl3ibj30eq03ldh7.jpg" alt="例子"><br>结果：打印出0 1 2和3<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8icnqabxlj30cx074t8u.jpg" alt="思路分析"></p>
+<hr>
+<h1 id="let"><a href="#let" class="headerlink" title="let"></a>let</h1><p>let用于声明变量，用法类似于var，但是<strong>所声明的变量只在let命令所在的代码块内有效</strong>。</p>
+<h2 id="使用let或者const声明的变量不能再被重新声明"><a href="#使用let或者const声明的变量不能再被重新声明" class="headerlink" title="使用let或者const声明的变量不能再被重新声明"></a>使用let或者const声明的变量不能再被重新声明</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id3t9bpbj30kb04oq6g.jpg" alt="var可以重复声明，不报错且可以对同一个值进行修改"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id5x6191j30rz01tq59.jpg" alt="let不能重复声明，会报错，显示已经被声明过（1）"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8id8fwnipj30sx021wh5.jpg" alt="let不能重复声明，会报错，显示已经被声明过（2）"></p>
+<hr>
+<h2 id="let不存在变量提升"><a href="#let不存在变量提升" class="headerlink" title="let不存在变量提升"></a>let不存在变量提升</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idczstdzj30o802utaw.jpg" alt="var存在变量提升，会将变量的声明提升，赋值则留在原地，打印出“undefined”"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idfs7guyj30o601xmz8.jpg" alt="let不存在变量提升，所以变量声明不会提升，报错"></p>
+<hr>
+<h2 id="暂存死区"><a href="#暂存死区" class="headerlink" title="暂存死区"></a>暂存死区</h2><ul>
+<li>ES6规定，如果块级作用域中存在let或者const声明的变量，那么这个变量一开始就会形成封闭的作用域。</li>
+<li>也就是说，<strong>即使向上的作用域中存在同名变量也是拿不到的</strong>。</li>
+</ul>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idi64wtfj30qi05k788.jpg" alt="var不存在暂存死区"><br>var不存在暂存死区，所以第一个console可以向上去上面的作用域找同名变量，拿过来打印。（其实有没有大括号意义不大）</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8idlmh06vj30tn05a78r.jpg" alt="let存在暂存死区，又不存在变量提升，所以第一个console报错"><br>let存在暂存死区，也就是说向上的作用域中存在同名变量也拿不到，所以第一个console拿不到上面的“我是美猴王”。let又不存在变量提升，所以第一个console中的monkey也没有被声明，只能报错。</p>
+<hr>
+<h2 id="补充：appendChild-、createElement"><a href="#补充：appendChild-、createElement" class="headerlink" title="补充：appendChild()、createElement()"></a>补充：appendChild()、createElement()</h2><p>HTML DOM Document 对象、appendChild() 方法、createElement()方法、createTextNode()都可以参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/06/JS%E4%B8%AD%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BAHTML%20DOM%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95/">笔记”JS中修改&#x2F;创建HTML DOM元素的方法”</a></p>
+<h2 id="使用let实现面试常见小例子"><a href="#使用let实现面试常见小例子" class="headerlink" title="使用let实现面试常见小例子"></a>使用let实现面试常见小例子</h2><p><strong>代码解析</strong>：</p>
+<ol>
+<li>先在HTML文档中<strong>创建</strong>一个按钮节点btn</li>
+<li>再改变节点文字</li>
+<li>然后给节点btn设置一个点击事件</li>
+<li>最后将节点btn<strong>添加</strong>到body中</li>
+</ol>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihdxtpx0j30ml0akwkt.jpg" alt="使用var生成十个按钮每个按点击的时候弹出1-10"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级通过自调用时有传进来的i，这个i是随着函数的调用而产生，随着函数调用结束而释放的，不是作用在一开始的var i身上的，所以每一个函数都对应不同的数字。</p>
+<p>变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。所以每一次循环中btn的innerText所指向的i其实都是同一个，循环到最后时前面的i全部被最后的结果覆盖了。而局部变量的话就是每循环一次产生一个新的i，所以不会被覆盖。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ihp7cy0cj30mh09lafh.jpg" alt="做这个修改则点击每个按钮弹出的都是11"><br><strong>原因</strong>：<br>执行事件时，alert（）首先需要i，但是当前作用域找不到，它就会到上一级找，上一级直接就是var i了，所有的代码都作用在它身上，所以他会是11。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iibovt0yj30lq070aep.jpg" alt="使用let生成十个按钮每个按点击的时候弹出1-10"><br>可以发现，使用let以后就不需要额外放一个自调用函数把他们框起来了。<br>变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量。</p>
+<hr>
+<h1 id="const"><a href="#const" class="headerlink" title="const"></a>const</h1><p>与let特性十分相似：<strong>不能重复声明、不存在提升、只在当前（块级）作用域内有效</strong>。</p>
+<h2 id="使用const来声明常量（不可改变的量）"><a href="#使用const来声明常量（不可改变的量）" class="headerlink" title="使用const来声明常量（不可改变的量）"></a>使用const来<strong>声明常量</strong>（不可改变的量）</h2><blockquote>
+<p>使用var或者let声明的是变量</p>
+</blockquote>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const a<span class="operator">=</span><span class="number">1</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p><strong>常量必须在声明的时候赋值</strong>，否则报错：<code>Missing initializer in const declaration</code></p>
+<hr>
+<h2 id="常量声明后不能被修改"><a href="#常量声明后不能被修改" class="headerlink" title="常量声明后不能被修改"></a>常量声明后不能被修改</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8iknnjqx6j30ux02c776.jpg" alt="常量声明后不能被修改"></p>
+<hr>
+<h2 id="常量为引用类型的时候可以修改该引用类型"><a href="#常量为引用类型的时候可以修改该引用类型" class="headerlink" title="常量为引用类型的时候可以修改该引用类型"></a>常量为引用类型的时候可以修改该引用类型</h2><p>常量为引用类型：<strong>对象、数组、函数</strong>。</p>
+<h3 id="常量声明一个对象"><a href="#常量声明一个对象" class="headerlink" title="常量声明一个对象"></a>常量声明一个对象</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ikv0pbx5j30uc080q9l.jpg" alt="常量声明一个对象"></p>
+<ul>
+<li>修改xiaoming.age可以，修改xiaoming却会报错，因为<strong>const只能保证我们声明指向的地址不变</strong>，不能保证声明的值不变。</li>
+<li>xiaoming指向的地址和两个属性指向的地址是一样的，常量要求xiaoming指向的地址不变。修改属性值以后属性依旧指向原本的地址，所以不会报错。但是修改xiaoming会<strong>使得指向地址变化，因此报错</strong>。</li>
+<li>也就是说，常量为对象时，不能直接修改这个对象，但是可以修改这个对象的属性，因为此时该常量是引用类型。</li>
+</ul>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">const</span> xiaoming = </span></span><span class="language-xquery">&#123;</span></span><br><span class="line"><span class="language-xquery">        age: <span class="number">14</span>,</span></span><br><span class="line"><span class="language-xquery">       <span class="built_in"> name</span>: <span class="string">&#x27;小名&#x27;</span></span></span><br><span class="line"><span class="language-xquery">    &#125;</span><span class="language-xml"><span class="language-javascript">;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    xiaoming.<span class="property">sax</span> = <span class="string">&#x27;男&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xiaoming.<span class="property">sax</span>); <span class="comment">//男</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>说明常量对象如果不处理是可以增加属性的。</p>
+<hr>
+<h3 id="常量声明一个数组"><a href="#常量声明一个数组" class="headerlink" title="常量声明一个数组"></a>常量声明一个数组</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8il8b7606j30u103pjvf.jpg" alt="常量声明一个数组"></p>
+<ul>
+<li>可以往常量数组中放入值，此时该常量数组指向的地址不变，不会报错。</li>
+<li>30试图让常量数组指向另一个地址，报错。</li>
+</ul>
+<hr>
+<h2 id="常量为引用类型时需要冻结来防止被修改"><a href="#常量为引用类型时需要冻结来防止被修改" class="headerlink" title="常量为引用类型时需要冻结来防止被修改"></a>常量为引用类型时需要冻结来防止被修改</h2><p>使用<code>Object.freeze(常量名)</code><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ilg6ur5pj30qj07z44n.jpg" alt="常量对象的例子"><br>注意：<strong>使用Object.freeze()以后也不能再给常量增加属性</strong>了（比如<code>xiaoming.dd=11;</code>）</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8ilkk6pt3j30v804179m.jpg" alt="常量数组的例子"></p>
+<hr>
+<h2 id="es6之前怎么声明常量"><a href="#es6之前怎么声明常量" class="headerlink" title="es6之前怎么声明常量"></a>es6之前怎么声明常量</h2><h3 id="补充：Object-defineProperty"><a href="#补充：Object-defineProperty" class="headerlink" title="补充：Object.defineProperty"></a>补充：<code>Object.defineProperty</code></h3><p><code>Object.defineProperty</code>除了可以增加一个属性以外还可以对已有的属性进行设置<code>writable:false</code>使该属性不可修改。</p>
+<h3 id="补充：Object-seal-变量名"><a href="#补充：Object-seal-变量名" class="headerlink" title="补充：Object.seal(变量名);"></a>补充：<code>Object.seal(变量名);</code></h3><p><code>Object.seal(变量名);</code>可以使该变量不能再增加属性。两者结合可以使变量成为常量。</p>
+<h3 id="补充：对象名-hasOwnProperty-属性名"><a href="#补充：对象名-hasOwnProperty-属性名" class="headerlink" title="补充：对象名.hasOwnProperty(属性名)"></a>补充：<code>对象名.hasOwnProperty(属性名)</code></h3><p><code>对象名.hasOwnProperty(属性名)</code>可以帮助我们判断这个属性是自身的还是继承过来的。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imb95cekj30uc0d2wky.jpg" alt="例子"><br>其中，obj2是通过obj1创建的，遍历打印obj2可以发现除了obj2自身的属性c、d之外还会打印出继承来的a、b属性。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imfhstj8j30wm0et7cc.jpg" alt="增加hasOwnProperty进行判断以后输出的就是obj2自身的属性c、d"></p>
+<h3 id="es6之前声明常量的方法"><a href="#es6之前声明常量的方法" class="headerlink" title="es6之前声明常量的方法"></a>es6之前声明常量的方法</h3><p><strong>思路</strong>：自定义一个Object的带有参数obj（需要成为常量的变量名）的方法freezePolyfill，需要声明常量时就使用<code>Object.freezePolyfill(变量名)</code></p>
+<p><strong>实现步骤</strong>：</p>
+<ol>
+<li>遍历属性和方法</li>
+<li>修改遍历到的属性的描述</li>
+<li>Object.seal（）</li>
+</ol>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8imzeyfkhj30rr0iln7l.jpg" alt="例子"></p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1g8inkpgb86j30hy08ygow.jpg" alt="问题"><br>解决方法：可以用递归来判断一下属性是不是方法，再去套上面的代码。（直接使用迭代的方式也可以）</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          解构赋值（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/28/CSS%20transition%E5%B1%9E%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">CSS transition属性（过渡效果）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var"><span class="nav-number">3.</span> <span class="nav-text">var</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#let"><span class="nav-number">4.</span> <span class="nav-text">let</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8let%E6%88%96%E8%80%85const%E5%A3%B0%E6%98%8E%E7%9A%84%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E5%86%8D%E8%A2%AB%E9%87%8D%E6%96%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text">使用let或者const声明的变量不能再被重新声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="nav-number">4.2.</span> <span class="nav-text">let不存在变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%82%E5%AD%98%E6%AD%BB%E5%8C%BA"><span class="nav-number">4.3.</span> <span class="nav-text">暂存死区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9AappendChild-%E3%80%81createElement"><span class="nav-number">4.4.</span> <span class="nav-text">补充：appendChild()、createElement()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8let%E5%AE%9E%E7%8E%B0%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E5%B0%8F%E4%BE%8B%E5%AD%90"><span class="nav-number">4.5.</span> <span class="nav-text">使用let实现面试常见小例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#const"><span class="nav-number">5.</span> <span class="nav-text">const</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8const%E6%9D%A5%E5%A3%B0%E6%98%8E%E5%B8%B8%E9%87%8F%EF%BC%88%E4%B8%8D%E5%8F%AF%E6%94%B9%E5%8F%98%E7%9A%84%E9%87%8F%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">使用const来声明常量（不可改变的量）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%A3%B0%E6%98%8E%E5%90%8E%E4%B8%8D%E8%83%BD%E8%A2%AB%E4%BF%AE%E6%94%B9"><span class="nav-number">5.2.</span> <span class="nav-text">常量声明后不能被修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E4%B8%BA%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E8%AF%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">常量为引用类型的时候可以修改该引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.3.1.</span> <span class="nav-text">常量声明一个对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="nav-number">5.3.2.</span> <span class="nav-text">常量声明一个数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E4%B8%BA%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%97%B6%E9%9C%80%E8%A6%81%E5%86%BB%E7%BB%93%E6%9D%A5%E9%98%B2%E6%AD%A2%E8%A2%AB%E4%BF%AE%E6%94%B9"><span class="nav-number">5.4.</span> <span class="nav-text">常量为引用类型时需要冻结来防止被修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es6%E4%B9%8B%E5%89%8D%E6%80%8E%E4%B9%88%E5%A3%B0%E6%98%8E%E5%B8%B8%E9%87%8F"><span class="nav-number">5.5.</span> <span class="nav-text">es6之前怎么声明常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9AObject-defineProperty"><span class="nav-number">5.5.1.</span> <span class="nav-text">补充：Object.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9AObject-seal-%E5%8F%98%E9%87%8F%E5%90%8D"><span class="nav-number">5.5.2.</span> <span class="nav-text">补充：Object.seal(变量名);</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E5%AF%B9%E8%B1%A1%E5%90%8D-hasOwnProperty-%E5%B1%9E%E6%80%A7%E5%90%8D"><span class="nav-number">5.5.3.</span> <span class="nav-text">补充：对象名.hasOwnProperty(属性名)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6%E4%B9%8B%E5%89%8D%E5%A3%B0%E6%98%8E%E5%B8%B8%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.5.4.</span> <span class="nav-text">es6之前声明常量的方法</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

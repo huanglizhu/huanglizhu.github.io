@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>博客项目登录（前端联调） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="html页面联调 登录功能依赖cookie，必须用浏览器来联调 cookie跨域不共享的，前端和server端必须同域 需要用到nignx做代理，让前后端同域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客项目登录（前端联调）">
+<meta property="og:url" content="http://yoursite.com/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="html页面联调 登录功能依赖cookie，必须用浏览器来联调 cookie跨域不共享的，前端和server端必须同域 需要用到nignx做代理，让前后端同域">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd8rwd5vn2j30h605c74u.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd8s0hh4whj30om0p80vk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9f8e2b8sj30v30btn1w.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9fo9y28uj30vr0crwfq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh12alyij30r202d3yt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9m6y6w56j30i103at8u.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9maiupl3j30k903t0sz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9n41bhdrj30tl0k8772.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9n5efmh7j30uz02djrj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9nag8g3uj31040olq5i.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdam40yzvbj30yn0e00uu.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdamn2tzjqj30zm0n5gr1.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaojm63hcj30i50kjq3n.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaok3x0xrj30l308edg2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaoluylzqj311c0fuab2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaoo0v14vj30m604qglq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdasve44u2j31hb0jujuy.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdateiu21zj30nk0d2ab7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdatfr6nl2j31hc099djg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdault1lx6j31160fvjtt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaumhhbsqj30i209qwez.jpg">
+<meta property="article:published_time" content="2020-02-28T08:40:16.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.398Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd8rwd5vn2j30h605c74u.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-博客项目登录（前端联调）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      博客项目登录（前端联调）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/" class="article-date">
+	  <time datetime="2020-02-28T08:40:16.000Z" itemprop="datePublished">二月 28, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="html页面联调"><a href="#html页面联调" class="headerlink" title="html页面联调"></a>html页面联调</h1><ul>
+<li>登录功能依赖cookie，必须用浏览器来联调</li>
+<li>cookie跨域不共享的，前端和server端必须同域</li>
+<li>需要用到nignx做代理，让前后端同域<span id="more"></span></li>
+</ul>
+<h2 id="跑起前端页面"><a href="#跑起前端页面" class="headerlink" title="跑起前端页面"></a>跑起前端页面</h2><ul>
+<li>http-server是一个轻量级的基于nodejs的<strong>http服务器</strong>，好处：可以使任意一个目录成为服务器的目录，<strong>完全抛开后台的沉重工程，直接运行想要的js代码</strong>。</li>
+<li>前端项目中，全局安装http-server:<code>npm i -g http-server</code>跑起静态页面</li>
+<li>设置前端端口为8001：<code>http-server -p 8001</code>(前后端端口不能一样)：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd8rwd5vn2j30h605c74u.jpg" alt="前端项目cmd"></li>
+<li>访问前端首页：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd8s0hh4whj30om0p80vk.jpg" alt="前端首页"></li>
+<li>此时我们需要nginx来使前后端使用同一个端口。</li>
+</ul>
+<hr>
+<h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><ul>
+<li><strong>高性能的web服务器，开源免费</strong></li>
+<li>一般用于做<strong>静态服务</strong>、负载均衡（本课用不到）</li>
+<li>还有<strong>反向代理</strong>（本课用到），即客户端不可见的代理：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9f8e2b8sj30v30btn1w.jpg" alt="反向代理示意图"></li>
+</ul>
+<h2 id="nginx下载与配置"><a href="#nginx下载与配置" class="headerlink" title="nginx下载与配置"></a>nginx下载与配置</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">官网下载</a></li>
+<li><strong>配置</strong>：（管理员权限打开记事本）Nginx所有配置文件都在<strong>Nginx根目录conf子目录中</strong>（可先不配置）</li>
+<li><strong>运行</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9fo9y28uj30vr0crwfq.jpg" alt="运行"></li>
+</ul>
+<h2 id="nginx命令"><a href="#nginx命令" class="headerlink" title="nginx命令"></a>nginx命令</h2><table>
+<thead>
+<tr>
+<th>含义</th>
+<th>nginx命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>测试配置文件格式是否正确</td>
+<td>nginx -t</td>
+</tr>
+<tr>
+<td>启动nginx</td>
+<td>start nginx（<strong>注意顺序！</strong>）</td>
+</tr>
+<tr>
+<td>重启nginx</td>
+<td>nginx -s reload</td>
+</tr>
+<tr>
+<td>停止nginx</td>
+<td>nginx -s stop</td>
+</tr>
+<tr>
+<td>查看版本</td>
+<td>nginx -v</td>
+</tr>
+<tr>
+<td>查看帮助信息</td>
+<td>nginx -h</td>
+</tr>
+<tr>
+<td>重启日志文件</td>
+<td>nginx -s reopen</td>
+</tr>
+</tbody></table>
+<h2 id="nginx反向代理的配置"><a href="#nginx反向代理的配置" class="headerlink" title="nginx反向代理的配置"></a>nginx反向代理的配置</h2><p>（管理员权限<strong>打开记事本</strong>）修改Nginx核心配置文件：conf\nginx.conf</p>
+<ul>
+<li>**修改<code>worker_processes</code>**：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdoh12alyij30r202d3yt.jpg" alt="worker_processes">我的电脑是4核的，所以设置为4</li>
+<li><strong>修改<code>server</code></strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9m6y6w56j30i103at8u.jpg" alt="server"></li>
+<li><code>#</code>就是注释，<strong>注释location</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9maiupl3j30k903t0sz.jpg" alt="注释location"></li>
+<li><strong>进行反向代理</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9n41bhdrj30tl0k8772.jpg" alt="进行反向代理"><ul>
+<li>如果location是静态页面就转发到8001端口，location是api开始的就转发到8000端口</li>
+</ul>
+</li>
+<li><strong>测试</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9n5efmh7j30uz02djrj.jpg" alt="测试"></li>
+<li><strong>启动nginx</strong>：<code>start nginx</code>（<strong>注意顺序！</strong>没有报错则启动成功）</li>
+<li>之前后端8000端口，前端8001端口无法获取8000端口的数据，<strong>现在测试8080端口</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd9nag8g3uj31040olq5i.jpg" alt="8080端口"></li>
+</ul>
+<hr>
+<h1 id="前端联调"><a href="#前端联调" class="headerlink" title="前端联调"></a>前端联调</h1><h2 id="个人中心只显示自己的数据"><a href="#个人中心只显示自己的数据" class="headerlink" title="个人中心只显示自己的数据"></a>个人中心只显示自己的数据</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>http-test中<strong>admin.html中发送ajax请求的地址中再加上一个<code>isadmin=1 </code>参数，使用登录者的用户名</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdam40yzvbj30yn0e00uu.jpg" alt="前端admin.html"></p>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><ul>
+<li>blog-1中的<strong>router-blog.js中，修改获取博客列表的路由</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdamn2tzjqj30zm0n5gr1.jpg" alt="router-blog.js"><ul>
+<li>之前没有isadmin时，博客列表的author是由req.query.author获取到的，现在<strong>有了isadmin后，则强制从req.session.username获取author</strong>，那么访问的就是本人的博客列表了。</li>
+</ul>
+</li>
+</ul>
+<h2 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h2><ol>
+<li><strong>启动nginx</strong>，打开8080端口，进入首页：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaojm63hcj30i50kjq3n.jpg" alt="首页"></li>
+<li>点击进入详情页：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaok3x0xrj30l308edg2.jpg" alt="详情页"></li>
+<li>尝试在<strong>尚未登录情况下进入admin管理中心</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaoluylzqj311c0fuab2.jpg" alt="尚未登录情况下进入admin管理中心"><ul>
+<li>可以看到并未显示管理中心，此时前端可以做个提示框或者跳转信息之类的。此时创建博客也会显示数据错误。</li>
+</ul>
+</li>
+<li>进行<strong>登录</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaoo0v14vj30m604qglq.jpg" alt="登录"></li>
+<li><strong>登录后自动跳转管理中心</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdasve44u2j31hb0jujuy.jpg" alt="管理中心"></li>
+<li>点击<strong>创建博客，创建完成后自动跳转管理中心：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdateiu21zj30nk0d2ab7.jpg" alt="管理中心"></li>
+<li>可点击进入<strong>查看博客内容</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdatfr6nl2j31hc099djg.jpg" alt="博客内容"></li>
+<li>可<strong>编辑博客</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdault1lx6j31160fvjtt.jpg" alt="编辑博客"></li>
+<li>可<strong>搜索博客</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gdaumhhbsqj30i209qwez.jpg" alt="搜索博客"></li>
+</ol>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="cookie是什么？session-是什么？如何实现登录？"><a href="#cookie是什么？session-是什么？如何实现登录？" class="headerlink" title="cookie是什么？session 是什么？如何实现登录？"></a>cookie是什么？session 是什么？如何实现登录？</h2><ul>
+<li><strong>cookie</strong>是跨域不共享的<strong>存储在浏览器的一段字符串</strong>（最大5kb），每次<strong>发送http请求时</strong>都会将请求域的cookie一起发送给server端。</li>
+<li><strong>session即server端存储用户信息</strong>，也就是cookie中存储userid，server端对应username&#x2F;个人信息。</li>
+<li><strong>实现登录</strong>：<ul>
+<li>用戶第一次发送登录的http请求时，请求头中并不存在cookie（即userid），此时server端生成一个cookie（即userid）返回给用户，这个userid对应用户的用户名和密码。下次访问时用户的请求头中就会携带这个userid，那么后端就会去解析cookie读取userid放到sessionId上，看sessionId对应的属性值（对象）中是否有username这个属性，有则判断为已登录。也就不需要重复登录了。</li>
+<li>session是一个对象，它的属性名即cookie的userid，属性值是对象，这个对象中包括username、realname</li>
+<li>session是存储在redis中的，这样就不会刷新页面就要求重新登录。</li>
+</ul>
+</li>
+</ul>
+<h2 id="redis在这里扮演什么角色？有什么核心的价值？"><a href="#redis在这里扮演什么角色？有什么核心的价值？" class="headerlink" title="redis在这里扮演什么角色？有什么核心的价值？"></a>redis在这里扮演什么角色？有什么核心的价值？</h2><ul>
+<li>redis在这用于存储session。</li>
+<li>这样一来session就不会保存在js变量中，不用担心访问量过大，内存暴增，也不会再正式线上运行时遇到多进程之间内存无法共享的问题。</li>
+</ul>
+<h2 id="nginx的反向代理配置，联调过程中的作用"><a href="#nginx的反向代理配置，联调过程中的作用" class="headerlink" title="nginx的反向代理配置，联调过程中的作用"></a>nginx的反向代理配置，联调过程中的作用</h2><ul>
+<li>使用nginx实现反向代理就可以根据url派发不同的接口，让前端页面可发生ajax请求去获取后端的数据。</li>
+<li><strong>假设前端页面是3000端口，后端页面是8000端口。</strong>那么用户打开页面时打开的就是3000端口的页面，前端页面中使用ajax请求获取数据时就会去获取3000端口下的对应路径的数据。而后端页面是8000端口，所以数据其实保存在8000端口下的对应路径中。<strong>这就无法获取数据</strong>。<strong>此时使用nginx进行反向代理，遇到<code>/api/</code>开头的url时就分配到8000端口，遇到<code>/</code>开头的url时就分配到3000端口，这样就没问题了。</strong></li>
+<li><strong>补充</strong>：使用<strong>react书写前端页面</strong>时，将前端页面经过build编译后生成的html页面放入了后端项目，那么访问的就是<strong>后端项目的接口下的页面</strong>，那么前端页面发送ajax请求时也就不需要nginx进行反向代理了，因为此时前后端是用同一个接口运行起来的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/29/JS%20Web%20API%20%E4%BA%8B%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS Web API 事件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/27/npm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">npm常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#html%E9%A1%B5%E9%9D%A2%E8%81%94%E8%B0%83"><span class="nav-number">1.</span> <span class="nav-text">html页面联调</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%91%E8%B5%B7%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">跑起前端页面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx"><span class="nav-number">2.</span> <span class="nav-text">nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E4%B8%8B%E8%BD%BD%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">nginx下载与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">nginx命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">nginx反向代理的配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83"><span class="nav-number">3.</span> <span class="nav-text">前端联调</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E5%8F%AA%E6%98%BE%E7%A4%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">个人中心只显示自己的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF"><span class="nav-number">3.1.2.</span> <span class="nav-text">后端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E8%B0%83"><span class="nav-number">3.2.</span> <span class="nav-text">联调</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fsession-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">cookie是什么？session 是什么？如何实现登录？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis%E5%9C%A8%E8%BF%99%E9%87%8C%E6%89%AE%E6%BC%94%E4%BB%80%E4%B9%88%E8%A7%92%E8%89%B2%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E6%A0%B8%E5%BF%83%E7%9A%84%E4%BB%B7%E5%80%BC%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">redis在这里扮演什么角色？有什么核心的价值？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%81%94%E8%B0%83%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">nginx的反向代理配置，联调过程中的作用</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>react中模拟假数据的方法总结 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便&#x2F;全能的模拟假数据方式，几经周折后有了这篇文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react中模拟假数据的方法总结">
+<meta property="og:url" content="http://yoursite.com/2020/01/29/react%E4%B8%AD%E6%A8%A1%E6%8B%9F%E5%81%87%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便&#x2F;全能的模拟假数据方式，几经周折后有了这篇文章。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-29T10:47:37.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.373Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-react中模拟假数据的方法总结" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      react中模拟假数据的方法总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/29/react%E4%B8%AD%E6%A8%A1%E6%8B%9F%E5%81%87%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="article-date">
+	  <time datetime="2020-01-29T10:47:37.000Z" itemprop="datePublished">一月 29, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>初次学习react时教程使用的是charles抓包分配假数据的方式来模拟后端数据，但我希望有更加方便&#x2F;全能的模拟假数据方式，几经周折后有了这篇文章。</p>
+<span id="more"></span>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>方法1 使用charles</strong>：<strong>不推荐使用</strong></li>
+<li><strong>方法2 使用mock.js</strong>：适合于<strong>模拟数据较多</strong>的情况</li>
+<li>方法3 ：适合于<strong>模拟数据较少</strong>的情况使用</li>
+</ul>
+<hr>
+<h1 id="使用charles"><a href="#使用charles" class="headerlink" title="使用charles"></a>使用charles</h1><ul>
+<li><strong>不推荐</strong>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/09/Charles%E4%BB%A3%E7%90%86Chrome%E6%8A%93%E5%8F%96localhost%E7%9A%84%E5%8C%85/">因为抓包很麻烦，使用Charles抓取localhost包需要注意更换url</a></li>
+<li><strong>步骤：</strong><ol>
+<li>使用Charles抓包，让Charles代理Chrome，然后将相应的接口通过Map Local Settings设置到本地文件上。 </li>
+<li>在本地文件上存储模拟数据。</li>
+<li>但是Charles代理Chrome后如果想抓localhost的包，那还需要从charlesproxy上转一下，十分麻烦。</li>
+</ol>
+</li>
+<li>具体案例可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#%E4%BD%BF%E7%94%A8Charles%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AEmock">“React高级内容（3）”中的”使用Charles实现本地接口数据mock”</a></li>
+</ul>
+<hr>
+<h1 id="使用mock-js"><a href="#使用mock-js" class="headerlink" title="使用mock.js"></a>使用mock.js</h1><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/19/Mock.js%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">“Mock.js的使用方法”</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/20/react%E4%B8%AD%E4%BD%BF%E7%94%A8mock.js%E6%A8%A1%E6%8B%9F%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/#%E4%BD%BF%E7%94%A8mock-js%E5%90%8E%E7%9A%84%E6%B5%81%E7%A8%8B">“react中使用mock.js模拟接口数据”</a></li>
+<li><strong>步骤：</strong><ol>
+<li>在 <strong>src目录下新建 mock文件夹</strong> 用于存放我们 mock数据 的js文件。</li>
+<li>在mock数据的js文件中<strong>引入mock并输出模拟数据的组件</strong></li>
+<li>在发出AJAX请求的js文件中，<strong>引入的mock组件</strong>，接下来只要<strong>正常书写AJAX请求</strong>即可，<strong>一旦对应的请求发出，Mock就会拦截并返回数据</strong>。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="直接放在项目public文件夹下"><a href="#直接放在项目public文件夹下" class="headerlink" title="直接放在项目public文件夹下"></a>直接放在项目public文件夹下</h1><ul>
+<li>在项目的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/28/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%A0%B7%E5%BC%8F%E5%B8%83%E5%B1%80%E3%80%81Ajax%E8%8E%B7%E5%8F%96%E6%8E%A8%E8%8D%90%E6%95%B0%E6%8D%AE%E3%80%81%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%89/#public%E4%B8%8B%E6%A8%A1%E6%8B%9F%E5%81%87%E6%95%B0%E6%8D%AE"><strong>按照 请求地址 在public文件夹下 新建json文件&#x3D;&gt;将假数据写在json文件中</strong></a>。<ul>
+<li>当js页面中向某个接口发出AJAX请求获取数据时，项目会先去node中找，<strong>找不到就会去public文件夹中找相应的路径下是否有数据</strong>。</li>
+<li><strong>比如</strong>：接口是<code>/api/headerList.json</code>,那可以在public文件夹下&#x3D;&gt;新建api文件夹&#x3D;&gt;新建headerList.json，放置相应假数据</li>
+</ul>
+</li>
+<li><strong>注意：public下的文件夹内不能放js文件，因为他是直接读取数据的，不会进行任何操作！</strong></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/30/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%8D%A2%E9%A1%B5%E5%8A%9F%E8%83%BD%E3%80%81%E6%8D%A2%E9%A1%B5%E6%97%8B%E8%BD%AC%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          简书Header组件开发（热门搜索换页功能、换页旋转动画效果）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/28/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%A0%B7%E5%BC%8F%E5%B8%83%E5%B1%80%E3%80%81Ajax%E8%8E%B7%E5%8F%96%E6%8E%A8%E8%8D%90%E6%95%B0%E6%8D%AE%E3%80%81%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">简书Header组件开发（热门搜索样式布局、Ajax获取推荐数据、代码优化）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8charles"><span class="nav-number">2.</span> <span class="nav-text">使用charles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mock-js"><span class="nav-number">3.</span> <span class="nav-text">使用mock.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%94%BE%E5%9C%A8%E9%A1%B9%E7%9B%AEpublic%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="nav-number">4.</span> <span class="nav-text">直接放在项目public文件夹下</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

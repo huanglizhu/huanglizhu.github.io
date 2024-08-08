@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>call（）与apply（） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="方法重用：call() 和 apply() 不带参数的使用方法非常相似。 带参数的使用方法有所区别：     方法 参数 举例    call() 参数列表 person.fullName.call(person1, “Oslo”, “Norway”);   apply() 数组形式 person.fullName.apply(person1, [“Oslo”, “Norway”]);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call（）与apply（）">
+<meta property="og:url" content="http://yoursite.com/2019/10/08/call()%E4%B8%8Eapply()/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="方法重用：call() 和 apply() 不带参数的使用方法非常相似。 带参数的使用方法有所区别：     方法 参数 举例    call() 参数列表 person.fullName.call(person1, “Oslo”, “Norway”);   apply() 数组形式 person.fullName.apply(person1, [“Oslo”, “Norway”]);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-08T06:26:40.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.098Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-call()与apply()" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      call（）与apply（）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/08/call()%E4%B8%8Eapply()/" class="article-date">
+	  <time datetime="2019-10-08T06:26:40.000Z" itemprop="datePublished">十月 8, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h1 id="方法重用：call-和-apply"><a href="#方法重用：call-和-apply" class="headerlink" title="方法重用：call() 和 apply()"></a>方法重用：call() 和 apply()</h1><ul>
+<li><strong>不带参数</strong>的使用方法非常相似。</li>
+<li><strong>带参数</strong>的使用方法有所区别：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>call()</td>
+<td>参数列表</td>
+<td>person.fullName.call(person1, “Oslo”, “Norway”);</td>
+</tr>
+<tr>
+<td>apply()</td>
+<td>数组形式</td>
+<td>person.fullName.apply(person1, [“Oslo”, “Norway”]);</td>
+</tr>
+</tbody></table>
+<ul>
+<li>如果要使用数组而不是参数列表，则 apply() 方法非常方便。</li>
+</ul>
+<hr>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><p>语句var arr&#x3D;[a,b,c,d];执行后，数组arr中每项都是一个整数，能得到其中最大整数语句有：</p>
+<ol>
+<li><code>Math.max(arr[0], arr[1], arr[2], arr[3])</code></li>
+<li><code>Math.max.call(Math, arr[0], arr[1], arr[2], arr[3])</code></li>
+<li><code>Math.max.apply(Math,arr)</code></li>
+</ol>
+<p>不能得到其中最大整数语句有：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.<span class="built_in">max</span>(arr)</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>Math的max()不支持传入数组,所以错误。</p>
+<hr>
+<h1 id="JavaScript-函数-Call"><a href="#JavaScript-函数-Call" class="headerlink" title="JavaScript 函数 Call"></a>JavaScript 函数 Call</h1><p><strong>可以通过 <code>call()</code>调用属于另一个对象的方法</strong>。</p>
+<h2 id="例子1-普通方法调用"><a href="#例子1-普通方法调用" class="headerlink" title="例子1:普通方法调用"></a>例子1:普通方法调用</h2><ul>
+<li>下面的例子创建了带有三个属性的对象（firstName、lastName、fullName）。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">    fullName: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">person.fullName();		<span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>fullName 属性是一个方法。person 对象是该方法的拥有者。</li>
+<li>fullName 属性属于 person 对象的方法。</li>
+</ul>
+<h2 id="例子2：使用函数-Call"><a href="#例子2：使用函数-Call" class="headerlink" title="例子2：使用函数 Call"></a>例子2：使用函数 Call</h2><p><strong>分别让person1与person2去调用person的fullName 方法</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: function() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;</span><br><span class="line">    firstName:<span class="string">&quot;Steve&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Jobs&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.call(person1);  <span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br><span class="line">person.fullName.call(person2);  <span class="comment">// 将返回 &quot;Steve Jobs&quot;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_call_1">完整例子</a></p>
+<h2 id="例子3：带参数的-call-方法"><a href="#例子3：带参数的-call-方法" class="headerlink" title="例子3：带参数的 call() 方法"></a>例子3：带参数的 call() 方法</h2><p><strong>让person1带着参数”Seattle”, “USA”去调用person的fullName属性（方法）</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  fullName: function(city, country) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName + <span class="string">&quot;,&quot;</span> + city + <span class="string">&quot;,&quot;</span> + country;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  firstName:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">  lastName: <span class="string">&quot;Gates&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">person.fullName.call(person1, <span class="string">&quot;Seattle&quot;</span>, <span class="string">&quot;USA&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_arguments">完整例子</a></p>
+<hr>
+<h1 id="JavaScript-函数-Apply"><a href="#JavaScript-函数-Apply" class="headerlink" title="JavaScript 函数 Apply"></a>JavaScript 函数 Apply</h1><ul>
+<li><code>apply()</code>会改变this的指向，</li>
+<li><strong>可以通过 <code>apply()</code> 方法调用属于另一个对象的方法。</strong></li>
+<li>但不仅限于此，<strong>当设置第一个参数为null时可以在某些本来需要写成遍历数组变量的任务中使用内建的函数</strong>,也就是说此时apply()的作用不是调用属于另一个对象的方法，而是<strong>使参数数组中的每一个元素都去执行func函数</strong>。【如：下方例子“使用Apply()在数组上模拟 max 方法”】</li>
+<li>call()方法的作用和 apply() 方法类似，区别就是call()方法接受的是<strong>参数列表</strong>，而apply()方法接受的是一个<strong>参数数组</strong>。</li>
+<li>apply() 方法调用一个<strong>具有给定this值的函数</strong>，以及作为一个<strong>数组（或类似数组对象</strong>）提供的参数。</li>
+<li><strong>语法</strong>：<code>func.apply(thisArg, [argsArray])</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>thisArg</td>
+<td>可选的。<br/>在 func 函数运行时使用的 this 值。<br/>请注意，this可能不是该方法看到的实际值：如果这个函数处于非严格模式下，则指定为 <strong>null 或 undefined 时this会自动替换为指向全局对象</strong>，原始值会被包装。</td>
+</tr>
+<tr>
+<td>argsArray</td>
+<td>可选的。<br/>一个数组或者类数组对象，其中的<strong>数组元素将作为单独的参数</strong>传给 func 函数。<br/>如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。<br/>从ECMAScript 5 开始可以使用类数组对象。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>返回值</strong>：调用有指定this值和参数的函数的结果。</li>
+<li><strong>描述</strong>：在调用一个存在的函数时，你可以为其指定一个 this 对象。 this 指当前对象，也就是正在调用这个函数的对象。 使用 apply， 你可以只写一次这个方法然后在另一个对象中继承它，而不用在新对象中重复写该方法。<br>你也可以使用 arguments对象作为 argsArray 参数。 arguments 是一个函数的局部变量。 它可以被用作被调用对象的所有未指定的参数。 这样，你在使用apply函数的时候就不需要知道被调用对象的所有参数。 你可以使用arguments来把所有的参数传递给被调用对象。 被调用对象接下来就负责处理这些参数。</li>
+</ul>
+<h2 id="例子：使用函数Apply"><a href="#例子：使用函数Apply" class="headerlink" title="例子：使用函数Apply"></a>例子：使用函数Apply</h2><p><strong>让person1去调用person的fullName 方法</strong>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: function() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName: <span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">    lastName: <span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.apply(person1);  <span class="comment">// 将返回 &quot;Bill Gates&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例子：带参数的-apply-方法"><a href="#例子：带参数的-apply-方法" class="headerlink" title="例子：带参数的 apply() 方法"></a>例子：带参数的 apply() 方法</h2><p>apply() 方法接受<strong>数组中的参数</strong>:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  fullName: function(city, country) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">&quot; &quot;</span> + <span class="keyword">this</span>.lastName + <span class="string">&quot;,&quot;</span> + city + <span class="string">&quot;,&quot;</span> + country;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  firstName:<span class="string">&quot;John&quot;</span>,</span><br><span class="line">  lastName: <span class="string">&quot;Doe&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">person.fullName.apply(person1, [<span class="string">&quot;Oslo&quot;</span>, <span class="string">&quot;Norway&quot;</span>]);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_apply_arguments">完整例子</a></p>
+<hr>
+<h1 id="使用Apply-在数组上模拟-max-方法"><a href="#使用Apply-在数组上模拟-max-方法" class="headerlink" title="使用Apply()在数组上模拟 max 方法"></a>使用Apply()在数组上模拟 max 方法</h1><h2 id="Math的max-方法"><a href="#Math的max-方法" class="headerlink" title="Math的max()方法"></a>Math的max()方法</h2><p>首先我们了解可以使用<code> Math.max()</code> 方法找到（数字列表中的）最大数字：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Math</span>.max(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);  // 会返回 <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_math">完整例子</a></p>
+<h2 id="让数组调用Math的max-方法"><a href="#让数组调用Math的max-方法" class="headerlink" title="让数组调用Math的max()方法"></a>让数组调用Math的max()方法</h2><p> 但是JavaScript <strong>数组没有 max() 方法</strong>，因此我们可以<strong>通过apply()让数组调用 Math的max() 方法</strong>：<br> <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.<span class="built_in">max</span>.apply(<span class="literal">null</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// 也会返回 3</span></span><br></pre></td></tr></table></figure><br> <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_function_call_math_apply_1">完整例子</a></p>
+<p> <strong>第一个参数（null）无关紧要</strong>。在本例中未使用它。这些例子会给出<strong>相同的结果</strong>：</p>
+<ol>
+<li><code>Math.max.apply(Math, [1,2,3]); // 也会返回 3</code></li>
+<li><code>Math.max.apply(&quot; &quot;, [1,2,3]); // 也会返回 3</code></li>
+<li><code>Math.max.apply(0, [1,2,3]); // 也会返回 3</code></li>
+</ol>
+<h3 id="JavaScript-严格模式"><a href="#JavaScript-严格模式" class="headerlink" title="JavaScript 严格模式"></a>JavaScript 严格模式</h3><p>在 JavaScript 严格模式下，如果 <code>apply() </code>方法的第一个参数不是对象，则它将成为被调用函数的所有者（对象）。在“非严格”模式下，它成为全局对象。</p>
+<hr>
+<h1 id="不能改变箭头函数this指向"><a href="#不能改变箭头函数this指向" class="headerlink" title="不能改变箭头函数this指向"></a>不能改变箭头函数this指向</h1><ul>
+<li><strong>注意： call, apply, bind 都不能改变箭头函数中的 this 指向</strong></li>
+<li>因为箭头函数的this只和定义时的作用域this有关，和调用者&#x2F;调用环境无关，也永远不会改变</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/09/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          百度前端技术学院 第四天学习笔记（CSS边框、列表）（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">函数相关知识点补充</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E7%94%A8%EF%BC%9Acall-%E5%92%8C-apply"><span class="nav-number">1.</span> <span class="nav-text">方法重用：call() 和 apply()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E5%87%BD%E6%95%B0-Call"><span class="nav-number">3.</span> <span class="nav-text">JavaScript 函数 Call</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%901-%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">例子1:普通方法调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%902%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0-Call"><span class="nav-number">3.2.</span> <span class="nav-text">例子2：使用函数 Call</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%903%EF%BC%9A%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84-call-%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">例子3：带参数的 call() 方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E5%87%BD%E6%95%B0-Apply"><span class="nav-number">4.</span> <span class="nav-text">JavaScript 函数 Apply</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0Apply"><span class="nav-number">4.1.</span> <span class="nav-text">例子：使用函数Apply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84-apply-%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">例子：带参数的 apply() 方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Apply-%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%8A%E6%A8%A1%E6%8B%9F-max-%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">使用Apply()在数组上模拟 max 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math%E7%9A%84max-%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">Math的max()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9%E6%95%B0%E7%BB%84%E8%B0%83%E7%94%A8Math%E7%9A%84max-%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">让数组调用Math的max()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.2.1.</span> <span class="nav-text">JavaScript 严格模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E6%94%B9%E5%8F%98%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E6%8C%87%E5%90%91"><span class="nav-number">6.</span> <span class="nav-text">不能改变箭头函数this指向</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

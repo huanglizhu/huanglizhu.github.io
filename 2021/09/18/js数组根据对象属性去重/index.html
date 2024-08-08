@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js数组根据对象属性去重 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="数组由多个对象组成，我需要根据对象的某一属性来判断，得到每个数组元素的该属性值不重复的新数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js数组根据对象属性去重">
+<meta property="og:url" content="http://yoursite.com/2021/09/18/js%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%8E%BB%E9%87%8D/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="数组由多个对象组成，我需要根据对象的某一属性来判断，得到每个数组元素的该属性值不重复的新数组">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-18T06:46:35.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.365Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-js数组根据对象属性去重" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      js数组根据对象属性去重
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/09/18/js%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%8E%BB%E9%87%8D/" class="article-date">
+	  <time datetime="2021-09-18T06:46:35.000Z" itemprop="datePublished">九月 18, 2021</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数组由多个对象组成，我需要根据对象的某一属性来判断，得到每个数组元素的该属性值不重复的新数组</p>
+<span id="more"></span>
+
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let arr = [</span><br><span class="line">    &#123;a:<span class="string">&#x27;1&#x27;</span>,b:<span class="string">&#x27;2&#x27;</span>&#125;,</span><br><span class="line">    &#123;a:<span class="string">&#x27;22&#x27;</span>,b:<span class="string">&#x27;33&#x27;</span>&#125;,</span><br><span class="line">    &#123;a:<span class="string">&#x27;123&#x27;</span>,b:<span class="string">&#x27;456&#x27;</span>&#125;,</span><br><span class="line">    &#123;a:<span class="string">&#x27;1&#x27;</span>,b:<span class="string">&#x27;666&#x27;</span>&#125;,</span><br><span class="line">    &#123;a:<span class="string">&#x27;123&#x27;</span>,b:<span class="string">&#x27;168&#x27;</span>&#125;,</span><br><span class="line">]</span><br><span class="line">// 根据a来给arr去重，a值相同时只保存一条数据</span><br><span class="line"><span class="keyword">function</span> <span class="keyword">unique</span>(arr)&#123;</span><br><span class="line">    const map = <span class="built_in">new</span> Map();</span><br><span class="line">    <span class="keyword">return</span> arr.<span class="keyword">filter</span>((item)=&gt; !map.has(item.a) &amp;&amp; map.<span class="keyword">set</span>( item.a, <span class="number">1</span> ))</span><br><span class="line">&#125;</span><br><span class="line">let res = <span class="keyword">unique</span>(arr)</span><br><span class="line">console.log(res)</span><br><span class="line">// <span class="keyword">Array</span> [<span class="keyword">Object</span> &#123; a: &quot;1&quot;, b: &quot;2&quot; &#125;, <span class="keyword">Object</span> &#123; a: &quot;22&quot;, b: &quot;33&quot; &#125;, <span class="keyword">Object</span> &#123; a: &quot;123&quot;, b: &quot;456&quot; &#125;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意：最后得到的是数组不是map对象，map只是在判断是否重复中帮忙用的！</strong></li>
+</ul>
+<h1 id="封装方法"><a href="#封装方法" class="headerlink" title="封装方法"></a>封装方法</h1><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数1：需要去重的数组；参数2：根据哪个属性去重</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">unique</span>(<span class="params">arr,val</span>)&#123;</span><br><span class="line">    const <span class="built_in">map</span> = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">return</span> arr.<span class="built_in">filter</span>(<span class="function">(<span class="params">item</span>)=&gt;</span> !<span class="built_in">map</span>.has(item[val]) &amp;&amp; <span class="built_in">map</span>.set( item[val], <span class="number">1</span> ))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">let uniqueArr = unique(arr,<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考知识点"><a href="#参考知识点" class="headerlink" title="参考知识点"></a>参考知识点</h1><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/es6-map-set.html">菜鸟</a></li>
+</ul>
+<h2 id="Map-prototype-has"><a href="#Map-prototype-has" class="headerlink" title="Map.prototype.has()"></a>Map.prototype.has()</h2><ul>
+<li><code>Map.prototype.has()</code>返回一个<strong>布尔值</strong>，用来<strong>表明map 中是否存在指定元素</strong>.</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map/has">MDN</a></li>
+</ul>
+<h2 id="Map-prototype-set-key-value"><a href="#Map-prototype-set-key-value" class="headerlink" title="Map.prototype.set(key, value)"></a>Map.prototype.set(key, value)</h2><ul>
+<li><code>Map.prototype.set(key, value)</code>为 Map 对象<strong>添加或更新</strong>一个指定了键（key）和值（value）的（新）键值对。</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map/set">MDN</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E9%9B%86%E5%90%88/">遇到的问题集合</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/26/%E7%A0%81%E4%BA%91%20%E5%BC%80%E5%8F%91%E4%B8%AD%E6%8B%B7%E8%B4%9D%E6%96%87%E4%BB%B6%E8%A6%81%E6%85%8E%E9%87%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          码云 开发中拷贝文件要慎重
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/17/await%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97%E4%B8%8E%E5%90%8C%E6%AD%A5%E9%A1%BA%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">await多层嵌套与同步顺序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">封装方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">参考知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">3.1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-prototype-has"><span class="nav-number">3.2.</span> <span class="nav-text">Map.prototype.has()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-prototype-set-key-value"><span class="nav-number">3.3.</span> <span class="nav-text">Map.prototype.set(key, value)</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

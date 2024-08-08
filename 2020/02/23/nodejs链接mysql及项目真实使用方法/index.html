@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nodejs链接mysql及项目真实使用方法 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="mysql 下载mysql 查询mysql版本：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs链接mysql及项目真实使用方法">
+<meta property="og:url" content="http://yoursite.com/2020/02/23/nodejs%E9%93%BE%E6%8E%A5mysql%E5%8F%8A%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="mysql 下载mysql 查询mysql版本：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd31em7m4dj308l06bwf9.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rezykhnj30u309uwg3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd31j48bupj30xd091q69.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rezykhnj30u309uwg3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qpd26f8j30fs0etq4x.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qogwncbj30qe0imjwf.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qwz2i8pj30b206e3z8.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qxktp89j30ee05qwez.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qxrvivpj30g607i0tp.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rt5ddkuj308q04r3z1.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rv5t1pvj30ob0bhdhq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rvg3se5j30h9082t9m.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2s4qxejfj30hj09x0vy.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sbz8jonj30pv0fen2z.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2shwuavzj30um0brjvh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2snz88i5j30rl09cacx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sp8c5g3j30g307v764.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2spztb5wj30d906xgms.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2ssp1sv9j30hf06dq4j.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2svb3g0yj30o906edhm.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sw02gn2j30oy083wgk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sxjukhnj30jx06gtac.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2szg7a3lj30qp078wgj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2t2m9gboj30k5078q4v.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2t33g6jsj30nn076769.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zf3u0kcj30ql08agnz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zjvlg7cj30gf07cabq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zlirkjhj30ry08ndii.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2ztsd3myj30fs0di77d.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zuzu0fpj30xb0g3gny.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30enyo3kj30m407a76n.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30pc4el7j30jz08sacj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30i4s2igj30kn08mgo6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd315kvpdyj3056037jra.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3188zncxj30y007441j.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd325xbhvxj306y04974b.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd333minqhj30q905et9e.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd339ti2qyj30i306vmxt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33ivkck2j30fy06t74s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33kugoeej30ni083acx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33n2069ej30iy0i1q7g.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3oic1ki0j316n08mwgt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3ot5xwdnj30mu0n9423.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3p9ll360j30n70mkdju.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3y5ltyh7j30kl0fw76h.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3yf89fwwj312a0buq7c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3qw8jlsmj30uz0btmzh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3yhwo2fvj31h20keaeq.jpg">
+<meta property="article:published_time" content="2020-02-23T08:47:58.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.368Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd31em7m4dj308l06bwf9.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-nodejs链接mysql及项目真实使用方法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      nodejs链接mysql及项目真实使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/23/nodejs%E9%93%BE%E6%8E%A5mysql%E5%8F%8A%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2020-02-23T08:47:58.000Z" itemprop="datePublished">二月 23, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">下载mysql</a></li>
+<li>查询<strong>mysql版本</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd31em7m4dj308l06bwf9.jpg" alt="查询mysql版本"><span id="more"></span></li>
+<li><strong>mysql只要是5以上的版本</strong>，则数据类型括号中的size统一为<strong>字符长度</strong>，不管<strong>中英文都是统一</strong>的，<strong>比如varchar(10)就代表显示10个汉字&#x2F;英文</strong>。<ul>
+<li><code>varchar(size)</code>或者<code>int(size)</code>等<a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-datatypes.html">SQL数据类型</a>中的**<code>size</code>指的不是字节也不是位！是字符的显示长度！**<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rezykhnj30u309uwg3.jpg" alt="size的解释"></li>
+<li>users表的例子:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd31j48bupj30xd091q69.jpg" alt="users表的例子"></li>
+</ul>
+</li>
+</ul>
+<h1 id="操作mysql的客户端"><a href="#操作mysql的客户端" class="headerlink" title="操作mysql的客户端"></a>操作mysql的客户端</h1><ul>
+<li>操作mysql的客户端有很多，官方出的有workbench，我常用的是SQLyog。</li>
+<li>workbench可以在官网下载.</li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/f71d6037a6a82a1ab641d119.html">SQLyog基本使用方法</a></li>
+</ul>
+<h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><ul>
+<li>建库</li>
+<li>建表</li>
+<li>表操作</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>SQL 对<strong>大小写不敏感</strong>：SELECT 与 select 是相同的。</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-datatypes.html">SQL数据类型</a></li>
+<li><strong>mysql 5以上的版本</strong>，size统一为长度，不管中英文都是统一的<strong>（比如varchar(10)就代表显示10个汉字&#x2F;英文）</strong>。<code>varchar(size)</code>或者<code>int(size)</code>等<a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-datatypes.html">SQL数据类型</a>中的**<code>size</code>指的不是字节也不是位！是字符的显示长度！**<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rezykhnj30u309uwg3.jpg" alt="size的解释"><ul>
+<li><strong>区分 字符 和 字节、位！</strong></li>
+<li>1个字节(Byte)&#x3D; 8位二进制。（1 Byte &#x3D;8 bit）二进制数系统中，每个0或1就是一个位(bit)，是存储信息的最小单位。</li>
+<li><strong>不同编码里，字符和字节的对应关系不同</strong>：<ul>
+<li>在<strong>ASCII码</strong>中，<strong>1个英文字符</strong>（不分大小写）占<strong>1个字节</strong>的空间，<strong>1个中文字符</strong>占<strong>2个字节</strong>的空间。对于符号来说，英文标点占一个字节，中文标点占两个字节。</li>
+<li><strong>UTF-8编码</strong>中，<strong>1个英文字符</strong>等于<strong>1个字节</strong>，<strong>1个中文字符（含繁体）等于3个字节</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><ol>
+<li>创建myblog数据库：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qpd26f8j30fs0etq4x.jpg" alt="创建myblog数据库"></li>
+<li>执行语句进行查询：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qogwncbj30qe0imjwf.jpg" alt="执行语句进行查询"></li>
+</ol>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><ul>
+<li><strong>注意：</strong><ol>
+<li><strong>主键是不能重复的，可以使用AI自动增加</strong></li>
+<li>时间采用毫秒数来计算时，int不够用，可采用bigint</li>
+<li>普通长度可采用varchar，长文可采用longtext</li>
+</ol>
+</li>
+<li>users表和blogs表：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qwz2i8pj30b206e3z8.jpg" alt="users表和blogs表"></li>
+<li>users表：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qxktp89j30ee05qwez.jpg" alt="users表"></li>
+<li>blogs表：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2qxrvivpj30g607i0tp.jpg" alt="blogs表"></li>
+</ul>
+<ol>
+<li><strong>新建表</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rt5ddkuj308q04r3z1.jpg" alt="新建表"></li>
+<li><strong>users表</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rv5t1pvj30ob0bhdhq.jpg" alt="users表"></li>
+<li><strong>blogs表</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2rvg3se5j30h9082t9m.jpg" alt="blogs表"></li>
+<li><strong>补充</strong>：修改表或者删除表：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2s4qxejfj30hj09x0vy.jpg" alt="修改表或者删除表"></li>
+</ol>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><ul>
+<li><strong>注意：id是自增的，你删除了id为1的那条数据，id为2的数据依旧是2，不会改变。</strong></li>
+<li>所有操作之前都要先<strong>选中数据库</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sbz8jonj30pv0fen2z.jpg" alt="选中数据库"></li>
+</ul>
+<h3 id="增加表中数据（insert-into-values）"><a href="#增加表中数据（insert-into-values）" class="headerlink" title="增加表中数据（insert into...values）"></a>增加表中数据（<code>insert into...values</code>）</h3><ul>
+<li>增加第1条数据:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2shwuavzj30um0brjvh.jpg" alt="增加第1条数据"></li>
+<li>增加第2条数据:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2snz88i5j30rl09cacx.jpg" alt="增加第2条数据"></li>
+</ul>
+<h3 id="查询表中数据-select-from"><a href="#查询表中数据-select-from" class="headerlink" title="查询表中数据(select...from)"></a>查询表中数据(<code>select...from</code>)</h3><ul>
+<li><strong><code>*</code>查询所有数据</strong>【尽量少用<code>*</code>，耗费性能，除非查的都是需要的】:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sp8c5g3j30g307v764.jpg" alt="查询所有数据"></li>
+<li><strong>查询单独&#x2F;几列数据</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2spztb5wj30d906xgms.jpg" alt="查询单独/几列数据"></li>
+<li><strong><code>where</code>条件筛选：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2ssp1sv9j30hf06dq4j.jpg" alt="`where`条件筛选"></li>
+<li><strong><code>and</code>并列条件筛选：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2svb3g0yj30o906edhm.jpg" alt="`and`并列条件筛选"></li>
+<li><strong><code>or</code>或者条件筛选：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sw02gn2j30oy083wgk.jpg" alt="`or`或者条件筛选"></li>
+<li><strong><code>like</code>和<code>%</code>模糊条件筛选：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2sxjukhnj30jx06gtac.jpg" alt="模糊条件筛选"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2szg7a3lj30qp078wgj.jpg" alt="模糊条件筛选"></li>
+<li><strong><code>order by xx</code>根据xx排序，顺序输出</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2t2m9gboj30k5078q4v.jpg" alt="根据id顺序输出"></li>
+<li><strong><code>order by xx desc</code>根据xx排序，倒序输出</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2t33g6jsj30nn076769.jpg" alt="根据id倒序输出"></li>
+</ul>
+<h3 id="修改表中数据（update-set）"><a href="#修改表中数据（update-set）" class="headerlink" title="修改表中数据（update...set）"></a>修改表中数据（<code>update...set</code>）</h3><p><strong><code>update...set</code>修改表中数据</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zf3u0kcj30ql08agnz.jpg" alt="修改表中数据"><br>    - 如果<strong>报错</strong>，提示现在使用的是<strong>安全模式</strong>，则输入<code>SET SQL_SAFE_UPDATES=0;</code>再进行修改即可。</p>
+<h3 id="删除表中数据（delete-from）"><a href="#删除表中数据（delete-from）" class="headerlink" title="删除表中数据（delete from）"></a>删除表中数据（<code>delete from</code>）</h3><ul>
+<li><strong><code>delete</code>删除表中数据：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zjvlg7cj30gf07cabq.jpg" alt="删除表中数据"></li>
+<li><strong>注意</strong>：<ol>
+<li>此时使用<code>insert</code>添加李四的数据，可以看到id不是2，是3，因为2已经用过了：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zlirkjhj30ry08ndii.jpg" alt="id是唯一的"> </li>
+<li><strong>实际上不应该直接删除数据</strong>，应该<strong>在表中增加state列用于存储状态，1表示存在（数据可用），0表示已被删除（数据可用），通过修改state的数据来表示该条数据是否删除。</strong></li>
+</ol>
+</li>
+</ul>
+<h4 id="实际运用“软删除”（state与update）"><a href="#实际运用“软删除”（state与update）" class="headerlink" title="实际运用“软删除”（state与update）"></a>实际运用“软删除”（<code>state</code>与<code>update</code>）</h4><ol>
+<li><strong>在users表中增加一列state，默认值为1，表示数据可用</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2ztsd3myj30fs0di77d.jpg" alt="更改表"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd2zuzu0fpj30xb0g3gny.jpg" alt="增加一列state"></li>
+<li><strong>用修改来实现“删除”的功能</strong>，实际是并没删除，只是我们查找数据的时候都只查state为1的可用数据，为0的我们就当已经删除了：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30enyo3kj30m407a76n.jpg" alt="用修改来实现删除的功能"><ul>
+<li><strong>补充：<code>&lt;&gt;</code>表示不等于</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30pc4el7j30jz08sacj.jpg" alt="`&lt;&gt;`表示不等于"></li>
+</ul>
+</li>
+<li><strong>“软删除”的好处就是 数据可恢复：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd30i4s2igj30kn08mgo6.jpg" alt="恢复数据"></li>
+</ol>
+<hr>
+<h2 id="补充blogs表数据"><a href="#补充blogs表数据" class="headerlink" title="补充blogs表数据"></a>补充blogs表数据</h2><ol>
+<li>使用**<code>Date.now()</code>获取时间**，放入表中作为模拟数据：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd315kvpdyj3056037jra.jpg" alt="`Date.now()`获取时间"></li>
+<li><strong>插入2条数据</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3188zncxj30y007441j.jpg" alt="插入2条数据"></li>
+</ol>
+<h2 id="连表查询"><a href="#连表查询" class="headerlink" title="连表查询"></a>连表查询</h2><ul>
+<li>**内连接<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/sql/sql_join_inner.asp">INNER JOIN</a>**：只取两张表有对应关系的记录</li>
+<li><strong>左连接<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/sql/sql_join_left.asp">LEFT JOIN</a></strong>:包含<strong>左边表的全部行</strong>（不管右边的表中是否存在与它们匹配的行），以及<strong>右边表</strong>中全部<strong>匹配的行</strong>;</li>
+<li><strong>右连接<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/sql/sql_join_right.asp">RIGHT JOIN</a></strong>:包含<strong>右边表的全部行</strong>（不管左边的表中是否存在与它们匹配的行），以及<strong>左边表</strong>中全部<strong>匹配的行</strong>;</li>
+<li><strong>全连接<a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-join-full.html">FULL OUTER JOIN</a></strong>:包含<strong>左、右两个表的全部行</strong>，不管另外一边的表中是否存在与它们匹配的行;</li>
+</ul>
+<hr>
+<h1 id="nodejs操作mysql"><a href="#nodejs操作mysql" class="headerlink" title="nodejs操作mysql"></a>nodejs操作mysql</h1><ul>
+<li>在实际开发中我们当然不可能借助sqlyog对数据库进行操作，这就需要node直接连接数据库了，思路其实和使用sqlyog差不多。</li>
+<li><strong>示例</strong>：用demo演示，不考虑真实使用</li>
+<li><strong>封装</strong>：将其封装为系统可用的工具（API）</li>
+<li><strong>使用</strong>：项目中通过API直接操作数据库，不再使用假数据</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ol>
+<li>新建<code>mysql-test</code>文件夹-<strong>初始化node环境</strong>：<code>npm init -y</code></li>
+<li>使用<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/NPM?from=tnpm">淘宝镜像</a><strong>安装mysql</strong>：<code>npm i mysql --registry=https://registry.npm.taobao.org</code></li>
+<li><strong>根目录下新建index.js</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd325xbhvxj306y04974b.jpg" alt="新建index.js"></li>
+<li>在index.js中：<ol>
+<li><strong>引入 mysql</strong></li>
+<li>使用<code>mysql.createConnection</code><strong>创建链接对象</strong>（相当于登录sqlyog）</li>
+<li>使用<code>链接对象.connect</code><strong>开始连接</strong></li>
+<li>使用<code>链接对象.query</code><strong>执行sql语句</strong><ul>
+<li>query():<ul>
+<li>参数1：sql语句</li>
+<li>参数2：回调方法<ul>
+<li>参数1：错误执行的返回值</li>
+<li>参数2：成功时的返回值<ul>
+<li>查询：返回查询到的内容(数组)</li>
+<li>修改数据：返回OkPacket对象</li>
+<li>增加数据：返回OkPacket对象（<code>insertId</code>发生改变）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用<code>链接对象.end</code><strong>关闭连接</strong>(不关闭数据库的链接则无法结束进程)</li>
+</ol>
+</li>
+</ol>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&quot;mysql&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建链接对象con</span></span><br><span class="line"><span class="keyword">const</span> con = mysql.<span class="title function_">createConnection</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="attr">user</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&#x27;rootroot&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>: <span class="string">&quot;3306&quot;</span>,</span><br><span class="line">  <span class="comment">// database为需要链接的数据库名称</span></span><br><span class="line">  <span class="attr">database</span>: <span class="string">&#x27;myblog&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始链接</span></span><br><span class="line">con.<span class="title function_">connect</span>();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 执行sql语句</span></span><br><span class="line"><span class="keyword">const</span> sql=<span class="string">&quot;SELECT * FROM users;&quot;</span>;</span><br><span class="line">con.<span class="title function_">query</span>(sql, <span class="function">(<span class="params">err, result</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭连接</span></span><br><span class="line">con.<span class="title function_">end</span>();</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果</strong>：<br><strong>返回值是查询的内容，</strong>其实和sqlyog是一样的，只是sqlyog是表格形式，而这里是json对象的形式：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd333minqhj30q905et9e.jpg" alt="运行结果"></p>
+<hr>
+<h3 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h3><p>在上面的代码中<strong>修改sql语句</strong>（注意引号）：</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const sql = &#x27;<span class="keyword">update</span> users <span class="keyword">set</span> realname=<span class="string">&quot;李四2&quot;</span> <span class="keyword">where</span> username=<span class="string">&quot;lisi&quot;</span>;&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果</strong>：<br><strong>返回值为OkPacket对象，对象中有一些数据表示是否修改成功</strong>，那么实际运用的时候我们就可以通过这些数据来返回true&#x2F;false给前端来代表是否修改成功：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd339ti2qyj30i306vmxt.jpg" alt="运行结果"></p>
+<hr>
+<h3 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h3><p>在上面的代码中<strong>修改sql语句</strong>（注意引号）：</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const sql = &#x27;<span class="keyword">INSERT</span> <span class="keyword">INTO</span> blogs(<span class="built_in">title</span>,content,createtime,author) <span class="keyword">VALUES</span> (<span class="string">&quot;标题C&quot;</span>,<span class="string">&quot;内容C&quot;</span>,<span class="number">1584888893495</span>,<span class="string">&quot;lisi&quot;</span>);&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果</strong>：<br><strong>返回值为OkPacket对象，对象中insertId:</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33ivkck2j30fy06t74s.jpg" alt="运行结果"></p>
+<p><strong>OkPacket对象中insertId对应数据表中的id</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33kugoeej30ni083acx.jpg" alt="sqlyog验证"></p>
+<p><strong>结合blog-1中的blog.js来看</strong>，我们<strong>模拟的假数据中的id</strong>就是通过<strong>OkPacket对象中insertId</strong>得到的：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd33n2069ej30iy0i1q7g.jpg" alt="blog-1中的blog.js"></p>
+<hr>
+<h1 id="node项目真实使用mysql的方法"><a href="#node项目真实使用mysql的方法" class="headerlink" title="node项目真实使用mysql的方法"></a>node项目真实使用mysql的方法</h1><h2 id="nodejs-链接-mysql-做成工具（API）"><a href="#nodejs-链接-mysql-做成工具（API）" class="headerlink" title="nodejs 链接 mysql 做成工具（API）"></a>nodejs 链接 mysql 做成工具（API）</h2><p><strong>总结</strong>：src-conf-db.js中根据<strong>环境变量NODE_ENV</strong>进行<strong>链接的不同的数据库</strong>配置。scr-db-mysql.js中<strong>引用db.js</strong>链接不同数据库后，生成<strong>执行sql语句的函数，输出供外界使用。</strong></p>
+<ol>
+<li>在<strong>blog-1</strong>文件夹中按照上面<strong>安装mysql</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3oic1ki0j316n08mwgt.jpg" alt="安装mysql"></li>
+<li><strong>src下新建conf文件夹-新建db.js，配置数据库信息</strong>：<ul>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3ot5xwdnj30mu0n9423.jpg" alt="conf-db.js"></li>
+<li><strong>注意</strong>：这里是根据<strong>环境变量</strong>（package.json中设置的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/#cross-env">NODE_ENV</a>）<strong>链接不同的数据库</strong>的，<strong>线下是连接本地数据库</strong>，线上就不能连接本地数据库了(但是现在我们没有服务器，所以还是先使用本地的数据库)。</li>
+</ul>
+</li>
+<li><strong>scr下新建db文件夹-新建mysql.js，创建统一执行sql语句的函数</strong>：<ul>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3p9ll360j30n70mkdju.jpg" alt="scr-db-mysql.js"></li>
+<li>其实这里和上面“示例”逻辑就是一样的，只是<strong>链接对象的配置信息从conf-db.js中获取</strong>。</li>
+<li>我们需要执行了函数后能返回数据，又因执行sql语句过程是异步的，所以<strong>使用Promise将query的函数2的两个参数返回值返回</strong>，最终返回Promise对象，则外界可通过Promise对象的then()&#x2F;catch()拿到返回数据。</li>
+<li><strong>在这不能使用<code>end</code>结束链接</strong>了，因为我们只创建一个链接对象con，而我们多次调用exec函数执行sql语句都是针对对象con的，如果我们使用了<code>end</code>，那么第一次使用exec以后就没有链接对象con，即无法多次执行exec函数。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="API对接mysql（博客列表）"><a href="#API对接mysql（博客列表）" class="headerlink" title="API对接mysql（博客列表）"></a>API对接mysql（博客列表）</h2><ol>
+<li>在<strong>controller-blog.js中，引入db-mysql.js中的exec函数</strong>，先<strong>将getList()中返回的假数据改为数据库中读取出来的</strong>：<ul>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3y5ltyh7j30kl0fw76h.jpg" alt="controller-blog.js"></li>
+<li><strong>注意：</strong></li>
+<li><strong><code>where 1=1</code>是为了保证查询语句一直正确存在的</strong>，因为1&#x3D;1是true，所以无论有没有author&#x2F;keyword都能保证sql语句正确执行。</li>
+<li><strong>exec函数返回的是Promise对象</strong>。</li>
+</ul>
+</li>
+<li>在<strong>router-blog.js中</strong>，使得匹配上该路由时<strong>返回从数据库中读出的数据（数组）</strong>：<ul>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3yf89fwwj312a0buq7c.jpg" alt="router-blog.js"></li>
+<li><strong>注意：</strong></li>
+<li><strong>controller-blog.js中返回的是Promise对象，通过Promise对象的then()即可获取返回数据。</strong></li>
+<li>这里路由<strong>返回的也是Promise对象</strong>。</li>
+</ul>
+</li>
+<li>路由写完就被app.js引用，然后显示在页面上，所以现在<strong>将app.js中显示在页面上的数据改为从路由中获取的数据</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3qw8jlsmj30uz0btmzh.jpg" alt="app.js"></li>
+<li>测试：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gd3yhwo2fvj31h20keaeq.jpg" alt="测试"></li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Node-js%E5%AD%A6%E4%B9%A0/">Node.js学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/24/nodejs%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B8%ADAPI%E5%AF%B9%E6%8E%A5mysql/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          nodejs博客项目中API对接mysql
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/22/%E5%80%9F%E5%8A%A9coding%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">借助coding管理项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">1.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9Cmysql%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">操作mysql的客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">3.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">3.2.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8"><span class="nav-number">3.3.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">3.4.</span> <span class="nav-text">表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE%EF%BC%88insert-into-values%EF%BC%89"><span class="nav-number">3.4.1.</span> <span class="nav-text">增加表中数据（insert into...values）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE-select-from"><span class="nav-number">3.4.2.</span> <span class="nav-text">查询表中数据(select...from)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE%EF%BC%88update-set%EF%BC%89"><span class="nav-number">3.4.3.</span> <span class="nav-text">修改表中数据（update...set）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE%EF%BC%88delete-from%EF%BC%89"><span class="nav-number">3.4.4.</span> <span class="nav-text">删除表中数据（delete from）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8%E2%80%9C%E8%BD%AF%E5%88%A0%E9%99%A4%E2%80%9D%EF%BC%88state%E4%B8%8Eupdate%EF%BC%89"><span class="nav-number">3.4.4.1.</span> <span class="nav-text">实际运用“软删除”（state与update）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85blogs%E8%A1%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">3.5.</span> <span class="nav-text">补充blogs表数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.6.</span> <span class="nav-text">连表查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E6%93%8D%E4%BD%9Cmysql"><span class="nav-number">4.</span> <span class="nav-text">nodejs操作mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.1.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.2.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.3.</span> <span class="nav-text">增加数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node%E9%A1%B9%E7%9B%AE%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">node项目真实使用mysql的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-%E9%93%BE%E6%8E%A5-mysql-%E5%81%9A%E6%88%90%E5%B7%A5%E5%85%B7%EF%BC%88API%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">nodejs 链接 mysql 做成工具（API）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E5%AF%B9%E6%8E%A5mysql%EF%BC%88%E5%8D%9A%E5%AE%A2%E5%88%97%E8%A1%A8%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">API对接mysql（博客列表）</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Charles代理Chrome抓取localhost的包 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="慕课实战遇到的问题在React中想使用Charles实现接口数据模拟。发现两个问题：1. Charles无法代理Chrome，所以一开始没抓到chrome的包。2. Charles无法抓localhost的包，导致无法实现接口模拟。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Charles代理Chrome抓取localhost的包">
+<meta property="og:url" content="http://yoursite.com/2020/01/09/Charles%E4%BB%A3%E7%90%86Chrome%E6%8A%93%E5%8F%96localhost%E7%9A%84%E5%8C%85/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="慕课实战遇到的问题在React中想使用Charles实现接口数据模拟。发现两个问题：1. Charles无法代理Chrome，所以一开始没抓到chrome的包。2. Charles无法抓localhost的包，导致无法实现接口模拟。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpu7zyacj30pl0hdwfu.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmptioxllj30zs0nrn59.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpwwjwpaj30ls0e00ti.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpxctqedj30lh07maah.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpykg5swj30pf0gata9.jpg">
+<meta property="article:published_time" content="2020-01-09T07:44:55.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.275Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpu7zyacj30pl0hdwfu.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Charles代理Chrome抓取localhost的包" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Charles代理Chrome抓取localhost的包
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/09/Charles%E4%BB%A3%E7%90%86Chrome%E6%8A%93%E5%8F%96localhost%E7%9A%84%E5%8C%85/" class="article-date">
+	  <time datetime="2020-01-09T07:44:55.000Z" itemprop="datePublished">一月 9, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="慕课实战遇到的问题"><a href="#慕课实战遇到的问题" class="headerlink" title="慕课实战遇到的问题"></a>慕课实战遇到的问题</h1><h2 id="在React中想使用Charles实现接口数据模拟。发现两个问题：1-Charles无法代理Chrome，所以一开始没抓到chrome的包。2-Charles无法抓localhost的包，导致无法实现接口模拟。"><a href="#在React中想使用Charles实现接口数据模拟。发现两个问题：1-Charles无法代理Chrome，所以一开始没抓到chrome的包。2-Charles无法抓localhost的包，导致无法实现接口模拟。" class="headerlink" title="在React中想使用Charles实现接口数据模拟。发现两个问题：1. Charles无法代理Chrome，所以一开始没抓到chrome的包。2. Charles无法抓localhost的包，导致无法实现接口模拟。"></a>在React中想使用Charles实现接口数据模拟。<br>发现两个问题：<br>1. Charles无法代理Chrome，所以一开始没抓到chrome的包。<br>2. Charles无法抓localhost的包，导致无法实现接口模拟。<br><span id="more"></span></h2><h1 id="解决：Charles代理Chrome"><a href="#解决：Charles代理Chrome" class="headerlink" title="解决：Charles代理Chrome"></a>解决：Charles代理Chrome</h1><p><strong>Charles在Windows下，默认只代理IE浏览器，对 Chrome 需要设置后才能抓包。</strong><br><a target="_blank" rel="noopener" href="https://www.switchysharp.com/install.html">SwitchySharp工具下载地址</a><br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/1709ad805d6a4a4634c4f0b4.html">Chrome设置教程</a></p>
+<hr>
+<h1 id="解决：Charles抓localhost的包"><a href="#解决：Charles抓localhost的包" class="headerlink" title="解决：Charles抓localhost的包"></a>解决：Charles抓localhost的包</h1><p>弄好之后可以发现确实可以抓取chrome的包，但并不能抓取localhost的包。</p>
+<h2 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h2><p>Charles官方对不能捕获localhost本地网页的说明，以及解决方法。全文大致意思如下：</p>
+<blockquote>
+</blockquote>
+<p>Localhost流量不会出现在Charles中<br>某些系统被硬编码为不使用代理进行本地主机流量，因此当您连接到http：&#x2F;&#x2F; localhost &#x2F;时，它不会显示在Charles中。<br>解决方法是连接到<a target="_blank" rel="noopener" href="http://localhost.charlesproxy.com/%E3%80%82%E8%BF%99%E6%8C%87%E5%90%91IP%E5%9C%B0%E5%9D%80127.0.0.1%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%AE%83%E5%BA%94%E8%AF%A5%E4%B8%8Elocalhost%E5%AE%8C%E5%85%A8%E7%9B%B8%E5%90%8C%EF%BC%8C%E4%BD%86%E5%AE%83%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E4%BA%8E%E5%AE%83%E5%B0%86%E9%80%9A%E8%BF%87Charles%E3%80%82%E6%97%A0%E8%AE%BACharles%E6%98%AF%E5%9C%A8%E8%B7%91%E8%BF%98%E6%98%AF%E4%BD%A0%E5%9C%A8%E4%BD%BF%E7%94%A8Charles%EF%BC%8C%E8%BF%99%E9%83%BD%E4%BC%9A%E6%9C%89%E6%95%88%E3%80%82%E5%A6%82%E6%9E%9C%E6%82%A8%E4%BD%BF%E7%94%A8%E5%85%B6%E4%BB%96%E7%AB%AF%E5%8F%A3%EF%BC%8C%E4%BE%8B%E5%A6%828080%EF%BC%8C%E5%8F%AA%E9%9C%80%E5%83%8F%E5%BE%80%E5%B8%B8%E4%B8%80%E6%A0%B7%E6%B7%BB%E5%8A%A0%E5%AE%83%EF%BC%8C%E4%BE%8B%E5%A6%82localhost.charlesproxy.com:8080%E3%80%82">http://localhost.charlesproxy.com/。这指向IP地址127.0.0.1，因此它应该与localhost完全相同，但它的优势在于它将通过Charles。无论Charles是在跑还是你在使用Charles，这都会有效。如果您使用其他端口，例如8080，只需像往常一样添加它，例如localhost.charlesproxy.com:8080。</a><br>您还可以在该域前放置任何内容，例如myapp.localhost.charlesproxy.com，它也将始终解析为127.0.0.1。<br>或者，您可以尝试添加<code>.</code>在localhost之后，或用本机名称替换localhost，或使用本地链接IP地址（例如192.168.1.2）。<br>如果Charles正在运行并且您使用Charles作为代理，那么您也可以使用local.charles作为localhost的替代方案。请注意，这仅在您使用Charles作为代理时才有效，因此上述方法是首选方法，除非您特别希望请求在不使用Charles时失败。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>原本想抓取的网址：<code>http://localhost:3000/</code><br>现在换成：<code>http://localhost.charlesproxy.com:3000/</code><br><strong>成功抓包</strong>（例子可看下方）</p>
+<hr>
+<h1 id="接口模拟例子"><a href="#接口模拟例子" class="headerlink" title="接口模拟例子"></a>接口模拟例子</h1><p>桌面右键新建文件<code>todolist.json</code>并放入数据（这就是<strong>接口的模拟数据</strong>）:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[<span class="string">&quot;你好呀&quot;</span>,<span class="string">&quot;你叫什么名字？&quot;</span>,<span class="string">&quot;我是胡萝卜&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="http://localhost.charlesproxy.com:3000/%E4%B8%AD%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%9C%A8%E7%88%B6%E7%BB%84%E4%BB%B6TodoList.js%E4%B8%AD%E8%AE%BE%E7%BD%AE%E7%9A%84**AJAX%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80**%EF%BC%9A">http://localhost.charlesproxy.com:3000/中我们可以看到在父组件TodoList.js中设置的**AJAX请求的接口地址**：</a><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpu7zyacj30pl0hdwfu.jpg" alt="接口地址"></p>
+<p><strong>希望在 <code>TodoList.js </code>组件中发送AJAX请求时将桌面上的<code>todolist.json</code>文件内的数据返回过来，则需要借助 <code>Charles</code> 进行设置。</strong><br><strong>打开 Charles</strong>,进行设置，抓取到请求的接口地址是“<a target="_blank" rel="noopener" href="http://localhost.charlesproxy.com:3000/api/todolist%E2%80%9D%E6%97%B6%E5%B0%B1%E8%BF%94%E5%9B%9E%60todolist.json%60%E6%96%87%E4%BB%B6%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9A">http://localhost.charlesproxy.com:3000/api/todolist”时就返回`todolist.json`文件的数据：</a><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmptioxllj30zs0nrn59.jpg" alt="步骤1"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpwwjwpaj30ls0e00ti.jpg" alt="步骤2"></p>
+<p><strong>发送的AJAX请求 数据获取成功</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpxctqedj30lh07maah.jpg" alt="发送的AJAX请求 数据获取成功"></p>
+<p><strong>可以看到获取到的数据</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmpykg5swj30pf0gata9.jpg" alt="可以看到获取到的数据"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/11/%E5%85%B3%E4%BA%8EsetState()/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          关于setState()
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React 高级内容（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%85%95%E8%AF%BE%E5%AE%9E%E6%88%98%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">慕课实战遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8React%E4%B8%AD%E6%83%B3%E4%BD%BF%E7%94%A8Charles%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E6%A8%A1%E6%8B%9F%E3%80%82%E5%8F%91%E7%8E%B0%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A1-Charles%E6%97%A0%E6%B3%95%E4%BB%A3%E7%90%86Chrome%EF%BC%8C%E6%89%80%E4%BB%A5%E4%B8%80%E5%BC%80%E5%A7%8B%E6%B2%A1%E6%8A%93%E5%88%B0chrome%E7%9A%84%E5%8C%85%E3%80%822-Charles%E6%97%A0%E6%B3%95%E6%8A%93localhost%E7%9A%84%E5%8C%85%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E6%A8%A1%E6%8B%9F%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">在React中想使用Charles实现接口数据模拟。发现两个问题：1. Charles无法代理Chrome，所以一开始没抓到chrome的包。2. Charles无法抓localhost的包，导致无法实现接口模拟。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%EF%BC%9ACharles%E4%BB%A3%E7%90%86Chrome"><span class="nav-number">2.</span> <span class="nav-text">解决：Charles代理Chrome</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%EF%BC%9ACharles%E6%8A%93localhost%E7%9A%84%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">解决：Charles抓localhost的包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E8%A7%A3%E9%87%8A"><span class="nav-number">3.1.</span> <span class="nav-text">官方解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%A8%A1%E6%8B%9F%E4%BE%8B%E5%AD%90"><span class="nav-number">4.</span> <span class="nav-text">接口模拟例子</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

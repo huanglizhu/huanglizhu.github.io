@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS 突然想起的知识点汇总 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="记录一些突然想起来&#x2F;容易混淆&#x2F;难记的知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 突然想起的知识点汇总">
+<meta property="og:url" content="http://yoursite.com/2020/07/04/JS%20%E7%AA%81%E7%84%B6%E6%83%B3%E8%B5%B7%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="记录一些突然想起来&#x2F;容易混淆&#x2F;难记的知识点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_easy.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_result.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg">
+<meta property="article:published_time" content="2020-07-04T01:15:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.065Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS 突然想起的知识点汇总" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS 突然想起的知识点汇总
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/07/04/JS%20%E7%AA%81%E7%84%B6%E6%83%B3%E8%B5%B7%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" class="article-date">
+	  <time datetime="2020-07-04T01:15:00.000Z" itemprop="datePublished">七月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录一些突然想起来&#x2F;容易混淆&#x2F;难记的知识点</p>
+<span id="more"></span>
+
+<h1 id="箭头函数和普通函数的区别"><a href="#箭头函数和普通函数的区别" class="headerlink" title="箭头函数和普通函数的区别"></a>箭头函数和普通函数的区别</h1><p>参考：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB">ES6扩展 函数扩展 箭头函数”箭头函数和普通函数的区别”</a></p>
+<ol start="2">
+<li>this指向父级作用域的this。</li>
+<li>不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。（可以拿到event函数）</li>
+<li><strong>没有arguments对象</strong>，如要使用可在箭头函数中用<strong>剩余参数<code>...</code>将传入的参数聚合成数组</strong>:<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭头函数中调用arguments报错</span></span><br><span class="line">const arg=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(arguments);</span><br><span class="line">&#125;</span><br><span class="line">arg(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//报错：arguments is not defined at arg</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以使用 剩余参数运算符 代替arguments去拿传入的参数</span></span><br><span class="line">const arg=<span class="function">(<span class="params">...args</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(args);</span><br><span class="line">&#125;</span><br><span class="line">arg(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//[1, 2, 3]</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="箭头函数作用"><a href="#箭头函数作用" class="headerlink" title="箭头函数作用"></a>箭头函数作用</h1><ul>
+<li>参考：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this">ES6扩展 函数扩展 箭头函数”回调函数中的this”</a></li>
+<li><strong>解决问题：</strong>回调函数中的this默认是指向windows</li>
+<li><strong>解决方法</strong>：<ul>
+<li><strong>方法1：</strong>在使用回调函数之前利用<strong>闭包的特性</strong>在外层函数中使用一个变量<code>_this</code>保存<code>this</code>，然后在回调函数中获取父级作用域的<code>_this</code>(<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E9%97%AD%E5%8C%85%E8%8E%B7%E5%8F%96">例子</a>)</li>
+<li><strong>方法2：</strong>将<strong>回调函数改为箭头函数</strong>，这样this取到外层的this，即我们需要的对象（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/12/ES6%E6%89%A9%E5%B1%95%20%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E8%8E%B7%E5%8F%96">例子</a>）</li>
+</ul>
+</li>
+</ul>
+<h1 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h1><ul>
+<li>参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/30/JS%20Web%20API%20%E5%AD%98%E5%82%A8/#localStorage%E5%92%8CsessionStorage">JS Web API 存储”localStorage和sessionStorage”</a></li>
+<li>注意<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/30/JS%20Web%20API%20%E5%AD%98%E5%82%A8/#localStorage%E5%92%8CsessionStorage">如何使用sessionStorage和LoacalStorage</a>:setItem getItem</li>
+</ul>
+<h2 id="cookie有效期"><a href="#cookie有效期" class="headerlink" title="cookie有效期"></a>cookie有效期</h2><p>已实验过cookie如果不设置过期时间，浏览器关闭就会消失。</p>
+<h2 id="浏览器缓存-与-http缓存"><a href="#浏览器缓存-与-http缓存" class="headerlink" title="浏览器缓存 与 http缓存"></a>浏览器缓存 与 http缓存</h2><ul>
+<li>参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98">前端基础-HTTP HTML 浏览器（2）”说一下浏览器缓存”</a></li>
+<li><strong>注意：http缓存也是在客户端缓存的</strong></li>
+<li><strong>前端缓存：</strong><ul>
+<li><strong>浏览器缓存：</strong><ul>
+<li>Cookie</li>
+<li>SessionStorage</li>
+<li>LoacalStorage</li>
+</ul>
+</li>
+<li><strong>http缓存：</strong><ul>
+<li><strong>强缓存：</strong><ul>
+<li><strong>Cache-Control</strong>：相对时间</li>
+<li><strong>Expires</strong>：基于服务器端的绝对时间</li>
+</ul>
+</li>
+<li><strong>协商缓存：</strong><ul>
+<li><strong>Last-Modified</strong>（响应头）与<strong>If-Modified-Since</strong>（请求头）：<strong>资源的最后修改时间</strong></li>
+<li><strong>ETag</strong>（响应头）与<strong>If-None-Match</strong>（请求头）：<strong>资源的唯一标识（一个字符串，类似指纹），由内容生成</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="const定义引用类型-属性（值）可变"><a href="#const定义引用类型-属性（值）可变" class="headerlink" title="const定义引用类型 属性（值）可变"></a>const定义引用类型 属性（值）可变</h1><ul>
+<li><strong>const作为常量，如果定义一个对象，她的属性值可变吗？</strong></li>
+<li><strong>可变</strong>，且可增加属性，不可变的只是对象的指向地址。（可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/01/let%E4%B8%8Econst/#%E5%B8%B8%E9%87%8F%E4%B8%BA%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E8%AF%A5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B">let命令与const命令“常量为引用类型的时候可以修改该引用类型”</a>）</li>
+<li>如需<strong>冻结常量对象使其属性与属性值不能被修改</strong>可使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/01/let%E4%B8%8Econst/#%E5%B8%B8%E9%87%8F%E4%B8%BA%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%97%B6%E9%9C%80%E8%A6%81%E5%86%BB%E7%BB%93%E6%9D%A5%E9%98%B2%E6%AD%A2%E8%A2%AB%E4%BF%AE%E6%94%B9"><code>Object.freeze(常量名)</code></a></li>
+</ul>
+<h1 id="JS基础知识面试题（1）中"><a href="#JS基础知识面试题（1）中" class="headerlink" title="JS基础知识面试题（1）中"></a>JS基础知识面试题（1）中</h1><p><strong>手写简易jquery+手写原型链继承（html是jquery的方法吧？）都要注意使用this</strong></p>
+<h2 id="for-in与for-of"><a href="#for-in与for-of" class="headerlink" title="for-in与for-of"></a>for-in与for-of</h2><ul>
+<li><strong>in 运算符:</strong><ul>
+<li>如果指定的 <strong>属性</strong> 在指定的<strong>对象或其原型链</strong>中，则in 运算符返回true。</li>
+<li>如果指定的 <strong>数组索引</strong> 在<strong>数组</strong>中，则in 运算符返回true。</li>
+</ul>
+</li>
+<li><code>for-in</code>与<code>for-of</code>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/13/ES6%E6%89%A9%E5%B1%95%20%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95/#%E8%A1%A5%E5%85%85%EF%BC%9Afor-in%E4%B8%8E%E3%80%90ES6%E5%BC%95%E5%85%A5%E7%9A%84%E3%80%91for-of">《ES6扩展 对象扩展》</a></li>
+</ul>
+<h2 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h2><ul>
+<li><strong>不使用<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of">for-of</a>的原因：</strong> 数组元素&#x2F;对象属性为不可迭代的对象时会报错。</li>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D">JS浅拷贝与深拷贝</a></li>
+<li><strong>浅拷贝与深拷贝：</strong><ul>
+<li><strong>对象：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#Object-assign">let copyObj &#x3D; Object.assign({}, obj)</a></li>
+<li><strong>数组：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#Array-prototype-slice%E6%96%B9%E6%B3%95">let copyArr &#x3D; arrayObj.slice(0)</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#Array-prototype-concat%E6%96%B9%E6%B3%95">let copyArr &#x3D; arrayObject.concat()</a></li>
+</ul>
+</li>
+<li><strong>数组&#x2F;对象 通用深拷贝：</strong> <ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#JSON-parse-JSON-stringify">JSON.parse(JSON.stringify())</a><strong>缺点</strong>：无法实现对 数组&#x2F;对象中 方法 的深拷贝，会显示为undefined</li>
+<li><strong>递归拷贝</strong>：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89/#%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D">参考“JS基础知识面试题（1）”</a></li>
+<li><strong>函数库lodash</strong>中的<code>_.cloneDeep()</code>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/#%E5%87%BD%E6%95%B0%E5%BA%93lodash">参考</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Promise的then函数返回值"><a href="#Promise的then函数返回值" class="headerlink" title="Promise的then函数返回值"></a>Promise的then函数返回值</h1><ul>
+<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#then%E5%92%8Ccatch%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E7%8A%B6%E6%80%81%E7%9A%84%E5%8F%98%E5%8C%96">JS异步进阶“then和catch如何影响状态的变化”</a></li>
+<li><strong>Promise的then函数中如果返回普通对象会被自动转为Promise对象吗？</strong>（问题来源于<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/06/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%882%EF%BC%89/#%E6%89%8B%E5%86%99Promise%E5%8A%A0%E8%BD%BD%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%89%87">JS基础知识面试题（2）”手写Promise加载一张图片”</a>）</li>
+<li><strong>会</strong><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const p = <span class="built_in">Promise</span>.resolve().<span class="keyword">then</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="params">()</span> =&gt;</span> console.log(<span class="string">&#x27;p&#x27;</span>, p)) <span class="regexp">//</span> p <span class="built_in">Promise</span> &#123;&lt;fulfilled&gt;: <span class="number">100</span>&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="字符串、数组的常用方法【待记忆】"><a href="#字符串、数组的常用方法【待记忆】" class="headerlink" title="字符串、数组的常用方法【待记忆】"></a>字符串、数组的常用方法【待记忆】</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/">JS对象之string</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/">JS对象之数组(1)</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/">JS对象之数组(2)</a></li>
+<li><strong>字符串和数组都有的方法：</strong><ul>
+<li><strong>位置查找（注意参数不同）：</strong><ul>
+<li><strong>字符串：</strong><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#indexOf-%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%B2%EF%BC%89%E7%9A%84%E4%BD%8D%E7%BD%AE">stringObject.indexOf(“o”)</a>没有找到该子字符串则返回-1</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#lastIndexOf-%E5%80%92%E7%9D%80%E6%9F%A5%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%EF%BC%88%E4%B8%B2%EF%BC%89%E7%9A%84%E4%BD%8D%E7%BD%AE">stringObject.lastIndexOf(“o”)</a></li>
+<li><strong>字符串独有的：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#charAt-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6">字符查找 stringObject.charAt(index)</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#charCodeAt-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E7%9A%84%E7%BC%96%E7%A0%81">编码查找stringObject.charCodeAt(index)</a></li>
+</ul>
+</li>
+<li><strong>数组：</strong><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#indexOf-%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B%E6%89%BE">arrayObject.indexOf(searchvalue,startindex可选)</a>返回数组下标，如有多个就返回第一个的位置</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#lastIndexOf-%E4%BB%8E%E5%B0%BE%E5%BC%80%E5%A7%8B%E6%89%BE">arrayObject.lastIndexOf(searchvalue,startindex可选)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>截取：(不会改变原始字符串&#x2F;数组)</strong>** slice(start,end)截取字符串&#x2F;部分元素**</li>
+<li><strong>字符串截取：(不会改变原始字符串)</strong> <ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#substring">substring(start,end)</a>与slice的区别：<ol>
+<li>当参数为负数时,自动将参数转换为0</li>
+<li>substring()会将较小的数作为开始位置,将较大的数作为结束位置</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#substr">substr(start,len)</a><strong>注意</strong>：len可选,表示截取的字符总数,<strong>省略时截取至字符串的未尾（包含末尾）</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>转换：</strong><ul>
+<li><strong>字符串&#x3D;》数组：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#split-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84">stringObject.split(分隔符)</a></li>
+<li><strong>数组&#x3D;》字符串：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95%EF%BC%9Ajoin-%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2">arrayObject.join(分隔符 默认为逗号)</a></li>
+</ul>
+</li>
+<li><strong>替换：</strong><ul>
+<li><strong>字符串：（不会影响原始字符串）</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#replace-%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2">stringObject.replace(替换前字符（串）,替换后字符（串）)</a></li>
+<li><strong>数组(删除、插入、替换都可)：【会改变原始数组】</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#splice-%E5%88%A0%E9%99%A4%E3%80%81%E6%8F%92%E5%85%A5%E3%80%81%E6%9B%BF%E6%8D%A2">arrayObject.splice(index,count)</a><strong>原数组会变成被删除&#x2F;插入&#x2F;替换以后的数组</strong>。返回含有删除部分的元素的数组</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符串独有的"><a href="#字符串独有的" class="headerlink" title="字符串独有的"></a>字符串独有的</h2><ul>
+<li><strong>不会改变原始字符串：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#toUpperCase-%E8%BD%AC%E5%A4%A7%E5%86%99">toUpperCase()转大写</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#toLowerCase-%E8%BD%AC%E5%B0%8F%E5%86%99">toLowerCase()转小写</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/13/JS%E5%AF%B9%E8%B1%A1%E4%B9%8Bstring/#trim-%E5%88%A0%E9%99%A4%E5%A4%B4%E5%B0%BE%E7%A9%BA%E6%A0%BC">trim()删除头尾空格</a></li>
+</ul>
+<h2 id="数组独有的"><a href="#数组独有的" class="headerlink" title="数组独有的"></a>数组独有的</h2><ul>
+<li><strong>直接修改原始数组：</strong> <ul>
+<li><strong>返回值是数组新长度:</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#push-%EF%BC%9A%E5%9C%A8%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0">push()：在尾部添加元素</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#unshift-%EF%BC%9A%E5%9C%A8%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0">unshift()：在开头添加元素</a></li>
+<li><strong>返回值是被删除的元素:</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#pop-%EF%BC%9A%E5%88%A0%E9%99%A4%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0">pop()：删除最后一个元素</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#shift-%EF%BC%9A%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0">shift()：删除第一个元素</a></li>
+<li><strong>返回值是修改后数组：</strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#reverse-%E9%A2%A0%E5%80%92%E9%A1%BA%E5%BA%8F">reverse()颠倒顺序</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#sort-%E5%8D%87%E5%BA%8F-%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F">sort()升序&#x2F;降序排序</a></li>
+</ul>
+</li>
+<li><strong>不修改原数组：</strong> <ul>
+<li><strong>返回值是新数组：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#concat-%E8%BF%9E%E6%8E%A5%E4%B8%A4%E4%B8%AA%E6%88%96%E5%A4%9A%E4%B8%AA%E6%95%B0%E7%BB%84">concat()连接两个或多个数组</a>、<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/jsref-map.html">map()遍历数组并进行操作</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#Array-prototype-filter-%E6%95%B0%E7%BB%84%E8%BF%87%E6%BB%A4%E6%96%B9%E6%B3%95">ES6新增的Array.prototype.filter()数组过滤方法</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#Array-from">ES6新增的Array.from()</a>用于<strong>从类数组对象（arguments）生成数组</strong>或者<strong>浅拷贝数组</strong></li>
+<li><strong>返回undefined：</strong> <a target="_blank" rel="noopener" href="https://m.runoob.com/jsref/jsref-foreach.html">forEach()遍历数组的每个元素</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="总结（是否修改原数组）"><a href="#总结（是否修改原数组）" class="headerlink" title="总结（是否修改原数组）"></a>总结（是否修改原数组）</h2><ul>
+<li><strong>字符串的方法都不会改变原始字符串</strong></li>
+<li>数组中<strong>会改变原始数组的方法有：</strong><ul>
+<li><strong>返回含有删除部分的元素的数组，原数组会变成被删除&#x2F;插入&#x2F;替换以后的数组：</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#splice-%E5%88%A0%E9%99%A4%E3%80%81%E6%8F%92%E5%85%A5%E3%80%81%E6%9B%BF%E6%8D%A2">arrayObject.splice(index,count)删除、插入、替换</a></li>
+<li><strong>返回值是数组新长度:</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#push-%EF%BC%9A%E5%9C%A8%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0">push()：在尾部添加元素</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#unshift-%EF%BC%9A%E5%9C%A8%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0">unshift()：在开头添加元素</a></li>
+<li><strong>返回值是被删除的元素:</strong> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#pop-%EF%BC%9A%E5%88%A0%E9%99%A4%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0">pop()：删除最后一个元素</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#shift-%EF%BC%9A%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0">shift()：删除第一个元素</a></li>
+<li><strong>返回值是修改后数组：</strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#reverse-%E9%A2%A0%E5%80%92%E9%A1%BA%E5%BA%8F">reverse()颠倒顺序</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/10/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%881%EF%BC%89/#sort-%E5%8D%87%E5%BA%8F-%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F">sort()升序&#x2F;降序排序</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="基础知识面试题3中“异步队列依次执行”"><a href="#基础知识面试题3中“异步队列依次执行”" class="headerlink" title="基础知识面试题3中“异步队列依次执行”"></a>基础知识面试题3中“异步队列依次执行”</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97%E6%9D%A5%E5%AE%9E%E7%8E%B0%E4%BE%9D%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E3%80%90%E5%BE%85%E6%80%9D%E8%80%83%E3%80%91">参考 JS基础知识面试题(3)</a></li>
+<li><strong>思路：队列 先进先出</strong>，Promise then，封装函数 <ul>
+<li>方法1： <strong>Promise.resolve() + arr.forEach + PromiseObj.then(fn)</strong></li>
+<li>方法2： <strong>async+for-of+await PromiseObj</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="预加载的实现方法"><a href="#预加载的实现方法" class="headerlink" title="预加载的实现方法"></a>预加载的实现方法</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD">懒加载 可参考 JS基础知识面试题(3)</a>、<a target="_blank" rel="noopener" href="https://www.imooc.com/learn/502">预加载 慕课</a>、<a target="_blank" rel="noopener" href="https://www.jb51.net/article/186121.htm">预加载 实现方法</a></li>
+<li><strong>预加载（异步加载）：提前加载</strong>图片，当用户需要查看时可直接从本地缓存中渲染。<ul>
+<li><strong>例子：</strong> loading页面显示时就是正在提前加载众多图片的时候，等待切换到下一个页面时众多图片已经加载完毕。</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.imooc.com/learn/502">实现方法</a>：</strong></li>
+</ul>
+<ol>
+<li><strong>显示loading页面</strong>时，将<strong>需要加载的图片src放入数组中</strong></li>
+<li>图片的load和error事件函数中就可以放<strong>进度条的进度计算</strong>，<strong>遍历图片数组加载图片</strong>（赋值给image对象的src）（error中也是正常进度，不然error就卡住永远无法加载结束）</li>
+<li>等<strong>图片数组遍历加载结束，隐藏loading页</strong>，正常显示网页，此时所有图片已加载过一次，用户查看时会直接从本地读取</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="JS-Web-API-中"><a href="#JS-Web-API-中" class="headerlink" title="JS Web API 中"></a>JS Web API 中</h1><h2 id="通用的事件监听函数（事件代理）"><a href="#通用的事件监听函数（事件代理）" class="headerlink" title="通用的事件监听函数（事件代理）"></a>通用的事件监听函数（事件代理）</h2><p><strong>可以同时监听 普通绑定 和 代理绑定 的通用事件监听函数</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent.jpg" alt="通用的事件监听函数" title="通用的事件监听函数"><strong>普通绑定</strong>时this就指向<strong>触发事件的DOM元素</strong>；<strong>事件代理</strong>时就需要<code>事件对象.target</code>来获取<strong>触发事件的DOM元素</strong></p>
+<h2 id="手写ajax"><a href="#手写ajax" class="headerlink" title="手写ajax"></a>手写ajax</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_easy.jpg" alt="手写简易ajax" title="手写简易ajax"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_result.jpg" alt="运行结果" title="运行结果"></p>
+<p>模拟404情况，换成不存在的地址：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_bindEvent_404.jpg" alt="模拟404情况" title="模拟404情况"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_AJAX_404_result.jpg" alt="运行结果" title="运行结果"></p>
+<hr>
+<h1 id="JS-Web-API-AJAX中"><a href="#JS-Web-API-AJAX中" class="headerlink" title="JS Web API AJAX中"></a>JS Web API AJAX中</h1><ul>
+<li>同源和跨域可以看<a target="_blank" rel="noopener" href="https://blog.csdn.net/zheshihuahua/article/details/125793405">这篇帖子</a>，写的非常简洁易懂</li>
+</ul>
+<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
+<p>为什么要有同源与不同源？</p>
+</blockquote>
+<ol>
+<li>出于安全考虑，浏览器不允许，页面向不同源的接口请求数据，因为如果 接口 和 网页不同源，浏览器认为是2个不同的 服务器</li>
+<li>不同的服务器中内容是不可控的，不允许访问了<br>总结说人话： 浏览器为了保护你的电脑安全<br>举个栗子： 你去肯德基店里点餐，店员只允许你点肯德基的产品（炸鸡，可乐，上校鸡块），如果此时你在肯德基店里面点麦当劳的产品，浏览器会认为你是坏人，就会让保安把你赶出去</li>
+</ol>
+<ul>
+<li><strong>同源策略</strong>：ajax请求时，<strong>浏览器</strong>要求当前网页和server必须同源（为了安全）<ul>
+<li><strong>注意</strong>：同源是<strong>浏览器规定</strong>的，在服务端是可以发起跨域攻击的，比如爬虫，因为<strong>server端并无同源策略</strong></li>
+</ul>
+</li>
+<li><strong>同源</strong>：<strong>协议、域名、端口</strong>，三者必须一致<ul>
+<li>比如：前端<code>http://a.com：8080/</code>；server：<code>https://b.com/api/xxx</code>（默认443端口）那么<strong>这前后端是三者都不一致</strong></li>
+</ul>
+</li>
+<li><strong>同源策略限制了跨域时的以下行为</strong>：<ul>
+<li>Cookie、LocalStorage、sessionStorage 和 IndexDB 跨域无法读取，只有同源才能获取他们</li>
+<li>DOM 和 JS 对象跨域无法获取</li>
+<li>Ajax请求跨域时无效，可发送，但浏览器会拒绝接受响应</li>
+</ul>
+</li>
+</ul>
+<h2 id="跨域的使用场景"><a href="#跨域的使用场景" class="headerlink" title="跨域的使用场景"></a>跨域的使用场景</h2><ul>
+<li>跨域，简单来说就是浏览器使用 ajax请求 时，如果请求的 接口地址 和 当前打开的页面 地址 不同源</li>
+<li><strong>跨域问题</strong> 是<strong>浏览器</strong>对于ajax请求的一种安全限制：一个页面发起的ajax请求，只能是于当前页<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/31/JS%20Web%20API%20%E9%9D%A2%E8%AF%95%E9%A2%98/#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5">同源</a>的路径，这能有效的阻止跨站攻击。</li>
+<li>出现跨域问题的<strong>前提：</strong><ul>
+<li>ajax: 浏览器只有使用ajax发送请求才会出现跨域，href属性与src属性不会出现跨域<ul>
+<li>接口地址： ajax请求的url</li>
+<li>打开的页面：当前页面的window.location.href</li>
+<li>不同源： 浏览器使用ajax,向不同源的接口发送请求，称之为 跨域访问</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>注意：</strong><ul>
+<li>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
+<li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号</li>
+<li>具体配合可参考[《JS Web API AJAX》]</li>
+</ul>
+</li>
+<li><strong>加载img CSS js可无视同源策略</strong>:<ul>
+<li>比如我们经常<strong>引用的js&#x2F;CSS的库</strong>，<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_css.asp"><code>&lt;link/&gt;</code></a>、<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/att_script_src.asp"><code>&lt;script&gt;</code></a>直接使用cdn地址就是<strong>跨域</strong>的。</li>
+<li><code>&lt;script&gt;</code>可实现<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#jsonp"><strong>JSONP</strong></a></li>
+<li>而图片比较特殊，如果该图片做了<strong>防盗链，则无法显示</strong>（比如百度）</li>
+<li><code>&lt;img/&gt;</code>可用于使用<strong>第三方统计服务来统计打点</strong>（比如统计访问次数），也就是把需要的参数放入img，在地址处使用第三方统计服务，这样就可以<strong>避免跨域问题</strong><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">跨域的图片地址/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">跨域的css地址/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">跨域的js地址</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>开发环境中，前后端联调</strong>时 <strong>使用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">nginx反向代理</a></strong> 或 <strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/#baseURL%E5%8F%8A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%88%86%E5%8F%91%E4%BB%A3%E7%90%86">proxy反向代理</a></strong> 根据url派发不同的端口，把跨域变为不跨域，使Ajax请求变成同源的从而传递数据<ul>
+<li><strong>例子1：</strong>假设<strong>前端页面是3000端口，后端页面是8000端口</strong>。那么用户打开页面时打开的就是3000端口的页面，前端页面中使用ajax请求获取数据时就会去获取3000端口下的对应路径的数据。而后端页面是8000端口，所以数据其实保存在8000端口下的对应路径中。<strong>这就无法获取数据。此时使用nginx进行反向代理，遇到&#x2F;api&#x2F;开头的url时就分配到8000端口，遇到&#x2F;开头的url时就分配到3000端口，这样就没问题了</strong>。 </li>
+<li><strong>例子2：</strong><ul>
+<li>开发环境中，假设<strong>前端服务是<code>http://localhost:8089/</code>，后端接口是存在<code>http://test01.7debao.com/</code>服务上的</strong></li>
+<li>那么前端打开页面时打开的就是<code>http://localhost:8089/</code>，前端页面中使用ajax请求获取数据时就会去获取<code>http://localhost:8089/</code>下的对应路径的数据</li>
+<li>而后端接口是存在<code>http://test01.7debao.com/</code>服务上的，所以数据其实保存在<code>http://test01.7debao.com/</code>下的对应路径中，<strong>这就导致无法获取数据</strong></li>
+<li><strong>此时使用proxy进行反向代理，结合axios配置给接口加d baseUrl<code>/api</code>，遇到以 <code>/api</code> 开头的URL请求会被代理分配到后端服务，其他以 <code>/</code> 开头的URL请求会被前端服务处理显示页面或返回404错误</strong></li>
+<li><strong>注意：</strong> 生产和测试环境下，我开发的项目前后端代码应该是部署在同一域名下，接口请求不存在跨域问题，所以不需要设置反向代理，具体是运维在云服务上配的，我只能看到没有处理接口，连axios的baseUrl都没设置，看起来是同源直接请求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="跨域的实现方式"><a href="#跨域的实现方式" class="headerlink" title="跨域的实现方式"></a>跨域的实现方式</h3><ul>
+<li><strong>注意：如果是协议和端口造成的跨域问题，“前端”无法解决。</strong></li>
+<li><strong>前提：</strong>所有的跨域，都<strong>必须经过server端允许和配合（包括前端jsonp）</strong></li>
+<li>对于跨域请求，一般首选使用CORS（跨域资源共享），因为它是一种标准、通用且相对简单的解决方案(jsonp就复杂多了)，适用于大多数跨域问题。只有在特定情况下才需要考虑使用反向代理</li>
+<li>可通<strong>过jsonp、CORS、反向代理</strong>实现跨域<ol>
+<li><strong>jsonp原理</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#jsonp">JS Web API AJAX</a><ul>
+<li><blockquote>
+<p>曾经的跨域杀手，专治各种跨域问题。现在慢慢的淡出历史舞台</p>
+</blockquote>
+</li>
+<li>由于存在一些安全风险和功能上的限制，以及现代浏览器支持其他更强大、更安全的跨域解决方案，JSONP的使用已经减少</li>
+</ul>
+</li>
+<li><strong>CORS（纯服务端）</strong>：可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#cors%EF%BC%88%E7%BA%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%89">JS Web API AJAX</a><ul>
+<li><blockquote>
+<p>目前的主流方案，也是最简单的方案。在实际工作中由后端人员来实现，前端不需要做任何事情</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>WebSocket</li>
+<li><strong>nginx反向代理</strong>：可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/28/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88%E5%89%8D%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%89/#nginx%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%81%94%E8%B0%83%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8">博客项目登录（前端联调）</a>和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/01/JS%20Web%20API%20AJAX/#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">nginx反向代理</a></li>
+<li><strong>proxy反向代理</strong> : 可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2022/12/19/axios%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/#baseURL%E5%8F%8A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E5%88%86%E5%8F%91%E4%BB%A3%E7%90%86">axios使用和简单封装</a></li>
+</ol>
+</li>
+<li>如何选择跨域的实现方式可参考博客[JS Web API AJAX]</li>
+</ul>
+<hr>
+<h1 id="防抖-节流"><a href="#防抖-节流" class="headerlink" title="防抖 节流"></a>防抖 节流</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce">防抖</a>：一段时间内重复触发，以最后一次触发事件为基准进行计算，n秒内未触发才执行函数，在此之前的调用都会被忽略<ul>
+<li>监听一个输入框的文字变化后触发change事件，直接用keyup事件，则会频发触发change事件。如果使用<strong>防抖</strong>，则用户<strong>输入结束或暂停时</strong>，才会触发change事件。（防抖不仅限于change事件）</li>
+<li>对某个按钮进行高频操作时，防止连续点击</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce">例子</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle">节流</a>：以第一次触发事件为准，在指定时间内最多执行一次，多余的调用都会被忽略<ul>
+<li>拖拽一个元素时，要随时拿到该元素被拖拽的位置。这里直接用drag事件则会频发触发，很容易导致卡顿。而使用<strong>节流</strong>，则<strong>无论拖拽速度多快，都会每隔100ms触发一次（时间自定义）</strong><ul>
+<li><strong>注意</strong>：如果用<strong>防抖</strong>的话，就会出现<strong>卡顿</strong>的感觉，因为<strong>只在停止的时候执行了一次</strong>，这个时候就应该用<strong>节流</strong>，在<strong>一定时间内多次执行</strong>，会<strong>流畅</strong>很多（具体原因可见上方“防抖”中“防抖与节流的区别”）</li>
+</ul>
+</li>
+<li>轮询请求时也可用，比如批量处理大量数据时，后端需要长时间处理，前端需要动态展示处理结果，则可规定每500ms发送一次请求<ul>
+<li>如果不使用节流，在请求结束后再次调用请求一直到数据全部处理完成，则会出现连续疯狂请求的情况</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle">例子</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3种弹框"><a href="#3种弹框" class="headerlink" title="3种弹框"></a>3种弹框</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/js/js-popup.html">菜鸟教程</a></li>
+<li><strong>警告框：</strong><code>alert(&quot;sometext&quot;);</code></li>
+<li><strong>确认框：</strong><code>confirm(&quot;sometext&quot;);</code><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var r<span class="operator">=</span>confirm(<span class="string">&quot;按下按钮&quot;</span>)<span class="comment">;</span></span><br><span class="line">if (r<span class="operator">=</span><span class="operator">=</span>true)</span><br><span class="line">&#123;</span><br><span class="line">    x<span class="operator">=</span><span class="string">&quot;你按下了\&quot;确定\&quot;按钮!&quot;</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    x<span class="operator">=</span><span class="string">&quot;你按下了\&quot;取消\&quot;按钮!&quot;</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>提示框：</strong><code>prompt(&quot;sometext&quot;,&quot;defaultvalue&quot;);</code>当提示框出现后，用户需要<strong>输入某个值</strong>，然后<strong>点击确认或取消按钮</strong>才能继续操纵。<ul>
+<li>如果用户<strong>点击确认</strong>，那么<strong>返回值为输入的值</strong>。</li>
+<li>如果用户<strong>点击取消</strong>，那么<strong>返回值为 null</strong>。<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person=prompt(<span class="string">&quot;请输入你的名字&quot;</span>,<span class="string">&quot;Harry Potter&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (person!=<span class="keyword">null</span> &amp;&amp; person!=<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    x=<span class="string">&quot;你好 &quot;</span> + person + <span class="string">&quot;! 今天感觉如何?&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;demo&quot;</span>).innerHTML=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="组件还是类？如何选择"><a href="#组件还是类？如何选择" class="headerlink" title="组件还是类？如何选择"></a>组件还是类？如何选择</h1><ul>
+<li>封装<strong>组件</strong>的情况：<ul>
+<li><strong>可重用性需求：</strong> 如果你的功能是可复用的，而且在应用程序的多个地方都可能被使用，封装成组件是一个很好的选择。Vue.js、React 和 Angular 等前端框架都鼓励组件化开发。</li>
+<li><strong>UI 组件：</strong> 当你的功能包含一组相关的 UI 元素、样式和行为时，封装成组件可以更好地组织代码。这有助于提高代码的可维护性和可重用性。</li>
+<li><strong>独立性：</strong> 如果你的功能是独立的，有自己的状态、行为和样式，且不依赖于外部环境，那么封装成组件可以使它更加独立和可测试。</li>
+<li><strong>框架要求：</strong> 如果你使用的前端框架或库是组件化导向的，比如 Vue.js 或 React，那么封装成组件符合框架的设计理念，并能更好地利用框架的特性。</li>
+</ul>
+</li>
+<li>封装成<strong>类</strong>的情况：<ul>
+<li><strong>面向对象编程：</strong> 如果你更喜欢使用面向对象的编程范式，或者项目中已经采用了这种方式，那么封装成类可能更符合你的编程风格。</li>
+<li><strong>服务类或工具类：</strong> 当你的功能更偏向于服务性质，例如提供一些工具方法、服务类，而不涉及 UI 层的展示时，封装成类可能更适合。</li>
+<li><strong>单例模式：</strong> 如果你的功能只需要一个实例，并且需要保持全局唯一性，封装成类可以更方便实现单例模式。</li>
+<li><strong>业务逻辑层：</strong> 在某些情况下，业务逻辑可能更适合使用类来组织，尤其是当逻辑涉及多个组件或模块时。</li>
+</ul>
+</li>
+<li>综合考虑时，你可能会在项目中同时使用组件和类，根据具体的场景选择最适合的方式。在现代前端开发中，组件化的思想更加流行，因为它有助于构建可维护和可扩展的应用程序。在大多数情况下，选择封装成组件更符合前端开发的潮流</li>
+</ul>
+<hr>
+<h2 id="工作场景"><a href="#工作场景" class="headerlink" title="工作场景"></a>工作场景</h2><ul>
+<li>例子代码可见<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2021/08/03/vue%20%E5%85%A8%E5%B1%80%E6%8C%82%E8%BD%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%88class%EF%BC%89/">《vue 全局挂载自定义函数（class）》</a><ul>
+<li>封装class的场景：本身旺旺聊天图标就是个span元素，我还需要一个appkey属性传给span，两种不同点亮图标的方法以及前置方法，虽然我现在只用一个方法，但把其他情况的方法也放一起封装到类里，以便后续开发做其他操作</li>
+<li>为何封装class：也可以封装组件，看个人习惯吧，如果封装组件，那么span元素用于显示，appkey在外部获取后存在vuex中（不然多个页面使用，一个个获取传入太麻烦了），在合适时机通过$refs调用图标点亮的方法</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/14/JS%20%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E9%A2%98%E6%B1%87%E6%80%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS 手写代码题汇总
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/02/http%20%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">http 面试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">箭头函数和普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">箭头函数作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%98%E5%82%A8"><span class="nav-number">3.</span> <span class="nav-text">存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E6%9C%89%E6%95%88%E6%9C%9F"><span class="nav-number">3.1.</span> <span class="nav-text">cookie有效期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98-%E4%B8%8E-http%E7%BC%93%E5%AD%98"><span class="nav-number">3.2.</span> <span class="nav-text">浏览器缓存 与 http缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#const%E5%AE%9A%E4%B9%89%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%B1%9E%E6%80%A7%EF%BC%88%E5%80%BC%EF%BC%89%E5%8F%AF%E5%8F%98"><span class="nav-number">4.</span> <span class="nav-text">const定义引用类型 属性（值）可变</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89%E4%B8%AD"><span class="nav-number">5.</span> <span class="nav-text">JS基础知识面试题（1）中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-in%E4%B8%8Efor-of"><span class="nav-number">5.1.</span> <span class="nav-text">for-in与for-of</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">5.2.</span> <span class="nav-text">浅拷贝与深拷贝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise%E7%9A%84then%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">Promise的then函数返回值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%90%E5%BE%85%E8%AE%B0%E5%BF%86%E3%80%91"><span class="nav-number">7.</span> <span class="nav-text">字符串、数组的常用方法【待记忆】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%8B%AC%E6%9C%89%E7%9A%84"><span class="nav-number">7.1.</span> <span class="nav-text">字符串独有的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%8B%AC%E6%9C%89%E7%9A%84"><span class="nav-number">7.2.</span> <span class="nav-text">数组独有的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%88%E6%98%AF%E5%90%A6%E4%BF%AE%E6%94%B9%E5%8E%9F%E6%95%B0%E7%BB%84%EF%BC%89"><span class="nav-number">7.3.</span> <span class="nav-text">总结（是否修改原数组）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%983%E4%B8%AD%E2%80%9C%E5%BC%82%E6%AD%A5%E9%98%9F%E5%88%97%E4%BE%9D%E6%AC%A1%E6%89%A7%E8%A1%8C%E2%80%9D"><span class="nav-number">8.</span> <span class="nav-text">基础知识面试题3中“异步队列依次执行”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">预加载的实现方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-Web-API-%E4%B8%AD"><span class="nav-number">10.</span> <span class="nav-text">JS Web API 中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0%EF%BC%88%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%89"><span class="nav-number">10.1.</span> <span class="nav-text">通用的事件监听函数（事件代理）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99ajax"><span class="nav-number">10.2.</span> <span class="nav-text">手写ajax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-Web-API-AJAX%E4%B8%AD"><span class="nav-number">11.</span> <span class="nav-text">JS Web API AJAX中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%BA%90"><span class="nav-number">11.1.</span> <span class="nav-text">同源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">11.2.</span> <span class="nav-text">跨域的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">11.2.1.</span> <span class="nav-text">跨域的实现方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E6%8A%96-%E8%8A%82%E6%B5%81"><span class="nav-number">12.</span> <span class="nav-text">防抖 节流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E7%A7%8D%E5%BC%B9%E6%A1%86"><span class="nav-number">13.</span> <span class="nav-text">3种弹框</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%BF%98%E6%98%AF%E7%B1%BB%EF%BC%9F%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9"><span class="nav-number">14.</span> <span class="nav-text">组件还是类？如何选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%9C%BA%E6%99%AF"><span class="nav-number">14.1.</span> <span class="nav-text">工作场景</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

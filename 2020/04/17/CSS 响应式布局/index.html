@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 响应式布局 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="例子： 起源：为了让网页适配移动端，使得网页在不同设备上正常使用，一般主要处理屏幕大小问题。 优点：解决了设备之间的差异化展示（让不同的设备达到最优的视觉体验） 缺点：兼容性代码多，工作量大，加载速度受影响。对原有网站布局会产生影响，用户判断未必精确。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 响应式布局">
+<meta property="og:url" content="http://yoursite.com/2020/04/17/CSS%20%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="例子： 起源：为了让网页适配移动端，使得网页在不同设备上正常使用，一般主要处理屏幕大小问题。 优点：解决了设备之间的差异化展示（让不同的设备达到最优的视觉体验） 缺点：兼容性代码多，工作量大，加载速度受影响。对原有网站布局会产生影响，用户判断未必精确。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghi91d5bedj30y00okjxc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghia490lvzj310z06vdly.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiaqq0k1qj30z20lu78v.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiddfdf4zj30yy0jtdk3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghidlnrk0oj30ui0qy7a9.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiavy047gj313l0hptkg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiaxb5rs5j30y80jkwoi.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghib15uexrj31290bm7dw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkf1isirnj30e204wmyb.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkf6fh4vhj30nt08zn5l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfaocrg6j313h0avq7y.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfcdjjsej30wi0e9152.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfmw9qqnj30yo0con9g.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfr5bq19j315l0jtnab.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfqwnoa5j30v30ji16l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkgc5qi9vj30x70a1n7g.jpg">
+<meta property="article:published_time" content="2020-04-17T04:54:45.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:29.909Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghi91d5bedj30y00okjxc.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS 响应式布局" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      CSS 响应式布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/04/17/CSS%20%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" class="article-date">
+	  <time datetime="2020-04-17T04:54:45.000Z" itemprop="datePublished">四月 17, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><strong>例子</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghi91d5bedj30y00okjxc.jpg" alt="bootstrap中的例子"></li>
+<li><strong>起源</strong>：为了让网页适配移动端，使得网页在不同设备上正常使用，一般主要处理屏幕大小问题。</li>
+<li><strong>优点</strong>：解决了设备之间的差异化展示（让不同的设备达到最优的视觉体验）</li>
+<li><strong>缺点</strong>：兼容性代码多，工作量大，加载速度受影响。对原有网站布局会产生影响，用户判断未必精确。<span id="more"></span></li>
+</ul>
+<h1 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h1><ul>
+<li><strong>移动优先</strong>：在<strong>设计的初期</strong>就要考虑的页面如何在多终端展示</li>
+<li><strong>渐进增强</strong>：充分发挥硬件设备的最大功能（比如：IE8以下不支持CSS3，但我们也要设计CSS3的，要让支持的用于享受到最完美体验）</li>
+</ul>
+<h1 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h1><ul>
+<li><strong>viewport</strong>：使网页<strong>适配移动端</strong>，一般新建html文档时都自带了，不用自己手动输入（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/11/CSS%E5%B8%83%E5%B1%80%EF%BC%882%EF%BC%89%E6%B5%AE%E5%8A%A8%20inline-block%20%E5%93%8D%E5%BA%94%E5%BC%8F/#viewport%E6%A1%88%E4%BE%8B%EF%BC%88%E9%80%82%E9%85%8D%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89">例子</a>）<br><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;</code><ul>
+<li><strong><code>width=device-width</code>：</strong>将<strong>页面宽度<code>width</code>设为 屏幕区域大小<code>device-width</code>（注意区分 页面 和 屏幕 ，<code>device-width</code>只和设备有关系）</strong>,使页面和屏幕的宽度进行匹配。（如果不加这个，那么很多手机上网页的默认宽度使980px，然而手机只有这么大却要显示980个像素，看起来页面就被缩小了很多。）</li>
+<li><strong>initial-scale：</strong>表示初始的缩放比例</li>
+</ul>
+</li>
+<li><strong>CSS3 Media Query</strong> 是<strong>最简单的方式</strong>，根据页面大小的范围匹配不同的样式。</li>
+<li>如果需要更加<strong>精确</strong>的控制页面效果则要通过js来动态控制根元素font-size的大小，纯css没办法确保各个宽度浏览器等比例复现设计稿，但借助<strong>原生Javascript</strong>成本高，<strong>不推荐使用</strong><ul>
+<li>参考大佬的博客<a target="_blank" rel="noopener" href="https://kwokronny.com/post/2/%E9%80%82%E5%90%88%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E7%9A%84%20rem%20%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%8C%E5%AE%8C%E7%BE%8E%E5%A4%8D%E7%8E%B0%E8%AE%BE%E8%AE%A1%E7%A8%BF">《适合响应式网站的 rem 解决方案，完美复现设计稿》</a>，借助<strong>js实时获取页面宽度</strong>来<strong>设置rem大小</strong>，以此实现元素大小随页面大小变化，确保不同大小浏览器的元素和浏览器的比例与设计稿一致</li>
+</ul>
+</li>
+<li><strong>第三方开源框架（比如bootstrap）</strong> 可以很好的支持浏览器响应式布局的设计</li>
+</ul>
+<h2 id="CSS3-Media-Query"><a href="#CSS3-Media-Query" class="headerlink" title="CSS3 Media Query"></a>CSS3 Media Query</h2><ul>
+<li>根据不同的设备给予不同的展示</li>
+</ul>
+<h3 id="常见属性"><a href="#常见属性" class="headerlink" title="常见属性"></a>常见属性</h3><ul>
+<li><strong>device-width，device-height</strong> 屏幕宽高（<strong>注意区分“屏幕”与“窗口”</strong>）</li>
+<li><strong>width，height</strong> 渲染窗口宽高(物理上的<strong>可视窗口宽高</strong>)</li>
+<li><strong>orientation</strong> 设备方向（横&#x2F;竖）</li>
+<li><strong>resolution</strong> 设备分辨率</li>
+</ul>
+<h3 id="media的使用（语法）"><a href="#media的使用（语法）" class="headerlink" title="media的使用（语法）"></a>media的使用（语法）</h3><ul>
+<li>具体语法可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-mediaquery.html">菜鸟教程 CSS3 @media 查询</a></li>
+<li><code>@media</code>可以<strong>针对不同的屏幕尺寸设置不同的样式</strong></li>
+<li><strong>语法：</strong><ul>
+<li><strong>外联样式表：</strong><code>&lt;link rel=&quot;stylesheet&quot; media=&quot;mediatype and|not|only (media feature)&quot; href=&quot;mystylesheet.css&quot;&gt;</code></li>
+<li><strong>内嵌样式表</strong>:<code>@media mediatype and|not|only (media feature) &#123;CSS-Code;&#125;</code></li>
+<li><strong>媒体类型</strong>：<ul>
+<li>all	用于所有设备</li>
+<li>print	用于打印机和打印预览</li>
+<li><strong>screen	用于电脑屏幕，平板电脑，智能手机等</strong>。</li>
+<li>speech	应用于屏幕阅读器等发声设备</li>
+</ul>
+</li>
+<li><strong>媒体功能：</strong>可参考<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/css3-pr-mediaquery.html">菜鸟教程</a></li>
+</ul>
+</li>
+<li><strong>注意：media的规定规则中区分 媒体类型 和 媒体功能 ，比如screen和max-width	是定义输出设备中的 页面 最大可见区域宽度。而 媒体功能中max-device-width	才是 定义输出设备的 屏幕 最大可见宽度。</strong></li>
+<li><strong>例子：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghia490lvzj310z06vdly.jpg" alt="例子"></li>
+</ul>
+<hr>
+<h2 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h2><ul>
+<li><strong>注意：</strong> bootstrap是<strong>高度组件化</strong>的，尽量使用他提供的，不要自己尝试重新开发</li>
+<li><strong>核心：栅格化布局</strong></li>
+<li><strong>优点：可快速搭建网站</strong></li>
+<li><strong>缺点：需要加载大量额外代码，性能不高</strong></li>
+<li>实际工作中使用media是不够的，<strong>框架</strong>可帮助我们<strong>解决低端浏览器不支持CSS3的问题</strong></li>
+<li>bootstrap是<strong>移动优先的前端框架</strong>，写<strong>非常少的代码</strong>即可实现多终端的页面适配。</li>
+<li><strong>使用：</strong>可以<strong>下载编译后的源码</strong>&#x2F;<strong>使用CDN</strong></li>
+<li><strong>使IE8支持media：</strong> bootstrap基本适配所有的浏览器，<strong>唯独IE8 需要 <a target="_blank" rel="noopener" href="https://v3.bootcss.com/getting-started/#support-ie8-ie9">Respond.js</a> 配合才能实现对媒体查询（media query）的支持。</strong><ul>
+<li><strong>注意：这个Respond.js必须部署在web server（网站）的域名下，不能是在静态资源域名下，会存在跨域的问题</strong>（具体可参考<a target="_blank" rel="noopener" href="https://v3.bootcss.com/getting-started/#support-ie8-respondjs">bootstrap官网</a>）</li>
+</ul>
+</li>
+</ul>
+<h3 id="官方例子"><a href="#官方例子" class="headerlink" title="官方例子"></a>官方例子</h3><p><a target="_blank" rel="noopener" href="https://v3.bootcss.com/getting-started/#template">官方例子</a>:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiaqq0k1qj30z20lu78v.jpg" alt="官方例子"></p>
+<h3 id="CSS样式、组件介绍"><a href="#CSS样式、组件介绍" class="headerlink" title="CSS样式、组件介绍"></a>CSS样式、组件介绍</h3><h4 id="设置padding（-container-）"><a href="#设置padding（-container-）" class="headerlink" title="设置padding（.container ）"></a>设置padding（<code>.container </code>）</h4><ul>
+<li>Bootstrap 需要为<strong>页面内容和栅格系统</strong>包裹一个 <code>.container </code> 容器，以便为其赋予合适的排列（aligment）和<strong>内补（padding）</strong>（<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#overview-container">官方参考</a>）</li>
+</ul>
+<h4 id="栅格系统（列布局）"><a href="#栅格系统（列布局）" class="headerlink" title="栅格系统（列布局）"></a>栅格系统（列布局）</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid">栅格系统</a></li>
+<li><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid-intro">栅格系统的简介</a>中有提到：“行（row）”<strong>必须包含在 <code>.container </code>（固定宽度）或 <code>.container-fluid </code>（100% 宽度）中</strong>，以便为其赋予合适的排列（aligment）和<strong>内补（padding）</strong>”（<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#overview-container">官方参考</a>）</li>
+<li>可以通过<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid-options">栅格参数</a>理解Bootstrap 的栅格系统是如何在多种屏幕设备上工作的。<ul>
+<li><strong>类前缀：</strong>手机.col-xs-、平板.col-sm-、桌面显示器.col-md-、大桌面显示器.col-lg-</li>
+</ul>
+</li>
+<li>中等屏幕（桌面显示器）应用<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid-example-basic">.col-md-前缀（实例：从堆叠到水平排列）</a>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiddfdf4zj30yy0jtdk3.jpg" alt=".col-md-前缀效果"></li>
+<li>如果<strong>不希望在换到小屏幕后12列堆叠</strong>（像上面的例子那样），可以使用<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid-example-mixed">.col-xs-* 和 .col-md-*前缀（实例：移动设备和桌面屏幕）</a><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghidlnrk0oj30ui0qy7a9.jpg" alt=".col-xs-* 和 .col-md-*前缀效果">（<strong>注意：3比2的比例来设置xs和md</strong>）</li>
+</ul>
+<h4 id="浮动、清除浮动（辅助类）"><a href="#浮动、清除浮动（辅助类）" class="headerlink" title="浮动、清除浮动（辅助类）"></a>浮动、清除浮动（辅助类）</h4><ul>
+<li>bootstrap提供了<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#helper-classes-floats">快速浮动</a>的 辅助类，我们可以借助他实现float的效果</li>
+<li>通过为父元素添加<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#helper-classes-clearfix">.clearfix 类</a>可以很容易地清除浮动</li>
+<li><strong>例子</strong>：下面“实际案例”的“做侧边栏响应式”中，<strong>给按钮的父元素增加了<code>.pull-right</code>使得按钮浮动在右边</strong></li>
+</ul>
+<h4 id="不同设备展示-隐藏某些内容"><a href="#不同设备展示-隐藏某些内容" class="headerlink" title="不同设备展示&#x2F;隐藏某些内容"></a>不同设备展示&#x2F;隐藏某些内容</h4><ul>
+<li>通过单独或联合使用bootstrap提供的<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#responsive-utilities">响应式工具</a>以<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#responsive-utilities-classes">列出的类</a>，可以<strong>针对不同屏幕尺寸隐藏或显示页面部分内容</strong>。</li>
+<li><strong>例子</strong>：下面“实际案例”的“做侧边栏响应式”中，<strong>给按钮的父元素增加了<code>.visible-xs-*</code>使得按钮只在极小屏幕下可见</strong></li>
+</ul>
+<hr>
+<h4 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h4><ul>
+<li>bootstrap中的<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#buttons">按钮</a>有<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#buttons-options">预定义样式</a>，并且<strong>可以在不同屏幕中使用不同<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#buttons-sizes">尺寸</a></strong></li>
+</ul>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><ul>
+<li>bootstrap提供了很多现成的<a target="_blank" rel="noopener" href="https://v3.bootcss.com/components/">组件</a></li>
+<li><strong>注意</strong>：我们自己定义的class名需要<strong>避免与组件本身的class样式产生冲突</strong>。</li>
+</ul>
+<h3 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h3><ul>
+<li><p>使用bootstrap只需要<strong>很少的代码</strong>即可呈现很棒的效果</p>
+</li>
+<li><p><strong>实现效果</strong>：</p>
+<ul>
+<li><strong>传统2列布局在电脑上的显示效果：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiavy047gj313l0hptkg.jpg" alt="传统2列布局在电脑上的显示效果"></li>
+<li><strong>模拟平板宽度:</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghiaxb5rs5j30y80jkwoi.jpg" alt="模拟平板宽度"></li>
+<li><strong>模拟手机宽度：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghib15uexrj31290bm7dw.jpg" alt="模拟手机宽度"></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#grid-intro">栅格系统的简介</a>中有提到：“行（row）”<strong>必须包含在 <code>.container </code>（固定宽度）或 <code>.container-fluid </code>（100% 宽度）中</strong>，以便为其赋予合适的排列（aligment）和<strong>内补（padding）</strong>”</p>
+</li>
+<li><p>所以<strong>想让导航栏有padding</strong>可使用<strong>官方提供的<a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/#overview-container">.container 类</a>作为父元素</strong></p>
+</li>
+</ul>
+<h4 id="顶部导航"><a href="#顶部导航" class="headerlink" title="顶部导航"></a>顶部导航</h4><p>使用bootstrap提供的**<a target="_blank" rel="noopener" href="https://v3.bootcss.com/components/#navbar">nav 组件</a><strong>，使用</strong><code>.container</code> 容器**包裹nav组件使其有padding：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkf1isirnj30e204wmyb.jpg" alt="顶部导航"></p>
+<h4 id="侧边导航"><a href="#侧边导航" class="headerlink" title="侧边导航"></a>侧边导航</h4><ol>
+<li>使用bootstrap提供的**<a target="_blank" rel="noopener" href="https://v3.bootcss.com/components/#list-group">列表组</a>**</li>
+<li>将 列表组 放在 <strong>栅格系统</strong> 中（注意使用**<code>.container</code> 容器**包裹 栅格系统 使其有padding）<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkf6fh4vhj30nt08zn5l.jpg" alt="侧边导航">分成9:3,9的部分留着放网站主体，3用来放侧边导航</li>
+</ol>
+<h4 id="巨幕"><a href="#巨幕" class="headerlink" title="巨幕"></a>巨幕</h4><p>在栅格系统的9中，使用bootstrap提供的**<a target="_blank" rel="noopener" href="https://v3.bootcss.com/components/#jumbotron">巨幕</a>**<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfaocrg6j313h0avq7y.jpg" alt="巨幕效果"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfcdjjsej30wi0e9152.jpg" alt="主体代码"></p>
+<h4 id="主体部分"><a href="#主体部分" class="headerlink" title="主体部分"></a>主体部分</h4><ul>
+<li><strong>实现效果：</strong>每篇文章在<strong>不同大小的屏幕</strong>中都<strong>显示同样的宽度</strong></li>
+<li>在 栅格系统 的左列中<strong>嵌套栅格系统</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfmw9qqnj30yo0con9g.jpg" alt="单篇文章代码"></li>
+<li>目前实现的效果：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfr5bq19j315l0jtnab.jpg" alt="目前实现的效果"></li>
+</ul>
+<h4 id="做侧边栏的响应式"><a href="#做侧边栏的响应式" class="headerlink" title="做侧边栏的响应式"></a>做侧边栏的响应式</h4><ul>
+<li>此时将<strong>页面宽度缩小，可发现需要一个侧边栏的响应式（按钮）</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkfqwnoa5j30v30ji16l.jpg" alt="将页面宽度缩小"></li>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ghkgc5qi9vj30x70a1n7g.jpg" alt="侧边栏的响应式（按钮）代码"></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/18/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端面试题目（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端面试题目（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">如何实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3-Media-Query"><span class="nav-number">2.1.</span> <span class="nav-text">CSS3 Media Query</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.1.</span> <span class="nav-text">常见属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#media%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E8%AF%AD%E6%B3%95%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">media的使用（语法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootstrap"><span class="nav-number">2.2.</span> <span class="nav-text">bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90"><span class="nav-number">2.2.1.</span> <span class="nav-text">官方例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E6%A0%B7%E5%BC%8F%E3%80%81%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.2.</span> <span class="nav-text">CSS样式、组件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEpadding%EF%BC%88-container-%EF%BC%89"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">设置padding（.container ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%88%97%E5%B8%83%E5%B1%80%EF%BC%89"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">栅格系统（列布局）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E5%8A%A8%E3%80%81%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%EF%BC%88%E8%BE%85%E5%8A%A9%E7%B1%BB%EF%BC%89"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">浮动、清除浮动（辅助类）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%B1%95%E7%A4%BA-%E9%9A%90%E8%97%8F%E6%9F%90%E4%BA%9B%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">不同设备展示&#x2F;隐藏某些内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Button"><span class="nav-number">2.2.2.5.</span> <span class="nav-text">Button</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.2.6.</span> <span class="nav-text">组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%A1%88%E4%BE%8B"><span class="nav-number">2.2.3.</span> <span class="nav-text">实际案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">顶部导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E5%AF%BC%E8%88%AA"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">侧边导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A8%E5%B9%95"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">巨幕</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E4%BD%93%E9%83%A8%E5%88%86"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">主体部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9A%E4%BE%A7%E8%BE%B9%E6%A0%8F%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">2.2.3.5.</span> <span class="nav-text">做侧边栏的响应式</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

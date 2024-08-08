@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>围绕 React 衍生出的思考 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="声名式开发不同于原生 JS 的 命令式开发 ， React 是声名式开发。 命令式开发 更关注 DOM 的每一步挂载，而 声名式开发 更在意数据的改变，只操作 数据，不关心 具体要如何 操作 DOM，改变数据以后 React 会自动帮你完成 DOM 挂载等步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="围绕 React 衍生出的思考">
+<meta property="og:url" content="http://yoursite.com/2020/01/04/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="声名式开发不同于原生 JS 的 命令式开发 ， React 是声名式开发。 命令式开发 更关注 DOM 的每一步挂载，而 声名式开发 更在意数据的改变，只操作 数据，不关心 具体要如何 操作 DOM，改变数据以后 React 会自动帮你完成 DOM 挂载等步骤。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi3lvlhxpj30vw086abd.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi3nfpnp0j310c0mljvs.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi64ykegdj30se0c3qab.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi63dbiu4j30qm0j7th4.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6a6e5ruj30wj0phdl2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6gilfuhj30qb0k2jzx.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6jofgurj30ru0lkk2e.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6iraat6j312i0klngk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi78hto31j30kh0eawji.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi7fqt7ydj30zo0q70zy.jpg">
+<meta property="article:published_time" content="2020-01-04T09:57:35.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.399Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi3lvlhxpj30vw086abd.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-围绕 React 衍生出的思考" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      围绕 React 衍生出的思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/04/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/" class="article-date">
+	  <time datetime="2020-01-04T09:57:35.000Z" itemprop="datePublished">一月 4, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="声名式开发"><a href="#声名式开发" class="headerlink" title="声名式开发"></a>声名式开发</h1><p>不同于原生 JS 的 命令式开发 ， <strong>React 是声名式开发</strong>。<br> 命令式开发 更关注 DOM 的每一步挂载，而 <strong>声名式开发 更在意数据的改变，只操作 数据，不关心 具体要如何 操作 DOM</strong>，改变数据以后 React 会自动帮你完成 DOM 挂载等步骤。</p>
+<span id="more"></span>
+<h2 id="帮助理解"><a href="#帮助理解" class="headerlink" title="帮助理解"></a>帮助理解</h2><p><strong>命令式</strong>：操作 DOM 使用 JS 去找到需要操作的 DOM 节点，然后 操作它。<br><strong>声明式</strong>：编码好 数据 与 界面的 关系，只操作 数据，不关心 具体要如何 操作 DOM ,把 DOM 都交给 React。</p>
+<hr>
+<h1 id="可以与其他框架并存"><a href="#可以与其他框架并存" class="headerlink" title="可以与其他框架并存"></a>可以与其他框架并存</h1><p>React可以与其他框架并存，也就是说public文件夹下<strong>index.html内的不同节点可以被不同的库所管理</strong>。（vue、jQuery等）<br>每一个库只管理自己对应的DOM，<strong>只要不影响外部DOM节点即可</strong>。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>在src文件夹下的index.js中我们将一个 <strong>由React管理的组件</strong> 挂载在index.html的DOM节点root上：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi3lvlhxpj30vw086abd.jpg" alt="index.js"></p>
+<p>在public文件夹下的index.html中我们可以放入<strong>由不同库进行管理的DOM节点</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi3nfpnp0j310c0mljvs.jpg" alt="index.html"></p>
+<hr>
+<h1 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h1><p>使用<code>class</code>定义一个组件名继承自react的Component来自定义组件。<br><strong>自定义组件命名以大写字母开头，调用形式类似h5标签（比如<code>&lt;TodoItem /&gt;</code>）。</strong><br><strong>父子组件的通信</strong>：</p>
+<ol>
+<li>父组件通过（子组件的）属性向子组件传值（数据或方法）。</li>
+<li>子组件想<strong>修改</strong>父组件数据的步骤：首先需要父组件向子组件传递一个方法，然后子组件通过调用该方法间接的操作父组件的数据。</li>
+</ol>
+<h2 id="面试常问：React中如何做父子组件的通信"><a href="#面试常问：React中如何做父子组件的通信" class="headerlink" title="面试常问：React中如何做父子组件的通信"></a>面试常问：React中如何做父子组件的通信</h2><p><strong>父组件向子组件传值（数据或方法）</strong>:父组件通过<strong>在子组件上添加属性的方式</strong>将数据（或方法）传给子组件（属性名是自定义的，属性值为需要传递的数据）<br><strong>子组件内使用父组件数据</strong>：在子组件内需要使用父组件传递过来的数据的位置通过<code>&#123;this.props.属性名&#125;</code>来接受对应属性值（数据）。</p>
+<p><strong>子组件内修改父组件的数据</strong>（子组件向父组件传值）：首先需要父组件向子组件传递一个方法，然后子组件通过调用该方法间接的操作父组件的数据。（子组件向父组件传的值可以通过调用父组件传过来的方法的参数传回去）</p>
+<p>更多细节和注意事项以及例子可以看<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/27/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%882%EF%BC%89/#%E7%BB%84%E4%BB%B6%E6%8B%86%E5%88%86-%E4%B8%8E-%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BC%A0%E5%80%BC">详细笔记</a></p>
+<hr>
+<h1 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h1><p><strong>在React中只允许父组件向子组件传值</strong>，在子组件可以使用父组件传过来的值，但<strong>不能在子组件中直接去修改父组件传过来的值</strong>。但是子组件可以通过调用父组件穿过来的方法间接的操作父组件的数据。</p>
+<p><strong>好处</strong>：<br>对代码调试很友好，一旦父组件的某个数据出现问题，所有对该数据的操作都是集中在父组件的某个方法中的，不会涉及到多个子组件身上。</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD">完整例子</a></p>
+<p><strong>删除功能</strong>实际上就是想办法<strong>在子组件中修改父组件的list数据</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi64ykegdj30se0c3qab.jpg" alt="父组件"><br><strong>正确的思路</strong>是 父组件是将item和index以及删除的方法handleItemDelete<strong>（在父组件的handleItemDelete（）中进行list数据的删除）</strong>传给子组件TodoItem，然后子组件通过调用父组件的方法对list数据进行删除：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi63dbiu4j30qm0j7th4.jpg" alt="正确的父组件"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6a6e5ruj30wj0phdl2.jpg" alt="正确的子组件"></p>
+<p><strong>错误的思路</strong>：在父组件中将list数据传到子组件中并在子组件中直接进行修改：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6gilfuhj30qb0k2jzx.jpg" alt="错误的父组件"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6jofgurj30ru0lkk2e.jpg" alt="错误的子组件"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi6iraat6j312i0klngk.jpg" alt="报错"></p>
+<hr>
+<h1 id="视图层框架"><a href="#视图层框架" class="headerlink" title="视图层框架"></a>视图层框架</h1><p>React并未把自己定位为大型框架，<strong>它只是一个视图层框架，只帮助我们解决数据和渲染之间的问题，至于组件之间怎么传值它并不负责</strong>。<br>在小型项目中光是依靠React来进行传值也是可以的（比如之前的TodoList，只有两层组件）。但<strong>在大型项目时，光用 React 是不够的，必须结合一些数据层框架（比如redux），解决复杂传值的问题。</strong></p>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><p>在一个大型项目中，组件之间呈树状分布，如果React去负责组件之间的传值将非常困难，假设我们紫色的组件想传值给最顶上的组件，就需要层层传递，非常复杂：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi78hto31j30kh0eawji.jpg" alt="各个组件树状图"></p>
+<hr>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><p><strong>例子</strong>：在React中我们使用的是一块一块的函数，比如TodoList.js中的constructor构造函数、render函数、getTodoItem函数等等：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbi7fqt7ydj30zo0q70zy.jpg" alt="TodoList.js中"></p>
+<p><strong>好处：给前端自动化测试带来很大便捷性。</strong>只需要给函数一个输入值，看看函数输出的时候符合预期即可。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/05/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9(1)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React 高级内容（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/03/TodoList%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">TodoList代码优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A3%B0%E5%90%8D%E5%BC%8F%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">声名式开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">帮助理解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E4%B8%8E%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%B9%B6%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">可以与其他框架并存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">组件化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%B8%B8%E9%97%AE%EF%BC%9AReact%E4%B8%AD%E5%A6%82%E4%BD%95%E5%81%9A%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-number">3.1.</span> <span class="nav-text">面试常问：React中如何做父子组件的通信</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-number">4.</span> <span class="nav-text">单向数据流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%B1%82%E6%A1%86%E6%9E%B6"><span class="nav-number">5.</span> <span class="nav-text">视图层框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="nav-number">5.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">函数式编程</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

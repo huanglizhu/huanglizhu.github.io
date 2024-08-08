@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS基础知识面试题（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="补充：慕课 前端技术面 第七章 笔记总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS基础知识面试题（2）">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="补充：慕课 前端技术面 第七章 笔记总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_setTimeout_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_ajax_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_dynamic_loading_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base_auto-increment_array.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone2.jpg">
+<meta property="article:published_time" content="2020-02-06T09:19:47.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.310Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS基础知识面试题（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS基础知识面试题（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/06/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%882%EF%BC%89/" class="article-date">
+	  <time datetime="2020-02-06T09:19:47.000Z" itemprop="datePublished">二月 6, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>补充：慕课 前端技术面 第七章 笔记总结</p>
+<span id="more"></span>
+
+<h1 id="异步与单线程"><a href="#异步与单线程" class="headerlink" title="异步与单线程"></a>异步与单线程</h1><h2 id="同步和异步的区别，分别举例子"><a href="#同步和异步的区别，分别举例子" class="headerlink" title="同步和异步的区别，分别举例子"></a>同步和异步的区别，分别举例子</h2><ul>
+<li>异步是基于JS是单线程语言而出现的</li>
+<li>同步任务会<strong>阻塞</strong>代码执行，而异步不会</li>
+<li>alert是同步，setTimeout是异步</li>
+</ul>
+<h2 id="手写Promise加载一张图片"><a href="#手写Promise加载一张图片" class="headerlink" title="手写Promise加载一张图片"></a>手写Promise加载一张图片</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载一张图片</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadImg</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">            img.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(img)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`图片加载失败 <span class="subst">$&#123;src&#125;</span>`</span>)</span><br><span class="line">                <span class="title function_">reject</span>(err)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">src</span> = src</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">&#x27;https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/JS_Web_API_DOM_more2one.jpg&#x27;</span></span><br><span class="line"><span class="title function_">loadImg</span>(url).<span class="title function_">then</span>(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img.<span class="property">width</span>)</span><br><span class="line">    <span class="keyword">return</span> img</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">img</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img.<span class="property">height</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">ex</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(ex))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg1.png" alt="Promise加载一张图片的结果" title="Promise加载一张图片的结果"></p>
+<h3 id="Promise加载2张图片（解决回调地域）"><a href="#Promise加载2张图片（解决回调地域）" class="headerlink" title="Promise加载2张图片（解决回调地域）"></a>Promise加载2张图片（解决回调地域）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载2张图片，即使用Promise解决回调地域</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadImg</span>(<span class="params">src</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">            img.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(img)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`图片加载失败 <span class="subst">$&#123;src&#125;</span>`</span>)</span><br><span class="line">                <span class="title function_">reject</span>(err)</span><br><span class="line">            &#125;</span><br><span class="line">            img.<span class="property">src</span> = src</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url1 = <span class="string">&#x27;https://img.mukewang.com/5a9fc8070001a82402060220-140-140.jpg&#x27;</span></span><br><span class="line"><span class="keyword">const</span> url2 = <span class="string">&#x27;https://img3.mukewang.com/5a9fc8070001a82402060220-100-100.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">loadImg</span>(url1).<span class="title function_">then</span>(<span class="function"><span class="params">img1</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img1.<span class="property">width</span>)</span><br><span class="line">    <span class="keyword">return</span> img1 <span class="comment">// 普通对象</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">img1</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img1.<span class="property">height</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">loadImg</span>(url2) <span class="comment">// promise 实例</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">img2</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img2.<span class="property">width</span>)</span><br><span class="line">    <span class="keyword">return</span> img2</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">img2</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img2.<span class="property">height</span>)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">ex</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(ex))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_getImg2.png" alt="Promise加载2张图片的结果" title="Promise加载2张图片的结果"></p>
+<h3 id="async-await彻底解决回调地狱"><a href="#async-await彻底解决回调地狱" class="headerlink" title="async&#x2F;await彻底解决回调地狱"></a>async&#x2F;await彻底解决回调地狱</h3><ul>
+<li><strong>背景</strong>：<ul>
+<li>异步回调会造成callback hell（回调地狱）</li>
+<li>Promise then catch链式调用可解决回调地狱，但也是基于回调函数</li>
+<li>async&#x2F;await是同步语法，彻底消灭回调函数</li>
+</ul>
+</li>
+<li><strong>用同步的方式编写异步：</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 依旧是用loadImg()返回Promise实例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadImg</span>(<span class="params">src</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line">    img.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(img)</span><br><span class="line">    &#125;</span><br><span class="line">    img.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`图片加载失败 <span class="subst">$&#123;src&#125;</span>`</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    img.<span class="property">src</span> = src</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：await 必须放在 async 函数中，否则会报错</span></span><br><span class="line">(<span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> src1 = <span class="string">&#x27;http://www.imooc.com/static/img/index/logo_new.png&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> src2 = <span class="string">&#x27;https://avatars3.githubusercontent.com/u/9583120&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 加载第一张图片</span></span><br><span class="line">    <span class="keyword">const</span> img1 = <span class="keyword">await</span> <span class="title function_">loadImg</span>(src1)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img1.<span class="property">width</span>, img1.<span class="property">height</span>) <span class="comment">// 252,144</span></span><br><span class="line">    <span class="comment">// 加载第二张图片</span></span><br><span class="line">    <span class="keyword">const</span> img2 = <span class="keyword">await</span> <span class="title function_">loadImg</span>(src2)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(img2)</span><br><span class="line">    <span class="comment">// &lt;img src=&quot;https://avatars3.githubusercontent.com/u/9583120&quot;&gt;</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(ex)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="关于setTimeout的笔试题1"><a href="#关于setTimeout的笔试题1" class="headerlink" title="关于setTimeout的笔试题1"></a>关于setTimeout的笔试题1</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_setTimeout_example.jpg" alt="题目" title="题目"><br>连续打印1 3 5 2<br><strong>一秒后打印4</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">1</span>);</span><br><span class="line">setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">2000</span>)</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">3</span>);</span><br><span class="line">setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">4</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 连续打印1 3 5 ，1秒后4 ，1秒后2</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>所有的同步任务在主线程上执行，形成一个执行栈。<strong>异步任务有了 运行结果 才会在任务队列中放置一个事件</strong>。脚本运行时先依次运行执行栈中的所有同步任务，然后会从任务队列里提取事件，选择需要首先执行的异步任务然后执行。</p>
+<p><strong>4先有结果，所以4先出现在任务队列了</strong></p>
+<p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90%EF%BC%88%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%89">补充一个微任务、宏任务的题目</a></p>
+<hr>
+<h2 id="前端使用异步的场景有哪些"><a href="#前端使用异步的场景有哪些" class="headerlink" title="前端使用异步的场景有哪些"></a>前端使用异步的场景有哪些</h2><ul>
+<li><strong>定时任务</strong>：setTimeout，setInterval(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/08/setTimeout%E4%B8%8EsetInterval/">笔记“setTimeout()与setInterval()”</a>）</li>
+<li><strong>网络请求</strong>：ajax请求，动态<code>&lt;img&gt;</code>加载</li>
+<li><strong>事件绑定</strong>：事件函数绑定以后并不会等触发事件函数才继续执行程序，程序照常执行，等需要触发的时候才会执行事件绑定函数。</li>
+</ul>
+<h3 id="ajax请求的例子"><a href="#ajax请求的例子" class="headerlink" title="ajax请求的例子"></a>ajax请求的例子</h3><p>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/">ajax请求完整笔记</a><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_ajax_example.jpg" alt="ajax请求代码示例" title="ajax请求代码示例"><br><strong>打印“start”、“end”,然后等<code>./data1.json</code>中的数据请求成功后执行函数-打印获取到的数据<code>data1</code>。</strong>（关于<code>$.get()</code>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/#get-%E4%BD%BF%E7%94%A8-AJAX-%E7%9A%84-HTTP-GET-%E8%AF%B7%E6%B1%82%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE">笔记</a>）</p>
+<h3 id="动态加载的例子"><a href="#动态加载的例子" class="headerlink" title="动态&lt;img&gt;加载的例子"></a>动态<code>&lt;img&gt;</code>加载的例子</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_dynamic_loading_example.jpg" alt="动态`&lt;img&gt;`加载的例子" title="动态`&lt;img&gt;`加载的例子"><br>关于<code>createElement()</code>可以参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/06/JS%E4%B8%AD%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BAHTML%20DOM%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95/">“JS中修改&#x2F;创建&#x2F;移动&#x2F;删除 HTML DOM元素”</a><br><code>onload事件</code>就是callback的一种形式</p>
+<p><strong>执行顺序：</strong><br><strong>打印“start”</strong>&#x3D;》<strong>创建一个图片元素img</strong>（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/01/let%E4%B8%8Econst/#%E8%A1%A5%E5%85%85%EF%BC%9AcreateElement-%E6%96%B9%E6%B3%95">可参考笔记</a>）&#x3D;》<strong>给img的src赋值</strong>，src 属性值更新时浏览器会<strong>自动加载</strong>并显示出新图像。(<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/04/HTML%20DOM%20Image%20%E5%AF%B9%E8%B1%A1/#src-%E5%B1%9E%E6%80%A7%EF%BC%88%E8%AE%BE%E7%BD%AE%E5%90%8E%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%EF%BC%89">可参考笔记</a>) &#x3D;》图片加载过程中<strong>打印“end”</strong> &#x3D;》 <strong>等img加载完成才会执行onload绑定的函数</strong>，打印<code>loaded</code>（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/09/JS_DOM%E4%BA%8B%E4%BB%B6/#onload-%E4%BA%8B%E4%BB%B6">可参考笔记</a>）</p>
+<p><strong>很明显src赋值的过程（图片动态加载）是异步的，不会阻塞end的打印</strong></p>
+<hr>
+<h3 id="事件绑定的例子"><a href="#事件绑定的例子" class="headerlink" title="事件绑定的例子"></a>事件绑定的例子</h3><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_addEventListener_example.jpg" alt="事件绑定的例子" title="事件绑定的例子"><br><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/05/DOM%E5%9F%BA%E7%A1%80/#addEventListener-%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E5%8F%A5%E6%9F%84-click">addEventListener()相关笔记</a><br>或者通过<code>object.onclick=function()&#123;SomeJavaScriptCode&#125;;</code>绑定<code>onclick事件</code>也是一样的。</p>
+<hr>
+<h2 id="异步编程的方法"><a href="#异步编程的方法" class="headerlink" title="异步编程的方法"></a>异步编程的方法</h2><ul>
+<li><strong>回调函数</strong>，这是异步编程最基本的方法。<strong>上面提到的定时器、ajax请求、图片的动态加载、事件绑定 实际上都是回调函数的形式。</strong><ul>
+<li>接下来的Promisee和async await其实就是回调函数的优化，也是建立在回调函数的基础上实现的异步编程。他们都可以使用链式来解决回调地狱的问题。</li>
+</ul>
+</li>
+<li><strong>Promises对象</strong>，Promises 对象是CommonJS 工作组提出的一种规范，目的是为异步编程提供统一接口。<ul>
+<li>简单说，它的思想是，<strong>每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。</strong>回调函数（回调地狱）变成了<strong>链式写法</strong>，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_example.png" alt="Promise的例子" title="Promise的例子"></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/05/ES6%20async%E5%87%BD%E6%95%B0%E4%B8%8Eawait%E5%85%B3%E9%94%AE%E8%AF%8D/"><strong>async</strong></a>,async函数返回的是一个 Promise 对象，可以使用 then 方法添加回调函数，async 函数内部 return 语句返回的值，会成为 then 方法回调函数的参数。当函数执行的时候，<strong>一旦遇到await就会先执行await的相关异步操作</strong>，等到异步操作完成，再接着执行函数体内后面的语句（<strong>包括同步任务也先等着await执行</strong>）。<ul>
+<li>比起Promise，await则不需要then，<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_await.png" alt="Promise与async对比的例子" title="Promise与async对比的例子"></li>
+</ul>
+</li>
+<li><strong>事件监听</strong>，任务的执行不取决于代码的顺序，而取决于某个事件是否发生。<ul>
+<li>例：为f1绑定一个事件，当f1发生click事件，就执行f2。</li>
+</ul>
+</li>
+<li><strong>发布&#x2F;订阅</strong>，与”事件监听”类似。<ul>
+<li>我们假定，存在一个”信号中心”，<strong>某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行</strong>。这就叫做”发布&#x2F;订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）。</li>
+<li>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="事件循环（JS的执行机制）"><a href="#事件循环（JS的执行机制）" class="headerlink" title="事件循环（JS的执行机制）"></a>事件循环（JS的执行机制）</h2><ul>
+<li><strong>注意：</strong>异步任务被挂起时会由浏览器的引擎去执行他们，而同步任务则是由JS的引擎去执行。</li>
+<li>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AD%A5%E9%AA%A4%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%89">从输入url到页面显示都经历了什么</a>:<ol>
+<li>用户输入url</li>
+<li>浏览器进行<strong>DNS解析</strong>，将域名解析为IP地址，查找顺序：<strong>浏览器自身的DNS缓存中查找&#x3D;》操作系统hosts文件&#x3D;》本地DNS服务器&#x3D;》向根服务器发出请求进行递归查询</strong></li>
+<li><strong>TCP连接，三次握手</strong>（请求头中Connection：keep-alive可以使一次TCP连接重复使用）：<strong>TCP连接请求报文&#x3D;》TCP连接响应报文&#x3D;》HTTP请求+TCP确认 报文</strong></li>
+<li><strong>根据服务端返回的响应报文判断是否有 强缓存</strong>（响应头中有Expires或有不为no-cache&#x2F;no-store的Cache-Control）且在有效期(max-age)内，如有则直接读取缓存，如无则<strong>通过服务端返回的响应报文判断是否有 协商缓存</strong>（Last-Modified&#x2F;Etag)，如有则<strong>带上If-Modified-Since&#x2F;If-None-Match发出http请求</strong>，服务器比对后判断缓存是否可用，如可用则返回304状态码并读取客户端缓存；如<strong>比对失败则返回状态码200</strong>并向服务端请求资源。如无Last-Modified&#x2F;Etag则直接向服务端请求资源，最后返回给客户端。【提高性能就要看缓存】<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/http_negotiate_cache_all.png" alt="http缓存 综述" title="http缓存 综述"></li>
+<li><strong>浏览器边解析html文档边构建DOM树&#x3D;》遇到css则同时解析css与html，根据css构建CSSOM（css对象模型）&#x3D;》合并为渲染树&#x3D;》回流</strong>（浏览器计算元素大小、位置）和<strong>重绘</strong>（元素的大小、颜色等属性确定后浏览器的绘制过程） 显示在屏幕上。<ul>
+<li>所以<strong>css建议放在head中</strong>，在DOM树生成之前生成CSSOM，这样DOM树生成时可直接和CSSOM合并成渲染树，不会有存在用户看到状态变化的过程。</li>
+<li><strong>回流和重绘</strong>非常<strong>耗性能</strong>，尽量减少。</li>
+</ul>
+</li>
+<li>解析&#x2F;渲染过程中<strong>如遇JS脚本&#x2F;连接，则停止渲染</strong>（因为JS有可能修改DOM结构）来执行和下载相应的代码，这会造成阻塞，故<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+<li><strong>js解析【事件循环】</strong>：同步任务放在<strong>执行栈</strong>中，异步任务有了结果后放在<strong>任务队列</strong>中，其中<strong>宏任务会先于微任务，script也属于宏任务</strong>，脚本运行时<strong>先清空执行栈</strong>，再从任务队列中提取事件依次执行。<ul>
+<li>事件循环：解决JS单线程运行阻塞</li>
+<li><strong>同步任务和微任务是由js引擎执行，script外的宏任务挂起时是浏览器引擎执行的</strong>，因为<strong>js引擎处理速度比浏览器引擎快</strong>，所以宏任务比微任务执行的更早</li>
+<li><strong>宏任务：script(整体代码)、setTimeout、setInterval、ajax、DOM 事件</strong><ul>
+<li>除script，其他都是<strong>浏览器引擎</strong>来执行，因为宏任务都是Web API，不属于ES语法</li>
+</ul>
+</li>
+<li><strong>微任务：</strong><ul>
+<li><strong>Promise.then()<strong>。（注意：</strong>Promise的函数体是定义时就立即执行的</strong>，then()是微任务）</li>
+<li>async是同步的，调用就立马执行，await这行代码也同步，但<strong>其后的代码会被放入 微任务队列 中</strong>。（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#async-await%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F">例子</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="Date、Math、数组API、对象API"><a href="#Date、Math、数组API、对象API" class="headerlink" title="Date、Math、数组API、对象API"></a>Date、Math、数组API、对象API</h1><p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/20/JS_Date%E5%AF%B9%E8%B1%A1/#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95">Date</a>、Math、数组API、对象API 的相关题目。<br><strong>数组API、对象API</strong>可以理解为数组、对象他们自带的那些<strong>方法</strong>。</p>
+<h2 id="获取2017-06-10格式的日期"><a href="#获取2017-06-10格式的日期" class="headerlink" title="获取2017-06-10格式的日期"></a>获取2017-06-10格式的日期</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_get_2017-06-10.jpg" alt="获取2017-06-10格式的日期" title="获取2017-06-10格式的日期"></p>
+<ul>
+<li>1-18 函数 formatDate <strong>接受一个Date对象，返回一个格式化后的日期</strong><ul>
+<li>2-4 为防止报错，如果没有传入参数，就新建一个Date对象作为参数dt</li>
+<li>5 <code>getFullYear()</code>获取年份</li>
+<li>6 <code>getMonth()</code>获取月份，由于<strong>获取到的是0-11</strong>，所以需要+1</li>
+<li>7 <code>getDate()</code>获取日期</li>
+<li>8-15 由于我们<strong>需要格式化的日期是两位数</strong>的，所以当<code>month&lt;10</code>的时候我们需要在前面添加0。日期也是同理。<ul>
+<li>这里涉及到之前讲的<strong>字符串拼接</strong>，字符串<code>&quot;0&quot;</code>和数字month拼接后相当于**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/01/JS%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97/#%E5%8F%98%E9%87%8F%E8%AE%A1%E7%AE%97-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">强制类型转换</a>**，month将成为字符串。</li>
+</ul>
+</li>
+<li>17 通过<code>-</code>连接，将<strong>数字拼接字符串 得到 字符串</strong></li>
+</ul>
+</li>
+<li>19 新建一个Date对象dt</li>
+<li>20 将dt传入函数formatDate，得到格式化后的日期formatDate</li>
+<li>21 打印格式化后的日期formatDate</li>
+</ul>
+<hr>
+<h2 id="获取长度一致的字符串随机数"><a href="#获取长度一致的字符串随机数" class="headerlink" title="获取长度一致的字符串随机数"></a>获取长度一致的字符串随机数</h2><p><strong>题目：获取随机数，要求是长度一致的字符串格式</strong></p>
+<p><strong>注意：字符串也有slice()，和数组的slice()类似，用于截取字符串</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_random_example.jpg" alt="获取长度一致的字符串格式的随机数" title="获取长度一致的字符串格式的随机数"><br>1 获取随机数random，小数部分长度不确定<br>2 <strong>随机数后加上10个0</strong>，保证截取的时候有10位（<strong>保证不报错</strong>）。数字拼接字符串后等于<strong>强制类型转换，random 变为字符串</strong><br>3 使用字符串的<strong>slice()截取random的前10位</strong>（注意：10不在截取范围）</p>
+<hr>
+<h2 id="遍历对象和数组的通用forEach函数"><a href="#遍历对象和数组的通用forEach函数" class="headerlink" title="遍历对象和数组的通用forEach函数"></a>遍历对象和数组的通用forEach函数</h2><p><strong>题目：写一个能遍历对象和数组的通用forEach函数</strong><br>（jquery中有现成的方法,<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组本身就有forEach()</a>）<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_foreach_array_object.jpg" alt="能遍历对象和数组的通用forEach函数" title="能遍历对象和数组的通用forEach函数"></p>
+<ul>
+<li>1-14 <strong>定义forEach函数</strong><ul>
+<li><strong>参数1</strong>：对象&#x2F;数组。<strong>参数2</strong>：函数。</li>
+<li><strong>注意：我们这里定义的forEach函数的index和item的顺序和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组自己的forEach()</a>是反的</strong></li>
+<li>3-7 判断传入的是对象&#x2F;数组，<strong>如果是数组</strong>，就<strong>用<a href="(https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0)">数组自己的forEach()</a><strong>，遍历数组后</strong>将index和item传入 参数2（fn函数）</strong>，通过fn函数将index与item的位置调换一下后<strong>打印</strong>。</li>
+<li>8-13 <strong>如果是对象</strong>，就通过<code>for in</code>遍历对象属性，并将 属性名称<code>key</code> 和 属性值<code>obj[key]</code>传给 参数2（fn函数），被调用后会被打印。<ul>
+<li>注意：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#%E8%A1%A5%E5%85%85%EF%BC%9Ain%E8%BF%90%E7%AE%97%E7%AC%A6">in运算符</a>在 数组 中是判断有无 数组下标 的，不是数组元素。在 对象 中判断有无 属性。返回值是boolean。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>15 定义一个数组arr</li>
+<li>17-19 调用我们定义的forEach函数，传入<strong>参数1为数组arr</strong>，参数2为一个函数，该函数接收两个参数并打印他们。<ul>
+<li><strong>注意：这里的index和item的顺序和<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/08/11/JS%E5%AF%B9%E8%B1%A1%E4%B9%8B%E6%95%B0%E7%BB%84%EF%BC%882%EF%BC%89/#forEach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0">数组的forEach()</a>是反的，主要是为了照顾后面对象的<code>key</code>、<code>value</code></strong></li>
+</ul>
+</li>
+<li>21 定义一个对象obj</li>
+<li>22-24 让对象obj调用我们定义的forEach函数<ul>
+<li>key：属性名称。value：属性值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="如果把后端的计算逻辑放到前端-移动端需要注意什么？"><a href="#如果把后端的计算逻辑放到前端-移动端需要注意什么？" class="headerlink" title="如果把后端的计算逻辑放到前端&#x2F;移动端需要注意什么？"></a>如果把后端的计算逻辑放到前端&#x2F;移动端需要注意什么？</h1><ol>
+<li><strong>性能</strong>, 数据一致性, 尤其是同步下来 &#x2F; 同步上去的数据, 用什么规则合并, 丢弃 &#x2F; 更新的原则是什么.</li>
+<li><strong>安全性问题</strong>，需要甄别哪些能放哪些不能放，web 前端 js 文件可以修改，而且网络请求还能被抓包和伪造，一些没什么影响的计算逻辑放在前端可以减轻服务器压力，但有些比较重要的计算逻辑还是不要放在前端了</li>
+</ol>
+<hr>
+<h1 id="setTimeout-与let、闭包与作用域"><a href="#setTimeout-与let、闭包与作用域" class="headerlink" title="setTimeout()与let、闭包与作用域"></a>setTimeout()与let、闭包与作用域</h1><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(i);</span><br><span class="line">  &#125;, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong>打印10个10<br><strong>原因：</strong><br>因为循环是同步的，setTimeout 是异步的，所以<strong>循环结束以后才会执行setTimeout</strong>。<br>而变量i是var命令声明的，在<strong>全局范围</strong>内都有效，所以全局只有一个变量i。所以<strong>每一次循环的i其实都是同一个</strong>，循环到最后时前面的i全部被最后的结果覆盖了。<br>所以最后，每次执行setTimeout时到<strong>父级作用域（这里是全局作用域）</strong>中找到的i都是10，10次打印的都是最后保存的i。</p>
+<p><strong>解决方法</strong>：<strong>局部变量</strong>的话就是每循环一次产生一个新的i，就不会被覆盖。所以我们可以通过<strong>闭包</strong>（也就是把循环的过程放到一个函数中封闭起来）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/03/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#%E9%97%AD%E5%8C%85">闭包</a>：函数a内部定义一个函数b，函数b可以访问函数a的变量,函数b中的变量就是局部变量</p>
+</blockquote>
+<h2 id="如何让他输出自增队列"><a href="#如何让他输出自增队列" class="headerlink" title="如何让他输出自增队列"></a>如何让他输出自增队列</h2><p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base_auto-increment_array.jpg" alt="自增队列" title="自增队列"><br><strong>方法1：将var改为let</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(i);</span><br><span class="line">      &#125;, i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>变量i是let声明的，<strong>当前的i只在本轮循环有效</strong>，所以<strong>每一次循环的i其实都是一个新的变量</strong>。</p>
+<p><strong>方法2：使用闭包(即局部变量)</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  (<span class="function">(<span class="params">i</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.<span class="built_in">log</span>(i)<span class="comment">//0-9</span></span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>【将i传进函数中作为 函数作用域 的变量】</strong></p>
+<ol>
+<li><code>i=0</code>时生成一个函数，<code>i=1</code>时又生成另外一个函数，<strong>总共通过循环创建了10个函数</strong>，<strong>循环了10次函数就会产生10个局部变量j</strong>，最后每个函数中的setTimeout都对应不同的j值。</li>
+<li>那么<strong>setTimeout的参数函数去获取i的值时就会到当前的 父级作用域（函数作用域）中找</strong>，自然也不会10个标签都找到同一个i了。</li>
+</ol>
+<p><strong>方法3：</strong><br><strong>删除setTimeout</strong>，那么每一次<strong>循环就立即输出</strong>，也就不存在覆盖的问题了。</p>
+<hr>
+<h1 id="深拷贝二维数组"><a href="#深拷贝二维数组" class="headerlink" title="深拷贝二维数组"></a>深拷贝二维数组</h1><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var target = [<span class="number">0</span>, <span class="number">1</span>, null, [<span class="number">1</span>, <span class="number">2</span>], &#123; name: <span class="string">&quot;a&quot;</span> &#125;, <span class="keyword">function</span> <span class="title">a</span>() &#123; <span class="keyword">return</span> <span class="type">1</span>; &#125;]</span><br><span class="line"></span><br><span class="line">// 完成下面的深拷贝函数</span><br><span class="line"><span class="keyword">function</span> <span class="title">deepCopy</span>(src) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">dest</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="递归拷贝所有层级属性"><a href="#递归拷贝所有层级属性" class="headerlink" title="递归拷贝所有层级属性"></a>递归拷贝所有层级属性</h2><ul>
+<li><strong>注意：</strong>对象和数组都会有遍历时需要避开的<strong>继承属性</strong>，<strong>使用for…in需要手动添加hasOwnProperty()<strong>来判断对象是否包含特定的</strong>自身（非继承）属性</strong>，对数组使用for…of迭代时则不需要判断。</li>
+<li><strong>不使用for…of的原因：</strong> 数组元素内为不可迭代的对象时会报错。</li>
+<li><strong>复习</strong>：<ul>
+<li><strong><code>typeof</code><strong>将</strong>引用类型</strong>(数组、对象、函数)都判断为<code>object</code>。</li>
+<li><strong><code>for...in</code><strong>主要用于</strong>对 数组元素&#x2F;对象属性 进行遍历</strong>。<code>for ... in</code> 循环中的代码每执行一次，就会对数组的元素或者对象的属性进行一次操作。<ul>
+<li><code>for(key in obj)</code>中，当obj为对象时，key是<strong>属性名</strong>。当obj为数组时，key是<strong>数组下标</strong>。（不是数组元素，for…of才是数组元素，且of只能迭代有顺序的数组等，不能遍历对象）</li>
+</ul>
+</li>
+<li><strong>Object的hasOwnProperty()<strong>方法返回一个布尔值，判断对象是否包含特定的</strong>自身（非继承）属性</strong>。<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝方法1</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> target = [<span class="number">0</span>, <span class="number">1</span>, <span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>], &#123; <span class="attr">name</span>: <span class="string">&quot;a&quot;</span> &#125;, <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;]</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepCopy</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// 如遇值类型则直接返回，否则继续执行</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">typeof</span> obj !== <span class="string">&quot;object&quot;</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化返回结果</span></span><br><span class="line">  let objClone = [];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 遍历数组元素</span></span><br><span class="line">  <span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 筛选对象自身属性</span></span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      <span class="comment">// 递归调用deepClone()</span></span><br><span class="line">      objClone[key] = deepClone(obj[key])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回结果</span></span><br><span class="line">  <span class="keyword">return</span> objClone;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objClone = deepCopy(target);</span><br><span class="line">objClone[<span class="number">3</span>][<span class="number">0</span>] = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(target);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(objClone);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝方法2</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> target = [<span class="number">0</span>, <span class="number">1</span>, <span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>], &#123; <span class="attr">name</span>: <span class="string">&quot;a&quot;</span> &#125;, <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完成下面的深拷贝函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepCopy</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  let objClone = [];</span><br><span class="line">  <span class="comment">// 遍历 数组元素</span></span><br><span class="line">  <span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">//判断 数组元素 是否为引用类型（数组、对象、函数），是则递归复制</span></span><br><span class="line">    <span class="keyword">if</span> (obj[key] &amp;&amp; <span class="built_in">typeof</span> obj[key] === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">      objClone[key] = deepCopy(obj[key]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//如果不是，简单复制</span></span><br><span class="line">      objClone[key] = obj[key];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> objClone;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objClone = deepCopy(target);</span><br><span class="line">objClone[<span class="number">3</span>][<span class="number">0</span>] = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(target);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(objClone);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone.jpg" alt="结果" title="结果"></p>
+<h2 id="不能通过JSON对象"><a href="#不能通过JSON对象" class="headerlink" title="不能通过JSON对象"></a>不能通过JSON对象</h2><ul>
+<li><strong>原理</strong>:不拷贝引用对象，<strong>使用<code>stringify()</code>拷贝一个 JSON字符串 会新辟一个新的存储地址</strong>，这样就<strong>切断了引用对象的指针联系</strong>。</li>
+<li><strong>缺点</strong>：<strong>无法实现对 数组&#x2F;对象中 方法</strong> 的深拷贝，会显示为undefined。（ES6提供了<code>object.assign()</code>可解决这个问题，可参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/daniao11417/p/10224782.html">这篇博客</a>）</li>
+</ul>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> target = [<span class="number">0</span>, <span class="number">1</span>, <span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>], &#123; <span class="attr">name</span>: <span class="string">&quot;a&quot;</span> &#125;, <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完成下面的深拷贝函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepCopy</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> JSON.parse(JSON.stringify(obj));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> objClone = deepCopy(target);</span><br><span class="line">objClone[<span class="number">4</span>].name = <span class="string">&quot;zzz&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(target);</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(objClone);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/js_base2_deepClone2.jpg" alt="无法实现对 数组/对象中 方法 的深拷贝" title="无法实现对 数组/对象中 方法 的深拷贝"></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS基础知识面试题（3）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/06/JS%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%8D%95%E7%BA%BF%E7%A8%8B%E3%80%81Date%E3%80%81Math/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS异步与单线程、Date、Math</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">异步与单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%88%86%E5%88%AB%E4%B8%BE%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">同步和异步的区别，分别举例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99Promise%E5%8A%A0%E8%BD%BD%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">1.2.</span> <span class="nav-text">手写Promise加载一张图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise%E5%8A%A0%E8%BD%BD2%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%88%E8%A7%A3%E5%86%B3%E5%9B%9E%E8%B0%83%E5%9C%B0%E5%9F%9F%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">Promise加载2张图片（解决回调地域）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1"><span class="nav-number">1.2.2.</span> <span class="nav-text">async&#x2F;await彻底解决回调地狱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EsetTimeout%E7%9A%84%E7%AC%94%E8%AF%95%E9%A2%981"><span class="nav-number">1.3.</span> <span class="nav-text">关于setTimeout的笔试题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E7%9A%84%E5%9C%BA%E6%99%AF%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.4.</span> <span class="nav-text">前端使用异步的场景有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax%E8%AF%B7%E6%B1%82%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">ajax请求的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.4.2.</span> <span class="nav-text">动态&lt;img&gt;加载的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.4.3.</span> <span class="nav-text">事件绑定的例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">异步编程的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">事件循环（JS的执行机制）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date%E3%80%81Math%E3%80%81%E6%95%B0%E7%BB%84API%E3%80%81%E5%AF%B9%E8%B1%A1API"><span class="nav-number">2.</span> <span class="nav-text">Date、Math、数组API、对象API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%962017-06-10%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%97%A5%E6%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">获取2017-06-10格式的日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%95%BF%E5%BA%A6%E4%B8%80%E8%87%B4%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">获取长度一致的字符串随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E9%80%9A%E7%94%A8forEach%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">遍历对象和数组的通用forEach函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%8A%8A%E5%90%8E%E7%AB%AF%E7%9A%84%E8%AE%A1%E7%AE%97%E9%80%BB%E8%BE%91%E6%94%BE%E5%88%B0%E5%89%8D%E7%AB%AF-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如果把后端的计算逻辑放到前端&#x2F;移动端需要注意什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setTimeout-%E4%B8%8Elet%E3%80%81%E9%97%AD%E5%8C%85%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">setTimeout()与let、闭包与作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BB%96%E8%BE%93%E5%87%BA%E8%87%AA%E5%A2%9E%E9%98%9F%E5%88%97"><span class="nav-number">4.1.</span> <span class="nav-text">如何让他输出自增队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">深拷贝二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%8B%B7%E8%B4%9D%E6%89%80%E6%9C%89%E5%B1%82%E7%BA%A7%E5%B1%9E%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">递归拷贝所有层级属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E9%80%9A%E8%BF%87JSON%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.2.</span> <span class="nav-text">不能通过JSON对象</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

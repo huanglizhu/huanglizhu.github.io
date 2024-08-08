@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js对象 学习笔记（1） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="对象 在 JavaScript 中，几乎“所有事物”都是对象。所有 JavaScript 值，除了原始值，都是对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js对象 学习笔记（1）">
+<meta property="og:url" content="http://yoursite.com/2019/10/03/js%E5%AF%B9%E8%B1%A1%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="对象 在 JavaScript 中，几乎“所有事物”都是对象。所有 JavaScript 值，除了原始值，都是对象。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-03T12:31:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.363Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-js对象 学习笔记（1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      js对象 学习笔记（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/03/js%E5%AF%B9%E8%B1%A1%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="article-date">
+	  <time datetime="2019-10-03T12:31:00.000Z" itemprop="datePublished">十月 3, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><ul>
+<li>在 JavaScript 中，几乎“所有事物”都是对象。所有 JavaScript 值，除了原始值，都是对象。<span id="more"></span></li>
+<li>布尔是对象（如果用 new 关键词定义）</li>
+<li>数字是对象（如果用 new 关键词定义）</li>
+<li>字符串是对象（如果用 new 关键词定义）</li>
+<li>日期永远都是对象</li>
+<li>算术永远都是对象</li>
+<li>正则表达式永远都是对象</li>
+<li>数组永远都是对象</li>
+<li>函数永远都是对象</li>
+<li>对象永远都是对象</li>
+</ul>
+<p><strong>原始值</strong></p>
+<ul>
+<li>原始值指的是<strong>没有属性或方法的值</strong>。</li>
+<li>原始数据类型指的是拥有原始值的数据。</li>
+<li>JavaScript 定义了 5 种原始数据类型：</li>
+</ul>
+<ol>
+<li>string  </li>
+<li>number</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+</ol>
+<ul>
+<li>原始值是一成不变的（它们是硬编码的，因此不能改变）。</li>
+<li>假设 x &#x3D; 3.14，您能够改变 x 的值。但是您无法改变 3.14 的值。</li>
+</ul>
+<h1 id="对象定义"><a href="#对象定义" class="headerlink" title="对象定义"></a>对象定义</h1><ul>
+<li>对象是包含变量的变量</li>
+<li>JavaScript 对象是<strong>命名值</strong>的<strong>集合</strong>。</li>
+<li>对象也是变量。但是<strong>对象能够包含很多值</strong>。</li>
+<li><strong>值</strong>按照<code>名称 : 值对</code>的形式编写（名称和值以冒号分隔）。<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var person</span> = &#123;firstName:<span class="string">&quot;Bill&quot;</span>, lastName:<span class="string">&quot;Gates&quot;</span>, age:62, eyeColor:<span class="string">&quot;blue&quot;</span>&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h1><ul>
+<li>属性指的是与 JavaScript 对象相关的值。</li>
+<li>JavaScript 对象是无序属性的集合。</li>
+<li>属性通常可以被修改、添加和删除，但是某些属性是只读的。</li>
+<li>firstName、lastName、age、eyeColor就是属性。</li>
+</ul>
+<h2 id="访问对象属性的两种方法"><a href="#访问对象属性的两种方法" class="headerlink" title="访问对象属性的两种方法"></a>访问对象属性的两种方法</h2><ul>
+<li>您可以使用 <code>.property</code> (<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_property_access_1">例子1</a> )或<code> [&quot;property&quot;]</code>( <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_property_access_2">例子2</a>)</li>
+</ul>
+<h2 id="JavaScript-for…in-循环"><a href="#JavaScript-for…in-循环" class="headerlink" title="JavaScript for…in 循环"></a>JavaScript for…in 循环</h2><p>JavaScript for…in 语句<strong>遍历对象的属性</strong>。</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">variable</span> <span class="keyword">in</span> <span class="keyword">object</span>) &#123;</span><br><span class="line">    要执行的代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>for…in <strong>循环中的代码块会为每个属性执行一次</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>JavaScript 对象属性<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> txt = <span class="string">&quot;&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> person = &#123;<span class="attr">fname</span>:<span class="string">&quot;Bill&quot;</span>, <span class="attr">lname</span>:<span class="string">&quot;Gates&quot;</span>, <span class="attr">age</span>:<span class="number">62</span>&#125;; </span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> x;</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">for</span> (x <span class="keyword">in</span> person) &#123;</span></span><br><span class="line"><span class="language-javascript">  txt += person[x] + <span class="string">&quot; &quot;</span>;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;demo&quot;</span>).<span class="property">innerHTML</span> = txt;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在这里，x依次是fname、lname、age。</li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_property_for_in">例子运行效果</a></li>
+</ul>
+<h2 id="添加新属性"><a href="#添加新属性" class="headerlink" title="添加新属性"></a>添加新属性</h2><ul>
+<li>可以通过简单的赋值，向已存在的对象添加新属性。</li>
+<li>不能使用预留词作为属性名（或方法名）。请使用 JavaScript 命名规则。<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">person.nationality</span> = <span class="string">&quot;English&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_property_add">完整例子</a></li>
+</ul>
+<h2 id="删除属性"><a href="#删除属性" class="headerlink" title="删除属性"></a>删除属性</h2><ul>
+<li><strong>delete 关键词</strong>会<strong>同时删除属性的值和属性本身</strong>。</li>
+<li>删除完成后，属性在被添加回来之前是无法使用的。</li>
+<li>delete 操作符被设计<strong>用于对象属性。它对变量或函数没有影响</strong>。</li>
+<li>delete 操作符不应被用于预定义的 JavaScript 对象属性。这样做会使应用程序崩溃。<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;firstName:<span class="string">&quot;Bill&quot;</span>, lastName:<span class="string">&quot;Gates&quot;</span>, age:<span class="number">62</span>, eyeColor:<span class="string">&quot;blue&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">delete</span> person.age;   <span class="regexp">//</span> 或 <span class="keyword">delete</span> person[<span class="string">&quot;age&quot;</span>];</span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_property_delete">完整例子</a></li>
+<li>JavaScript 对象继承了它们的原型的属性。</li>
+<li>delete 关键词<strong>不会删除被继承的属性</strong>，但是如果您删除了某个原型属性，则将影响到所有从原型继承的对象。</li>
+</ul>
+<hr>
+<h1 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h1><ul>
+<li>方法是<strong>可以在对象上执行的动作</strong>。</li>
+<li>对象属性可以是原始值、其他对象以及函数。</li>
+<li><strong>对象方法</strong>是<strong>包含函数定义</strong>的<strong>对象属性</strong>。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>firstName</td>
+<td>Bill</td>
+</tr>
+<tr>
+<td>fullName</td>
+<td>function() {return this.firstName + “ “ + this.lastName;}</td>
+</tr>
+</tbody></table>
+<h2 id="this-关键词"><a href="#this-关键词" class="headerlink" title="this 关键词"></a>this 关键词</h2><ul>
+<li>在 JavaScript 中，被称为 this 的事物，指的是拥有该 JavaScript 代码的对象。</li>
+<li><strong>this 的值</strong>，在函数中使用时，是“拥有”该函数的<strong>对象</strong>。</li>
+<li>请注意 <strong>this 并非变量</strong>。它是关键词。您无法改变 this 的值。</li>
+</ul>
+<h2 id="创建与访问对象方法"><a href="#创建与访问对象方法" class="headerlink" title="创建与访问对象方法"></a>创建与访问对象方法</h2><ul>
+<li>创建对象方法：<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">methodName : <span class="keyword">function</span><span class="params">()</span> &#123; 代码行 &#125;</span><br></pre></td></tr></table></figure></li>
+<li>访问对象方法：<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objectName<span class="selector-class">.methodName</span>()</span><br></pre></td></tr></table></figure></li>
+<li>此例访问 person 对象的 fullName() 方法：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_method">例子</a></li>
+<li>如果访问 fullName 属性时没有使用 ()，则将返回函数定义：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_function">例子</a></li>
+</ul>
+<h2 id="使用内建方法"><a href="#使用内建方法" class="headerlink" title="使用内建方法"></a>使用内建方法</h2><ul>
+<li>此例使用 String 对象的 toUpperCase() 方法，把文本转换为大写：<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable language_">message</span> = <span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable language_">x</span> = <span class="variable language_">message</span>.toUpperCase();</span><br></pre></td></tr></table></figure>
+x 的值，在以上代码执行后将是：<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HELLO WORLD!</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="添加新的方法"><a href="#添加新的方法" class="headerlink" title="添加新的方法"></a>添加新的方法</h2><p>向对象添加方法是在构造器函数内部完成的：(更多相关知识在<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/06/js%E5%AF%B9%E8%B1%A1%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">js对象 学习笔记（2）</a>中的“JavaScript 对象构造器”内)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function person(firstName, lastName, age, eyeColor) &#123;</span><br><span class="line">    <span class="keyword">this</span>.firstName = firstName;  </span><br><span class="line">    <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyeColor;</span><br><span class="line">    <span class="keyword">this</span>.changeName = function (name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.lastName = name;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>changeName() 函数 name 的值赋给了 person 的 lastName 属性。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myMother.changeName(<span class="string">&quot;Jobs&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp?f=js_object_constructor_4">完整例子</a></li>
+<li>通过用 myMother “替代” this。</li>
+<li>this 的值，在对象中使用时，就是对象本身。</li>
+<li>在<strong>构造器函数</strong>中，this 是没有值的。它是新对象的替代物。 当一个新对象被创建时，<strong>this 的值会成为这个新对象</strong>。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/05/%E8%A7%A3%E5%86%B3%E5%B0%8F%E7%81%AB%E7%AE%AD%E8%A2%AB%E7%9B%AE%E5%BD%95%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          hexo中hipaper主题——解决小火箭被目录覆盖问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/02/AJAX%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">AJAX异步更新</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">对象定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">对象属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">访问对象属性的两种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-for%E2%80%A6in-%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript for…in 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%B1%9E%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">添加新属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%B1%9E%E6%80%A7"><span class="nav-number">3.4.</span> <span class="nav-text">删除属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">对象方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#this-%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">4.1.</span> <span class="nav-text">this 关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">创建与访问对象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%86%85%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">使用内建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">4.4.</span> <span class="nav-text">添加新的方法</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

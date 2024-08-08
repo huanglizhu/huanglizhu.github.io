@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>let命令 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象） 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="let命令">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/let/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="了解块级作用域 块级作用域是一个语句，将多个操作封装在一起，通常是放在一个大括号里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象） 块级作用域之中的每个函数都类似一个代码块。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-15T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.366Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-let" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      let命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/10/15/let/" class="article-date">
+	  <time datetime="2019-10-15T13:00:00.000Z" itemprop="datePublished">十月 15, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="了解块级作用域"><a href="#了解块级作用域" class="headerlink" title="了解块级作用域"></a>了解块级作用域</h1><ul>
+<li>块级作用域是一个语句，将多个操作封装在一起，通常是放在一个<strong>大括号</strong>里，没有返回值。（但是对象声明用到的大括号不包括块级作用域，它包括的是对象）</li>
+<li><strong>块级作用域之中的每个函数都类似一个代码块</strong>。（但是这个代码块不包含它体内的另一个函数内的内容，类似于“我的附庸的附庸不是我的附庸”，函数1所包含的函数2的内容也不属于函数1的代码块）<span id="more"></span></li>
+</ul>
+<h2 id="块级作用域于函数声明"><a href="#块级作用域于函数声明" class="headerlink" title="块级作用域于函数声明"></a>块级作用域于函数声明</h2><ul>
+<li>ES6 引入了块级作用域，明确<strong>允许在块级作用域之中声明函数</strong>。ES6 规定，<strong>块级作用域之中，函数声明语句的行为类似于let</strong> ，在块级作用域之外不可引用。</li>
+<li>但应该避免在块级作用域内声明函数。如果确实需要，也应该写成函数表达式，而不是函数声明语句。</li>
+</ul>
+<p>但为了减轻因此产生的不兼容问题，在ES6环境的浏览器中：</p>
+<ol>
+<li>允许在块级作用域内声明函数。</li>
+<li><strong>函数声明类似于var</strong>，即会<strong>提升到全局作用域或函数作用域的头部</strong>。</li>
+<li>同时，函数声明还会提升到所在的块级作用域的头部。<br>ES6 的浏览器实现有效，<strong>其他环境</strong>的实现不用遵守，<strong>还是将块级作用域的函数声明当作let处理</strong>。</li>
+</ol>
+<hr>
+<h2 id="ES6-允许块级作用域的任意嵌套"><a href="#ES6-允许块级作用域的任意嵌套" class="headerlink" title="ES6 允许块级作用域的任意嵌套"></a>ES6 允许块级作用域的任意嵌套</h2><p>先了解一下，<strong>匿名立即执行函数</strong>表达式（匿名 IIFE）可以用块级作用域实现：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IIFE 写法</span></span><br><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(a);</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 块级作用域写法</span></span><br><span class="line">&#123;</span><br><span class="line">    let a = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面代码使用了一个<strong>五层的块级作用域</strong>，每一层都是一个单独的作用域。。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;&#123;&#123;&#123;</span></span><br><span class="line"><span class="template-tag">  <span class="name">let</span> insane = <span class="string">&#x27;Hello World&#x27;</span>;</span></span><br><span class="line"><span class="template-tag">  &#123;let insane = <span class="string">&#x27;Hello World&#x27;</span>&#125;</span></span><br><span class="line"><span class="template-tag">&#125;&#125;&#125;&#125;</span><span class="language-xml">;</span></span><br></pre></td></tr></table></figure>
+<p>注意：内层作用域可以定义外层作用域的同名变量。</p>
+<hr>
+<h1 id="let-命令"><a href="#let-命令" class="headerlink" title="let 命令"></a>let 命令</h1><ul>
+<li>声明变量，用法类似于var，但是所声明的变量只在let命令所在的代码块内有效。</li>
+<li>for循环的计数器，就很合适使用let命令。</li>
+</ul>
+<h2 id="for循环的例子-var与let"><a href="#for循环的例子-var与let" class="headerlink" title="for循环的例子(var与let)"></a>for循环的例子(var与let)</h2><ul>
+<li>首先要明确，for循环有一个特别之处，设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="string">&#x27;abc&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br></pre></td></tr></table></figure></li>
+<li>上面代码正确运行，输出了 3 次abc。这表明<strong>函数内部的变量i与循环变量i不在同一个作用域</strong>，有各自单独的作用域。</li>
+</ul>
+<p><strong>使用var的例子：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a <span class="operator">=</span> []<span class="comment">;</span></span><br><span class="line">for (var i <span class="operator">=</span> <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  a[i] <span class="operator">=</span> function () &#123;</span><br><span class="line">    console.log(i)<span class="comment">;</span></span><br><span class="line">  &#125;<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>]()<span class="comment">; // 10,数组a中的10个元素都是打印10</span></span><br></pre></td></tr></table></figure>
+<p>变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。所以a[0]指向的i以及a[1]到a[8]指向的i都被后来循环的a[9]指向的i（也就是10）覆盖掉了。而局部变量的话就是每循环一次产生一个新的i，所以不会被覆盖。</p>
+<p><strong>使用let的例子：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a <span class="operator">=</span> []<span class="comment">;</span></span><br><span class="line">for (let i <span class="operator">=</span> <span class="number">0</span><span class="comment">; i &lt; 10; i++) &#123;</span></span><br><span class="line">  a[i] <span class="operator">=</span> function () &#123;</span><br><span class="line">    console.log(i)<span class="comment">;</span></span><br><span class="line">  &#125;<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>]()<span class="comment">; // 6</span></span><br></pre></td></tr></table></figure>
+<p>变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。</p>
+<hr>
+<h2 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h2><ul>
+<li>ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量从一开始就形成了封闭作用域。凡是在声明之前使用这些变量(包括声明或者赋值)，就会报错。</li>
+<li>存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let声明变量前，对tmp赋值会报错。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  tmp = <span class="string">&#x27;abc&#x27;</span>; <span class="comment">// ReferenceError</span></span><br><span class="line">  <span class="keyword">let</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="let不允许重复声明"><a href="#let不允许重复声明" class="headerlink" title="let不允许重复声明"></a>let不允许重复声明</h2><h3 id="不能在函数内部重新声明参数"><a href="#不能在函数内部重新声明参数" class="headerlink" title="不能在函数内部重新声明参数"></a>不能在函数内部重新声明参数</h3><p><strong>不能在函数内部重新声明参数</strong>，这相当于在同一个块级作用域里面两次用let声明变量：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="keyword">func</span><span class="params">(arg)</span></span> &#123;</span><br><span class="line">  let arg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line">function <span class="function"><span class="keyword">func</span><span class="params">(arg)</span></span> &#123;</span><br><span class="line">  &#123;</span><br><span class="line">    let arg;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="comment">// 不报错，注意这里是两个代码块了（不理解的话可以看下面的另一个例子）</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的函数有<strong>两个代码块</strong>，都声明了变量n，运行后输出5。（因为代码块2的变量n不作用于代码块2之外）这表示<strong>外层代码块不受内层代码块的影响</strong>。<br><br/>如果两次都使用var定义变量n，最后输出的值才是 10。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="number">5</span>; <span class="comment">//代码块1定义的变量n</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> n = <span class="number">10</span>; <span class="comment">//代码块2定义的变量n</span></span><br><span class="line">        <span class="comment">//在这console.log(n);会得到10</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(n); <span class="comment">// 5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">f1</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%BA%94%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%EF%BC%88CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          百度前端技术学院 第五天学习笔记（CSS盒模型）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/13/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E5%9B%9B%E5%A4%A9%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第四天学习总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">了解块级作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%BA%8E%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">块级作用域于函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-%E5%85%81%E8%AE%B8%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E4%BB%BB%E6%84%8F%E5%B5%8C%E5%A5%97"><span class="nav-number">1.2.</span> <span class="nav-text">ES6 允许块级作用域的任意嵌套</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#let-%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">let 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF%E7%9A%84%E4%BE%8B%E5%AD%90-var%E4%B8%8Elet"><span class="nav-number">2.1.</span> <span class="nav-text">for循环的例子(var与let)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">暂时性死区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="nav-number">2.3.</span> <span class="nav-text">let不允许重复声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E5%9C%A8%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8%E9%87%8D%E6%96%B0%E5%A3%B0%E6%98%8E%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">不能在函数内部重新声明参数</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

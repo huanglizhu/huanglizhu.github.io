@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>首页开发（3） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="实现“加载更多”的换页功能实现功能: 在List.js中增加“加载更多”按钮，点击按钮后换页。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="首页开发（3）">
+<meta property="og:url" content="http://yoursite.com/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="实现“加载更多”的换页功能实现功能: 在List.js中增加“加载更多”按钮，点击按钮后换页。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpddl2mfj30k4072gm0.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpg54jj4j30qp08dmyc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpgt7ko0j30i2054mxk.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpme7z4mj30he06wjrp.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvtov126hj30z30j50vq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvtpbp5kwj319r0mjwlf.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu18t8fxj30dt071jru.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu3lc29qj30nm0cvgn9.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu632wg0j30xx05ymy3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuwtwgbtj30ti0m40vo.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuxkj7t8j31gd09ojtq.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuzkc3lsj30lm0313yr.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuz62a1sj31fo06oq3l.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvv5sjwhpj30mg06wwfh.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvv9o47ugj30i20410t2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvc680koj30ki02b74j.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvfjc6mhj30uz074jsc.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvqqkmgnj30ss0r7gqg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvwmgitj9j30m10b40tz.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvws1yxfyj30ql06dq4w.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvx4sj5etj30p90fc0up.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvx6chjlrj318j0icdhg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxgouuhqj314k0avt9s.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxiuu6kxj30ud0n6tdj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxlv3xvtj30qm0540ti.jpg">
+<meta property="article:published_time" content="2020-02-15T13:50:12.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.437Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpddl2mfj30k4072gm0.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-首页开发（3）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      首页开发（3）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/" class="article-date">
+	  <time datetime="2020-02-15T13:50:12.000Z" itemprop="datePublished">二月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="实现“加载更多”的换页功能"><a href="#实现“加载更多”的换页功能" class="headerlink" title="实现“加载更多”的换页功能"></a>实现“加载更多”的换页功能</h1><p><strong>实现功能</strong>: 在List.js中<strong>增加“加载更多”按钮</strong>，<strong>点击按钮后换页</strong>。</p>
+<span id="more"></span>
+<p><strong>实现 点击 加载更多：</strong></p>
+<ol>
+<li><strong>模拟接口数据</strong>（public-api-homeList.json）</li>
+<li><strong>定义组件</strong>（style.js）</li>
+<li><strong>点击</strong>后要<strong>发送AJAX请求</strong>，AJAX请求是<strong>写在action中</strong>的（actionCreators.js）</li>
+<li><strong>使用组件</strong>，<strong>绑定点击事件</strong>，在事件函数中<strong>调用方法</strong>去<strong>创建并派发action</strong>（相当于发送AJAX请求）（List.js）</li>
+<li>store拿到action后打包action和state传给reducer</li>
+<li><strong>reducer</strong>拿到action和state后去<strong>改变articleList后返回新state</strong>（reducer.js）</li>
+<li><strong>页面重新渲染</strong></li>
+</ol>
+<p><strong>实现 换页：</strong></p>
+<ol>
+<li>在reducer中<strong>新增 articlePage 用于存储当前页数</strong>，初始值为1（reducer.js）</li>
+<li>在List.js中每<strong>点击</strong>一次按钮就使articlePage+1，所以要在调用的函数中传入page</li>
+<li>要使 articlePage+1 改变就要通过action，所以在actionCreators.js中进行设置。<ol>
+<li>使<strong>AJAX请求的接口地址上使用articlePage</strong>，这也就<strong>保证了每次请求的地址都是带有不同页数的</strong>。</li>
+<li>要让articlePage+1就要通过action改变store中数据</li>
+</ol>
+</li>
+<li>reducer其实还是返回homeList.json中的模拟数据，只是方便了后端。</li>
+</ol>
+<h2 id="实现-加载更多数据"><a href="#实现-加载更多数据" class="headerlink" title="实现 加载更多数据"></a>实现 加载更多数据</h2><h3 id="定义-组件LoadMore"><a href="#定义-组件LoadMore" class="headerlink" title="定义 组件LoadMore"></a>定义 组件<code>LoadMore</code></h3><p>在style.js中**定义 组件<code>LoadMore</code>**：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">const</span> <span class="string">LoadMore</span> <span class="string">=</span> <span class="string">styled.div`</span></span><br><span class="line">  <span class="attr">width:</span> <span class="number">100</span><span class="string">%;</span></span><br><span class="line">  <span class="attr">line-height:</span> <span class="string">40px;</span></span><br><span class="line">  <span class="attr">margin:</span> <span class="string">30px</span> <span class="number">0</span><span class="string">;</span></span><br><span class="line">  <span class="attr">background:</span> <span class="comment">#a5a5a5;</span></span><br><span class="line">  <span class="attr">text-align:</span> <span class="string">center;</span></span><br><span class="line">  <span class="attr">border-radius:</span> <span class="string">20px;</span></span><br><span class="line">  <span class="attr">color:</span> <span class="comment">#fff;</span></span><br><span class="line">  <span class="attr">cursor:</span> <span class="string">pointer;</span></span><br><span class="line"><span class="string">`;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="模拟接口数据"><a href="#模拟接口数据" class="headerlink" title="模拟接口数据"></a>模拟接口数据</h3><p>在public-api下<strong>新建homeList.json文件</strong>用于<strong>模拟接口数据</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;sucess&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">4</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;疫情就要结束了！&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;因为一个人，人民摘掉口罩的愿望可能成为了泡影，学生返校，工人正常复工的时间可能又要推迟。一个人的不重视，就可能会导致全国人民努力白费。我不知道为...&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;imgUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcuniztyfhj30dw09tai6.jpg&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">5</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;在家长厨艺&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;今年，大家都过了一个 长长长长长长的假期 每天朋友圈里 除了有关疫情的新闻 就是晒自己做的“黑暗料理” 在这个没有了外卖的日子里 蛋糕、奶茶、火...&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;imgUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcunif28rwj30rs0iitzs.jpg&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">6</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;大家要坚持戴口罩！&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;疫情对普通人的影响，很大程度上表现为一场魔幻式的恐慌。从朋友圈疯传的段子就可以看出，最搞笑的是某宝平台上的兽用双黄莲也被抢购一空。虽然我国制度优...&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;imgUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcunhi0u4qj30ib0au79t.jpg&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用组件，绑定点击事件"><a href="#使用组件，绑定点击事件" class="headerlink" title="使用组件，绑定点击事件"></a>使用组件，绑定点击事件</h3><p><strong>List.js:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span>, <span class="title class_">Fragment</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  <span class="title class_">ListItem</span>,</span><br><span class="line">  <span class="title class_">ListInfo</span>,</span><br><span class="line">  <span class="title class_">LoadMore</span>,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;../style&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; actionCreators &#125; <span class="keyword">from</span> <span class="string">&quot;../store&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">List</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; list, getMoreList &#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;</span></span><br><span class="line"><span class="language-xml">          list.map((item, index) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">            return (</span></span><br><span class="line"><span class="language-xml">              <span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">img</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                  <span class="attr">className</span>=<span class="string">&quot;pic&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                  <span class="attr">src</span>=<span class="string">&#123;item.get(</span>&quot;<span class="attr">imgUrl</span>&quot;)&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                  <span class="attr">alt</span>=<span class="string">&#123;item.get(</span>&quot;<span class="attr">title</span>&quot;)&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">ListInfo</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                  <span class="tag">&lt;<span class="name">h3</span> <span class="attr">className</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;item.get(&quot;title&quot;)&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                  <span class="tag">&lt;<span class="name">p</span> <span class="attr">className</span>=<span class="string">&quot;desc&quot;</span>&gt;</span>&#123;item.get(&quot;desc&quot;)&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">ListInfo</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">              <span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            )</span></span><br><span class="line"><span class="language-xml">          &#125;)</span></span><br><span class="line"><span class="language-xml">        &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">LoadMore</span> <span class="attr">onClick</span>=<span class="string">&#123;getMoreList&#125;</span>&gt;</span>加载更多<span class="tag">&lt;/<span class="name">LoadMore</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">mapState</span> = (<span class="params">state</span>) =&gt; (&#123;</span><br><span class="line">  <span class="attr">list</span>: state.<span class="title function_">getIn</span>([<span class="string">&quot;home&quot;</span>, <span class="string">&quot;articleList&quot;</span>])</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatch</span> = (<span class="params">dispatch</span>) =&gt; (&#123;</span><br><span class="line">  <span class="title function_">getMoreList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">dispatch</span>(actionCreators.<span class="title function_">getMoreList</span>());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">connect</span>(mapState, mapDispatch)(<span class="title class_">List</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在List.js中<strong>引入并使用 组件<code>LoadMore</code><strong>，绑定</strong>点击事件</strong>，点击以后我们是要发送AJAX请求获取数据的，获取到的数据改变state中数据让页面重新渲染<ol>
+<li><strong>AJAX请求要放到action中</strong>，在actionCreators.js中新建**getMoreList()<strong>用于创建 <strong>发送AJAX请求的action</strong>,新建</strong>addHomeList()**用于创建 <strong>改变store中数据的action</strong>。</li>
+<li>要<strong>派发action</strong>给store就要在connect方法的参数2（回调函数）中**新建函数getMoreList()**用于派发action</li>
+<li>事件绑定函数中只需**调用函数getMoreList()**即可完成AJAX的发送</li>
+</ol>
+</li>
+</ol>
+<h3 id="创建2个action"><a href="#创建2个action" class="headerlink" title="创建2个action"></a>创建2个action</h3><p><strong>actionCreators.js中添加以下代码，创建发送AJAX请求和改变state数据的action:</strong></p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">&quot;immutable&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const addHomeList = <span class="function"><span class="params">(list)</span> =&gt;</span> (&#123;</span><br><span class="line">  type: constants.ADD_HOME_List,</span><br><span class="line">  list: fromJS(list)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> const getMoreList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (dispatch) =&gt; &#123;</span><br><span class="line">    axios.get(<span class="string">&quot;/api/homeList.json&quot;</span>).<span class="keyword">then</span>(<span class="function"><span class="params">(res)</span> =&gt;</span> &#123;</span><br><span class="line">      const result = res.data.data;</span><br><span class="line">      dispatch(addHomeList(result));</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>新建**getMoreList()**用于创建 <strong>发送AJAX请求的action</strong></li>
+<li>新建**addHomeList()**用于创建 <strong>改变store中数据的action</strong>。<ul>
+<li>用于<strong>改变store</strong>中的数据的<strong>数据</strong>也<strong>必须是immutable类型</strong>的。</li>
+<li><strong>immutable提供的fromJS()和List()<strong>都可以</strong>使普通数组转换为immutable数组</strong>。<ul>
+<li>但是<strong>List只能使数组变immutable，数组元素若为对象，则还是普通对象</strong>。fromJS()是将数组元素也immutable化的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="reducer处理articleList"><a href="#reducer处理articleList" class="headerlink" title="reducer处理articleList"></a>reducer处理articleList</h3><p><strong>reducer</strong>接收到action后,使用<strong>concat()<strong>将 articleList变成</strong>合并了新数据后的数组</strong>,返回给state:</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">case constants.ADD_HOME_List:</span><br><span class="line">  return <span class="keyword">state</span>.<span class="built_in">set</span>(<span class="string">&quot;articleList&quot;</span>, <span class="keyword">state</span>.get(<span class="string">&quot;articleList&quot;</span>).concat(action.list))</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现-换页"><a href="#实现-换页" class="headerlink" title="实现 换页"></a>实现 换页</h2><h3 id="reducer新增articlePage管理当前页码"><a href="#reducer新增articlePage管理当前页码" class="headerlink" title="reducer新增articlePage管理当前页码"></a>reducer新增articlePage管理当前页码</h3><ol>
+<li>在reducer中<strong>给state新增一个默认数据<code>articlePage:1</code></strong>,默认起始页为1，接下来每点击一次“加载更多”就使articlePage+1<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">defaultState</span> = <span class="title function_ invoke__">fromJS</span>(&#123;</span><br><span class="line">  <span class="attr">topicList</span>: [],</span><br><span class="line">  <span class="attr">articleList</span>: [],</span><br><span class="line">  <span class="attr">recommendList</span>: [],</span><br><span class="line">  <span class="attr">articlePage</span>:<span class="number">1</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="List中获取articlePage传给action使用"><a href="#List中获取articlePage传给action使用" class="headerlink" title="List中获取articlePage传给action使用"></a>List中获取articlePage传给action使用</h3><p><strong>在List.js中获取articlePage:</strong></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mapState = (<span class="keyword">state</span>) =&gt; (&#123;</span><br><span class="line">  list: <span class="keyword">state</span>.getIn([<span class="string">&quot;home&quot;</span>, <span class="string">&quot;articleList&quot;</span>]),</span><br><span class="line">  page: <span class="keyword">state</span>.getIn([<span class="string">&quot;home&quot;</span>, <span class="string">&quot;articlePage&quot;</span>])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用点击事件绑定函数getMoreList()时传入articlePage</strong>:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; list, page, getMoreList &#125; = <span class="keyword">this</span>.props;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LoadMore</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> getMoreList(page)&#125;&gt;加载更多<span class="tag">&lt;/<span class="name">LoadMore</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>getMoreList()<strong>拿到page后传给 actionCreators.js</strong>中的getMoreList():</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const mapDispatch = (<span class="name">dispatch</span>) =&gt; (&#123;</span><br><span class="line">  getMoreList(<span class="name">page</span>) &#123;</span><br><span class="line">    dispatch(<span class="name">actionCreators</span>.getMoreList(<span class="name">page</span>))<span class="comment">;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="actionCreators中page-1"><a href="#actionCreators中page-1" class="headerlink" title="actionCreators中page+1"></a>actionCreators中page+1</h3><p>actionCreators.js中，在**请求后端接口数据时加上page（<code>&quot;/api/homeList.json?page=&quot; + page</code>**）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">getMoreList</span> = (<span class="params">page</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">    axios.<span class="title function_">get</span>(<span class="string">&quot;/api/homeList.json?page=&quot;</span> + page).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = res.<span class="property">data</span>.<span class="property">data</span>;</span><br><span class="line">      <span class="title function_">dispatch</span>(<span class="title function_">addHomeList</span>(result));</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>可以看到每次点击“加载更多”请求的都是第一页：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpddl2mfj30k4072gm0.jpg" alt="结果"><br>把page也通过addHomeList<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpg54jj4j30qp08dmyc.jpg" alt="page+1"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpgt7ko0j30i2054mxk.jpg" alt="传递给store"></p>
+<h3 id="reducer处理articlePage"><a href="#reducer处理articlePage" class="headerlink" title="reducer处理articlePage"></a>reducer处理articlePage</h3><p>action传递了nextPage，reducer就将接收到<strong>的nextPage放到state中替换掉articlePage</strong>，则<strong>每一次点击后请求的接口都带有不同的页数</strong>：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case constants.ADD_HOME_List:</span><br><span class="line">  return <span class="keyword">state</span>.merge(&#123;</span><br><span class="line">    <span class="string">&quot;articleList&quot;</span>: <span class="keyword">state</span>.get(<span class="string">&quot;articleList&quot;</span>).concat(action.list),</span><br><span class="line">    <span class="string">&quot;articlePage&quot;</span>: action.nextPage</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>这样一来每次点击请求的页码都不同：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvpme7z4mj30he06wjrp.jpg" alt="效果"></p>
+<p><strong>注意</strong><br>后端拿到不同的页码就可以返回不同的数据了。(但实际上我们每次返回的还是homeList.json中的模拟数据)</p>
+<hr>
+<h1 id="实现-返回顶部-功能"><a href="#实现-返回顶部-功能" class="headerlink" title="实现 返回顶部 功能"></a>实现 返回顶部 功能</h1><ul>
+<li><strong>在home-index.js中</strong>我们实现一个点击以后返回顶部的按钮。</li>
+</ul>
+<h2 id="style-js中定义组件BackTop"><a href="#style-js中定义组件BackTop" class="headerlink" title="style.js中定义组件BackTop"></a>style.js中定义组件BackTop</h2><p>由于是一直在右下角的，所以该按钮是<strong>固定定位</strong>的:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="type">const</span> BackTop = styled.div`</span><br><span class="line">  position: fixed;</span><br><span class="line">  right: <span class="number">100</span>px;</span><br><span class="line">  bottom: <span class="number">100</span>px;</span><br><span class="line">  width: <span class="number">60</span>px;</span><br><span class="line">  line-height: <span class="number">60</span>px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  border: <span class="number">1</span>px solid <span class="meta">#ccc;</span></span><br><span class="line">  font-size: <span class="number">14</span>px;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<h2 id="home-index-js中使用BackTop"><a href="#home-index-js中使用BackTop" class="headerlink" title="home-index.js中使用BackTop"></a>home-index.js中使用BackTop</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvtov126hj30z30j50vq.jpg" alt="home-index.js中使用BackTop"><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvtpbp5kwj319r0mjwlf.jpg" alt="效果"></p>
+<h2 id="BackTop绑定点击事件"><a href="#BackTop绑定点击事件" class="headerlink" title="BackTop绑定点击事件"></a>BackTop绑定点击事件</h2><p>要想让按钮<strong>点击回到顶部</strong>，就需要给他<strong>绑定点击事件</strong>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">BackTop</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleScrollTop&#125;</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="name">BackTop</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于此时和reducer并不关系，只是单纯回到顶部，所以只需要<strong>在Home组件中书写函数</strong>即可:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleScrollTop</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们需要<strong>借助<code>window.scrollTo()</code>方法把内容滚动到指定的坐标</strong>。<code>scrollTo(x 坐标,y 坐标)</code></p>
+<h2 id="下滑到一定位置再显示该按钮"><a href="#下滑到一定位置再显示该按钮" class="headerlink" title="下滑到一定位置再显示该按钮"></a>下滑到一定位置再显示该按钮</h2><p><strong>实现功能：</strong>此时按钮一直显示在页面上，我们要<strong>实现下滑到一定位置再显示该按钮</strong>。</p>
+<ol>
+<li>在<strong>reducer中添加<code>showScroll:false</code>默认不显示按钮</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu18t8fxj30dt071jru.jpg" alt="reducer.js"></li>
+<li>到<strong>home-index.js中拿到数据showScroll</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu3lc29qj30nm0cvgn9.jpg" alt="home-index.js"></li>
+<li>使用<strong>三元运算符</strong>来<strong>根据showScroll决定是否显示按钮</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvu632wg0j30xx05ymy3.jpg" alt="三元运算符"></li>
+<li><strong>使用<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/met-element-addeventlistener.html">addEventListener()</a>监听<a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-onscroll.html">onScroll事件</a></strong>,元素滚动条在<strong>滚动时就触发 changeScrollTopShow()</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuwtwgbtj30ti0m40vo.jpg" alt="滚动时就触发 changeScrollTopShow()"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuxkj7t8j31gd09ojtq.jpg" alt="滚动时监听成功"></li>
+<li>在 changeScrollTopShow()中<strong>根据<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTop"><code>document.documentElement.scrollTop</code></a>得到滚动距离</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuzkc3lsj30lm0313yr.jpg" alt="得到滚动距离"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvuz62a1sj31fo06oq3l.jpg" alt="往下滚动">由于我们需要通过改变store中数据来决定是否显示按钮，所以函数changeScrollTopShow要放在connect的参数2中。</li>
+<li>在changeScrollTopShow()中设置判断，<strong>滚动距离顶部距离大于400才显示，否则隐藏按钮</strong>，要修改store中数据就要<strong>派发action</strong>，所以需要在 <strong>actionCreators.js中创建对应action</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvv5sjwhpj30mg06wwfh.jpg" alt="changeScrollTopShow"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvv9o47ugj30i20410t2.jpg" alt="actionCreators.js"></li>
+<li>在<strong>reducer中处理action</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvc680koj30ki02b74j.jpg" alt="reducer中处理action"></li>
+<li><strong>注意：在home组件中给window绑定了一个事件，那么移除home组件时要记得解绑：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvfjc6mhj30uz074jsc.jpg" alt="记得解绑"></li>
+</ol>
+<h2 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h2><p>将<strong>修改state中数据的代码拿出来放在函数里</strong>，在switch…case中通过<strong>调用函数对state进行修改</strong>，精简switch…case的代码：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvvqqkmgnj30ss0r7gqg.jpg" alt="优化代码"></p>
+<hr>
+<h1 id="首页性能优化（PureComponent）"><a href="#首页性能优化（PureComponent）" class="headerlink" title="首页性能优化（PureComponent）"></a>首页性能优化（PureComponent）</h1><ul>
+<li>我们在<strong>首页所有组件都使用connect与store做了链接</strong>，这也就导致<strong>只要store发生改变，那么每个组件都会被重新渲染</strong>，也就是render函数会被重新执行，也就是说<strong>不管更新的数据和本组件是否有关系，本组件都会重新渲染</strong>，这样就导致<strong>性能不高</strong>。</li>
+</ul>
+<p><strong>解决方法</strong>：</p>
+<ul>
+<li>所以可以<strong>使用 shouldCompUpdate()<strong>优化代码，</strong>判断只有和本组件有关的数据更新时，本组件的render函数才执行</strong>，否则return false不让组件重新渲染。<strong>通过避免虚拟DOM的比对来提高性能</strong>。</li>
+<li>但是<strong>手写shouldCompUpdate太过麻烦</strong>，所以我们可以<strong>使用react提供的PureComponent</strong></li>
+<li><strong>前提条件：必须使用immutable管理数据才能使用PureComponent，否则坑很多。</strong></li>
+<li>在首页index.js及其内部组件中都<strong>使用PureComponent代替Component</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvwmgitj9j30m10b40tz.jpg" alt="以Topic为例"></li>
+</ul>
+<hr>
+<h1 id="路由跳转（react-router-dom的Link组件）"><a href="#路由跳转（react-router-dom的Link组件）" class="headerlink" title="路由跳转（react-router-dom的Link组件）"></a>路由跳转（react-router-dom的Link组件）</h1><ul>
+<li>使用<strong>react-router-dom的Link组件</strong>帮助进行页面跳转，Link组件类似a标签，to属性类似a标签的href属性。</li>
+<li>使用Link组件可使<strong>页面跳转时不发送另一个http请求</strong>，提升加载速度，提高性能。</li>
+<li><strong>注意：react是 单页应用的跳转</strong>，也就是说，<strong>不管怎么进行页面跳转，整个网站只会加载一次html文件</strong>，这也就决定了<strong>不能使用<code>&lt;a&gt;</code>标签进行页面跳转</strong>。<ul>
+<li>如果<strong>使用<code>&lt;a&gt;</code>标签进行页面跳转，跳转时会发送HTTP请求。</strong></li>
+<li>而<strong>借助react-router-dom的Link组件实现跳转则不会</strong>，因此加载速度会快很多，借此也可提高性能。</li>
+</ul>
+</li>
+</ul>
+<h2 id="首页到详情页"><a href="#首页到详情页" class="headerlink" title="首页到详情页"></a>首页到详情页</h2><p>希望<strong>点击博客时可跳转到详情页：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvws1yxfyj30ql06dq4w.jpg" alt="博客"></p>
+<p>在List.js中<strong>引入react-router-dom的Link组件</strong>：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Link &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvx4sj5etj30p90fc0up.jpg" alt="使用Link组件"><br>可以看到<strong>跳转时并没有发送另一个HTTP请求：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvx6chjlrj318j0icdhg.jpg" alt="效果"></p>
+<hr>
+<h2 id="详情页到首页"><a href="#详情页到首页" class="headerlink" title="详情页到首页"></a>详情页到首页</h2><p><strong>实现功能：</strong>点击Logo从详情页跳转到首页。</p>
+<p><strong>在common-header-styles.js中，原本我们的Logo组件使用的是a标签，现在改成div</strong>：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="type">const</span> Logo = styled.div`</span><br><span class="line">  position:absolute;</span><br><span class="line">  display:block;</span><br><span class="line">  top:<span class="number">0</span>;</span><br><span class="line">  left:<span class="number">0</span>;</span><br><span class="line">  height:<span class="number">56</span>px;</span><br><span class="line">  width:<span class="number">100</span>px;</span><br><span class="line">  background:<span class="built_in">url</span>($&#123;LogoPic&#125;);</span><br><span class="line">  <span class="comment">// contain：把x轴拉满，y轴够长的话会平铺重复显示图片</span></span><br><span class="line">  background-size:contain;</span><br><span class="line">`;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在common-header-index.js中引入并使用Link组件包裹Logo组件，使之可跳转首页:</strong></p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Link &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Logo</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时会<strong>报错</strong>：<code>Error: Invariant failed: You should not use &lt;Link&gt; outside a &lt;Router&gt;</code>也就是说<strong>Link不应该在router的外部</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxgouuhqj314k0avt9s.jpg" alt="报错"><br>（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/12/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/#%E5%9C%A8React%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD">关于Router组件可复习这篇笔记</a>）<br>到<strong>App.js中可以看到，Header和BrowserRouter组件是并列关系，</strong>也就是说，<strong>处于Header组件中的Link组件</strong>和BrowserRouter组件是并列关系，Link也就在router的外部了：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxiuu6kxj30ud0n6tdj.jpg" alt="App.js"><br><strong>解决方法：</strong>将Header组件放入BrowserRouter组件内部:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gcvxlv3xvtj30qm0540ti.jpg" alt="将Header组件放入BrowserRouter组件内部"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/16/%E8%A7%A3%E5%86%B3router%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          解决router相关报错
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/14/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">首页开发（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E2%80%9C%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A%E2%80%9D%E7%9A%84%E6%8D%A2%E9%A1%B5%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">实现“加载更多”的换页功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">实现 加载更多数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-%E7%BB%84%E4%BB%B6LoadMore"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义 组件LoadMore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">模拟接口数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%8C%E7%BB%91%E5%AE%9A%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">使用组件，绑定点击事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA2%E4%B8%AAaction"><span class="nav-number">1.1.4.</span> <span class="nav-text">创建2个action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reducer%E5%A4%84%E7%90%86articleList"><span class="nav-number">1.1.5.</span> <span class="nav-text">reducer处理articleList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-%E6%8D%A2%E9%A1%B5"><span class="nav-number">1.2.</span> <span class="nav-text">实现 换页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reducer%E6%96%B0%E5%A2%9EarticlePage%E7%AE%A1%E7%90%86%E5%BD%93%E5%89%8D%E9%A1%B5%E7%A0%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">reducer新增articlePage管理当前页码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E4%B8%AD%E8%8E%B7%E5%8F%96articlePage%E4%BC%A0%E7%BB%99action%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">List中获取articlePage传给action使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actionCreators%E4%B8%ADpage-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">actionCreators中page+1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reducer%E5%A4%84%E7%90%86articlePage"><span class="nav-number">1.2.4.</span> <span class="nav-text">reducer处理articlePage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8-%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">实现 返回顶部 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#style-js%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6BackTop"><span class="nav-number">2.1.</span> <span class="nav-text">style.js中定义组件BackTop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#home-index-js%E4%B8%AD%E4%BD%BF%E7%94%A8BackTop"><span class="nav-number">2.2.</span> <span class="nav-text">home-index.js中使用BackTop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BackTop%E7%BB%91%E5%AE%9A%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">BackTop绑定点击事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%BB%91%E5%88%B0%E4%B8%80%E5%AE%9A%E4%BD%8D%E7%BD%AE%E5%86%8D%E6%98%BE%E7%A4%BA%E8%AF%A5%E6%8C%89%E9%92%AE"><span class="nav-number">2.4.</span> <span class="nav-text">下滑到一定位置再显示该按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.5.</span> <span class="nav-text">优化代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%88PureComponent%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">首页性能优化（PureComponent）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%EF%BC%88react-router-dom%E7%9A%84Link%E7%BB%84%E4%BB%B6%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">路由跳转（react-router-dom的Link组件）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E9%A1%B5%E5%88%B0%E8%AF%A6%E6%83%85%E9%A1%B5"><span class="nav-number">4.1.</span> <span class="nav-text">首页到详情页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E6%83%85%E9%A1%B5%E5%88%B0%E9%A6%96%E9%A1%B5"><span class="nav-number">4.2.</span> <span class="nav-text">详情页到首页</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

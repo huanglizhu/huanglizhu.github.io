@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TodoList代码优化 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="react.js基础精讲（1）中todoList代码中有许多需要优化的地方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TodoList代码优化">
+<meta property="og:url" content="http://yoursite.com/2020/01/03/TodoList%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="react.js基础精讲（1）中todoList代码中有许多需要优化的地方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactBindThis.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactConstructorBindThis.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactJsxJs.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/rreactGetTodoItemactConstructorBindThis.png">
+<meta property="article:published_time" content="2020-01-03T10:20:02.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.347Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-TodoList代码优化" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      TodoList代码优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/03/TodoList%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="article-date">
+	  <time datetime="2020-01-03T10:20:02.000Z" itemprop="datePublished">一月 3, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>react.js基础精讲（1）中todoList代码中有许多需要优化的地方</p>
+<span id="more"></span>
+
+<h1 id="使用ES6的解构赋值进行优化"><a href="#使用ES6的解构赋值进行优化" class="headerlink" title="使用ES6的解构赋值进行优化"></a>使用ES6的解构赋值进行优化</h1><h2 id="TodoItem-js中第一处代码优化"><a href="#TodoItem-js中第一处代码优化" class="headerlink" title="TodoItem.js中第一处代码优化"></a>TodoItem.js中第一处代码优化</h2><ul>
+<li>调用 <strong>父组件传递过来的数据</strong> 时可以进行代码优化，使用<strong>ES6的解构赋值</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png" alt="解构赋值" title="解构赋值"></li>
+<li>解释：<ol>
+<li><strong>父组件传递到子组件的数据是存放在属性中的，而众属性是放在props中的</strong>。<br>假设<code>this.props=&#123;AA:&#39;AA值&#39;,BB:&#39;BB值&#39;,CC:&#39;CC值&#39;,..&#125;;</code><br>使用<strong>ES6的解构赋值,可以一次性赋值多个变量</strong>:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;<span class="variable constant_">AA</span>,<span class="variable constant_">BB</span>,<span class="variable constant_">CC</span>,...&#125;=<span class="variable language_">this</span>.<span class="property">props</span>;</span><br></pre></td></tr></table></figure>
+在此基础上，接下来<strong>需要调用属性时直接使用<code>AA</code>即可</strong>。</li>
+<li><code>const &#123; content &#125; = this.props;</code>相当于<code>const content  = this.props.content;</code></li>
+<li>在<code>return()</code>中属性名<code>content</code>被<code>&#123;&#125;</code>包裹是因为**JSX语法中调用JS变量需要使用<code>&#123;&#125;</code>**。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="TodoItem-js中第二处代码优化"><a href="#TodoItem-js中第二处代码优化" class="headerlink" title="TodoItem.js中第二处代码优化"></a>TodoItem.js中第二处代码优化</h2><p>原本的代码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handelClick</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="variable language_">this</span>.<span class="property">props</span>.<span class="title function_">deleteItem</span>(<span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">index</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样进行优化后：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handelClick</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="comment">// index也是父组件传过来的，可以一起解构赋值</span></span><br><span class="line"> <span class="keyword">const</span> &#123; deleteItem, index &#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line"> <span class="title function_">deleteItem</span>(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="引用顺序的优化"><a href="#引用顺序的优化" class="headerlink" title="引用顺序的优化"></a>引用顺序的优化</h1><h2 id="TodoList-js中第一处代码优化"><a href="#TodoList-js中第一处代码优化" class="headerlink" title="TodoList.js中第一处代码优化"></a>TodoList.js中第一处代码优化</h2><p>原本的代码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span>, <span class="title class_">Fragment</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;<span class="comment">/* 快捷键imrc */</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./style.css&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">TodoItem</span> <span class="keyword">from</span> <span class="string">&quot;./TodoItem&quot;</span></span><br></pre></td></tr></table></figure>
+<p>一般我们将<strong>组件的引用放在前面，样式的引用放在后面</strong>，进行优化后：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">Component</span>, <span class="title class_">Fragment</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;<span class="comment">/* 快捷键imrc */</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">TodoItem</span> <span class="keyword">from</span> <span class="string">&quot;./TodoItem&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./style.css&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="在构造函数中绑定this指向（bind）"><a href="#在构造函数中绑定this指向（bind）" class="headerlink" title="在构造函数中绑定this指向（bind）"></a>在构造函数中绑定<code>this</code>指向（<code>bind</code>）</h1><h2 id="TodoList-js中第二处代码优化"><a href="#TodoList-js中第二处代码优化" class="headerlink" title="TodoList.js中第二处代码优化"></a>TodoList.js中第二处代码优化</h2><ul>
+<li>原本在<code>return()</code>中绑定事件函数的<code>this</code>指向，但是为了性能优化我们应该<strong>在构造函数<code>constructor</code>中绑定<code>this</code>指向</strong>：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
+</ul>
+<hr>
+<h2 id="TodoList-js中第三处代码优化"><a href="#TodoList-js中第三处代码优化" class="headerlink" title="TodoList.js中第三处代码优化"></a>TodoList.js中第三处代码优化</h2><ul>
+<li>将父组件的<code>handleItemDelete</code>方法传给子组件前我们需要绑定<code>this</code>指向，防止传过去以后<code>this</code>指向子组件以至于找不到该方法而报错。同样的，我们可以将绑定这个动作放到构造函数中完成， <strong>在构造函数中绑定<code>this</code>指向</strong> ：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactConstructorBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
+</ul>
+<hr>
+<h1 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h1><p>JSX语法实际上是写一些页面上显示的东西用的，但是在<code>TodoList.js</code>中出现了一些逻辑代码：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactJsxJs.png" alt="JS逻辑代码被{}包裹" title="JS逻辑代码被{}包裹"></p>
+<h2 id="TodoList-js中第四处代码优化"><a href="#TodoList-js中第四处代码优化" class="headerlink" title="TodoList.js中第四处代码优化"></a>TodoList.js中第四处代码优化</h2><ul>
+<li>我们另外写一个<code>getTodoItem()</code>来存放这些逻辑代码，然后在原本需要逻辑代码的位置使用JS表达式调用<code>getTodoItem()</code>即可（<strong>注意JS表达式需要<code>&#123;&#125;</code>包裹</strong>）：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/rreactGetTodoItemactConstructorBindThis.png" alt="优化后" title="优化后"></li>
+<li><strong>注意</strong>：<code>getTodoItem()</code>中需要另外写一个<code>return</code>用于将函数结果返回，否则调用函数以后是没有结果的。</li>
+</ul>
+<hr>
+<h1 id="setState-中参数改为函数"><a href="#setState-中参数改为函数" class="headerlink" title="setState()中参数改为函数"></a>setState()中参数改为函数</h1><ul>
+<li>新版的React中, <strong><code>setState()</code>参数</strong> 可以是一个 <strong>函数</strong> 而不是 对象 ，而<strong>这个函数最终返回（<code>return</code>）一个对象</strong>。</li>
+</ul>
+<h2 id="TodoList-js中第五处代码优化"><a href="#TodoList-js中第五处代码优化" class="headerlink" title="TodoList.js中第五处代码优化"></a>TodoList.js中第五处代码优化</h2><ul>
+<li><strong>原本的代码</strong>：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleInputChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;</span><br><span class="line">    <span class="attr">inputValue</span>: e.<span class="property">target</span>.<span class="property">value</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>解释</strong>：<ul>
+<li>target对应的是事件对象e对应的DOM节点（也就是input节点），input节点的value值实际上就是输入框中的内容，但此时键入后只能在控制台上看到变化，页面输入框中毫无变化。这是因为虽然拿到了内容，但并未改变状态中的值，所以我们还需要修改的是状态中的inputValue，react中改变状态中的数据需要调用组件的setState方法</li>
+</ul>
+</li>
+<li><strong>优化后</strong>：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleInputChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">inputValue</span>: e.<span class="property">target</span>.<span class="property">value</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>结合<strong>ES6 return 简写</strong>，<strong>再次优化</strong>：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleInputChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">() =&gt;</span> (&#123;</span><br><span class="line">      <span class="attr">inputValue</span>: e.<span class="property">target</span>.<span class="property">value</span></span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>会发现<strong>报错</strong><code>TypeError: Cannot read property &#39;value&#39; of null</code>：</li>
+<li><strong>原因</strong>：这是因为setState方法如果传一个函数，它实际上是异步的写法，在后面讲“虚拟DOM”时将会讲解，主要是为了提升性能。</li>
+<li><strong>解决方案</strong>：此时需要<strong>将<code>e.target.value</code>放在<code>setState（）</code>的外部保存一下</strong>，再在内部进行调用：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleInputChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> value = e.<span class="property">target</span>.<span class="property">value</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">inputValue</span>: value</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>注意</strong>：箭头函数返回对象时<strong>若想省略return则需要用<code>()</code>包裹对象</strong>。（具体可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">“函数相关知识点补充”中箭头函数部分</a>）</li>
+</ul>
+<hr>
+<h1 id="使用-prevState-代替-this-state"><a href="#使用-prevState-代替-this-state" class="headerlink" title="使用 prevState 代替 this.state"></a>使用 prevState 代替 this.state</h1><ul>
+<li>我们像上面一样优化<code>TodoList.js</code>中的<code>handleBtnClick（）</code>：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleBtnClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// prevState相当于this.state，但更靠谱</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">()=&gt;</span>(&#123;</span><br><span class="line">    <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">    <span class="attr">list</span>: [...<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">list</span>, <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">inputValue</span>],</span><br><span class="line">    <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">    <span class="attr">inputValue</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行起来没问题，但其实有更加靠谱的优化方法（如下）。</li>
+</ul>
+<h2 id="TodoList-js中第六处代码优化"><a href="#TodoList-js中第六处代码优化" class="headerlink" title="TodoList.js中第六处代码优化"></a>TodoList.js中第六处代码优化</h2><ul>
+<li>setState（）中参数改为函数后，<strong>该参数内的函数可传入一个参数prevState</strong></li>
+<li><code>prevState</code>指的是你<strong>修改数据前的那一次是怎么样的</strong>，相当于<code>this.state</code>，使用<code>prevState</code><strong>可以避免你不小心改变state的状态</strong>：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleBtnClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// prevState相当于this.state，但更靠谱</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">(<span class="params">prevState</span>)=&gt;</span>(&#123;</span><br><span class="line">    <span class="comment">/* 通过扩展运算符将原本的list与输入框中得到的inputValue合并数组后赋给list */</span></span><br><span class="line">    <span class="attr">list</span>: [...prevState.<span class="property">list</span>, prevState.<span class="property">inputValue</span>],</span><br><span class="line">    <span class="comment">/* 清空输入框中的值 */</span></span><br><span class="line">    <span class="attr">inputValue</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="TodoList-js中第七处代码优化"><a href="#TodoList-js中第七处代码优化" class="headerlink" title="TodoList.js中第七处代码优化"></a>TodoList.js中第七处代码优化</h2><p><strong>原本的代码</strong>:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleItemDelete</span>(<span class="params">index</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> list = [...<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">list</span>]</span><br><span class="line">  list.<span class="title function_">splice</span>(index, <span class="number">1</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;</span><br><span class="line">    <span class="attr">list</span>: list</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>setState（）</code>中参数改为函数</strong>，第一次优化后：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleItemDelete</span>(<span class="params">index</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> list = [...<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">list</span>]</span><br><span class="line">  list.<span class="title function_">splice</span>(index, <span class="number">1</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">list</span>: list &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用<code>prevState</code>代替<code>this.state</code></strong>,第二次优化后：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleItemDelete</span>(<span class="params">index</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> list = [...prevState.<span class="property">list</span>];</span><br><span class="line">    list.<span class="title function_">splice</span>(index, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">list</span>: list &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<strong>按照ES6的语法，<code>list:list</code>可简写为<code>list</code></strong> （笔记“ES6对象简写”中有详细解释）：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleItemDelete</span>(<span class="params">index</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> list = [...prevState.<span class="property">list</span>];</span><br><span class="line">    list.<span class="title function_">splice</span>(index, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123; list &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="解决key值问题"><a href="#解决key值问题" class="headerlink" title="解决key值问题"></a>解决key值问题</h1><ul>
+<li><strong>涉及到循环时每一项都应该有自己独立的key值，没有不会报错，但会警告。</strong></li>
+</ul>
+<h2 id="key值需要加在被循环的子项最外层上"><a href="#key值需要加在被循环的子项最外层上" class="headerlink" title="key值需要加在被循环的子项最外层上"></a>key值需要加在被循环的子项最外层上</h2><ul>
+<li><strong>注意：index作为key值时不靠谱的，暂且用着，后期再改。</strong></li>
+<li>key值需要加在被循环的<strong>子项最外层上，</strong>所以有<code>&lt;div&gt;</code>时需要放在<code>&lt;div&gt;</code>上：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getTodoItem</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">list</span>.<span class="title function_">map</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="comment">/* 注意return中只能有一个父元素，注释也会被当成子元素 */</span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">TodoItem</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">content</span>=<span class="string">&#123;item&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">index</span>=<span class="string">&#123;index&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">deleteItem</span>=<span class="string">&#123;this.handleItemDelete&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>删去div写在 子组件TodoItem 也可以：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getTodoItem</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">list</span>.<span class="title function_">map</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="comment">/* 注意return中只能有一个父元素，注释也会被当成子元素 */</span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">TodoItem</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">key</span>=<span class="string">&#123;index&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">content</span>=<span class="string">&#123;item&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">index</span>=<span class="string">&#123;index&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">deleteItem</span>=<span class="string">&#123;this.handleItemDelete&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      /&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/04/%E5%9B%B4%E7%BB%95%20React%20%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          围绕 React 衍生出的思考
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/02/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React.js基础精讲(2)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ES6%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">使用ES6的解构赋值进行优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoItem-js%E4%B8%AD%E7%AC%AC%E4%B8%80%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">TodoItem.js中第一处代码优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoItem-js%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">TodoItem.js中第二处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">引用顺序的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E4%B8%80%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">TodoList.js中第一处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E7%BB%91%E5%AE%9Athis%E6%8C%87%E5%90%91%EF%BC%88bind%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">在构造函数中绑定this指向（bind）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">TodoList.js中第二处代码优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E4%B8%89%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">TodoList.js中第三处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">JSX语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E5%9B%9B%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">TodoList.js中第四处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setState-%E4%B8%AD%E5%8F%82%E6%95%B0%E6%94%B9%E4%B8%BA%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">setState()中参数改为函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E4%BA%94%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">5.1.</span> <span class="nav-text">TodoList.js中第五处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-prevState-%E4%BB%A3%E6%9B%BF-this-state"><span class="nav-number">6.</span> <span class="nav-text">使用 prevState 代替 this.state</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E5%85%AD%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">6.1.</span> <span class="nav-text">TodoList.js中第六处代码优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TodoList-js%E4%B8%AD%E7%AC%AC%E4%B8%83%E5%A4%84%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">6.2.</span> <span class="nav-text">TodoList.js中第七处代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3key%E5%80%BC%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">解决key值问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#key%E5%80%BC%E9%9C%80%E8%A6%81%E5%8A%A0%E5%9C%A8%E8%A2%AB%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%AD%90%E9%A1%B9%E6%9C%80%E5%A4%96%E5%B1%82%E4%B8%8A"><span class="nav-number">7.1.</span> <span class="nav-text">key值需要加在被循环的子项最外层上</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

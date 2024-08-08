@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS作用域和闭包 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="更新：慕课 前端技术一面 第六章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS作用域和闭包">
+<meta property="og:url" content="http://yoursite.com/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="更新：慕课 前端技术一面 第六章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhmg4c8sj30gl07rwhw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhs5rbd3j30ja0akq6a.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhsh59wuj30jg0bwn1y.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbsr1t8nmij309x077aa6.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssfve5xaj30r50fmk05.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gkzd4smex7j30si0cwdi7.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssao9edoj30tf0eatb2.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpdkwc0owj30ru0cdjxo.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqdyxyumij30nc0aowjt.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqdn02vhgj30jn0g1n2x.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqip6zftwj30pl0c07h5.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gkzdksxj7xj30rk0d70v3.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg">
+<meta property="article:published_time" content="2020-02-05T14:00:08.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.306Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS作用域和闭包" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS作用域和闭包
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/" class="article-date">
+	  <time datetime="2020-02-05T14:00:08.000Z" itemprop="datePublished">二月 5, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>更新：慕课 前端技术一面 第六章</p>
+<span id="more"></span>
+
+<h1 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h1><ul>
+<li><strong>范围</strong>：一段<code>&lt;script&gt;</code>或者一个函数,一段<code>&lt;script&gt;</code>生成一个全局上下文，一个函数声明一个函数上下文。</li>
+<li><strong>全局</strong>：在执行全局上下文之前会先将 <strong>变量定义、函数声明</strong>提升</li>
+<li><strong>函数</strong>：在函数<strong>执行之前</strong>（注意不是定义之前），会先将 <strong>变量定义、函数声明、<code>this</code>、<code>arguments</code>（所有参数的集合）</strong>提升</li>
+<li><strong>注意</strong>：“函数声明”<code>function fn（）&#123;...&#125;</code>和“函数表达式”<code>var fn =function()&#123;...&#125;</code>的区别。（“函数表达式”不会被提升）</li>
+<li>“提升”详细内容可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87">《函数相关知识点补充》的“变量与函数提升”</a></li>
+</ul>
+<hr>
+<h2 id="变量、函数提升"><a href="#变量、函数提升" class="headerlink" title="变量、函数提升"></a>变量、函数提升</h2><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="函数提升"></p>
+<ul>
+<li>首先要明确，<strong>变量是声明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
+<li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
+<li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
+<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。（变量的提升只会对<code>var</code>命令声明的变量有效，其他不是用var命令声明的变量，不会发生变量的提升。）</li>
+<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在块级，使用<strong>let声明的变量不存在变量提升</strong>。</li>
+<li><strong>函数和变量相比，会被优先提升</strong>。这意味着函数会被提升到更靠前的位置。</li>
+<li>ES5中说，在全局和函数作用域中定义的<strong>函数的声明和定义都将会被提前</strong>到当前作用域的顶部。</li>
+<li><strong>补充</strong>：当出现多个同名变量与同名函数时，<strong>调用该变量名时的优先级为：变量声明&lt; 函数声明 &lt; 变量赋值</strong>（具体参考牛客网20191215第7题）</li>
+<li>通过函数声明方式创建的函数会被提升，<strong>通过表达式方法创建的函数不会被提升</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="帮助理解"></li>
+</ul>
+<hr>
+<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><ul>
+<li><strong>this要在函数执行时才能确认值，函数定义时无法确认。</strong><ul>
+<li>箭头函数除外，箭头函数的this指向外层作用域的this</li>
+</ul>
+</li>
+<li>在全局的上下文中调用函数时，<strong>默认this绑定window</strong><ul>
+<li><strong>注意： 严格模式下，默认this指向undefined</strong></li>
+</ul>
+</li>
+<li>实际上this最终指向的是那个调用它的<strong>对象</strong>，<strong>谁调用函数的就指向谁</strong>。<ul>
+<li><strong>注意：</strong>对象属性函数getName内部的<strong>非箭头函数</strong>的指向是window而不是调用对象obj，因为没有指定对象调用该函数test(见下方“this指向调用对象”例子）</li>
+</ul>
+</li>
+<li>this可作为 <strong>构造函数&#x2F;对象属性&#x2F;普通函数</strong> 执行，另外还有<strong>call&#x2F;apply&#x2F;bind</strong>。</li>
+<li><strong>优先级 new&gt;显式&gt;隐式&gt;默认</strong></li>
+<li>可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/wakaka112233/article/details/112793697">《js中this指向的四种规则+ 箭头函数this指向》</a></li>
+</ul>
+<h2 id="默认this绑定window"><a href="#默认this绑定window" class="headerlink" title="默认this绑定window"></a>默认this绑定window</h2><ul>
+<li><strong>注意： 严格模式下，默认this指向undefined</strong><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let <span class="type">name</span> = <span class="string">&#x27;哈哈&#x27;</span></span><br><span class="line">console.log(this)  // this 处于全局上下文 指向<span class="keyword">window</span></span><br><span class="line">console.log(this.name) // 此时this.name 相当于<span class="keyword">window</span>.name, 即全局作用域下的<span class="type">name</span> ‘哈哈’</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="this指向调用对象-隐式绑定"><a href="#this指向调用对象-隐式绑定" class="headerlink" title="this指向调用对象(隐式绑定)"></a>this指向调用对象(隐式绑定)</h2><ul>
+<li><strong>注意</strong>：对象属性函数内部的<strong>非箭头函数</strong>的指向是window而不是对象obj<ul>
+<li>如果test是箭头函数，则取上级作用域this，自然指向obj<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;哈哈&#x27;</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;嘿嘿&quot;</span>,</span><br><span class="line">    <span class="attr">getName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) <span class="comment">// getName是obj属性，obj.getName()，this指向obj</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>) <span class="comment">// 嘿嘿</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>)&#123; <span class="comment">// 注意：这里test()调用对象不是obj</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) <span class="comment">// 指向window</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)  <span class="comment">// 哈哈  </span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">test</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">getName</span>()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="构造函数new的对象"><a href="#构造函数new的对象" class="headerlink" title="构造函数new的对象"></a>构造函数new的对象</h2><ul>
+<li>使用<strong>构造函数</strong>创建<strong>对象</strong>时，this<strong>指向新创建的对象</strong><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> foo() <span class="comment">// this指向新创建的对象obj</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="call、apply、bind显式绑定"><a href="#call、apply、bind显式绑定" class="headerlink" title="call、apply、bind显式绑定"></a>call、apply、bind显式绑定</h2><ul>
+<li><strong>注：</strong>当指定的对象不存在时，this仍指向默认的window，比如：<code>call(undefind)</code><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> obj3 = &#123;</span><br><span class="line">   name:<span class="string">&#x27;吼吼&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">function <span class="built_in">f3</span>(<span class="selector-tag">a</span>,<span class="selector-tag">b</span>,c)&#123;</span><br><span class="line">   console<span class="selector-class">.log</span>(<span class="selector-tag">a</span>,<span class="selector-tag">b</span>,c)</span><br><span class="line">   console<span class="selector-class">.log</span>(<span class="string">&quot;我的this是&quot;</span>,this)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">f3</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span> <span class="comment">// 1,2,3 window</span></span><br><span class="line"></span><br><span class="line">f3<span class="selector-class">.call</span>(obj3,<span class="number">4</span>,<span class="number">5</span>,<span class="string">&quot;call&quot;</span>) <span class="comment">// 4,5,&quot;call&quot; &#123;name:&#x27;吼吼&#x27;&#125;</span></span><br><span class="line">f3<span class="selector-class">.apply</span>(obj3,<span class="selector-attr">[4,5,<span class="string">&quot;apply&quot;</span>]</span>) <span class="comment">// 4,5,&quot;apply&quot; &#123;name:&#x27;吼吼&#x27;&#125;</span></span><br><span class="line">f3<span class="selector-class">.bind</span>(obj3)(<span class="number">4</span>,<span class="number">5</span>,<span class="string">&quot;bind&quot;</span>)  <span class="comment">// 注意：bind特殊点，返回的是个函数 4,5,&quot;bind&quot; &#123;name:&#x27;吼吼&#x27;&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="箭头函数的this指向"><a href="#箭头函数的this指向" class="headerlink" title="箭头函数的this指向"></a>箭头函数的this指向</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(this)   <span class="comment">// 因被obj4调用，所以this指的是obj4</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> test2 = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(this)   <span class="comment">// 注意，此处指的是 window，test2不属于哪个新定义对象调用的函数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> test = <span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(this)   <span class="comment">// 箭头函数，这里this 指向的仍是 obj4 与父级作用域的this是相同的</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    test()</span><br><span class="line">    test2()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj4 = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="string">&quot;哦哦&quot;</span>,</span><br><span class="line">    <span class="attr">foo</span>:foo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj4.foo()</span><br></pre></td></tr></table></figure>
+
+<h2 id="改变this的特殊情况"><a href="#改变this的特殊情况" class="headerlink" title="改变this的特殊情况"></a>改变this的特殊情况</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一些api可以指定this指向</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">name</span>:<span class="string">&quot;嘻嘻&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">12</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于arr.forEach 函数 ，当不传第二个参数时，默认this指向window</span></span><br><span class="line">arr.forEach(<span class="keyword">function</span>(<span class="params">item,index,arr</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(this) <span class="comment">// window</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 当有第二个参数时，指向指定的obj2</span></span><br><span class="line">arr.forEach(<span class="keyword">function</span>(<span class="params">item,index,arr</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(this) <span class="comment">// obj2</span></span><br><span class="line">&#125;,obj2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="与严格模式的关系"><a href="#与严格模式的关系" class="headerlink" title="与严格模式的关系"></a>与严格模式的关系</h2><ul>
+<li>鉴于 this 是词法层面上的，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode">严格模式</a>中与 this 相关的规则都将被忽略。<ul>
+<li>严格模式下的this相对于非严格模式下的this的<strong>主要区别</strong>在于：对于JS代码中没有写<strong>执行主体（对象）</strong>的情况下，<strong>非严格模式默认都是window执行的</strong>，所以<strong>this指向的是window</strong>，但是在<strong>严格模式下，没有写执行主体，this指向是undefined</strong></li>
+</ul>
+</li>
+<li><strong>语法：</strong><code>&#39;use strict&#39;;</code> 为函数开启严格模式的语法<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = () =&gt; &#123; </span><br><span class="line">    <span class="string">&#x27;use strict&#x27;</span>;  <span class="comment">// 为函数开启严格模式的语法</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p><strong>JS在ES6之前没有块级作用域，只有函数和全局作用域</strong>。【<strong>ES6规定了块级作用域</strong>，相关知识可参考笔记[let命令](<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/15/let/0%E3%80%91">https://huanglizhu.github.io/2019/10/15/let/0】</a><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhmg4c8sj30gl07rwhw.jpg" alt="函数和全局作用域"></p>
+<h2 id="自由变量-和-作用域链"><a href="#自由变量-和-作用域链" class="headerlink" title="自由变量 和 作用域链"></a>自由变量 和 作用域链</h2><ul>
+<li><strong>父级作用域</strong>：在<strong>函数定义时规定的</strong>，不需要管执行顺序。（可看下方的第二个例子）</li>
+<li><strong>自由变量</strong>：在当前作用域还没有定义的变量。</li>
+<li><strong>作用域链</strong>：函数中找不到 自由变量 的值时一层层向上面的 父级作用域 进行查找的链式流程。</li>
+</ul>
+<p><strong>自由变量例子</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhs5rbd3j30ja0akq6a.jpg" alt="自由变量"></p>
+<p><strong>父级作用域（作用域链）例子</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqhsh59wuj30jg0bwn1y.jpg" alt="父级作用域"><br>6：a在F2()中找不到，到F2()的父级作用域F1()中找，还是找不到就到F1()的父级作用域（也就是全局作用域）中找，找到，打印100.</p>
+<p><strong>函数作为参数传递的例子：</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbsr1t8nmij309x077aa6.jpg" alt="闭包作为参数传递的例子"><br>函数fn1作为参数传入 立即执行函数 中，在执行到<code>fn2(30)</code>的时候，30作为参数传入fn1中，这时候if(x&gt;num)中的num取的并不是立即执行函数中的num（100），而是取fn1函数中的自由变量num的父级作用域（全局作用域）下的num，即15，而30&gt;15，所以打印30。<br>【<strong>注意：父级作用域是函数定义时决定的，不是调用时决定的！所以fn1（）的父级作用域是全局作用域</strong>】</p>
+<hr>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><ul>
+<li>闭包的<strong>本质</strong>就是<strong>在一个函数内部定义另一个函数</strong>，所以闭包可以理解成<strong>“定义在一个函数内部的函数”</strong>。</li>
+<li>闭包<strong>作用</strong>：让一个函数<strong>有权访问另一个函数作用域中变量</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures">MDN</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22486908">知乎上一个很好的解释和更多的例子</a></li>
+<li><strong>「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。</strong></li>
+<li><strong>实例：</strong><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssfve5xaj30r50fmk05.jpg" alt="实例"><ul>
+<li>假设上面三行代码在一个立即执行函数中</li>
+<li>三行代码中，有一个局部变量 local（也就是“环境”），有一个函数 foo，foo 里面可以访问到 local 变量。</li>
+<li>在这里<strong>“局部变量 local 和 函数 foo ”就是一个闭包</strong>。</li>
+</ul>
+</li>
+<li>闭包的<strong>3个特性</strong>：<ul>
+<li><strong>函数中定义函数</strong></li>
+<li><strong>封闭性</strong>：<strong>外界无法访问闭包内部的数据</strong>，如果在闭包内声明变量，外界是无法访问的，除非闭包主动向外界提供访问接口；</li>
+<li><strong>持久性</strong>：一般的函数调用完毕之后，系统自动注销函数，而对于闭包来说，在外部函数被调用之后，闭包结构依然保存在（<strong>参数和变量不会在函数被调用完后被垃圾回收机制回收</strong>）</li>
+</ul>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><strong>游戏中的例子</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg" alt="例子2"><br>假设我们在做一个游戏，在写其中关于「还剩几条命」的代码。如果不用闭包，你可以直接用一个全局变量：<code>window.lives = 30 // 还有三十条命</code><br>但这样看起来很不妥。万一不小心把这个值改成 <code>-1</code> 了怎么办。所以我们不能让别人「直接访问」这个变量。怎么办呢？<br><strong>用局部变量</strong>。<br>但是用局部变量别人又访问不到，怎么办呢？<br>**暴露一个访问器（函数），让别人可以「间接访问」生命值<code>lives</code>**。<br>使用闭包后，在其他的 JS 文件中就可以使用 <code>window.奖励一条命()</code> 来涨命，使用 <code>window.死一条命()</code> 来让角色掉一条命。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><h3 id="帮助js回调函数获取this"><a href="#帮助js回调函数获取this" class="headerlink" title="帮助js回调函数获取this"></a>帮助js回调函数获取this</h3><ul>
+<li><strong>js回调函数中的this默认是指向window</strong></li>
+<li><strong>例子</strong>：在使用回调函数之前利用**<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures">闭包</a>的特性**先使用一个变量<code>_this</code>保存<code>this</code>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xiaoming = &#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;xiaoming&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">getAge</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="comment">//...ajax</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            _this.<span class="property">age</span> = <span class="number">15</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(_this);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xiaoming.<span class="title function_">getAge</span>();<span class="comment">//&#123;name: &quot;xiaoming&quot;, age: 15, getAge: f&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="隐藏一个变量（闭包的封闭性）"><a href="#隐藏一个变量（闭包的封闭性）" class="headerlink" title="隐藏一个变量（闭包的封闭性）"></a>隐藏一个变量（闭包的封闭性）</h3><ul>
+<li>用于隐藏一个变量，<strong>让外界无法直接访问这个变量</strong>，但可以主动向外界提供访问接口，将更改变量的函数绑在window对象上使外界<strong>可以间接更改变量</strong></li>
+<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#%E4%BE%8B%E5%AD%90">游戏中加减生命值的例子</a></li>
+</ul>
+<h3 id="保存一个变量特殊状态中的值（闭包的持久性）"><a href="#保存一个变量特殊状态中的值（闭包的持久性）" class="headerlink" title="保存一个变量特殊状态中的值（闭包的持久性）"></a>保存一个变量特殊状态中的值（闭包的持久性）</h3><ul>
+<li><strong>持久性：</strong>一般的函数调用完毕之后，系统自动注销函数，而对于闭包来说，在外部函数被调用之后，闭包结构依然保存在<strong>（参数和变量不会在函数被调用完后被垃圾回收机制回收）</strong>（例子如下“创建10个a标签点击弹出相应数字”的解决方案）<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gkzd4smex7j30si0cwdi7.jpg" alt="普通函数与闭包对比"></li>
+</ul>
+<h2 id="好处与坏处"><a href="#好处与坏处" class="headerlink" title="好处与坏处"></a>好处与坏处</h2><ul>
+<li><strong>好处：</strong><ul>
+<li>保护函数内的变量安全 ，实现封装，<strong>防止变量流入其他环境发生命名冲突</strong></li>
+<li><strong>在内存中维持一个变量特殊状态中的值</strong>，可以做缓存（但使用多了同时也是一项缺点，消耗内存）<ul>
+<li><strong>可以使用 匿名自执行函数 来保存某个特殊状态中的值</strong>，调用完毕之后，系统自动注销函数，可以减少内存消耗</li>
+<li><strong>注意:匿名函数自执行只是产生闭包的一种情况，闭包是现象或者情形，不实用匿名函数自执行也有很多情况产生闭包，所以两者之间根本就是两回事儿，不能混淆。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>坏处：</strong> <ul>
+<li>由于闭包会使得<strong>函数中的变量都被保存在内存中</strong>，<strong>内存消耗很大</strong>，所以不能滥用闭包，否则会造成<strong>网页的性能问题</strong>。解决方法是，<strong>在退出函数之前，将不使用的局部变量全部删除。</strong><ul>
+<li>外部无法访问到闭包里面的变量，但可以在闭包内部返回一个方法，该方法<strong>将闭包内部的变量设置为null，让变量失去引用，会被系统自动回收</strong>。</li>
+<li>如果闭包不需要了，想删除闭包，直接将子函数设置为null就可以了。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>注意</strong>：<br>闭包不会造成内存泄漏（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22486908">参考1</a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/rubylouvre/p/3345294.html">参考2</a>）：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssao9edoj30tf0eatb2.jpg" alt="知乎"></li>
+</ul>
+<hr>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="说一下对变量提升的理解"><a href="#说一下对变量提升的理解" class="headerlink" title="说一下对变量提升的理解"></a>说一下对<strong>变量提升</strong>的理解</h2><p>【变量定义、函数声明（注意和函数表达式的区别）】</p>
+<ul>
+<li>首先要明确，<strong>变量是声明被提升，函数在ES5中是整个函数被提升，在ES6中是只提升函数的声明</strong>（具体见例子），函数内容（变量初始化的值）是不会被提升的，他们将被留在原来的位置。</li>
+<li>这导致了JavaScript 函数能够在声明之前被调用，不过会undefined，还是建议规范书写代码。</li>
+<li>ES6之前只有<strong>全局作用域和函数作用域</strong>，这两个作用域<strong>都存在变量提升</strong>。</li>
+<li><strong><code>var</code>命令</strong>声明的变量，不管在什么位置，<strong>变量声明</strong>都会被<strong>提升到当前作用域的头部</strong>。（变量的提升只会对<code>var</code>命令声明的变量有效，其他不是用var命令声明的变量，不会发生变量的提升。）</li>
+<li><strong>注意</strong>：变量的提升只存在全局&#x2F;函数作用域中，**<code>if()&#123;&#125;</code>或<code>for()&#123;&#125;</code><strong>都不是函数作用域，他们</strong>里面的变量会提升到包裹他们的全局&#x2F;函数作用域的顶部**。</li>
+<li>ES6中取代<code>var</code>的<code>let</code>命令的作用域限定在块级，使用<strong>let声明的变量不存在变量提升</strong>。</li>
+<li><strong>函数和变量相比，会被优先提升</strong>。这意味着函数会被提升到更靠前的位置。</li>
+<li>ES5中说，在全局和函数作用域中定义的<strong>函数的声明和定义都将会被提前</strong>到当前作用域的顶部。</li>
+<li><strong>补充</strong>：当出现多个同名变量与同名函数时，<strong>调用该变量名时的优先级为：变量声明&lt; 函数声明 &lt; 变量赋值</strong>（具体参考牛客网20191215第7题）</li>
+<li>通过函数声明方式创建的函数会被提升，<strong>通过表达式方法创建的函数不会被提升</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpcbf1pe6j30jj0eqtdm.jpg" alt="帮助理解"></li>
+</ul>
+<hr>
+<h2 id="this的不同使用场景"><a href="#this的不同使用场景" class="headerlink" title="this的不同使用场景"></a>this的不同使用场景</h2><ol>
+<li>在<strong>普通函数中</strong>执行，**<code>this</code>指向<code>window</code>**<ul>
+<li><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbpdkwc0owj30ru0cdjxo.jpg" alt="例子"><strong><code>window.fn1();</code>和<code>fn1()</code>效果一样</strong>，所以函数<code>fn1()</code>是由<code>window</code>对象调用的，根据<strong>谁调用函数的this就指向谁</strong>的原则，<code>this</code>指向<code>window</code>。</li>
+</ul>
+</li>
+<li>借助<strong>call()&#x2F;apply()&#x2F;bind()<strong>绑定&#x2F;改变<code>this</code>指向，</strong>绑定的this是谁就是谁</strong>。<ul>
+<li><strong>注意：</strong>与call、apply不同，必须要使用**函数表达式创建才能使用<code>bind()</code>**，使用<code>bind()</code>传参的方式也不同，可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/24/bind()/"><code>bind()</code></a><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqdyxyumij30nc0aowjt.jpg" alt="bind"></li>
+</ul>
+</li>
+<li>在<strong>对象属性（方法）中</strong> 执行，<code>this</code>指向<strong>对象本身</strong></li>
+<li>在<strong>class&#x2F;构造函数 里</strong>使用<code>this</code>，<code>this</code>指向<strong>class实例&#x2F;构造函数实例本身</strong></li>
+<li>在<strong>箭头函数 里</strong>使用<code>this</code>，<code>this</code>是该函数的<strong>上级作用域的<code>this</code></strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqdn02vhgj30jn0g1n2x.jpg" alt="例子1"></li>
+</ol>
+<hr>
+<h2 id="手写bind函数"><a href="#手写bind函数" class="headerlink" title="手写bind函数"></a>手写bind函数</h2><p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/07/%E7%B1%BB%E6%95%B0%E7%BB%84/#%E7%B1%BB%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84">类数组转换为数组的多种方法</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fn1()的隐式原型 指向 Function的显式原型，所以fn1.bind1()在Function.prototype上定义</span></span><br><span class="line"><span class="comment">// 模拟 bind</span></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">bind1</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 将参数拆解为数组</span></span><br><span class="line">    <span class="keyword">const</span> args = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取 this（数组第一项）</span></span><br><span class="line">    <span class="keyword">const</span> t = args.<span class="title function_">shift</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// fn1.bind(...) 中的 fn1</span></span><br><span class="line">    <span class="keyword">const</span> self = <span class="variable language_">this</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回一个函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> self.<span class="title function_">apply</span>(t, args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params">a, b, c</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;this&#x27;</span>, <span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;this is fn1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.<span class="title function_">bind1</span>(&#123;<span class="attr">x</span>: <span class="number">100</span>&#125;, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line"><span class="keyword">const</span> res = <span class="title function_">fn2</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="创建10个标签，点击时弹出对应的序号"><a href="#创建10个标签，点击时弹出对应的序号" class="headerlink" title="创建10个&lt;a&gt;标签，点击时弹出对应的序号"></a>创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号</h2><h3 id="错误的例子"><a href="#错误的例子" class="headerlink" title="错误的例子"></a>错误的例子</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbqip6zftwj30pl0c07h5.jpg" alt="错误的例子"><br><strong>错误原因分析</strong>：</p>
+<ol>
+<li>确实<strong>可以得到0-9的10个<code>&lt;a&gt;</code>标签</strong>。</li>
+<li>但是**<code>addEventListener()</code>中添加的函数时要点击以后才会执行的<strong>，当我们10个标签都出现在页面上以后，</strong>i值变为10**。</li>
+<li>而<strong>for循环这10下是个很快的过程，等循环结束我们点击a标签，触发click的函数时，i是个自由变量，他要去父级作用域中找i的值，此时i已经循环到了10</strong>。</li>
+<li>所以<strong>不管点击哪个标签，弹出的警示框的i都是10，并不是对应的序号</strong>。</li>
+</ol>
+<p><strong>总结：之所以会错就是因为这里的i是 全局作用域 下的i。</strong></p>
+<p><strong>理解方式2：</strong><br>1.循环是<strong>同步</strong>的，所以创建标签时得到0-9是没问题的。<br>2.但 事件绑定是<strong>异步</strong>的，所以他会<strong>等循环全部结束以后才开始执行</strong>。<br>3.可<strong>i是全局变量</strong>，也就是说每次循环改变的都是同一个i的值，循环结束后<strong>i值变为10</strong>，此时事件绑定函数才开始执行，那么他每次到<strong>父级作用域</strong>中取到的其实都是**<code>i=10</code><strong>,所以</strong>不管点击哪个标签弹出的都是10**。</p>
+<h3 id="正确示例"><a href="#正确示例" class="headerlink" title="正确示例"></a>正确示例</h3><ol>
+<li>方法1：<strong>【使用闭包的持久性，注意重点不在匿名自执行函数，将i传进函数中作为 函数作用域 的变量】</strong>:<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gkzdksxj7xj30rk0d70v3.jpg" alt="正确示例"><ol>
+<li><code>i=0</code>时生成一个函数，<code>i=1</code>时又生成另外一个函数，<strong>总共通过循环创建了10个函数</strong>。</li>
+<li>那么<strong>第9行代码去获取i的值时就会到当前作用域（函数作用域）中找</strong>，自然也不会10个标签都找到同一个i了。</li>
+</ol>
+</li>
+<li>方法2：<strong>【for中使用let代替var定义i】</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  let 是块级作用域，所以 let代替var定义i 能起到和闭包相同的效果</span></span><br><span class="line"><span class="comment">// 注意：let i在for外面没用，那样i的块级作用域太大了</span></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">  a.<span class="property">innerHTML</span> = i + <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line">  a.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>();</span><br><span class="line">    <span class="title function_">alert</span>(i);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="如何理解作用域"><a href="#如何理解作用域" class="headerlink" title="如何理解作用域"></a>如何理解作用域</h2><ul>
+<li>自由变量，即当前作用域还没有定义的变量</li>
+<li>作用域链，即自由变量的层层查找</li>
+<li><strong>闭包的使用场景</strong>（也和作用域有关）</li>
+</ul>
+<hr>
+<h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><p><strong>隐藏数据,如做一个简单的cache工具:</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包隐藏数据，只提供 API</span></span><br><span class="line">function createCache() &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">data</span> = &#123;&#125; <span class="comment">// 闭包中的数据，被隐藏，不被外界访问</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="keyword">set</span>: function (key, <span class="keyword">val</span>) &#123;</span><br><span class="line">            <span class="keyword">data</span>[key] = <span class="keyword">val</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">get</span>: function (key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">data</span>[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = createCache()</span><br><span class="line">c.<span class="keyword">set</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">100</span>)</span><br><span class="line">console.log( c.<span class="keyword">get</span>(<span class="string">&#x27;a&#x27;</span>) )</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断用户是不是第一次校验</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbroolypomj30fp0e1n6c.jpg" alt="实际应用1"><br><strong>好处</strong>：将存储用户id的 变量<code>_list</code> 封装起来,那么闭包外面就拿不到 变量<code>_list</code>，减少用户数据泄露的危险。</p>
+<p><strong>游戏中的作用</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbssxz918rj30uc0ebqbj.jpg" alt="例子2"><br>假设我们在做一个游戏，在写其中关于「还剩几条命」的代码。如果不用闭包，你可以直接用一个全局变量：<code>window.lives = 30 // 还有三十条命</code><br>但这样看起来很不妥。万一不小心把这个值改成 <code>-1</code> 了怎么办。所以我们不能让别人「直接访问」这个变量。怎么办呢？<br><strong>用局部变量</strong>。<br>但是用局部变量别人又访问不到，怎么办呢？<br>**暴露一个访问器（函数），让别人可以「间接访问」生命值<code>lives</code>**。<br>使用闭包后，在其他的 JS 文件中就可以使用 <code>window.奖励一条命()</code> 来涨命，使用 <code>window.死一条命()</code> 来让角色掉一条命。</p>
+<hr>
+<h2 id="setTimeout-与let、闭包"><a href="#setTimeout-与let、闭包" class="headerlink" title="setTimeout()与let、闭包"></a>setTimeout()与let、闭包</h2><p>（其实和上面的“创建10个<code>&lt;a&gt;</code>标签，点击时弹出对应的序号”类似，事件绑定和setTimeout都是异步。而他们到<strong>父级作用域（这里是全局作用域）</strong>中找i时拿到的都是同一个i，所以我们要<strong>想办法让他们的 父级作用域 变成 函数作用域</strong>，每个i都保存在不同的函数中，这样就不会重复了）</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.<span class="built_in">log</span>(i);</span><br><span class="line">  &#125;, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong>打印10个10<br><strong>原因：</strong><br>因为循环是同步的，setTimeout 是异步的，所以<strong>循环结束以后才会执行setTimeout</strong>。<br>而变量i是var命令声明的，在<strong>全局范围</strong>内都有效，所以全局只有一个变量i。所以<strong>每一次循环的i其实都是同一个</strong>，循环到最后时前面的i全部被最后的结果覆盖了。<br>所以最后，每次执行setTimeout时到<strong>父级作用域（这里是全局作用域）</strong>中找到的i都是10，10次打印的都是最后保存的i。</p>
+<p><strong>解决方法</strong>：<strong>局部变量</strong>的话就是每循环一次产生一个新的i，就不会被覆盖。所以我们可以通过<strong>闭包</strong>（也就是把循环的过程放到一个函数中封闭起来）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/03/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#%E9%97%AD%E5%8C%85">闭包</a>：函数a内部定义一个函数b，函数b可以访问函数a的变量,函数b中的变量就是局部变量</p>
+</blockquote>
+<h3 id="如何让他输出自增队列"><a href="#如何让他输出自增队列" class="headerlink" title="如何让他输出自增队列"></a>如何让他输出自增队列</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gccbuix5rxj31gv08i74r.jpg" alt="自增队列"></p>
+<p><strong>方法1：将var改为let</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(i);</span><br><span class="line">      &#125;, i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>变量i是let声明的，<strong>当前的i只在本轮循环有效</strong>，所以<strong>每一次循环的i其实都是一个新的变量</strong>。</p>
+<p><strong>方法2：使用闭包(即局部变量)</strong></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  (<span class="function">(<span class="params">j</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.<span class="built_in">log</span>(j)<span class="comment">//0-9</span></span><br><span class="line">    &#125;, i)</span><br><span class="line">  &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>【将i传进函数中作为 函数作用域 的变量】</strong></p>
+<ol>
+<li><code>i=0</code>时生成一个函数，<code>i=1</code>时又生成另外一个函数，<strong>总共通过循环创建了10个函数</strong>，<strong>循环了10次函数就会产生10个局部变量j</strong>，最后每个函数中的setTimeout都对应不同的j值。</li>
+<li>那么<strong>setTimeout的参数函数去获取i的值时就会到当前的 父级作用域（函数作用域）中找</strong>，自然也不会10个标签都找到同一个i了。</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/05/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS基础知识面试题（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/04/JS%20class%E5%92%8C%E7%BB%A7%E6%89%BF%20%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS class和继承 原型和原型链</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">执行上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E3%80%81%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87"><span class="nav-number">1.1.</span> <span class="nav-text">变量、函数提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">2.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4this%E7%BB%91%E5%AE%9Awindow"><span class="nav-number">2.1.</span> <span class="nav-text">默认this绑定window</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E5%90%91%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1-%E9%9A%90%E5%BC%8F%E7%BB%91%E5%AE%9A"><span class="nav-number">2.2.</span> <span class="nav-text">this指向调用对象(隐式绑定)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0new%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">构造函数new的对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call%E3%80%81apply%E3%80%81bind%E6%98%BE%E5%BC%8F%E7%BB%91%E5%AE%9A"><span class="nav-number">2.4.</span> <span class="nav-text">call、apply、bind显式绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84this%E6%8C%87%E5%90%91"><span class="nav-number">2.5.</span> <span class="nav-text">箭头函数的this指向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E5%8F%98this%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="nav-number">2.6.</span> <span class="nav-text">改变this的特殊情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.7.</span> <span class="nav-text">与严格模式的关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E5%8F%98%E9%87%8F-%E5%92%8C-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">3.1.</span> <span class="nav-text">自由变量 和 作用域链</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">4.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">4.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9js%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%8E%B7%E5%8F%96this"><span class="nav-number">4.2.1.</span> <span class="nav-text">帮助js回调函数获取this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%97%8F%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%EF%BC%88%E9%97%AD%E5%8C%85%E7%9A%84%E5%B0%81%E9%97%AD%E6%80%A7%EF%BC%89"><span class="nav-number">4.2.2.</span> <span class="nav-text">隐藏一个变量（闭包的封闭性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E7%89%B9%E6%AE%8A%E7%8A%B6%E6%80%81%E4%B8%AD%E7%9A%84%E5%80%BC%EF%BC%88%E9%97%AD%E5%8C%85%E7%9A%84%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%89"><span class="nav-number">4.2.3.</span> <span class="nav-text">保存一个变量特殊状态中的值（闭包的持久性）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84%E4%B8%8E%E5%9D%8F%E5%A4%84"><span class="nav-number">4.3.</span> <span class="nav-text">好处与坏处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B%E5%AF%B9%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">说一下对变量提升的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E7%9A%84%E4%B8%8D%E5%90%8C%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.2.</span> <span class="nav-text">this的不同使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99bind%E5%87%BD%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">手写bind函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA10%E4%B8%AA%E6%A0%87%E7%AD%BE%EF%BC%8C%E7%82%B9%E5%87%BB%E6%97%B6%E5%BC%B9%E5%87%BA%E5%AF%B9%E5%BA%94%E7%9A%84%E5%BA%8F%E5%8F%B7"><span class="nav-number">5.4.</span> <span class="nav-text">创建10个&lt;a&gt;标签，点击时弹出对应的序号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">5.4.1.</span> <span class="nav-text">错误的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.4.2.</span> <span class="nav-text">正确示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">5.5.</span> <span class="nav-text">如何理解作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E9%97%AD%E5%8C%85%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.6.</span> <span class="nav-text">实际开发中闭包的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-%E4%B8%8Elet%E3%80%81%E9%97%AD%E5%8C%85"><span class="nav-number">5.7.</span> <span class="nav-text">setTimeout()与let、闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BB%96%E8%BE%93%E5%87%BA%E8%87%AA%E5%A2%9E%E9%98%9F%E5%88%97"><span class="nav-number">5.7.1.</span> <span class="nav-text">如何让他输出自增队列</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

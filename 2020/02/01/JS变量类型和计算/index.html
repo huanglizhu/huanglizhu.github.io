@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS变量类型和计算 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="更新：慕课 前端技术一面 第四章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS变量类型和计算">
+<meta property="og:url" content="http://yoursite.com/2020/02/01/JS%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="更新：慕课 前端技术一面 第四章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gct98gwcksj30cr09ndfv.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmzuexw4pj30fn02nq3v.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmzvuudlpj30fr03xt9z.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn01tso5zj30kv0bidio.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2qqapwpj30hr0b9jvg.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2uzf6c2j30fo05fwh2.jpg">
+<meta property="article:published_time" content="2020-02-01T11:22:57.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.307Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gct98gwcksj30cr09ndfv.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS变量类型和计算" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS变量类型和计算
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/02/01/JS%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97/" class="article-date">
+	  <time datetime="2020-02-01T11:22:57.000Z" itemprop="datePublished">二月 1, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>更新：慕课 前端技术一面 第四章</p>
+<span id="more"></span>
+
+<h1 id="思考过程"><a href="#思考过程" class="headerlink" title="思考过程"></a>思考过程</h1><ul>
+<li>拿到一个面试题，第一时间看到的是什么-&gt;<strong>考点</strong></li>
+<li>又如何看待网上搜出来的永远也看不完的题海-&gt;<strong>不变应万变</strong></li>
+<li>如何对待接下来遇到的面试题？-&gt;<strong>题目到知识再到题目</strong></li>
+</ul>
+<h1 id="一些面试题和考察的知识点"><a href="#一些面试题和考察的知识点" class="headerlink" title="一些面试题和考察的知识点"></a>一些面试题和考察的知识点</h1><ul>
+<li>JS中使用<code>typeof</code>能得到的哪些类型？<strong>【JS变量类型】</strong></li>
+<li>何时使用<code>===</code>何时使用<code>==</code>？<strong>【强制类型转换】</strong></li>
+<li><code>window.onload</code>和<code>DOMContentLoaded</code>的区别？<strong>【浏览器渲染过程】</strong></li>
+<li>用JS创建10个<code>&lt;a&gt;</code>标签，点击的时候弹出来对应的序号<strong>【作用域】</strong></li>
+<li>简述如何实现个<strong>模块加载器</strong>，实现类似<code>require.js</code>的基本功能<strong>【JS模块化】</strong></li>
+<li>实现数组的<strong>随机排序</strong> <strong>【JS基础算法】</strong></li>
+</ul>
+<hr>
+<h1 id="变量类型和计算"><a href="#变量类型和计算" class="headerlink" title="变量类型和计算"></a>变量类型和计算</h1><h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><ul>
+<li>值类型VS引用类型</li>
+<li>typeof运算符详解</li>
+</ul>
+<h3 id="值类型（基本数据类型）"><a href="#值类型（基本数据类型）" class="headerlink" title="值类型（基本数据类型）"></a>值类型（基本数据类型）</h3><ul>
+<li>基本类型的<strong>值是不可变的</strong><ul>
+<li>任何方法都无法改变一个基本类型的值，比如一个字符串：<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用了toUpperCase()方法后返回的是一个新的字符串</span></span><br><span class="line"><span class="keyword">var</span> <span class="keyword">name</span>  = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="keyword">name</span>.toUpperCase();  <span class="comment">//输出HELLO</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>也<strong>不能给基本类型添加属性与方法</strong>:<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="string">&#x27;Mary&#x27;</span>;</span><br><span class="line">person.age = <span class="number">22</span>;</span><br><span class="line">person.method = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(person.age); <span class="comment">//underfined</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(person.method);<span class="comment">//underfined</span></span><br></pre></td></tr></table></figure></li>
+<li>基本类型的<strong>变量和值都是存放在栈内存</strong>中：<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a <span class="operator">=</span> <span class="number">200</span><span class="comment">;</span></span><br><span class="line">var b <span class="operator">=</span> a<span class="comment">;</span></span><br><span class="line"><span class="attribute">b</span> <span class="operator">=</span> <span class="number">21</span><span class="comment">;</span></span><br><span class="line">console.log(a)<span class="comment">; //200</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>值类型</strong>中变量b相当于<strong>深拷贝</strong>了变量a，a和b是两个<strong>不同的存在</strong>。所以改变a以后b不变。</p>
+<hr>
+<h3 id="引用类型（引用-对象数据类型）"><a href="#引用类型（引用-对象数据类型）" class="headerlink" title="引用类型（引用&#x2F;对象数据类型）"></a>引用类型（引用&#x2F;对象数据类型）</h3><ul>
+<li>除了基本类型就是引用类型，也就是说对象。对象是属性与方法的集合。也就是说<strong>引用类型可以拥有属性与方法，属性又可以包含基本类型与引用类型</strong>。</li>
+<li><strong>引用类型的值是可变的</strong>,我们可以为引用类型<strong>添加属性与方法，也可以删除其属性与方法</strong>。如：<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="comment">&#123;&#125;</span>; <span class="comment">//创建一个对象 ---引用类型</span></span><br><span class="line">person.<span class="keyword">name</span> = <span class="string">&#x27;Mary&#x27;</span>;</span><br><span class="line">person.age = <span class="number">22</span>;</span><br><span class="line">person.sayName = <span class="function"><span class="keyword">function</span><span class="params">()</span> <span class="comment">&#123;console.log(person.name);&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">person</span>.<span class="title">sayName</span><span class="params">()</span>;</span> <span class="comment">//&#x27;Mary&#x27;</span></span><br><span class="line">delete person.<span class="keyword">name</span>;  <span class="comment">//删除person对象的name属性</span></span><br></pre></td></tr></table></figure></li>
+<li>引用类型将<strong>引用名称</strong>存储在<strong>栈内存</strong>中，<strong>真实的数据</strong>存放在<strong>堆内存</strong>里：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gct98gwcksj30cr09ndfv.jpg" alt="栈内存与堆内存"><ul>
+<li><strong>例子</strong>:<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">age</span>: <span class="number">20</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.age = <span class="number">21</span>;</span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(a.age); <span class="comment">//21</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p><strong>引用类型</strong>中变量b和变量a都是<strong>指针</strong>，他们<strong>同样都指向同一个属性age</strong>，所以他们其实是<strong>共享属性age</strong>的。所以<strong>改变b的age属性</strong>时<strong>相当于改变a的age属性</strong>。</p>
+<p><strong>对象、数组、函数 是引用类型</strong>，这是因为如果他们的内容很多，采用 值类型 就要 复制 ，那就很耗内存，<strong>为了让内存共用（节省）空间，所以才存在 引用类型。</strong></p>
+<hr>
+<h3 id="typeof运算符"><a href="#typeof运算符" class="headerlink" title="typeof运算符"></a>typeof运算符</h3><p><code>typeof</code>能得到的<strong>6种</strong>类型：<strong>number、undefined、string、boolean、object、function。</strong><br><strong>(注意：null 空指针，也是一个对象)</strong></p>
+<p><strong>但是，typeof运算符 只能区分 值类型</strong>：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>;<span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">&quot;hlz&quot;</span>;<span class="comment">//string</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">123</span>;<span class="comment">//number</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span>;<span class="comment">//boolean</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>对于 引用类型 ，typeof运算符只能区分出 函数</strong> ：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">typeof</span> &#123;&#125;;<span class="comment">//object</span></span><br><span class="line"><span class="built_in">typeof</span> [];<span class="comment">//object</span></span><br><span class="line"><span class="built_in">typeof</span> <span class="literal">null</span>;<span class="comment">//object</span></span><br><span class="line"><span class="built_in">typeof</span> <span class="built_in">console</span>.<span class="built_in">log</span>;<span class="comment">//function</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="变量计算-强制类型转换"><a href="#变量计算-强制类型转换" class="headerlink" title="变量计算-强制类型转换"></a>变量计算-强制类型转换</h2><ul>
+<li>字符串拼接</li>
+<li><code>==</code>运算符</li>
+<li><code>if</code>语句</li>
+<li>逻辑运算</li>
+</ul>
+<hr>
+<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmzuexw4pj30fn02nq3v.jpg" alt="字符串拼接"></p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="==运算符"></a><code>==</code>运算符</h3><p><strong>运算符前后的变量会先被强转为true&#x2F;false再进行比较</strong></p>
+<ul>
+<li>100被转换为字符串 再进行比较，所以相等</li>
+<li>0和””都被转换为false 再进行比较，所以相等</li>
+<li>null和undefined都被转换为false 再进行比较，所以相等<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmzvuudlpj30fr03xt9z.jpg" alt="`==`运算符"></li>
+</ul>
+<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a><code>if</code>语句</h3><p><strong>变量做判断条件 时会先 强制转换 为boolean类型再判断</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn01tso5zj30kv0bidio.jpg" alt="`if`语句"></p>
+<hr>
+<h3 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h3><p>首先要明确，<strong>逻辑与<code>&amp;&amp;</code>与逻辑或<code>||</code>返回的都是表达式，非<code>!</code>返回的是布尔值。</strong></p>
+<h4 id="帮助理解"><a href="#帮助理解" class="headerlink" title="帮助理解"></a>帮助理解</h4><p><strong>返回表达式的原则：从前往后判断，只要到了能判断出 整个表达式的真假 的位置我们就停下来返回这个位置的部分表达式。</strong></p>
+<p><strong>&amp;&amp;：前后都为真才是真，只要有一个是假的就是假。</strong>所以只要有第一个表达式是假的我们就不用继续判断了，返回第一个表达式。如果第一个表达式是真的我们就继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
+<p><strong>||：只要有一个是真就是真。</strong>所以只要有第一个表达式是真的就可以判断整个表达式都是真的，故返回第一个表达式。如果第一个表达式是假的那我们就要继续判断第二个表达式，（但由于一定要返回一个表达式，所以）此时无论真假都得返回第二个表达式。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="number">10</span> &amp;&amp; <span class="number">0</span>);<span class="comment">//0</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&quot;&quot;</span> || <span class="string">&quot;abc&quot;</span>);<span class="comment">//&quot;abc&quot;</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(!window.abc);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>可以使用<code>!!</code>判断一个变量会被当做true还是false</strong>：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span></span><br><span class="line"><span class="built_in">console</span>.<span class="built_in">log</span>(!!a);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h1><h2 id="JS中使用typeof能得到的哪些类型"><a href="#JS中使用typeof能得到的哪些类型" class="headerlink" title="JS中使用typeof能得到的哪些类型"></a>JS中使用<code>typeof</code>能得到的哪些类型</h2><p>6种，<strong>number、undefined、string、boolean、object、function</strong><br>可以<strong>准确判断4种 值类型</strong> ，但是 <strong>引用类型 中只能判断函数</strong>，其余的 <strong>数组、对象、正则、日期 都被识别为object</strong>。</p>
+<p><strong>注意：null（空指针）也被识别为object！</strong></p>
+<hr>
+<h2 id="何时使用-何时使用"><a href="#何时使用-何时使用" class="headerlink" title="何时使用===何时使用=="></a>何时使用<code>===</code>何时使用<code>==</code></h2><p><strong>只有一种情况使用双等号<code>==</code>，其他时候全部使用三等号<code>===</code><strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2g90as6j30qq05ojtw.jpg" alt="何时使用`==`"><br>此时第三行代码相当于第四行代码的</strong>简写</strong>，这是<strong>jquery的源码推荐写法</strong>。</p>
+<hr>
+<h2 id="JS中有哪些内置函数"><a href="#JS中有哪些内置函数" class="headerlink" title="JS中有哪些内置函数"></a>JS中有哪些内置函数</h2><p>内置函数（数据封装类对象）：<br><code>Object</code>、<code>Array</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>、<code>Function</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code></p>
+<hr>
+<h2 id="JS变量-按-存储方式-分为哪些类型，有何特点"><a href="#JS变量-按-存储方式-分为哪些类型，有何特点" class="headerlink" title="JS变量 按 存储方式 分为哪些类型，有何特点"></a>JS变量 按 存储方式 分为哪些类型，有何特点</h2><p>按照<strong>存储方式</strong>区分为：<strong>值类型、引用类型</strong><br><strong>特点</strong>：值类型相当于复制，<strong>引用类型</strong>则是 <strong>指针复制</strong> 并不是真正的拷贝，两个变量会<strong>共用同一个属性</strong>，他们的值的修改是相互干预的。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2qqapwpj30hr0b9jvg.jpg" alt="按存储方式区分JS变量"></p>
+<hr>
+<h2 id="如何理解JSON"><a href="#如何理解JSON" class="headerlink" title="如何理解JSON"></a>如何理解JSON</h2><p>JSON是一种<strong>数据格式</strong>，<strong>但从JS来看JSON就是一个JS内置对象，他有两个方法</strong>，“JavaScript Object Notation” 即 “JavaScript 对象表示法”，它是<strong>存储和交换文本信息的语法</strong>。<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbn2uzf6c2j30fo05fwh2.jpg" alt="JSON"><br><strong>stringify（）</strong>把对象变成字符串<br><strong>parse（）</strong>把字符串变成对象</p>
+<hr>
+<h2 id="手写深拷贝"><a href="#手写深拷贝" class="headerlink" title="手写深拷贝"></a>手写深拷贝</h2><ul>
+<li>注意判断值类型和引用类型</li>
+<li>注意判断是数组还是对象(判断对象自身属性)</li>
+<li>递归</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝方法1</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepClone</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// 如遇值类型则直接返回，否则继续执行【注意Object有引号】</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化返回结果</span></span><br><span class="line">  <span class="keyword">let</span> cloneObj = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(obj) ? [] : &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 遍历对象属性/数组元素</span></span><br><span class="line">  <span class="keyword">for</span> (key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 筛选对象自身属性</span></span><br><span class="line">    <span class="keyword">if</span> (obj.<span class="title function_">hasOwnProperty</span>(key)) &#123;</span><br><span class="line">      <span class="comment">// 递归调用deepClone()，</span></span><br><span class="line">      cloneObj[key] = <span class="title function_">deepClone</span>(obj[key])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回结果</span></span><br><span class="line">  <span class="keyword">return</span> cloneObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝方法2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepClone</span>(<span class="params">obj</span>)&#123;</span><br><span class="line">  <span class="comment">// 根据传入的参数obj判断拷贝数组还是对象</span></span><br><span class="line">  <span class="keyword">let</span> objClone = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(obj)?[]:&#123;&#125;;</span><br><span class="line">  <span class="comment">// 判断参数obj是否是引用类型（数组/对象）【注意Object有引号】</span></span><br><span class="line">  <span class="keyword">if</span>(obj &amp;&amp; <span class="keyword">typeof</span> obj===<span class="string">&quot;object&quot;</span>)&#123;</span><br><span class="line">      <span class="comment">// 是对象则用for in遍历 对象属性</span></span><br><span class="line">      <span class="keyword">for</span>(key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">          <span class="comment">// 如果是非继承属性</span></span><br><span class="line">          <span class="keyword">if</span>(obj.<span class="title function_">hasOwnProperty</span>(key))&#123;</span><br><span class="line">          <span class="comment">//判断ojb子元素（数组元素/对象属性）是否为引用类型（数组、对象、函数）</span></span><br><span class="line">              <span class="keyword">if</span>(obj[key]&amp;&amp;<span class="keyword">typeof</span> obj[key] ===<span class="string">&quot;object&quot;</span>)&#123;</span><br><span class="line">                  <span class="comment">//是则递归复制</span></span><br><span class="line">                  objClone[key] = <span class="title function_">deepClone</span>(obj[key]);</span><br><span class="line">              &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="comment">//如果不是，简单复制</span></span><br><span class="line">                  objClone[key] = obj[key];</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> objClone;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="keyword">let</span> a=[<span class="number">0</span>, <span class="number">1</span>, <span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>], &#123; <span class="attr">name</span>: <span class="string">&quot;a&quot;</span> &#125;, <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;],</span><br><span class="line">  b=<span class="title function_">deepClone</span>(a);</span><br><span class="line">b[<span class="number">3</span>][<span class="number">0</span>] = <span class="number">5</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/02/JS%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JS浅拷贝与深拷贝
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/01/ES6%E5%AF%B9%E8%B1%A1%E7%AE%80%E5%86%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6对象简写</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">思考过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%92%8C%E8%80%83%E5%AF%9F%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">一些面试题和考察的知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">变量类型和计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">变量类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">值类型（基本数据类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%BC%95%E7%94%A8-%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">引用类型（引用&#x2F;对象数据类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.1.3.</span> <span class="nav-text">typeof运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E8%AE%A1%E7%AE%97-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">变量计算-强制类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5"><span class="nav-number">3.2.1.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.2.2.</span> <span class="nav-text">&#x3D;&#x3D;运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.2.3.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-number">3.2.4.</span> <span class="nav-text">逻辑运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9%E7%90%86%E8%A7%A3"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">帮助理解</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E8%A7%A3%E7%AD%94"><span class="nav-number">4.</span> <span class="nav-text">题目解答</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E4%B8%AD%E4%BD%BF%E7%94%A8typeof%E8%83%BD%E5%BE%97%E5%88%B0%E7%9A%84%E5%93%AA%E4%BA%9B%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">JS中使用typeof能得到的哪些类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8-%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">何时使用&#x3D;&#x3D;&#x3D;何时使用&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">JS中有哪些内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%8F%98%E9%87%8F-%E6%8C%89-%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F-%E5%88%86%E4%B8%BA%E5%93%AA%E4%BA%9B%E7%B1%BB%E5%9E%8B%EF%BC%8C%E6%9C%89%E4%BD%95%E7%89%B9%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">JS变量 按 存储方式 分为哪些类型，有何特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3JSON"><span class="nav-number">4.5.</span> <span class="nav-text">如何理解JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">4.6.</span> <span class="nav-text">手写深拷贝</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

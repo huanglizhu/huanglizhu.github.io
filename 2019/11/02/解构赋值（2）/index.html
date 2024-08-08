@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解构赋值（2） | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="解构赋值和扩展运算符相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解构赋值（2）">
+<meta property="og:url" content="http://yoursite.com/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="解构赋值和扩展运算符相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-02T13:30:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:30.245Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-解构赋值（2）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      解构赋值（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%882%EF%BC%89/" class="article-date">
+	  <time datetime="2019-11-02T13:30:00.000Z" itemprop="datePublished">十一月 2, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>解构赋值和扩展运算符相关知识</p>
+<span id="more"></span>
+
+<h1 id="字符串的解构赋值"><a href="#字符串的解构赋值" class="headerlink" title="字符串的解构赋值"></a>字符串的解构赋值</h1><p><strong>和数组的解构赋值使用方法是类似的</strong>，使用<code>[]</code>，空格也会被匹配到，不使用<strong>扩展运算符</strong>时返回的是字符，使用<strong>扩展运算符</strong>时会把每个剩余未匹配的字符作为一项组成一个<strong>数组</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, ...oth] = <span class="string">&quot;I am hlz&quot;</span> <span class="comment">// 空格也会被识别</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c, oth) <span class="comment">// I a [&#x27;m&#x27;, &#x27; &#x27;, &#x27;h&#x27;, &#x27;l&#x27;, &#x27;z&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; length &#125; = <span class="string">&quot;I am hlz&quot;</span> <span class="comment">// 提取属性【了解即可】</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(length) <span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以解构赋值+扩展运算符可以将字符串转为数组</span></span><br><span class="line"><span class="keyword">let</span> [...arrStr] = <span class="string">&quot;I am hlz&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arrStr) <span class="comment">// [&#x27;I&#x27;, &#x27; &#x27;, &#x27;a&#x27;, &#x27;m&#x27;, &#x27; &#x27;, &#x27;h&#x27;, &#x27;l&#x27;, &#x27;z&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>等号左边是数组结构，右边是字符串</li>
+<li>左边的<code>[]</code>中为需要赋值的变量</li>
+<li>右边为需要解构的字符串</li>
+</ul>
+<hr>
+<h2 id="结合扩展运算符（-）将字符串转换为数组"><a href="#结合扩展运算符（-）将字符串转换为数组" class="headerlink" title="结合扩展运算符（...）将字符串转换为数组"></a>结合扩展运算符（<code>...</code>）将字符串转换为数组</h2><p>使用<strong>扩展运算符</strong>时会把每个剩余未匹配的字符作为一项组成一个<strong>数组</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&quot;hello &quot;</span> <span class="comment">// 空格也会被识别</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> [ ...arrStr1 ] = <span class="string">&quot;hello &quot;</span> <span class="comment">// 注意理解结合扩展运算符</span></span><br><span class="line"><span class="keyword">let</span> arrStr2 = str.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> arrStr3 = [ ...arrStr ]</span><br><span class="line"><span class="comment">// [&#x27;h&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;, &#x27;o&#x27;, &#x27; &#x27;]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>例子中spStr1与spStr2、spStr3得到的都是一样的。</li>
+<li>spStr1使用的是字符串的<strong>解构赋值</strong>与扩展运算符结合。</li>
+<li>spStr2使用的是字符串的split方法。</li>
+<li>spStr3使用的是纯粹的扩展运算符，可以理解为“展开运算符”，较难理解，通过下面2个例子来解释：<ul>
+<li><strong>在创建数组(例子中的oStr)的时候，通过扩展运算符将字符串展开，字符串的每一个字符构成一个数组元素</strong>  <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let str=<span class="string">&quot;我超级棒的！&quot;</span>;</span><br><span class="line"></span><br><span class="line">const oStr = [<span class="string">...str</span>];</span><br><span class="line">console.log<span class="params">(oStr)</span>;<span class="string">//</span>[<span class="string">&quot;我&quot;</span>, <span class="string">&quot;超&quot;</span>, <span class="string">&quot;级&quot;</span>, <span class="string">&quot;棒&quot;</span>, <span class="string">&quot;的&quot;</span>, <span class="string">&quot;！&quot;</span>]</span><br></pre></td></tr></table></figure>
+  或者  <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&quot;antzone&quot;</span>;</span><br><span class="line">console.<span class="keyword">log</span>(<span class="meta">[</span><span class="params">...</span>str<span class="meta">]</span>);// <span class="meta">[</span><span class="string">&quot;a&quot;</span>, <span class="string">&quot;n&quot;</span>, <span class="string">&quot;t&quot;</span>, <span class="string">&quot;z&quot;</span>, <span class="string">&quot;o&quot;</span>, <span class="string">&quot;n&quot;</span>, <span class="string">&quot;e&quot;</span><span class="meta">]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="提取属性（了解即可）"><a href="#提取属性（了解即可）" class="headerlink" title="提取属性（了解即可）"></a>提取属性（了解即可）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&quot;我超级棒的！&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; length, split &#125; = str</span><br><span class="line"><span class="comment">// length 6</span></span><br><span class="line"><span class="comment">// split ƒ split() &#123; [native code] &#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="数值与布尔值的解构赋值（了解即可）"><a href="#数值与布尔值的解构赋值（了解即可）" class="headerlink" title="数值与布尔值的解构赋值（了解即可）"></a>数值与布尔值的解构赋值（了解即可）</h1><p>数值与布尔值的解构赋值<strong>与对象的结构赋值方法类似</strong>。他<strong>获取</strong>到的是数值与布尔值的<strong>属性</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; <span class="attr">toString</span>: ts &#125; = <span class="number">123</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ts) <span class="comment">// ƒ toString() &#123; [native code] &#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ts === <span class="title class_">Number</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ts.<span class="title function_">call</span>(<span class="number">123</span>)) <span class="comment">// &#x27;123&#x27;</span></span><br><span class="line"><span class="comment">// 直接123.toString()会报错，js解析会把.当成小数点，改成(123).toString()可以正常使用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">valueOf</span>: vo &#125; = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">toString</span>: ts &#125; = <span class="literal">true</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ts === <span class="title class_">Boolean</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子中我们先是<strong>获取到数值1的属性valueOf</strong>，并将其赋给vo，当然不赋给vo也是可以的，结果可以看到是获取成功了。（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf">关于valueOf 方法</a>）<br/><br>然后我们<strong>获取布尔值true的属性toString</strong>，并将其赋给ts，当然不赋给ts也是可以的，结果可以看到也是获取成功的。</p>
+<hr>
+<h1 id="函数参数的解构赋值"><a href="#函数参数的解构赋值" class="headerlink" title="函数参数的解构赋值"></a>函数参数的解构赋值</h1><ul>
+<li>undefined 可以触发默认值</li>
+<li>注意两种指定默认值的方法，一种是<strong>对变量指定</strong>，一种是<strong>对参数指定</strong>，会得到不同的答案<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="number">1</span>,<span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line"><span class="keyword">let</span> res = arr.<span class="title function_">map</span>([a, b] =&gt; a + b)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// [3, 7]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined 可以触发默认值</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="literal">undefined</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">let</span> res = arr.<span class="title function_">map</span>(<span class="function">(<span class="params">a = <span class="string">&#x27;test&#x27;</span></span>) =&gt;</span> a);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// [1, &#x27;test&#x27;, 2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对参数指定默认值</span></span><br><span class="line"><span class="comment">// 注意：如果函数调用时未传递参数或传递的参数不是一个对象，那么解构赋值将使用默认值</span></span><br><span class="line"><span class="comment">// 使用场景：防止调用函数时没传参数的情况</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">func</span> = (<span class="params">&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;</span>) =&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> [x, y]</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(<span class="number">1</span>, <span class="number">2</span>)) <span class="comment">// [undefined, undefined] 参数不是对象，解构赋值失败，x 和 y 都会得到 undefined 值，而不是指定的默认值 &#123;x: 0, y: 0&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>()) <span class="comment">// [0, 0]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(&#123;&#125;)) <span class="comment">// [undefined, undefined]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(&#123;<span class="attr">x</span>: <span class="number">1</span>&#125;)) <span class="comment">// [1, undefined] 注意和“对变量指定默认值”的区别，这里传参是个对象，就一定不会取默认值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对变量指定默认值</span></span><br><span class="line"><span class="comment">// 如果函数调用时传递的参数是一个对象，但该对象缺少 x 或 y 属性时，解构赋值将使用相应的默认值 0</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">func</span> = (<span class="params">&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125;</span>) =&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> [x, y]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(&#123;<span class="attr">x</span>:<span class="number">1</span>,<span class="attr">y</span>:<span class="number">2</span>&#125;)) <span class="comment">// [1, 2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>()) <span class="comment">// error</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(<span class="string">&quot;123&quot;</span>)) <span class="comment">// [0, 0]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(&#123;&#125;)) <span class="comment">// [0, 0]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">func</span>(&#123;<span class="attr">x</span>: <span class="number">1</span>&#125;)) <span class="comment">// [1, 0]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="Node-js-函数引用-与解构赋值"><a href="#Node-js-函数引用-与解构赋值" class="headerlink" title="Node.js 函数引用 与解构赋值"></a>Node.js 函数引用 与解构赋值</h1><p>为什么有时候引用外部js文件中的函数时要使用<code>&#123;&#125;</code>进行解构赋值？</p>
+<p><strong>可以看笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/23/Node.js%E5%87%BD%E6%95%B0%E5%BC%95%E7%94%A8%E4%B8%8E%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/">“Node.js函数引用与解构赋值”</a></strong></p>
+<hr>
+<h1 id="React-js与解构赋值"><a href="#React-js与解构赋值" class="headerlink" title="React.js与解构赋值"></a>React.js与解构赋值</h1><p><strong>可以看笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/">“React.js基础精讲(1)”</a></strong></p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/ES6%E5%AD%A6%E4%B9%A0/">ES6学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/05/hexo%E5%8F%AF%E4%BB%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%BD%86deploy%E5%88%B0github%E5%A4%B1%E8%B4%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          hexo可以本地预览但deploy到github失败
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/02/%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">解构赋值（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">字符串的解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%EF%BC%89%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">结合扩展运算符（...）将字符串转换为数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">提取属性（了解即可）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E4%B8%8E%E5%B8%83%E5%B0%94%E5%80%BC%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">数值与布尔值的解构赋值（了解即可）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">函数参数的解构赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Node-js-%E5%87%BD%E6%95%B0%E5%BC%95%E7%94%A8-%E4%B8%8E%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">Node.js 函数引用 与解构赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-js%E4%B8%8E%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">React.js与解构赋值</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React.js初探 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="React简介react.js文档中文文档较为滞后，建议阅读英文文档。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React.js初探">
+<meta property="og:url" content="http://yoursite.com/2019/11/24/React.js%E5%88%9D%E6%8E%A2%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="React简介react.js文档中文文档较为滞后，建议阅读英文文档。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4d26v4rj30n50dwtfm.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4p9enovj31hb04975c.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4t0e9f0j31hc02y0ti.jpg">
+<meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb5din43ej30s40a3wlo.jpg">
+<meta property="article:published_time" content="2019-11-24T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-08T07:32:08.319Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="React.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4d26v4rj30n50dwtfm.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-React.js初探（1）" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      React.js初探
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/11/24/React.js%E5%88%9D%E6%8E%A2%EF%BC%881%EF%BC%89/" class="article-date">
+	  <time datetime="2019-11-24T13:00:00.000Z" itemprop="datePublished">十一月 24, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React简介"><a href="#React简介" class="headerlink" title="React简介"></a>React简介</h1><h2 id="react-js文档"><a href="#react-js文档" class="headerlink" title="react.js文档"></a>react.js文档</h2><p>中文文档较为滞后，建议阅读<a target="_blank" rel="noopener" href="https://reactjs.org/docs/hello-world.html">英文文档</a>。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="与vue-js对比"><a href="#与vue-js对比" class="headerlink" title="与vue.js对比"></a>与vue.js对比</h2><ul>
+<li>vue.js使用的api更多所以更简单，但正是因为react.js使用的api少，所以他的灵活度更大，更适合用于一些复杂度高的项目。</li>
+<li>一些面向用户端，复杂度不高的项目使用vue.js会更加简单。</li>
+</ul>
+<hr>
+<h1 id="React开发环境准备"><a href="#React开发环境准备" class="headerlink" title="React开发环境准备"></a>React开发环境准备</h1><h2 id="脚手架工具"><a href="#脚手架工具" class="headerlink" title="脚手架工具"></a>脚手架工具</h2><ul>
+<li>常见的脚手架工具有：webpack、grunt，还有我们接下来使用的react.js官方提供的Create-react-app。</li>
+<li>我们<strong>可以使用脚手架工具去更加简单的编写代码</strong>，但是编写的代码不能直接运行，需要<strong>通过脚手架工具进行编译</strong>以后才能<strong>运行</strong>。</li>
+</ul>
+<hr>
+<h1 id="工程目录文件简介"><a href="#工程目录文件简介" class="headerlink" title="工程目录文件简介"></a>工程目录文件简介</h1><p><strong>总结</strong>：<br>重要的就是：<br>public下的index.html文件，负责页面上显示的html内容。<br>src下的index.js文件,整个react项目的入口，他会引入一个APP.js文件的APP组件，该组件负责显示出页面上的组件内容。</p>
+<h2 id="重启项目"><a href="#重启项目" class="headerlink" title="重启项目"></a>重启项目</h2><p>具体可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/24/React%E5%AE%98%E6%96%B9%E8%84%9A%E6%89%8B%E6%9E%B6%E5%B7%A5%E5%85%B7/">“React官方脚手架工具的使用”</a>。</p>
+<hr>
+<h2 id="根目录下"><a href="#根目录下" class="headerlink" title="根目录下"></a>根目录下</h2><h3 id="yarn-lock文件"><a href="#yarn-lock文件" class="headerlink" title="yarn.lock文件"></a><code>yarn.lock</code>文件</h3><p>放置一些依赖配置，<strong>一般不要动</strong>。</p>
+<h3 id="README-md文件"><a href="#README-md文件" class="headerlink" title="README.md文件"></a><code>README.md</code>文件</h3><p>关于项目的说明，<strong>可以删掉再使用markdown语法进行书写</strong>。</p>
+<h3 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a><code>package.json</code>文件</h3><p>是一个node的包文件，他可以让项目变成一个node的包。**                一般不会去动，是脚手架自动生成的文件。**<br>主要是node里面的内容，<strong>包含了：项目名字，版本，依赖的包、可供调用的指令</strong>。</p>
+<p>我们之所以可以<strong>在cmd中通过<code>npm start</code>来启动项目，实际上就是通过<code>npm start</code>启动了下图中红框框出的指令</strong>，它会帮我们通过<code>react-scripts</code>去启动服务器：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4d26v4rj30n50dwtfm.jpg" alt="可供调用的指令"></p>
+<h3 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title=".gitignore文件"></a><code>.gitignore</code>文件</h3><p>使用git管理代码时，如果有文件不想上传就可以放在这。</p>
+<h2 id="todolist文件夹下"><a href="#todolist文件夹下" class="headerlink" title="todolist文件夹下"></a><code>todolist</code>文件夹下</h2><h3 id="node-modules文件夹"><a href="#node-modules文件夹" class="headerlink" title="node_ modules文件夹"></a><code>node_ modules</code>文件夹</h3><p>放一些这个项目依赖的第三方包，<strong>不要动他</strong>。</p>
+<h2 id="public文件夹下"><a href="#public文件夹下" class="headerlink" title="public文件夹下"></a><code>public</code>文件夹下</h2><h3 id="favicon-ico"><a href="#favicon-ico" class="headerlink" title="favicon.ico"></a><code>favicon.ico</code></h3><p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4p9enovj31hb04975c.jpg" alt="如图所示"></p>
+<h3 id="index-html文件"><a href="#index-html文件" class="headerlink" title="index.html文件"></a><code>index.html</code>文件</h3><p><strong>项目首页的HTML模板</strong>，将注释删掉后会简洁很多，<code>&lt;title&gt;</code>标签决定：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb4t0e9f0j31hc02y0ti.jpg" alt="&lt;title&gt;标签"><br><code>&lt;noscript&gt;</code>标签是在网页禁掉script的情况下，用来提示用户应该在浏览器上开启script的适配项或者说允许网页去解析JavaScript。这是一段容错的代码。</p>
+<h3 id="manifest-json文件"><a href="#manifest-json文件" class="headerlink" title="manifest.json文件"></a><code>manifest.json</code>文件</h3><p>在下面的<code>index.js</code>文件中我们提到使用<code>registerServiceWorker</code>可以在没有网络时网页也可以当做app来使用。<br>我们可以将这个网页在桌面上建一个快捷方式，**<code>manifest.json</code>文件正是定义这个app的名字、图标、网址跳转到哪儿、主题颜色等的地方**。<br>（不使用<code>manifest.json</code>时该文件可删除，同时<code>index.html</code>中的<code>manifest</code>引用代码也可删除。）</p>
+<h2 id="src文件夹下"><a href="#src文件夹下" class="headerlink" title="src文件夹下"></a><code>src</code>文件夹下</h2><p>放置项目所有的源代码，<strong>所有代码的入口在<code>index.js</code>文件里</strong>。</p>
+<h3 id="index-js文件"><a href="#index-js文件" class="headerlink" title="index.js文件"></a><code>index.js</code>文件</h3><p>可以注意到<code>import ./index.css</code>,这是因为react讲究 all in js ，所以css和js也就不分离了。</p>
+<p><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbb5din43ej30s40a3wlo.jpg" alt="`index.js`文件"><br>文件中有一个**<code>registerServiceWorker</code>，它主要用于帮助我们借助网页去写手机APP应用<strong>，使用了它</strong>即使断网了，二次访问时也能加载出页面**。那么没有网络时该网页也可以当做app使用。因为<code>registerServiceWorker</code>会帮助你将页面存储在我们的浏览器内。<br>（后来新建的项目是如下代码，可查一下是否同一个意思：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> serviceWorker <span class="keyword">from</span> <span class="string">&#x27;./serviceWorker&#x27;</span>;</span><br><span class="line">serviceWorker.unregister();</span><br></pre></td></tr></table></figure>
+<p>如不需使用可删除代码后同样可以删去src下的<code>serviceWorker.js</code>）</p>
+<p><code>import App from &#39;./App&#39;;</code>以及<code>ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code>则是在index页面上引入并渲染以<strong>显示App组件</strong>。</p>
+<h3 id="App-js文件"><a href="#App-js文件" class="headerlink" title="App.js文件"></a><code>App.js</code>文件</h3><p><code>App.js</code>就是<strong>定义App组件</strong>的地方。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">React</span>, &#123; <span class="type">Component</span> &#125; from &#x27;react&#x27;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        hello world</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="type">App</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="App-test-js文件"><a href="#App-test-js文件" class="headerlink" title="App.test.js文件"></a><code>App.test.js</code>文件</h3><p><strong>自动化测试文件</strong>，还不涉及自动化测试时为使项目简洁可删去该文件。</p>
+<hr>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-js%E5%AD%A6%E4%B9%A0/">React.js学习</a>, <a class="article-category-link" href="/categories/%E7%AE%80%E4%B9%A6%E9%A1%B9%E7%9B%AE/">简书项目</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-js/" rel="tag">React.js</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/24/bind()/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          bind()
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/22/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%83%E5%A4%A9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88CSS%E5%B1%85%E4%B8%AD%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百度前端技术学院 第七天学习笔记（CSS 居中）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">React简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-js%E6%96%87%E6%A1%A3"><span class="nav-number">1.1.</span> <span class="nav-text">react.js文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8Evue-js%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">与vue.js对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">React开发环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%89%8B%E6%9E%B6%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">脚手架工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">工程目录文件简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.1.</span> <span class="nav-text">重启项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">根目录下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn-lock%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">yarn.lock文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#README-md%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">README.md文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">package.json文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.4.</span> <span class="nav-text">.gitignore文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#todolist%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">todolist文件夹下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#node-modules%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">3.3.1.</span> <span class="nav-text">node_ modules文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="nav-number">3.4.</span> <span class="nav-text">public文件夹下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#favicon-ico"><span class="nav-number">3.4.1.</span> <span class="nav-text">favicon.ico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-html%E6%96%87%E4%BB%B6"><span class="nav-number">3.4.2.</span> <span class="nav-text">index.html文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#manifest-json%E6%96%87%E4%BB%B6"><span class="nav-number">3.4.3.</span> <span class="nav-text">manifest.json文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#src%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="nav-number">3.5.</span> <span class="nav-text">src文件夹下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-js%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.1.</span> <span class="nav-text">index.js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-js%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.2.</span> <span class="nav-text">App.js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-test-js%E6%96%87%E4%BB%B6"><span class="nav-number">3.5.3.</span> <span class="nav-text">App.test.js文件</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2024
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
