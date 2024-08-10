@@ -14,7 +14,7 @@
   <meta name="description" content="react.js基础精讲（1）中todoList代码中有许多需要优化的地方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TodoList代码优化">
-<meta property="og:url" content="http://yoursite.com/2020/01/03/TodoList%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/01/03/TodoList%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="react.js基础精讲（1）中todoList代码中有许多需要优化的地方">
 <meta property="og:locale" content="zh_CN">
@@ -225,7 +225,7 @@
 <li>会发现<strong>报错</strong><code>TypeError: Cannot read property &#39;value&#39; of null</code>：</li>
 <li><strong>原因</strong>：这是因为setState方法如果传一个函数，它实际上是异步的写法，在后面讲“虚拟DOM”时将会讲解，主要是为了提升性能。</li>
 <li><strong>解决方案</strong>：此时需要<strong>将<code>e.target.value</code>放在<code>setState（）</code>的外部保存一下</strong>，再在内部进行调用：<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">handleInputChange</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> value = e.<span class="property">target</span>.<span class="property">value</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setState</span>(<span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">inputValue</span>: value</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><strong>注意</strong>：箭头函数返回对象时<strong>若想省略return则需要用<code>()</code>包裹对象</strong>。（具体可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">“函数相关知识点补充”中箭头函数部分</a>）</li>
+<li><strong>注意</strong>：箭头函数返回对象时<strong>若想省略return则需要用<code>()</code>包裹对象</strong>。（具体可参考笔记<a href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">“函数相关知识点补充”中箭头函数部分</a>）</li>
 </ul>
 <hr>
 <h1 id="使用-prevState-代替-this-state"><a href="#使用-prevState-代替-this-state" class="headerlink" title="使用 prevState 代替 this.state"></a>使用 prevState 代替 this.state</h1><ul>

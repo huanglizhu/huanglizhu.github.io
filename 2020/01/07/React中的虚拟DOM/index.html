@@ -14,7 +14,7 @@
   <meta name="description" content="面试： 虚拟DOM 是什么，有什么用总结：  虚拟DOM 就是一个JS对象，用它来描述 真实的DOM。 使用 虚拟DOM 有助于极大提升性能：React对性能的提升在于减少了 真实DOM对象 的生成与比较，取而代之的是使用 虚拟DOM(JS对象) 来完成数据改变后的生成与比较。而用JS形成一个 JS对象 性能损耗非常小，生成一个 DOM元素 性能损耗大，涉及DOM的操作都很耗性能。（具体可看下面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React中的虚拟DOM">
-<meta property="og:url" content="http://yoursite.com/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/01/07/React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="面试： 虚拟DOM 是什么，有什么用总结：  虚拟DOM 就是一个JS对象，用它来描述 真实的DOM。 使用 虚拟DOM 有助于极大提升性能：React对性能的提升在于减少了 真实DOM对象 的生成与比较，取而代之的是使用 虚拟DOM(JS对象) 来完成数据改变后的生成与比较。而用JS形成一个 JS对象 性能损耗非常小，生成一个 DOM元素 性能损耗大，涉及DOM的操作都很耗性能。（具体可看下面">
 <meta property="og:locale" content="zh_CN">
@@ -211,7 +211,7 @@
 <h3 id="补充：数组类型的对象"><a href="#补充：数组类型的对象" class="headerlink" title="补充：数组类型的对象"></a>补充：数组类型的对象</h3><p><strong>对象数组</strong> 就是数组里的每个元素都是类的对象，赋值时先定义对象，然后将对象直接赋给数组就行了。</p>
 <p><strong>注意</strong>：</p>
 <ol>
-<li><strong>在 JavaScript 中，几乎“所有事物”都是对象</strong>。所有 JavaScript 值，除了原始值，都是对象。（具体可以看笔记“<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/03/js%E5%AF%B9%E8%B1%A1%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/">js对象 学习笔记（1）</a>”）</li>
+<li><strong>在 JavaScript 中，几乎“所有事物”都是对象</strong>。所有 JavaScript 值，除了原始值，都是对象。（具体可以看笔记“<a href="https://huanglizhu.github.io/2019/10/03/js%E5%AF%B9%E8%B1%A1%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/">js对象 学习笔记（1）</a>”）</li>
 <li><strong>数组中每一项都可以存放不同类型的数据</strong>。</li>
 </ol>
 <hr>
@@ -243,7 +243,7 @@
 <hr>
 <h1 id="虚拟DOM中的Diff算法"><a href="#虚拟DOM中的Diff算法" class="headerlink" title="虚拟DOM中的Diff算法"></a>虚拟DOM中的Diff算法</h1><p>在上面第7步中我们说去 “当state数据发生改变时，<strong>比较 原始虚拟DOM 和 新的虚拟DOM 的区别</strong>”， 这里的<strong>“比较”采用的就是Diff算法</strong>，（Diff-&gt;difference-&gt;找不同）。<br><strong>Diff算法大大提升了两个虚拟DOM之间进行比对的性能。</strong></p>
 <p>下面的<strong>同层比较</strong> 和 <strong>key值匹配</strong> 就是 Diff算法 的一部分。</p>
-<h2 id="答之前的问题：为什么setState是异步的"><a href="#答之前的问题：为什么setState是异步的" class="headerlink" title="答之前的问题：为什么setState是异步的"></a>答之前的问题：为什么setState是异步的</h2><p>（关于什么是异步可参考笔记“<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/01/js%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/">JS中的同步与异步</a>”）<br>setState之所以是异步，是因为<strong>要提高React底层的性能</strong>。<br>提高性能主要靠<strong>减少比对次数</strong>：如果不是异步的，短时间内修改3次state，则react需要进行3次 虚拟DOM 的比对，而异步则可以把3次比对合并，react只需要进行1次 虚拟DOM 的比对。</p>
+<h2 id="答之前的问题：为什么setState是异步的"><a href="#答之前的问题：为什么setState是异步的" class="headerlink" title="答之前的问题：为什么setState是异步的"></a>答之前的问题：为什么setState是异步的</h2><p>（关于什么是异步可参考笔记“<a href="https://huanglizhu.github.io/2019/10/01/js%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/">JS中的同步与异步</a>”）<br>setState之所以是异步，是因为<strong>要提高React底层的性能</strong>。<br>提高性能主要靠<strong>减少比对次数</strong>：如果不是异步的，短时间内修改3次state，则react需要进行3次 虚拟DOM 的比对，而异步则可以把3次比对合并，react只需要进行1次 虚拟DOM 的比对。</p>
 <p>异步任务是指不进入主线程，而进入任务队列的任务，只有任务队列通知主线程，某个异步任务可以执行了，该任务才会进入主线程。<br>我的理解：也就是说如果短时间内多次修改，他会等你停止修改以后才通知主线程可以对我进行比对啦。</p>
 <h2 id="同层比较"><a href="#同层比较" class="headerlink" title="同层比较"></a>同层比较</h2><p><strong>React的 虚拟DOM 采用的是 同层比较 的算法。</strong><br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbkgcxohc8j30zc0h6dt6.jpg" alt="例子"><br>逐层比对，如果第一层就不同，react就不会往下比对，而是直接使用 新的虚拟DOM 去生成真实的DOM。<strong>虽然可能会造成DOM节点渲染的浪费，但同层比对的算法简单，效率快，大大减少了两个虚拟DOM之间比对的性能消耗。</strong></p>
 <h2 id="答之前的问题：为什么index不能作为key值"><a href="#答之前的问题：为什么index不能作为key值" class="headerlink" title="答之前的问题：为什么index不能作为key值"></a>答之前的问题：为什么index不能作为key值</h2><p><strong>key值需要是稳定的，可变的key值也就失去了它存在的意义。</strong></p>

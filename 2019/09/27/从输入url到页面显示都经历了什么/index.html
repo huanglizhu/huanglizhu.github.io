@@ -14,7 +14,7 @@
   <meta name="description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从输入url到页面显示都经历了什么">
-<meta property="og:url" content="http://yoursite.com/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="从输入url到页面显示都经历了什么（可参考简书、知乎）">
 <meta property="og:locale" content="zh_CN">
@@ -204,7 +204,7 @@
 </ul>
 <h3 id="服务端-处理请求-发出响应"><a href="#服务端-处理请求-发出响应" class="headerlink" title="服务端 处理请求 发出响应"></a>服务端 处理请求 发出响应</h3><p>服务器收到 TCP 数据包后，会将 TCP 数据包中的 HTTP 请求报文解析出来，并发送 HTTP 响应给客户端，即<strong>返回相应的html</strong>给浏览器。</p>
 <h3 id="客户端-解析数据-渲染页面-断开连接"><a href="#客户端-解析数据-渲染页面-断开连接" class="headerlink" title="客户端 解析数据 渲染页面 断开连接"></a>客户端 解析数据 渲染页面 断开连接</h3><ul>
-<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
+<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。</li>
 <li><strong>构建CSS对象模型CSSOM：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建CSS对象模型CSSOM</strong><ul>
 <li><strong>建议CSS写在head中</strong>：页面<strong>边解析边渲染</strong>，如果把CSS写在HTML后，则先解析DOM树渲染在页面上，再生成CSSOM合成渲染树重新渲染在页面上，这样会有一个过程，用户可能会看到一个过程变化。<strong>所以在DOM树生成之前就先生成CSSOM会更好</strong>，这样当DOM树生成时就可<strong>直接和所有CSSOM进行合并，一步渲染完成</strong>。</li>
 </ul>
@@ -215,11 +215,11 @@
 <li><strong>重绘：</strong>当盒模型的位置,大小以及其他属性，如颜色,字体等确定下来之后，浏览器便开始绘制内容</li>
 </ul>
 </li>
-<li><strong>注意:<strong>在dom树的构建过程&#x2F;渲染树的</strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
+<li><strong>注意:<strong>在dom树的构建过程&#x2F;渲染树的</strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
 <li>总结代码放置顺序：CSS HTML JS</li>
 </ul>
 </li>
-<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89">事件循环</a></li>
+<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89">事件循环</a></li>
 <li><strong>另外的HTTP请求：</strong> html文件中会含有 图片、视频、音频、js、jquery、css等其他资源，这些又是另外的HTTP请求。在解析DOM的过程中，遇到这些都会进行并行下载，浏览器对每个域的并行下载数量有一定的限制，一般是4-6个，可能会通过一个网页产生很多的HTTP请求，<strong>请求越少性能越好</strong>。</li>
 <li>为提高性能要关注<strong>缓存</strong>（强缓存和协商缓存），缓存一般通过Cache-Control、Last-Modify、Expires等首部字段控制。 <ul>
 <li>Cache-Control和Expires的区别在于Cache-Control使用<strong>相对时间</strong>，Expires使用的是基于服务器 端的<strong>绝对时间</strong>，因为存在时差问题，一般采用Cache-Control。</li>
@@ -274,7 +274,7 @@
 </tbody></table>
 <p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/tcpThreeTimesHandshake.png" alt="tcp三次握手" title="tcp三次握手"></p>
 <ul>
-<li>tcp三次握手和四次挥手具体可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%A6%82%E6%8B%AC">前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）</a></li>
+<li>tcp三次握手和四次挥手具体可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%A6%82%E6%8B%AC">前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）</a></li>
 </ul>
 <h3 id="客户端（浏览器）发送http请求"><a href="#客户端（浏览器）发送http请求" class="headerlink" title="客户端（浏览器）发送http请求"></a>客户端（浏览器）发送http请求</h3><ul>
 <li><strong>例子：</strong><ul>
@@ -372,18 +372,18 @@
 <h3 id="客户端（浏览器）解析数据-渲染页面"><a href="#客户端（浏览器）解析数据-渲染页面" class="headerlink" title="客户端（浏览器）解析数据 渲染页面"></a>客户端（浏览器）解析数据 渲染页面</h3><ul>
 <li><strong>客户端（浏览器）</strong>接收到server端返回的 HTML 文件 后就会<strong>解析这些html代码</strong>，在还<strong>没有完全接收 HTML 文件</strong>时便<strong>开始渲染、显示网页</strong>。</li>
 <li>在执行 HTML 中代码时，先是解析html，解析html过程中遇到引入了css，则会在解析html的同时解析css。</li>
-<li><strong>如果遇到引入了js，则会解析js，停止html和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）。等解析完js再解析剩下未解析完的html和css。</strong></li>
+<li><strong>如果遇到引入了js，则会解析js，停止html和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）。等解析完js再解析剩下未解析完的html和css。</strong></li>
 <li>页面显示之后的 加载图片、加载js、加载jquery、加载css等，这些又是<strong>另外的HTTP请求</strong>。可能会通过一个网页产生很多的HTTP请求，请求越少性能越好。</li>
 </ul>
 <h4 id="边解析边渲染"><a href="#边解析边渲染" class="headerlink" title="边解析边渲染"></a>边解析边渲染</h4><ul>
-<li>浏览器是一个<strong>边解析边渲染</strong>的过程。（可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/25/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/#CSS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">CSS是如何工作的</a>、<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/629913274412345484.html">容易理解的渲染树</a>）</li>
+<li>浏览器是一个<strong>边解析边渲染</strong>的过程。（可参考<a href="https://huanglizhu.github.io/2019/09/25/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2%20%E7%AC%AC%E4%B8%89%E5%A4%A9%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88CSS%E6%96%87%E6%9C%AC%EF%BC%89/#CSS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">CSS是如何工作的</a>、<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/629913274412345484.html">容易理解的渲染树</a>）</li>
 </ul>
 <ol>
 <li>首先浏览器<strong>解析HTML文件构建DOM树</strong></li>
 <li>然后<strong>解析CSS文件构建 CSS对象模型</strong>：解析提取的CSS文件，并根据选择器类型分到不同的“存储桶”，例如元素，类，ID等。根据找到的选择器，它确定应将哪些 <strong>CSS规则</strong> 应用于<strong>DOM中的哪些节点</strong>，并根据需要<strong>向其附加样式</strong>。<br>（<strong>CSS 规则</strong>由两个主要的部分构成：选择器，以及一条或多条声明。）</li>
 <li>等到渲染树构建完成后，浏览器开始根据DOM树<strong>合成渲染树（将 渲染树 放在合适的HTML元素中）</strong><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderTree.png" alt="渲染树图解" title="渲染树图解"></li>
 <li>最后<strong>浏览器将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong></li>
-<li><strong>渲染过程中遇到<code>&lt;script&gt;</code>则暂停渲染</strong>（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>），优先加载并执行JS代码，完成再继续渲染<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderPath.png" alt="图解全过程" title="图解全过程"></li>
+<li><strong>渲染过程中遇到<code>&lt;script&gt;</code>则暂停渲染</strong>（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>），优先加载并执行JS代码，完成再继续渲染<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/renderPath.png" alt="图解全过程" title="图解全过程"></li>
 </ol>
 <h4 id="浏览器-reflow-回流-和repain-重绘"><a href="#浏览器-reflow-回流-和repain-重绘" class="headerlink" title="浏览器 reflow(回流)和repain(重绘)"></a>浏览器 reflow(回流)和repain(重绘)</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e081f9aa03fb">参考简书</a>、<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903569087266823">参考掘金</a></li>
@@ -410,17 +410,17 @@
 </li>
 </ul>
 </li>
-<li>当页面中<strong>元素样式的改变并不影响它在文档流中的位置</strong>时（例如：color、background-color、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#visibility-hidden%EF%BC%8Copacity-0%EF%BC%8Cdisplay-none">visibility:hidden</a>等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为**repain(重绘)**。</li>
+<li>当页面中<strong>元素样式的改变并不影响它在文档流中的位置</strong>时（例如：color、background-color、<a href="https://huanglizhu.github.io/2020/04/05/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%EF%BC%881%EF%BC%89/#visibility-hidden%EF%BC%8Copacity-0%EF%BC%8Cdisplay-none">visibility:hidden</a>等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为**repain(重绘)**。</li>
 <li><strong>页面在首次加载时必然会经历reflow和repain</strong>。reflow和repain过程是<strong>非常消耗性能</strong>的，尤其是在移动设备上，它会破坏用户体验，有时会造成页面卡顿。所以我们应该<strong>尽可能少的减少reflow和repain</strong></li>
 </ul>
 <h5 id="减少回流、重绘的方法"><a href="#减少回流、重绘的方法" class="headerlink" title="减少回流、重绘的方法"></a>减少回流、重绘的方法</h5><ul>
-<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并DOM操作</a></strong> ：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
+<li><strong><a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并DOM操作</a></strong> ：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
 <li><strong>避免频繁读取会引发回流&#x2F;重绘的属性(见上)<strong>，如果确实需要多次使用，就用一个</strong>变量缓存</strong>起来。</li>
 <li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
 </ul>
 <h4 id="JS的解析（同步、异步）"><a href="#JS的解析（同步、异步）" class="headerlink" title="JS的解析（同步、异步）"></a>JS的解析（同步、异步）</h4><ul>
 <li><strong>JS的解析是由浏览器中的JS解析引擎完成的</strong>。</li>
-<li>JS是<strong>单线程运行</strong>，也就是说，<strong>在同一个时间内只能做一件事</strong>，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。（HTML5提供的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">Web Workers API</a>可以让浏览器作为宿主环境提供给JS一个<strong>多线程运行的环境</strong>）</li>
+<li>JS是<strong>单线程运行</strong>，也就是说，<strong>在同一个时间内只能做一件事</strong>，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。（HTML5提供的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">Web Workers API</a>可以让浏览器作为宿主环境提供给JS一个<strong>多线程运行的环境</strong>）</li>
 <li>但是又存在某些任务比较耗时，如 IO读写 等，所以需要一种机制可以先执行排在后面的任务，这就是：<strong>同步任务(synchronous)和异步任务(asynchronous)</strong></li>
 <li><strong>同步任务</strong>就是放在主线程（执行栈）上执行的任务，<strong>异步任务</strong>是放在任务队列中的任务。【<strong>注意：异步任务中有两个任务队列：宏任务和微任务</strong>】</li>
 <li>JS的执行机制就可以看做是一个 <strong>主线程（执行栈）</strong> 加上一个 <strong>任务队列</strong>(task queue)。</li>
@@ -431,8 +431,8 @@
 <li><strong>任务队列 分为（但不包含） 宏任务队列 和 微任务队列（因为script中的同步任务也属于宏任务）</strong>。</li>
 <li><strong>宏任务先于微任务执行（第一个执行的宏任务是script中的同步任务）</strong></li>
 <li><strong>每一次执行栈结束都会给一次DOM渲染的机会</strong> </li>
-<li>DOM 渲染<strong>前</strong>触发微任务，DOM 渲染<strong>后</strong>触发宏任务(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#event-loop%E5%9B%BE%E8%A7%A3%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E4%B8%8EDOM%E6%B8%B2%E6%9F%93%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F">“JS异步进阶”中”event-loop图解宏任务和微任务与DOM渲染的执行顺序”</a>)</li>
-<li><strong>补充</strong>：<strong>任务队列</strong>中除了完成的异步任务还会有<strong>被触发的DOM事件</strong>，图示可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#DOM%E4%BA%8B%E4%BB%B6%E5%92%8Cevent-loop%E7%9A%84%E5%85%B3%E7%B3%BB">“JS异步进阶”中的“DOM事件和event loop的关系”</a></li>
+<li>DOM 渲染<strong>前</strong>触发微任务，DOM 渲染<strong>后</strong>触发宏任务(可参考<a href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#event-loop%E5%9B%BE%E8%A7%A3%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E4%B8%8EDOM%E6%B8%B2%E6%9F%93%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F">“JS异步进阶”中”event-loop图解宏任务和微任务与DOM渲染的执行顺序”</a>)</li>
+<li><strong>补充</strong>：<strong>任务队列</strong>中除了完成的异步任务还会有<strong>被触发的DOM事件</strong>，图示可参考<a href="https://huanglizhu.github.io/2020/05/05/JS%E5%BC%82%E6%AD%A5%E8%BF%9B%E9%98%B6/#DOM%E4%BA%8B%E4%BB%B6%E5%92%8Cevent-loop%E7%9A%84%E5%85%B3%E7%B3%BB">“JS异步进阶”中的“DOM事件和event loop的关系”</a></li>
 </ul>
 </li>
 <li>在此过程中，主线程要做的就是从任务队列中去执行事件，执行完毕，再取事件，再执行事件…这样不断取事件，执行事件的循环机制就叫做<strong>事件循环机制</strong>。</li>
@@ -484,7 +484,7 @@
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ul>
 <li>浏览器在解析过程中，如果遇到请求外部资源时，如图像,iconfont,JS等。这些又是<strong>另外的HTTP请求</strong>，浏览器将<strong>重复以上所有过程</strong>下载该资源。可能会通过一个网页产生很多的HTTP请求，请求越少性能越好。</li>
 <li><strong>请求过程是异步</strong>的，并<strong>不会影响HTML文档进行加载</strong>，但是<strong>当文档加载过程中遇到JS文件，HTML文档会挂起渲染过程，不仅要等到文档中JS文件加载完毕还要等待解析执行完毕，才会继续HTML的渲染过程</strong>。</li>
-<li>原因是<strong>因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a><strong>，这就意味着JS执行完成前，后续所有资源的下载是没有必要的，这就是</strong>JS阻塞后续资源下载的根本原因</strong>。</li>
+<li>原因是<strong>因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a><strong>，这就意味着JS执行完成前，后续所有资源的下载是没有必要的，这就是</strong>JS阻塞后续资源下载的根本原因</strong>。</li>
 <li>CSS文件的加载不影响JS文件的加载，但是却影响JS文件的执行。<strong>JS代码执行前浏览器必须保证CSS文件已经下载并加载完毕</strong>。</li>
 </ul>
 <h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><ul>

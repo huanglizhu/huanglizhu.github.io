@@ -14,7 +14,7 @@
   <meta name="description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bind()">
-<meta property="og:url" content="http://yoursite.com/2019/11/24/bind()/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2019/11/24/bind()/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="bind() ES5 引入了 Function.prototype.bind。 bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。 也就是说，调用f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数(some">
 <meta property="og:locale" content="zh_CN">
@@ -173,7 +173,7 @@
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
 <li>函数使用bind()返回的还是一个函数，而<code>call()</code>&#x2F;<code>apply()</code>则是直接调用函数。</li>
 <li>使用函数声明的方式创建的函数不能使用<code>bind()</code>，只有使用函数表达式的方式创建的函数才能使用。</li>
-<li><code>call()</code>&#x2F;<code>apply()</code>&#x2F;<code>bind()</code>都是使用第一个参数改变<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#this">this</a>的指向。</li>
+<li><code>call()</code>&#x2F;<code>apply()</code>&#x2F;<code>bind()</code>都是使用第一个参数改变<a href="https://huanglizhu.github.io/2020/02/05/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/#this">this</a>的指向。</li>
 <li><code>bind()</code>与<code>call()</code>&#x2F;<code>apply()</code>的传参方法有所不同。</li>
 </ol>
 <hr>
@@ -225,7 +225,7 @@
 <li>**事件绑定处理函数（<code>onPress=&#123;this.foo&#125;</code>）时，<code>foo</code>方法内部的<code>this</code>的指向就会丢失(此时在<code>foo</code>函数内部打印<code>this</code>得到的是<code>undefined</code>)**。这就会出现外部的<code>foo</code>方法内部的<code>this</code>会丢失指向。</li>
 <li>为了解决这个问题，我们在实例化对象的时候就<strong>需要在构造函数中绑定<code>this</code>（<code>this.foo = this.foo.bind(this);</code>），使得无论事件处理函数如何传递，它的<code>this</code>的指向都是固定的，固定指向我们所实例化的对象（App组件）</strong>。<ul>
 <li>虽然在render函数中<code>&lt;Button onPress=&#123;this.foo.bind(this)&#125;/&gt;</code>效果一样，但比较消耗性能，<strong>不推荐</strong>。</li>
-<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React%E4%B8%AD%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a></li>
+<li><a href="https://huanglizhu.github.io/2019/11/26/React.js%E5%9F%BA%E7%A1%80%E7%B2%BE%E8%AE%B2%EF%BC%881%EF%BC%89/#React%E4%B8%AD%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">具体应用可参考笔记“React.js基础精讲(1)”中的“React中的响应式设计思想和事件绑定”</a></li>
 </ul>
 </li>
 </ul>
@@ -240,7 +240,7 @@
 <li>在React<a href="(https://huanglizhu.github.io/2020/01/16/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#%E4%BD%BF%E7%94%A8Redux%E5%AE%8C%E6%88%90TodoList%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD">这个例子</a>中，在<strong>父组件</strong>中使用<code>bind</code>绑定事件函数<code>handleItemDelete</code>的<code>this</code>指向时,<strong>如果还想将参数index传入函数，则可在绑定时传入</strong>：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个例子里该组件在父组件中调用</span></span><br><span class="line">&lt;List.Item onClick=&#123;<span class="keyword">this</span>.handleItemDelete.bind(<span class="keyword">this</span>, index)&#125;&gt;&#123;item&#125;&lt;/List.Item&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="父组件绑定this，子组件传参"><a href="#父组件绑定this，子组件传参" class="headerlink" title="父组件绑定this，子组件传参"></a>父组件绑定this，子组件传参</h2><ul>
-<li>但如果<strong>事件函数和bind绑定都在父组件中，而函数的调用和传参在子组件</strong>，就可以这样传参（可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/18/Redux%E8%BF%9B%E9%98%B6(1)UI%E7%BB%84%E4%BB%B6%E3%80%81%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6/#%E5%88%86%E7%A6%BBUI%E7%BB%84%E4%BB%B6TodoListUI">完整例子</a>）：</li>
+<li>但如果<strong>事件函数和bind绑定都在父组件中，而函数的调用和传参在子组件</strong>，就可以这样传参（可参考<a href="https://huanglizhu.github.io/2020/01/18/Redux%E8%BF%9B%E9%98%B6(1)UI%E7%BB%84%E4%BB%B6%E3%80%81%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6%E3%80%81%E6%97%A0%E7%8A%B6%E6%80%81%E7%BB%84%E4%BB%B6/#%E5%88%86%E7%A6%BBUI%E7%BB%84%E4%BB%B6TodoListUI">完整例子</a>）：</li>
 </ul>
 <ol>
 <li>在<strong>父组件</strong>的构造函数中使用bind绑定<code>this.handleItemDelete=this.handleItemDelete.bind();</code></li>

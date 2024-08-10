@@ -14,7 +14,7 @@
   <meta name="description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React知识点汇总（项目）">
-<meta property="og:url" content="http://yoursite.com/2020/04/10/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/04/10/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%A1%B9%E7%9B%AE%EF%BC%89/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="总结遇到过的性能优化 【构造函数内绑定事件函数this指向】：在constructor函数里绑定 事件函数 的 this指向（bind），而不是在事件函数内绑定，这样可以保证整个程序里只绑定一次，且可以避免 子组件 的无谓渲染。">
 <meta property="og:locale" content="zh_CN">
@@ -178,18 +178,18 @@
 <li><strong>【虚拟DOM】</strong>：React的底层用了<strong>虚拟DOM</strong>的概念，替代了之前的 真实的DOM（JS对象）。</li>
 <li><strong>【diff算法】</strong>：React的 <strong>diff算法： 同层比对、key值的运用</strong> 来提升 虚拟DOM 比对的速度。</li>
 <li><strong>【shouldComponentUpdate&#x2F;PureComponent避免不必要的子组件render函数的渲染更新】</strong>：<ul>
-<li>借助**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-%E7%9A%84-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">生命周期函数</a>shouldComponentUpdate<strong>来提高组件性能，</strong>避免不必要的子组件render函数的渲染更新**。（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#%E5%88%A9%E7%94%A8%E5%AE%83%E5%81%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">例子在“React高级内容（3）”</a>）<ul>
+<li>借助**<a href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-%E7%9A%84-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">生命周期函数</a>shouldComponentUpdate<strong>来提高组件性能，</strong>避免不必要的子组件render函数的渲染更新**。（<a href="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/#%E5%88%A9%E7%94%A8%E5%AE%83%E5%81%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">例子在“React高级内容（3）”</a>）<ul>
 <li>更为简单的方法可参考下面的“PureComponent”</li>
 </ul>
 </li>
-<li><strong>让组件继承</strong> react提供的**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E9%A6%96%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%88PureComponent%EF%BC%89">PureComponent</a><strong>（</strong>替代手写shouldComponentUpdate<strong>）判断</strong>只有和本组件有关的数据更新<strong>时，</strong>本组件的render函数才执行<strong>，否则return false不让组件重新渲染。通过</strong>避免虚拟DOM的比对**来提高性能。</li>
+<li><strong>让组件继承</strong> react提供的**<a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E9%A6%96%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%88PureComponent%EF%BC%89">PureComponent</a><strong>（</strong>替代手写shouldComponentUpdate<strong>）判断</strong>只有和本组件有关的数据更新<strong>时，</strong>本组件的render函数才执行<strong>，否则return false不让组件重新渲染。通过</strong>避免虚拟DOM的比对**来提高性能。</li>
 <li>函数组件使用 <strong>React.memo</strong></li>
 <li>记得<strong>搭配immutable.js不可变值</strong></li>
 </ul>
 </li>
 <li><strong>【使用react-router-dom库进行路由跳转】</strong>：使用<strong>react-router-dom的Link组件</strong>进行<strong>页面跳转</strong>，跳转时<strong>不会发送HTTP请求</strong>，因此加载速度会快很多，借此也可提高性能。</li>
 <li><strong>【异步加载组件】</strong>：可使用react-loadable模块实现异步加载组件<strong>解决首屏加载慢</strong>的问题。</li>
-<li><strong>【<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">前端通用的性能优化</a>】</strong>，如<strong>图片懒加载</strong></li>
+<li><strong>【<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">前端通用的性能优化</a>】</strong>，如<strong>图片懒加载</strong></li>
 <li>webpack层面的优化（<strong>webpack在production环境下进行打包时，就会自动压缩代码至1&#x2F;3的大小</strong>，在浏览器上进行反解析再进行渲染。）</li>
 <li>使用<strong>SSR服务器端渲染</strong>，不需要通过ajax发送请求，减少请求次数达到性能优化，这个需要额外设置。</li>
 </ul>
@@ -198,15 +198,15 @@
 <li>但<strong>社区方案众多</strong>，可以根据需求进行选择<ul>
 <li><strong>css modules</strong></li>
 <li><strong>（babel）react-css-modules</strong></li>
-<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#styled-components%E7%AE%A1%E7%90%86CSS%E6%A0%B7%E5%BC%8F"><strong>styled components</strong></a>：直接在单独的js文件中<strong>将样式写在组件里</strong>（也可以修饰现有的组件），然后<strong>直接使用带有样式的组件</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg" alt="styled components例子">从Div组件可以明确：<strong>styled components不仅可生成带样式组件，还可获取组件属性设置特殊样式</strong>，例子中就规定了big属性的Div组件字体大小为72px（涉及ES6的模板字符串和变量的使用方法）</li>
+<li><a href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#styled-components%E7%AE%A1%E7%90%86CSS%E6%A0%B7%E5%BC%8F"><strong>styled components</strong></a>：直接在单独的js文件中<strong>将样式写在组件里</strong>（也可以修饰现有的组件），然后<strong>直接使用带有样式的组件</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gh1670f3kpj30nc07awlj.jpg" alt="styled components例子">从Div组件可以明确：<strong>styled components不仅可生成带样式组件，还可获取组件属性设置特殊样式</strong>，例子中就规定了big属性的Div组件字体大小为72px（涉及ES6的模板字符串和变量的使用方法）</li>
 <li><strong>styled jsx</strong>：简单粗暴，在jsx中允许直接写入css</li>
-<li><strong>css文件+className（不推荐）</strong>：可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%EF%BC%89%E4%BD%BF%E7%94%A8index-css%E7%9A%84%E6%95%88%E6%9E%9C">简书Header组件开发（styled-components管理样式）</a></li>
+<li><strong>css文件+className（不推荐）</strong>：可参考<a href="https://huanglizhu.github.io/2020/01/23/%E7%AE%80%E4%B9%A6Header%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%88styled-components%E7%AE%A1%E7%90%86%E6%A0%B7%E5%BC%8F%EF%BC%89/#%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%EF%BC%89%E4%BD%BF%E7%94%A8index-css%E7%9A%84%E6%95%88%E6%9E%9C">简书Header组件开发（styled-components管理样式）</a></li>
 </ul>
 </li>
 </ul>
 <h1 id="使用antd时用styled-Components修改部分样式"><a href="#使用antd时用styled-Components修改部分样式" class="headerlink" title="使用antd时用styled-Components修改部分样式"></a>使用antd时用styled-Components修改部分样式</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nico2333/article/details/104217852">参考方法1</a>：新建一个 styled-components 组件 Test 包裹在想要修改的antd组件外，然后通过从 Test 中操作其子代CSS样式对目标antd组件进行样式修改（给作为子组件的antd组件添加className）。<ul>
-<li>操作其子代CSS样式的方法可参考博客<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/13/styled-components%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#amp-%E4%BC%AA%E5%85%83%E7%B4%A0-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8%EF%BC%8C%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8%E5%92%8C%E5%B5%8C%E5%A5%97">“styled-components的使用方法”中<code>&amp;</code>的使用方法</a></li>
+<li>操作其子代CSS样式的方法可参考博客<a href="https://huanglizhu.github.io/2020/02/13/styled-components%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#amp-%E4%BC%AA%E5%85%83%E7%B4%A0-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8%EF%BC%8C%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8%E5%92%8C%E5%B5%8C%E5%A5%97">“styled-components的使用方法”中<code>&amp;</code>的使用方法</a></li>
 </ul>
 </li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jack-zhou21235/p/11326364.html">参考方法2</a>：直接<strong>在存放css样式的js文件中输出样式,再在js文件中引入样式并使用即可</strong>：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//css.js</span></span><br><span class="line"><span class="keyword">import</span>  styled  <span class="keyword">from</span> <span class="string">&#x27;styled-components&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> btnStyle = &#123;</span><br><span class="line">　　<span class="attr">background</span>:<span class="string">&#x27;pink&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -214,18 +214,18 @@
 </ul>
 <h1 id="路由跳转（react-router-dom的Link组件）"><a href="#路由跳转（react-router-dom的Link组件）" class="headerlink" title="路由跳转（react-router-dom的Link组件）"></a>路由跳转（react-router-dom的Link组件）</h1><ul>
 <li><strong>注意</strong>：react是 <strong>单页应用的跳转</strong>，也就是说，不管怎么进行页面跳转，<strong>整个网站只会加载一次html文件</strong>，这也就决定了<strong>不能使用<code>&lt;a&gt;</code>标签进行页面跳转</strong>。<ul>
-<li>如果使用<code>&lt;a&gt;</code>标签进行页面跳转，跳转时会发送HTTP请求。<br>而借助<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/">react-router-dom</a>的Link组件实现跳转则不会，<strong>因此加载速度会快很多，借此也可提高性能。</strong></li>
+<li>如果使用<code>&lt;a&gt;</code>标签进行页面跳转，跳转时会发送HTTP请求。<br>而借助<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/">react-router-dom</a>的Link组件实现跳转则不会，<strong>因此加载速度会快很多，借此也可提高性能。</strong></li>
 </ul>
 </li>
-<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%EF%BC%88react-router-dom%E7%9A%84Link%E7%BB%84%E4%BB%B6%EF%BC%89">react-router-dom的Link组件 例子</a></li>
+<li><a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%EF%BC%88react-router-dom%E7%9A%84Link%E7%BB%84%E4%BB%B6%EF%BC%89">react-router-dom的Link组件 例子</a></li>
 </ul>
 <h2 id="路由传值"><a href="#路由传值" class="headerlink" title="路由传值"></a>路由传值</h2><ul>
-<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC">react-router-dom的使用</a></li>
-<li>个人觉得，【react的url中传递参数值】<strong>组件的跳转路径</strong>上最好<strong>使用<code>/:参数值</code><strong>的方法传值，这样</strong>组件中可以直接使用<code>this.props.match.params.参数名</code>获取所传参数值</strong>。【react将参数值传递给node】在react的组件的action中通过<strong>ajax请求的路径中使用<code>?key=value</code>来传值</strong>，这样<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/#app-js%E8%A7%A3%E6%9E%90%E5%85%AC%E5%85%B1%E5%8F%82%E6%95%B0"><strong>在node中通过queryString.parse</strong></a>可直接<strong>得到JSON对象</strong></li>
+<li>可参考<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC">react-router-dom的使用</a></li>
+<li>个人觉得，【react的url中传递参数值】<strong>组件的跳转路径</strong>上最好<strong>使用<code>/:参数值</code><strong>的方法传值，这样</strong>组件中可以直接使用<code>this.props.match.params.参数名</code>获取所传参数值</strong>。【react将参数值传递给node】在react的组件的action中通过<strong>ajax请求的路径中使用<code>?key=value</code>来传值</strong>，这样<a href="https://huanglizhu.github.io/2020/01/18/%E5%BC%80%E5%8F%91%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%8E%A5%E5%8F%A3(2)/#app-js%E8%A7%A3%E6%9E%90%E5%85%AC%E5%85%B1%E5%8F%82%E6%95%B0"><strong>在node中通过queryString.parse</strong></a>可直接<strong>得到JSON对象</strong></li>
 </ul>
 <h1 id="遇到过的问题"><a href="#遇到过的问题" class="headerlink" title="遇到过的问题"></a>遇到过的问题</h1><ol>
 <li>模拟接口数据（Charles抓包&#x2F;mockjs&#x2F;public下新建api文件夹）</li>
-<li>路由跳转时 Link组件 必须在router的内部（<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E8%AF%A6%E6%83%85%E9%A1%B5%E5%88%B0%E9%A6%96%E9%A1%B5">例子</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/">react-router-dom</a>、<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/12/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/#%E8%B7%AF%E7%94%B1">react中路由相关知识点</a>）</li>
+<li>路由跳转时 Link组件 必须在router的内部（<a href="https://huanglizhu.github.io/2020/02/15/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/#%E8%AF%A6%E6%83%85%E9%A1%B5%E5%88%B0%E9%A6%96%E9%A1%B5">例子</a>、<a href="https://huanglizhu.github.io/2020/02/20/react-router-dom%E7%9A%84%E4%BD%BF%E7%94%A8/">react-router-dom</a>、<a href="https://huanglizhu.github.io/2020/02/12/%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/#%E8%B7%AF%E7%94%B1">react中路由相关知识点</a>）</li>
 </ol>
 
       

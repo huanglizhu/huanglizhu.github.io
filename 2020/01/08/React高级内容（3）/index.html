@@ -14,7 +14,7 @@
   <meta name="description" content="render函数必须存在所有的生命周期函数都可以没有，但render函数必须存在，否则报错。原因：组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。所以我们的render函数是必须自己定义的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React 高级内容（3）">
-<meta property="og:url" content="http://yoursite.com/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/01/08/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%883%EF%BC%89/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="render函数必须存在所有的生命周期函数都可以没有，但render函数必须存在，否则报错。原因：组件时继承自react的Component的，其中内置了其他所有的生命周期函数，唯独没有render函数。所以我们的render函数是必须自己定义的。">
 <meta property="og:locale" content="zh_CN">
@@ -193,7 +193,7 @@
 <p>提交11时第一次执行Todoltem的render函数,<strong>在父组件的输入框中输入9个数字时</strong>不仅执行父组件的render函数9次，<strong>还执行了子组件Todoltem的render函数9次</strong>：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmi8n51ghj314v0aawg2.jpg" alt="结果"></p>
 <p>这就是我们之前讲的“<strong>当父组件的render函数被运行时，它的子组件的render都将被重新运行一次</strong>”。<br><strong>可实际上并不需要执行子组件的render，所以我们可以使用生命周期函数来做性能优化。</strong></p>
 <h4 id="使用shouldComponentUpdate"><a href="#使用shouldComponentUpdate" class="headerlink" title="使用shouldComponentUpdate"></a>使用shouldComponentUpdate</h4><p><strong>注意： shouldComponentUpdate 应该需要自带两个参数(nextProps, nextState)，他们代表即将更新的两个数据。</strong></p>
-<p>在上一篇笔记 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/05/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-%E7%9A%84-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">React高级内容（2）</a> 的“React的生命周期函数”中我们提到过，<strong>不管state还是props更新都要先通过shouldComponentUpdate来判断是否需要更新。</strong></p>
+<p>在上一篇笔记 <a href="https://huanglizhu.github.io/2020/02/05/React%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9%EF%BC%882%EF%BC%89/#React-%E7%9A%84-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">React高级内容（2）</a> 的“React的生命周期函数”中我们提到过，<strong>不管state还是props更新都要先通过shouldComponentUpdate来判断是否需要更新。</strong></p>
 <p>在子组件TodoItem中<strong>使用 shouldComponentUpdate 做性能优化，避免content无变化时被父组件更新带动执行子组件render</strong>：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nextProps.content !== <span class="keyword">this</span>.props.content) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -268,7 +268,7 @@
 <p><strong>结果</strong>：todolist.json文件中的内容显示在输入框下面，并且可以实现点击删除，也可以提交新的数据<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmqwjoubgj30xh053dg2.jpg" alt="结果"></p>
 <p><strong>思路</strong>：<br>state中的list更新后， 父组件TodoList 就会重新执行 render函数 ，那么 render函数 中的 getTodoItem函数 也会被重新执行，在getTodoItem函数中会遍历list中的每一个数据并把他们依次传入 子组件TodoItem 中，在 子组件TodoItem 中每一项都会实现 点击删除 的功能，返回的子组件们就会在父组件的ul标签中形成无序列表。</p>
 <hr>
-<h3 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h3><p>当<strong>函数中返回的代码只有一句时，我们可以使用<code>()</code>包裹代码从而代替函数的<code>&#123;&#125;</code>return</strong>:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmr94s863j30zt0dbdjs.jpg" alt="优化代码1"><br>（相关原因可看笔记”<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">函数相关知识点补充</a>“中的 箭头函数）</p>
+<h3 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h3><p>当<strong>函数中返回的代码只有一句时，我们可以使用<code>()</code>包裹代码从而代替函数的<code>&#123;&#125;</code>return</strong>:<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbmr94s863j30zt0dbdjs.jpg" alt="优化代码1"><br>（相关原因可看笔记”<a href="https://huanglizhu.github.io/2019/10/07/%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">函数相关知识点补充</a>“中的 箭头函数）</p>
 <p>我们之前把data放到list中<code>list: res.data</code>，但**最好使用扩展运算符将其复制到list中： <code>list: [...res.data]</code>**，以免因为数据的改动产生不好的影响。</p>
 <hr>
 

@@ -14,7 +14,7 @@
   <meta name="description" content="在vue开发过程中的一些关于xss与v-html的思考">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xss与v-html">
-<meta property="og:url" content="http://yoursite.com/2022/05/05/xss%E4%B8%8Ev-html/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2022/05/05/xss%E4%B8%8Ev-html/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="在vue开发过程中的一些关于xss与v-html的思考">
 <meta property="og:locale" content="zh_CN">
@@ -170,7 +170,7 @@
 
 <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
 <li>vue开发中，在一个下拉框中需要将下拉数据中后端返回的html代码效果直接显示在下拉框中<blockquote>
-<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#v-html">文档：</a>在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#XSS%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E6%94%BB%E5%87%BB">XSS 攻击</a>。<strong>只在可信内容上使用 <code>v-html</code>，永不用在用户提交的内容上</strong>。</p>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#v-html">文档：</a>在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 <a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#XSS%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E6%94%BB%E5%87%BB">XSS 攻击</a>。<strong>只在可信内容上使用 <code>v-html</code>，永不用在用户提交的内容上</strong>。</p>
 </blockquote>
 </li>
 <li>于是我开始思考，接口返回的内容算可信内容吗？会不会出现接口被截取导致返回内容不可信的情况发生？（事实上是我多虑了…）</li>
@@ -183,7 +183,7 @@
 </ul>
 <h1 id="前端预防XSS"><a href="#前端预防XSS" class="headerlink" title="前端预防XSS"></a>前端预防XSS</h1><ul>
 <li>当然，如果还是担心，前端也可通过<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具</a>替换特殊字符，如<code>&lt;</code>变为<code>&amp;lt；</code> <code>&gt;</code>变为<code>&amp;gt</code>,<code>&lt;script&gt;</code>变为<code>&amp;lt；script&amp;gt；</code>直接显示，而<strong>不会作为脚本执行</strong></li>
-<li><strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83XSS%E6%94%BB%E5%87%BB">XSS网络攻击及防范</a>)</li>
+<li><strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83XSS%E6%94%BB%E5%87%BB">XSS网络攻击及防范</a>)</li>
 </ul>
 <h2 id="vue中使用XSS工具"><a href="#vue中使用XSS工具" class="headerlink" title="vue中使用XSS工具"></a>vue中使用XSS工具</h2><ul>
 <li>除了<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具官网</a>提供的使用方法，还可以通过<strong>覆盖html指令</strong>实现。引入组件<code>XSS</code>，在编译前将从<code>vue-loader</code>传入的<code>compilerOptions.directives</code>和<code>baseOptions.directives</code>进行了合并。<ul>

@@ -14,7 +14,7 @@
   <meta name="description" content="记录一些重要的知识点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端基础-HTTP&#x2F;HTML&#x2F;浏览器（2）">
-<meta property="og:url" content="http://yoursite.com/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="记录一些重要的知识点">
 <meta property="og:locale" content="zh_CN">
@@ -288,18 +288,18 @@
 </ul>
 </li>
 <li><strong>客户端</strong> 解析数据 渲染页面 断开连接：<ul>
-<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
-<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89">事件循环</a></li>
+<li><strong>构建DOM树：</strong>浏览器<strong>根据这个html来构建DOM树</strong>，在dom树的构建过程中如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止构建DOM树和css解析（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
+<li>js的解析涉及<strong>同步、异步（宏任务与微任务）</strong>，<a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#JS%E7%9A%84%E8%A7%A3%E6%9E%90%EF%BC%88%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%EF%BC%89">事件循环</a></li>
 </ul>
 </li>
 <li><strong>构建CSS对象模型树CSSOM树：</strong>解析html过程中遇到引入了css，则会在解析html的同时解析css，根据外部样式，内部样式，内联样式<strong>构建一个CSS对象模型树CSSOM树</strong></li>
 <li><strong>合并为渲染树：</strong> CSSOM树构建完成后<strong>CSSOM树和DOM树合并为渲染树</strong>，这里主要做的是排除非视觉节点，比如script，meta标签和排除display为none的节点。</li>
 <li>最后浏览器<strong>回流后将渲染树绘制到屏幕上显示</strong>。这个过程比较复杂，涉及到两个概念: <strong>reflow(回流)和repain(重绘)</strong><ul>
-<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98">回流</a>：</strong>会引起<strong>元素位置&#x2F;内容变化、布局、隐藏</strong>的就会**reflow(回流)**，如：窗口大小改变、字体大小改变、以及元素位置改变，都会引起周围的元素改变他们以前的位置。</li>
-<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98">重绘</a>：不会引起位置、布局变化，只是影响元素的外观的</strong>，比如改变背景颜色等，只会**repaint(重绘)**。</li>
+<li><strong><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98">回流</a>：</strong>会引起<strong>元素位置&#x2F;内容变化、布局、隐藏</strong>的就会**reflow(回流)**，如：窗口大小改变、字体大小改变、以及元素位置改变，都会引起周围的元素改变他们以前的位置。</li>
+<li><strong><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E6%B5%8F%E8%A7%88%E5%99%A8-reflow-%E5%9B%9E%E6%B5%81-%E5%92%8Crepain-%E9%87%8D%E7%BB%98">重绘</a>：不会引起位置、布局变化，只是影响元素的外观的</strong>，比如改变背景颜色等，只会**repaint(重绘)**。</li>
 </ul>
 </li>
-<li><strong>注意:<strong>在dom树的构建过程&#x2F;渲染树的</strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
+<li><strong>注意:<strong>在dom树的构建过程&#x2F;渲染树的</strong>渲染过程中</strong>如果<strong>遇到JS脚本和外部JS连接</strong>，则会<strong>停止渲染（因为JS有可能修改DOM结构，或者通过改变html元素的字体大小改变css的<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#viewport%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80">rem</a>）来执行和下载相应的代码</strong>，这会造成<strong>阻塞</strong>，这就是为什么<strong>推荐JS代码应该放在html代码的后面</strong>。<ul>
 <li>总结代码放置顺序：CSS HTML JS</li>
 </ul>
 </li>
@@ -364,7 +364,7 @@
 <hr>
 <h2 id="cookie如何防范XSS攻击"><a href="#cookie如何防范XSS攻击" class="headerlink" title="cookie如何防范XSS攻击"></a>cookie如何防范XSS攻击</h2><ul>
 <li>XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本</li>
-<li>在<strong>HTTP头部配上HttpOnly</strong>（后端通过<code>set-cookie:httponly</code>，前端通过<code>document.cookie = &quot;cookieName=cookieValue; HttpOnly&quot;;</code>这样设置），禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">博客项目登录（cookie）</a>）</li>
+<li>在<strong>HTTP头部配上HttpOnly</strong>（后端通过<code>set-cookie:httponly</code>，前端通过<code>document.cookie = &quot;cookieName=cookieValue; HttpOnly&quot;;</code>这样设置），禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">博客项目登录（cookie）</a>）</li>
 <li><strong>设置cookie的secure属性为<code>secure:true</code></strong>,告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
 </ul>
 <hr>
@@ -383,17 +383,17 @@
 </li>
 </ul>
 </li>
-<li><strong>XSS预防</strong> : <strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83XSS%E6%94%BB%E5%87%BB">XSS网络攻击及防范</a>)<ol>
+<li><strong>XSS预防</strong> : <strong>前端在显示时替换，后端在存储时替换</strong>，都做总不会有错(可参考<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#Cookie%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83XSS%E6%94%BB%E5%87%BB">XSS网络攻击及防范</a>)<ol>
 <li><strong>替换特殊字符</strong>，如<code>&lt;</code>变为<code>&amp;lt；</code> <code>&gt;</code>变为<code>&amp;gt</code>,<code>&lt;script&gt;</code>变为<code>&amp;lt；script&amp;gt；</code>直接显示，而<strong>不会作为脚本执行</strong>(实际工作中可使用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具</a>)<ul>
 <li>例子：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfwb4suzlej30oh05uaeb.jpg" alt="前端在显示时替换特殊字符"><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfwb58vn0lj30fa08bjt9.jpg" alt="显示效果">特殊字符在html中会<strong>被浏览器解析</strong>显示为相应的符号，<strong>故script以字符串形式显示，不会作为脚本执行</strong></li>
 </ul>
 </li>
-<li>在<strong>HTTP头部配上HttpOnly</strong>（后端通过<code>set-cookie:httponly</code>，前端通过<code>document.cookie = &quot;cookieName=cookieValue; HttpOnly&quot;;</code>这样设置）,禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">博客项目登录（cookie）</a>）</li>
+<li>在<strong>HTTP头部配上HttpOnly</strong>（后端通过<code>set-cookie:httponly</code>，前端通过<code>document.cookie = &quot;cookieName=cookieValue; HttpOnly&quot;;</code>这样设置）,禁止javascript脚本来访问cookie。严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。（在node中的设置方法可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">博客项目登录（cookie）</a>）</li>
 <li><strong>设置cookie的secure属性为<code>secure:true</code></strong>,告诉浏览器<strong>仅在请求为https的时候发送cookie</strong></li>
 </ol>
 </li>
 <li><strong>XSS工具</strong>：替换特殊字符可使用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/xss">XSS工具</a><ul>
-<li><strong>node使用XSS</strong>的方法可参考博客：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/03/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8/#xss%E6%94%BB%E5%87%BB%EF%BC%88xss%E5%BA%93%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89%EF%BC%89%EF%BC%89">博客项目安全</a></li>
+<li><strong>node使用XSS</strong>的方法可参考博客：<a href="https://huanglizhu.github.io/2020/03/03/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8/#xss%E6%94%BB%E5%87%BB%EF%BC%88xss%E5%BA%93%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89%EF%BC%89%EF%BC%89">博客项目安全</a></li>
 <li><strong>前端使用XSS</strong>的方法可参考官方例子：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfwbfb4srkj30u30al0u0.jpg" alt="参考官方例子"></li>
 </ul>
 </li>
@@ -489,14 +489,14 @@
 </ol>
 <hr>
 <h2 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h2><ol>
-<li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#session-%E4%BB%8B%E7%BB%8D">session</a><strong>数据放在</strong>服务器**上。（session可以存放于文件，数据库，内存中）</li>
+<li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，**<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#session-%E4%BB%8B%E7%BB%8D">session</a><strong>数据放在</strong>服务器**上。（session可以存放于文件，数据库，内存中）</li>
 <li><strong>cookie不是很安全</strong>，server端可以修改cookie并返回给浏览器，浏览器中也可以通过javascript修改cookie（有限制）。别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，<strong>考虑到安全应当使用session</strong>。server端放置信息不会被前端获取到，<strong>更安全</strong>。且server端空间大，<strong>可存储更多信息</strong>。</li>
 <li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用redis。</li>
 <li><strong>单个cookie</strong>保存的数据<strong>不能超过4K</strong>，很多浏览器都限制一个站点最多保存20个cookie。</li>
 <li>Cookie的最大的作用就是存储sessionId（或者userId、uId之类的，名字不一样，作用都一样）用来唯一标识用户。也可存放不敏感的信息，比如用户设置的<strong>网站主题、地区</strong>。</li>
 </ol>
 <h3 id="node操作cookie"><a href="#node操作cookie" class="headerlink" title="node操作cookie"></a>node操作cookie</h3><ul>
-<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E8%8E%B7%E5%8F%96cookie">博客项目登录（cookie）</a></li>
+<li>可参考<a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E8%8E%B7%E5%8F%96cookie">博客项目登录（cookie）</a></li>
 <li><strong>注意：</strong>当浏览器收到带有 Set-Cookie 头的 HTTP 响应时，它会将该 Cookie 存储在浏览器中。然后，<strong>对于同一域名和路径的后续请求，浏览器会自动在请求头中添加相应的 Cookie 信息</strong><ul>
 <li>前提：响应中的 Set-Cookie 头设置了有效的 Cookie 值和属性，例如名称、值、过期时间、路径等。</li>
 <li>一般会存一个uid：账号id，通过这个识别不同的用户发出的请求</li>
@@ -504,8 +504,8 @@
 </li>
 <li><strong>获取cookie：</strong>可通过<code>req.headers.cookie</code>获取到cookie <strong>（req是http请求）</strong></li>
 <li><strong>操作cookie：</strong> <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(`Set-Cookie`,`<span class="attribute">username</span>=<span class="variable">$&#123;data.username&#125;</span>; <span class="attribute">path</span>=/`);</span><br></pre></td></tr></table></figure></li>
-<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">设置httponly预防XSS攻击</a>：</strong><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(`Set-Cookie`,`httpOnly`)<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
-<li><strong><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E8%AE%BE%E7%BD%AEcookie%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4%EF%BC%88expires%EF%BC%89">设置cookie过期时间</a>：</strong>完整代码在“博客项目登录（cookie）”中<ol>
+<li><strong><a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E7%BB%99cookie%E5%81%9A%E9%99%90%E5%88%B6">设置httponly预防XSS攻击</a>：</strong><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(`Set-Cookie`,`httpOnly`)<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li><strong><a href="https://huanglizhu.github.io/2020/02/25/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88cookie%EF%BC%89/#%E8%AE%BE%E7%BD%AEcookie%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4%EF%BC%88expires%EF%BC%89">设置cookie过期时间</a>：</strong>完整代码在“博客项目登录（cookie）”中<ol>
 <li><code>const d = new Date();</code></li>
 <li><code>d.setTime(d.getTime()+(24*60*60*1000));</code>（<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/js/jsref_getTime.asp">getTime()</a>、<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/js/jsref_setTime.asp">setTime()</a>）</li>
 <li><code>d.toUTCString()</code>根据格林威治时间 (GMT) 把 Date 对象转换为字符串</li>
@@ -514,20 +514,20 @@
 </li>
 </ul>
 <h3 id="node操作session"><a href="#node操作session" class="headerlink" title="node操作session"></a>node操作session</h3><ul>
-<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#session-%E4%BB%8B%E7%BB%8D">博客项目登录（session、redis）</a></li>
+<li>可参考<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#session-%E4%BB%8B%E7%BB%8D">博客项目登录（session、redis）</a></li>
 <li>总的来说，从<code>req.headers.cookie</code>获取cookie后放入<code>req.cookie</code>，如无userId则按日期的毫秒数(<code>Date.now()</code>）和随机数(<code>Math.random()</code>)组成的userId放入cookie(注意Set-Cookie回给客户端)，创建全局变量SESSION_DATA，创建空对象<code>SESSION_DATA[userId]=&#123;&#125;</code>，最后把<code>req.session=SESSION_DATA[userId]</code>。接下来登录后把username等信息放入<code>req.session</code>中即存储成功。</li>
 <li><strong>koa2操作session：</strong><ul>
-<li>完整例子可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/12/redis%E3%80%81session%E4%B8%8Ejest%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#koa2%E4%BD%BF%E7%94%A8session">redis、session与jest基本使用方法</a></li>
+<li>完整例子可参考<a href="https://huanglizhu.github.io/2020/03/12/redis%E3%80%81session%E4%B8%8Ejest%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#koa2%E4%BD%BF%E7%94%A8session">redis、session与jest基本使用方法</a></li>
 <li><strong>与node的区别：</strong><ul>
 <li>使用插件后就<strong>不需要自己去创建cookie和session以及设置他们之间的联系</strong>了，插件配置好session和cookie相关信息后，<strong>每次发送http请求时会自动创建符合要求的cookie给服务端</strong>，服务端<strong>直接设置<code>ctx.session</code>来存储存储用户名和密码等信息</strong>即可。下次用户再访问网页时，服务端就可通过用户请求中的cookie值去获取session对象，进行判断<strong>（服务端不用自己管理cookie，直接用session即可）</strong>。</li>
 </ul>
 </li>
 <li>安装<strong>koa-generic-session插件</strong>：koa <strong>生成session</strong>的一个工具<ul>
-<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/07/koa2%E9%87%8D%E6%9E%84%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/#app-js%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6-%E9%85%8D%E7%BD%AEsession%E5%92%8Credis">session配置中</a>可以<strong>设置cookie相关字段</strong>，配置好后，每次用户发送http请求时，都会创建一个符合配置关键词前缀的cookie，根据用户请求中的cookie获取session数据</li>
+<li><a href="https://huanglizhu.github.io/2020/03/07/koa2%E9%87%8D%E6%9E%84%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE/#app-js%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6-%E9%85%8D%E7%BD%AEsession%E5%92%8Credis">session配置中</a>可以<strong>设置cookie相关字段</strong>，配置好后，每次用户发送http请求时，都会创建一个符合配置关键词前缀的cookie，根据用户请求中的cookie获取session数据</li>
 </ul>
 </li>
 <li>使用插件完成session配置后，可以从**<code>ctx.session</code>获取session**</li>
-<li><strong>流程：</strong>用户每次访问网页时就会创建一个 符合<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/03/12/redis%E3%80%81session%E4%B8%8Ejest%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#koa2%E4%BD%BF%E7%94%A8session">session配置中</a>前缀的cookie(cookie对象的属性值是session对象的对象名)，然后服务端会有一系列操作往session中存储用户名和密码等，那么下次用户再访问网页时，服务端就可通过用户请求中的cookie值去获取session对象，进行判断</li>
+<li><strong>流程：</strong>用户每次访问网页时就会创建一个 符合<a href="https://huanglizhu.github.io/2020/03/12/redis%E3%80%81session%E4%B8%8Ejest%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#koa2%E4%BD%BF%E7%94%A8session">session配置中</a>前缀的cookie(cookie对象的属性值是session对象的对象名)，然后服务端会有一系列操作往session中存储用户名和密码等，那么下次用户再访问网页时，服务端就可通过用户请求中的cookie值去获取session对象，进行判断</li>
 </ul>
 </li>
 </ul>
@@ -539,19 +539,19 @@
 </ol>
 <hr>
 <h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
-<li>可参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">JS 运行环境</a></li>
-<li><strong>加快请求速度</strong>：<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">web worker多线程</a>，react中<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%EF%BC%88%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%89">异步组件（懒加载）</a> <ol>
+<li>可参考<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">JS 运行环境</a></li>
+<li><strong>加快请求速度</strong>：<a href="https://huanglizhu.github.io/2020/04/04/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%883%EF%BC%89/#%E8%AF%B4%E4%B8%80%E4%B8%8Bweb-worker">web worker多线程</a>，react中<a href="https://huanglizhu.github.io/2020/04/14/React%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB%EF%BC%88%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89/#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%EF%BC%88%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%89">异步组件（懒加载）</a> <ol>
 <li><strong>减少资源体积：压缩代码</strong><ul>
 <li>比如使用<strong>webpack在production环境下</strong>进行打包时，就会<strong>自动压缩代码</strong>至1&#x2F;3的大小，在浏览器上进行反解析再进行渲染。</li>
 </ul>
 </li>
 <li><strong>减少访问次数</strong>：<ul>
-<li><a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#%E9%9B%AA%E7%A2%A7%E5%9B%BE">雪碧图</a></li>
+<li><a href="https://huanglizhu.github.io/2019/12/06/CSS%E9%9D%9E%E5%B8%83%E5%B1%80%E6%A0%B7%E5%BC%8F%EF%BC%9A%E8%83%8C%E6%99%AF/#%E9%9B%AA%E7%A2%A7%E5%9B%BE">雪碧图</a></li>
 <li><strong>合并代码</strong>：比如webpack中，在index.js中引入a.js、b.js，打包后只生成一个bundle.js，这就是合并代码。（加载3次3kb的文件不如加载1次9kb快，这<strong>和网络请求有关系</strong>）</li>
 <li><strong>SSR服务器端渲染</strong>：不需要通过ajax发送请求。</li>
 <li><strong>缓存</strong>：原本需要发送多个请求的数据直接在缓存中获取即可减少访问次数。<ul>
 <li>离线数据缓存localStorage。</li>
-<li><strong>尽量命中强缓存</strong>，结合<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E7%BC%93%E5%AD%98">webpack的内容哈希值输出文件名</a>，减少http请求。（具体见下方<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">“前端缓存最佳实践”</a>）</li>
+<li><strong>尽量命中强缓存</strong>，结合<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E7%BC%93%E5%AD%98">webpack的内容哈希值输出文件名</a>，减少http请求。（具体见下方<a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">“前端缓存最佳实践”</a>）</li>
 </ul>
 </li>
 </ul>
@@ -565,15 +565,15 @@
 </li>
 <li><strong>渲染</strong>：<ul>
 <li><strong>CSS放在head中，JS放在body最下面</strong></li>
-<li><strong>尽早开始执行JS</strong>，用<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#window-onload%E5%92%8CDOMContentLoaded">DOMContentLoaded</a>触发</li>
-<li>**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD">懒加载</a>**（图片懒加载，上滑加载更多）</li>
+<li><strong>尽早开始执行JS</strong>，用<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#window-onload%E5%92%8CDOMContentLoaded">DOMContentLoaded</a>触发</li>
+<li>**<a href="https://huanglizhu.github.io/2020/02/07/JS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/#%E5%9B%BE%E7%89%87%E7%9A%84%E6%87%92%E5%8A%A0%E8%BD%BD">懒加载</a>**（图片懒加载，上滑加载更多）</li>
 <li>对<strong>DOM查询进行缓存</strong>（DOM操作很耗性能）</li>
-<li>**频繁DOM操作，<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并</a>**到一起插入DOM结构</li>
-<li>让渲染更流畅：**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle">节流throttle</a> <a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce">防抖debounce</a>**</li>
+<li>**频繁DOM操作，<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并</a>**到一起插入DOM结构</li>
+<li>让渲染更流畅：**<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E8%8A%82%E6%B5%81-throttle">节流throttle</a> <a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E9%98%B2%E6%8A%96-debounce">防抖debounce</a>**</li>
 </ul>
 </li>
 <li><strong>减少回流、重绘：</strong><ul>
-<li>**<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并DOM操作</a>**：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
+<li>**<a href="https://huanglizhu.github.io/2020/04/04/JS%20%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/#%E5%A4%9A%E4%B8%AADOM%E6%93%8D%E4%BD%9C%E5%90%88%E5%B9%B6">合并DOM操作</a>**：比如我们要向页面添加多个img元素，如果单独加进去就会频繁的回流+重绘，此时我们就可以使用<code>document.createDocumentFragment()</code>将多个img合并到Fragment中再统一加入。</li>
 <li><strong>避免频繁读取会引发回流&#x2F;重绘的属性(见上)<strong>，如果确实需要多次使用，就用一个</strong>变量缓存</strong>起来。</li>
 <li>将动画效果应用到position属性为absolute或fixed的元素上，对具有<strong>复杂动画的元素</strong>使用<strong>绝对定位</strong>，使它<strong>脱离文档流</strong>，否则会引起父元素及后续元素频繁回流。</li>
 </ul>

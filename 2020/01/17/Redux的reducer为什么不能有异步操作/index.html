@@ -14,7 +14,7 @@
   <meta name="description" content="回顾Redux设计和使用的三大基本原则可参考笔记Redux入门（2）：  单一数据源，也就是store中的state是唯一的 state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：只有store能改变自己的state) reducer必须是纯函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux的reducer为什么不能有异步操作">
-<meta property="og:url" content="http://yoursite.com/2020/01/17/Redux%E7%9A%84reducer%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%89%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2020/01/17/Redux%E7%9A%84reducer%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%9C%89%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="回顾Redux设计和使用的三大基本原则可参考笔记Redux入门（2）：  单一数据源，也就是store中的state是唯一的 state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：只有store能改变自己的state) reducer必须是纯函数">
 <meta property="og:locale" content="zh_CN">
@@ -165,7 +165,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="回顾Redux设计和使用的三大基本原则"><a href="#回顾Redux设计和使用的三大基本原则" class="headerlink" title="回顾Redux设计和使用的三大基本原则"></a>回顾Redux设计和使用的三大基本原则</h1><p>可参考笔记<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#Redux%E8%AE%BE%E8%AE%A1%E5%92%8C%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99">Redux入门（2）</a>：</p>
+        <h1 id="回顾Redux设计和使用的三大基本原则"><a href="#回顾Redux设计和使用的三大基本原则" class="headerlink" title="回顾Redux设计和使用的三大基本原则"></a>回顾Redux设计和使用的三大基本原则</h1><p>可参考笔记<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#Redux%E8%AE%BE%E8%AE%A1%E5%92%8C%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99">Redux入门（2）</a>：</p>
 <ol>
 <li><strong>单一数据源</strong>，也就是store中的<strong>state是唯一的</strong></li>
 <li>state 是只读，Redux并没有暴露出直接修改state的接口，必须通过action来触发修改(即：<strong>只有store能改变自己的state</strong>)</li>
@@ -175,7 +175,7 @@
 <hr>
 <h1 id="Redux的设计初衷"><a href="#Redux的设计初衷" class="headerlink" title="Redux的设计初衷"></a>Redux的设计初衷</h1><p>先从Redux的设计层面来解释为什么Reducer必须是纯函数。</p>
 <p>Redux的设计参考了Flux的模式，作者希望以此来实现时间旅行，<strong>保存应用的历史状态，实现应用状态的可预测</strong>。所以整个Redux都是函数式编程的范式，要求reducer是纯函数也是自然而然的事情，<strong>使用纯函数才能保证相同的输入得到相同的输入，保证状态的可预测</strong>。</p>
-<p>不是纯函数的例子可以参考<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#reducer%E5%BF%85%E9%A1%BB%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0">Redux入门（2）中的例子</a>。</p>
+<p>不是纯函数的例子可以参考<a href="https://huanglizhu.github.io/2020/02/13/Redux%E5%85%A5%E9%97%A8%EF%BC%882%EF%BC%89/#reducer%E5%BF%85%E9%A1%BB%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0">Redux入门（2）中的例子</a>。</p>
 <hr>
 <h1 id="Redux的源码"><a href="#Redux的源码" class="headerlink" title="Redux的源码"></a>Redux的源码</h1><p>那么reducer到底干了件什么事，在Redux的源码中只用了一行来表示：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">currentState</span> = currentReducer(currentState, action)</span><br></pre></td></tr></table></figure>
@@ -228,11 +228,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/18/JS%E7%AC%94%E8%AF%95%E9%A2%98%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%883%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/18/JS%E7%AC%94%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          JS笔试遇到的知识点（3）
+          JS笔试遇到的知识点（2）
         
       </div>
     </a>

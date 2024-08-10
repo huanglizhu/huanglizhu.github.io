@@ -14,7 +14,7 @@
   <meta name="description" content="接着《ES6 Promise（1）》继续学习Promise">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6 Promise（2）">
-<meta property="og:url" content="http://yoursite.com/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:url" content="https://huanglizhu.github.io/2019/12/07/ES6%20Promise%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="接着《ES6 Promise（1）》继续学习Promise">
 <meta property="og:locale" content="zh_CN">
@@ -172,7 +172,7 @@
 <span id="more"></span>
 
 <h1 id="信任问题"><a href="#信任问题" class="headerlink" title="信任问题"></a>信任问题</h1><p><strong>回调函数信任问题：</strong><br>在使用传统的回调函数来处理异步操作时，存在信任问题。<br>因为在一些情况下，可能无法确保回调函数会被及时调用，或者根本不会被调用。<br>例如，在一个异步请求完成后，如果网络出现问题或其他错误，回调函数可能永远不会被调用，导致无法得知异步操作的结果。这会使代码变得难以理解和维护。</p>
-<p><strong>结合笔记“ES6 Promise（1）”中<a target="_blank" rel="noopener" href="https://huanglizhu.github.io/2019/12/06/ES6%20Promise%EF%BC%881%EF%BC%89/#%E4%BD%BF%E7%94%A8Promise%E5%AE%9E%E7%8E%B0%E5%B9%B3%E7%A7%BB%E5%8A%A8%E7%94%BB">“回调函数和promise实现平移动画”</a>的例子来看。使用Promise不仅是解决了回调函数层层嵌套的问题，更多的是解决了“信任问题”，不交由第三方库，直接自己控制流程。</strong></p>
+<p><strong>结合笔记“ES6 Promise（1）”中<a href="https://huanglizhu.github.io/2019/12/06/ES6%20Promise%EF%BC%881%EF%BC%89/#%E4%BD%BF%E7%94%A8Promise%E5%AE%9E%E7%8E%B0%E5%B9%B3%E7%A7%BB%E5%8A%A8%E7%94%BB">“回调函数和promise实现平移动画”</a>的例子来看。使用Promise不仅是解决了回调函数层层嵌套的问题，更多的是解决了“信任问题”，不交由第三方库，直接自己控制流程。</strong></p>
 <p><strong>回调函数：</strong><br>假设我们将回调函数cb传给<strong>第三方库method</strong>，那么由于种种原因我们并不能保证这个第三方库安装我们的预想去执行回调，它<strong>有可能 快了一些&#x2F;慢了一些&#x2F;因为bug执行了两次cb函数</strong>。<br>这导致了回调函数信任问题的一个方面：在异步代码中，对于回调的执行时机和正确性，我们需要信任所使用的库或函数</p>
 <p><strong>使用Promise：</strong><br>Promise 可以将控制权从第三方库转移到我们自己的代码中，可以在 <code>.then()</code> 或 <code>.catch()</code> 方法中定义回调函数，而不用担心第三方库是否会正确调用这些回调。Promise 提供了一种更可靠的方式来处理异步操作，避免了信任问题<br>Promise状态一旦改变为 成功&#x2F;失败 就不能再被改变，所以传进去的函数不会被重复执行：<br><img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gbz8bylgj6j30ln0ji12x.jpg" alt="回调和promise对比"></p>
 <h2 id="控制反转"><a href="#控制反转" class="headerlink" title="控制反转"></a>控制反转</h2><p><strong>控制反转：</strong><br>控制反转是一种设计模式，它强调将决策权从代码的一部分转移到另一部分。<br><strong>Promise 使用控制反转来解决回调函数信任问题</strong><br><strong>Promise 将决定什么时候调用回调函数，而不是由我们的代码来决定</strong> 。当异步操作完成时，Promise 决定调用 <code>.then()</code> 或 <code>.catch()</code> 方法中的回调函数。<br>这种控制权的转移使得代码更可靠、更易于管理，并提供了一种更为结构化的处理异步操作的方式</p>
