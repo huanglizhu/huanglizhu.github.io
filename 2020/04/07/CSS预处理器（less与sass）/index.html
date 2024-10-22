@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggw7s5xm4tj30nk0f47h2.jpg">
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggw7x8weuhj314809e400.jpg">
 <meta property="article:published_time" content="2020-04-07T05:32:52.000Z">
-<meta property="article:modified_time" content="2024-08-08T07:32:08.275Z">
+<meta property="article:modified_time" content="2024-10-22T03:02:23.096Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
@@ -262,6 +262,212 @@
 <li><strong>sass</strong>：<img src="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1ggrjw66q4xj30ik0353z8.jpg" alt="sass变量和计算">语法不同，例子和结果除了空行上的区别，其他是没有区别的（background的函数也是相同的）</li>
 </ul>
 <hr>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="原生函数"><a href="#原生函数" class="headerlink" title="原生函数"></a>原生函数</h3><ul>
+<li>内置的函数可用于处理颜色、字符串、列表、数学运算等</li>
+</ul>
+<ol>
+<li><strong>颜色处理函数</strong><br>颜色操作是 Less 和 SCSS 中最常用的功能之一，两者的基本函数较为相似。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Less</th>
+<th>SCSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>变浅 (lighten)</td>
+<td><code>lighten(@color, 10%)</code></td>
+<td><code>lighten($color, 10%)</code></td>
+</tr>
+<tr>
+<td>变深 (darken)</td>
+<td><code>darken(@color, 10%)</code></td>
+<td><code>darken($color, 10%)</code></td>
+</tr>
+<tr>
+<td>增加饱和度 (saturate)</td>
+<td><code>saturate(@color, 10%)</code></td>
+<td><code>saturate($color, 10%)</code></td>
+</tr>
+<tr>
+<td>降低饱和度 (desaturate)</td>
+<td><code>desaturate(@color, 10%)</code></td>
+<td><code>desaturate($color, 10%)</code></td>
+</tr>
+<tr>
+<td>增加透明度，使元素更透明</td>
+<td><code>fadeout(@color, @amount)</code></td>
+<td><code>transparentize($color, $amount)</code>  <br>或 <code>fade-out($color, $amount)</code></td>
+</tr>
+<tr>
+<td>减少透明度 (fade)使元素更不透明</td>
+<td><code>fade(@color, 50%)</code></td>
+<td><code>rgba($color, 0.5)</code> 或 <code>fade-in($color, 50%)</code></td>
+</tr>
+<tr>
+<td>设定透明度 (fade-in)</td>
+<td>不支持，使用 <code>fade(@color)</code></td>
+<td><code>fade-in($color, 50%)</code></td>
+</tr>
+<tr>
+<td>提取透明度 (alpha)</td>
+<td><code>fade(@color)</code></td>
+<td><code>alpha($color)</code></td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>：Less 的 <code>fade</code> 函数用于设置透明度，而 <strong>SCSS</strong> 使用 <code>rgba</code> 来处理透明度，同时也提供 <code>fade-in</code> 和 <code>fade-out</code>。</p>
+<ol start="2">
+<li><strong>数学函数</strong><br>数学函数在 <strong>Less</strong> 和 <strong>SCSS</strong> 中都有，但是它们的使用方式几乎相同。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Less</th>
+<th>SCSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绝对值 (abs)</td>
+<td><code>abs(@number)</code></td>
+<td><code>abs($number)</code></td>
+</tr>
+<tr>
+<td>四舍五入</td>
+<td><code>round(@number)</code></td>
+<td><code>round($number)</code></td>
+</tr>
+<tr>
+<td>向上取整</td>
+<td><code>ceil(@number)</code></td>
+<td><code>ceil($number)</code></td>
+</tr>
+<tr>
+<td>向下取整</td>
+<td><code>floor(@number)</code></td>
+<td><code>floor($number)</code></td>
+</tr>
+<tr>
+<td>百分比转换</td>
+<td><code>percentage(@number)</code></td>
+<td><code>percentage($number)</code></td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li><strong>字符串函数</strong></li>
+</ol>
+<p>字符串函数在 <strong>SCSS</strong> 中更为丰富，<strong>Less</strong> 则较少使用字符串操作函数。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Less</th>
+<th>SCSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>转换为小写 (to-lower-case)</td>
+<td>不支持</td>
+<td><code>to-lower-case($string)</code></td>
+</tr>
+<tr>
+<td>转换为大写 (to-upper-case)</td>
+<td>不支持</td>
+<td><code>to-upper-case($string)</code></td>
+</tr>
+<tr>
+<td>字符串插入 (str-insert)</td>
+<td>不支持</td>
+<td><code>str-insert($string, $insert, $index)</code></td>
+</tr>
+<tr>
+<td>字符串长度 (str-length)</td>
+<td>不支持</td>
+<td><code>str-length($string)</code></td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><strong>列表函数</strong></li>
+</ol>
+<p>在处理列表时，<strong>SCSS</strong> 提供了更多的内置函数来操作列表，而 <strong>Less</strong> 的支持相对较弱。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Less</th>
+<th>SCSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>列表长度 (length)</td>
+<td><code>length(@list)</code></td>
+<td><code>length($list)</code></td>
+</tr>
+<tr>
+<td>获取列表中的某个元素 (nth)</td>
+<td><code>nth(@list, 2)</code></td>
+<td><code>nth($list, 2)</code></td>
+</tr>
+<tr>
+<td>合并列表 (append)</td>
+<td>不支持</td>
+<td><code>append($list, $val)</code></td>
+</tr>
+</tbody></table>
+<ol start="5">
+<li><strong>类型检查</strong></li>
+</ol>
+<p>在 <strong>SCSS</strong> 中，类型检查函数很常用，而 <strong>Less</strong> 中则不常见。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Less</th>
+<th>SCSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否为数字 (isnumber)</td>
+<td>不支持</td>
+<td><code>type-of($value) == &#39;number&#39;</code></td>
+</tr>
+<tr>
+<td>是否为颜色 (iscolor)</td>
+<td>不支持</td>
+<td><code>type-of($value) == &#39;color&#39;</code></td>
+</tr>
+<tr>
+<td>是否为字符串 (isstring)</td>
+<td>不支持</td>
+<td><code>type-of($value) == &#39;string&#39;</code></td>
+</tr>
+</tbody></table>
+<ol start="6">
+<li><strong>透明度和颜色通道</strong></li>
+</ol>
+<p>SCSS 提供了更多控制颜色通道的函数，例如 <code>red()</code>, <code>green()</code>, <code>blue()</code>, <code>opacity()</code> 等，而 Less 对这类细粒度操作的支持较少。</p>
+<ul>
+<li><p><strong>总结：</strong></p>
+<ul>
+<li><p><strong>基本功能</strong>：对于常见的颜色处理和数学运算，Less 和 SCSS 提供的函数是非常相似的，例如 <code>lighten</code>、<code>darken</code>、<code>abs</code>、<code>round</code> 等函数。</p>
+</li>
+<li><p><strong>高级功能</strong>：<strong>SCSS</strong> 提供更多高级功能，如字符串操作、列表操作和类型检查函数。如果你需要处理这些场景，SCSS 提供的原生函数更为强大。</p>
+</li>
+<li><p><strong>Less</strong> 更简单直观，而 <strong>SCSS</strong> 功能更丰富，适合复杂的样式逻辑和需要更多自定义处理的项目。</p>
+</li>
+</ul>
+<p>  可以根据项目的复杂度选择适合的预处理器，同时也可以通过自定义函数扩展其功能。</p>
+</li>
+</ul>
+<hr>
+<h3 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h3><ul>
+<li><strong>SCSS</strong> 原生支持自定义函数，而 <strong>Less</strong> 则通过 JavaScript 插件机制实现自定义函数。</li>
+<li><strong>SCSS</strong> 自定义函数示例：<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@function</span> calculate-margin(<span class="variable">$padding</span>, <span class="variable">$border</span>) &#123;</span><br><span class="line">  <span class="keyword">@return</span> <span class="variable">$padding</span> + <span class="variable">$border</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$padding</span>: <span class="number">10px</span>;</span><br><span class="line"><span class="variable">$border</span>: <span class="number">2px</span>;</span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="built_in">calculate-margin</span>(<span class="variable">$padding</span>, <span class="variable">$border</span>); <span class="comment">// 输出 12px</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>Less</strong> 自定义函数示例 <strong>（通过 JavaScript 插件）</strong>：<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@base-color:</span> <span class="number">#3498db</span>;</span><br><span class="line"><span class="selector-class">.custom-size</span> &#123;</span><br><span class="line">  <span class="comment">// 使用 JavaScript 自定义的 double 函数</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">double</span>(<span class="number">10px</span>); <span class="comment">// 输出 20px</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
 <h2 id="mixin-复用CSS代码"><a href="#mixin-复用CSS代码" class="headerlink" title="mixin 复用CSS代码"></a>mixin 复用CSS代码</h2><ul>
 <li><strong>mixin：</strong>实现一大段CSS代码的复用（以前只能在HTML中实现），相当于将一段CSS代码<strong>复制</strong>到调用mixin的地方。</li>
 <li><strong>less：</strong><ul>
@@ -482,7 +688,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">CSS预处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less%E4%B8%8Esass-%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">less与sass 对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97"><span class="nav-number">2.3.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">2.4.</span> <span class="nav-text">变量和计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixin-%E5%A4%8D%E7%94%A8CSS%E4%BB%A3%E7%A0%81"><span class="nav-number">2.5.</span> <span class="nav-text">mixin 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend-%E5%A4%8D%E7%94%A8CSS%E4%BB%A3%E7%A0%81"><span class="nav-number">2.6.</span> <span class="nav-text">extend 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.7.</span> <span class="nav-text">loop 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import-CSS%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">2.8.</span> <span class="nav-text">import CSS模块化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8stylus"><span class="nav-number">3.</span> <span class="nav-text">预处理器stylus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">预处理器框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EST"><span class="nav-number">4.1.</span> <span class="nav-text">EST</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text">常见的CSS预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">预处理器的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">5.3.</span> <span class="nav-text">预处理器的能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">5.4.</span> <span class="nav-text">预处理器的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E5%90%97"><span class="nav-number">5.5.</span> <span class="nav-text">推荐使用预处理器吗</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">CSS预处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less%E4%B8%8Esass-%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">less与sass 对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97"><span class="nav-number">2.3.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">2.4.</span> <span class="nav-text">变量和计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">2.5.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E5%87%BD%E6%95%B0"><span class="nav-number">2.5.1.</span> <span class="nav-text">原生函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.5.2.</span> <span class="nav-text">自定义函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixin-%E5%A4%8D%E7%94%A8CSS%E4%BB%A3%E7%A0%81"><span class="nav-number">2.6.</span> <span class="nav-text">mixin 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend-%E5%A4%8D%E7%94%A8CSS%E4%BB%A3%E7%A0%81"><span class="nav-number">2.7.</span> <span class="nav-text">extend 复用CSS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.8.</span> <span class="nav-text">loop 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import-CSS%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">2.9.</span> <span class="nav-text">import CSS模块化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8stylus"><span class="nav-number">3.</span> <span class="nav-text">预处理器stylus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">预处理器框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EST"><span class="nav-number">4.1.</span> <span class="nav-text">EST</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text">常见的CSS预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">预处理器的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">5.3.</span> <span class="nav-text">预处理器的能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">5.4.</span> <span class="nav-text">预处理器的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E5%90%97"><span class="nav-number">5.5.</span> <span class="nav-text">推荐使用预处理器吗</span></a></li></ol></li></ol>
     
     </div>
   </aside>
