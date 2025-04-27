@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gfgaikdwasj30kv0i112g.jpg">
 <meta property="og:image" content="https://i0.wp.com/ww1.sinaimg.cn/large/005H7IVsgy1gkup59bjmvj30u009igmt.jpg">
 <meta property="article:published_time" content="2020-04-03T04:29:23.000Z">
-<meta property="article:modified_time" content="2024-08-29T12:07:01.243Z">
+<meta property="article:modified_time" content="2025-04-27T06:31:02.563Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
@@ -428,9 +428,7 @@
 <hr>
 <h3 id="cookie、sessionStorage、localStorage区别"><a href="#cookie、sessionStorage、localStorage区别" class="headerlink" title="cookie、sessionStorage、localStorage区别"></a>cookie、sessionStorage、localStorage区别</h3><ul>
 <li><strong>共同点</strong>：都<strong>保存在浏览器端</strong>。</li>
-<li><strong>区别：</strong></li>
-</ul>
-<ol>
+<li><strong>区别：</strong><ol>
 <li><strong>生命周期</strong>：<ul>
 <li>Cookie：<strong>设置的cookie过期时间之前一直有效</strong>，即使窗口或浏览器关闭。未设置则<strong>默认为关闭浏览器后失效</strong>。(<strong>不是浏览器标签页</strong>，而是整个浏览器)</li>
 <li>Localstorage:除非被手动清除，否则<strong>永久保存</strong>，窗口或浏览器关闭也一直保存，因此<strong>用作持久数据</strong>。</li>
@@ -468,9 +466,20 @@
 </ul>
 </li>
 <li><strong>作用域：</strong><ul>
-<li>cookie和localStorage：在<strong>同一个浏览器窗口所有同源窗口</strong>中都是共享的</li>
-<li>sessionStorage：在<strong>同一个浏览器窗口</strong>是共享的（不同浏览器、同一个页面也是不共享的）</li>
-<li>关于<strong>同源</strong>可参考<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">阮一峰</a>，简单来说就是A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。所谓**”同源”指的是”三个相同”**。<ol>
+<li>每个浏览器都会维护自己的存储空间，不会共享</li>
+<li>cookie和localStorage：在<strong>同一个浏览器窗口所有同源窗口</strong>中都是共享的<ul>
+<li><strong>跨域共享：</strong><ul>
+<li>cookie 可以通过设置[[ <strong>Domian 属性</strong><a href="https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#cookie%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE]]%E6%8C%87%E5%AE%9A%E5%9C%A8%E5%93%AA%E4%BA%9B%E5%9F%9F%E4%B9%8B%E9%97%B4%E5%85%B1%E4%BA%AB%EF%BC%88%E5%90%8C%E4%B8%80%E5%9F%9F%E5%92%8C**%E5%AD%90%E5%9F%9F**%EF%BC%89">https://huanglizhu.github.io/2020/04/03/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-HTTP%20HTML%20%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%882%EF%BC%89/#cookie%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE]]指定在哪些域之间共享（同一域和**子域**）</a></li>
+<li>sessionStorage &#x2F; localStorage 要跨域则要使用特定的跨域策略，如跨域存储技术&#x2F;<code>document.domiain</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sessionStorage：在<strong>同一个浏览器页签访问同源页面</strong>是共享的（同一浏览器同源两个页签之间也不共享）<ul>
+<li>比如访问<code>www.example.com/home</code>然后跳转<code>www.example.com/rule</code>，他俩是共享的</li>
+</ul>
+</li>
+<li>关于<strong>同源</strong>可参考<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">阮一峰</a>，简单来说就是A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。所谓 <strong>“同源”指的是”三个相同”</strong><ol>
 <li><strong>协议</strong>相同</li>
 <li><strong>域名</strong>相同</li>
 <li><strong>端口</strong>相同</li>
@@ -483,10 +492,11 @@
 <li><code>http://www.example.com:81/dir/other.html</code>：不同源（端口不同）</li>
 </ol>
 </li>
-<li>每个浏览器都会维护自己的存储空间，不会共享</li>
 </ul>
 </li>
 </ol>
+</li>
+</ul>
 <hr>
 <h2 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h2><ol>
 <li><strong>cookie数据</strong>存放在客户的<strong>浏览器</strong>上，**<a href="https://huanglizhu.github.io/2020/02/26/%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%E7%99%BB%E5%BD%95%EF%BC%88session%E3%80%81redis%EF%BC%89/#session-%E4%BB%8B%E7%BB%8D">session</a><strong>数据放在</strong>服务器**上。（session可以存放于文件，数据库，内存中）</li>
