@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>rem计算与渲染顺序 页面初次渲染宽度异常 | 珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="前端,程序员,软件开发,面试,CSS,JavaScript,JS,ES6,HTML,Node.js,React,Vue" />
+  
+  
+  
+  
+  <meta name="description" content="记录一个app内嵌h5页面初始加载卡顿时偶现的渲染问题（页面由窄变宽），主要是rem计算和页面渲染顺序导致的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rem计算与渲染顺序 页面初次渲染宽度异常">
+<meta property="og:url" content="https://huanglizhu.github.io/2025/12/09/rem%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B8%B2%E6%9F%93%E9%A1%BA%E5%BA%8F%20%E9%A1%B5%E9%9D%A2%E5%88%9D%E6%AC%A1%E6%B8%B2%E6%9F%93%E5%AE%BD%E5%BA%A6%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="珠">
+<meta property="og:description" content="记录一个app内嵌h5页面初始加载卡顿时偶现的渲染问题（页面由窄变宽），主要是rem计算和页面渲染顺序导致的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huanglizhu.github.io/images/Pasted%20image%2020251209151606.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/img_v3_02sq_160596ab-1ded-47a9-8d53-797a6475d4cg.jpg">
+<meta property="article:published_time" content="2025-12-09T07:18:52.000Z">
+<meta property="article:modified_time" content="2025-12-11T02:50:42.486Z">
+<meta property="article:author" content="黄丽珠">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huanglizhu.github.io/images/Pasted%20image%2020251209151606.png">
+  
+    <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/sx.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+        <header id="allheader" class="site-header" role="banner"  >
+                <div class="clearfix container">
+                    <div class="site-branding">
+
+                        <h1 class="site-title">
+                            
+                                    <a href="/" title="珠" rel="home">
+                                        珠
+                                    </a>
+                                    
+                        </h1>
+
+                        
+                            <div class="site-description">
+                                Record every bit of front-end learning.
+                            </div>
+                            
+
+                                <nav id="main-navigation" class="main-navigation" role="navigation">
+                                    <a class="nav-open">Menu</a>
+                                    <a class="nav-close">Close</a>
+
+                                    <div class="clearfix sf-menu">
+                                        <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                                            
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/">
+                                                        主页
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/archives">
+                                                        归档
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/categories">
+                                                        分类
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/tags">
+                                                        标签
+                                                    </a>
+                                                </li>
+                                                
+                                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663">
+                                                    <a class="" href="/about">
+                                                        关于
+                                                    </a>
+                                                </li>
+                                                
+                                        </ul>
+                                    </div>
+                                </nav>
+
+                    </div>
+                </div>
+        </header>
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-rem计算与渲染顺序 页面初次渲染宽度异常" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      rem计算与渲染顺序 页面初次渲染宽度异常
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2025/12/09/rem%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B8%B2%E6%9F%93%E9%A1%BA%E5%BA%8F%20%E9%A1%B5%E9%9D%A2%E5%88%9D%E6%AC%A1%E6%B8%B2%E6%9F%93%E5%AE%BD%E5%BA%A6%E5%BC%82%E5%B8%B8/" class="article-date">
+	  <time datetime="2025-12-09T07:18:52.000Z" itemprop="datePublished">十二月 9, 2025</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录一个app内嵌h5页面初始加载卡顿时偶现的渲染问题（页面由窄变宽），主要是rem计算和页面渲染顺序导致的</p>
+<span id="more"></span>
+
+<h1 id="补充老blog"><a href="#补充老blog" class="headerlink" title="补充老blog"></a>补充老blog</h1><p><a href="https://huanglizhu.github.io/2019/09/27/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88/#%E8%BE%B9%E8%A7%A3%E6%9E%90%E8%BE%B9%E6%B8%B2%E6%9F%93">从输入url到页面显示都经历了什么 | 珠</a>这里需要把 <strong><code>&lt;script&gt;</code></strong> 是否暂停渲染改改，是有的会阻塞渲染有的不会，分情况的</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><ul>
+<li><strong>已知前提：</strong> vue3项目，页面通过webview内嵌于app中，头部和足部都是终端控制，中间部分是h5页面内容</li>
+<li><strong>问题场景：</strong> 网络卡顿情况下，偶现的概率灰出现加载页面过程中先展示灰色窄长条然后才展示正常宽度<br><img src="/../images/Pasted%20image%2020251209151606.png" alt="异常与正常页面差异图"></li>
+</ul>
+<h1 id="原因猜想"><a href="#原因猜想" class="headerlink" title="原因猜想"></a>原因猜想</h1><ul>
+<li>这种窄条的样子倒是和设备宽度极大（远超过移动端设备宽度）的样子有点像，大概率是rem计算的问题</li>
+</ul>
+<h1 id="关键-：script-的阻塞与并行区别"><a href="#关键-：script-的阻塞与并行区别" class="headerlink" title="关键 ：script 的阻塞与并行区别"></a>关键 ：script 的阻塞与并行区别</h1><ul>
+<li><strong>问题的根源就在于 HTML&#x2F;CSS 解析 与 JS执行 的顺序并不只受到先后顺序影响， <code>&lt;script type=&quot;module&quot;&gt;</code>（等价于<code>&lt;script defer&gt;</code>）不阻塞 HTML &#x2F; CSS 解析</strong>，  导致浏览器在执行 <code>setRem()</code> 之前，  <strong>HTML 和 CSS 就可能已经解析并开始参与页面渲染了</strong> <ul>
+<li>所以问题出在这：<ul>
+<li><strong>看起来顺序：</strong>  <code>index.html</code>的<code>id=&quot;app&quot;</code> 元素 初始化 -&gt;  <code>main.ts</code> 先<code>setRem</code>再挂载<code>App.vue</code> 相关 CSS 样式（<code>html, body, #app</code>样式）</li>
+<li><strong>实际顺序：</strong> 拼接一起以后的执行顺序是 <code>解析 HTML 构建 DOM 树 -&gt; 加载 CSS 构建 CSS对象模型 -&gt; 合成 渲染树 绘制到屏幕上 -&gt; 渲染中遇到 JS 停止渲染去加载 JS</code> <ul>
+<li>也就是说实际上<code>App.vue</code>里的样式在<code>main.ts</code>里<code>setRem</code>执行前就有概率先渲染了，导致<code>rem</code>还是默认值16px</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需要做的是把<code>script</code>中关于<code>rem</code>计算的写成阻塞页面渲染的<code>&lt;script&gt;</code>，确保这段 JS 计算优先于初始的页面渲染</li>
+</ul>
+<h1 id="需要知道"><a href="#需要知道" class="headerlink" title="需要知道"></a>需要知道</h1><h3 id="浏览器的加载顺序（简化版）"><a href="#浏览器的加载顺序（简化版）" class="headerlink" title="浏览器的加载顺序（简化版）"></a>浏览器的加载顺序（简化版）</h3><ol>
+<li><strong>解析 HTML</strong> → 构建 DOM 树</li>
+<li><strong>遇到 <code>&lt;link&gt;</code>、<code>&lt;style&gt;</code></strong> → 构建 CSSOM（CSS 对象模型）</li>
+<li><strong>DOM + CSSOM 合成渲染树</strong> → 绘制到屏幕上</li>
+<li><strong>遇到 <code>&lt;script&gt;</code></strong><ul>
+<li><code>defer</code> &#x2F; <code>async</code> &#x2F; <code>type=&quot;module&quot;</code> →  并行 HTML 解析 、加载 &amp; 执行 JS </li>
+<li>普通<code>&lt;script&gt;</code>(非 <code>defer</code> &#x2F; <code>async</code>)  →  暂停解析 HTML → 加载 &amp; 执行 JS → 继续解析</li>
+</ul>
+</li>
+</ol>
+<h3 id="浏览器的加载与渲染是“并行-阻塞”的关系"><a href="#浏览器的加载与渲染是“并行-阻塞”的关系" class="headerlink" title="浏览器的加载与渲染是“并行 + 阻塞”的关系"></a>浏览器的加载与渲染是“并行 + 阻塞”的关系</h3><p>浏览器在遇到不同资源时，会做不同的处理：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>行为</th>
+<th>是否阻塞 HTML 解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;link rel=&quot;stylesheet&quot;&gt;</code></td>
+<td>异步加载，但在渲染前必须等 CSSOM 构建完成</td>
+<td>✅ 阻塞渲染（Render Blocker）</td>
+</tr>
+<tr>
+<td><code>&lt;script&gt;</code>（无 <code>defer</code> &#x2F; <code>async</code>）</td>
+<td>停止 HTML &#x2F; CSS 解析，立即加载并执行 JS</td>
+<td>✅ 阻塞解析（Parse Blocker）与渲染</td>
+</tr>
+<tr>
+<td><code>&lt;script defer&gt;</code></td>
+<td>等 DOM 解析完再执行 JS</td>
+<td>❌ 不阻塞</td>
+</tr>
+<tr>
+<td><code>&lt;script async&gt;</code></td>
+<td>加载完成就立即执行 JS，时机不确定</td>
+<td>❌ 不阻塞</td>
+</tr>
+<tr>
+<td><code>&lt;script type=&quot;module&quot;&gt;</code></td>
+<td>类似<code>defer</code></td>
+<td>❌ 不阻塞</td>
+</tr>
+</tbody></table>
+<h1 id="问题代码"><a href="#问题代码" class="headerlink" title="问题代码"></a>问题代码</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>/&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;/favicon.ico&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/svg+xml&quot;</span>/&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;</span>/&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/src/main.ts&quot;</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span>; <span class="comment">// 👈 这里执行时，App.vue 的样式就已注入 &lt;style&gt;</span></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="title function_">setRem</span>(); <span class="comment">// 👈 这里先计算 rem</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>); <span class="comment">// &lt;-- 1. 创建应用实例</span></span><br><span class="line">app.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>); <span class="comment">// // &lt;-- 2. 挂载应用（这一步非常关键）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// App.vue</span><br><span class="line">&lt;style lang=&quot;scss&quot; &gt;</span><br><span class="line">	html,  </span><br><span class="line">	body &#123;</span><br><span class="line">		background: #000;</span><br><span class="line">	&#125;</span><br><span class="line">	#app &#123;  </span><br><span class="line">		margin: 0 auto; </span><br><span class="line">		min-height: 100vh;  </span><br><span class="line">		width: 7.5rem;  </span><br><span class="line">		background-size: 100%;  </span><br><span class="line">		background: #F5F5F5;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="问题产生的流程概述"><a href="#问题产生的流程概述" class="headerlink" title="问题产生的流程概述"></a>问题产生的流程概述</h1><ul>
+<li>需要知道的完整启动过程:<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ index.html 解析阶段</span><br><span class="line"><span class="code">	↓</span></span><br><span class="line"><span class="code">   浏览器开始解析 HTML</span></span><br><span class="line"><span class="code">	├─ 创建 &lt;html&gt;、&lt;body&gt;、#app 等 DOM 节点</span></span><br><span class="line"><span class="code">	├─ 遇到 &lt;link&gt; → 异步加载 CSS</span></span><br><span class="line"><span class="code">	├─ 遇到 &lt;script type=&quot;module&quot; src=&quot;/src/main.ts&quot;&gt;</span></span><br><span class="line"><span class="code">	│     ⤷ 不阻塞解析（defer-like），继续解析 HTML</span></span><br><span class="line"><span class="code">	└─ #app 已存在于 DOM（后面样式可先找到DOM进行渲染）</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">2️⃣ main.ts 加载与执行（在 HTML 解析完成后）</span><br><span class="line"><span class="code">	↓</span></span><br><span class="line"><span class="code">   import App.vue</span></span><br><span class="line"><span class="code">	├─ 执行 App.vue 内部 import（样式模块）</span></span><br><span class="line"><span class="code">	│     ⤷ 向 &lt;head&gt; 注入 &lt;style&gt; 标签</span></span><br><span class="line"><span class="code">	│     ⤷ 样式立即进入 CSSOM，等待参与渲染</span></span><br><span class="line"><span class="code">	└─ App 组件本身的逻辑代码加载完毕，但还没创建与渲染</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">   浏览器此时状态</span><br><span class="line"><span class="code">	├─ DOM 树已构建完成</span></span><br><span class="line"><span class="code">	├─ CSSOM 部分或全部构建完成</span></span><br><span class="line"><span class="code">	├─ Render Tree 可能已生成（根据默认 font-size 进行布局）</span></span><br><span class="line"><span class="code">	└─ 有概率触发首帧绘制（默认 rem = 16px）</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">   执行 setRem()</span><br><span class="line"><span class="code">	├─ 修改 html 的 font-size（比如 rem = 50px）</span></span><br><span class="line"><span class="code">	├─ 如果此时浏览器已绘制首帧，则触发回流 (reflow)</span></span><br><span class="line"><span class="code">	├─ 若能在 CSS 解析前执行，可避免首屏抖动（rem 16px-&gt;50px 导致的窄屏-&gt;宽屏）</span></span><br><span class="line"><span class="code">	└─ （最佳实践：提前放在 index.html &lt;head&gt; 中执行）</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">4️⃣ 执行 createApp(App)</span><br><span class="line"><span class="code">	├─ 创建 Vue 应用实例</span></span><br><span class="line"><span class="code">	├─ 不再注入样式（已注入）</span></span><br><span class="line"><span class="code">	└─ 准备渲染树</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">5️⃣ 执行 app.mount(&#x27;#app&#x27;)</span><br><span class="line"><span class="code">	├─ 定位到现有的 #app 节点</span></span><br><span class="line"><span class="code">	├─ 清空其内部内容</span></span><br><span class="line"><span class="code">	├─ 通过 Virtual DOM 渲染出组件结构</span></span><br><span class="line"><span class="code">	├─ 触发 App.vue 的 setup()、render() 执行</span></span><br><span class="line"><span class="code">	└─ 启动响应式系统，生成实际 DOM 节点</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">6️⃣ 浏览器再次合成渲染树</span><br><span class="line"><span class="code">	├─ DOM（Vue 渲染结果） + CSSOM（含 App.vue 样式）</span></span><br><span class="line"><span class="code">	├─ Recalculate Style → Layout → Paint → Composite</span></span><br><span class="line"><span class="code">	└─ 绘制出最终 Vue 首屏内容</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="项目中发生的事情"><a href="#项目中发生的事情" class="headerlink" title="项目中发生的事情"></a>项目中发生的事情</h1><ol>
+<li><strong><code>index.html</code> 阶段</strong><ul>
+<li>浏览器先解析 <code>&lt;html&gt;、&lt;body&gt;</code> 等结构</li>
+<li>构建出一个空的 <code>#app</code> 容器</li>
+<li>此时没有 Vue 应用，CSS（包括来自 App.vue 编译出的样式）<strong>尚未加载</strong></li>
+</ul>
+</li>
+<li><strong><code>main.ts</code> 执行</strong><ul>
+<li>由于 Vite 会把入口 JS 用 <code>&lt;script type=&quot;module&quot; src=&quot;...&quot;&gt;</code> 的形式加载，<br>  所以在 DOM 基本就绪后，它开始执行：<code>setRem(); createApp(App).mount(&#39;#app&#39;)</code><br>  这段 JS 不会阻塞 HTML &#x2F; CSS 解析 与 页面渲染</li>
+<li><code>setRem()</code> 修改了根元素的 <code>font-size</code></li>
+<li><code>createApp(App)</code> 加载组件树（包括 App.vue 的样式）</li>
+</ul>
+</li>
+<li><strong>关键点：App.vue 的样式加载时机</strong><ul>
+<li><strong>注意：</strong> 浏览器在渲染过程中是 <strong>“边解析边绘制”</strong> <ul>
+<li><code>App.vue</code>在 <code>import</code> 时就已经将 CSS 注入到 <code>&lt;style&gt;</code> 标签中，并不是等到<code>createApp(App)</code> 创建了一个 <strong>应用实例</strong>（内存中对象）&#x2F; <code>app.mount(&#39;#app&#39;)</code> 创建 <strong>根组件实例</strong> <code>App.vue</code> 时才注入样式</li>
+<li>而 DOM 树 中更是已经存在 <code>html</code> &#x2F; <code>body</code> &#x2F; <code>#app</code> </li>
+<li>所以有概率出现 JS 脚本还没跑完时（还没执行到 <code>setRem()</code>），HTML 和 CSS 解析出默认字体大小的首屏就先渲染在页面上</li>
+</ul>
+</li>
+<li>所以第一帧的样式用的是默认 <code>16px</code> 的 rem<ul>
+<li>结果：<code>#app.width = 7.5 × 16px = 120px</code></li>
+<li>浏览器立刻绘制这 <code>120px</code> 宽的灰条在中间</li>
+</ul>
+</li>
+<li>然后 <code>setRem()</code> 再修改 <code>font-size</code>，浏览器触发一次 <strong>reflow（回流）</strong>，视觉上就像是“样式在 setRem 之前先执行”了一样（即所谓“首屏抖动”）<ul>
+<li>计算完毕后把 <code>html.style.fontSize</code> 设置为正确值（比如 <code>50px</code>）<br>- 页面重新布局 → <code>7.5rem = 375px</code><br>- 灰条从中间“撑开”到全宽，看起来像闪了一下</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="拓展了解"><a href="#拓展了解" class="headerlink" title="拓展了解"></a>拓展了解</h3><ul>
+<li><code>createApp(App)</code> 创建了一个 <strong>应用实例</strong>（内存中对象），不会执行 <code>App.vue</code> 的代码<ul>
+<li>真正触发 App.vue 初始化的是 <strong><code>app.mount()</code></strong></li>
+<li><code>app.mount(&#39;#app&#39;)</code> 做了什么：<ul>
+<li>在内存中创建一个 <strong>根组件实例</strong>，这个根组件就是你传入的 <code>App.vue</code></li>
+<li>开始执行 <code>App.vue</code> 的 <strong>setup() &#x2F; data &#x2F; computed &#x2F; watch</strong></li>
+<li>调用 <code>render()</code>，生成虚拟 DOM</li>
+<li>把虚拟 DOM 渲染成真实 DOM</li>
+<li>替换掉 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> 的内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="场景复现"><a href="#场景复现" class="headerlink" title="场景复现"></a>场景复现</h1><ul>
+<li><code>main.ts</code> 里设置一个延时，可以通过延时模拟初始化缓慢的问题  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟初始化慢</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;  </span><br><span class="line">	<span class="title function_">setRem</span>();  </span><br><span class="line">&#125;, <span class="number">5000</span>); <span class="comment">// 延迟 5000ms 执行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line">app.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>复现出来的灰色北京条宽度确实如此，打印出的初始字体大小确实是<code>16px</code>，所以灰色宽度是<code>120px</code><br><img src="/../images/img_v3_02sq_160596ab-1ded-47a9-8d53-797a6475d4cg.jpg"></li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>让 <strong><code>setRem()</code> 尽早执行</strong>，且确保阻塞 HTML &#x2F; CSS 的解析，避免在页面渲染以后才处理<code>rem</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 在任何 CSS 加载前执行</span></span></span><br><span class="line"><span class="language-javascript">    (<span class="keyword">function</span> <span class="title function_">setRem</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> baseSize = <span class="number">100</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> scale = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span> / <span class="number">375</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">style</span>.<span class="property">fontSize</span> = baseSize * <span class="title class_">Math</span>.<span class="title function_">min</span>(scale, <span class="number">2</span>) + <span class="string">&#x27;px&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;)();</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后 <code>main.ts</code> 就不用再执行一次了。这样能确保：</p>
+<blockquote>
+<p>所有 Vue 组件的 rem 计算基础在页面渲染之前就已经设定好。</p>
+</blockquote>
+<hr>
+<h1 id="业界常见的“首屏自适应初始化”优化思路"><a href="#业界常见的“首屏自适应初始化”优化思路" class="headerlink" title="业界常见的“首屏自适应初始化”优化思路"></a>业界常见的“首屏自适应初始化”优化思路</h1><p>淘宝 flexible、postcss-px2rem、lib-flexible、vw 脚本等都在 <strong>head 阶段</strong> 执行。</p>
+<p>比如淘宝 flexible 的源码里，第一行就是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">flexible</span> (<span class="params"><span class="variable language_">window</span>, <span class="variable language_">document</span></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> docEl = <span class="variable language_">document</span>.<span class="property">documentElement</span>;</span><br><span class="line">  <span class="keyword">var</span> dpr = <span class="variable language_">window</span>.<span class="property">devicePixelRatio</span> || <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> rem = docEl.<span class="property">clientWidth</span> / <span class="number">10</span>;</span><br><span class="line">  docEl.<span class="property">style</span>.<span class="property">fontSize</span> = rem + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;)(<span class="variable language_">window</span>, <span class="variable language_">document</span>);</span><br></pre></td></tr></table></figure>
+
+<p>它和我这项目的逻辑几乎一样，只是放在了 <strong>最前面</strong></p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><strong>要想样式初始化时 rem 就正确生效，必须让 <code>setRem()</code> 在任何 Vue 应用启动和 CSS 渲染前执行（最好放在 <code>&lt;head&gt;</code> 里且用单纯的 <code>&lt;script&gt;</code> 阻塞 HTML &#x2F; CSS 解析与页面渲染）</strong></p>
+<table>
+<thead>
+<tr>
+<th>执行位置</th>
+<th>渲染阶段</th>
+<th>是否闪烁</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;head&gt;</code></td>
+<td>在 CSS 加载前</td>
+<td>✅ 不闪烁</td>
+<td>font-size 在第一次布局前确定</td>
+</tr>
+<tr>
+<td>main.ts</td>
+<td>在 Vue 启动前但 CSS 可能已解析</td>
+<td>⚠️ 有概率闪烁</td>
+<td>浏览器已绘制过旧布局，修改后要重排</td>
+</tr>
+<tr>
+<td>Vue 内部组件</td>
+<td>🚫 太晚</td>
+<td>🚫 无意义</td>
+<td>早已渲染错误</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/CSS%E5%AD%A6%E4%B9%A0/">CSS学习</a>, <a class="article-category-link" href="/categories/JavaScript%E5%AD%A6%E4%B9%A0/">JavaScript学习</a>, <a class="article-category-link" href="/categories/vue%E5%AD%A6%E4%B9%A0/">vue学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/07/15/%E8%B4%B5%E9%98%B3%E6%B8%B8%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">深圳-贵阳 四天三晚</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%80%81blog"><span class="nav-number">1.</span> <span class="nav-text">补充老blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E7%8C%9C%E6%83%B3"><span class="nav-number">3.</span> <span class="nav-text">原因猜想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%94%AE-%EF%BC%9Ascript-%E7%9A%84%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%B9%B6%E8%A1%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">关键 ：script 的阻塞与并行区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93"><span class="nav-number">5.</span> <span class="nav-text">需要知道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F%EF%BC%88%E7%AE%80%E5%8C%96%E7%89%88%EF%BC%89"><span class="nav-number">5.0.1.</span> <span class="nav-text">浏览器的加载顺序（简化版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%B8%B2%E6%9F%93%E6%98%AF%E2%80%9C%E5%B9%B6%E8%A1%8C-%E9%98%BB%E5%A1%9E%E2%80%9D%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">5.0.2.</span> <span class="nav-text">浏览器的加载与渲染是“并行 + 阻塞”的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A3%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">问题代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F%E7%9A%84%E6%B5%81%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">7.</span> <span class="nav-text">问题产生的流程概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%8F%91%E7%94%9F%E7%9A%84%E4%BA%8B%E6%83%85"><span class="nav-number">8.</span> <span class="nav-text">项目中发生的事情</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E4%BA%86%E8%A7%A3"><span class="nav-number">8.0.1.</span> <span class="nav-text">拓展了解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%A4%8D%E7%8E%B0"><span class="nav-number">9.</span> <span class="nav-text">场景复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">10.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%9A%E7%95%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E2%80%9C%E9%A6%96%E5%B1%8F%E8%87%AA%E9%80%82%E5%BA%94%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF"><span class="nav-number">11.</span> <span class="nav-text">业界常见的“首屏自适应初始化”优化思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+    
+
+                <div class="clearfix container">
+                    <div class="site-info">
+                        &copy;
+                        2025
+                            珠 All Rights Reserved.
+                                
+                                    <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量
+                                    <span id="busuanzi_value_site_pv"></span>次
+                                    </span>
+                                    
+                    </div>
+                    <div class="site-credit">
+                        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+                    </div>
+                </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
