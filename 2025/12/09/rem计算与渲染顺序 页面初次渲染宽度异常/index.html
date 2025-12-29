@@ -21,11 +21,11 @@
 <meta property="og:image" content="https://huanglizhu.github.io/images/Pasted%20image%2020251209151606.png">
 <meta property="og:image" content="https://huanglizhu.github.io/images/img_v3_02sq_160596ab-1ded-47a9-8d53-797a6475d4cg.jpg">
 <meta property="article:published_time" content="2025-12-09T07:18:52.000Z">
-<meta property="article:modified_time" content="2025-12-11T06:08:43.216Z">
+<meta property="article:modified_time" content="2025-12-11T06:12:22.866Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="vue">
-<meta property="article:tag" content="JS">
 <meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JS">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://huanglizhu.github.io/images/Pasted%20image%2020251209151606.png">
@@ -186,7 +186,7 @@
 <li><strong>问题的根源就在于 HTML&#x2F;CSS 解析 与 JS执行 的顺序并不只受到先后顺序影响， <code>&lt;script type=&quot;module&quot;&gt;</code>（等价于<code>&lt;script defer&gt;</code>）不阻塞 HTML &#x2F; CSS 解析</strong>，  导致浏览器在执行 <code>setRem()</code> 之前，  <strong>HTML 和 CSS 就可能已经解析并开始参与页面渲染了</strong> <ul>
 <li>所以问题出在这：<ul>
 <li><strong>看起来顺序：</strong>  <code>index.html</code>的<code>id=&quot;app&quot;</code> 元素 初始化 -&gt;  <code>main.ts</code> 先<code>setRem</code>再挂载<code>App.vue</code> 相关 CSS 样式（<code>html, body, #app</code>样式）</li>
-<li><strong>实际顺序：</strong> 拼接一起以后的执行顺序是 :  <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解析 HTML 构建 DOM 树 -&gt; 加载 CSS 构建 CSS对象模型 -&gt; 合成 渲染树 绘制到屏幕上 -&gt; 渲染中遇到 JS 停止渲染去加载 JS</span><br></pre></td></tr></table></figure>
+<li><strong>实际顺序：</strong> 拼接一起以后的执行顺序是 :  <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">解析 HTML 构建 DOM 树 </span><br><span class="line">	↓</span><br><span class="line">加载 CSS 构建 CSS对象模型</span><br><span class="line">	↓</span><br><span class="line">合成 渲染树 绘制到屏幕上</span><br><span class="line">	↓</span><br><span class="line">渲染中遇到 <span class="keyword">JS</span> 停止渲染去加载 <span class="keyword">JS</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>也就是说实际上<code>App.vue</code>里的样式在<code>main.ts</code>里<code>setRem</code>执行前就有概率先渲染了，导致<code>rem</code>还是默认值16px</li>
 </ul>
@@ -364,6 +364,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2025/12/12/bj/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          北京 天津 五日
+        
+      </div>
+    </a>
   
   
     <a href="/2025/07/15/%E8%B4%B5%E9%98%B3%E6%B8%B8%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
