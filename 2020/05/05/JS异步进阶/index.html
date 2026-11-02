@@ -18,21 +18,21 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="JS如何执行 从前到后，一行一行执行 如果某一行执行报错，则停止下面代码的执行 先执行完同步代码，再执行异步">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_img1.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_img2.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_DOM_img.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_rejected_await.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_try_catch.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_callstack_DOM.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop2.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/event_loop_img1.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/event_loop_img2.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/event_loop_DOM_img.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_rejected_await.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_try_catch.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_callstack_DOM.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_Promise_setTimeout.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop2.png">
 <meta property="article:published_time" content="2020-05-05T13:25:27.000Z">
-<meta property="article:modified_time" content="2026-07-07T02:52:57.496Z">
+<meta property="article:modified_time" content="2026-11-02T10:41:52.276Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_img1.png">
+<meta name="twitter:image" content="https://huanglizhu.github.io/images/event_loop_img1.png">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -185,7 +185,7 @@
 <li><strong>异步</strong>要<strong>基于回调</strong>来实现</li>
 <li><strong>event loop</strong>就是异步回调的<strong>实现原理</strong></li>
 <li><strong>图示流程</strong>：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> <span class="title function_">cb1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cb1&#x27;</span>) <span class="comment">// cb 即 callback</span></span><br><span class="line">&#125;, <span class="number">5000</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Bye&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_img1.png" alt="event loop图示流程1" title="event loop图示流程1"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_img2.png" alt="event loop图示流程2" title="event loop图示流程2"></li>
+<img src="/images/event_loop_img1.png" alt="event loop图示流程1" title="event loop图示流程1"><br><img src="/images/event_loop_img2.png" alt="event loop图示流程2" title="event loop图示流程2"></li>
 </ul>
 <h1 id="DOM事件和event-loop的关系"><a href="#DOM事件和event-loop的关系" class="headerlink" title="DOM事件和event loop的关系"></a>DOM事件和event loop的关系</h1><ul>
 <li>首先要明确<strong>DOM事件不是异步！</strong></li>
@@ -195,7 +195,7 @@
 <li>click是立马就执行的，但是绑定的事件函数要等触发以后才执行，<strong>虽然不是异步，但也有一个事件循环的过程，触发后的事件函数才被放入 回调队列 中，等待执行栈中清空后进行事件循环。</strong></li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">$(<span class="string">&#x27;#btn1&#x27;</span>).<span class="title function_">click</span>(<span class="keyword">function</span> (<span class="params">e</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;button clicked&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">&#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Bye&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/event_loop_DOM_img.png" alt="DOM事件的event loop图示流程" title="DOM事件的event loop图示流程"></p>
+<p><img src="/images/event_loop_DOM_img.png" alt="DOM事件的event loop图示流程" title="DOM事件的event loop图示流程"></p>
 <hr>
 <h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><ul>
 <li><strong>pending resolved rejected</strong></li>
@@ -258,10 +258,10 @@
 </li>
 <li><p><strong>await相当于Promise的then</strong></p>
 <ul>
-<li><strong>注意：对rejected状态的Promise使用await时不会执行，会报错，此时可使用try..catch包裹await来捕获异常。</strong><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_rejected_await.png" alt="例子" title="例子"></li>
+<li><strong>注意：对rejected状态的Promise使用await时不会执行，会报错，此时可使用try..catch包裹await来捕获异常。</strong><img src="/images/async_rejected_await.png" alt="例子" title="例子"></li>
 </ul>
 </li>
-<li><p><strong>try…catch可捕获异常</strong>，代替了Promise的catch<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_try_catch.png" alt="try..catch例子" title="try..catch例子"></p>
+<li><p><strong>try…catch可捕获异常</strong>，代替了Promise的catch<img src="/images/async_try_catch.png" alt="try..catch例子" title="try..catch例子"></p>
 </li>
 <li><p>await 后面跟 Promise 对象：会阻断后续代码，等待状态变为 resolved ，才获取结果并继续执行</p>
 </li>
@@ -318,7 +318,7 @@
 <li>JS是单线程的，且和DOM渲染共用一个线程，所以JS执行时需要留一些时机供DOM渲染</li>
 <li><strong>每一次</strong> call stack 结束（即<strong>同步任务执行完</strong>），<strong>都会给一次 DOM 渲染的机会</strong>（不一定非得渲染，就是给一次 DOM 渲染的机会！！！），<strong>DOM结构如有改变则重新渲染</strong>。<strong>然后再触发下一次 event loop</strong>。</li>
 <li><strong>例子：可以看出js执行和DOM渲染共用一个线程，js执行完才到DOM渲染</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $p1 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> $p2 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> $p3 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#container&#x27;</span>)</span><br><span class="line">            .<span class="title function_">append</span>($p1)</span><br><span class="line">            .<span class="title function_">append</span>($p2)</span><br><span class="line">            .<span class="title function_">append</span>($p3)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;length&#x27;</span>,  $(<span class="string">&#x27;#container&#x27;</span>).<span class="title function_">children</span>().<span class="property">length</span> )</span><br><span class="line"><span class="title function_">alert</span>(<span class="string">&#x27;本次 call stack 结束，DOM 结构已更新，但尚未触发渲染&#x27;</span>)</span><br><span class="line"><span class="comment">// （alert 会阻断 js 执行，也会阻断 DOM 渲染，便于查看效果）</span></span><br><span class="line"><span class="comment">// 到此，即本次 call stack 结束后（同步任务都执行完了），浏览器会自动触发渲染，不用代码干预</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 另外，按照 event loop 触发 DOM 渲染时机，setTimeout 时 alert ，就能看到 DOM 渲染后的结果了</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;setTimeout 是在下一次 Call Stack ，就能看到 DOM 渲染出来的结果了&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_callstack_DOM.png" alt="event-loop和DOM渲染的关系例子结果" title="event-loop和DOM渲染的关系例子结果"></li>
+<img src="/images/async_callstack_DOM.png" alt="event-loop和DOM渲染的关系例子结果" title="event-loop和DOM渲染的关系例子结果"></li>
 </ul>
 <h2 id="宏任务和微任务的执行顺序的原因"><a href="#宏任务和微任务的执行顺序的原因" class="headerlink" title="宏任务和微任务的执行顺序的原因"></a>宏任务和微任务的执行顺序的原因</h2><ul>
 <li><strong>为什么 异步任务 中微任务比宏任务执行更早</strong><ul>
@@ -328,12 +328,12 @@
 </li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改 DOM</span></span><br><span class="line"><span class="keyword">const</span> $p1 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> $p2 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> $p3 = $(<span class="string">&#x27;&lt;p&gt;一段文字&lt;/p&gt;&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#container&#x27;</span>)</span><br><span class="line">    .<span class="title function_">append</span>($p1)</span><br><span class="line">    .<span class="title function_">append</span>($p2)</span><br><span class="line">    .<span class="title function_">append</span>($p3)</span><br><span class="line"></span><br><span class="line"><span class="comment">// // 微任务：DOM渲染之前执行（DOM 结构已更新，但未渲染）</span></span><br><span class="line"><span class="comment">// Promise.resolve().then(() =&gt; &#123;</span></span><br><span class="line"><span class="comment">//     const length = $(&#x27;#container&#x27;).children().length</span></span><br><span class="line"><span class="comment">//     console.log(&#x27;length1&#x27;,length) // length1 3</span></span><br><span class="line"><span class="comment">//     alert(`Promise then`) // DOM渲染了吗？--没有</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 宏任务：DOM渲染之后执行（DOM 结构已更新）</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> length = $(<span class="string">&#x27;#container&#x27;</span>).<span class="title function_">children</span>().<span class="property">length</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;length2&#x27;</span>,length) <span class="comment">// length2 3</span></span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">`macro task <span class="subst">$&#123;length&#125;</span>`</span>) <span class="comment">// macro task 3</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout.png" alt="宏任务和微任务的执行顺序" title="宏任务和微任务的执行顺序"></p>
+<p><img src="/images/async_Promise_setTimeout.png" alt="宏任务和微任务的执行顺序" title="宏任务和微任务的执行顺序"></p>
 <h2 id="event-loop图解宏任务和微任务与DOM渲染的执行顺序"><a href="#event-loop图解宏任务和微任务与DOM渲染的执行顺序" class="headerlink" title="event-loop图解宏任务和微任务与DOM渲染的执行顺序"></a>event-loop图解宏任务和微任务与DOM渲染的执行顺序</h2><ul>
 <li><strong>微任务</strong>：<strong>微任务是ES6语法规定的。</strong> ES 语法标准之内，<strong>JS 引擎来统一处理</strong>。即，不用浏览器有任何处理，即可一次性处理完，更快更及时。</li>
 <li><strong>宏任务</strong>：<strong>宏任务是浏览器规定的。</strong> ES 语法没有，<strong>JS 引擎不处理，浏览器（或 nodejs）干预处理。</strong>处理起来就比较慢，所以在DOM渲染后才触发宏任务。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop.png" alt="event-loop图解宏任务的执行顺序" title="event-loop图解宏任务的执行顺序"><br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/async_Promise_setTimeout_eventLoop2.png" alt="event-loop图解微任务的执行顺序" title="event-loop图解微任务的执行顺序"></p>
+<p><img src="/images/async_Promise_setTimeout_eventLoop.png" alt="event-loop图解宏任务的执行顺序" title="event-loop图解宏任务的执行顺序"><br><img src="/images/async_Promise_setTimeout_eventLoop2.png" alt="event-loop图解微任务的执行顺序" title="event-loop图解微任务的执行顺序"></p>
 <hr>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="描述event-loop机制"><a href="#描述event-loop机制" class="headerlink" title="描述event loop机制"></a>描述event loop机制</h2><ul>
 <li>第一遍可以只到宏任务微任务</li>

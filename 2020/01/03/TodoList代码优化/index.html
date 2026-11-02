@@ -18,17 +18,17 @@
 <meta property="og:site_name" content="珠">
 <meta property="og:description" content="react.js基础精讲（1）中todoList代码中有许多需要优化的地方">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactBindThis.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactConstructorBindThis.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactJsxJs.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/rreactGetTodoItemactConstructorBindThis.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/reactPropsDeconstruction.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/reactBindThis.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/reactConstructorBindThis.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/reactJsxJs.png">
+<meta property="og:image" content="https://huanglizhu.github.io/images/rreactGetTodoItemactConstructorBindThis.png">
 <meta property="article:published_time" content="2020-01-03T10:20:02.000Z">
-<meta property="article:modified_time" content="2026-07-07T02:52:57.549Z">
+<meta property="article:modified_time" content="2026-11-02T10:41:52.901Z">
 <meta property="article:author" content="黄丽珠">
 <meta property="article:tag" content="React.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png">
+<meta name="twitter:image" content="https://huanglizhu.github.io/images/reactPropsDeconstruction.png">
   
     <link rel="alternate" href="/atom.xml" title="珠" type="application/atom+xml">
   
@@ -175,7 +175,7 @@
 <span id="more"></span>
 
 <h1 id="使用ES6的解构赋值进行优化"><a href="#使用ES6的解构赋值进行优化" class="headerlink" title="使用ES6的解构赋值进行优化"></a>使用ES6的解构赋值进行优化</h1><h2 id="TodoItem-js中第一处代码优化"><a href="#TodoItem-js中第一处代码优化" class="headerlink" title="TodoItem.js中第一处代码优化"></a>TodoItem.js中第一处代码优化</h2><ul>
-<li>调用 <strong>父组件传递过来的数据</strong> 时可以进行代码优化，使用<strong>ES6的解构赋值</strong>：<img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactPropsDeconstruction.png" alt="解构赋值" title="解构赋值"></li>
+<li>调用 <strong>父组件传递过来的数据</strong> 时可以进行代码优化，使用<strong>ES6的解构赋值</strong>：<img src="/images/reactPropsDeconstruction.png" alt="解构赋值" title="解构赋值"></li>
 <li>解释：<ol>
 <li><strong>父组件传递到子组件的数据是存放在属性中的，而众属性是放在props中的</strong>。<br>假设<code>this.props=&#123;AA:&#39;AA值&#39;,BB:&#39;BB值&#39;,CC:&#39;CC值&#39;,..&#125;;</code><br>使用<strong>ES6的解构赋值,可以一次性赋值多个变量</strong>:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;<span class="variable constant_">AA</span>,<span class="variable constant_">BB</span>,<span class="variable constant_">CC</span>,...&#125;=<span class="variable language_">this</span>.<span class="property">props</span>;</span><br></pre></td></tr></table></figure>
 在此基础上，接下来<strong>需要调用属性时直接使用<code>AA</code>即可</strong>。</li>
@@ -198,16 +198,16 @@
 
 <hr>
 <h1 id="在构造函数中绑定this指向（bind）"><a href="#在构造函数中绑定this指向（bind）" class="headerlink" title="在构造函数中绑定this指向（bind）"></a>在构造函数中绑定<code>this</code>指向（<code>bind</code>）</h1><h2 id="TodoList-js中第二处代码优化"><a href="#TodoList-js中第二处代码优化" class="headerlink" title="TodoList.js中第二处代码优化"></a>TodoList.js中第二处代码优化</h2><ul>
-<li>原本在<code>return()</code>中绑定事件函数的<code>this</code>指向，但是为了性能优化我们应该<strong>在构造函数<code>constructor</code>中绑定<code>this</code>指向</strong>：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
+<li>原本在<code>return()</code>中绑定事件函数的<code>this</code>指向，但是为了性能优化我们应该<strong>在构造函数<code>constructor</code>中绑定<code>this</code>指向</strong>：<br><img src="/images/reactBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
 </ul>
 <hr>
 <h2 id="TodoList-js中第三处代码优化"><a href="#TodoList-js中第三处代码优化" class="headerlink" title="TodoList.js中第三处代码优化"></a>TodoList.js中第三处代码优化</h2><ul>
-<li>将父组件的<code>handleItemDelete</code>方法传给子组件前我们需要绑定<code>this</code>指向，防止传过去以后<code>this</code>指向子组件以至于找不到该方法而报错。同样的，我们可以将绑定这个动作放到构造函数中完成， <strong>在构造函数中绑定<code>this</code>指向</strong> ：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactConstructorBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
+<li>将父组件的<code>handleItemDelete</code>方法传给子组件前我们需要绑定<code>this</code>指向，防止传过去以后<code>this</code>指向子组件以至于找不到该方法而报错。同样的，我们可以将绑定这个动作放到构造函数中完成， <strong>在构造函数中绑定<code>this</code>指向</strong> ：<br><img src="/images/reactConstructorBindThis.png" alt="在构造函数constructor中绑定this指向" title="在构造函数constructor中绑定this指向"></li>
 </ul>
 <hr>
-<h1 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h1><p>JSX语法实际上是写一些页面上显示的东西用的，但是在<code>TodoList.js</code>中出现了一些逻辑代码：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/reactJsxJs.png" alt="JS逻辑代码被{}包裹" title="JS逻辑代码被{}包裹"></p>
+<h1 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h1><p>JSX语法实际上是写一些页面上显示的东西用的，但是在<code>TodoList.js</code>中出现了一些逻辑代码：<br><img src="/images/reactJsxJs.png" alt="JS逻辑代码被{}包裹" title="JS逻辑代码被{}包裹"></p>
 <h2 id="TodoList-js中第四处代码优化"><a href="#TodoList-js中第四处代码优化" class="headerlink" title="TodoList.js中第四处代码优化"></a>TodoList.js中第四处代码优化</h2><ul>
-<li>我们另外写一个<code>getTodoItem()</code>来存放这些逻辑代码，然后在原本需要逻辑代码的位置使用JS表达式调用<code>getTodoItem()</code>即可（<strong>注意JS表达式需要<code>&#123;&#125;</code>包裹</strong>）：<br><img src="https://cdn.jsdelivr.net/gh/huanglizhu/huanglizhu.github.io/images/rreactGetTodoItemactConstructorBindThis.png" alt="优化后" title="优化后"></li>
+<li>我们另外写一个<code>getTodoItem()</code>来存放这些逻辑代码，然后在原本需要逻辑代码的位置使用JS表达式调用<code>getTodoItem()</code>即可（<strong>注意JS表达式需要<code>&#123;&#125;</code>包裹</strong>）：<br><img src="/images/rreactGetTodoItemactConstructorBindThis.png" alt="优化后" title="优化后"></li>
 <li><strong>注意</strong>：<code>getTodoItem()</code>中需要另外写一个<code>return</code>用于将函数结果返回，否则调用函数以后是没有结果的。</li>
 </ul>
 <hr>
